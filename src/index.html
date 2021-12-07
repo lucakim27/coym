@@ -4,45 +4,97 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comment on your occupation!</title>
+    <title>Comment on your occupation</title>
     <style>
-        footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background-color: rgb(0, 27, 63);
-            color: white;
-            text-align: center;
+        a {
+            text-decoration: none;
+            color: blue;
+            font-size: 40px;
+        }
+        a:hover {
+            color: rgb(37, 37, 37);
+        }
+        header {
+            margin-left: 96%;
+            margin-top: 0%;
+        }
+        center {
+            margin-top: -3%;
         }
     </style>
 </head>
 <body>
+    <header><button onclick="show()">Login</button></header>
     <center>
-        <h1>Search your occupation here!</h1>
+        <h1 id="header">Search your occupation here</h1>
         <input type="text" id="userInput">
-        <button onclick="searchOccupation()">Search</button>
+        <button onclick="searchOccupation()" id="searchBtn">Search</button>
         <hr>
         <div id="output"></div>
     </center>
-    <footer>nikolaikim27@gmail.com</footer>
 </body>
 <script>
-    const occupationArray = ["software engineer", "software developer", "programmer"]
+    const userInput = document.getElementById("userInput")
+    const output = document.getElementById("output")
+    const searchBtn = document.getElementById("searchBtn")
+    const header = document.getElementById("header")
+    // [["occupation title", [comments], [likes], [dislikes]], ["another occupation title", [comments], [likes], [dislikes]]]
+    const occupationArray = [["software engineer", [], [], []], ["software developer", [], [], []], ["programmer", [], [], []]]
 
     function searchOccupation() {
-        const userInput = document.getElementById("userInput")
-        const output = document.getElementById("output")
+        searchBtn.value = ''
         displayOccupation(userInput, output)
+        userInput.value = ''
     }
 
     function displayOccupation(userInput, output) {
         output.innerHTML = ''
         for (var i=0; i < occupationArray.length; i++) {
-            if (occupationArray[i].toLowerCase().includes(userInput.value.toLowerCase()) == true) {
-                output.innerHTML += `<a href="" onclick="">${occupationArray[i]}</a><hr>`
+            if (occupationArray[i][0].toLowerCase().includes(userInput.value.toLowerCase()) == true) {
+                output.innerHTML += `<a href="#" onclick="displayComment(${i})">${occupationArray[i][0]}</a><hr>`
             }
         }
+    }
+
+    function displayComment(value) {
+        header.innerHTML = `${occupationArray[value][0]}`
+        header.setAttribute("href", "#")
+        userInput.value = ''
+        output.innerHTML = ''
+        searchBtn.innerText = "comment"
+        searchBtn.setAttribute("onclick", "comment()")
+    }
+
+    function comment() {
+        for (var i = 0; i < occupationArray.length; i++) {
+            if (occupationArray[i][0] == header.innerText) {
+                occupationArray[i][1].push(userInput.value)
+                occupationArray[i][2].push(0)
+                occupationArray[i][3].push(0)
+            }
+        }
+        output.innerHTML += `<p>${userInput.value}</p><button onclick=like() id="${userInput.value}-likes">Like</button><button onclick="dislike()" id="${userInput.value}-dislikes">Dislike</button><hr>`
+        userInput.value = ''
+    }
+
+    function like() {
+        for (var i = 0; i < occupationArray.length; i++) {
+            if (occupationArray[i][0] == header.innerText) {
+                // occupationArray[i][2] += 1
+            }
+        }
+    }
+
+    function dislike() {
+        for (var i = 0; i < occupationArray.length; i++) {
+            if (occupationArray[i][0] == header.innerText) {
+                // occupationArray[i][3] += 1
+            }
+        }
+    }
+    
+    function show() {
+        console.log(occupationArray)
     }
 </script>
 </html>
