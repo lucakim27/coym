@@ -38,7 +38,6 @@
     const output = document.getElementById("output")
     const searchBtn = document.getElementById("searchBtn")
     const header = document.getElementById("header")
-    // [["occupation title", [comments], [likes], [dislikes]], ["another occupation title", [comments], [likes], [dislikes]]]
     const occupationArray = [["software engineer", [], [], []], ["software developer", [], [], []], ["programmer", [], [], []]]
 
     function searchOccupation() {
@@ -66,29 +65,78 @@
     }
 
     function comment() {
+
+        output.innerHTML = ""
+
+        // iterate occupationArray array
         for (var i = 0; i < occupationArray.length; i++) {
-            if (occupationArray[i][0] == header.innerText) {
+            // if it matches with header and not none
+            if (occupationArray[i][0] == header.innerText && userInput.value != "") {
+                // insert values into occupationArray
                 occupationArray[i][1].push(userInput.value)
                 occupationArray[i][2].push(0)
                 occupationArray[i][3].push(0)
+                userInput.value = ''
             }
         }
-        output.innerHTML += `<p>${userInput.value}</p><button onclick=like() id="${userInput.value}-likes">Like</button><button onclick="dislike()" id="${userInput.value}-dislikes">Dislike</button><hr>`
-        userInput.value = ''
-    }
 
-    function like() {
         for (var i = 0; i < occupationArray.length; i++) {
             if (occupationArray[i][0] == header.innerText) {
-                // occupationArray[i][2] += 1
+                for(var j = 0; j < occupationArray[i][1].length; j++) {
+                    output.innerHTML += `<p>${occupationArray[i][1][j]}</p><button onclick=like(this.id) id="${occupationArray[i][1][j]}+">${occupationArray[i][2][j]} Likes</button>`
+                    output.innerHTML += `<button onclick="dislike(this.id)" id="${occupationArray[i][1][j]}-">${occupationArray[i][3][j]} Dislikes</button><hr>`
+                }
             }
         }
+
+
     }
 
-    function dislike() {
+    function like(clicked_id) {
+
         for (var i = 0; i < occupationArray.length; i++) {
             if (occupationArray[i][0] == header.innerText) {
-                // occupationArray[i][3] += 1
+                for (var j = 0; j < occupationArray[i][1].length; j++) {
+                    if (occupationArray[i][1][j] + "+" == clicked_id) {
+                        occupationArray[i][2][j]++
+                    }
+                }
+            }
+        }
+
+        output.innerHTML = ""
+
+        for (var i = 0; i < occupationArray.length; i++) {
+            if (occupationArray[i][0] == header.innerText) {
+                for(var j = 0; j < occupationArray[i][1].length; j++) {
+                    output.innerHTML += `<p>${occupationArray[i][1][j]}</p><button onclick=like(this.id) id="${occupationArray[i][1][j]}+">${occupationArray[i][2][j]} Likes</button>`
+                    output.innerHTML += `<button onclick="dislike(this.id)" id="${occupationArray[i][1][j]}-">${occupationArray[i][3][j]} Dislikes</button><hr>`
+                }
+            }
+        }
+
+
+    }
+
+    function dislike(clicked_id) {
+      for (var i = 0; i < occupationArray.length; i++) {
+            if (occupationArray[i][0] == header.innerText) {
+                for (var j = 0; j < occupationArray[i][1].length; j++) {
+                    if (occupationArray[i][1][j] + "-" == clicked_id) {
+                        occupationArray[i][3][j]++
+                    }
+                }
+            }
+        }
+
+        output.innerHTML = ""
+
+        for (var i = 0; i < occupationArray.length; i++) {
+            if (occupationArray[i][0] == header.innerText) {
+                for(var j = 0; j < occupationArray[i][1].length; j++) {
+                    output.innerHTML += `<p>${occupationArray[i][1][j]}</p><button onclick=like(this.id) id="${occupationArray[i][1][j]}+">${occupationArray[i][2][j]} Likes</button>`
+                    output.innerHTML += `<button onclick="dislike(this.id)" id="${occupationArray[i][1][j]}-">${occupationArray[i][3][j]} Dislikes</button><hr>`
+                }
             }
         }
     }
