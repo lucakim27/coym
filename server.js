@@ -1,12 +1,28 @@
-const express = require('express')
 const path = require('path')
+const http = require('http')
+const express = require('express')
+const socketio = require('socket.io')
+
 const app = express()
-const port = 8000
+const server = http.createServer(app);
+const io = socketio(server)
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/src/index.html'))
+
+const occupationArray = [
+  ["software engineer", [], [], []],
+  ["software developer", [], [], []],
+  ["programmer", [], [], []]
+]
+
+app.use(express.static(path.join(__dirname, 'src')))
+
+io.on('connection', (socket) => {
+  console.log('An user connected');
+
+  io.to(socket.id).emit('enter', occupationArray)
+
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}!`)
-})
+const PORT = process.env.PORT || 3000;
+
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`))
