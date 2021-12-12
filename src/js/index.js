@@ -2,11 +2,14 @@ const userInput = document.getElementById("userInput")
 const output = document.getElementById("output")
 const searchBtn = document.getElementById("searchBtn")
 const header = document.getElementById("header")
-const occupationArray = [["software engineer", [], [], []], ["software developer", [], [], []], ["programmer", [], [], []]]
 const socket = io()
 
 socket.on('enter', (array) => {
-    console.log(array)
+    this.occupationArray = array
+})
+
+socket.on('updatedComment', () => {
+    displayUpdatedComments()
 })
 
 function searchOccupation() {
@@ -34,9 +37,7 @@ function displayComment(value) {
 }
 
 function comment() {
-
     output.innerHTML = ""
-
     // iterate occupationArray array
     for (var i = 0; i < occupationArray.length; i++) {
         // if it matches with header and not none
@@ -48,73 +49,44 @@ function comment() {
             userInput.value = ''
         }
     }
-
-    for (var i = 0; i < occupationArray.length; i++) {
-        if (occupationArray[i][0] == header.innerText) {
-            for(var j = 0; j < occupationArray[i][1].length; j++) {
-                output.innerHTML += `<p>${occupationArray[i][1][j]}</p><button onclick=like(this.id) id="${occupationArray[i][1][j]}+">${occupationArray[i][2][j]} Likes</button>`
-                output.innerHTML += `<button onclick="dislike(this.id)" id="${occupationArray[i][1][j]}-">${occupationArray[i][3][j]} Dislikes</button><hr>`
-            }
-        }
-    }
+    socket.emit('updateComment', this.occupationArray)
 }
 
-function like(clicked_id) {
+function likeOrDislike(clicked_id) {
 
+    // like or dislike
     for (var i = 0; i < occupationArray.length; i++) {
         if (occupationArray[i][0] == header.innerText) {
             for (var j = 0; j < occupationArray[i][1].length; j++) {
                 if (occupationArray[i][1][j] + "+" == clicked_id) {
                     occupationArray[i][2][j]++
                 }
-            }
-        }
-    }
-
-    output.innerHTML = ""
-
-    for (var i = 0; i < occupationArray.length; i++) {
-        if (occupationArray[i][0] == header.innerText) {
-            for(var j = 0; j < occupationArray[i][1].length; j++) {
-                output.innerHTML += `<p>${occupationArray[i][1][j]}</p><button onclick=like(this.id) id="${occupationArray[i][1][j]}+">${occupationArray[i][2][j]} Likes</button>`
-                output.innerHTML += `<button onclick="dislike(this.id)" id="${occupationArray[i][1][j]}-">${occupationArray[i][3][j]} Dislikes</button><hr>`
-            }
-        }
-    }
-
-
-}
-
-function dislike(clicked_id) {
-    for (var i = 0; i < occupationArray.length; i++) {
-        if (occupationArray[i][0] == header.innerText) {
-            for (var j = 0; j < occupationArray[i][1].length; j++) {
-                if (occupationArray[i][1][j] + "-" == clicked_id) {
-                    occupationArray[i][3][j]++
+                else if (occupationArray[i][1][j] + "-" == clicked_id) {
+                    occupationArray[i][3][j]++ 
                 }
             }
         }
     }
-
-    output.innerHTML = ""
-
-    for (var i = 0; i < occupationArray.length; i++) {
-        if (occupationArray[i][0] == header.innerText) {
-            for(var j = 0; j < occupationArray[i][1].length; j++) {
-                output.innerHTML += `<p>${occupationArray[i][1][j]}</p><button onclick=like(this.id) id="${occupationArray[i][1][j]}+">${occupationArray[i][2][j]} Likes</button>`
-                output.innerHTML += `<button onclick="dislike(this.id)" id="${occupationArray[i][1][j]}-">${occupationArray[i][3][j]} Dislikes</button><hr>`
-            }
-        }
-    }
+    socket.emit('updateComment', this.occupationArray)
 }
 
-function show() {
+function openForm() {
     console.log(occupationArray)
-
     document.getElementById("myForm").style.display = "block"
-
 }
 
 function closeForm() {
     document.getElementById("myForm").style.display = "none";
+}
+
+function displayUpdatedComments() {
+    output.innerHTML = ""
+    for (var i = 0; i < occupationArray.length; i++) {
+        if (occupationArray[i][0] == header.innerText) {
+            for(var j = 0; j < occupationArray[i][1].length; j++) {
+                output.innerHTML += `<p>${occupationArray[i][1][j]}</p><button onclick=likeOrDislike(this.id) id="${occupationArray[i][1][j]}+">${occupationArray[i][2][j]} Likes</button>`
+                output.innerHTML += `<button onclick="likeOrDislike(this.id)" id="${occupationArray[i][1][j]}-">${occupationArray[i][3][j]} Dislikes</button><hr>`
+            }
+        }
+    } 
 }
