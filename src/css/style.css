@@ -1,3 +1,6 @@
+body {
+    background-color: rgb(236, 234, 231);
+}
 a {
     text-decoration: none;
     color: blue;
@@ -7,7 +10,7 @@ a:hover {
     color: rgb(37, 37, 37);
 }
 center {
-    margin-top: -3%;
+    margin-top: -1%;
 }
 .open-button {
     background-color: #555;
@@ -26,6 +29,7 @@ center {
     display: none;
     position: fixed;
     top: 0;
+    right: 0;
     /* right: 15px; */
     border: 3px solid #f1f1f1;
     z-index: 9;
@@ -67,4 +71,55 @@ center {
 /* Add some hover effects to buttons */
 .form-container .btn:hover, .open-button:hover {
     opacity: 1;
+}
+#logo {
+    position: absolute;
+    top: -22px;
+    left: 20px;
+    background-color: #ffffff;
+    border-style: solid;
+    padding: 3px;
+ }
+#loginBtn {
+    position: absolute;
+    right: 197px;
+    top: 7px;
+    background-color: #00a2ff;
+}
+#registerBtn {
+    position: absolute;
+    right: 90px;
+    top: 7px;
+    background-color: #00ce56;
+}
+#homeBtn {
+    position: absolute;
+    right: 8px;
+    top: 7px;
+    background-color: #ffd900;
+}
+#hrAfterHeader {
+    margin-top: 53px;
+}
+#header {
+    font-family: fantasy;
+}
+#searchBtn {
+    background-color: #ff00aa;
+}
+#output button {
+    background-color: #00a2ff;
+}
+#eachComment {
+    display: flex;
+    margin-left: 30%;
+}
+#eachComment p {
+    left: 1000px;
+}
+#eachComment button {
+    position: absolute;
+    right: 10px;
+    height: 80px;
+    width: 100px;
 }

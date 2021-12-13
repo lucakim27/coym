@@ -2,14 +2,17 @@ const userInput = document.getElementById("userInput")
 const output = document.getElementById("output")
 const searchBtn = document.getElementById("searchBtn")
 const header = document.getElementById("header")
+const homeBtn = document.getElementById("homeBtn")
 const socket = io()
+
+var occupationArray = []
 
 socket.on('enter', (array) => {
     this.occupationArray = array
 })
 
-socket.on('updatedComment', () => {
-    displayUpdatedComments()
+socket.on('updatedComment', (array) => {
+    occupationArray = array
 })
 
 function searchOccupation() {
@@ -34,6 +37,8 @@ function displayComment(value) {
     output.innerHTML = ''
     searchBtn.innerText = "comment"
     searchBtn.setAttribute("onclick", "comment()")
+    homeBtn.disabled = false
+    displayUpdatedComments()
 }
 
 function comment() {
@@ -49,6 +54,7 @@ function comment() {
             userInput.value = ''
         }
     }
+    displayUpdatedComments()
     socket.emit('updateComment', this.occupationArray)
 }
 
@@ -67,11 +73,11 @@ function likeOrDislike(clicked_id) {
             }
         }
     }
+    displayUpdatedComments()
     socket.emit('updateComment', this.occupationArray)
 }
 
 function openForm() {
-    console.log(occupationArray)
     document.getElementById("myForm").style.display = "block"
 }
 
@@ -84,8 +90,8 @@ function displayUpdatedComments() {
     for (var i = 0; i < occupationArray.length; i++) {
         if (occupationArray[i][0] == header.innerText) {
             for(var j = 0; j < occupationArray[i][1].length; j++) {
-                output.innerHTML += `<p>${occupationArray[i][1][j]}</p><button onclick=likeOrDislike(this.id) id="${occupationArray[i][1][j]}+">${occupationArray[i][2][j]} Likes</button>`
-                output.innerHTML += `<button onclick="likeOrDislike(this.id)" id="${occupationArray[i][1][j]}-">${occupationArray[i][3][j]} Dislikes</button><hr>`
+                output.innerHTML += `<div id="eachComment"><p>${occupationArray[i][1][j]}</p><button onclick=likeOrDislike(this.id) id="${occupationArray[i][1][j]}+">${occupationArray[i][2][j]} Likes</button></div><hr>`
+                // output.innerHTML += `<button onclick="likeOrDislike(this.id)" id="${occupationArray[i][1][j]}-">${occupationArray[i][3][j]} Dislikes</button><hr>`
             }
         }
     } 
