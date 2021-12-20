@@ -41,7 +41,7 @@ center {
     background-color: white;
 }
 /* Full-width input fields */
-.form-container input[type=text], .form-container input[type=password] {
+.form-container input[type=text], .form-container input[type=password], .form-container input[type=passwordCheck] {
     width: 90%;
     padding: 15px;
     margin: 5px 0 22px 0;
@@ -49,7 +49,7 @@ center {
     background: #f1f1f1;
 }
 /* When the inputs get focus, do something */
-.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+.form-container input[type=text]:focus, .form-container input[type=password]:focus,  .form-container input[type=passwordCheck]:focus {
     background-color: #ddd;
     outline: none;
 }

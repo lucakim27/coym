@@ -11,7 +11,7 @@
     <header>
         <p id="logo">COYO</p>
         <button onclick="openForm()" id="loginBtn">Login</button>
-        <button id="registerBtn">Register</button>
+        <button onclick="openRegisterForm()" id="registerBtn">Register</button>
         <button id="homeBtn" onClick="window.location.reload()" disabled>Home</button>
     </header><hr id="hrAfterHeader">
     <center>
@@ -20,15 +20,33 @@
         <button onclick="searchOccupation()" id="searchBtn">Search</button><hr>
         <div id="output"></div>
     </center>
-    <div class="form-popup" id="myForm">
+
+    <!-- LOGIN POPUP -->
+    <div class="form-popup" id="myForm1">
         <form class="form-container">
           <h1>Login</h1>
-          <label for="email"><b>ID</b></label>
-          <input type="text" placeholder="Enter ID" name="id" required>
+          <label for="email"><b>Email</b></label>
+          <input type="text" placeholder="email@example.com" name="email" minlength="5" required>
           <label for="psw"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" name="psw" required>
+          <input type="password" placeholder="Enter Password" name="psw" minlength="5" required>
           <button type="submit" class="btn">Login</button>
           <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+    </div>
+
+    <!-- REGISTER POPUP -->
+    <div class="form-popup" id="myForm2">
+        <form class="form-container">
+          <h1>Register</h1>
+          <label for="email"><b>Email</b></label>
+          <input type="text" placeholder="email@example.com" name="email" minlength="5" required>
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" minlength="5" required>
+          <label for="psw"><b>Password Check</b></label>
+          <input type="passwordCheck" placeholder="Enter Password Again" minlength="5" name="pswCheck" required>
+          <!-- <button type="submit" class="btn">Register</button> -->
+          <button class="btn" onclick="register()">Register</button>
+          <button type="button" class="btn cancel" onclick="closeRegisterForm()">Close</button>
         </form>
     </div>
 </body>

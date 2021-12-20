@@ -78,11 +78,19 @@ function likeOrDislike(clicked_id) {
 }
 
 function openForm() {
-    document.getElementById("myForm").style.display = "block"
+    document.getElementById("myForm1").style.display = "block"
+}
+
+function openRegisterForm() {
+    document.getElementById("myForm2").style.display = "block"
 }
 
 function closeForm() {
-    document.getElementById("myForm").style.display = "none";
+    document.getElementById("myForm1").style.display = "none";
+}
+
+function closeRegisterForm() {
+    document.getElementById("myForm2").style.display = "none"
 }
 
 function displayUpdatedComments() {
@@ -95,4 +103,8 @@ function displayUpdatedComments() {
             }
         }
     } 
+}
+
+function register() {
+    console.log("Registered!")
 }
