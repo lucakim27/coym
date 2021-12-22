@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comments</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <p id="logo">COYO</p>
+        <button onclick="openForm()" id="loginBtn">Login</button>
+        <button onclick="openRegisterForm()" id="registerBtn">Register</button>
+    </header><hr id="hrAfterHeader">
+
+    <center>
+        <h1 id="occupationTitle"></h1>
+        <input type="text" id="userInput">
+        <button id="searchBtn">Comment</button><hr>
+        <div id="comments"></div>
+    </center>
+
+    <!-- LOGIN POPUP -->
+    <div class="form-popup" id="myForm1">
+        <form class="form-container">
+          <h1>Login</h1>
+          <label for="email"><b>Email</b></label>
+          <input type="email" placeholder="email@example.com" name="email" minlength="5" required>
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" minlength="5" required>
+          <button type="submit" class="btn">Login</button>
+          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+    </div>
+
+    <!-- REGISTER POPUP -->
+    <div class="form-popup" id="myForm2">
+        <div id="registerForm" class="form-container">
+          <h1>Register</h1>
+          <label><b>Email</b></label>
+          <input id="email" type="email" placeholder="email@example.com">
+          <label"><b>Password</b></label>
+          <input id="password" type="password" placeholder="Enter Password">
+          <label><b>Password Check</b></label>
+          <input id="repeatPassword" type="password" placeholder="Enter Password Again">
+          <button type="submit" class="btn" onclick="register()">Register</button>
+          <button type="button" class="btn cancel" onclick="closeRegisterForm()">Close</button>
+        </div>
+    </div>
+
+    <!-- EMAIL AUTHENTICATION POPUP -->
+    <div class="form-popup" id="myForm3">
+        <div class="form-container" id="form-container"></div>
+    </div>
+    
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/comment.js"></script>
+<script src="/js/login.js"></script>
+</html>
