@@ -354,7 +354,12 @@ function getOccupationsArray() {
 }
 
 function setOccupationsArray(array) {
-  occupations = array
+  console.log(occupations)
+  console.log(array)
+  occupations.splice(0, occupations.length)
+  for (var i = 0; i < array.length; i++) {
+    occupations.push(array[i])
+  }
 }
 
 module.exports = {
