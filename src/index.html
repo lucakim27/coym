@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Comment on your occupation</title>
         <link rel="stylesheet" href="/css/style.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
 <body>
     <header>
@@ -17,7 +18,18 @@
         <h1 id="header">Comment on your occupation</h1>
         <input type="text" id="userInput">
         <button onclick="searchOccupation()" id="searchBtn">Search</button><hr>
-        <div id="output"></div>
+        <!-- <div id="output"></div> -->
+
+        <!-- http://localhost:3000/comment?occupation=Academic+librarian -->
+
+        <div id="app-4">
+            <form action="/comment" method="get">
+                <a v-for="occupation in data" onclick="alert(this.innerText);">
+                    {{ occupation[0] }} <hr>
+                </a>
+            </form>
+        </div>
+
     </center>
 
     <!-- LOGIN POPUP -->

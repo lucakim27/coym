@@ -12,7 +12,7 @@ socket.on('userEnter', (array) => {
     for (var i = 0; i < array.length; i++) {
         occupationArray.push(array[i])
     }
-    displayOccupation(userInput, outputDOM, occupationArray)
+    // displayOccupation(userInput, outputDOM, occupationArray)
 })
 
 socket.on('updatedComment', (array) => {
@@ -20,15 +20,20 @@ socket.on('updatedComment', (array) => {
 })
 
 function searchOccupation() {
-    displayOccupation(userInput, outputDOM, occupationArray)
+    // displayOccupation(userInput, outputDOM, occupationArray)
     userInput.value = ''
 }
 
-function displayOccupation(userInput, outputDOM, array) {
-    outputDOM.innerHTML = ''
-    for (var i = 0; i < occupationArray.length; i++) {
-        if (array[i][0].toLowerCase().includes(userInput.value.toLowerCase()) == true) {
-            outputDOM.innerHTML += `<form action="/comment" method="get"><button type="submit" name="occupation" value="${array[i][0]}">${array[i][0]}</button></form><hr>`
-        }
-    }
-}
+// function displayOccupation(userInput, outputDOM, array) {
+//     outputDOM.innerHTML = ''
+//     for (var i = 0; i < occupationArray.length; i++) {
+//         if (array[i][0].toLowerCase().includes(userInput.value.toLowerCase()) == true) {
+//             outputDOM.innerHTML += `<form action="/comment" method="get"><button type="submit" name="occupation" value="${array[i][0]}">${array[i][0]}</button></form><hr>`
+//         }
+//     }
+// }
+
+var app4 = new Vue ({
+    el: '#app-4',
+    data: { data: occupationArray }
+})
