@@ -15,21 +15,13 @@
         <button onclick="openRegisterForm()" id="registerBtn">Register</button>
     </header><hr id="hrAfterHeader">
     <center>
-        <h1 id="header">Comment on your occupation</h1>
-        <input type="text" id="userInput">
-        <button onclick="searchOccupation()" id="searchBtn">Search</button><hr>
-        <!-- <div id="output"></div> -->
-
-        <!-- http://localhost:3000/comment?occupation=Academic+librarian -->
-
+        <h1 id="header">Comment on your occupation</h1>     
         <div id="app-4">
-            <form action="/comment" method="get">
-                <a v-for="occupation in data" onclick="alert(this.innerText);">
-                    {{ occupation[0] }} <hr>
-                </a>
-            </form>
+            <input type="text" id="userInput" v-model="searchQuery" placeholder="Search here"><hr>
+            <a v-for="occupation in resultQuery" onclick="directPage(this.innerText)">
+                {{ occupation[0] }} <hr>
+            </a>
         </div>
-
     </center>
 
     <!-- LOGIN POPUP -->

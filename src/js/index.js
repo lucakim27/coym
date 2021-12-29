@@ -12,28 +12,34 @@ socket.on('userEnter', (array) => {
     for (var i = 0; i < array.length; i++) {
         occupationArray.push(array[i])
     }
-    // displayOccupation(userInput, outputDOM, occupationArray)
 })
 
 socket.on('updatedComment', (array) => {
     occupationArray = array
 })
 
-function searchOccupation() {
-    // displayOccupation(userInput, outputDOM, occupationArray)
-    userInput.value = ''
-}
-
-// function displayOccupation(userInput, outputDOM, array) {
-//     outputDOM.innerHTML = ''
-//     for (var i = 0; i < occupationArray.length; i++) {
-//         if (array[i][0].toLowerCase().includes(userInput.value.toLowerCase()) == true) {
-//             outputDOM.innerHTML += `<form action="/comment" method="get"><button type="submit" name="occupation" value="${array[i][0]}">${array[i][0]}</button></form><hr>`
-//         }
-//     }
-// }
-
 var app4 = new Vue ({
     el: '#app-4',
-    data: { data: occupationArray }
+
+    data: { 
+        searchQuery: null,
+        data: occupationArray
+    },
+
+    computed: {
+        resultQuery() {
+            if (this.searchQuery) {
+                return this.data.filter ((item) => {
+                  return this.searchQuery.toLowerCase().split(' ').every(v => item.toString().toLowerCase().includes(v))
+                })
+            }
+            else {
+                return this.data
+            }
+        }
+    }
 })
+
+function directPage(occupationName) {
+    document.location.href = 'http://localhost:3000/comment?occupation=' + occupationName
+}
