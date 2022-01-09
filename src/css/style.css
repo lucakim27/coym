@@ -8,6 +8,7 @@ a {
 }
 a:hover {
     color: rgb(37, 37, 37);
+    cursor: pointer;
 }
 center {
     margin-top: -1%;
