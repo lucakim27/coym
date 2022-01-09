@@ -23,7 +23,7 @@
         <div id="app-4">
             <input type="text" id="userInput" v-model="searchQuery" placeholder="Search here"><hr>
             <a v-for="occupation in resultQuery" onclick="directPage(this.innerText)">
-                {{ occupation }} <hr>
+                {{ occupation[0] }} <hr>
             </a>
         </div>
     </center>

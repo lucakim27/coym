@@ -40,14 +40,19 @@ function getQueryVariable(variable) {
 }
 
 function comment() {
-    for (var i = 0; i < occupationArray.length; i++) {
-        if (occupationArray[i][0] == occupationTitle.innerText && userInput.value != "") {
-            occupationArray[i][1].push(userInput.value)
-            occupationArray[i][2].push(0)
-            userInput.value = ''
+    if (userInput.value.length == 0) {
+        return 0
+    } else if (confirm("Are you sure you wanna comment?")) {
+        for (var i = 0; i < occupationArray.length; i++) {
+            if (occupationArray[i][0] == occupationTitle.innerText && userInput.value != "") {
+                occupationArray[i][1].push(userInput.value)
+                occupationArray[i][2].push(0)
+                userInput.value = ''
+            }
         }
+        socket.emit('updateComment', occupationArray)
     }
-    socket.emit('updateComment', occupationArray)
+
 }
 
 function likeOrDislike(clicked_id) {

@@ -74,29 +74,27 @@ center {
 }
 #logo {
     position: absolute;
-    top: -22px;
+    top: -10px;
     left: 20px;
-    background-color: #ffffff;
+    background-color: #ff00ff;
     border-style: solid;
-    padding: 3px;
+    padding: 9px;
  }
 #loginBtn {
     position: absolute;
-    right: 112px;
+    right: 87px;
     top: 7px;
     background-color: #00a2ff;
+    width: 80px;
+    height: 40px;
 }
 #registerBtn {
     position: absolute;
     right: 5px;
     top: 7px;
     background-color: #00ce56;
-}
-#homeBtn {
-    position: absolute;
-    right: 8px;
-    top: 7px;
-    background-color: #ffd900;
+    height: 40px;
+    width: 80px;
 }
 #hrAfterHeader {
     margin-top: 53px;
@@ -120,16 +118,12 @@ center {
 #output button:hover {
     color: #FF0000; 
 }
-#eachComment {
-    display: flex;
-    margin-left: 30%;
-}
 #eachComment p {
-    left: 1000px;
+    text-align: center;
+    width: 100vw;
 }
 #eachComment button {
-    position: absolute;
-    right: 10px;
-    height: 80px;
-    width: 100px;
+    /* position: absolute; */
+    height: 20px;
+    width: 100vw;
 }
