@@ -122,6 +122,7 @@ center {
 #eachComment p {
     text-align: center;
     width: 100vw;
+    overflow-wrap: break-word;
 }
 #eachComment button {
     /* position: absolute; */
