@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Comment on your occupation</title>
-        <link rel="stylesheet" href="/css/style.css">
-        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comment on your occupation</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
 <body>
 
     <!-- HEADER -->
-    <header>
+    <header ng-controller="app">
         <p id="logo">COYO</p>
-        <button onclick="openForm()" id="loginBtn">Login</button>
-        <button onclick="openRegisterForm()" id="registerBtn">Register</button>
-    </header><hr id="hrAfterHeader">
+
+        <div ng-hide="true">
+            <img src="" alt="">
+            <p>{{$username}}</p>
+        </div>
+
+        <div ng-hide="false">
+            <button onclick="openForm()" id="loginBtn">Login</button>
+            <button onclick="openRegisterForm()" id="registerBtn">Register</button>
+        </div>
+
+    </header>
+    <hr id="hrAfterHeader">
 
     <!-- CONTENT -->
     <center>
@@ -30,7 +41,7 @@
 
     <!-- LOGIN POPUP -->
     <div class="form-popup" id="myForm1">
-        <form class="form-container">
+        <form class="form-container" action="index.html">
           <h1>Login</h1>
           <label for="email"><b>Email</b></label>
           <input type="email" placeholder="email@example.com" name="email" minlength="5" required>
