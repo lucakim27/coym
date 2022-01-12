@@ -12,17 +12,17 @@
 <body>
 
     <!-- HEADER -->
-    <header ng-controller="app">
+    <header ng-app="indexHeader" ng-controller="indexHeaderController">
         <p id="logo">COYO</p>
 
-        <div ng-hide="true">
-            <img src="" alt="">
-            <p>{{$username}}</p>
-        </div>
-
-        <div ng-hide="false">
+        <div ng-show="login == 0">
             <button onclick="openForm()" id="loginBtn">Login</button>
             <button onclick="openRegisterForm()" id="registerBtn">Register</button>
+        </div>
+
+        <div ng-show="login == 1">
+            <img id="userProfile" src="/img/accountIMG.jpeg" alt="acc" width="50" height="50">
+            <p id="userName">{{firstName + " " + lastName}}</p>
         </div>
 
     </header>
@@ -33,10 +33,13 @@
         <h1 id="header">Comment on your occupation</h1>
         <div id="app-4">
             <input type="text" id="userInput" v-model="searchQuery" placeholder="Search here"><hr>
-            <a v-for="occupation in resultQuery" onclick="directPage(this.innerText)">
-                {{ occupation[0] }} <hr>
-            </a>
+            <div id="divScroll">
+                <a v-for="occupation in resultQuery" onclick="directPage(this.innerText)">
+                    {{ occupation[0] }} <hr id="lineInside" disabled>
+                </a>
+            </div>
         </div>
+        <hr>
     </center>
 
     <!-- LOGIN POPUP -->
