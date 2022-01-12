@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(236, 234, 231);
+    background-color: rgb(255, 255, 255);
 }
 a {
     text-decoration: none;
@@ -75,15 +75,18 @@ center {
 }
 #logo {
     position: absolute;
-    top: -10px;
+    top: -25px;
     left: 20px;
-    background-color: #ff00ff;
-    border-style: solid;
+    /* background-color: #ff00ff; */
+    /* border-style: solid; */
     padding: 9px;
+    width: 75px;
+    height: 25px;
+    font-family: fantasy;
  }
 #loginBtn {
     position: absolute;
-    right: 87px;
+    right: 127px;
     top: 7px;
     background-color: #00a2ff;
     width: 80px;
@@ -91,11 +94,11 @@ center {
 }
 #registerBtn {
     position: absolute;
-    right: 5px;
+    right: 15px;
     top: 7px;
     background-color: #00ce56;
     height: 40px;
-    width: 80px;
+    width: 110px;
 }
 #hrAfterHeader {
     margin-top: 53px;
@@ -126,6 +129,24 @@ center {
 }
 #eachComment button {
     /* position: absolute; */
-    height: 20px;
+    height: 35px;
     width: 100vw;
+}
+#userName {
+    position: absolute;
+    right: 27px;
+    top: -17px;
+}
+#userProfile {
+    position: absolute;
+    right: 147px;
+    top: 0px;
+}
+#divScroll {
+    overflow: hidden;
+    overflow-y: scroll;
+    height: 700px;
+}
+#lineInside {
+    border-top: 0.5px dotted;
 }
