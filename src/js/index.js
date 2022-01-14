@@ -43,10 +43,3 @@ var app4 = new Vue ({
 function directPage(occupationName) {
     document.location.href = 'http://localhost:3000/comment?occupation=' + occupationName
 }
-
-var app = angular.module('indexHeader', [])
-    app.controller('indexHeaderController', function($scope) {
-        $scope.login = 1;
-        $scope.firstName = "Heesu"
-        $scope.lastName = "Kim"
-})
