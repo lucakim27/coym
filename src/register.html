@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COYO Register</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+
+
+    <header>
+        <p id="logo">COYO</p>
+    </header>
+    <hr id="hrAfterHeader">
+
+    <center id="registerContainer">
+        <h1 id="header">Register</h1>
+        <input type="text" placeholder="Email" ng-model="registerEmail"><br><br>
+        <input type="text" placeholder="ID" ng-model="registerID"><br><br>
+        <input type="text" placeholder="Password" ng-model="registerPW"><br><br>
+        <input type="text" placeholder="Password Again"><br><br>
+        <button>Register</button><br>
+    </center>
+
+
+
+</body>
+<script src="/js/controller/indexController.js"></script>
+</html>

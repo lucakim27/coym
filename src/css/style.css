@@ -1,7 +1,7 @@
 body {
     background-color: rgb(255, 255, 255);
 }
-a {
+#divScroll a {
     text-decoration: none;
     color: blue;
     font-size: 40px;
@@ -86,19 +86,12 @@ center {
  }
 #loginBtn {
     position: absolute;
-    right: 127px;
+    right: 20px;
+    background-color: rgb(255, 255, 255);
+    font-family: fantasy;
     top: 7px;
-    background-color: #00a2ff;
     width: 80px;
     height: 40px;
-}
-#registerBtn {
-    position: absolute;
-    right: 15px;
-    top: 7px;
-    background-color: #00ce56;
-    height: 40px;
-    width: 110px;
 }
 #hrAfterHeader {
     margin-top: 53px;
@@ -147,6 +140,6 @@ center {
     overflow-y: scroll;
     height: 700px;
 }
-#lineInside {
-    border-top: 0.5px dotted;
+#loginContainer, #registerContainer {
+    margin-top: 5%;
 }
