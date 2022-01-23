@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
-<body>
+<body ng-app="index" ng-controller="indexController">
 
 
     <header>
@@ -18,11 +18,13 @@
 
     <center id="registerContainer">
         <h1 id="header">Register</h1>
-        <input type="text" placeholder="Email" ng-model="registerEmail"><br><br>
+        <label for="">ID</label><br>
         <input type="text" placeholder="ID" ng-model="registerID"><br><br>
-        <input type="text" placeholder="Password" ng-model="registerPW"><br><br>
-        <input type="text" placeholder="Password Again"><br><br>
-        <button>Register</button><br>
+        <label for="">PW</label><br>
+        <input type="text" placeholder="Password" ng-model="registerPw"><br><br>
+        <label for="">PW Check</label><br>
+        <input type="text" placeholder="Password Again" ng-model="registerPwAgain"><br><br>
+        <button ng-click="clickRegister(registerID, registerPw, registerPwAgain)">Register</button><br>
     </center>
 
 
