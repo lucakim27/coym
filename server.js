@@ -9,16 +9,22 @@ const server = http.createServer(app)
 const io = socketio(server)
 const PORT = process.env.PORT || 3000
 
-// var accArray = [
-//   ["admin@gmail.com", "12345"]
-// ]
-
+// pages
 app.use(express.static(path.join(__dirname, 'src')))
 
 app.get('/comment', function (req, res) {
   res.sendFile(__dirname + '/src/comment.html')
 })
 
+app.get('/login', function (req, res) {
+  res.sendFile(__dirname + '/src/login.html')
+})
+
+app.get('/register', function (req, res) {
+  res.sendFile(__dirname + '/src/register.html')
+})
+
+// Sokcet on / emit
 io.on('connection', (socket) => {
   console.log("New user joined " + socket.id)
 
@@ -27,6 +33,11 @@ io.on('connection', (socket) => {
   socket.on('updateComment', (array) => {
     setOccupationsArray(array)
     io.sockets.emit('updatedComment', getOccupationsArray())
+  })
+
+  socket.on('registerAccount', ({ id, pwd }) => {
+    console.log(id)
+    console.log(pwd)
   })
 
 })

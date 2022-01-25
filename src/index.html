@@ -8,19 +8,19 @@
     <link rel="stylesheet" href="/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
-<body ng-app="indexHeader" ng-controller="indexHeaderController">
+<body ng-app="index" ng-controller="indexController">
 
     <!-- HEADER -->
-    <header >
+    <header>
         <p id="logo">COYO</p>
 
-        <div ng-show="login == 0">
-            <button onclick="openForm()" id="loginBtn">Login</button>
-            <button onclick="openRegisterForm()" id="registerBtn">Register</button>
+        <div ng-show="loginStatus == 0">
+            <button ng-click="clickLoginBtn()" data-toggle="modal" id="loginBtn">Login</button>
         </div>
 
-        <div ng-show="login == 1">
+        <div ng-show="loginStatus == 1">
             <img id="userProfile" src="/img/accountIMG.jpeg" alt="acc" width="50" height="50">
             <p id="userName">{{firstName + " " + lastName}}</p>
         </div>
@@ -35,49 +35,15 @@
             <input type="text" id="userInput" v-model="searchQuery" placeholder="Search here"><hr>
             <div id="divScroll">
                 <a v-for="occupation in resultQuery" onclick="directPage(this.innerText)">
-                    {{ occupation[0] }} <hr id="lineInside">
+                    {{ occupation[0] }} <hr>
                 </a>
             </div>
         </div>
         <hr>
     </center>
 
-    <!-- LOGIN POPUP -->
-    <div class="form-popup" id="myForm1">
-        <form class="form-container" action="index.html">
-          <h1>Login</h1>
-          <label for="email"><b>Email</b></label>
-          <input type="email" placeholder="email@example.com" name="email" minlength="5" required>
-          <label for="psw"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" name="psw" minlength="5" required>
-          <button type="submit" class="btn">Login</button>
-          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-        </form>
-    </div>
-
-    <!-- REGISTER POPUP -->
-    <div class="form-popup" id="myForm2">
-        <div id="registerForm" class="form-container">
-          <h1>Register</h1>
-          <label><b>Email</b></label>
-          <input id="email" type="email" placeholder="email@example.com" ng-model="registerEmailInput">
-          <label"><b>Password</b></label>
-          <input id="password" type="password" placeholder="Enter Password" ng-model="registerPasswordInput">
-          <label><b>Password Check</b></label>
-          <input id="repeatPassword" type="password" placeholder="Enter Password Again" ng-model="registerPasswordAgainInput">
-          <button class="btn" ng-click="clickRegister(registerEmailInput, registerPasswordInput, registerPasswordAgainInput)">Register</button>
-          <button class="btn cancel" ng-click="clickRegister()">Close</button>
-        </div>
-    </div>
-
-    <!-- EMAIL AUTHENTICATION POPUP -->
-    <div class="form-popup" id="myForm3">
-        <div class="form-container" id="form-container"></div>
-    </div>
-
 </body>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/index.js"></script>
-<script src="/js/login.js"></script>
 <script src="/js/controller/indexController.js"></script>
 </html>

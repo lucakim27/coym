@@ -6,18 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comments</title>
     <link rel="stylesheet" href="/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
-<body>
+<body ng-app="index" ng-controller="indexController">
     <header>
         <p id="logo">COYO</p>
-        <button onclick="openForm()" id="loginBtn">Login</button>
-        <button onclick="openRegisterForm()" id="registerBtn">Register</button>
+
+        <div ng-show="loginStatus == 0">
+            <button ng-click="clickLoginBtn()" data-toggle="modal" id="loginBtn">Login</button>
+        </div>
+
+        <div ng-show="loginStatus == 1">
+            <img id="userProfile" src="/img/accountIMG.jpeg" alt="acc" width="50" height="50">
+            <p id="userName">{{firstName + " " + lastName}}</p>
+        </div>
+
+
+        <!-- <button onclick="openForm()" id="loginBtn">Login</button> -->
     </header><hr id="hrAfterHeader">
 
     <center>
         <h1 id="occupationTitle"></h1>
-        <input type="text" id="userInput">
-        <button id="searchBtn">Comment</button><hr>
+        <div ng-hide="loginStatus == 0">
+            <input type="text" id="userInput">
+            <button id="searchBtn">Comment</button>
+        </div><hr>
         <div id="comments"></div>
     </center>
 
@@ -57,5 +70,5 @@
 </body>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/comment.js"></script>
-<script src="/js/login.js"></script>
+<script src="/js/controller/indexController.js"></script>
 </html>
