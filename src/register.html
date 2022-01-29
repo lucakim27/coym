@@ -5,11 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>COYO Register</title>
+    <script src="/socket.io/socket.io.js"></script>
     <link rel="stylesheet" href="/css/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
-<body ng-app="index" ng-controller="indexController">
-
+<body>
 
     <header>
         <p id="logo">COYO</p>
@@ -18,17 +17,15 @@
 
     <center id="registerContainer">
         <h1 id="header">Register</h1>
-        <label for="">ID</label><br>
-        <input type="text" placeholder="ID" ng-model="registerID"><br><br>
+        <label>ID</label><br>
+        <input type="text" placeholder="ID" id="registerID"><br><br>
         <label for="">PW</label><br>
-        <input type="text" placeholder="Password" ng-model="registerPw"><br><br>
+        <input type="password" placeholder="Password" id="registerPw"><br><br>
         <label for="">PW Check</label><br>
-        <input type="text" placeholder="Password Again" ng-model="registerPwAgain"><br><br>
-        <button ng-click="clickRegister(registerID, registerPw, registerPwAgain)">Register</button><br>
+        <input type="password" placeholder="Password Again" id="registerPwAgain"><br><br>
+        <button onclick="clickRegister()">Register</button><br>
     </center>
 
-
-
 </body>
-<script src="/js/controller/indexController.js"></script>
+<script src="/js/register.js"></script>
 </html>

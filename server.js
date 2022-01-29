@@ -3,6 +3,7 @@ const http = require('http')
 const express = require('express')
 const socketio = require('socket.io')
 const { getOccupationsArray, setOccupationsArray } = require('./utils/occupation')
+const { searchAccounts, addAccount } = require('./utils/account')
 
 const app = express()
 const server = http.createServer(app)
@@ -35,11 +36,19 @@ io.on('connection', (socket) => {
     io.sockets.emit('updatedComment', getOccupationsArray())
   })
 
-  socket.on('registerAccount', ({ id, pwd }) => {
-    console.log(id)
-    console.log(pwd)
+  socket.on('registerAccount', acc => {
+    addAccount(acc)
+  })
+
+  socket.on('login', acc => {
+    if (searchAccounts(acc) == true) {
+      io.sockets.emit('loginSuccessful')
+    } else {
+      io.sockets.emit('loginFail')
+    }
   })
 
 })
 
+// listen
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`))

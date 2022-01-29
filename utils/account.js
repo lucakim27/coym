@@ -1,7 +1,7 @@
 const accounts = []
 
-function getAccounts() {
-    return account
+function searchAccounts() {
+    return accounts
 }
 
 function addAccount(newAcc) {
@@ -9,6 +9,6 @@ function addAccount(newAcc) {
 }
 
 module.exports = {
-    getAccounts,
+    searchAccounts,
     addAccount
 }
