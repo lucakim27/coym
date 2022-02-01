@@ -7,6 +7,7 @@ const occupationTitle = document.getElementById("occupationTitle")
 
 const socket = io()
 const occupationArray = []
+const loggedIn = false
 
 socket.on('userEnter', (array) => {
     for (var i = 0; i < array.length; i++) {
@@ -16,6 +17,13 @@ socket.on('userEnter', (array) => {
 
 socket.on('updatedComment', (array) => {
     occupationArray = array
+})
+
+socket.on('loggedIn', (id) => {
+    console.log(loggedIn)
+    loggedIn = true
+    console.log(loggedIn)
+    console.log(id)
 })
 
 var app4 = new Vue ({

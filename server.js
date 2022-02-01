@@ -10,7 +10,6 @@ const server = http.createServer(app)
 const io = socketio(server)
 const PORT = process.env.PORT || 3000
 
-// pages
 app.use(express.static(path.join(__dirname, 'src')))
 
 app.get('/comment', function (req, res) {
@@ -25,7 +24,6 @@ app.get('/register', function (req, res) {
   res.sendFile(__dirname + '/src/register.html')
 })
 
-// Sokcet on / emit
 io.on('connection', (socket) => {
   console.log("New user joined " + socket.id)
 
@@ -40,15 +38,18 @@ io.on('connection', (socket) => {
     addAccount(acc)
   })
 
+  socket.on('logIn', id => {
+    io.to(socket.id).emit('loggedIn', id)
+  })
+
   socket.on('login', acc => {
     if (searchAccounts(acc) == true) {
-      io.sockets.emit('loginSuccessful')
+      io.to(socket.id).emit('loginSuccessful', acc[0])
     } else {
-      io.sockets.emit('loginFail')
+      io.to(socket.id).emit('loginFail', false)
     }
   })
 
 })
 
-// listen
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`))

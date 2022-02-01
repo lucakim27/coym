@@ -9,6 +9,7 @@ function clickRegister() {
     } else {
         alert("Registered Successfully!")
         socket.emit('registerAccount', [document.getElementById("registerID").value, document.getElementById("registerPw").value])
+        document.location.href = 'http://localhost:3000/login'
     }
 
 }

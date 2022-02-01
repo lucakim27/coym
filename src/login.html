@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>COYO Login</title>
     <link rel="stylesheet" href="/css/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
 
@@ -17,12 +17,13 @@
 
     <center id="loginContainer">
         <h1 id="header">Login</h1>
-        <input type="text" placeholder="Enter your ID"><br><br>
-        <input type="text" placeholder="Enter your Password"><br><br>
-        <button>Login</button><br>
+        <input type="text" placeholder="Enter your ID" id="loginID"><br><br>
+        <input type="password" placeholder="Enter your Password" id="loginPw"><br><br>
+        <button onclick="clickLogin()">Login</button><br>
         <p>Register <a href="/register">here</a>!</p>
     </center>
 
 </body>
-<script src="/js/controller/indexController.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/login.js"></script>
 </html>
