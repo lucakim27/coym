@@ -10,20 +10,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
-<body ng-app="index" ng-controller="indexController">
+<body>
 
     <!-- HEADER -->
     <header>
         <p id="logo">COYO</p>
 
-        <div ng-show="loginStatus == 0">
-            <button ng-click="clickLoginBtn()" data-toggle="modal" id="loginBtn">Login</button>
-        </div>
+        <button data-toggle="modal" id="loginBtn" onclick="clickLoginBtn()">Login</button>
 
-        <div ng-show="loginStatus == 1">
-            <img id="userProfile" src="/img/accountIMG.jpeg" alt="acc" width="50" height="50">
-            <p id="userName">{{firstName + " " + lastName}}</p>
-        </div>
+        <div id="userId">9ZX4DVGw8Ed96hwqAAA_</div>
 
     </header>
     <hr id="hrAfterHeader">

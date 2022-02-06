@@ -93,6 +93,15 @@ center {
     width: 80px;
     height: 40px;
 }
+#userId {
+    position: absolute;
+    right: 300px;
+    background-color: rgb(255, 255, 255);
+    font-family: fantasy;
+    top: 10px;
+    width: 80px;
+    height: 40px;
+}
 #hrAfterHeader {
     margin-top: 53px;
 }

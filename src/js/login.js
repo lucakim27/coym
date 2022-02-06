@@ -4,9 +4,10 @@ function clickLogin() {
     socket.emit('login', [document.getElementById("loginID").value, document.getElementById("loginPw").value])
 }
 
-socket.on('loginSuccessful', id => {
-    document.location.href = 'http://localhost:3000'
-    socket.emit('logIn', id)
+socket.on('loginSuccessful', idAndAcc => {
+    alert("Login Successful!")
+    document.location.href = 'http://localhost:3000/?login=' + idAndAcc[0]
+    socket.emit('loggedIn', idAndAcc)
 })
 
 socket.on('loginFail', value => {

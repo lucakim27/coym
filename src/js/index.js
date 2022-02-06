@@ -1,35 +1,33 @@
-const userInput = document.getElementById("userInput")
-const outputDOM = document.getElementById("output")
-const searchBtn = document.getElementById("searchBtn")
-const header = document.getElementById("header")
-const homeBtn = document.getElementById("homeBtn")
-const occupationTitle = document.getElementById("occupationTitle")
-
 const socket = io()
 const occupationArray = []
-const loggedIn = false
+var socketid = ''
 
 socket.on('userEnter', (array) => {
     for (var i = 0; i < array.length; i++) {
         occupationArray.push(array[i])
     }
+
+    if (getQueryVariable('login') === '') {
+        document.getElementById('userId').style.display = 'none'
+    }
+    else {
+        document.getElementById('loginBtn').style.display = 'none'
+    }
+
 })
 
 socket.on('updatedComment', (array) => {
     occupationArray = array
 })
 
-socket.on('loggedIn', (id) => {
-    console.log(loggedIn)
-    loggedIn = true
-    console.log(loggedIn)
-    console.log(id)
+socket.on('loggedIn', (array) => {
+    alert(array)
 })
 
 var app4 = new Vue ({
     el: '#app-4',
 
-    data: { 
+    data: {
         searchQuery: null,
         data: occupationArray
     },
@@ -50,4 +48,13 @@ var app4 = new Vue ({
 
 function directPage(occupationName) {
     document.location.href = 'http://localhost:3000/comment?occupation=' + occupationName
+}
+
+function clickLoginBtn() {
+    document.location.href = 'http://localhost:3000/login'
+}
+
+function getQueryVariable(variable) {
+    var query = window.location.search.substring(1)
+    return query
 }

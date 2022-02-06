@@ -25,7 +25,7 @@ app.get('/register', function (req, res) {
 })
 
 io.on('connection', (socket) => {
-  console.log("New user joined " + socket.id)
+  console.log("An user joined: " + socket.id)
 
   io.to(socket.id).emit('userEnter', getOccupationsArray())
 
@@ -38,18 +38,24 @@ io.on('connection', (socket) => {
     addAccount(acc)
   })
 
-  socket.on('logIn', id => {
-    io.to(socket.id).emit('loggedIn', id)
+  socket.on('loggedIn', idAndAcc => {
+
+    // check if the socketid is logged in user then on index page, by using query, it will check if its logged in user or not.
+    console.log(idAndAcc)
+
   })
 
   socket.on('login', acc => {
     if (searchAccounts(acc) == true) {
-      io.to(socket.id).emit('loginSuccessful', acc[0])
+      io.to(socket.id).emit('loginSuccessful', [socket.id, acc])
     } else {
       io.to(socket.id).emit('loginFail', false)
     }
   })
 
+  socket.on('disconnect', function () {
+      console.log("The user disconnected: " + socket.id)
+  })
 })
 
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`))
