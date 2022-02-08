@@ -38,19 +38,16 @@ io.on('connection', (socket) => {
     addAccount(acc)
   })
 
-  socket.on('loggedIn', idAndAcc => {
-
-    // check if the socketid is logged in user then on index page, by using query, it will check if its logged in user or not.
-    console.log(idAndAcc)
-
-  })
-
   socket.on('login', acc => {
     if (searchAccounts(acc) == true) {
       io.to(socket.id).emit('loginSuccessful', [socket.id, acc])
     } else {
       io.to(socket.id).emit('loginFail', false)
     }
+  })
+
+  socket.on('getId', socketid => {
+    console.log(socketid)
   })
 
   socket.on('disconnect', function () {

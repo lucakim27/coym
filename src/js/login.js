@@ -7,7 +7,6 @@ function clickLogin() {
 socket.on('loginSuccessful', idAndAcc => {
     alert("Login Successful!")
     document.location.href = 'http://localhost:3000/?login=' + idAndAcc[0]
-    socket.emit('loggedIn', idAndAcc)
 })
 
 socket.on('loginFail', value => {

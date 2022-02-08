@@ -12,6 +12,7 @@ socket.on('userEnter', (array) => {
     }
     else {
         document.getElementById('loginBtn').style.display = 'none'
+        socket.emit('getId', getQueryVariable('login'))
     }
 
 })
