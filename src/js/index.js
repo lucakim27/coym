@@ -6,23 +6,26 @@ socket.on('userEnter', (array) => {
     for (var i = 0; i < array.length; i++) {
         occupationArray.push(array[i])
     }
-
-    if (getQueryVariable('login') === '') {
+    if (getQueryVariable('socketid') === '') {
         document.getElementById('userId').style.display = 'none'
     }
     else {
         document.getElementById('loginBtn').style.display = 'none'
-        socket.emit('getId', getQueryVariable('login'))
+        socketid = getQueryVariable('socketid')
+        socket.emit('getId', socketid)
     }
-
 })
 
 socket.on('updatedComment', (array) => {
     occupationArray = array
 })
 
-socket.on('loggedIn', (array) => {
-    alert(array)
+socket.on('displayId', id => {
+    for (var i=0; i < id.length; i++) {
+        if (socketid == id[i]) {
+            document.getElementById('userId').innerHTML = socketid
+        }
+    }
 })
 
 var app4 = new Vue ({

@@ -4,6 +4,7 @@ const express = require('express')
 const socketio = require('socket.io')
 const { getOccupationsArray, setOccupationsArray } = require('./utils/occupation')
 const { searchAccounts, addAccount } = require('./utils/account')
+const { getLoggedInUsers, addLoggedInUsers } = require('./utils/loggedin')
 
 const app = express()
 const server = http.createServer(app)
@@ -47,7 +48,9 @@ io.on('connection', (socket) => {
   })
 
   socket.on('getId', socketid => {
-    console.log(socketid)
+    addLoggedInUsers(socketid)
+    console.log(getLoggedInUsers())
+    io.sockets.emit('displayId', getLoggedInUsers())
   })
 
   socket.on('disconnect', function () {
