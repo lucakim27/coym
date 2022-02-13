@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comment on your occupation</title>
     <link rel="stylesheet" href="/css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
@@ -16,7 +14,7 @@
     <header>
         <p id="logo">COYO</p>
 
-        <button data-toggle="modal" id="loginBtn" onclick="clickLoginBtn()">Login</button>
+        <button id="loginBtn" onclick="clickLoginBtn()">Login</button>
 
         <div id="userId"></div>
 
@@ -26,13 +24,8 @@
     <!-- CONTENT -->
     <center>
         <h1 id="header">Comment on your occupation</h1>
-        <div id="app-4">
-            <input type="text" id="userInput" v-model="searchQuery" placeholder="Search here"><hr>
-            <div id="divScroll">
-                <a v-for="occupation in resultQuery" onclick="directPage(this.innerText)">
-                    {{ occupation[0] }} <hr>
-                </a>
-            </div>
+            <input type="text" id="userInput" placeholder="Search here"><hr>
+            <div id="divScroll"></div>
         </div>
         <hr>
     </center>
@@ -40,5 +33,4 @@
 </body>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/index.js"></script>
-<script src="/js/controller/indexController.js"></script>
 </html>

@@ -6,6 +6,7 @@ socket.on('userEnter', (array) => {
     for (var i = 0; i < array.length; i++) {
         occupationArray.push(array[i])
     }
+    listOutOccupations()
     if (getQueryVariable('socketid') === '') {
         document.getElementById('userId').style.display = 'none'
     }
@@ -21,34 +22,18 @@ socket.on('updatedComment', (array) => {
 })
 
 socket.on('displayId', id => {
-    for (var i=0; i < id.length; i++) {
+    for (var i = 0; i < id.length; i++) {
         if (socketid == id[i]) {
             document.getElementById('userId').innerHTML = socketid
         }
     }
 })
 
-var app4 = new Vue ({
-    el: '#app-4',
-
-    data: {
-        searchQuery: null,
-        data: occupationArray
-    },
-
-    computed: {
-        resultQuery() {
-            if (this.searchQuery) {
-                return this.data.filter ((item) => {
-                  return this.searchQuery.toLowerCase().split(' ').every(v => item.toString().toLowerCase().includes(v))
-                })
-            }
-            else {
-                return this.data
-            }
-        }
+function listOutOccupations() {
+    for (var i = 0; i < occupationArray.length; i++) {
+        document.getElementById('divScroll').innerHTML += "<a onclick='directPage(this.innerText)'>" + occupationArray[i][0] + "</a><hr>"
     }
-})
+}
 
 function directPage(occupationName) {
     document.location.href = 'http://localhost:3000/comment?occupation=' + occupationName
