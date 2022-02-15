@@ -1,6 +1,7 @@
 const socket = io()
 const occupationArray = []
 var socketid = ''
+document.getElementById('userInput').addEventListener('change', updateValue);
 
 socket.on('userEnter', (array) => {
     for (var i = 0; i < array.length; i++) {
@@ -46,4 +47,14 @@ function clickLoginBtn() {
 function getQueryVariable(variable) {
     var query = window.location.search.substring(1)
     return query
+}
+
+
+function updateValue(e) {
+  document.getElementById('divScroll').innerHTML = ""
+  for (var i = 0; i < occupationArray.length; i++) {
+      if (occupationArray[i][0].toLowerCase().includes(e.target.value.toLowerCase()) == true) {
+          document.getElementById('divScroll').innerHTML += "<a onclick='directPage(this.innerText)'>" + occupationArray[i][0] + "</a><hr>"
+      }
+  }
 }
