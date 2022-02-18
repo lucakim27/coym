@@ -2,7 +2,7 @@
 - Comment-On-Your-Occupation
 
 # Objective
-- To give users an easy calculation with numbers and equations.
+- A website where you comment on your occupation and people get some ideas about it.
 
 # Features
 - Login
