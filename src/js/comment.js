@@ -4,6 +4,7 @@ const commentBtn = document.getElementById('searchBtn')
 const userInput = document.getElementById("userInput")
 const socket = io()
 const occupationArray = []
+var socketid = ''
 
 occupationTitle.innerHTML = getQueryVariable('occupation')
 searchBtn.setAttribute("onclick", "comment()")
@@ -13,6 +14,16 @@ socket.on('userEnter', (array) => {
         occupationArray.push(array[i])
     }
     displayUpdatedComments()
+})
+
+checkIfLoggedIn()
+
+socket.on('displayId', id => {
+    for (var i = 0; i < id.length; i++) {
+        if (socketid == id[i]) {
+            document.getElementById('userId').innerHTML = socketid
+        }
+    }
 })
 
 socket.on('updatedComment', (array) => {
@@ -52,7 +63,6 @@ function comment() {
         }
         socket.emit('updateComment', occupationArray)
     }
-
 }
 
 function likeOrDislike(clicked_id) {
@@ -76,5 +86,29 @@ function displayUpdatedComments() {
                 commentsArea.innerHTML += `<div id="eachComment"><p>${occupationArray[i][1][j]}</p><button onclick=likeOrDislike(this.id) id="${occupationArray[i][1][j]}+">${occupationArray[i][2][j]} Likes</button></div><hr>`
             }
         }
+    }
+}
+
+function clickLoginBtn() {
+    document.location.href = 'http://localhost:3000/login'
+}
+
+function checkIfLoggedIn() {
+    if (getQueryVariable('socketid') == 'undefined' && getQueryVariable('id') == 'undefined') {
+        document.getElementById('inputAndCommentBtn').style.display = 'none'
+    }
+    else {
+        document.getElementById('inputAndCommentBtn').style.display = 'block'
+    }
+
+    if (getQueryVariable('socketid') == '' || getQueryVariable('socketid') == 'undefined') {
+        document.getElementById('userId').style.display = 'none'
+        document.getElementById('loginBtn').style.display = 'block'
+    }
+    else {
+        document.getElementById('loginBtn').style.display = 'none'
+        document.getElementById('userId').style.display = 'block'
+        socketid = getQueryVariable('socketid')
+        socket.emit('getId', socketid)
     }
 }

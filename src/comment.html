@@ -8,33 +8,22 @@
     <link rel="stylesheet" href="/css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
-<body ng-app="index" ng-controller="indexController">
+<body>
     <header>
         <p id="logo">COYO</p>
-
-        <div ng-show="loginStatus == 0">
-            <button ng-click="clickLoginBtn()" data-toggle="modal" id="loginBtn">Login</button>
-        </div>
-
-        <div ng-show="loginStatus == 1">
-            <img id="userProfile" src="/img/accountIMG.jpeg" alt="acc" width="50" height="50">
-            <p id="userName">{{firstName + " " + lastName}}</p>
-        </div>
-
-
-        <!-- <button onclick="openForm()" id="loginBtn">Login</button> -->
+        <button data-toggle="modal" id="loginBtn" onclick="clickLoginBtn()">Login</button>
+        <div id="userId"></div>
     </header><hr id="hrAfterHeader">
 
     <center>
         <h1 id="occupationTitle"></h1>
-        <div ng-hide="loginStatus == 0">
+        <div id="inputAndCommentBtn">
             <input type="text" id="userInput">
             <button id="searchBtn">Comment</button>
         </div><hr>
         <div id="comments"></div>
     </center>
 
-    <!-- LOGIN POPUP -->
     <div class="form-popup" id="myForm1">
         <form class="form-container">
           <h1>Login</h1>
@@ -47,7 +36,6 @@
         </form>
     </div>
 
-    <!-- REGISTER POPUP -->
     <div class="form-popup" id="myForm2">
         <div id="registerForm" class="form-container">
           <h1>Register</h1>
@@ -61,14 +49,8 @@
           <button type="button" class="btn cancel" onclick="closeRegisterForm()">Close</button>
         </div>
     </div>
-
-    <!-- EMAIL AUTHENTICATION POPUP -->
-    <div class="form-popup" id="myForm3">
-        <div class="form-container" id="form-container"></div>
-    </div>
     
 </body>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/comment.js"></script>
-<script src="/js/controller/indexController.js"></script>
 </html>

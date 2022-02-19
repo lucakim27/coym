@@ -48,9 +48,21 @@ io.on('connection', (socket) => {
   })
 
   socket.on('getId', socketid => {
+
+    for (var i = 0; i < getLoggedInUsers().length; i++) {
+      if (getLoggedInUsers()[i] == socketid) {
+        
+      }
+    }
+
+
     addLoggedInUsers(socketid)
-    console.log(getLoggedInUsers())
+
+
+
+
     io.sockets.emit('displayId', getLoggedInUsers())
+    console.log(getLoggedInUsers())
   })
 
   socket.on('disconnect', function () {

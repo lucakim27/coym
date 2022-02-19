@@ -8,15 +8,10 @@ socket.on('userEnter', (array) => {
         occupationArray.push(array[i])
     }
     listOutOccupations()
-    if (getQueryVariable('socketid') === '') {
-        document.getElementById('userId').style.display = 'none'
-    }
-    else {
-        document.getElementById('loginBtn').style.display = 'none'
-        socketid = getQueryVariable('socketid')
-        socket.emit('getId', socketid)
-    }
+    checkIfLoggedIn()
 })
+
+checkIfLoggedIn()
 
 socket.on('updatedComment', (array) => {
     occupationArray = array
@@ -37,7 +32,7 @@ function listOutOccupations() {
 }
 
 function directPage(occupationName) {
-    document.location.href = 'http://localhost:3000/comment?occupation=' + occupationName
+    document.location.href = 'http://localhost:3000/comment?occupation=' + occupationName  + '&socketid=' + getQueryVariable('socketid') + '&id=' + getQueryVariable('id')
 }
 
 function clickLoginBtn() {
@@ -46,9 +41,19 @@ function clickLoginBtn() {
 
 function getQueryVariable(variable) {
     var query = window.location.search.substring(1)
-    return query
+    var vars = query.split('&')
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=')
+        if (decodeURIComponent(pair[0]) == variable) {
+            if (decodeURIComponent(pair[1]).includes('+') == false) {
+                return decodeURIComponent(pair[1])
+            }
+            else {
+                return decodeURIComponent(pair[1].replaceAll('+', ' '))
+            }
+        }
+    }
 }
-
 
 function updateValue(e) {
   document.getElementById('divScroll').innerHTML = ""
@@ -57,4 +62,15 @@ function updateValue(e) {
           document.getElementById('divScroll').innerHTML += "<a onclick='directPage(this.innerText)'>" + occupationArray[i][0] + "</a><hr>"
       }
   }
+}
+
+function checkIfLoggedIn() {
+    if (getQueryVariable('socketid') == '' || getQueryVariable('socketid') == undefined) {
+        document.getElementById('userId').style.display = 'none'
+    }
+    else {
+        document.getElementById('loginBtn').style.display = 'none'
+        socketid = getQueryVariable('socketid')
+        socket.emit('getId', socketid)
+    }
 }
