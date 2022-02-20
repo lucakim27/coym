@@ -1,14 +1,12 @@
 const socket = io()
 const occupationArray = []
 var socketid = ''
-document.getElementById('userInput').addEventListener('change', updateValue);
 
 socket.on('userEnter', (array) => {
     for (var i = 0; i < array.length; i++) {
         occupationArray.push(array[i])
     }
     listOutOccupations()
-    checkIfLoggedIn()
 })
 
 checkIfLoggedIn()
@@ -32,7 +30,7 @@ function listOutOccupations() {
 }
 
 function directPage(occupationName) {
-    document.location.href = 'http://localhost:3000/comment?occupation=' + occupationName  + '&socketid=' + getQueryVariable('socketid') + '&id=' + getQueryVariable('id')
+    document.location.href = 'http://localhost:3000/comment?occupation=' + occupationName  + '&socketid=' + getQueryVariable('socketid')
 }
 
 function clickLoginBtn() {
@@ -55,15 +53,6 @@ function getQueryVariable(variable) {
     }
 }
 
-function updateValue(e) {
-  document.getElementById('divScroll').innerHTML = ""
-  for (var i = 0; i < occupationArray.length; i++) {
-      if (occupationArray[i][0].toLowerCase().includes(e.target.value.toLowerCase()) == true) {
-          document.getElementById('divScroll').innerHTML += "<a onclick='directPage(this.innerText)'>" + occupationArray[i][0] + "</a><hr>"
-      }
-  }
-}
-
 function checkIfLoggedIn() {
     if (getQueryVariable('socketid') == '' || getQueryVariable('socketid') == undefined) {
         document.getElementById('userId').style.display = 'none'
@@ -72,5 +61,23 @@ function checkIfLoggedIn() {
         document.getElementById('loginBtn').style.display = 'none'
         socketid = getQueryVariable('socketid')
         socket.emit('getId', socketid)
+    }
+}
+
+function directToHome() {
+    if (getQueryVariable('socketid') == '' || getQueryVariable('socketid') == undefined) {
+        document.location.href = 'http://localhost:3000'
+    }
+    else {
+        document.location.href = `http://localhost:3000/?socketid=${getQueryVariable('socketid')}` 
+    }
+}
+
+function searchOccupationBtn() {
+    document.getElementById('divScroll').innerHTML = ""
+    for (var i = 0; i < occupationArray.length; i++) {
+        if (occupationArray[i][0].toLowerCase().includes(document.getElementById('userInput').value.toLowerCase()) == true) {
+            document.getElementById('divScroll').innerHTML += "<a onclick='directPage(this.innerText)'>" + occupationArray[i][0] + "</a><hr>"
+        }
     }
 }

@@ -41,28 +41,17 @@ io.on('connection', (socket) => {
 
   socket.on('login', acc => {
     if (searchAccounts(acc) == true) {
-      io.to(socket.id).emit('loginSuccessful', [socket.id, acc])
+      io.to(socket.id).emit('loginSuccessful', socket.id)
     } else {
       io.to(socket.id).emit('loginFail', false)
     }
   })
 
   socket.on('getId', socketid => {
-
-    for (var i = 0; i < getLoggedInUsers().length; i++) {
-      if (getLoggedInUsers()[i] == socketid) {
-        
-      }
+    if (getLoggedInUsers().includes(socketid) == false) {
+      addLoggedInUsers(socketid)
     }
-
-
-    addLoggedInUsers(socketid)
-
-
-
-
     io.sockets.emit('displayId', getLoggedInUsers())
-    console.log(getLoggedInUsers())
   })
 
   socket.on('disconnect', function () {

@@ -94,21 +94,25 @@ function clickLoginBtn() {
 }
 
 function checkIfLoggedIn() {
-    if (getQueryVariable('socketid') == 'undefined' && getQueryVariable('id') == 'undefined') {
+    if (getQueryVariable('socketid') == 'undefined') {
         document.getElementById('inputAndCommentBtn').style.display = 'none'
-    }
-    else {
-        document.getElementById('inputAndCommentBtn').style.display = 'block'
-    }
-
-    if (getQueryVariable('socketid') == '' || getQueryVariable('socketid') == 'undefined') {
         document.getElementById('userId').style.display = 'none'
         document.getElementById('loginBtn').style.display = 'block'
     }
     else {
+        document.getElementById('inputAndCommentBtn').style.display = 'block'
         document.getElementById('loginBtn').style.display = 'none'
         document.getElementById('userId').style.display = 'block'
         socketid = getQueryVariable('socketid')
         socket.emit('getId', socketid)
+    }
+}
+
+function directToHome() {
+    if (getQueryVariable('socketid') == '' || getQueryVariable('socketid') == 'undefined') {
+        document.location.href = 'http://localhost:3000'
+    }
+    else {
+        document.location.href = `http://localhost:3000/?socketid=${getQueryVariable('socketid')}` 
     }
 }
