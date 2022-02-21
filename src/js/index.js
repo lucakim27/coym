@@ -18,7 +18,7 @@ socket.on('updatedComment', (array) => {
 socket.on('displayId', id => {
     for (var i = 0; i < id.length; i++) {
         if (socketid == id[i]) {
-            document.getElementById('userId').innerHTML = socketid
+            document.getElementById('userId').innerHTML = "<img src='../img/accountIMG.jpeg' style='width: 50px;height: 50px;margin-left: 305px;margin-top: -10px;'>"
         }
     }
 })
