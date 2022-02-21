@@ -94,7 +94,7 @@ function clickLoginBtn() {
 }
 
 function checkIfLoggedIn() {
-    if (getQueryVariable('socketid') == 'undefined') {
+    if (getQueryVariable('socketid') == 'undefined' || getQueryVariable('socketid') == undefined) {
         document.getElementById('inputAndCommentBtn').style.display = 'none'
         document.getElementById('userId').style.display = 'none'
         document.getElementById('loginBtn').style.display = 'block'

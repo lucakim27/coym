@@ -30,7 +30,12 @@ function listOutOccupations() {
 }
 
 function directPage(occupationName) {
-    document.location.href = 'http://localhost:3000/comment?occupation=' + occupationName  + '&socketid=' + getQueryVariable('socketid')
+    if (getQueryVariable('socketid') == undefined) {
+        document.location.href = 'http://localhost:3000/comment?occupation=' + occupationName
+    }
+    else {
+        document.location.href = 'http://localhost:3000/comment?occupation=' + occupationName  + '&socketid=' + getQueryVariable('socketid')
+    }
 }
 
 function clickLoginBtn() {
