@@ -1,5 +1,6 @@
 body {
     background-color: rgb(255, 255, 255);
+    overflow-y: hidden;
 }
 #divScroll a {
     text-decoration: none;
@@ -12,66 +13,6 @@ a:hover {
 }
 center {
     margin-top: -1%;
-}
-.open-button {
-    background-color: #555;
-    color: white;
-    padding: 16px 20px;
-    border: none;
-    cursor: pointer;
-    opacity: 0.8;
-    position: fixed;
-    bottom: 23px;
-    right: 28px;
-    width: 280px;
-}
-/* The popup form - hidden by default */
-.form-popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    right: 0;
-    /* right: 15px; */
-    border: 3px solid #f1f1f1;
-    z-index: 9;
-}
-/* Add styles to the form container */
-.form-container {
-    max-width: 400px;
-    padding: 10px;
-    background-color: white;
-}
-/* Full-width input fields */
-.form-container input[type=email], .form-container input[type=password], .form-container input[type=passwordCheck], .form-container input[type=code] {
-    width: 90%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
-    border: none;
-    background: #f1f1f1;
-}
-/* When the inputs get focus, do something */
-.form-container input[type=email]:focus, .form-container input[type=password]:focus,  .form-container input[type=passwordCheck]:focus, .form-container input[type=code]:focus {
-    background-color: #ddd;
-    outline: none;
-}
-/* Set a style for the submit/login button */
-.form-container .btn {
-    background-color: #04AA6D;
-    color: white;
-    padding: 16px 20px;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    margin-bottom:10px;
-    opacity: 0.8;
-}
-/* Add a red background color to the cancel button */
-.form-container .cancel {
-    background-color: red;
-}
-/* Add some hover effects to buttons */
-.form-container .btn:hover, .open-button:hover {
-    opacity: 1;
 }
 #logo {
     position: absolute;
@@ -93,6 +34,7 @@ center {
     top: 7px;
     width: 80px;
     height: 40px;
+    cursor: pointer;
 }
 #userId {
     position: absolute;
@@ -102,6 +44,7 @@ center {
     top: 10px;
     width: 80px;
     height: 40px;
+    cursor: pointer;
 }
 #hrAfterHeader {
     margin-top: 53px;
@@ -111,6 +54,7 @@ center {
 }
 #searchBtn {
     background-color: #ff00aa;
+    cursor: pointer;
 }
 #output button {
     background-color: rgb(236, 234, 231);
@@ -135,21 +79,53 @@ center {
     height: 35px;
     width: 100vw;
 }
-#userName {
-    position: absolute;
-    right: 27px;
-    top: -17px;
-}
-#userProfile {
-    position: absolute;
-    right: 147px;
-    top: 0px;
-}
 #divScroll {
     overflow: hidden;
     overflow-y: scroll;
-    height: 700px;
+    height: 100vh;
 }
 #loginContainer, #registerContainer {
     margin-top: 5%;
+}
+
+.open-button {
+    background-color: #555;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+    position: fixed;
+    bottom: 23px;
+    right: 28px;
+    width: 280px;
+}
+
+.form-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 15px;
+    top: 50px;
+    border: 3px solid #f1f1f1;
+    max-width: 300px;
+    max-height: 200px;
+    padding-top: 50px;
+    max-width: 300px;
+    padding: 10px;
+    background-color: white;
+}
+
+.form-popup .btn {
+    background-color: red;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+}
+
+.form-popup h2 {
+    font-family: fantasy;
 }

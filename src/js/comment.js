@@ -116,3 +116,15 @@ function directToHome() {
         document.location.href = `http://localhost:3000/?socketid=${getQueryVariable('socketid')}` 
     }
 }
+
+function clickProfile() {
+    if (document.getElementById('myForm').style.display == 'block') {
+        document.getElementById('myForm').style.display = 'none';
+    } else {
+        document.getElementById('myForm').style.display = 'block';
+    }
+}
+
+function logoutBtn() {
+    document.location.href = 'http://localhost:3000'
+}

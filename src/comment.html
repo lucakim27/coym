@@ -12,7 +12,7 @@
     <header>
         <p id="logo" onclick="directToHome()">COYO</p>
         <button data-toggle="modal" id="loginBtn" onclick="clickLoginBtn()">Login</button>
-        <div id="userId"></div>
+        <div id="userId" onclick="clickProfile()"></div>
     </header><hr id="hrAfterHeader">
 
     <center>
@@ -24,30 +24,9 @@
         <div id="comments"></div>
     </center>
 
-    <div class="form-popup" id="myForm1">
-        <form class="form-container">
-          <h1>Login</h1>
-          <label for="email"><b>Email</b></label>
-          <input type="email" placeholder="email@example.com" name="email" minlength="5" required>
-          <label for="psw"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" name="psw" minlength="5" required>
-          <button type="submit" class="btn">Login</button>
-          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-        </form>
-    </div>
-
-    <div class="form-popup" id="myForm2">
-        <div id="registerForm" class="form-container">
-          <h1>Register</h1>
-          <label><b>Email</b></label>
-          <input id="email" type="email" placeholder="email@example.com">
-          <label"><b>Password</b></label>
-          <input id="password" type="password" placeholder="Enter Password">
-          <label><b>Password Check</b></label>
-          <input id="repeatPassword" type="password" placeholder="Enter Password Again">
-          <button type="submit" class="btn" onclick="register()">Register</button>
-          <button type="button" class="btn cancel" onclick="closeRegisterForm()">Close</button>
-        </div>
+    <div class="form-popup" id="myForm">
+        <h2>Your Profile</h2>
+        <button class="btn" onclick="logoutBtn()">Log out</button>
     </div>
     
 </body>

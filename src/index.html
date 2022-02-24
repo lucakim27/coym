@@ -13,11 +13,11 @@
     <header>
         <p id="logo" onclick="directToHome()">COYO</p>
         <button id="loginBtn" onclick="clickLoginBtn()">Login</button>
-        <div id="userId"></div>
+        <div id="userId" onclick="clickProfile()"></div>
     </header>
     <hr id="hrAfterHeader">
 
-    <center >
+    <center>
         <h1 id="header">Comment on your occupation</h1>
             <input type="text" id="userInput" placeholder="Search here">
             <button onclick="searchOccupationBtn()" id="searchBtn">Search</button>
@@ -25,6 +25,11 @@
         <div id="divScroll"></div>
         <hr>
     </center>
+
+    <div class="form-popup" id="myForm">
+        <h2>Your Profile</h2>
+        <button class="btn" onclick="logoutBtn()">Log out</button>
+    </div>
 
 </body>
 <script src="/socket.io/socket.io.js"></script>
