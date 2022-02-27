@@ -4,38 +4,45 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <script src="/socket.io/socket.io.js"></script>
+    <title>About</title>
     <link rel="stylesheet" href="/css/style.css">
+
 </head>
 <body>
 
     <header style="height: 10px;">
-
+        
         <div class="dropdown">
             <img src="../img/menuBar.png" onclick="myFunction()" alt="menuBar" class="menuBar dropbtn" style="width:50px; height:50px; padding: 3px;">
             <div id="myDropdown" class="dropdown-content">
-              <a onclick="directToHome()">Home</a>
+              <a href="http://localhost:3000">Home</a>
               <a href="http://localhost:3000/about">About</a>
               <a onclick="window.location.href = 'mailto:nikolaikim27@google.com'">Contact</a>
             </div>
         </div>
-
+        
+        <button id="loginBtn" onclick="clickLoginBtn()">Login</button>
+        <div id="userId" onclick="clickProfile()"></div>
     </header>
     <hr id="hrAfterHeader">
 
-    <center id="registerContainer">
-        <h1 id="header">Register</h1>
-        <label>ID</label><br>
-        <input type="text" placeholder="ID" id="registerID"><br><br>
-        <label for="">PW</label><br>
-        <input type="password" placeholder="Password" id="registerPw"><br><br>
-        <label for="">PW Check</label><br>
-        <input type="password" placeholder="Password Again" id="registerPwAgain"><br><br>
-        <button onclick="clickRegister()">Register</button><br>
+
+    <center>
+        <h1 id="header">About</h1><hr>
+        
+        <ul>
+            <li>When has the website been created: Dec/22/2021</li><br>
+            <li>How to inquire adding a new occupation: you may contact us in the contact tab, menu bar.</li><br>
+            <li>How to hop on the website development: <a href="https://github.com/lucakim27/Comment-On-Your-Occupation">Click Here</a>!</li>
+        </ul>
+        
     </center>
 
+
+
+
+
 </body>
-<script src="/js/register.js"></script>
 <script src="/js/sub/menuBar.js"></script>
+<script src="/js/sub/loginBtn.js"></script>
 </html>

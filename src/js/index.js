@@ -38,10 +38,6 @@ function directPage(occupationName) {
     }
 }
 
-function clickLoginBtn() {
-    document.location.href = 'http://localhost:3000/login'
-}
-
 function getQueryVariable(variable) {
     var query = window.location.search.substring(1)
     var vars = query.split('&')
@@ -94,26 +90,3 @@ function clickProfile() {
         document.getElementById('myForm').style.display = 'block';
     }
 }
-
-function logoutBtn() {
-    document.location.href = 'http://localhost:3000'
-}
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-  }
-  
-  // Close the dropdown if the user clicks outside of it
-  window.onclick = function(event) {
-    if (!event.target.matches('.dropbtn')) {
-      var dropdowns = document.getElementsByClassName("dropdown-content");
-      var i;
-      for (i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show')) {
-          openDropdown.classList.remove('show');
-        }
-      }
-    }
-  }

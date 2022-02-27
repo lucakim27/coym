@@ -21,8 +21,7 @@ checkIfLoggedIn()
 socket.on('displayId', id => {
     for (var i = 0; i < id.length; i++) {
         if (socketid == id[i]) {
-            document.getElementById('userId').innerHTML = "<img src='../img/accountIMG.jpeg' style='width: 50px;height: 50px;margin-left: 305px;margin-top: -10px;'>"
-        }
+            document.getElementById('userId').innerHTML = "<img src='../img/accountIMG.jpeg' style='width: 50px; height: 50px; margin-left: 315px; margin-top: -2px; padding: 3px;'>"        }
     }
 })
 
@@ -89,10 +88,6 @@ function displayUpdatedComments() {
     }
 }
 
-function clickLoginBtn() {
-    document.location.href = 'http://localhost:3000/login'
-}
-
 function checkIfLoggedIn() {
     if (getQueryVariable('socketid') == 'undefined' || getQueryVariable('socketid') == undefined) {
         document.getElementById('inputAndCommentBtn').style.display = 'none'
@@ -115,36 +110,4 @@ function directToHome() {
     else {
         document.location.href = `http://localhost:3000/?socketid=${getQueryVariable('socketid')}` 
     }
-}
-
-function clickProfile() {
-    if (document.getElementById('myForm').style.display == 'block') {
-        document.getElementById('myForm').style.display = 'none';
-    } else {
-        document.getElementById('myForm').style.display = 'block';
-    }
-}
-
-function logoutBtn() {
-    document.location.href = 'http://localhost:3000'
-}
-
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-    var openDropdown = dropdowns[i];
-    if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-    }
-    }
-}
 }

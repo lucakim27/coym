@@ -25,6 +25,11 @@ app.get('/register', function (req, res) {
   res.sendFile(__dirname + '/src/register.html')
 })
 
+app.get('/about', function (req, res) {
+  res.sendFile(__dirname + '/src/about.html')
+})
+
+
 io.on('connection', (socket) => {
   console.log("An user joined: " + socket.id)
 
