@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comment on your occupation</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-</head>
-<body>
-
-    <header>
-        <p id="logo" onclick="directToHome()">COYO</p>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Comment on your occupation</title>
+        <link rel="stylesheet" href="/css/style.css">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    </head>
+    <body>
+        
+        <header style="height: 10px;">
+        <!-- <p id="logo" onclick="directToHome()">COYO</p> -->
+        
+        <div class="dropdown">
+            <img src="../img/menuBar.png" onclick="myFunction()" alt="menuBar" class="menuBar dropbtn" style="width:50px; height:50px; padding: 3px;">
+            <div id="myDropdown" class="dropdown-content">
+              <a href="#home">Home</a>
+              <a href="#about">About</a>
+              <a href="#contact">Contact</a>
+            </div>
+        </div>
+        
         <button id="loginBtn" onclick="clickLoginBtn()">Login</button>
         <div id="userId" onclick="clickProfile()"></div>
     </header>
@@ -30,6 +40,7 @@
         <h2>Your Profile</h2>
         <button class="btn" onclick="logoutBtn()">Log out</button>
     </div>
+
 
 </body>
 <script src="/socket.io/socket.io.js"></script>

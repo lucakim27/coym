@@ -9,8 +9,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
 <body>
-    <header>
-        <p id="logo" onclick="directToHome()">COYO</p>
+    <header style="height: 10px;">
+        <!-- <p id="logo" onclick="directToHome()">COYO</p>  -->
+
+        <div class="dropdown">
+            <img src="../img/menuBar.png" onclick="myFunction()" alt="menuBar" class="menuBar dropbtn" style="width:50px; height:50px; padding: 3px;">
+            <div id="myDropdown" class="dropdown-content">
+              <a href="#home">Home</a>
+              <a href="#about">About</a>
+              <a href="#contact">Contact</a>
+            </div>
+        </div>
+
         <button data-toggle="modal" id="loginBtn" onclick="clickLoginBtn()">Login</button>
         <div id="userId" onclick="clickProfile()"></div>
     </header><hr id="hrAfterHeader">

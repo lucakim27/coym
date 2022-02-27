@@ -12,3 +12,7 @@ socket.on('loginSuccessful', socketid => {
 socket.on('loginFail', value => {
     alert("ID or Password is wrong.")
 })
+
+function directToHome() {
+    document.location.href = 'http://localhost:3000'
+}
