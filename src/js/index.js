@@ -65,15 +65,6 @@ function checkIfLoggedIn() {
     }
 }
 
-function directToHome() {
-    if (getQueryVariable('socketid') == '' || getQueryVariable('socketid') == undefined) {
-        document.location.href = 'http://localhost:3000'
-    }
-    else {
-        document.location.href = `http://localhost:3000/?socketid=${getQueryVariable('socketid')}` 
-    }
-}
-
 function searchOccupationBtn() {
     document.getElementById('divScroll').innerHTML = ""
     for (var i = 0; i < occupationArray.length; i++) {
@@ -88,5 +79,14 @@ function clickProfile() {
         document.getElementById('myForm').style.display = 'none';
     } else {
         document.getElementById('myForm').style.display = 'block';
+    }
+}
+
+function directToAboutPage() {
+    if (getQueryVariable('socketid') == '' || getQueryVariable('socketid') == undefined) {
+        document.location.href = 'http://localhost:3000/about'
+    }
+    else {
+        document.location.href = `http://localhost:3000/about?socketid=${getQueryVariable('socketid')}` 
     }
 }

@@ -111,3 +111,12 @@ function directToHome() {
         document.location.href = `http://localhost:3000/?socketid=${getQueryVariable('socketid')}` 
     }
 }
+
+function directToAboutPage() {
+    if (getQueryVariable('socketid') == '' || getQueryVariable('socketid') == undefined) {
+        document.location.href = 'http://localhost:3000/about'
+    }
+    else {
+        document.location.href = `http://localhost:3000/about?socketid=${getQueryVariable('socketid')}` 
+    }
+}
