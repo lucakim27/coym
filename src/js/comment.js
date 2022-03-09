@@ -104,7 +104,7 @@ function checkIfLoggedIn() {
 }
 
 function directToHome() {
-    if (getQueryVariable('socketid') == '' || getQueryVariable('socketid') == 'undefined') {
+    if (getQueryVariable('socketid') == '' || getQueryVariable('socketid') == 'undefined' || getQueryVariable('socketid') == undefined) {
         document.location.href = 'http://localhost:3000'
     }
     else {
