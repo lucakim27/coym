@@ -1,7 +1,11 @@
 const loggedInUsers = []
 
-function getLoggedInUsers() {
-    return loggedInUsers
+function getLoggedInUsersIdBySocketId(socketid) {
+    for (var i = 0; i < loggedInUsers.length; i++) {
+        if (loggedInUsers[i][2] == socketid) {
+            return loggedInUsers[i][0]
+        }
+    }
 }
 
 function addLoggedInUsers(newUser) {
@@ -9,6 +13,6 @@ function addLoggedInUsers(newUser) {
 }
 
 module.exports = {
-    getLoggedInUsers,
+    getLoggedInUsersIdBySocketId,
     addLoggedInUsers
 }

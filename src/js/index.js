@@ -16,11 +16,8 @@ socket.on('updatedComment', (array) => {
 })
 
 socket.on('displayId', id => {
-    for (var i = 0; i < id.length; i++) {
-        if (socketid == id[i]) {
-            document.getElementById('userId').innerHTML = "<img src='../img/accountIMG.jpeg' style='width: 50px; height: 50px; margin-left: 315px; margin-top: -2px; padding: 3px;'>"
-        }
-    }
+    document.getElementById('userAccountId').innerHTML = "Your id: " + id
+    document.getElementById('userId').innerHTML = "<img src='../img/accountIMG.jpeg' style='width: 50px; height: 50px; margin-left: 315px; margin-top: -2px; padding: 3px;'>"
 })
 
 function listOutOccupations() {

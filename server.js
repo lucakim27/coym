@@ -4,7 +4,7 @@ const express = require('express')
 const socketio = require('socket.io')
 const { getOccupationsArray, setOccupationsArray } = require('./utils/occupation')
 const { searchAccounts, addAccount } = require('./utils/account')
-const { getLoggedInUsers, addLoggedInUsers } = require('./utils/loggedin')
+const { getLoggedInUsersIdBySocketId, addLoggedInUsers } = require('./utils/loggedIn')
 
 const app = express()
 const server = http.createServer(app)
@@ -29,7 +29,6 @@ app.get('/about', function (req, res) {
   res.sendFile(__dirname + '/src/about.html')
 })
 
-
 io.on('connection', (socket) => {
   console.log("An user joined: " + socket.id)
 
@@ -45,18 +44,20 @@ io.on('connection', (socket) => {
   })
 
   socket.on('login', acc => {
+    acc.push(socket.id)
     if (searchAccounts(acc) == true) {
-      io.to(socket.id).emit('loginSuccessful', socket.id)
+      io.to(socket.id).emit('loginSuccessful', acc)
     } else {
       io.to(socket.id).emit('loginFail', false)
     }
   })
 
   socket.on('getId', socketid => {
-    if (getLoggedInUsers().includes(socketid) == false) {
-      addLoggedInUsers(socketid)
-    }
-    io.sockets.emit('displayId', getLoggedInUsers())
+    io.sockets.emit('displayId', getLoggedInUsersIdBySocketId(socketid))
+  })
+
+  socket.on('loggedIn', acc => {
+    addLoggedInUsers(acc)
   })
 
   socket.on('disconnect', function () {
