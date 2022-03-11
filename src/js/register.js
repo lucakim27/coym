@@ -15,3 +15,7 @@ function clickRegister() {
 function directToHome() {
     document.location.href = 'http://localhost:3000'
 }
+
+function directToAboutPage() {
+    documesnt.location.href = 'http://localhost:3000/about'
+}

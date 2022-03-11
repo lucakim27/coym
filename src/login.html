@@ -7,19 +7,19 @@
     <title>Login</title>
     <link rel="stylesheet" href="/css/style.css">
     <script src="/socket.io/socket.io.js"></script>
-
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
 
     <header style="height: 10px;">
 
-        <div class="dropdown">
-            <img src="../img/menuBar.png" onclick="myFunction()" alt="menuBar" class="menuBar dropbtn" style="width:50px; height:50px; padding: 3px;">
-            <div id="myDropdown" class="dropdown-content">
-              <a onclick="directToHome()">Home</a>
-              <a href="http://localhost:3000/about">About</a>
-              <a onclick="window.location.href = 'mailto:nikolaikim27@google.com'">Contact</a>
-            </div>
+        <img src="../img/menuBar.png" onclick="w3_open()" alt="menuBar" class="menuBar dropbtn" style="width:70px; height:70px;">
+
+        <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none; margin-top: -120px;" id="mySidebar">
+            <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
+            <a onclick="directToHome()" class="w3-bar-item w3-button">Home</a>
+            <a onclick="directToAboutPage()" class="w3-bar-item w3-button">About</a>
+            <a onclick="window.location.href = 'mailto:nikolaikim27@google.com'" class="w3-bar-item w3-button">Contact</a>
         </div>
 
     </header><hr id="hrAfterHeader">

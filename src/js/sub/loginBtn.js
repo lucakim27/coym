@@ -1,8 +1,8 @@
 function clickProfile() {
-    if (document.getElementById('myForm').style.display == 'block') {
-        document.getElementById('myForm').style.display = 'none';
+    if (document.getElementById('myForm').classList.contains('show')) {
+        document.getElementById('myForm').classList.remove('show')
     } else {
-        document.getElementById('myForm').style.display = 'block';
+        document.getElementById("myForm").classList.toggle("show")
     }
 }
 

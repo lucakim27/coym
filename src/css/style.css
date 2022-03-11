@@ -1,19 +1,23 @@
 body {
     background-color: rgb(255, 255, 255);
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
 }
+
 #divScroll a {
     text-decoration: none;
     color: blue;
     font-size: 40px;
 }
+
 a:hover {
     color: rgb(37, 37, 37);
     cursor: pointer;
 }
+
 center {
     margin-top: -1%;
 }
+
 #logo {
     position: absolute;
     top: -25px;
@@ -26,6 +30,7 @@ center {
     font-family: fantasy;
     cursor: pointer;
  }
+
 #loginBtn {
     position: absolute;
     right: 20px;
@@ -36,6 +41,7 @@ center {
     height: 40px;
     cursor: pointer;
 }
+
 #userId {
     position: absolute;
     right: 300px;
@@ -46,16 +52,20 @@ center {
     height: 40px;
     cursor: pointer;
 }
+
 #hrAfterHeader {
     margin-top: 53px;
 }
+
 #header, #occupationTitle {
     font-family: fantasy;
 }
+
 #searchBtn {
     background-color: #ff00aa;
     cursor: pointer;
 }
+
 #output button {
     background-color: rgb(236, 234, 231);
     border: none;
@@ -66,24 +76,29 @@ center {
     font-family: inherit;
     font-size: inherit;
 }
+
 #output button:hover {
     color: #FF0000; 
 }
+
 #eachComment p {
     text-align: center;
     width: 100vw;
     overflow-wrap: break-word;
 }
+
 #eachComment button {
     /* position: absolute; */
     height: 35px;
     width: 100vw;
 }
+
 #divScroll {
     overflow: hidden;
     overflow-y: scroll;
     height: 100vh;
 }
+
 #loginContainer, #registerContainer {
     margin-top: 5%;
 }
@@ -109,7 +124,7 @@ center {
     top: 60px;
     border: 3px solid #f1f1f1;
     max-width: 300px;
-    max-height: 200px;
+    max-height: 250px;
     padding-top: 50px;
     max-width: 300px;
     padding: 10px;
@@ -141,7 +156,7 @@ center {
     border: none;
     cursor: pointer;
 }
-  
+
 .dropdown {
     position: relative;
     display: inline-block;
