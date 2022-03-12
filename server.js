@@ -29,6 +29,10 @@ app.get('/about', function (req, res) {
   res.sendFile(__dirname + '/src/about.html')
 })
 
+app.get('/chart', function (req, res) {
+  res.sendFile(__dirname + '/src/chart.html')
+})
+
 io.on('connection', (socket) => {
   console.log("An user joined: " + socket.id)
 
