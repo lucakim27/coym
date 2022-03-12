@@ -1,6 +1,6 @@
 body {
     background-color: rgb(255, 255, 255);
-    /* overflow-y: hidden; */
+    overflow-y: hidden;
 }
 
 #divScroll a {
@@ -96,7 +96,7 @@ center {
 #divScroll {
     overflow: hidden;
     overflow-y: scroll;
-    height: 100vh;
+    height: 78vh;
 }
 
 #loginContainer, #registerContainer {

@@ -51,3 +51,12 @@ function directToHome() {
 }
 
 checkIfLoggedIn()
+
+function directToChartPage() {
+    if (getQueryVariable('socketid') == '' || getQueryVariable('socketid') == undefined) {
+        document.location.href = 'http://localhost:3000/chart'
+    }
+    else {
+        document.location.href = `http://localhost:3000/chart?socketid=${getQueryVariable('socketid')}` 
+    }
+}
