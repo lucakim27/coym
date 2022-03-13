@@ -93,12 +93,6 @@ center {
     width: 100vw;
 }
 
-#divScroll {
-    overflow: hidden;
-    overflow-y: scroll;
-    height: 78vh;
-}
-
 #loginContainer, #registerContainer {
     margin-top: 5%;
 }
@@ -187,4 +181,9 @@ center {
 
 .show {
     display: block;
+}
+
+table td {
+    text-align: center;
+    font-size: 30px;
 }

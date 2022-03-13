@@ -6,10 +6,26 @@ socket.on('userEnter', (array) => {
     for (var i = 0; i < array.length; i++) {
         occupationArray.push(array[i])
     }
-    listOutOccupations()
+    
+    for (var i = 0; i < occupationArray.length; i++) {
+        var table = document.getElementById("occupationTable")
+        var row = table.insertRow(i)
+        var cell = row.insertCell(0)
+        var a = document.createElement('a')
+        a.href = directPage(occupationArray[i][0])
+        a.innerHTML = occupationArray[i][0]
+        cell.appendChild(a)
+        cell.appendChild(document.createElement('hr'))
+    }
+    
+    if (getQueryVariable('socketid') == '' || getQueryVariable('socketid') == undefined) {
+        document.getElementById('userId').style.display = 'none'
+    } else {
+        document.getElementById('loginBtn').style.display = 'none'
+        socketid = getQueryVariable('socketid')
+        socket.emit('getId', socketid)
+    }
 })
-
-checkIfLoggedIn()
 
 socket.on('updatedComment', (array) => {
     occupationArray = array
@@ -20,18 +36,11 @@ socket.on('displayId', id => {
     document.getElementById('userId').innerHTML = "<img src='../img/accountIMG.jpeg' style='width: 50px; height: 50px; margin-left: 315px; margin-top: -2px; padding: 3px;'>"
 })
 
-function listOutOccupations() {
-    for (var i = 0; i < occupationArray.length; i++) {
-        document.getElementById('divScroll').innerHTML += "<a onclick='directPage(this.innerText)'>" + occupationArray[i][0] + "</a><hr>"
-    }
-}
-
 function directPage(occupationName) {
     if (getQueryVariable('socketid') == undefined) {
-        document.location.href = 'http://localhost:3000/comment?occupation=' + occupationName
-    }
-    else {
-        document.location.href = 'http://localhost:3000/comment?occupation=' + occupationName  + '&socketid=' + getQueryVariable('socketid')
+        return 'http://localhost:3000/comment?occupation=' + occupationName
+    } else {
+        return 'http://localhost:3000/comment?occupation=' + occupationName  + '&socketid=' + getQueryVariable('socketid')
     }
 }
 
@@ -43,22 +52,10 @@ function getQueryVariable(variable) {
         if (decodeURIComponent(pair[0]) == variable) {
             if (decodeURIComponent(pair[1]).includes('+') == false) {
                 return decodeURIComponent(pair[1])
-            }
-            else {
+            } else {
                 return decodeURIComponent(pair[1].replaceAll('+', ' '))
             }
         }
-    }
-}
-
-function checkIfLoggedIn() {
-    if (getQueryVariable('socketid') == '' || getQueryVariable('socketid') == undefined) {
-        document.getElementById('userId').style.display = 'none'
-    }
-    else {
-        document.getElementById('loginBtn').style.display = 'none'
-        socketid = getQueryVariable('socketid')
-        socket.emit('getId', socketid)
     }
 }
 
@@ -82,8 +79,7 @@ function clickProfile() {
 function directToAboutPage() {
     if (getQueryVariable('socketid') == '' || getQueryVariable('socketid') == undefined) {
         document.location.href = 'http://localhost:3000/about'
-    }
-    else {
+    } else {
         document.location.href = `http://localhost:3000/about?socketid=${getQueryVariable('socketid')}` 
     }
 }
@@ -91,8 +87,7 @@ function directToAboutPage() {
 function directToChartPage() {
     if (getQueryVariable('socketid') == '' || getQueryVariable('socketid') == undefined) {
         document.location.href = 'http://localhost:3000/chart'
-    }
-    else {
+    } else {
         document.location.href = `http://localhost:3000/chart?socketid=${getQueryVariable('socketid')}` 
     }
 }
