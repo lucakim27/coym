@@ -60,10 +60,19 @@ function getQueryVariable(variable) {
 }
 
 function searchOccupationBtn() {
-    document.getElementById('divScroll').innerHTML = ""
+    var table = document.getElementById("occupationTable")
+    var countRow = 0
+    table.innerHTML = ""
     for (var i = 0; i < occupationArray.length; i++) {
         if (occupationArray[i][0].toLowerCase().includes(document.getElementById('userInput').value.toLowerCase()) == true) {
-            document.getElementById('divScroll').innerHTML += "<a onclick='directPage(this.innerText)'>" + occupationArray[i][0] + "</a><hr>"
+            var row = table.insertRow(countRow)
+            var cell = row.insertCell(0)
+            var a = document.createElement('a')
+            a.href = directPage(occupationArray[i][0])
+            a.innerHTML = occupationArray[i][0]
+            cell.appendChild(a)
+            cell.appendChild(document.createElement('hr'))
+            countRow++
         }
     }
 }
