@@ -5,6 +5,7 @@ const userInput = document.getElementById("userInput")
 const socket = io()
 const occupationArray = []
 var socketid = ''
+var userId = ''
 
 occupationTitle.innerHTML = getQueryVariable('occupation')
 searchBtn.setAttribute("onclick", "comment()")
@@ -13,12 +14,25 @@ socket.on('userEnter', (array) => {
     for (var i = 0; i < array.length; i++) {
         occupationArray.push(array[i])
     }
+
     displayUpdatedComments()
+
+    if (getQueryVariable('socketid') == 'undefined' || getQueryVariable('socketid') == undefined) {
+        document.getElementById('inputAndCommentBtn').style.display = 'none'
+        document.getElementById('userId').style.display = 'none'
+        document.getElementById('loginBtn').style.display = 'block'
+    }
+    else {
+        document.getElementById('inputAndCommentBtn').style.display = 'block'
+        document.getElementById('loginBtn').style.display = 'none'
+        document.getElementById('userId').style.display = 'block'
+        socketid = getQueryVariable('socketid')
+        socket.emit('getId', socketid)
+    }
 })
 
-checkIfLoggedIn()
-
 socket.on('displayId', id => {
+    userId = id
     document.getElementById('userAccountId').innerHTML = "Your id: " + id
     document.getElementById('userId').innerHTML = "<img src='../img/accountIMG.jpeg' style='width: 50px; height: 50px; margin-left: 315px; margin-top: -2px; padding: 3px;'>"
 })
@@ -39,8 +53,7 @@ function getQueryVariable(variable) {
         if (decodeURIComponent(pair[0]) == variable) {
             if (decodeURIComponent(pair[1]).includes('+') == false) {
                 return decodeURIComponent(pair[1])
-            }
-            else {
+            } else {
                 return decodeURIComponent(pair[1].replaceAll('+', ' '))
             }
         }
@@ -54,7 +67,7 @@ function comment() {
         for (var i = 0; i < occupationArray.length; i++) {
             if (occupationArray[i][0] == occupationTitle.innerText && userInput.value != "") {
                 occupationArray[i][1].push(userInput.value)
-                occupationArray[i][2].push(0)
+                occupationArray[i][2].push([])
                 userInput.value = ''
             }
         }
@@ -62,12 +75,21 @@ function comment() {
     }
 }
 
-function likeOrDislike(clicked_id) {
+function like(clicked_id) {
+    if (userId == '') return 0
     for (var i = 0; i < occupationArray.length; i++) {
         if (occupationArray[i][0] == occupationTitle.innerText) {
             for (var j = 0; j < occupationArray[i][1].length; j++) {
                 if (occupationArray[i][1][j] + "+" == clicked_id) {
-                    occupationArray[i][2][j]++
+                    if (occupationArray[i][2][j].includes(userId) == false) {
+                        occupationArray[i][2][j].push(userId)
+                    } else {
+                        for (var e = 0; e < occupationArray[i][2][j].length; e++) {
+                            if (occupationArray[i][2][j][e] == userId) {
+                                occupationArray[i][2][j].splice(e, 1)
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -80,24 +102,20 @@ function displayUpdatedComments() {
     for (var i = 0; i < occupationArray.length; i++) {
         if (occupationArray[i][0] == occupationTitle.innerText) {
             for(var j = 0; j < occupationArray[i][1].length; j++) {
-                commentsArea.innerHTML += `<div id="eachComment"><p>${occupationArray[i][1][j]}</p><button onclick=likeOrDislike(this.id) id="${occupationArray[i][1][j]}+">${occupationArray[i][2][j]} Likes</button></div><hr>`
+                commentsArea.innerHTML += 
+                `
+                    <div id="eachComment">
+                        <p>
+                            ${occupationArray[i][1][j]}
+                        </p>
+                        <button onclick=like(this.id) id="${occupationArray[i][1][j]}+">
+                            ${occupationArray[i][2][j].length} Likes
+                        </button>
+                    </div>
+                    <hr>
+                `
             }
         }
-    }
-}
-
-function checkIfLoggedIn() {
-    if (getQueryVariable('socketid') == 'undefined' || getQueryVariable('socketid') == undefined) {
-        document.getElementById('inputAndCommentBtn').style.display = 'none'
-        document.getElementById('userId').style.display = 'none'
-        document.getElementById('loginBtn').style.display = 'block'
-    }
-    else {
-        document.getElementById('inputAndCommentBtn').style.display = 'block'
-        document.getElementById('loginBtn').style.display = 'none'
-        document.getElementById('userId').style.display = 'block'
-        socketid = getQueryVariable('socketid')
-        socket.emit('getId', socketid)
     }
 }
 

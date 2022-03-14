@@ -1,6 +1,6 @@
 body {
     background-color: rgb(255, 255, 255);
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
 }
 
 #divScroll a {
