@@ -1,4 +1,41 @@
 const socket = io()
+const occupationArray = []
+
+socket.on('userEnter', (array) => {
+
+    if (getQueryVariable('socketid') == '' || getQueryVariable('socketid') == undefined) {
+        document.getElementById('userId').style.display = 'none'
+    }
+    else {
+        document.getElementById('loginBtn').style.display = 'none'
+        socketid = getQueryVariable('socketid')
+        socket.emit('getId', socketid)
+    }
+
+    for (var i = 0; i < array.length; i++) {
+        occupationArray.push(array[i])
+    }
+
+    for (var i = 0; i < occupationArray.length; i++) {
+
+        var table = document.getElementById("mostViewedOccuaptions")
+        var row = table.insertRow(i)
+        var cell = row.insertCell(0)
+        var p = document.createElement('p')
+        p.innerHTML = occupationArray[i][0]
+        cell.appendChild(p)
+        cell.appendChild(document.createElement('hr'))
+
+        var table = document.getElementById("mostCommentedOccuaptions")
+        var row = table.insertRow(i)
+        var cell = row.insertCell(0)
+        var p = document.createElement('p')
+        p.innerHTML = occupationArray[i][0]
+        cell.appendChild(p)
+        cell.appendChild(document.createElement('hr'))
+
+    }
+})
 
 function directPages(page) {
     if (getQueryVariable('socketid') == '' || getQueryVariable('socketid') == undefined) {
@@ -23,19 +60,6 @@ function getQueryVariable(variable) {
         }
     }
 }
-
-function checkIfLoggedIn() {
-    if (getQueryVariable('socketid') == '' || getQueryVariable('socketid') == undefined) {
-        document.getElementById('userId').style.display = 'none'
-    }
-    else {
-        document.getElementById('loginBtn').style.display = 'none'
-        socketid = getQueryVariable('socketid')
-        socket.emit('getId', socketid)
-    }
-}
-
-checkIfLoggedIn()
 
 socket.on('displayId', id => {
     document.getElementById('userAccountId').innerHTML = "Your id: " + id
