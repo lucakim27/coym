@@ -5,6 +5,7 @@ const socketio = require('socket.io')
 const { getOccupationsArray, setOccupationsArray } = require('./utils/occupation')
 const { searchAccounts, addAccount } = require('./utils/account')
 const { getLoggedInUsersIdBySocketId, addLoggedInUsers } = require('./utils/loggedIn')
+const { countUpMostViewed, getMostViewed } = require('./utils/count')
 
 const app = express()
 const server = http.createServer(app)
@@ -38,6 +39,8 @@ io.on('connection', (socket) => {
 
   io.to(socket.id).emit('userEnter', getOccupationsArray())
 
+  io.to(socket.id).emit('getMostViewed', getMostViewed())
+
   socket.on('updateComment', (array) => {
     setOccupationsArray(array)
     io.sockets.emit('updatedComment', getOccupationsArray())
@@ -49,7 +52,7 @@ io.on('connection', (socket) => {
 
   socket.on('login', acc => {
     acc.push(socket.id)
-    if (searchAccounts(acc) == true) {
+    if (searchAccounts(acc)) {
       io.to(socket.id).emit('loginSuccessful', acc)
     } else {
       io.to(socket.id).emit('loginFail', false)
@@ -66,6 +69,11 @@ io.on('connection', (socket) => {
 
   socket.on('disconnect', function () {
       console.log("The user disconnected: " + socket.id)
+  })
+
+  socket.on('countUpMostViewed', occupationName => {
+    // countUpMostViewed(occupationName)
+    console.log(countUpMostViewed(occupationName))
   })
 })
 

@@ -1,8 +1,9 @@
 const socket = io()
-const occupationArray = []
+const countArray = {}
+const table = document.getElementById("mostViewedOccuaptions")
 
-socket.on('userEnter', (array) => {
-
+socket.on('getMostViewed', (value) => {
+    
     if (getQueryVariable('socketid') == '' || getQueryVariable('socketid') == undefined) {
         document.getElementById('userId').style.display = 'none'
     }
@@ -12,29 +13,16 @@ socket.on('userEnter', (array) => {
         socket.emit('getId', socketid)
     }
 
-    for (var i = 0; i < array.length; i++) {
-        occupationArray.push(array[i])
-    }
+    const keys = Object.keys(value)
 
-    for (var i = 0; i < occupationArray.length; i++) {
-
-        var table = document.getElementById("mostViewedOccuaptions")
-        var row = table.insertRow(i)
+    keys.forEach((key, index) => {
+        var row = table.insertRow(index)
         var cell = row.insertCell(0)
         var p = document.createElement('p')
-        p.innerHTML = occupationArray[i][0]
+        p.innerHTML = `${key}: ${value[key]}<hr>`
         cell.appendChild(p)
-        cell.appendChild(document.createElement('hr'))
+    });
 
-        var table = document.getElementById("mostCommentedOccuaptions")
-        var row = table.insertRow(i)
-        var cell = row.insertCell(0)
-        var p = document.createElement('p')
-        p.innerHTML = occupationArray[i][0]
-        cell.appendChild(p)
-        cell.appendChild(document.createElement('hr'))
-
-    }
 })
 
 function directPages(page) {

@@ -8,14 +8,13 @@ socket.on('userEnter', (array) => {
     }
     
     for (var i = 0; i < occupationArray.length; i++) {
-        var table = document.getElementById("occupationTable")
-        var row = table.insertRow(i)
+        var row = document.getElementById("occupationTable").insertRow(i)
         var cell = row.insertCell(0)
-        var a = document.createElement('a')
-        a.href = directPage(occupationArray[i][0])
-        a.innerHTML = occupationArray[i][0]
-        cell.appendChild(a)
-        cell.appendChild(document.createElement('hr'))
+        cell.insertAdjacentHTML('beforeend', `
+            <a href='${directPage(occupationArray[i][0])}' onclick="countForCharts('${occupationArray[i][0]}')">
+                ${occupationArray[i][0]}
+            </a><hr>`
+        )
     }
     
     if (getQueryVariable('socketid') == '' || getQueryVariable('socketid') == undefined) {
@@ -33,8 +32,13 @@ socket.on('updatedComment', (array) => {
 
 socket.on('displayId', id => {
     document.getElementById('userAccountId').innerHTML = "Your id: " + id
-    document.getElementById('userId').innerHTML = "<img src='../img/accountIMG.jpeg' style='width: 50px; height: 50px; margin-left: 315px; margin-top: -2px; padding: 3px;'>"
+    document.getElementById('userId').innerHTML = "<img src='../img/accountIMG.jpeg'; style='width: 50px; height: 50px; margin-left: 315px; margin-top: -2px; padding: 3px;'>"
 })
+
+function countForCharts(occupationName) {
+    console.log(occupationName)
+    socket.emit('countUpMostViewed', occupationName)
+}
 
 function directPage(occupationName) {
     if (getQueryVariable('socketid') == undefined) {
