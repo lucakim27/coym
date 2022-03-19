@@ -68,6 +68,7 @@ function comment() {
             if (occupationArray[i][0] == occupationTitle.innerText && userInput.value != "") {
                 occupationArray[i][1].push(userInput.value)
                 occupationArray[i][2].push([])
+                occupationArray[i][3].push(userId)
                 userInput.value = ''
             }
         }
@@ -102,9 +103,14 @@ function displayUpdatedComments() {
     for (var i = 0; i < occupationArray.length; i++) {
         if (occupationArray[i][0] == occupationTitle.innerText) {
             for(var j = 0; j < occupationArray[i][1].length; j++) {
+                console.log(occupationArray[i])
                 commentsArea.innerHTML += 
                 `
                     <div id="eachComment">
+                        <img src='../img/accountIMG.jpeg' style='width: 50px; height: 50px;'>
+                        <p style='font-weight: bold;'>
+                            ${occupationArray[i][3][j]}
+                        </p>
                         <p>
                             ${occupationArray[i][1][j]}
                         </p>

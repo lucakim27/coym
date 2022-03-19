@@ -64,6 +64,8 @@ center {
 #searchBtn {
     background-color: #ff00aa;
     cursor: pointer;
+    border-radius: 10px;
+    color: white;
 }
 
 #output button {
@@ -85,12 +87,35 @@ center {
     text-align: center;
     width: 100vw;
     overflow-wrap: break-word;
+    font-size: 30px;
 }
 
 #eachComment button {
-    /* position: absolute; */
-    height: 35px;
-    width: 100vw;
+    color: #888;
+    font-size: 1.5em;
+    font-family: 'Heebo', sans-serif;
+    background-color: transparent;
+    padding: 0.333em 1em 0.25em;
+    line-height: 1.2em;
+    box-shadow: 0 0.25em 1em -0.25em;
+    cursor: pointer;
+    transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
+    outline: 0;
+    /* margin: 5em 0; */
+}
+
+#eachComment button:hover {
+    color: indianred;
+}
+
+#eachComment button:active {
+    transform: scale(0.95);
+}
+
+#eachComment button.selected {
+    color: #FFF;
+    background-color: indianred;
+    border-color: indianred;
 }
 
 #loginContainer, #registerContainer {
@@ -186,4 +211,17 @@ center {
 table td {
     text-align: center;
     font-size: 30px;
+}
+
+table td a {
+    text-decoration: none;
+}
+
+#occupationTable {
+    width: 100%;
+}
+
+#userInput {
+    border-radius: 10px;
+    text-align: center;
 }
