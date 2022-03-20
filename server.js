@@ -2,6 +2,7 @@ const path = require('path')
 const http = require('http')
 const express = require('express')
 const socketio = require('socket.io')
+const nodemailer = require('nodemailer');
 const { getOccupationsArray, setOccupationsArray } = require('./utils/occupation')
 const { searchAccounts, addAccount } = require('./utils/account')
 const { getLoggedInUsersIdBySocketId, addLoggedInUsers } = require('./utils/loggedIn')
@@ -32,6 +33,10 @@ app.get('/about', function (req, res) {
 
 app.get('/chart', function (req, res) {
   res.sendFile(__dirname + '/src/chart.html')
+})
+
+app.get('/request', function (req, res) {
+  res.sendFile(__dirname + '/src/request.html')
 })
 
 io.on('connection', (socket) => {
@@ -72,9 +77,35 @@ io.on('connection', (socket) => {
   })
 
   socket.on('countUpMostViewed', occupationName => {
-    // countUpMostViewed(occupationName)
-    console.log(countUpMostViewed(occupationName))
+    countUpMostViewed(occupationName)
   })
+
+  socket.on('sendRequest', value => {
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'nikolaikim27@gmail.com',
+        pass: 'zaq14789'
+      }
+    })
+    
+    var mailOptions = {
+      from: 'nikolaikim27@gmail.com',
+      to: 'nikolaikim27@gmail.com',
+      subject: value[0],
+      text: value[1]
+    }
+    
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+        io.sockets.emit('requestSuccessful', null)
+      }
+    })
+  })
+
 })
 
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`))

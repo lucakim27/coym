@@ -104,3 +104,11 @@ function directToChartPage() {
         document.location.href = `http://localhost:3000/chart?socketid=${getQueryVariable('socketid')}` 
     }
 }
+
+function directToRequestPage() {
+    if (getQueryVariable('socketid') == '' || getQueryVariable('socketid') == undefined) {
+        document.location.href = 'http://localhost:3000/request'
+    } else {
+        document.location.href = `http://localhost:3000/request?socketid=${getQueryVariable('socketid')}` 
+    }
+}

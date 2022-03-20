@@ -14,6 +14,7 @@ function clickProfile() {
     }
 }
 
+checkIfLoggedIn()
 function checkIfLoggedIn() {
     if (getQueryVariable('socketid') == '' || getQueryVariable('socketid') == undefined) {
         document.getElementById('userId').style.display = 'none'
@@ -50,7 +51,6 @@ function directToHome() {
     }
 }
 
-checkIfLoggedIn()
 
 function directToChartPage() {
     if (getQueryVariable('socketid') == '' || getQueryVariable('socketid') == undefined) {
@@ -58,5 +58,13 @@ function directToChartPage() {
     }
     else {
         document.location.href = `http://localhost:3000/chart?socketid=${getQueryVariable('socketid')}` 
+    }
+}
+
+function directToRequestPage() {
+    if (getQueryVariable('socketid') == '' || getQueryVariable('socketid') == undefined) {
+        document.location.href = 'http://localhost:3000/request'
+    } else {
+        document.location.href = `http://localhost:3000/request?socketid=${getQueryVariable('socketid')}` 
     }
 }

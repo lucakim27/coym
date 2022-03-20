@@ -23,3 +23,7 @@ function directToAboutPage() {
 function directToChartPage() {
     document.location.href = 'http://localhost:3000/chart'
 }
+
+function directToRequestPage() {
+    document.location.href = 'http://localhost:3000/request'
+}
