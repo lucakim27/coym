@@ -65,7 +65,7 @@ io.on('connection', (socket) => {
   })
 
   socket.on('getId', socketid => {
-    io.sockets.emit('displayId', getLoggedInUsersIdBySocketId(socketid))
+    io.to(socket.id).emit('displayId', getLoggedInUsersIdBySocketId(socketid))
   })
 
   socket.on('loggedIn', acc => {
