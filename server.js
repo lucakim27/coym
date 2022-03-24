@@ -2,11 +2,14 @@ const path = require('path')
 const http = require('http')
 const express = require('express')
 const socketio = require('socket.io')
-const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer')
+const bodyParser = require('body-parser')
+
 const { getOccupationsArray, setOccupationsArray } = require('./utils/occupation')
 const { searchAccounts, addAccount } = require('./utils/account')
 const { getLoggedInUsersIdBySocketId, addLoggedInUsers } = require('./utils/loggedIn')
 const { countUpMostViewed, getMostViewed } = require('./utils/count')
+const { check, validationResult } = require('express-validator');
 
 const app = express()
 const server = http.createServer(app)
@@ -14,6 +17,11 @@ const io = socketio(server)
 const PORT = process.env.PORT || 3000
 
 app.use(express.static(path.join(__dirname, 'src')))
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/src/index.html')
+})
 
 app.get('/comment', function (req, res) {
   res.sendFile(__dirname + '/src/comment.html')
@@ -21,6 +29,38 @@ app.get('/comment', function (req, res) {
 
 app.get('/login', function (req, res) {
   res.sendFile(__dirname + '/src/login.html')
+})
+
+var loginValidate = [
+
+  check('username', 'Username Must Be an Email Address').isEmail()
+  .trim()
+  .escape()
+  .normalizeEmail(),
+
+  check('password')
+  .isLength({ min: 8 })
+  .withMessage('Password Must Be at Least 8 Characters')
+  .matches('[0-9]')
+  .withMessage('Password Must Contain a Number')
+  .matches('[A-Z]')
+  .withMessage('Password Must Contain an Uppercase Letter')
+  .trim()
+  .escape()
+
+]
+
+app.post('/login', loginValidate, (req, res) => {
+  console.log(req.body.username)
+  console.log(req.body.password)
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+  	return res.status(422).json({ errors: errors.array() });
+  }
+  else {
+    // put username and password in the utils
+    res.sendFile(__dirname + '/src/index.html')
+  }
 })
 
 app.get('/register', function (req, res) {
@@ -66,6 +106,7 @@ io.on('connection', (socket) => {
 
   socket.on('getId', socketid => {
     io.to(socket.id).emit('displayId', getLoggedInUsersIdBySocketId(socketid))
+    console.log(getLoggedInUsersIdBySocketId(socketid))
   })
 
   socket.on('loggedIn', acc => {

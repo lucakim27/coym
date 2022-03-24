@@ -36,7 +36,6 @@ socket.on('displayId', id => {
 })
 
 function countForCharts(occupationName) {
-    console.log(occupationName)
     socket.emit('countUpMostViewed', occupationName)
 }
 

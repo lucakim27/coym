@@ -27,11 +27,13 @@
     </header><hr id="hrAfterHeader">
 
     <center id="loginContainer">
-        <h1 id="header">Login</h1>
-        <input type="text" placeholder="Enter your ID" id="loginID"><br><br>
-        <input type="password" placeholder="Enter your Password" id="loginPw"><br><br>
-        <button onclick="clickLogin()">Login</button><br>
-        <p>Register <a href="/register">here</a>!</p>
+        <form action="/login" method="post">
+            <h1 id="header">Login</h1>
+            <input type="text" name="username" placeholder="Enter your ID" id="loginID" required><br><br>
+            <input type="password" name="password" placeholder="Enter your Password" id="loginPw" required><br><br>
+            <button onclick="clickLogin()" type="submit" value="login">Login</button><br>
+            <p>Register <a href="/register">here</a>!</p>
+        </form>
     </center>
 
 </body>
