@@ -4,6 +4,7 @@ const express = require('express')
 const socketio = require('socket.io')
 const nodemailer = require('nodemailer')
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 
 const { getOccupationsArray, setOccupationsArray } = require('./utils/occupation')
 const { searchAccounts, addAccount } = require('./utils/account')
@@ -17,10 +18,19 @@ const io = socketio(server)
 const PORT = process.env.PORT || 3000
 
 app.use(express.static(path.join(__dirname, 'src')))
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/src/index.html')
+  const cookies = req.cookies;
+  const currentUser = cookies['current-user']
+
+  if (currentUser) {
+    res.sendFile(__dirname + '/src/index.html', {
+      user: currentUser
+    })
+  } else {
+    res.sendFile(__dirname + '/src/index.html')
+  }
 })
 
 app.get('/comment', function (req, res) {
@@ -33,33 +43,33 @@ app.get('/login', function (req, res) {
 
 var loginValidate = [
 
-  check('username', 'Username Must Be an Email Address').isEmail()
+  check('username')
+  .isLength({ min: 8 })
+  .withMessage('Username Must Be at Least 8 Characters')
+  .matches('[0-9]')
+  .withMessage('Password Must Contain a Number')
   .trim()
-  .escape()
-  .normalizeEmail(),
+  .escape(),
 
   check('password')
   .isLength({ min: 8 })
   .withMessage('Password Must Be at Least 8 Characters')
   .matches('[0-9]')
   .withMessage('Password Must Contain a Number')
-  .matches('[A-Z]')
-  .withMessage('Password Must Contain an Uppercase Letter')
   .trim()
   .escape()
 
 ]
 
 app.post('/login', loginValidate, (req, res) => {
-  console.log(req.body.username)
-  console.log(req.body.password)
-  const errors = validationResult(req);
+  const errors = validationResult(req)
+  console.log(errors)
   if (!errors.isEmpty()) {
-  	return res.status(422).json({ errors: errors.array() });
+  	return res.status(422).json({ errors: errors.array() })
   }
   else {
-    // put username and password in the utils
-    res.sendFile(__dirname + '/src/index.html')
+    res.cookie('current-user', [req.body.username, req.body.password])
+    res.redirect('/')
   }
 })
 
