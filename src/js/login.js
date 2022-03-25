@@ -14,7 +14,7 @@ socket.on('loginFail', value => {
 })
 
 function directToHome() {
-    document.location.href = 'http://localhost:3000'
+    document.location.href = 'http://localhost:3000/home'
 }
 
 function directToAboutPage() {

@@ -7,7 +7,7 @@ function clickProfile() {
 }
 
 function logoutBtn() {
-    document.location.href = 'http://localhost:3000'
+    document.location.href = 'http://localhost:3000/home'
 }
 
 function clickLoginBtn() {

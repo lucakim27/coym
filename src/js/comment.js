@@ -127,10 +127,10 @@ function displayUpdatedComments() {
 
 function directToHome() {
     if (getQueryVariable('socketid') == '' || getQueryVariable('socketid') == 'undefined' || getQueryVariable('socketid') == undefined) {
-        document.location.href = 'http://localhost:3000'
+        document.location.href = 'http://localhost:3000/home'
     }
     else {
-        document.location.href = `http://localhost:3000/?socketid=${getQueryVariable('socketid')}` 
+        document.location.href = `http://localhost:3000/home?socketid=${getQueryVariable('socketid')}` 
     }
 }
 
