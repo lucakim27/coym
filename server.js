@@ -22,27 +22,33 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/src/index.html')
+  res.render(__dirname + '/src/index.ejs')
 })
 
 app.get('/home', (req, res) => {
-  console.log(req.cookies['current-user'])
   if (req.cookies['current-user']) {
-    res.sendFile(__dirname + '/src/home.html', {
+    res.render(__dirname + '/src/home.ejs', {
       user: req.cookies['current-user']
     })
   } else {
-    res.sendFile(__dirname + '/src/home.html')
+    res.render(__dirname + '/src/home.ejs')
   }
 })
 
 app.get('/comment', function (req, res) {
-  console.log(req.cookies['current-user'])
-  res.sendFile(__dirname + '/src/comment.html')
+  if (req.cookies['current-user']) {
+    res.render(__dirname + '/src/comment.ejs', {
+      user: req.cookies['current-user']
+    })
+  } else {
+    res.render(__dirname + '/src/comment.ejs', {
+      user: "You're not logged in"
+    })
+  }
 })
 
 app.get('/login', function (req, res) {
-  res.sendFile(__dirname + '/src/login.html')
+  res.render(__dirname + '/src/login.ejs')
 })
 
 var loginValidate = [
@@ -65,36 +71,57 @@ var loginValidate = [
 
 ]
 
-app.post('/login', loginValidate, (req, res) => {
+app.post('/auth', loginValidate, (req, res) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
   	return res.status(422).json({ errors: errors.array() })
   }
   else {
     console.log(req.body.username, req.body.password)
-    res.cookie('current-user', [req.body.username, req.body.password])
-    res.redirect('/')
+    res.cookie('current-user', req.body.username)
+    res.redirect('/home')
   }
 })
 
 app.get('/register', function (req, res) {
   console.log(req.cookies['current-user'])
-  res.sendFile(__dirname + '/src/register.html')
+  res.render(__dirname + '/src/register.ejs')
 })
 
 app.get('/about', function (req, res) {
-  console.log(req.cookies['current-user'])
-  res.sendFile(__dirname + '/src/about.html')
+  if (req.cookies['current-user']) {
+    res.render(__dirname + '/src/about.ejs', {
+      user: req.cookies['current-user']
+    })
+  } else {
+    res.render(__dirname + '/src/about.ejs', {
+      user: "You're not logged in"
+    })
+  }
 })
 
 app.get('/chart', function (req, res) {
-  console.log(req.cookies['current-user'])
-  res.sendFile(__dirname + '/src/chart.html')
+  if (req.cookies['current-user']) {
+    res.render(__dirname + '/src/chart.ejs', {
+      user: req.cookies['current-user']
+    })
+  } else {
+    res.render(__dirname + '/src/chart.ejs', {
+      user: "You're not logged in"
+    })
+  }
 })
 
 app.get('/request', function (req, res) {
-  console.log(req.cookies['current-user'])
-  res.sendFile(__dirname + '/src/request.html')
+  if (req.cookies['current-user']) {
+    res.render(__dirname + '/src/request.ejs', {
+      user: req.cookies['current-user']
+    })
+  } else {
+    res.render(__dirname + '/src/request.ejs', {
+      user: "You're not logged in"
+    })
+  }
 })
 
 io.on('connection', (socket) => {

@@ -44,13 +44,14 @@ center {
 
 #userId {
     position: absolute;
-    right: 300px;
+    right: 100px;
     background-color: rgb(255, 255, 255);
     font-family: fantasy;
-    top: 10px;
+    top: 15px;
     width: 80px;
     height: 40px;
     cursor: pointer;
+    font-size: 30px;
 }
 
 #hrAfterHeader {
