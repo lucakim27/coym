@@ -16,6 +16,15 @@ socket.on('userEnter', (array) => {
             </a><hr>`
         )
     }
+
+    if (document.getElementById('userAccountId').innerText == 'anonymous') {
+        document.getElementById('logoutBtn').style.display = 'none'
+        document.getElementById('loginBtn').style.display = 'block'
+    } else {
+        document.getElementById('loginBtn').style.display = 'none'
+        document.getElementById('logoutBtn').style.display = 'block'
+    }
+
 })
 
 socket.on('updatedComment', (array) => {

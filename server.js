@@ -26,23 +26,25 @@ app.get('/', function (req, res) {
 })
 
 app.get('/home', (req, res) => {
-  if (req.cookies['current-user']) {
+  if (req.cookies['current-user'] && req.cookies['current-user'] != 'loggedout') {
     res.render(__dirname + '/src/home.ejs', {
       user: req.cookies['current-user']
     })
   } else {
-    res.render(__dirname + '/src/home.ejs')
+    res.render(__dirname + '/src/home.ejs', {
+      user: "anonymous"
+    })
   }
 })
 
 app.get('/comment', function (req, res) {
-  if (req.cookies['current-user']) {
+  if (req.cookies['current-user'] && req.cookies['current-user'] != 'loggedout') {
     res.render(__dirname + '/src/comment.ejs', {
       user: req.cookies['current-user']
     })
   } else {
     res.render(__dirname + '/src/comment.ejs', {
-      user: "You're not logged in"
+      user: "anonymous"
     })
   }
 })
@@ -83,43 +85,47 @@ app.post('/auth', loginValidate, (req, res) => {
   }
 })
 
+app.post('/logout', function(req, res) {
+  res.cookie('current-user', 'loggedout')
+  res.redirect('/home')
+})
+
 app.get('/register', function (req, res) {
-  console.log(req.cookies['current-user'])
   res.render(__dirname + '/src/register.ejs')
 })
 
 app.get('/about', function (req, res) {
-  if (req.cookies['current-user']) {
+  if (req.cookies['current-user'] && req.cookies['current-user'] != 'loggedout') {
     res.render(__dirname + '/src/about.ejs', {
       user: req.cookies['current-user']
     })
   } else {
     res.render(__dirname + '/src/about.ejs', {
-      user: "You're not logged in"
+      user: "anonymous"
     })
   }
 })
 
 app.get('/chart', function (req, res) {
-  if (req.cookies['current-user']) {
+  if (req.cookies['current-user'] && req.cookies['current-user'] != 'loggedout') {
     res.render(__dirname + '/src/chart.ejs', {
       user: req.cookies['current-user']
     })
   } else {
     res.render(__dirname + '/src/chart.ejs', {
-      user: "You're not logged in"
+      user: "anonymous"
     })
   }
 })
 
 app.get('/request', function (req, res) {
-  if (req.cookies['current-user']) {
+  if (req.cookies['current-user'] && req.cookies['current-user'] != 'loggedout') {
     res.render(__dirname + '/src/request.ejs', {
       user: req.cookies['current-user']
     })
   } else {
     res.render(__dirname + '/src/request.ejs', {
-      user: "You're not logged in"
+      user: "anonymous"
     })
   }
 })
