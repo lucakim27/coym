@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <script src="/socket.io/socket.io.js"></script>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
@@ -28,17 +27,15 @@
     <hr id="hrAfterHeader">
 
     <center id="registerContainer">
-        <h1 id="header">Register</h1>
-        <label>ID</label><br>
-        <input type="text" placeholder="ID" id="registerID"><br><br>
-        <label for="">PW</label><br>
-        <input type="password" placeholder="Password" id="registerPw"><br><br>
-        <label for="">PW Check</label><br>
-        <input type="password" placeholder="Password Again" id="registerPwAgain"><br><br>
-        <button onclick="clickRegister()">Register</button><br>
+        <form action="/registerAccount" method="post">
+            <h1 id="header">Register</h1>
+            <input type="text" name="username" placeholder="Enter your ID" required><br><br>
+            <input type="password" name="password" placeholder="Password" required><br><br>
+            <input type="password" name="repassword" placeholder="Password Again" required><br><br>
+            <button type="submit" value="register">Register</button><br>
+        </form>
     </center>
 
 </body>
-<script src="/js/register.js"></script>
 <script src="/js/sub/menuBar.js"></script>
 </html>

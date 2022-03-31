@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="/css/style.css">
-    <script src="/socket.io/socket.io.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
@@ -29,15 +28,13 @@
     <center id="loginContainer">
         <form action="/auth" method="post">
             <h1 id="header">Login</h1>
-            <input type="text" name="username" placeholder="Enter your ID" id="loginID" required><br><br>
-            <input type="password" name="password" placeholder="Enter your Password" id="loginPw" required><br><br>
-            <button onclick="clickLogin()" type="submit" value="login">Login</button><br>
+            <input type="text" name="username" placeholder="Enter your ID" required><br><br>
+            <input type="password" name="password" placeholder="Enter your Password" required><br><br>
+            <button type="submit" value="login">Login</button><br>
             <p>Register <a href="/register">here</a>!</p>
         </form>
     </center>
 
 </body>
-<script src="/socket.io/socket.io.js"></script>
-<script src="/js/login.js"></script>
 <script src="/js/sub/menuBar.js"></script>
 </html>

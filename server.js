@@ -6,11 +6,32 @@ const nodemailer = require('nodemailer')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 
-const { getOccupationsArray, setOccupationsArray } = require('./utils/occupation')
-const { searchAccounts, addAccount } = require('./utils/account')
-const { getLoggedInUsersIdBySocketId, addLoggedInUsers } = require('./utils/loggedIn')
-const { countUpMostViewed, getMostViewed } = require('./utils/count')
-const { check, validationResult } = require('express-validator')
+const { 
+  check,
+  validationResult
+} = require('express-validator')
+
+const { 
+  getOccupationsArray,
+  setOccupationsArray
+} = require('./utils/occupation')
+
+const {
+  searchAccounts,
+  addAccount,
+  checkAccountsById,
+  checkAccountsByPassword
+} = require('./utils/account')
+
+const {
+  getLoggedInUsersIdBySocketId, 
+  addLoggedInUsers
+} = require('./utils/loggedIn')
+
+const { 
+  countUpMostViewed,
+  getMostViewed
+} = require('./utils/count')
 
 const app = express()
 const server = http.createServer(app)
@@ -73,13 +94,39 @@ var loginValidate = [
 
 ]
 
+var registerValidate = [
+
+  check('username')
+  .isLength({ min: 8 })
+  .withMessage('Username Must Be at Least 8 Characters')
+  .matches('[0-9]')
+  .withMessage('Password Must Contain a Number')
+  .trim()
+  .escape(),
+
+  check('password')
+  .isLength({ min: 8 })
+  .withMessage('Password Must Be at Least 8 Characters')
+  .matches('[0-9]')
+  .withMessage('Password Must Contain a Number')
+  .trim()
+  .escape(),
+
+  check('repassword', 'Passwords do not match')
+  .custom((value, {req}) => (
+    value === req.body.password)
+  )
+  .trim()
+  .escape()
+
+]
+
 app.post('/auth', loginValidate, (req, res) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
   	return res.status(422).json({ errors: errors.array() })
   }
   else {
-    console.log(req.body.username, req.body.password)
     res.cookie('current-user', req.body.username)
     res.redirect('/home')
   }
@@ -92,6 +139,20 @@ app.post('/logout', function(req, res) {
 
 app.get('/register', function (req, res) {
   res.render(__dirname + '/src/register.ejs')
+})
+
+app.post('/registerAccount', registerValidate, function (req, res) {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() })
+  } else if (checkAccountsById(req.body.username) == true) {
+    return res.status(422).json({ errors: "Username is duplicated" })
+  } else if(checkAccountsByPassword(req.body.password) == true) {
+    return res.status(422).json({ errors: "Password is duplicated" })
+  } else {
+    addAccount([req.body.username, req.body.password])
+    res.redirect('/login')
+  }
 })
 
 app.get('/about', function (req, res) {

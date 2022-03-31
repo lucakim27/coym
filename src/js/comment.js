@@ -10,6 +10,12 @@ socket.on('userEnter', (array) => {
         occupationArray.push(array[i])
     }
     displayUpdatedComments()
+
+    if (document.getElementById('userId').innerText == 'anonymous') {
+        document.getElementById('inputAndCommentBtn').style.display = 'none'
+    } else {
+        document.getElementById('inputAndCommentBtn').style.display = 'block'
+    }
 })
 
 socket.on('updatedComment', (array) => {
