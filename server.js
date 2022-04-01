@@ -38,7 +38,15 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 
 app.get('/', function (req, res) {
-  res.render(__dirname + '/src/index.ejs')
+  if (req.cookies['current-user'] && req.cookies['current-user'] != 'loggedout') {
+    res.render(__dirname + '/src/index.ejs', {
+      user: req.cookies['current-user']
+    })
+  } else {
+    res.render(__dirname + '/src/index.ejs', {
+      user: "anonymous"
+    })
+  }
 })
 
 app.get('/home', (req, res) => {
@@ -48,6 +56,18 @@ app.get('/home', (req, res) => {
     })
   } else {
     res.render(__dirname + '/src/home.ejs', {
+      user: "anonymous"
+    })
+  }
+})
+
+app.get('/online', (req, res) => {
+  if (req.cookies['current-user'] && req.cookies['current-user'] != 'loggedout') {
+    res.render(__dirname + '/src/online.ejs', {
+      user: req.cookies['current-user']
+    })
+  } else {
+    res.render(__dirname + '/src/online.ejs', {
       user: "anonymous"
     })
   }

@@ -5,11 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to COYO</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
-    <center style="padding-top: 40vh;">
-        <a href="http://localhost:3000/home" style="font-size: 40px;">Direct to home page</a><br>
-        <a href="http://localhost:3000/login">Login</a>
+    <center>
+        <h1>Comment On Your Occupation</h1><hr>
+        <h3 id="greetLoggedinUser">
+            Welcome back 
+            <b id="username"><%= user %></b>
+        </h3>
+        <p>Get some ideas about the occupation you're intersted in!</p>
+        <button>
+            <a href="http://localhost:3000/home">
+                Home
+            </a>
+        </button>
+        <button id="loginBtn">
+            <a href="http://localhost:3000/login">
+                Login
+            </a>
+        </button>
     </center>
 </body>
+<script src="/js/index.js"></script>
 </html>
