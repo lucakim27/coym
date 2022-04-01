@@ -11,6 +11,7 @@ function searchAccounts(acc) {
             return true
         }
     }
+    return false
 }
 
 function checkAccountsById(id) {

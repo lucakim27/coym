@@ -23,11 +23,6 @@ const {
   checkAccountsByPassword
 } = require('./utils/account')
 
-const {
-  getLoggedInUsersIdBySocketId, 
-  addLoggedInUsers
-} = require('./utils/loggedIn')
-
 const { 
   countUpMostViewed,
   getMostViewed
@@ -125,8 +120,9 @@ app.post('/auth', loginValidate, (req, res) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
   	return res.status(422).json({ errors: errors.array() })
-  }
-  else {
+  } else if (searchAccounts([req.body.username, req.body.password]) == false) {
+    return res.status(422).json({ errors: "Your id or pw is incorrect" })
+  } else {
     res.cookie('current-user', req.body.username)
     res.redirect('/home')
   }
@@ -202,29 +198,7 @@ io.on('connection', (socket) => {
     setOccupationsArray(array)
     io.sockets.emit('updatedComment', getOccupationsArray())
   })
-
-  socket.on('registerAccount', acc => {
-    addAccount(acc)
-  })
-
-  socket.on('login', acc => {
-    acc.push(socket.id)
-    if (searchAccounts(acc)) {
-      io.to(socket.id).emit('loginSuccessful', acc)
-    } else {
-      io.to(socket.id).emit('loginFail', false)
-    }
-  })
-
-  socket.on('getId', socketid => {
-    io.to(socket.id).emit('displayId', getLoggedInUsersIdBySocketId(socketid))
-    console.log(getLoggedInUsersIdBySocketId(socketid))
-  })
-
-  socket.on('loggedIn', acc => {
-    addLoggedInUsers(acc)
-  })
-
+  
   socket.on('disconnect', function () {
       console.log("The user disconnected: " + socket.id)
   })
