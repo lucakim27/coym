@@ -4,21 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Request</title>
+    <title>Online</title>
     <link rel="stylesheet" href="/css/style.css">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
     <header style="height: 10px;">
         
         <img src="../img/menuBar.png" onclick="sidebarOpen()" alt="menuBar" class="menuBar dropbtn" style="width:70px; height:70px;">
-
+        
         <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none; margin-top: -120px;" id="mySidebar">
             <button onclick="sidebarClose()" class="w3-bar-item w3-large">Close &times;</button>
             <a href="http://localhost:3000/home" class="w3-bar-item w3-button">Home</a>
-            <a href="http://localhost:3000/online" class="w3-bar-item w3-button">Online users</a>
-            <a href="http://localhost:3000/chart" class="w3-bar-item w3-button">Chart</a>
+            <a href="http://localhost:3000/chart" class="w3-bar-item w3-button">Charts</a>
+            <a href="http://localhost:3000/request" class="w3-bar-item w3-button">Request</a>
             <a href="http://localhost:3000/about" class="w3-bar-item w3-button">About</a>
             <a onclick="window.location.href = 'mailto:nikolaikim27@google.com'" class="w3-bar-item w3-button">Contact</a>
         </div>
@@ -27,17 +26,12 @@
     </header><hr id="hrAfterHeader">
 
     <center>
-        <h1 id="header">Request</h1><br>
-        <label>Purpose: </label>
-        <select id="purposeSelection">
-            <option selected="selected">Please select the purpose</option>
-            <option value="new">Request adding a new occupation</option>
-            <option value="existing">Request removing an existing occupation</option>
-        </select><br><br>
-        <label>Occupation Name: </label><input type="text" id="occupationName" placeholder="Type here"><br><br>
-        <label>Reason being: </label><input type="text" id="Reason" placeholder="Type here"><br><br>
-        <button onclick="submitRequest()">Submit</button>
+        <h1 id="header">Online Users</h1>
+        <p>Anonymous users: <p id="anonymousUsersNumber"></p></p>
+        <p>Logged in users: <p id="loggedinUsersNumber"></p></p><hr>
+        <table id="onlineUsersTable"></table>
     </center>
+
 
     <div class="form-popup" id="myForm">
         <h2>Your Profile</h2>
@@ -47,7 +41,7 @@
 
 </body>
 <script src="/socket.io/socket.io.js"></script>
-<script src="/js/request.js"></script>
 <script src="/js/sub/menuBar.js"></script>
 <script src="/js/sub/loginBtn.js"></script>
+<script src="/js/online.js"></script>
 </html>

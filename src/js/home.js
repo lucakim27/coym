@@ -17,14 +17,15 @@ socket.on('userEnter', (array) => {
         )
     }
 
-    if (document.getElementById('userAccountId').innerText == 'anonymous') {
+    if (document.getElementById('userId').innerText == 'anonymous') {
         document.getElementById('logoutBtn').style.display = 'none'
         document.getElementById('loginBtn').style.display = 'block'
     } else {
         document.getElementById('loginBtn').style.display = 'none'
         document.getElementById('logoutBtn').style.display = 'block'
     }
-
+    
+    socket.emit('addOnlineUser', document.getElementById('userId').innerText)
 })
 
 socket.on('updatedComment', (array) => {

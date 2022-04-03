@@ -2,7 +2,6 @@ const accounts = []
 
 function addAccount(newAcc) {
     accounts.push(newAcc)
-    return accounts
 }
 
 function searchAccounts(acc) {

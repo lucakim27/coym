@@ -16,6 +16,8 @@ socket.on('userEnter', (array) => {
     } else {
         document.getElementById('inputAndCommentBtn').style.display = 'block'
     }
+    
+    socket.emit('addOnlineUser', document.getElementById('userId').innerText)
 })
 
 socket.on('updatedComment', (array) => {

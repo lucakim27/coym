@@ -23,10 +23,17 @@ const {
   checkAccountsByPassword
 } = require('./utils/account')
 
-const { 
+const {
   countUpMostViewed,
   getMostViewed
 } = require('./utils/count')
+
+const {
+  getOnlineUsers,
+  addOnlineUser,
+  countUsers,
+  removeOnlineUser
+} = require('./utils/online')
 
 const app = express()
 const server = http.createServer(app)
@@ -38,7 +45,10 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 
 app.get('/', function (req, res) {
-  if (req.cookies['current-user'] && req.cookies['current-user'] != 'loggedout') {
+  if (
+    req.cookies['current-user'] &&
+    req.cookies['current-user'] != 'loggedout'
+  ) {
     res.render(__dirname + '/src/index.ejs', {
       user: req.cookies['current-user']
     })
@@ -50,7 +60,10 @@ app.get('/', function (req, res) {
 })
 
 app.get('/home', (req, res) => {
-  if (req.cookies['current-user'] && req.cookies['current-user'] != 'loggedout') {
+  if (
+    req.cookies['current-user'] &&
+    req.cookies['current-user'] != 'loggedout'
+  ) {
     res.render(__dirname + '/src/home.ejs', {
       user: req.cookies['current-user']
     })
@@ -62,7 +75,10 @@ app.get('/home', (req, res) => {
 })
 
 app.get('/online', (req, res) => {
-  if (req.cookies['current-user'] && req.cookies['current-user'] != 'loggedout') {
+  if (
+    req.cookies['current-user'] &&
+    req.cookies['current-user'] != 'loggedout'
+  ) {
     res.render(__dirname + '/src/online.ejs', {
       user: req.cookies['current-user']
     })
@@ -74,7 +90,10 @@ app.get('/online', (req, res) => {
 })
 
 app.get('/comment', function (req, res) {
-  if (req.cookies['current-user'] && req.cookies['current-user'] != 'loggedout') {
+  if (
+    req.cookies['current-user'] &&
+    req.cookies['current-user'] != 'loggedout'
+  ) {
     res.render(__dirname + '/src/comment.ejs', {
       user: req.cookies['current-user']
     })
@@ -172,7 +191,10 @@ app.post('/registerAccount', registerValidate, function (req, res) {
 })
 
 app.get('/about', function (req, res) {
-  if (req.cookies['current-user'] && req.cookies['current-user'] != 'loggedout') {
+  if (
+    req.cookies['current-user'] &&
+    req.cookies['current-user'] != 'loggedout'
+  ) {
     res.render(__dirname + '/src/about.ejs', {
       user: req.cookies['current-user']
     })
@@ -184,7 +206,10 @@ app.get('/about', function (req, res) {
 })
 
 app.get('/chart', function (req, res) {
-  if (req.cookies['current-user'] && req.cookies['current-user'] != 'loggedout') {
+  if (
+    req.cookies['current-user'] &&
+    req.cookies['current-user'] != 'loggedout'
+  ) {
     res.render(__dirname + '/src/chart.ejs', {
       user: req.cookies['current-user']
     })
@@ -196,7 +221,10 @@ app.get('/chart', function (req, res) {
 })
 
 app.get('/request', function (req, res) {
-  if (req.cookies['current-user'] && req.cookies['current-user'] != 'loggedout') {
+  if (
+    req.cookies['current-user'] &&
+    req.cookies['current-user'] != 'loggedout'
+  ) {
     res.render(__dirname + '/src/request.ejs', {
       user: req.cookies['current-user']
     })
@@ -208,11 +236,16 @@ app.get('/request', function (req, res) {
 })
 
 io.on('connection', (socket) => {
-  console.log("An user joined: " + socket.id)
-
   io.to(socket.id).emit('userEnter', getOccupationsArray())
-
   io.to(socket.id).emit('getMostViewed', getMostViewed())
+  io.to(socket.id).emit('getOnlineUsersNumber', countUsers())
+  io.to(socket.id).emit('getOnlineUsers', getOnlineUsers())
+
+  socket.on('addOnlineUser', (user) => {
+    addOnlineUser(user, socket.id)
+    io.emit('getOnlineUsers', getOnlineUsers())
+    io.emit('getOnlineUsersNumber', countUsers())
+  })
 
   socket.on('updateComment', (array) => {
     setOccupationsArray(array)
@@ -220,7 +253,9 @@ io.on('connection', (socket) => {
   })
   
   socket.on('disconnect', function () {
-      console.log("The user disconnected: " + socket.id)
+    removeOnlineUser(socket.id)
+    io.emit('getOnlineUsers', getOnlineUsers())
+    io.emit('getOnlineUsersNumber', countUsers())
   })
 
   socket.on('countUpMostViewed', occupationName => {
@@ -231,14 +266,14 @@ io.on('connection', (socket) => {
     var transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'nikolaikim27@gmail.com',
-        pass: 'zaq14789'
+        user: '',
+        pass: ''
       }
     })
     
     var mailOptions = {
-      from: 'nikolaikim27@gmail.com',
-      to: 'nikolaikim27@gmail.com',
+      from: '',
+      to: '',
       subject: value[0],
       text: value[1]
     }
