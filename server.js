@@ -247,8 +247,15 @@ io.on('connection', (socket) => {
     io.emit('getOnlineUsersNumber', countUsers())
   })
 
-  socket.on('updateComment', (array) => {
-    setOccupationsArray(array)
+  socket.on('updateComment', (i, j, e) => {
+    // setOccupationsArray(array)
+    console.log(i, j, e)
+    io.sockets.emit('updatedComment', getOccupationsArray())
+  })
+
+  socket.on('updateLike', (i, j ,e) => {
+    // setOccupationsArray(array)
+    console.log(i, j, e)
     io.sockets.emit('updatedComment', getOccupationsArray())
   })
   
