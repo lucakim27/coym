@@ -25,3 +25,10 @@ socket.on('getMostViewed', (value) => {
     
 })
 
+if ($("#userId").text() == 'anonymous') {
+    $("#logoutBtn").css('display', 'block')
+    $("#logoutBtn").css('display', 'none')
+} else {
+    $("#logoutBtn").css('display', 'block')
+    $("#loginBtn").css('display', 'none')
+}

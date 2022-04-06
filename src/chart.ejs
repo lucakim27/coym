@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chart</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -46,9 +47,14 @@
     </center>
 
     <div class="form-popup" id="myForm">
-        <h2>Your Profile</h2>
-        <h4><%= user %></h4>
-        <button class="btn" onclick="logoutBtn()">Log out</button>
+        <center>
+            <h2>Your Profile</h2>
+            <h4 id="userAccountId"><%= user %></h4>
+            <button type="submit" value="logout" id="loginBtn" style="margin-top: 120px; margin-right: 25px;" onclick="clickLoginBtn()">Log in</button>
+            <form action="/logout" method="post">
+                <button id="logoutBtn" style="margin-top: 20px;" onclick="logoutBtn()">Log out</button>
+            </form>
+        </center>
     </div>
 
 </body>

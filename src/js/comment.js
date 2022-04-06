@@ -8,8 +8,12 @@ socket.on('userEnter', (array) => {
     socket.emit('addOnlineUser', $("#userId").text())
     if ($("#userId").text() == 'anonymous') {
         $("#inputAndCommentBtn").css('display', 'none')
+        $("#logoutBtn").css('display', 'block')
+        $("#logoutBtn").css('display', 'none')
     } else {
         $("#inputAndCommentBtn").css('display', 'block')
+        $("#logoutBtn").css('display', 'block')
+        $("#loginBtn").css('display', 'none')
     }
 })
 
@@ -43,7 +47,7 @@ const getQueryVariable = function(variable) {
 
 $("#occupationTitle").text(getQueryVariable('occupation'))
 
-function comment() {
+const comment = function() {
     if ($('#userInput').val() === '') return 0
     else if (confirm("Are you sure you wanna comment?")) {
         socket.emit('updateComment',
@@ -86,7 +90,7 @@ const appendComments = function(i, j) {
                     ${occupationArray[i][3][j]}
                 </p>
                 <p>${occupationArray[i][1][j]}</p>
-                <button onclick=like(${occupationArray[i][1][j]})>
+                <button onclick=like('${occupationArray[i][1][j]}')>
                     ${occupationArray[i][2][j].length} Likes
                 </button>
             </div><hr>

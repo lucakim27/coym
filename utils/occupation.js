@@ -353,14 +353,38 @@ function getOccupationsArray() {
   return occupations
 }
 
-function setOccupationsArray(array) {
-  occupations.splice(0, occupations.length)
-  for (var i = 0; i < array.length; i++) {
-    occupations.push(array[i])
-  }
+function updateComment(username, comment, page) {
+  occupations.forEach(array => {
+    if (array[0] === page) {
+      array[1].push(comment)
+      array[2].push([])
+      array[3].push(username)
+      return 0
+    }
+  })
+}
+
+function updateLike(comment, username, page) {
+  occupations.forEach(array => {
+    if (array[0] === page) {
+      for (var i = 0; i < array[1].length; i++) {
+        if (array[1][i] === comment) {
+          for (var j = 0; j < array[2][i].length; j++) {
+            if (array[2][i][j] === username) {
+              array[2][i].splice(j, 1)
+              return 0
+            }
+          }
+          array[2][i].push(username)
+          return 0
+        }
+      }
+    }
+  })
 }
 
 module.exports = {
   getOccupationsArray,
-  setOccupationsArray
+  updateComment,
+  updateLike
 }

@@ -1,6 +1,6 @@
-if (document.getElementById('username').innerText == 'anonymous') {
-    document.getElementById('greetLoggedinUser').style.display = 'none'
+if ($("#username").text() == 'anonymous') {
+    $("#greetLoggedinUser").css('display', 'none')
 } else {
-    document.getElementById('greetLoggedinUser').style.display = 'block'
-    document.getElementById('loginBtn').style.display = 'none'
+    $("#greetLoggedinUser").css('display', 'block')
+    $("#loginBtn").css('display', 'none')
 }

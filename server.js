@@ -13,7 +13,9 @@ const {
 
 const { 
   getOccupationsArray,
-  setOccupationsArray
+  setOccupationsArray,
+  updateComment,
+  updateLike
 } = require('./utils/occupation')
 
 const {
@@ -247,15 +249,13 @@ io.on('connection', (socket) => {
     io.emit('getOnlineUsersNumber', countUsers())
   })
 
-  socket.on('updateComment', (i, j, e) => {
-    // setOccupationsArray(array)
-    console.log(i, j, e)
+  socket.on('updateComment', (username, comment, page) => {
+    updateComment(username, comment, page)
     io.sockets.emit('updatedComment', getOccupationsArray())
   })
 
-  socket.on('updateLike', (i, j ,e) => {
-    // setOccupationsArray(array)
-    console.log(i, j, e)
+  socket.on('updateLike', (comment, username, page) => {
+    updateLike(comment, username, page)
     io.sockets.emit('updatedComment', getOccupationsArray())
   })
   
