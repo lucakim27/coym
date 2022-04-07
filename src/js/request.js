@@ -9,11 +9,3 @@ socket.on('requestSuccessful', value => {
 })
 
 socket.emit('addOnlineUser', document.getElementById('userId').innerText)
-
-if ($("#userId").text() == 'anonymous') {
-    $("#logoutBtn").css('display', 'block')
-    $("#logoutBtn").css('display', 'none')
-} else {
-    $("#logoutBtn").css('display', 'block')
-    $("#loginBtn").css('display', 'none')
-}

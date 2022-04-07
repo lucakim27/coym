@@ -8,12 +8,8 @@ socket.on('userEnter', (array) => {
     socket.emit('addOnlineUser', $("#userId").text())
     if ($("#userId").text() == 'anonymous') {
         $("#inputAndCommentBtn").css('display', 'none')
-        $("#logoutBtn").css('display', 'block')
-        $("#logoutBtn").css('display', 'none')
     } else {
         $("#inputAndCommentBtn").css('display', 'block')
-        $("#logoutBtn").css('display', 'block')
-        $("#loginBtn").css('display', 'none')
     }
 })
 

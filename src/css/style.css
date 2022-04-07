@@ -226,3 +226,10 @@ table td a {
     border-radius: 10px;
     text-align: center;
 }
+
+.vl {
+    border-left: 1px solid rgb(225, 225, 225);
+    height: 82vh;
+    margin-top : -20px;
+    overflow-y: auto;
+}

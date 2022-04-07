@@ -5,13 +5,6 @@ var occupationTable = document.getElementById("occupationTable")
 socket.on('userEnter', (array) => {
     pushOccupationArray(array, 0)
     listOccupations(0)
-    if ($("#userId").text() == 'anonymous') {
-        $("#logoutBtn").css('display', 'block')
-        $("#logoutBtn").css('display', 'none')
-    } else {
-        $("#logoutBtn").css('display', 'block')
-        $("#loginBtn").css('display', 'none')
-    }
     socket.emit('addOnlineUser', $("#userId").text())
 })
 

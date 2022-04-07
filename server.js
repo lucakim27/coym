@@ -13,7 +13,6 @@ const {
 
 const { 
   getOccupationsArray,
-  setOccupationsArray,
   updateComment,
   updateLike
 } = require('./utils/occupation')
@@ -86,6 +85,21 @@ app.get('/online', (req, res) => {
     })
   } else {
     res.render(__dirname + '/src/online.ejs', {
+      user: "anonymous"
+    })
+  }
+})
+
+app.get('/chat', (req, res) => {
+  if (
+    req.cookies['current-user'] &&
+    req.cookies['current-user'] != 'loggedout'
+  ) {
+    res.render(__dirname + '/src/chat.ejs', {
+      user: req.cookies['current-user']
+    })
+  } else {
+    res.render(__dirname + '/src/chat.ejs', {
       user: "anonymous"
     })
   }

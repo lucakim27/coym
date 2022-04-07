@@ -10,21 +10,18 @@
 </head>
 <body>
     <center>
-        <h1>Comment On Your Occupation</h1><hr>
+        <h3 style="position: absolute; left: 50px; margin-top: -50px;">COYO</h3>
+        <button id="loginBtn" onclick="directPage('login')" style="position: absolute; right: 50px; margin-top: -50px;">
+            Login
+        </button>
+        <hr style="margin-top: 70px;">
         <h3 id="greetLoggedinUser">
             Welcome back 
             <b id="username"><%= user %></b>
         </h3>
         <p>Get some ideas about the occupation you're intersted in!</p>
-        <button>
-            <a href="http://localhost:3000/home">
-                Home
-            </a>
-        </button>
-        <button id="loginBtn">
-            <a href="http://localhost:3000/login">
-                Login
-            </a>
+        <button onclick="directPage('home')">
+            Start
         </button>
     </center>
 </body>

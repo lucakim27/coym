@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online</title>
+    <title>Chat</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="/css/style.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
     <header style="height: 10px;">
@@ -19,8 +19,8 @@
             <a href="http://localhost:3000/home" class="w3-bar-item w3-button">Home</a>
             <a href="http://localhost:3000/login" class="w3-bar-item w3-button" id="loginTab">Login</a>
             <a href="http://localhost:3000/register" class="w3-bar-item w3-button" id="registerTab">Register</a>
-            <a href="http://localhost:3000/online" class="w3-bar-item w3-button" style="background-color: rgb(227, 227, 227);">Online</a>
-            <a href="http://localhost:3000/chat" class="w3-bar-item w3-button">Chat</a>
+            <a href="http://localhost:3000/online" class="w3-bar-item w3-button">Online</a>
+            <a href="http://localhost:3000/chat" class="w3-bar-item w3-button" style="background-color: rgb(227, 227, 227);">Chat</a>
             <a href="http://localhost:3000/chart" class="w3-bar-item w3-button">Chart</a>
             <a href="http://localhost:3000/request" class="w3-bar-item w3-button">Request</a>
             <a href="http://localhost:3000/about" class="w3-bar-item w3-button">About</a>
@@ -30,11 +30,41 @@
         <div id="userId" onclick="clickProfile()"><%= user %></div>
     </header><hr id="hrAfterHeader">
 
+
     <center>
-        <h1 id="header">Online Users</h1>
-        <p>Anonymous users: <p id="anonymousUsersNumber"></p></p>
-        <p>Logged in users: <p id="loggedinUsersNumber"></p></p><hr>
-        <table id="onlineUsersTable"></table>
+        <h1 id="header">Chat</h1><hr>
+
+        <div style="display: flex;">
+            <div style="flex: 0;">
+                <center>
+                    <table style="margin-right: 300px">
+                        <p>asdnasldsa</p><hr>
+                        <p>asdnasldsa</p><hr>
+                        <p>asdnasldsa</p><hr>
+                        <p>asdnasldsa</p><hr>
+                        <p>asdnasldsa</p><hr>
+                        <p>asdnasldsa</p><hr>
+                        <p>asdnasldsa</p><hr>
+                        <p>asdnasldsa</p><hr>
+                    </table>
+                </center>
+            </div>
+
+            <div class="vl"></div>
+
+            <div style="flex: 0;">
+                <div id="texts" style="border: 1px solid black; width: 133vh; margin: 20px; height: 65vh;">
+                    asdfs<hr>
+                    safdsdf<hr>
+                    asdf
+                </div>
+                <div style="display: flex; margin: 20px;">
+                    <input type="text" style="width: 100vh;">
+                    <button style="flex: 1;">Enter</button>
+                </div>
+            </div>
+        </div>
+
     </center>
 
     <div class="form-popup" id="myForm">
@@ -53,5 +83,5 @@
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/sub/menuBar.js"></script>
 <script src="/js/sub/loginBtn.js"></script>
-<script src="/js/online.js"></script>
+<script src="/js/chat.js"></script>
 </html>

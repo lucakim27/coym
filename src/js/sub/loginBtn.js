@@ -1,4 +1,4 @@
-function clickProfile() {
+const clickProfile = function() {
     if (document.getElementById('myForm').classList.contains('show')) {
         document.getElementById('myForm').classList.remove('show')
     } else {
@@ -6,10 +6,10 @@ function clickProfile() {
     }
 }
 
-function logoutBtn() {
-    document.location.href = 'http://localhost:3000/home'
-}
-
-function clickLoginBtn() {
-    document.location.href = 'http://localhost:3000/login'
+if ($("#userId").text() == 'anonymous') {
+    $("#logoutBtn").css('display', 'none')
+} else {
+    $("#logoutBtn").css('display', 'block')
+    $("#loginTab").css('display', 'none')
+    $("#registerTab").css('display', 'none')
 }
