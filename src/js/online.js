@@ -1,30 +1,28 @@
 const socket = io()
-const table = document.getElementById("onlineUsersTable")
+const unloggedinUserTable = document.getElementById("unloggedinUser")
+const loggedinUserTable = document.getElementById("loggedinUser")
 
-socket.emit('addOnlineUser', document.getElementById('userId').innerText)
+socket.emit('addOnlineUser', $("#userId").text())
 
 socket.on('getOnlineUsers', (onlineUsers) => {
-    table.innerHTML = ''
-    if (JSON.stringify(onlineUsers) == '{}') {
-        var row = table.insertRow(0)
-        var cell = row.insertCell(0)
+    unloggedinUserTable.innerHTML = ''
+    loggedinUserTable.innerHTML = ''
+    const keys = Object.keys(onlineUsers)
+    keys.forEach((key, index) => {
+        var row1 = unloggedinUserTable.insertRow(index).insertCell(0)
+        var row2 = loggedinUserTable.insertRow(index).insertCell(0)
         var p = document.createElement('p')
-        p.innerHTML = `There's no online user at the moment.`
-        cell.appendChild(p)
-    } else {
-        const keys = Object.keys(onlineUsers)
-        keys.forEach((key, index) => {
-            var row = table.insertRow(index)
-            var cell = row.insertCell(0)
-            var p = document.createElement('p')
-            p.innerHTML = `${key}: ${onlineUsers[key]}<hr>`
-            cell.appendChild(p)
-        })
-    }
+        if (onlineUsers[key] != 'anonymous') {
+            p.innerHTML = `${onlineUsers[key]}<hr>`
+            row2.appendChild(p)
+        } else {
+            p.innerHTML = `${key}<hr>`
+            row1.appendChild(p)
+        }
+    })
 })
 
 socket.on('getOnlineUsersNumber', (value) => {
-    document.getElementById('anonymousUsersNumber').innerText = value[0]
-    document.getElementById('loggedinUsersNumber').innerText = value[1]
+    $("#anonymousUsersNumber").text(value[0])
+    $("#loggedinUsersNumber").text(value[1])
 })
-
