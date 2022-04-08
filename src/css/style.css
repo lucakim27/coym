@@ -233,3 +233,39 @@ table td a {
     margin-top : -20px;
     overflow-y: auto;
 }
+
+#unloggedinUser {
+    overflow-y: hidden;
+}
+
+.header-fixed {
+    width: 100% 
+}
+
+.header-fixed > thead,
+.header-fixed > tbody,
+.header-fixed > thead > tr,
+.header-fixed > tbody > tr,
+.header-fixed > thead > tr > td,
+.header-fixed > tbody > tr > td {
+    display: block;
+}
+
+.header-fixed > tbody > tr:after,
+.header-fixed > thead > tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+.header-fixed > tbody {
+    overflow-y: auto;
+    height: 450px;
+}
+
+.header-fixed > tbody > tr > td,
+.header-fixed > thead > tr > td {
+    width: 100%;
+    float: left;
+}

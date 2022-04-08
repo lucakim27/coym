@@ -11,6 +11,7 @@ socket.on('userEnter', (array) => {
     } else {
         $("#inputAndCommentBtn").css('display', 'block')
     }
+    socket.emit('addOnlineUser', $("#userId").text())
 })
 
 socket.on('updatedComment', (array) => {

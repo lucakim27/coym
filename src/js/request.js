@@ -8,4 +8,4 @@ socket.on('requestSuccessful', value => {
     document.querySelector('center').innerHTML = 'Your request has been sent successfully.'
 })
 
-socket.emit('addOnlineUser', document.getElementById('userId').innerText)
+socket.emit('addOnlineUser', $("#userId").text())

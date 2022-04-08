@@ -26,7 +26,9 @@ const {
 
 const {
   countUpMostViewed,
-  getMostViewed
+  getMostViewed,
+  countUpMostCommented,
+  getMostCommented
 } = require('./utils/count')
 
 const {
@@ -254,6 +256,7 @@ app.get('/request', function (req, res) {
 io.on('connection', (socket) => {
   io.to(socket.id).emit('userEnter', getOccupationsArray())
   io.to(socket.id).emit('getMostViewed', getMostViewed())
+  io.to(socket.id).emit('getMostCommented', getMostCommented())
   io.to(socket.id).emit('getOnlineUsersNumber', countUsers())
   io.to(socket.id).emit('getOnlineUsers', getOnlineUsers())
 
@@ -265,6 +268,7 @@ io.on('connection', (socket) => {
 
   socket.on('updateComment', (username, comment, page) => {
     updateComment(username, comment, page)
+    countUpMostCommented(page)
     io.sockets.emit('updatedComment', getOccupationsArray())
   })
 
