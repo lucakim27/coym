@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/css/style.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
     <header style="height: 10px;">
@@ -27,32 +29,37 @@
             <a onclick="window.location.href = 'mailto:nikolaikim27@google.com'" class="w3-bar-item w3-button">Contact</a>
         </div>
         
-        <div id="userId" onclick="clickProfile()"><%= user %></div>
+        <div id="userId" data-toggle="modal" data-target="#myModal"><%= user %></div>
     </header><hr id="hrAfterHeader">
 
     <center>
         <h1 id="header">Online Users</h1><hr>
 
         <div style="display: flex; padding: 10px; justify-content: center;">
-            <div style=" height: 70vh; min-width: 40%; flex: 0; background-color: rgb(235, 235, 235); padding: 10px; margin-right: 30px; border-radius: 5px;">
-                <table id="unloggedinUser" class="table table-striped header-fixed"></table>
+            <div style="height: 70vh; min-width: 40%; flex: 0; background-color: rgb(235, 235, 235); padding: 10px; margin-right: 30px; border-radius: 5px;">
+                <table id="friendsList" class="table table-striped header-fixed"></table>
             </div>
-            <div style="overflow-y: auto; height: 70vh; min-width: 40%; flex: 0; background-color: rgb(235, 235, 235); padding: 10px; margin-left: 30px; border-radius: 5px;">
+            <div style="height: 70vh; min-width: 40%; flex: 0; background-color: rgb(235, 235, 235); padding: 10px; margin-left: 30px; border-radius: 5px;">
                 <table id="loggedinUser" class="table table-striped header-fixed"></table>
             </div>
         </div>
     </center>
 
-    <div class="form-popup" id="myForm">
-        <center>
-            <h2>Your Profile</h2>
-            <h4 id="userAccountId"><%= user %></h4>
-            <form action="/logout" method="post">
-                <button id="logoutBtn" style="margin-top: 20px;">
-                    Log out
-                </button>
-            </form>
-        </center>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><%= user %></h4>
+                </div>
+                <div class="modal-body">
+                    <p>Some text in the modal.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>

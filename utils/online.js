@@ -1,11 +1,14 @@
 const onlineUsers = {}
+const friendsList = {}
 
 function getOnlineUsers() {
     return onlineUsers
 }
 
 function addOnlineUser(newUser, socketid) {
-    onlineUsers[socketid] = newUser
+    if (newUser != 'anonymous') {
+        onlineUsers[socketid] = newUser
+    }
 }
 
 function removeOnlineUser(socketid) {
@@ -13,26 +16,22 @@ function removeOnlineUser(socketid) {
 }
 
 function countUsers() {
+    return Object.keys(onlineUsers).length
+}
 
-    var anonymous = 0
-    var loggedin = 0
+function getFriendsList() {
+    return friendsList
+}
 
-    const keys = Object.keys(onlineUsers)
-
-    keys.forEach((key) => {
-        if (onlineUsers[key] == 'anonymous') {
-            anonymous++
-        } else {
-            loggedin++
-        }
-    })
-
-    return [anonymous, loggedin]
+function addFriend(userId, friendsId) {
+    friendsList[userId] = friendsId
 }
 
 module.exports = {
     getOnlineUsers,
     addOnlineUser,
     countUsers,
-    removeOnlineUser
+    removeOnlineUser,
+    getFriendsList,
+    addFriend
 }

@@ -35,7 +35,9 @@ const {
   getOnlineUsers,
   addOnlineUser,
   countUsers,
-  removeOnlineUser
+  removeOnlineUser,
+  getFriendsList,
+  addFriend
 } = require('./utils/online')
 
 const app = express()
@@ -257,13 +259,12 @@ io.on('connection', (socket) => {
   io.to(socket.id).emit('userEnter', getOccupationsArray())
   io.to(socket.id).emit('getMostViewed', getMostViewed())
   io.to(socket.id).emit('getMostCommented', getMostCommented())
-  io.to(socket.id).emit('getOnlineUsersNumber', countUsers())
-  io.to(socket.id).emit('getOnlineUsers', getOnlineUsers())
+  io.to(socket.id).emit('getOnlineUsers', getOnlineUsers(), countUsers())
+  io.to(socket.id).emit('getFriendsList', getFriendsList())
 
   socket.on('addOnlineUser', (user) => {
     addOnlineUser(user, socket.id)
-    io.emit('getOnlineUsers', getOnlineUsers())
-    io.emit('getOnlineUsersNumber', countUsers())
+    io.emit('getOnlineUsers', getOnlineUsers(), countUsers())
   })
 
   socket.on('updateComment', (username, comment, page) => {
