@@ -7,29 +7,13 @@
     <title>About</title>
     <link rel="stylesheet" href="/css/style.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
 
     <header style="height: 10px;">
-        
-        <img src="../img/menuBar.png" onclick="sidebarOpen()" alt="menuBar" class="menuBar dropbtn" style="width:70px; height:70px;">
-
-        <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none; margin-top: -120px;" id="mySidebar">
-            <button onclick="sidebarClose()" class="w3-bar-item w3-large">Close &times;</button>
-            <a href="http://localhost:3000/home" class="w3-bar-item w3-button">Home</a>
-            <a href="http://localhost:3000/login" class="w3-bar-item w3-button" id="loginTab">Login</a>
-            <a href="http://localhost:3000/register" class="w3-bar-item w3-button" id="registerTab">Register</a>
-            <a href="http://localhost:3000/online" class="w3-bar-item w3-button">Online</a>
-            <a href="http://localhost:3000/chat" class="w3-bar-item w3-button">Chat</a>
-            <a href="http://localhost:3000/chart" class="w3-bar-item w3-button">Chart</a>
-            <a href="http://localhost:3000/request" class="w3-bar-item w3-button">Request</a>
-            <a href="http://localhost:3000/about" class="w3-bar-item w3-button" style="background-color: rgb(227, 227, 227);">About</a>
-            <a onclick="window.location.href = 'mailto:nikolaikim27@google.com'" class="w3-bar-item w3-button">Contact</a>
-        </div>
-        
         <div id="userId" data-toggle="modal" data-target="#myModal"><%= user %></div>
     </header>
     <hr id="hrAfterHeader">
@@ -45,25 +29,8 @@
         
     </center>
 
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><%= user %></h4>
-                </div>
-                <div class="modal-body">
-                    <p>Some text in the modal.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </body>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/sub/menuBar.js"></script>
-<script src="/js/sub/loginBtn.js"></script>
+<script src="/js/sub/profileModal.js"></script>
 </html>
