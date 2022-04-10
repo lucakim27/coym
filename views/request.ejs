@@ -1,21 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Request</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <%- include('partials/head'); -%>
 </head>
 <body>
-    <header style="height: 10px;">
-        <div id="userId" data-toggle="modal" data-target="#myModal"><%= user %></div>
-    </header><hr id="hrAfterHeader">
-
+    <%- include('partials/header'); -%>
     <center>
         <h1 id="header">Request</h1><br>
         <label>Purpose: </label>
@@ -30,8 +19,6 @@
     </center>
 
 </body>
-<script src="/socket.io/socket.io.js"></script>
+<%- include('partials/script'); -%>
 <script src="/js/request.js"></script>
-<script src="/js/sub/menuBar.js"></script>
-<script src="/js/sub/profileModal.js"></script>
 </html>
