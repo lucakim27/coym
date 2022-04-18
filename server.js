@@ -5,7 +5,6 @@ const socketio = require('socket.io')
 const nodemailer = require('nodemailer')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
-const layouts = require("express-ejs-layouts")
 const routes = require('./routes/index')
 
 const { 
@@ -38,22 +37,21 @@ const PORT = process.env.PORT || 3000
 app.engine('html', require('ejs').renderFile)
 app.set('views', path.join(__dirname, 'views'))
 app.set("view engine", "html")
-// app.use(layouts)
 app.use(express.static(path.join(__dirname, 'src')))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use('/', routes)
 
-// app.use(function(req, res, next) {
-//   var err = new Error('Not Found')
-//   err.status = 404
-//   next(err)
-// })
+app.use(function(req, res, next) {
+  var err = new Error('Not Found')
+  err.status = 404
+  next(err)
+})
 
-// app.use(function(err, req, res, next) {
-//   res.status(err.status || 500)
-//   res.render('error', {status:err.status, message:err.message})
-// })
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500)
+  res.render('error', {status:err.status, message:err.message})
+})
 
 io.on('connection', (socket) => {
   io.to(socket.id).emit('userEnter', getOccupationsArray())
@@ -73,8 +71,8 @@ io.on('connection', (socket) => {
     io.sockets.emit('updatedComment', getOccupationsArray())
   })
 
-  socket.on('updateLike', (comment, username, page) => {
-    updateLike(comment, username, page)
+  socket.on('updateLike', (index, row, username, page) => {
+    updateLike(index, row, username, page)
     io.sockets.emit('updatedComment', getOccupationsArray())
   })
   

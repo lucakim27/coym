@@ -364,11 +364,11 @@ function updateComment(username, comment, page) {
   })
 }
 
-function updateLike(comment, username, page) {
+function updateLike(index, row, username, page) {
   occupations.forEach(array => {
     if (array[0] === page) {
       for (var i = 0; i < array[1].length; i++) {
-        if (array[1][i] === comment) {
+        if (array[1][i] === occupations[index][1][row]) {
           for (var j = 0; j < array[2][i].length; j++) {
             if (array[2][i][j] === username) {
               array[2][i].splice(j, 1)

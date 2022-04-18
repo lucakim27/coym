@@ -56,10 +56,12 @@ const comment = function() {
     }
 }
 
-const like = function(comment) {
+const like = function(index, row) {
     if ($("#userId").text() == 'anonymous') return 0
     else {
-        socket.emit('updateLike', comment,
+        socket.emit('updateLike', 
+            index,
+            row,
             $("#userId").text(),
             $("#occupationTitle").text()
         )
@@ -87,7 +89,7 @@ const appendComments = function(i, j) {
                     ${occupationArray[i][3][j]}
                 </p>
                 <p>${occupationArray[i][1][j]}</p>
-                <button onclick=like('${occupationArray[i][1][j]}')>
+                <button onclick=like(${[i, j]})>
                     ${occupationArray[i][2][j].length} Likes
                 </button>
             </div><hr>
