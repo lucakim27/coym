@@ -11,10 +11,13 @@ socket.on('getOnlineUsers', (onlineUsers, count) => {
     const keys = Object.keys(onlineUsers)
     keys.forEach((key, index) => {
         var row = loggedinUserTable.getElementsByTagName('tbody')[0].insertRow(index).insertCell(0)
-        var p = document.createElement('p')
+        var a = document.createElement('a')
         if (onlineUsers[key] != 'anonymous') {
-            p.innerHTML = `${onlineUsers[key]}`
-            row.appendChild(p)
+            a.innerHTML = `${onlineUsers[key]}`
+            a.setAttribute('data-toggle', 'modal')
+            a.setAttribute('data-target', '#showOtherUserProfileModal')
+            a.setAttribute('onclick', `putDetailsInUserModal('${onlineUsers[key]}')`)
+            row.appendChild(a)
         }
     })
 })
@@ -26,8 +29,12 @@ socket.on('getFriendsList', friendsList => {
     const keys = Object.keys(friendsList)
     keys.forEach((key, index) => {
         var row = friendsListTable.getElementsByTagName('tbody')[0].insertRow(index).insertCell(0)
-        var p = document.createElement('p')
-        p.innerHTML = `${friendsList[key]}`
-        row.appendChild(p)
+        var a = document.createElement('a')
+        a.innerHTML = `${friendsList[key]}`
+        row.appendChild(a)
     })
 })
+
+const putDetailsInUserModal = function(name) {
+    $('.modal-title').html(name)
+}
