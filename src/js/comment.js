@@ -5,7 +5,6 @@ searchBtn.setAttribute("onclick", "comment()")
 socket.on('userEnter', (array) => {
     pushOccupationArray(array, 0)
     displayUpdatedComments(0)
-    socket.emit('addOnlineUser', $("#userId").text())
     if ($("#userId").text() == 'anonymous') {
         $("#inputAndCommentBtn").css('display', 'none')
     } else {

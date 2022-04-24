@@ -26,7 +26,10 @@ const {
   countUsers,
   removeOnlineUser,
   getFriendsList,
-  addFriend
+  addFriendsList,
+  getPendingFriendsRequest,
+  addPendingFriendsRequest,
+  findOnlineUserById
 } = require('./utils/online')
 
 const app = express()
@@ -57,12 +60,13 @@ io.on('connection', (socket) => {
   io.to(socket.id).emit('userEnter', getOccupationsArray())
   io.to(socket.id).emit('getMostViewed', getMostViewed())
   io.to(socket.id).emit('getMostCommented', getMostCommented())
-  io.to(socket.id).emit('getOnlineUsers', getOnlineUsers(), countUsers())
+  io.to(socket.id).emit('getOnlineUsers', getOnlineUsers())
   io.to(socket.id).emit('getFriendsList', getFriendsList())
+  io.to(socket.id).emit('getFriendsRequestPending', getPendingFriendsRequest())
 
   socket.on('addOnlineUser', (user) => {
     addOnlineUser(user, socket.id)
-    io.emit('getOnlineUsers', getOnlineUsers(), countUsers())
+    io.emit('getOnlineUsers', getOnlineUsers())
   })
 
   socket.on('updateComment', (username, comment, page) => {
@@ -79,11 +83,17 @@ io.on('connection', (socket) => {
   socket.on('disconnect', function () {
     removeOnlineUser(socket.id)
     io.emit('getOnlineUsers', getOnlineUsers())
-    io.emit('getOnlineUsersNumber', countUsers())
   })
 
   socket.on('countUpMostViewed', occupationName => {
     countUpMostViewed(occupationName)
+  })
+
+  socket.on('friendsRequest', (username, myname) => {
+    addPendingFriendsRequest(username, myname)
+    if (findOnlineUserById(username) != '') {
+      io.to(findOnlineUserById(username)).emit('updateFriendsRequest', getPendingFriendsRequest())
+    }
   })
 
   socket.on('sendRequest', value => {

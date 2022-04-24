@@ -8,10 +8,23 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">${$("#userId").text()}</h4>
+                        <h4 class="modal-title">
+                            ${$("#userId").text()}
+                        </h4>
                     </div>
                     <div class="modal-body">
-                        <p>Some text in the modal.</p>
+                        <center>
+                            <div style="
+                                height: 30vh;
+                                min-width: 70%;
+                                flex: 0;
+                                background-color: rgb(235, 235, 235);
+                                padding: 10px; 
+                                border-radius: 5px;"
+                            >
+                                <table id="pendingFriendsRequest" class="table table-striped header-fixed"></table>
+                            </div>
+                        </center>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default loginBtn" onclick="window.location.href='http://localhost:3000/login'">
@@ -37,4 +50,3 @@
     document.querySelector('body').appendChild(div)
 
 })()
-  
