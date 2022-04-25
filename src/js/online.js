@@ -9,7 +9,7 @@ socket.on('getOnlineUsers', (onlineUsers) => {
     header.innerHTML = `<b>Online users</b>`
     const keys = Object.keys(onlineUsers)
     var tableIndex = 0
-    keys.forEach((key, index) => {
+    keys.forEach((key) => {
         if (onlineUsers[key] != 'anonymous' && onlineUsers[key] != $("#userId").text()) {
             var row = loggedinUserTable.getElementsByTagName('tbody')[0].insertRow(tableIndex).insertCell(0)
             var a = document.createElement('a')

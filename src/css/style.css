@@ -42,6 +42,10 @@ center {
     cursor: pointer;
 }
 
+.loginBtn, .logoutBtn{
+    position: relative;
+}
+
 #userId {
     position: absolute;
     right: 100px;

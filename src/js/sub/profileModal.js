@@ -31,7 +31,7 @@
                             Login
                         </button>
                         <form action="/logout" method="post" class='logoutForm'>
-                            <button type="submit" value="logout" class="btn btn-default">
+                            <button type="submit" value="logout" class="btn btn-default logoutBtn">
                                 Logout
                             </button>
                         </form>
