@@ -1,4 +1,3 @@
-const socket = io()
 const chatUsersTable = document.getElementById('chatUsers')
 socket.emit('addOnlineUser', $("#userId").text())
 

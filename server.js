@@ -23,7 +23,6 @@ const {
 const {
   getOnlineUsers,
   addOnlineUser,
-  countUsers,
   removeOnlineUser,
   getFriendsList,
   addFriendsList,

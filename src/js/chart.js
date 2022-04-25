@@ -1,4 +1,3 @@
-const socket = io()
 const mostViewedOccuaptionsTable = document.getElementById("mostViewedOccuaptions")
 const mostCommentedOccuaptionsTable = document.getElementById("mostCommentedOccuaptions")
 

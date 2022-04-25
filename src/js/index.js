@@ -5,8 +5,6 @@ if ($("#username").text() == 'anonymous') {
     $(".loginBtn").css('display', 'none')
 }
 
-socket.emit('addOnlineUser', $("#userId").text())
-
 const directPage = function(page) {
     window.location.href = `http://localhost:3000/${page}`
 }

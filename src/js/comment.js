@@ -1,4 +1,3 @@
-const socket = io()
 const occupationArray = []
 searchBtn.setAttribute("onclick", "comment()")
 

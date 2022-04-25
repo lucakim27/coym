@@ -1,4 +1,3 @@
-const socket = io()
 const loggedinUserTable = document.getElementById("loggedinUser")
 const friendsListTable = document.getElementById("friendsList")
 

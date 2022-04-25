@@ -1,5 +1,3 @@
-const socket = io()
-
 function submitRequest() {
     socket.emit('sendRequest', [document.getElementById('occupationName'), document.getElementById('Reason')])
 }
