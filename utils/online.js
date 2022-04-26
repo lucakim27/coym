@@ -32,16 +32,14 @@ const getPendingFriendsRequest = function() {
 }
 
 const addPendingFriendsRequest = function(myname, username) {
-    if (!pendingFriendsRequest.hasOwnProperty(username)) {
-        pendingFriendsRequest[username] = [myname]
-    } else {
+    if (!pendingFriendsRequest.hasOwnProperty(myname)) {
         for (const [key, value] of Object.entries(pendingFriendsRequest)) {
-            if (!value.includes(myname)) {
-                pendingFriendsRequest[username].push(myname)
+            if (value == username) {
                 return 0
             }
         }
     }
+    pendingFriendsRequest[myname] = username
 }
 
 const getFriendsList = function() {
