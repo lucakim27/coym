@@ -31,20 +31,25 @@ const getPendingFriendsRequest = function() {
     return pendingFriendsRequest
 }
 
+const addPendingFriendsRequest = function(myname, username) {
+    if (!pendingFriendsRequest.hasOwnProperty(username)) {
+        pendingFriendsRequest[username] = [myname]
+    } else {
+        for (const [key, value] of Object.entries(pendingFriendsRequest)) {
+            if (!value.includes(myname)) {
+                pendingFriendsRequest[username].push(myname)
+                return 0
+            }
+        }
+    }
+}
+
 const getFriendsList = function() {
     return friendsList
 }
 
-const addPendingFriendsRequest = function(myname, username) {
-    if (pendingFriendsRequest.hasOwnProperty(username) != true) {
-        pendingFriendsRequest[username] = [myname]
-    } else {
-        pendingFriendsRequest[username].push(myname)
-    }
-}
-
 const addFriendsList = function(myname, username) {
-    if (friendsList.hasOwnProperty(myname) != true) {
+    if (!friendsList.hasOwnProperty(myname)) {
         friendsList[myname] = [username]
     } else {
         friendsList[myname].pushs(username)
@@ -59,5 +64,5 @@ module.exports = {
     addFriendsList,
     addPendingFriendsRequest,
     getPendingFriendsRequest,
-    findOnlineUserById
+    findOnlineUserById,
 }
