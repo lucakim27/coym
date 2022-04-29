@@ -37,7 +37,7 @@ socket.on('getFriendsList', friendsList => {
 })
 
 socket.on('updateFriendsRequest', (PendingFriendsRequest) => {
-    alert(JSON.stringify(PendingFriendsRequest))
+    console.log(JSON.stringify(PendingFriendsRequest))
 })
 
 const putDetailsInOnlineUserModal = function(name) {
