@@ -1,4 +1,4 @@
-if ($("#username").text() == 'anonymous') {
+if ($("#username").text().length === 0) {
     $("#greetLoggedinUser").css('display', 'none')
 } else {
     $("#greetLoggedinUser").css('display', 'block')

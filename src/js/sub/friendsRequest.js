@@ -10,7 +10,6 @@ socket.on('getFriendsRequestPending', (array) => {
     pendingFriendsRequestTable.innerHTML = '<thead></thead><tbody></tbody>'
     var header = pendingFriendsRequestTable.getElementsByTagName('thead')[0].insertRow(0).insertCell(0)
     header.innerHTML = `<b>Pending Friends Request</b>`
-    console.log()
     for (var i = 0; i < array.length; i++) {
         console.log(array[i])
         var row = pendingFriendsRequestTable.getElementsByTagName('tbody')[0].insertRow(i).insertCell(0)

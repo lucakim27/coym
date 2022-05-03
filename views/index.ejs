@@ -5,11 +5,10 @@
 </head>
 <body>
     <center>
-        <h3 style="position: absolute; left: 50px; margin-top: -50px;">COYO</h3>
-        <hr style="margin-top: 70px;">
-        <h3 id="greetLoggedinUser">
-            Welcome back 
-            <b id="username"><%= user %></b>
+        <hr id="hrAfterHeader">
+            <div id="greetLoggedinUser">
+                Welcome back <b id="username"><%= user %></b>
+            </div>
         </h3>
         <p>Get some ideas about the occupation you're intersted in!</p>
         <button onclick="directPage('home')">

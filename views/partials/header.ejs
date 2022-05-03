@@ -1,4 +1,13 @@
 <header style="height: 10px;">
-    <div id="userId" data-toggle="modal" data-target="#myModal"><%= user %></div>
+    <% if(user === ''){ %>
+        <div id="userId"><button 
+            id="loginBtn" 
+            data-toggle="modal" 
+            data-target="#myModal" 
+            style="width: 100px; height: 45px; margin-right: -90px; margin-top: -20px;"
+        >Login</button></div>
+      <% } else{ %>  
+        <div id="userId" data-toggle="modal" data-target="#myModal"><%= user %></div>
+     <% } %>
 </header>
 <hr id="hrAfterHeader">

@@ -41,12 +41,11 @@
         </div>
     `
 
-    if ($("#userId").text() === 'anonymous') {
+    if ($("#userId").text() === "Login") {
         div.getElementsByClassName('logoutForm')[0].style.display = 'none'
     } else {
         div.getElementsByClassName('loginBtn')[0].style.display = 'none'
     }
-
+    
     document.querySelector('body').appendChild(div)
-
 })()

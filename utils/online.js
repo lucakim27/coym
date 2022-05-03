@@ -64,6 +64,8 @@ const getPendingFriendsRequest = function(counterpart) {
 * @return {String} value || 0
 */
 const addPendingFriendsRequest = function(counterpart, user) {
+    // find where has a duplication issue
+
     if (!pendingFriendsRequest.hasOwnProperty(counterpart)) {
         pendingFriendsRequest[counterpart] = [user]
     } else {
@@ -77,6 +79,9 @@ const addPendingFriendsRequest = function(counterpart, user) {
             }
         }
     }
+
+
+    
 }
 
 const getFriendsList = function() {
