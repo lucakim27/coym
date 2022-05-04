@@ -14,7 +14,7 @@ const {
 } = require('../utils/account')
 
 router.get('/', function(req, res, next) {
-  if (req.cookies['current-user'] != 'undefined' && searchAccounts(req.cookies['current-user'].id, req.cookies['current-user'].pwd)) {
+  if (req.cookies['current-user'] != undefined && searchAccounts(req.cookies['current-user'].id, req.cookies['current-user'].pwd)) {
     res.render(__dirname + '/../views/index.ejs', {
         user: req.cookies['current-user'].id
     })
@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
 })
 
 router.get('/home', function(req, res, next) {
-  if (req.cookies['current-user'] != 'undefined' && searchAccounts(req.cookies['current-user'].id, req.cookies['current-user'].pwd)) {
+  if (req.cookies['current-user'] != undefined && searchAccounts(req.cookies['current-user'].id, req.cookies['current-user'].pwd)) {
     res.render(__dirname + '/../views/home.ejs', {
         user: req.cookies['current-user'].id
     })
@@ -38,7 +38,7 @@ router.get('/home', function(req, res, next) {
 })
 
 router.get('/comment', function(req, res, next) {
-  if (req.cookies['current-user'] != 'undefined' && searchAccounts(req.cookies['current-user'].id, req.cookies['current-user'].pwd)) {
+  if (req.cookies['current-user'] != undefined && searchAccounts(req.cookies['current-user'].id, req.cookies['current-user'].pwd)) {
     res.render(__dirname + '/../views/comment.ejs', {
         user: req.cookies['current-user'].id
     })
@@ -50,7 +50,7 @@ router.get('/comment', function(req, res, next) {
 })
 
 router.get('/chat', function(req, res, next) {
-  if (req.cookies['current-user'] != 'undefined' && searchAccounts(req.cookies['current-user'].id, req.cookies['current-user'].pwd)) {
+  if (req.cookies['current-user'] != undefined && searchAccounts(req.cookies['current-user'].id, req.cookies['current-user'].pwd)) {
     res.render(__dirname + '/../views/chat.ejs', {
         user: req.cookies['current-user'].id
     })
@@ -62,7 +62,7 @@ router.get('/chat', function(req, res, next) {
 })
 
 router.get('/chart', function(req, res, next) {
-  if (req.cookies['current-user'] != 'undefined' && searchAccounts(req.cookies['current-user'].id, req.cookies['current-user'].pwd)) {
+  if (req.cookies['current-user'] != undefined && searchAccounts(req.cookies['current-user'].id, req.cookies['current-user'].pwd)) {
     res.render(__dirname + '/../views/chart.ejs', {
         user: req.cookies['current-user'].id
     })
@@ -74,7 +74,7 @@ router.get('/chart', function(req, res, next) {
 })
 
 router.get('/about', function(req, res, next) {
-  if (req.cookies['current-user'] != 'undefined' && searchAccounts(req.cookies['current-user'].id, req.cookies['current-user'].pwd)) {
+  if (req.cookies['current-user'] != undefined && searchAccounts(req.cookies['current-user'].id, req.cookies['current-user'].pwd)) {
     res.render(__dirname + '/../views/about.ejs', {
         user: req.cookies['current-user'].id
     })
@@ -86,7 +86,7 @@ router.get('/about', function(req, res, next) {
 })
 
 router.get('/login', function(req, res, next) {
-  if (req.cookies['current-user'] != 'undefined') {
+  if (req.cookies['current-user'] != undefined) {
     return res.status(422).json({ errors: "You're already logged in" })
   } else {
     res.render(__dirname + '/../views/login.ejs')
@@ -94,7 +94,7 @@ router.get('/login', function(req, res, next) {
 })
 
 router.get('/register', function(req, res, next) {
-  if (req.cookies['current-user'] != 'undefined') {
+  if (req.cookies['current-user'] != undefined) {
     return res.status(422).json({ errors: "You're already logged in" })
   } else {
     res.render(__dirname + '/../views/register.ejs')
@@ -102,7 +102,7 @@ router.get('/register', function(req, res, next) {
 })
 
 router.get('/online', function(req, res, next) {
-  if (req.cookies['current-user'] != 'undefined' && searchAccounts(req.cookies['current-user'].id, req.cookies['current-user'].pwd)) {
+  if (req.cookies['current-user'] != undefined && searchAccounts(req.cookies['current-user'].id, req.cookies['current-user'].pwd)) {
     res.render(__dirname + '/../views/online.ejs', {
         user: req.cookies['current-user'].id
     })
@@ -114,7 +114,7 @@ router.get('/online', function(req, res, next) {
 })
 
 router.get('/request', function(req, res, next) {
-  if (req.cookies['current-user'] != 'undefined' && searchAccounts(req.cookies['current-user'].id, req.cookies['current-user'].pwd)) {
+  if (req.cookies['current-user'] != undefined && searchAccounts(req.cookies['current-user'].id, req.cookies['current-user'].pwd)) {
     res.render(__dirname + '/../views/request.ejs', {
         user: req.cookies['current-user'].id
     })
