@@ -4,19 +4,17 @@
     <%- include('partials/head'); -%>
 </head>
 <body>
-    <center>
-        <hr id="hrAfterHeader">
+    <center style="margin-top: 30vh">
+        <h1 style="color: grey">Comment On Your <b style="color: rgb(0, 221, 255)">Occupation</b></h1>
             <div id="greetLoggedinUser">
                 Welcome back <b id="username"><%= user %></b>
             </div>
         </h3>
-        <p>Get some ideas about the occupation you're intersted in!</p>
-        <button onclick="directPage('home')">
-            Start
-        </button>
-        <button onclick="directPage('login')" class="loginBtn">
-            Login
-        </button>
+        <b>Get some ideas about the occupation you're intersted in!</b><br>
+        <div style="margin-top: 10px;">
+            <button onclick="directPage('home')" style="background: black; color: rgb(171, 171, 171);">Start</button>
+            <a href="http://localhost:3000/login" class="loginBtn" style="margin-left: 10px;">Login</a>
+        </div>
     </center>
 </body>
 <script src="/js/index.js"></script>
