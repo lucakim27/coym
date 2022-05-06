@@ -86,7 +86,7 @@ router.get('/about', function(req, res, next) {
 })
 
 router.get('/login', function(req, res, next) {
-  if (req.cookies['current-user'] != undefined) {
+  if (req.cookies['current-user'] != undefined && req.cookies['current-user'] != 'undefined') {
     return res.status(422).json({ errors: "You're already logged in" })
   } else {
     res.render(__dirname + '/../views/login.ejs')
@@ -94,7 +94,7 @@ router.get('/login', function(req, res, next) {
 })
 
 router.get('/register', function(req, res, next) {
-  if (req.cookies['current-user'] != undefined) {
+  if (req.cookies['current-user'] != undefined && req.cookies['current-user'] != 'undefined') {
     return res.status(422).json({ errors: "You're already logged in" })
   } else {
     res.render(__dirname + '/../views/register.ejs')

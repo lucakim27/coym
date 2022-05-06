@@ -227,8 +227,10 @@ table td a {
 }
 
 #userInput {
-    border-radius: 10px;
+    border-radius: 5px;
     text-align: center;
+    width: 400px;
+    font-size: 20px;
 }
 
 .vl {

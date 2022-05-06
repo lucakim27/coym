@@ -1,4 +1,3 @@
-// const socket = io()
 const occupationArray = []
 var occupationTable = document.getElementById("occupationTable")
 
@@ -33,6 +32,51 @@ const listOccupations = function(i) {
     }
 }
 
+const searchOccupations = function(i, j, input) {
+    if (i < occupationArray.length && occupationArray[i][0].toLowerCase().includes(input.toLowerCase())) {
+        var row = occupationTable.insertRow(j)
+        var cell = row.insertCell(0)
+        cell.insertAdjacentHTML('beforeend', `
+            <a  href='http://localhost:3000/comment?occupation=${occupationArray[i][0]}' 
+                onclick="countForCharts('${occupationArray[i][0]}')"
+            >${occupationArray[i][0]}
+            </a><hr>`
+        )
+        searchOccupations(i+1, j+1, input)
+    } else if (i < occupationArray.length) {
+        searchOccupations(i+1, j, input)
+    }
+}
+
 const countForCharts = function (occupationName) {
     socket.emit('countUpMostViewed', occupationName)
 }
+
+$.event.special.inputchange = {
+    setup: function() {
+        var self = this, val
+        $.data(this, 'timer', window.setInterval(function() {
+            val = self.value
+            if ( $.data( self, 'cache') != val ) {
+                $.data( self, 'cache', val )
+                $( self ).trigger( 'inputchange' )
+            }
+        }, 20))
+    },
+    teardown: function() {
+        window.clearInterval( $.data(this, 'timer') )
+    },
+    add: function() {
+        $.data(this, 'cache', this.value)
+    }
+};
+
+$('input').on('inputchange', function() {
+    occupationTable.innerHTML = ''
+    if (this.value.length !== 0) {
+        searchOccupations(0, 0, this.value)
+    } else {
+        listOccupations(0)
+    }
+})
+    
