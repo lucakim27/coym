@@ -4,7 +4,7 @@ searchBtn.setAttribute("onclick", "comment()")
 socket.on('userEnter', (array) => {
     pushOccupationArray(array, 0)
     displayUpdatedComments(0)
-    if ($("#userId").text() == 'anonymous') {
+    if ($("#userId").text() == 'Login') {
         $("#inputAndCommentBtn").css('display', 'none')
     } else {
         $("#inputAndCommentBtn").css('display', 'block')
@@ -43,8 +43,9 @@ const getQueryVariable = function(variable) {
 $("#occupationTitle").text(getQueryVariable('occupation'))
 
 const comment = function() {
-    if ($('#userInput').val() === '') return 0
-    else if (confirm("Are you sure you wanna comment?")) {
+    if ($('#userInput').val() === '') {
+        return 0
+    } else if (confirm("Are you sure you wanna comment?")) {
         socket.emit('updateComment',
             $("#userId").text(),
             $('#userInput').val(),
@@ -55,8 +56,10 @@ const comment = function() {
 }
 
 const like = function(index, row) {
-    if ($("#userId").text() == 'anonymous') return 0
-    else {
+    if ($("#userId").text() == 'Login') {
+        alert("You can't like a comment when you're not logged in.")
+        return 0
+    } else {
         socket.emit('updateLike', 
             index,
             row,
