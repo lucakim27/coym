@@ -13,16 +13,26 @@
                         </h4>
                     </div>
                     <div class="modal-body">
+                        <ul>
+                            <li><a onclick="clickTab1()">Pending Friends Request</a></li>
+                            <li>|</li>
+                            <li><a onclick="clickTab2()">Settings</a></li>
+                        </ul><hr style="width: 598px; margin-left: -15px;">
                         <center>
-                            <div style="
-                                height: 30vh;
-                                min-width: 70%;
-                                flex: 0;
-                                background-color: rgb(235, 235, 235);
-                                padding: 10px; 
-                                border-radius: 5px;"
-                            >
-                                <table id="pendingFriendsRequest" class="table table-striped header-fixed"></table>
+                            <div id='tab1'>
+                                <div style="
+                                    height: 30vh;
+                                    min-width: 70%;
+                                    flex: 0;
+                                    background-color: rgb(235, 235, 235);
+                                    padding: 10px; 
+                                    border-radius: 5px;"
+                                >
+                                    <table id="pendingFriendsRequest" class="table table-striped header-fixed"></table>
+                                </div>
+                            </div>
+                            <div id='tab2' style='display: none;'>
+                                <h3>Settings</h3>
                             </div>
                         </center>
                     </div>
@@ -49,3 +59,13 @@
     
     document.querySelector('body').appendChild(div)
 })()
+
+const clickTab1 = function() {
+    $("#tab1").show()
+    $("#tab2").hide()
+}
+
+const clickTab2 = function() {
+    $("#tab1").hide()
+    $("#tab2").show()
+}
