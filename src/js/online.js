@@ -37,7 +37,14 @@ socket.on('getFriendsList', friendsList => {
 })
 
 socket.on('updateFriendsRequest', (PendingFriendsRequest) => {
-    console.log(JSON.stringify(PendingFriendsRequest))
+    const pendingFriendsRequestTable = document.getElementById("pendingFriendsRequest")
+    pendingFriendsRequestTable.innerHTML = '<thead></thead><tbody></tbody>'
+    var header = pendingFriendsRequestTable.getElementsByTagName('thead')[0].insertRow(0).insertCell(0)
+    header.innerHTML = `<b>Pending Friends Request</b>`
+    for (var i = 0; i < PendingFriendsRequest.length; i++) {
+        var row = pendingFriendsRequestTable.getElementsByTagName('tbody')[0].insertRow(i).insertCell(0)
+        row.innerHTML = PendingFriendsRequest[i]
+    }
 })
 
 const putDetailsInOnlineUserModal = function(name) {

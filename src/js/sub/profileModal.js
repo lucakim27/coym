@@ -1,6 +1,13 @@
 (function showProfileModal() {
 
     var div = document.createElement('div')
+    var name
+
+    if ($("#userId").text() === 'Login') {
+        name = "You're not logged in."
+    } else {
+        name = $("#userId").text()
+    }
 
     div.innerHTML = `
         <div class="modal fade" id="myModal" role="dialog">
@@ -9,7 +16,7 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">
-                            ${$("#userId").text()}
+                            ${name}
                         </h4>
                     </div>
                     <div class="modal-body">
@@ -19,20 +26,16 @@
                             <li><a onclick="clickTab2()">Settings</a></li>
                         </ul><hr style="width: 598px; margin-left: -15px;">
                         <center>
-                            <div id='tab1'>
-                                <div style="
-                                    height: 30vh;
-                                    min-width: 70%;
-                                    flex: 0;
-                                    background-color: rgb(235, 235, 235);
-                                    padding: 10px; 
-                                    border-radius: 5px;"
-                                >
-                                    <table id="pendingFriendsRequest" class="table table-striped header-fixed"></table>
-                                </div>
-                            </div>
-                            <div id='tab2' style='display: none;'>
-                                <h3>Settings</h3>
+                            <div style="
+                                height: 30vh;
+                                min-width: 70%;
+                                flex: 0;
+                                background-color: rgb(235, 235, 235);
+                                padding: 10px; 
+                                border-radius: 5px;"
+                            >
+                                <table id="pendingFriendsRequest" class="table table-striped header-fixed"></table>
+                                <b id='tab2' style='font-size: 30px; display: none;'>Settings</b>
                             </div>
                         </center>
                     </div>
@@ -61,11 +64,11 @@
 })()
 
 const clickTab1 = function() {
-    $("#tab1").show()
+    $("#pendingFriendsRequest").show()
     $("#tab2").hide()
 }
 
 const clickTab2 = function() {
-    $("#tab1").hide()
+    $("#pendingFriendsRequest").hide()
     $("#tab2").show()
 }
