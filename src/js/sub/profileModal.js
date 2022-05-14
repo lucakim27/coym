@@ -21,9 +21,9 @@
                     </div>
                     <div class="modal-body">
                         <ul>
-                            <li><a onclick="clickTab1()">Pending Friends Request</a></li>
+                            <li><a onclick="clickTab1()" id='tab1' style='color: red;'>Pending Friends Request</a></li>
                             <li>|</li>
-                            <li><a onclick="clickTab2()">Settings</a></li>
+                            <li><a onclick="clickTab2()" id='tab2'>Settings</a></li>
                         </ul><hr style="width: 598px; margin-left: -15px;">
                         <center>
                             <div style="
@@ -32,10 +32,11 @@
                                 flex: 0;
                                 background-color: rgb(235, 235, 235);
                                 padding: 10px; 
-                                border-radius: 5px;"
+                                border-radius: 5px;
+                                overflow-y: scroll;"
                             >
                                 <table id="pendingFriendsRequest" class="table table-striped header-fixed"></table>
-                                <b id='tab2' style='font-size: 30px; display: none;'>Settings</b>
+                                <b id='settings' style='font-size: 30px; display: none;'></b>
                             </div>
                         </center>
                     </div>
@@ -65,10 +66,14 @@
 
 const clickTab1 = function() {
     $("#pendingFriendsRequest").show()
-    $("#tab2").hide()
+    $("#settings").hide()
+    $("#tab1").css('color', 'red')
+    $("#tab2").css('color', '#337ab7')
 }
 
 const clickTab2 = function() {
     $("#pendingFriendsRequest").hide()
-    $("#tab2").show()
+    $("#settings").show()
+    $("#tab1").css('color', '#337ab7')
+    $("#tab2").css('color', 'red')
 }
