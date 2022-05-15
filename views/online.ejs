@@ -45,12 +45,16 @@
                     <p>Some text in the modal.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default loginBtn" onclick="requestFriends()">
-                        Request friends
-                    </button>
-                    <button type="button" class="btn btn-default loginBtn" onclick="sendChats()">
-                        Send a chat
-                    </button>
+                    <% if(user === ''){ %>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <% } else{ %>
+                        <button type="button" class="btn btn-default loginBtn" onclick="requestFriends()">
+                            Request friends
+                        </button>
+                        <button type="button" class="btn btn-default loginBtn" onclick="sendChats()">
+                            Send a chat
+                        </button>
+                     <% } %>
                 </div>
             </div>
         </div>

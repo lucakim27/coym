@@ -7,7 +7,7 @@ function getOnlineUsers() {
 }
 
 function addOnlineUser(newUser, socketid) {
-    if (newUser != 'anonymous') {
+    if (newUser != 'Login') {
         onlineUsers[socketid] = newUser
     }
 }

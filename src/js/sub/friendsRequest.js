@@ -12,3 +12,12 @@ socket.on('getFriendsRequestPending', (array) => {
         row.innerHTML = array[i]  + "<button style='width: 50px; margin-left: 30px;' onclick='acceptFriendsRequest()'>O</button><button style='width: 50px; margin-left: 30px;' onclick='declineFriendsRequest()'>X</button>"
     }
 })
+
+const acceptFriendsRequest = function() {
+    alert("RUN acceptFriendsRequest")
+}
+
+const declineFriendsRequest = function() {
+    alert("RUN declineFriendsRequest")
+
+}
