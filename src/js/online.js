@@ -23,17 +23,17 @@ socket.on('getOnlineUsers', (onlineUsers) => {
     })
 })
 
-socket.on('getFriendsList', friendsList => {
+socket.on('getFriendsList', (friendsList) => {
     friendsListTable.innerHTML = '<thead></thead><tbody></tbody>'
     var header = friendsListTable.getElementsByTagName('thead')[0].insertRow(0).insertCell(0)
     header.innerHTML = `<b>Your friends</b>`
-    const keys = Object.keys(friendsList)
-    keys.forEach((key, index) => {
-        var row = friendsListTable.getElementsByTagName('tbody')[0].insertRow(index).insertCell(0)
-        var a = document.createElement('a')
-        a.innerHTML = `${friendsList[key]}`
-        row.appendChild(a)
-    })
+    if (friendsList === null) return 0
+    else {
+        for (var i = 0; i < friendsList.length; i++) {
+            var row = friendsListTable.getElementsByTagName('tbody')[0].insertRow(i).insertCell(0)
+            row.innerHTML = friendsList[i]
+        }
+    }
 })
 
 socket.on('updateFriendsRequest', (PendingFriendsRequest) => {
@@ -41,7 +41,7 @@ socket.on('updateFriendsRequest', (PendingFriendsRequest) => {
     pendingFriendsRequestTable.innerHTML = '<tbody></tbody>'
     for (var i = 0; i < PendingFriendsRequest.length; i++) {
         var row = pendingFriendsRequestTable.getElementsByTagName('tbody')[0].insertRow(i).insertCell(0)
-        row.innerHTML = PendingFriendsRequest[i]  + "<button style='width: 50px; margin-left: 30px;' onclick='acceptFriendsRequest()'>O</button><button style='width: 50px; margin-left: 30px;' onclick='declineFriendsRequest()'>X</button>"
+        row.innerHTML = PendingFriendsRequest[i]  + `<button style='width: 50px; margin-left: 30px;' id='${PendingFriendsRequest[i]}' onclick='acceptFriendsRequest(this.id)'>O</button><button style='width: 50px; margin-left: 30px;' onclick='declineFriendsRequest(this.id)'>X</button>`
     }
 })
 

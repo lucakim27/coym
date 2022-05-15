@@ -26,7 +26,10 @@ const {
   removeOnlineUser,
   getPendingFriendsRequest,
   addPendingFriendsRequest,
-  findOnlineUserByUsername
+  findOnlineUserByUsername,
+  findOnlineUserById,
+  addFriendsList,
+  getFriendsListByUsername
 } = require('./utils/online')
 
 const app = express()
@@ -58,8 +61,7 @@ io.on('connection', (socket) => {
   io.to(socket.id).emit('getMostViewed', getMostViewed())
   io.to(socket.id).emit('getMostCommented', getMostCommented())
   io.to(socket.id).emit('getOnlineUsers', getOnlineUsers())
-  // io.to(socket.id).emit('getFriendsList', getFriendsList())
-
+  io.to(socket.id).emit('getFriendsList', getFriendsListByUsername(findOnlineUserById(socket.id)))
   io.to(socket.id).emit('getUsername')
 
   socket.on('passBackUsername', (username) => {
@@ -96,6 +98,13 @@ io.on('connection', (socket) => {
     if (findOnlineUserByUsername(counterpart) != '') {
       io.to(findOnlineUserByUsername(counterpart)).emit('updateFriendsRequest', getPendingFriendsRequest(counterpart))
     }
+  })
+
+  socket.on('acceptFriendsRequest', (counterpart, user) => {
+    addFriendsList(user, counterpart)
+    addFriendsList(counterpart, user)
+    io.to(findOnlineUserByUsername(counterpart)).emit('getFriendsList', getFriendsListByUsername(counterpart))
+    io.to(findOnlineUserByUsername(user)).emit('getFriendsList', getFriendsListByUsername(user))
   })
 
   socket.on('sendRequest', value => {

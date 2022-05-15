@@ -84,15 +84,15 @@ const addPendingFriendsRequest = function(counterpart, user) {
     
 }
 
-const getFriendsList = function() {
-    return friendsList
+const getFriendsListByUsername = function(user) {
+    return friendsList[user]
 }
 
-const addFriendsList = function(myname, username) {
-    if (!friendsList.hasOwnProperty(myname)) {
-        friendsList[myname] = [username]
+const addFriendsList = function(user, counterpart) {
+    if (!friendsList.hasOwnProperty(user)) {
+        friendsList[user] = [counterpart]
     } else {
-        friendsList[myname].pushs(username)
+        friendsList[user].push(counterpart)
     }
 }
 
@@ -103,4 +103,7 @@ module.exports = {
     addPendingFriendsRequest,
     getPendingFriendsRequest,
     findOnlineUserByUsername,
+    findOnlineUserById,
+    addFriendsList,
+    getFriendsListByUsername
 }
