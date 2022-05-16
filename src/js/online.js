@@ -29,20 +29,13 @@ socket.on('getFriendsList', (friendsList) => {
     header.innerHTML = `<b>Your friends</b>`
     if (friendsList === null) return 0
     else {
-        for (var i = 0; i < friendsList.length; i++) {
-            var row = friendsListTable.getElementsByTagName('tbody')[0].insertRow(i).insertCell(0)
-            row.innerHTML = friendsList[i]
-        }
+        displayGetFriendsListTable(0, friendsList)
     }
 })
 
 socket.on('updateFriendsRequest', (PendingFriendsRequest) => {
-    const pendingFriendsRequestTable = document.getElementById("pendingFriendsRequest")
     pendingFriendsRequestTable.innerHTML = '<tbody></tbody>'
-    for (var i = 0; i < PendingFriendsRequest.length; i++) {
-        var row = pendingFriendsRequestTable.getElementsByTagName('tbody')[0].insertRow(i).insertCell(0)
-        row.innerHTML = PendingFriendsRequest[i]  + `<button style='width: 50px; margin-left: 30px;' id='${PendingFriendsRequest[i]}' onclick='acceptFriendsRequest(this.id)'>O</button><button style='width: 50px; margin-left: 30px;' onclick='declineFriendsRequest(this.id)'>X</button>`
-    }
+    displayUpdateFriendsRequest(0, PendingFriendsRequest)
 })
 
 const putDetailsInOnlineUserModal = function(name) {
@@ -55,8 +48,21 @@ const requestFriends = function() {
 }
 
 const sendChats = function() {
-
-
-
     window.location = 'http://localhost:3000/chat'
+}
+
+const displayGetFriendsListTable = function(i, friendsList) {
+    if (i < friendsList.length) {
+        var row = friendsListTable.getElementsByTagName('tbody')[0].insertRow(i).insertCell(0)
+        row.innerHTML = friendsList[i]
+        displayGetFriendsListTable(i+1, friendsList)
+    }
+}
+
+const displayUpdateFriendsRequest = function(i, PendingFriendsRequest) {
+    if (i < PendingFriendsRequest.length) {
+        var row = pendingFriendsRequestTable.getElementsByTagName('tbody')[0].insertRow(i).insertCell(0)
+        row.innerHTML = PendingFriendsRequest[i]  + `<button style='width: 50px; margin-left: 30px;' id='${PendingFriendsRequest[i]}' onclick='acceptFriendsRequest(this.id)'>O</button><button style='width: 50px; margin-left: 30px;' onclick='declineFriendsRequest(this.id)'>X</button>`
+        displayUpdateFriendsRequest(i+1, PendingFriendsRequest)
+    }
 }
