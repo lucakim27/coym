@@ -26,20 +26,6 @@ const findOnlineUserByUsername = function(username) {
     return 0
 }
 
-/**
-* Function that returns username by socketId
-* @param {String} socketId
-* @return {String} username || 0
-*/
-const findOnlineUserById = function(socketId) {
-    for (const [key, value] of Object.entries(onlineUsers)) {
-        if (key === socketId) {
-            return value
-        }
-    }
-    return 0
-}
-
 function removeOnlineUser(socketid) {
     delete onlineUsers[socketid]
 }
@@ -103,7 +89,6 @@ module.exports = {
     addPendingFriendsRequest,
     getPendingFriendsRequest,
     findOnlineUserByUsername,
-    findOnlineUserById,
     addFriendsList,
-    getFriendsListByUsername
+    getFriendsListByUsername,
 }
