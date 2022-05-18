@@ -62,7 +62,6 @@ io.on('connection', (socket) => {
   io.to(socket.id).emit('getUsername')
   
   socket.on('addOnlineUser', (user) => {
-    console.log("addOnlineUser")
     addOnlineUser(user, socket.id)
     io.emit('getOnlineUsers', getOnlineUsers())
     io.to(socket.id).emit('getOnlineUsers', getOnlineUsers())
@@ -107,6 +106,13 @@ io.on('connection', (socket) => {
     addFriendsList(counterpart, user)
     io.to(findOnlineUserByUsername(counterpart)).emit('getFriendsList', getFriendsListByUsername(counterpart))
     io.to(findOnlineUserByUsername(user)).emit('getFriendsList', getFriendsListByUsername(user))
+  })
+
+  socket.on('getChatContents', (variable) => {
+    console.log(variable)
+    // store chats
+    
+    io.to(socket.id).emit('', )
   })
 
   socket.on('sendRequest', value => {
