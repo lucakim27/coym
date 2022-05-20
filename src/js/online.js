@@ -38,13 +38,20 @@ socket.on('updateFriendsRequest', (PendingFriendsRequest) => {
     displayUpdateFriendsRequest(0, PendingFriendsRequest)
 })
 
+socket.on('declineFriendsRequest', (val) => {
+    if (val === 0) {
+        alert("You can't request friends because you're already friends with him/her.")
+    } else if (val === 1) {
+        alert("You can't request friends because you've already sent friends request to him/her.")
+    }
+})
+
 const putDetailsInOnlineUserModal = function(name) {
     $('.modal-title').html(name)
 }
 
 const requestFriends = function() {
     socket.emit('friendsRequest', $('.modal-title').html(), $("#userId").text())
-    alert("You just sent a friend request to '" + $('.modal-title').html() + "'")
 }
 
 const sendChats = function() {

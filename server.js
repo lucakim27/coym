@@ -94,13 +94,6 @@ io.on('connection', (socket) => {
     countUpMostViewed(occupationName)
   })
 
-  socket.on('friendsRequest', (counterpart, user) => {
-    addPendingFriendsRequest(counterpart, user)
-    if (findOnlineUserByUsername(counterpart) != '') {
-      io.to(findOnlineUserByUsername(counterpart)).emit('updateFriendsRequest', getPendingFriendsRequest(counterpart))
-    }
-  })
-
   socket.on('acceptFriendsRequest', (counterpart, user) => {
     addFriendsList(user, counterpart)
     addFriendsList(counterpart, user)
@@ -113,6 +106,19 @@ io.on('connection', (socket) => {
     // store chats
     
     io.to(socket.id).emit('', )
+  })
+
+  socket.on('friendsRequest', (counterpart, user) => {
+    if (getFriendsListByUsername(counterpart) || getFriendsListByUsername(user)) {
+      io.to(findOnlineUserByUsername(user)).emit('declineFriendsRequest', 0)
+    } else if (getPendingFriendsRequest(counterpart) || getPendingFriendsRequest(user))  {
+      io.to(findOnlineUserByUsername(user)).emit('declineFriendsRequest', 1)
+    } else {
+      addPendingFriendsRequest(counterpart, user)
+      if (findOnlineUserByUsername(counterpart) != '') {
+        io.to(findOnlineUserByUsername(counterpart)).emit('updateFriendsRequest', getPendingFriendsRequest(counterpart))
+      }
+    }
   })
 
   socket.on('sendRequest', value => {
