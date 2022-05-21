@@ -1,6 +1,6 @@
 const onlineUsers = {}
 const friendsList = {}
-const pendingFriendsRequest  = {}
+const pendingFriendsRequest = {}
 
 function getOnlineUsers() {
     return onlineUsers
@@ -44,14 +44,16 @@ const getPendingFriendsRequest = function(counterpart) {
     return 0
 }
 
+const getAllPendingFriendsRequest = function() {
+    return pendingFriendsRequest
+}
+
 /**
 * Function that stores value in pendingFriendsRequest
 * @param {String} socketId
 * @return {String} value || 0
 */
 const addPendingFriendsRequest = function(counterpart, user) {
-    // find where has a duplication issue
-
     if (!pendingFriendsRequest.hasOwnProperty(counterpart)) {
         pendingFriendsRequest[counterpart] = [user]
     } else {
@@ -65,9 +67,18 @@ const addPendingFriendsRequest = function(counterpart, user) {
             }
         }
     }
+}
 
-
-    
+const removePendingFriendsRequest = function(counterpart) {
+    var container = []
+    Object.keys(getAllPendingFriendsRequest()).forEach(key => {
+      for (var i = 0; i < getAllPendingFriendsRequest()[key].length; i++) {
+        if (getAllPendingFriendsRequest()[key][i] != counterpart) {
+          container.push(counterpart)
+        }
+      }
+      getAllPendingFriendsRequest()[key] = container
+    })
 }
 
 const getFriendsListByUsername = function(user) {
@@ -91,4 +102,6 @@ module.exports = {
     findOnlineUserByUsername,
     addFriendsList,
     getFriendsListByUsername,
+    removePendingFriendsRequest,
+    getAllPendingFriendsRequest
 }

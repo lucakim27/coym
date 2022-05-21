@@ -29,6 +29,8 @@ const {
   findOnlineUserByUsername,
   addFriendsList,
   getFriendsListByUsername,
+  removePendingFriendsRequest,
+  getAllPendingFriendsRequest
 } = require('./utils/online')
 
 const app = express()
@@ -70,9 +72,13 @@ io.on('connection', (socket) => {
   })
   
   socket.on('passBackUsername', (username) => {
+
+    console.log('passBackUsername')
+    console.log(username)
+    console.log(getPendingFriendsRequest(username))
+
     io.to(socket.id).emit('getFriendsRequestPending', getPendingFriendsRequest(username))
   })
-
 
   socket.on('updateComment', (username, comment, page) => {
     updateComment(username, comment, page)
@@ -109,6 +115,7 @@ io.on('connection', (socket) => {
   })
 
   socket.on('friendsRequest', (counterpart, user) => {
+    // has an issue that you cant friends request multiple users...
     if (getFriendsListByUsername(counterpart) || getFriendsListByUsername(user)) {
       io.to(findOnlineUserByUsername(user)).emit('declineFriendsRequest', 0)
     } else if (getPendingFriendsRequest(counterpart) || getPendingFriendsRequest(user))  {
@@ -119,6 +126,11 @@ io.on('connection', (socket) => {
         io.to(findOnlineUserByUsername(counterpart)).emit('updateFriendsRequest', getPendingFriendsRequest(counterpart))
       }
     }
+  })
+
+  socket.on('removePendingFriendsRequest', (counterpart, user) => {
+    removePendingFriendsRequest(counterpart)
+    io.to(findOnlineUserByUsername(user)).emit('updatePendingFriendsRequest', getPendingFriendsRequest(user))
   })
 
   socket.on('sendRequest', value => {
