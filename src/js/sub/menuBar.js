@@ -17,7 +17,6 @@ var renderMenubar;
       <a href="http://localhost:3000/online" class="w3-bar-item w3-button">Online</a>
       <a href="http://localhost:3000/chat" class="w3-bar-item w3-button">Chat</a>
       <a href="http://localhost:3000/chart" class="w3-bar-item w3-button">Chart</a>
-      <a href="http://localhost:3000/request" class="w3-bar-item w3-button">Request</a>
       <a href="http://localhost:3000/about" class="w3-bar-item w3-button">About</a>
       <a onclick="window.location.href = 'mailto:nikolaikim27@google.com'" class="w3-bar-item w3-button">Contact</a>
     </div>

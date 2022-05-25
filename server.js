@@ -133,32 +133,6 @@ io.on('connection', (socket) => {
     io.to(findOnlineUserByUsername(user)).emit('updatePendingFriendsRequest', getPendingFriendsRequest(user))
   })
 
-  socket.on('sendRequest', value => {
-    var transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: '',
-        pass: ''
-      }
-    })
-    
-    var mailOptions = {
-      from: '',
-      to: '',
-      subject: value[0],
-      text: value[1]
-    }
-    
-    transporter.sendMail(mailOptions, function(error, info){
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('Email sent: ' + info.response);
-        io.sockets.emit('requestSuccessful', null)
-      }
-    })
-  })
-
 })
 
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`))
