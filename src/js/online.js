@@ -1,7 +1,31 @@
 const loggedinUserTable = document.getElementById("loggedinUser")
 const friendsListTable = document.getElementById("friendsList")
 
-socket.emit('addOnlineUser', $("#userId").text())
+function getCookie(cname) {
+    let id = ''
+    let name = cname + "="
+    let decodedCookie = decodeURIComponent(document.cookie)
+    let ca = decodedCookie.split(';')
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i]
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1)
+      }
+      if (c.indexOf(name) == 0) {
+        for (var j = 9; j < c.substring(name.length, c.length).length; j++) {
+            if (c.substring(name.length, c.length)[j] === '"') {
+                break
+            } else {
+                id += c.substring(name.length, c.length)[j]
+            }
+        }
+        return id
+      }
+    }
+    return ""
+}
+
+socket.emit('addOnlineUser', getCookie('current-user'))
 
 socket.on('getOnlineUsers', (onlineUsers) => {
     loggedinUserTable.innerHTML = '<thead></thead><tbody></tbody>'
@@ -10,7 +34,7 @@ socket.on('getOnlineUsers', (onlineUsers) => {
     const keys = Object.keys(onlineUsers)
     var tableIndex = 0
     keys.forEach((key) => {
-        if (onlineUsers[key] != 'anonymous' && onlineUsers[key] != $("#userId").text()) {
+        if (onlineUsers[key] != 'anonymous' && onlineUsers[key] != getCookie('current-user')) {
             var row = loggedinUserTable.getElementsByTagName('tbody')[0].insertRow(tableIndex).insertCell(0)
             var a = document.createElement('a')
             a.innerHTML = `${onlineUsers[key]}`
@@ -51,7 +75,7 @@ const putDetailsInOnlineUserModal = function(name) {
 }
 
 const requestFriends = function() {
-    socket.emit('friendsRequest', $('.modal-title').html(), $("#userId").text())
+    socket.emit('friendsRequest', $('.modal-title').html(), getCookie('current-user'))
 }
 
 const sendChats = function() {

@@ -1,8 +1,32 @@
 const socket = io()
 const pendingFriendsRequestTable = document.getElementById("pendingFriendsRequest")
 
+function getCookie(cname) {
+    let id = ''
+    let name = cname + "="
+    let decodedCookie = decodeURIComponent(document.cookie)
+    let ca = decodedCookie.split(';')
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i]
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1)
+      }
+      if (c.indexOf(name) == 0) {
+        for (var j = 9; j < c.substring(name.length, c.length).length; j++) {
+            if (c.substring(name.length, c.length)[j] === '"') {
+                break
+            } else {
+                id += c.substring(name.length, c.length)[j]
+            }
+        }
+        return id
+      }
+    }
+    return ""
+}
+
 socket.on('getUsername', () => {
-    socket.emit('passBackUsername', $("#userId").text())
+    socket.emit('passBackUsername', getCookie('current-user'))
 })
 
 socket.on('getFriendsRequestPending', (array) => {
@@ -16,12 +40,12 @@ socket.on('updatePendingFriendsRequest', (array) => {
 })
 
 const acceptFriendsRequest = function(counterpart) {
-    socket.emit('acceptFriendsRequest', counterpart, $("#userId").text())
-    socket.emit('removePendingFriendsRequest', counterpart, $("#userId").text())
+    socket.emit('acceptFriendsRequest', counterpart, getCookie('current-user'))
+    socket.emit('removePendingFriendsRequest', counterpart, getCookie('current-user'))
 }
 
 const declineFriendsRequest = function(counterpart) {
-    socket.emit('removePendingFriendsRequest', counterpart, $("#userId").text())
+    socket.emit('removePendingFriendsRequest', counterpart, getCookie('current-user'))
 }
 
 const displayPendingFriendsRequestTable = function(i, array) {

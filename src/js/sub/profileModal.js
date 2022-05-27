@@ -1,12 +1,29 @@
 (function showProfileModal() {
 
     var div = document.createElement('div')
-    var name
 
-    if ($("#userId").text() === 'Login') {
-        name = "You're not logged in."
-    } else {
-        name = $("#userId").text()
+    function getCookie(cname) {
+        let id = ''
+        let name = cname + "="
+        let decodedCookie = decodeURIComponent(document.cookie)
+        let ca = decodedCookie.split(';')
+        for(let i = 0; i <ca.length; i++) {
+          let c = ca[i]
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1)
+          }
+          if (c.indexOf(name) == 0) {
+            for (var j = 9; j < c.substring(name.length, c.length).length; j++) {
+                if (c.substring(name.length, c.length)[j] === '"') {
+                    break
+                } else {
+                    id += c.substring(name.length, c.length)[j]
+                }
+            }
+            return id
+          }
+        }
+        return ""
     }
 
     div.innerHTML = `
@@ -16,7 +33,7 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">
-                            ${name}
+                            ${getCookie('current-user')}
                         </h4>
                     </div>
                     <div class="modal-body">
@@ -55,7 +72,7 @@
         </div>
     `
 
-    if ($("#userId").text() === "Login") {
+    if (getCookie('current-user') === "Login") {
         div.getElementsByClassName('logoutForm')[0].style.display = 'none'
     } else {
         div.getElementsByClassName('loginBtn')[0].style.display = 'none'

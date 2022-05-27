@@ -1,5 +1,30 @@
 const chatUsersTable = document.getElementById('chatUsers')
-socket.emit('addOnlineUser', $("#userId").text())
+socket.emit('addOnlineUser', getCookie('current-user'))
+
+function getCookie(cname) {
+    let id = ''
+    let name = cname + "="
+    let decodedCookie = decodeURIComponent(document.cookie)
+    let ca = decodedCookie.split(';')
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i]
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1)
+      }
+      if (c.indexOf(name) == 0) {
+        for (var j = 9; j < c.substring(name.length, c.length).length; j++) {
+            if (c.substring(name.length, c.length)[j] === '"') {
+                break
+            } else {
+                id += c.substring(name.length, c.length)[j]
+            }
+        }
+        return id
+      }
+    }
+    return ""
+}
+
 
 // chatUsers
 socket.on('getChatUsers', (chatUsers) => {

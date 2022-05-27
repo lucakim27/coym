@@ -4,12 +4,12 @@ searchBtn.setAttribute("onclick", "comment()")
 socket.on('userEnter', (array) => {
     pushOccupationArray(array, 0)
     displayUpdatedComments(0)
-    if ($("#userId").text() == 'Login') {
+    if (getCookie('current-user') == 'Login') {
         $("#inputAndCommentBtn").css('display', 'none')
     } else {
         $("#inputAndCommentBtn").css('display', 'block')
     }
-    socket.emit('addOnlineUser', $("#userId").text())
+    socket.emit('addOnlineUser', getCookie('current-user'))
 })
 
 socket.on('updatedComment', (array) => {
@@ -17,6 +17,30 @@ socket.on('updatedComment', (array) => {
     pushOccupationArray(array, 0)
     displayUpdatedComments(0)
 })
+
+function getCookie(cname) {
+    let id = ''
+    let name = cname + "="
+    let decodedCookie = decodeURIComponent(document.cookie)
+    let ca = decodedCookie.split(';')
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i]
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1)
+      }
+      if (c.indexOf(name) == 0) {
+        for (var j = 9; j < c.substring(name.length, c.length).length; j++) {
+            if (c.substring(name.length, c.length)[j] === '"') {
+                break
+            } else {
+                id += c.substring(name.length, c.length)[j]
+            }
+        }
+        return id
+      }
+    }
+    return ""
+}
 
 const pushOccupationArray = function(array, i) {
     if (i < array.length) {
@@ -47,7 +71,7 @@ const comment = function() {
         return 0
     } else if (confirm("Are you sure you wanna comment?")) {
         socket.emit('updateComment',
-            $("#userId").text(),
+            getCookie('current-user'),
             $('#userInput').val(),
             $("#occupationTitle").text()
         )
@@ -56,14 +80,14 @@ const comment = function() {
 }
 
 const like = function(index, row) {
-    if ($("#userId").text() == 'Login') {
+    if (getCookie('current-user') == 'Login') {
         alert("You can't like a comment when you're not logged in.")
         return 0
     } else {
         socket.emit('updateLike', 
             index,
             row,
-            $("#userId").text(),
+            getCookie('current-user'),
             $("#occupationTitle").text()
         )
     }

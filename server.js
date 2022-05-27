@@ -2,7 +2,6 @@ const path = require('path')
 const http = require('http')
 const express = require('express')
 const socketio = require('socket.io')
-const nodemailer = require('nodemailer')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const routes = require('./routes/index')
@@ -72,11 +71,6 @@ io.on('connection', (socket) => {
   })
   
   socket.on('passBackUsername', (username) => {
-
-    console.log('passBackUsername')
-    console.log(username)
-    console.log(getPendingFriendsRequest(username))
-
     io.to(socket.id).emit('getFriendsRequestPending', getPendingFriendsRequest(username))
   })
 
@@ -108,7 +102,7 @@ io.on('connection', (socket) => {
   })
 
   socket.on('getChatContents', (variable) => {
-    console.log(variable)
+    // console.log(variable)
     // store chats
     
     io.to(socket.id).emit('', )
