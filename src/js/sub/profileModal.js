@@ -38,9 +38,9 @@
                     </div>
                     <div class="modal-body">
                         <ul>
-                            <li><a onclick="clickTab1()" id='tab1' style='color: red;'>Pending Friends Request</a></li>
+                            <li><a onclick="clickTab1()" id='tab1' style='color: black;'>Pending Friends Request</a></li>
                             <li>|</li>
-                            <li><a onclick="clickTab2()" id='tab2'>Settings</a></li>
+                            <li><a onclick="clickTab2()" id='tab2' style='color: #337ab7;'>Settings</a></li>
                         </ul><hr style="width: 598px; margin-left: -15px;">
                         <center>
                             <div style="
@@ -84,7 +84,7 @@
 const clickTab1 = function() {
     $("#pendingFriendsRequest").show()
     $("#settings").hide()
-    $("#tab1").css('color', 'red')
+    $("#tab1").css('color', 'black')
     $("#tab2").css('color', '#337ab7')
 }
 
@@ -92,5 +92,5 @@ const clickTab2 = function() {
     $("#pendingFriendsRequest").hide()
     $("#settings").show()
     $("#tab1").css('color', '#337ab7')
-    $("#tab2").css('color', 'red')
+    $("#tab2").css('color', 'black')
 }
