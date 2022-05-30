@@ -28,9 +28,14 @@ const {
   findOnlineUserByUsername,
   addFriendsList,
   getFriendsListByUsername,
-  removePendingFriendsRequest,
-  getAllPendingFriendsRequest
+  removePendingFriendsRequest
 } = require('./utils/online')
+
+const { 
+  getChat,
+  addChatContent,
+  getAllChats
+} = require('./utils/chat')
 
 const app = express()
 const server = http.createServer(app)
@@ -101,11 +106,24 @@ io.on('connection', (socket) => {
     io.to(findOnlineUserByUsername(user)).emit('getFriendsList', getFriendsListByUsername(user))
   })
 
-  socket.on('getChatContents', (variable) => {
-    // console.log(variable)
-    // store chats
-    
-    io.to(socket.id).emit('', )
+  socket.on('getChatContents', (counterpart, user) => {
+    // work on here tmr
+    console.log(counterpart)
+    console.log(user)
+    console.log(getAllChats())
+    console.log(getChat(user, counterpart))
+    io.to(findOnlineUserByUsername(counterpart)).emit('displayChatContents', getChat(user, counterpart))
+    io.to(findOnlineUserByUsername(user)).emit('displayChatContents', getChat(user, counterpart))
+  })
+
+  socket.on('sendChatContents', (input, user, counterpart) => {
+    if (counterpart === '') {
+      io.to(findOnlineUserByUsername(user)).emit('declineSendChatContents')
+    } else {
+      addChatContent(user, counterpart, input)
+      io.to(findOnlineUserByUsername(counterpart)).emit('updateChatContents', getChat(user, counterpart))
+      io.to(findOnlineUserByUsername(user)).emit('updateChatContents', getChat(user, counterpart))
+    }
   })
 
   socket.on('friendsRequest', (counterpart, user) => {
