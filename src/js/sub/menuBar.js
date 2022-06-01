@@ -23,7 +23,8 @@ var renderMenubar;
   `
   for (var i = 0; i < div.getElementsByTagName('a').length; i++) {
     if (window.location.pathname === div.getElementsByTagName('a')[i].pathname) {
-      div.getElementsByTagName('a')[i].style.backgroundColor = 'LightSteelBlue'
+      div.getElementsByTagName('a')[i].style.backgroundColor = "rgb(54, 153, 207)"
+      div.getElementsByTagName('a')[i].style.color = 'white'
     }
   }
   document.querySelector('header').appendChild(div)

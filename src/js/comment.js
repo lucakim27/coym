@@ -4,7 +4,7 @@ searchBtn.setAttribute("onclick", "comment()")
 socket.on('userEnter', (array) => {
     pushOccupationArray(array, 0)
     displayUpdatedComments(0)
-    if (getCookie('current-user') == 'Login') {
+    if (getCookie('current-user') === '') {
         $("#inputAndCommentBtn").css('display', 'none')
     } else {
         $("#inputAndCommentBtn").css('display', 'block')
@@ -80,8 +80,8 @@ const comment = function() {
 }
 
 const like = function(index, row) {
-    if (getCookie('current-user') == 'Login') {
-        alert("You can't like a comment when you're not logged in.")
+    if (getCookie('current-user') == '') {
+        alert("You're not logged in.")
         return 0
     } else {
         socket.emit('updateLike', 
