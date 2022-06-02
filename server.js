@@ -107,7 +107,7 @@ io.on('connection', (socket) => {
   })
 
   socket.on('getChatContents', (counterpart, user) => {
-    // work on here tmr
+    // work on here next time
     console.log(counterpart)
     console.log(user)
     console.log(getAllChats())
@@ -127,10 +127,9 @@ io.on('connection', (socket) => {
   })
 
   socket.on('friendsRequest', (counterpart, user) => {
-    // has an issue that you cant friends request multiple users...
-    if (getFriendsListByUsername(counterpart) || getFriendsListByUsername(user)) {
+    if (getFriendsListByUsername(counterpart) != undefined || getFriendsListByUsername(user) != undefined) {
       io.to(findOnlineUserByUsername(user)).emit('declineFriendsRequest', 0)
-    } else if (getPendingFriendsRequest(counterpart) || getPendingFriendsRequest(user))  {
+    } else if (getPendingFriendsRequest(counterpart) != 0 || getPendingFriendsRequest(user) != 0)  {
       io.to(findOnlineUserByUsername(user)).emit('declineFriendsRequest', 1)
     } else {
       addPendingFriendsRequest(counterpart, user)
@@ -141,8 +140,22 @@ io.on('connection', (socket) => {
   })
 
   socket.on('removePendingFriendsRequest', (counterpart, user) => {
+    /*
+    user was 'y03278111', counterpart was 'y03278123'
+      removePendingFriendsRequest
+      0
+      [ 'y03278123' ]
+      0
+      []
+    */
+    console.log('removePendingFriendsRequest')
+    console.log(getPendingFriendsRequest(counterpart))
+    console.log(getPendingFriendsRequest(user))
+    // why is the parameter counterpart?
     removePendingFriendsRequest(counterpart)
+    console.log(getPendingFriendsRequest(counterpart))
     io.to(findOnlineUserByUsername(user)).emit('updatePendingFriendsRequest', getPendingFriendsRequest(user))
+    console.log(getPendingFriendsRequest(user))
   })
 
 })
