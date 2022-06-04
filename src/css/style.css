@@ -72,6 +72,7 @@ center {
     border-radius: 5px;
     color: white;
     font-size: 20px;
+    width: 90px;
 }
 
 #output button {
@@ -278,7 +279,7 @@ table td a {
 }
 
 table tbody tr {
-    background-color: rgb(235, 235, 235) !important;
+    background-color: rgb(255, 255, 255) !important;
 }
 
 #occupationTable tbody tr {
@@ -292,7 +293,7 @@ table tbody tr {
 .waviy span {
     position: relative;
     display: inline-block;
-    color: #fff;
+    color: rgb(0, 0, 0);
     text-transform: uppercase;
     animation: flip 2s infinite;
     animation-delay: calc(.2s * var(--i))
@@ -312,4 +313,13 @@ ul {
 
 li {
     display: inline;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    margin-top: 100px;
+    height: 500px;
 }

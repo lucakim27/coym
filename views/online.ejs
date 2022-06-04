@@ -6,14 +6,21 @@
 <body>
     <%- include('partials/header'); -%>
     <center>
-        <h1 id="header">Online Users</h1><hr>
+        <h1 id="header" class="waviy">
+            <span style="--i:0">O</span>
+            <span style="--i:1">n</span>
+            <span style="--i:2">l</span>
+            <span style="--i:3">i</span>
+            <span style="--i:4">n</span>
+            <span style="--i:5">e</span>
+        </h1><hr>
 
         <div style="display: flex; padding: 10px; justify-content: center;">
             <div style="
                 height: 70vh;
                 min-width: 40%;
                 flex: 0;
-                background-color: rgb(235, 235, 235);
+                border-style: solid;
                 padding: 10px; 
                 margin-right: 30px; 
                 border-radius: 5px;"
@@ -24,7 +31,7 @@
                 height: 70vh;
                 min-width: 40%;
                 flex: 0;
-                background-color: rgb(235, 235, 235);
+                border-style: solid;
                 padding: 10px;
                 margin-left: 30px;
                 border-radius: 5px;"
@@ -56,7 +63,7 @@
             </div>
         </div>
     </div>
-
+    <%- include('partials/footer'); -%>
 </body>
 <%- include('partials/script'); -%>
 <script src="/js/online.js"></script>

@@ -5,14 +5,15 @@
 </head>
 <body>
     <%- include('partials/header'); -%>
-    <center>
+    <center style="height: 700px;">
         <h1 id="occupationTitle"></h1>
         <div id="inputAndCommentBtn">
-            <input type="text" id="userInput" placeholder="Comment here">
-            <button id="searchBtn">Comment</button>
+            <input type="text" id="userInput" placeholder="Comment here...">
+            <button id="searchBtn">></button>
         </div><hr>
         <div id="comments"></div>
-    </center>
+    </center><hr>
+    <%- include('partials/footer'); -%>
 </body>
 <%- include('partials/script'); -%>
 <script src="/js/comment.js"></script>

@@ -6,13 +6,20 @@
 <body>
     <%- include('partials/header'); -%>
     <center>
-        <h1 id="header">Charts</h1><hr>
+        <h1 id="header" class="waviy">
+            <span style="--i:0">C</span>
+            <span style="--i:1">h</span>
+            <span style="--i:2">a</span>
+            <span style="--i:3">r</span>
+            <span style="--i:4">t</span>
+        </h1><hr>
+
         <div style="display: flex; padding: 10px; justify-content: center;">
             <div style="
                 height: 70vh;
                 min-width: 40%;
                 flex: 0;
-                background-color:rgb(235, 235, 235);
+                border-style: solid;
                 padding: 10px;
                 margin-right: 30px;
                 border-radius: 5px;"
@@ -22,7 +29,8 @@
             <div style="
                 height: 70vh;
                 min-width: 40%;
-                flex: 0; background-color: rgb(235, 235, 235);
+                flex: 0; 
+                border-style: solid;
                 padding: 10px;
                 margin-left: 30px;
                 border-radius: 5px;"
@@ -31,6 +39,7 @@
             </div>
         </div>
     </center>
+    <%- include('partials/footer'); -%>
 </body>
 <%- include('partials/script'); -%>
 <script src="/js/chart.js"></script>

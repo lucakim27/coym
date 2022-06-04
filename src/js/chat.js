@@ -43,8 +43,6 @@ const displayGetChatUsersTable = function(i, chatUsers) {
     if (i < chatUsers.length) {
         var row = chatUsersTable.getElementsByTagName('tbody')[0].insertRow(i).insertCell(0)
         row.innerHTML = `<a href='#${chatUsers[i]}' style='padding: 10px;'>` + chatUsers[i] + '</a><br>'
-        row.style.backgroundColor = 'rgb(235, 235, 235)'
-        row.style.borderRadius = "5px"
         displayGetChatUsersTable(i+1, chatUsers)
     }
 }

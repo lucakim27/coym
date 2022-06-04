@@ -5,14 +5,22 @@
 </head>
 <body>
     <%- include('partials/header'); -%>
-    <center>
-        <h1 id="header">About</h1><hr>
+    <center style="height: 700px;">
+        <h1 id="header" class="waviy">
+            <span style="--i:0">A</span>
+            <span style="--i:1">b</span>
+            <span style="--i:2">o</span>
+            <span style="--i:3">u</span>
+            <span style="--i:4">t</span>
+        </h1><hr>
+
         <ul style="width: 800px;">
-            <li style="font-size:large; background-color: rgb(235, 235, 235); border-radius: 5px; padding: 10px;">Email: <a>nikolaikim27@gmail.com</a></li><br><br>
-            <li style="font-size:large; background-color: rgb(235, 235, 235); border-radius: 5px; padding: 10px;">When was the website created: <a>Dec / 22 / 2021</a></li><br><br>
-            <li style="font-size:large; background-color: rgb(235, 235, 235); border-radius: 5px; padding: 10px;">How to hop on the website development: <a href="https://github.com/lucakim27/Comment-On-Your-Occupation">Click Here</a>!</li>
+            <li style="font-size:large; border: solid; border-radius: 5px; padding: 10px;">Email: <a>nikolaikim27@gmail.com</a></li><br><br>
+            <li style="font-size:large; border: solid; border-radius: 5px; padding: 10px;">When was the website created: <a>Dec / 22 / 2021</a></li><br><br>
+            <li style="font-size:large; border: solid; border-radius: 5px; padding: 10px;">How to hop on the website development: <a href="https://github.com/lucakim27/Comment-On-Your-Occupation">Click Here</a>!</li>
         </ul>
     </center>
+    <%- include('partials/footer'); -%>
 </body>
 <%- include('partials/script'); -%>
 <script src="/js/about.js"></script>

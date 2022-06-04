@@ -49,7 +49,7 @@
                                 height: 30vh;
                                 min-width: 70%;
                                 flex: 0;
-                                background-color: rgb(235, 235, 235);
+                                border: solid;
                                 padding: 10px; 
                                 border-radius: 5px;
                                 overflow-y: scroll;"
