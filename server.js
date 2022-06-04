@@ -28,7 +28,8 @@ const {
   findOnlineUserByUsername,
   addFriendsList,
   getFriendsListByUsername,
-  removePendingFriendsRequest
+  removePendingFriendsRequest,
+  sentFriendsRequest
 } = require('./utils/online')
 
 const { 
@@ -77,6 +78,7 @@ io.on('connection', (socket) => {
   
   socket.on('passBackUsername', (username) => {
     io.to(socket.id).emit('getFriendsRequestPending', getPendingFriendsRequest(username))
+    io.to(socket.id).emit('getSentFriendsRequestPending', sentFriendsRequest(username))
   })
 
   socket.on('updateComment', (username, comment, page) => {
@@ -108,6 +110,7 @@ io.on('connection', (socket) => {
 
   socket.on('getChatContents', (counterpart, user) => {
     // work on here next time
+    // whats wrong here?
     console.log(counterpart)
     console.log(user)
     console.log(getAllChats())
@@ -135,27 +138,15 @@ io.on('connection', (socket) => {
       addPendingFriendsRequest(counterpart, user)
       if (findOnlineUserByUsername(counterpart) != '') {
         io.to(findOnlineUserByUsername(counterpart)).emit('updateFriendsRequest', getPendingFriendsRequest(counterpart))
+        io.to(findOnlineUserByUsername(user)).emit('updateSentPendingFriendsRequest', sentFriendsRequest(user))
       }
     }
   })
 
   socket.on('removePendingFriendsRequest', (counterpart, user) => {
-    /*
-    user was 'y03278111', counterpart was 'y03278123'
-      removePendingFriendsRequest
-      0
-      [ 'y03278123' ]
-      0
-      []
-    */
-    console.log('removePendingFriendsRequest')
-    console.log(getPendingFriendsRequest(counterpart))
-    console.log(getPendingFriendsRequest(user))
-    // why is the parameter counterpart?
     removePendingFriendsRequest(counterpart)
-    console.log(getPendingFriendsRequest(counterpart))
     io.to(findOnlineUserByUsername(user)).emit('updatePendingFriendsRequest', getPendingFriendsRequest(user))
-    console.log(getPendingFriendsRequest(user))
+    io.to(findOnlineUserByUsername(counterpart)).emit('updateSentPendingFriendsRequest', sentFriendsRequest(counterpart))
   })
 
 })

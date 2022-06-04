@@ -1,5 +1,6 @@
 const socket = io()
 const pendingFriendsRequestTable = document.getElementById("pendingFriendsRequest")
+const sentFriendsRequestTable = document.getElementById("sentFriendsRequest")
 
 function getCookie(cname) {
     let id = ''
@@ -39,6 +40,16 @@ socket.on('updatePendingFriendsRequest', (array) => {
     displayPendingFriendsRequestTable(0, array)
 })
 
+socket.on('getSentFriendsRequestPending', (array) => {
+    sentFriendsRequestTable.innerHTML = '<tbody></tbody>'
+    displaySentPendingFriendsRequestTable(0, array)
+})
+
+socket.on('updateSentPendingFriendsRequest', (array) => {
+    sentFriendsRequestTable.innerHTML = '<tbody></tbody>'
+    displaySentPendingFriendsRequestTable(0, array)
+})
+
 const acceptFriendsRequest = function(counterpart) {
     socket.emit('acceptFriendsRequest', counterpart, getCookie('current-user'))
     socket.emit('removePendingFriendsRequest', counterpart, getCookie('current-user'))
@@ -51,7 +62,15 @@ const declineFriendsRequest = function(counterpart) {
 const displayPendingFriendsRequestTable = function(i, array) {
     if (i < array.length) {
         var row = pendingFriendsRequestTable.getElementsByTagName('tbody')[0].insertRow(i).insertCell(0)
-        row.innerHTML = array[i]  + `<button style='width: 50px; margin-left: 30px;' id='${array[i]}' onclick='acceptFriendsRequest(this.id)'>O</button><button style='width: 50px; margin-left: 30px;' id='${array[i]}' onclick='declineFriendsRequest(this.id)'>X</button>`
+        row.innerHTML = array[i]  + `<button style='width: 50px; margin-left: 30px; border-radius: 30px;' id='${array[i]}' onclick='acceptFriendsRequest(this.id)'>O</button><button style='width: 50px; margin-left: 30px; border-radius: 30px;' id='${array[i]}' onclick='declineFriendsRequest(this.id)'>X</button>`
+        displayPendingFriendsRequestTable(i+1, array)
+    }
+}
+
+const displaySentPendingFriendsRequestTable = function(i, array) {
+    if (i < array.length) {
+        var row = sentFriendsRequestTable.getElementsByTagName('tbody')[0].insertRow(i).insertCell(0)
+        row.innerHTML = array[i]
         displayPendingFriendsRequestTable(i+1, array)
     }
 }

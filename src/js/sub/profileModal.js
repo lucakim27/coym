@@ -38,7 +38,9 @@
                     </div>
                     <div class="modal-body">
                         <ul>
-                            <li><a onclick="clickTab1()" id='tab1' style='color: black;'>Pending Friends Request</a></li>
+                            <li><a onclick="clickTab1()" id='tab1' style='color: black;'>Received Friends Request</a></li>
+                            <li>|</li>
+                            <li><a onclick="clickTab3()" id='tab3' style='color: #337ab7;'>Sent Friends Request</a></li>
                             <li>|</li>
                             <li><a onclick="clickTab2()" id='tab2' style='color: #337ab7;'>Settings</a></li>
                         </ul><hr style="width: 598px; margin-left: -15px;">
@@ -53,12 +55,13 @@
                                 overflow-y: scroll;"
                             >
                                 <table id="pendingFriendsRequest" class="table table-striped header-fixed"></table>
+                                <table id="sentFriendsRequest" class="table table-striped header-fixed" style='display: none;'></table>
                                 <b id='settings' style='font-size: 30px; display: none;'></b>
                             </div>
                         </center>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default loginBtn" onclick="window.location.href='http://localhost:3000/login'">
+                        <button type="button" class="btn btn-default loginBtn" onclick="window.location.href='/login'">
                             Login
                         </button>
                         <form action="/logout" method="post" class='logoutForm'>
@@ -83,14 +86,27 @@
 
 const clickTab1 = function() {
     $("#pendingFriendsRequest").show()
+    $("#sentFriendsRequest").hide()
     $("#settings").hide()
     $("#tab1").css('color', 'black')
     $("#tab2").css('color', '#337ab7')
+    $("#tab3").css('color', '#337ab7')
 }
 
 const clickTab2 = function() {
     $("#pendingFriendsRequest").hide()
+    $("#sentFriendsRequest").hide()
     $("#settings").show()
     $("#tab1").css('color', '#337ab7')
     $("#tab2").css('color', 'black')
+    $("#tab3").css('color', '#337ab7')
+}
+
+const clickTab3 = function() {
+    $("#sentFriendsRequest").show()
+    $("#pendingFriendsRequest").hide()
+    $("#settings").hide()
+    $("#tab1").css('color', '#337ab7')
+    $("#tab2").css('color', '#337ab7')
+    $("#tab3").css('color', 'black')
 }

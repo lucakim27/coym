@@ -47,7 +47,7 @@ const listOccupations = function(i) {
         var row = occupationTable.insertRow(i)
         var cell = row.insertCell(0)
         cell.insertAdjacentHTML('beforeend', `
-            <a  href='http://localhost:3000/comment?occupation=${occupationArray[i][0]}' 
+            <a  href='/comment?occupation=${occupationArray[i][0]}' 
                 onclick="countForCharts('${occupationArray[i][0]}')"
             >${occupationArray[i][0]}
             </a><hr>`
@@ -61,7 +61,7 @@ const searchOccupations = function(i, j, input) {
         var row = occupationTable.insertRow(j)
         var cell = row.insertCell(0)
         cell.insertAdjacentHTML('beforeend', `
-            <a  href='http://localhost:3000/comment?occupation=${occupationArray[i][0]}' 
+            <a  href='/comment?occupation=${occupationArray[i][0]}' 
                 onclick="countForCharts('${occupationArray[i][0]}')"
             >${occupationArray[i][0]}
             </a><hr>`

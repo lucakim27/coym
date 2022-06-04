@@ -67,7 +67,7 @@ center {
 }
 
 #searchBtn {
-    background-color: #000000;
+    background-color: rgb(54, 153, 207);
     cursor: pointer;
     border-radius: 5px;
     color: white;

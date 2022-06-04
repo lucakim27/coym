@@ -9,19 +9,19 @@
         <h1 id="header">Chat</h1><hr>
 
         <div style="display: flex;">
-            <div style="flex: 0; margin-right: 30px;">
-                <table style="margin-left: 30px;" id="chatUsers"></table>
+            <div style="flex: 0; margin-right: 20px;">
+                <table style="margin-left: 20px;" id="chatUsers"></table>
             </div>
 
             <div class="vl"></div>
 
             <div style="flex: 0;">
-                <div id="texts" style="border: 1px solid black; width: 143vh; margin: 20px; height: 65vh; overflow-y: scroll;">
+                <div id="texts" style="border: 1px solid black; width: 143vh; margin: 20px; height: 65vh; overflow-y: scroll; border-radius: 5px;">
                     <table id="chatContents"></table>
                 </div>
                 <div style="display: flex; margin: 20px;">
-                    <input type="text" style="width: 100vh;" id="chatContent">
-                    <button style="flex: 1;" onclick="sendChat()">Enter</button>
+                    <input type="text" style="width: 100vh; border-color: rgb(235, 235, 235); background-color: rgb(239, 239, 239); border-radius: 5px;" id="chatContent">
+                    <button style="flex: 1; background-color: rgb(54, 153, 207); width: 10px; color: white; border-radius: 5px;" onclick="sendChat()">></button>
                 </div>
             </div>
         </div>

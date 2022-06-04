@@ -6,5 +6,5 @@ if ($("#username").text().length === 0) {
 }
 
 const directPage = function(page) {
-    window.location.href = `http://localhost:3000/${page}`
+    window.location.href = `/${page}`
 }

@@ -93,6 +93,18 @@ const addFriendsList = function(user, counterpart) {
     }
 }
 
+const sentFriendsRequest = function(user) {
+    var container = []
+    Object.keys(getAllPendingFriendsRequest()).forEach(key => {
+        for (var i = 0; i < getAllPendingFriendsRequest()[key].length; i++) {
+          if (getAllPendingFriendsRequest()[key][i] === user) {
+            container.push(key.toString())
+          }
+        }
+    })
+    return container
+}
+
 module.exports = {
     getOnlineUsers,
     addOnlineUser,
@@ -103,5 +115,6 @@ module.exports = {
     addFriendsList,
     getFriendsListByUsername,
     removePendingFriendsRequest,
-    getAllPendingFriendsRequest
+    getAllPendingFriendsRequest,
+    sentFriendsRequest
 }

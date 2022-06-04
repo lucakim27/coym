@@ -31,7 +31,7 @@ socket.on('getChatUsers', (chatUsers) => {
     chatUsersTable.innerHTML = '<tbody></tbody>'
     if (chatUsers === null) {
         var row = chatUsersTable.getElementsByTagName('tbody')[0].insertRow(0).insertCell(0)
-        row.innerHTML = "<a>No chat users available.</a>"
+        row.innerHTML = "<a> ................... </a>"
         row.style.backgroundColor = 'white'
     }
     else {
@@ -42,14 +42,16 @@ socket.on('getChatUsers', (chatUsers) => {
 const displayGetChatUsersTable = function(i, chatUsers) {
     if (i < chatUsers.length) {
         var row = chatUsersTable.getElementsByTagName('tbody')[0].insertRow(i).insertCell(0)
-        row.innerHTML = `<a href='#${chatUsers[i]}'>` + chatUsers[i] + '</a><hr>'
-        row.style.backgroundColor = 'white'
+        row.innerHTML = `<a href='#${chatUsers[i]}' style='padding: 10px;'>` + chatUsers[i] + '</a><br>'
+        row.style.backgroundColor = 'rgb(235, 235, 235)'
+        row.style.borderRadius = "5px"
         displayGetChatUsersTable(i+1, chatUsers)
     }
 }
 
 
 const sendChat = function() {
+    alert(`${$('#chatContent').val()} ${getCookie('current-user')} ${urlParams.substring(0, urlParams.length - 1)}`)
     socket.emit('sendChatContents', $('#chatContent').val(), getCookie('current-user'), urlParams.substring(0, urlParams.length - 1))
 }
 

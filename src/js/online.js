@@ -78,14 +78,13 @@ const requestFriends = function() {
     socket.emit('friendsRequest', $('.modal-title').html(), getCookie('current-user'))
 }
 
-const sendChats = function() {
-    window.location = 'http://localhost:3000/chat'
-}
-
 const displayGetFriendsListTable = function(i, friendsList) {
     if (i < friendsList.length) {
         var row = friendsListTable.getElementsByTagName('tbody')[0].insertRow(i).insertCell(0)
-        row.innerHTML = friendsList[i]
+        var a = document.createElement('a')
+        a.innerHTML = friendsList[i]
+        a.href = `/chat#${friendsList[i]}`
+        row.appendChild(a)
         displayGetFriendsListTable(i+1, friendsList)
     }
 }
@@ -93,7 +92,7 @@ const displayGetFriendsListTable = function(i, friendsList) {
 const displayUpdateFriendsRequest = function(i, PendingFriendsRequest) {
     if (i < PendingFriendsRequest.length) {
         var row = pendingFriendsRequestTable.getElementsByTagName('tbody')[0].insertRow(i).insertCell(0)
-        row.innerHTML = PendingFriendsRequest[i]  + `<button style='width: 50px; margin-left: 30px;' id='${PendingFriendsRequest[i]}' onclick='acceptFriendsRequest(this.id)'>O</button><button style='width: 50px; margin-left: 30px;' id='${PendingFriendsRequest[i]}' onclick='declineFriendsRequest(this.id)'>X</button>`
+        row.innerHTML = PendingFriendsRequest[i]  + `<button style='width: 50px; margin-left: 30px; border-radius: 30px;' id='${PendingFriendsRequest[i]}' onclick='acceptFriendsRequest(this.id)'>O</button><button style='width: 50px; margin-left: 30px; border-radius: 30px;' id='${PendingFriendsRequest[i]}' onclick='declineFriendsRequest(this.id)'>X</button>`
         displayUpdateFriendsRequest(i+1, PendingFriendsRequest)
     }
 }
