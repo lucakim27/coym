@@ -9,7 +9,8 @@ const routes = require('./routes/index')
 const { 
   getOccupationsArray,
   updateComment,
-  updateLike
+  updateLike,
+  findOccupationComments
 } = require('./utils/occupation')
 
 const {
@@ -67,6 +68,10 @@ io.on('connection', (socket) => {
   io.to(socket.id).emit('getMostViewed', getMostViewed())
   io.to(socket.id).emit('getMostCommented', getMostCommented())
   io.to(socket.id).emit('getUsername')
+
+  socket.on('emitPage', (page) => {
+    io.to(socket.id).emit('getComments' ,findOccupationComments(page))
+  })
   
   socket.on('addOnlineUser', (user) => {
     addOnlineUser(user, socket.id)
@@ -84,12 +89,13 @@ io.on('connection', (socket) => {
   socket.on('updateComment', (username, comment, page) => {
     updateComment(username, comment, page)
     countUpMostCommented(page)
-    io.sockets.emit('updatedComment', getOccupationsArray())
+    io.sockets.emit('updatedComment', findOccupationComments(page))
+    console.log(findOccupationComments(page))
   })
 
   socket.on('updateLike', (index, row, username, page) => {
     updateLike(index, row, username, page)
-    io.sockets.emit('updatedComment', getOccupationsArray())
+    io.sockets.emit('updatedComment', findOccupationComments(page))
   })
   
   socket.on('disconnect', function () {
@@ -109,14 +115,16 @@ io.on('connection', (socket) => {
   })
 
   socket.on('getChatContents', (counterpart, user) => {
-    // work on here next time
-    // whats wrong here?
+    console.log('getChatContents')
     console.log(counterpart)
     console.log(user)
     console.log(getAllChats())
     console.log(getChat(user, counterpart))
-    io.to(findOnlineUserByUsername(counterpart)).emit('displayChatContents', getChat(user, counterpart))
+    console.log(findOnlineUserByUsername(user))
+    // why would you send to the counterpart?
+    // io.to(findOnlineUserByUsername(counterpart)).emit('displayChatContents', getChat(user, counterpart))
     io.to(findOnlineUserByUsername(user)).emit('displayChatContents', getChat(user, counterpart))
+    // why i cant emit to the client side?
   })
 
   socket.on('sendChatContents', (input, user, counterpart) => {
@@ -124,6 +132,7 @@ io.on('connection', (socket) => {
       io.to(findOnlineUserByUsername(user)).emit('declineSendChatContents')
     } else {
       addChatContent(user, counterpart, input)
+      // do we have to emit to the counterpart as well?
       io.to(findOnlineUserByUsername(counterpart)).emit('updateChatContents', getChat(user, counterpart))
       io.to(findOnlineUserByUsername(user)).emit('updateChatContents', getChat(user, counterpart))
     }

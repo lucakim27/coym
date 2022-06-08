@@ -353,6 +353,24 @@ function getOccupationsArray() {
   return occupations
 }
 
+const findOccupationComments = function(page) {
+  var list = {comments: [], likes: [] , username: []}
+  occupations.forEach(array => {
+    if (array[0] === page) {
+      for (var i = 0; i < array[1].length; i++) {
+        list.comments.push(array[1][i])
+      }
+      for (var i = 0; i < array[2].length; i++) {
+        list.likes.push(array[2][i])
+      }
+      for (var i = 0; i < array[3].length; i++) {
+        list.username.push(array[3][i])
+      }
+    }
+  })
+  return list
+}
+
 function updateComment(username, comment, page) {
   occupations.forEach(array => {
     if (array[0] === page) {
@@ -386,5 +404,6 @@ function updateLike(index, row, username, page) {
 module.exports = {
   getOccupationsArray,
   updateComment,
-  updateLike
+  updateLike,
+  findOccupationComments
 }

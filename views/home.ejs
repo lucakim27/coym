@@ -5,7 +5,7 @@
 </head>
 <body>
     <%- include('partials/header'); -%>
-    <center>
+    <center style="height: 800px;">
         <h1 id="header" class="waviy" style="color: black;">
             <span style="--i:1">C</span>
             <span style="--i:2">o</span>
@@ -33,47 +33,22 @@
             <span style="--i:24">o</span>
             <span style="--i:25">n</span>
         </h1><hr>
-        <div style="display: flex;">
-
-            <div style="margin-left: 100px;">
-                <h2 style="margin-left: 10px;">What can you benefit from the website?</h2>
-                <ol style="padding: 20px;">
-                    <li>1. Ease a pain of choosing a major for the pre-university students.</li><br><br>
-                    <li>2. Chat with the experts of the occupation you're interested in.</li><br><br>
-                    <li>3. Read all the comments from people in the occupation.</li><br>
-                </ol>
-                <h2 style="margin-left: 10px;">Recent Comments</h2>
-                <div style="
-                        height: 38vh;
-                        width: 500px;
-                        flex: 0;
-                        padding: 10px;
-                        margin-top: 20px;
-                        margin-left: 20px;
-                        border-radius: 5px;
-                        border-style: solid;
-                        overflow-y: scroll;"
-                    >
-                    <table id="recentCommentsTable"></table>
-                </div>
-            </div>
-            <div style="padding: 20px; border-radius: 5px; border-style: solid; margin-left: 170px;">
-                <input type="text" id="userInput" placeholder="Search here..." style="width: 500px;">
-                <div style="
-                        height: 68vh;
-                        width: 500px;
-                        flex: 0;
-                        padding: 10px;
-                        margin-top: 20px;
-                        border-radius: 5px;
-                        border-style: solid;
-                        overflow-y: scroll;"
-                    >
-                    <table id="occupationTable"></table>
-                </div>
+        <div style="padding: 30px;">
+            <input type="text" id="userInput" placeholder="Search here..." style="width: 1550px; font-size: 30px;">
+            <div style="
+                    height: 65vh;
+                    width: 1550px;
+                    flex: 0;
+                    padding: 10px;
+                    margin-top: 20px;
+                    border-radius: 5px;
+                    border-style: solid;
+                    overflow-y: scroll;"
+                >
+                <table id="occupationTable"></table>
             </div>
         </div>
-    </center>
+    </center><br><br>
     <%- include('partials/footer'); -%>
 </body>
 <%- include('partials/script'); -%>

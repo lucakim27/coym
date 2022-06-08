@@ -1,7 +1,32 @@
+socket.emit('addOnlineUser', getCookie('current-user'))
 const chatUsersTable = document.getElementById('chatUsers')
 const chatContentsTable = document.getElementById('chatContents')
-socket.emit('addOnlineUser', getCookie('current-user'))
-var urlParams = new URLSearchParams(window.location.hash.replace("#","?")).toString()
+const user = { 
+    selected: ''
+}
+
+const getSelectedChatUser = function() {
+    return user.selected
+}
+
+const setSelectedChatUser = function(selectedChatUser) {
+    user.selected = selectedChatUser
+}
+
+const getQueryVariable = function(variable) {
+    var query = window.location.search.substring(1)
+    var vars = query.split('&')
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=')
+        if (decodeURIComponent(pair[0]) == variable) {
+            if (decodeURIComponent(pair[1]).includes('+') == false) {
+                return decodeURIComponent(pair[1])
+            } else {
+                return decodeURIComponent(pair[1].replaceAll('+', ' '))
+            }
+        }
+    }
+}
 
 function getCookie(cname) {
     let id = ''
@@ -31,7 +56,6 @@ socket.on('getChatUsers', (chatUsers) => {
     chatUsersTable.innerHTML = '<tbody></tbody>'
     if (chatUsers === null) {
         var row = chatUsersTable.getElementsByTagName('tbody')[0].insertRow(0).insertCell(0)
-        row.innerHTML = "<a> ................... </a>"
         row.style.backgroundColor = 'white'
     }
     else {
@@ -42,20 +66,21 @@ socket.on('getChatUsers', (chatUsers) => {
 const displayGetChatUsersTable = function(i, chatUsers) {
     if (i < chatUsers.length) {
         var row = chatUsersTable.getElementsByTagName('tbody')[0].insertRow(i).insertCell(0)
-        row.innerHTML = `<a href='#${chatUsers[i]}' style='padding: 10px;'>` + chatUsers[i] + '</a><br>'
+        row.innerHTML = `<a onclick="chatUserClick('${String(chatUsers[i])}')" id='${String(chatUsers[i])}'>` + chatUsers[i] + '</a><br>'
+        row.style.padding = '10px'
         displayGetChatUsersTable(i+1, chatUsers)
     }
 }
 
-
 const sendChat = function() {
-    alert(`${$('#chatContent').val()} ${getCookie('current-user')} ${urlParams.substring(0, urlParams.length - 1)}`)
-    socket.emit('sendChatContents', $('#chatContent').val(), getCookie('current-user'), urlParams.substring(0, urlParams.length - 1))
+    socket.emit('sendChatContents', $('#chatContent').val(), getCookie('current-user'), getSelectedChatUser())
+    $('#chatContent').val('')
 }
 
-window.addEventListener('hashchange', function() {
-    socket.emit('getChatContents', window.location.hash, getCookie('current-user'))
-})
+function chatUserClick(counterpart) {
+    setSelectedChatUser(counterpart)
+    socket.emit('getChatContents', counterpart, getCookie('current-user'))
+}
 
 socket.on('displayChatContents', (array) => {
     chatContentsTable.innerHTML = '<tbody></tbody>'
@@ -72,6 +97,7 @@ const displayChatContentsTable = function(i, chatContents) {
     if (i < chatContents.length) {
         var row = chatContentsTable.getElementsByTagName('tbody')[0].insertRow(i).insertCell(0)
         row.innerHTML += chatContents[i] + "<hr>"
+        row.style.width = '130vh'
         displayChatContentsTable(i+1, chatContents)
     }
 }

@@ -9,8 +9,12 @@ const chat = {}
  */
 const getChat = function(user, counterpart) {
     var array = []
-    array.push(chat[user])
-    array.push(chat[counterpart])
+    if (chat[user] != undefined) {
+        array.push(chat[user])
+    }
+    if (chat[counterpart] != undefined) {
+        array.push(chat[counterpart])
+    }
     return array
 }
 
