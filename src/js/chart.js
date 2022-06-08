@@ -27,6 +27,7 @@ function getCookie(cname) {
 
 socket.emit('addOnlineUser', getCookie('current-user'))
 
+// implement chart.js library here
 socket.on('getMostViewed', (value) => {
     mostViewedOccuaptionsTable.innerHTML = '<thead></thead><tbody></tbody>'
     var header1 = mostViewedOccuaptionsTable.getElementsByTagName('thead')[0].insertRow(0).insertCell(0)
@@ -40,6 +41,7 @@ socket.on('getMostViewed', (value) => {
     })
 })
 
+// implement chart.js library here
 socket.on('getMostCommented', (value) => {
     mostCommentedOccuaptionsTable.innerHTML = '<thead></thead><tbody></tbody>'
     var header2 = mostCommentedOccuaptionsTable.getElementsByTagName('thead')[0].insertRow(0).insertCell(0)

@@ -90,7 +90,6 @@ io.on('connection', (socket) => {
     updateComment(username, comment, page)
     countUpMostCommented(page)
     io.sockets.emit('updatedComment', findOccupationComments(page))
-    console.log(findOccupationComments(page))
   })
 
   socket.on('updateLike', (index, row, username, page) => {

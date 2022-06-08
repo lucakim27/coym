@@ -14,18 +14,20 @@ Many students in the world are facing difficulties in figuring out what occupati
 - Contact: A function that opens the e-mail program and has my e-mail address.
 - Each occupations sub page: A page where you comment and like on the comments.
 
-# APIs
-- cookie-parser
-- ejs
-- express
-- express-ejs-layouts
-- express-validator
+# Back-end
+- node.js
 - socket.io
+- express
+
+# Front-end
+- socket.io
+- jquery
+- ejs
 
 # How to hop on the project
 You're welcome to make as many pull requests as you want to as well as the issues.
 
-# How to run on Linux
+# How to open the website
 ```
 git clone https://github.com/lucakim27/Comment-On-Your-Occupation.git
 ```

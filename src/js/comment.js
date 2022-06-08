@@ -86,7 +86,7 @@ const comment = function() {
 
 const like = function(index, row) {
     if (getCookie('current-user') == '') {
-        alert("You're not logged in.")
+        toastr.error('You are not logged in...')
         return 0
     } else {
         socket.emit('updateLike',

@@ -103,5 +103,5 @@ const displayChatContentsTable = function(i, chatContents) {
 }
 
 socket.on('declineSendChatContents', () => {
-    alert("You're declined to send a chat becasue you haven't chosen anyone to chat yet.")
+    toastr.error('You have not chosen anyone to chat with yet...')
 })

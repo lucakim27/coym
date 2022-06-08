@@ -60,13 +60,14 @@ socket.on('getFriendsList', (friendsList) => {
 socket.on('updateFriendsRequest', (PendingFriendsRequest) => {
     pendingFriendsRequestTable.innerHTML = '<tbody></tbody>'
     displayUpdateFriendsRequest(0, PendingFriendsRequest)
+    toastr.success('Successfully added to your friends!')
 })
 
 socket.on('declineFriendsRequest', (val) => {
     if (val === 0) {
-        alert("You can't request friends because you're already friends with him/her.")
+        toastr.warning('You are already friends with him/her..')
     } else if (val === 1) {
-        alert("You can't request friends because you've already sent friends request to him/her.")
+        toastr.error('You have already sent the friends request to him/her...')
     }
 })
 
