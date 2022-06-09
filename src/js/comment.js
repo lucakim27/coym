@@ -29,6 +29,11 @@ socket.on('getComments', (occupationArray) => {
 
 socket.on('updatedComment', (occupationArray) => {
     displayUpdatedComments(0, occupationArray)
+    toastr.success('Successfully commented!')
+})
+
+socket.on('duplicatedComment', () => {
+    toastr.error('The comment is dupliacted...')
 })
 
 function getCookie(cname) {
@@ -73,6 +78,7 @@ $("#occupationTitle").html(animateText(getQueryVariable('occupation')))
 
 const comment = function() {
     if ($('#userInput').val() === '') {
+        toastr.error('You have not typed anything yet...')
         return 0
     } else if (confirm("Are you sure you wanna comment?")) {
         socket.emit('updateComment',
@@ -95,6 +101,7 @@ const like = function(index, row) {
             getCookie('current-user'),
             getQueryVariable('occupation')
         )
+        toastr.success('Successfully liked!')
     }
 }
 

@@ -87,9 +87,18 @@ io.on('connection', (socket) => {
   })
 
   socket.on('updateComment', (username, comment, page) => {
-    updateComment(username, comment, page)
-    countUpMostCommented(page)
-    io.sockets.emit('updatedComment', findOccupationComments(page))
+    var check = true
+    findOccupationComments(page).comments.forEach(element => {
+      if (element === comment) {
+        check = false
+        io.sockets.emit('duplicatedComment')
+      }
+    })
+    if (check) {
+      countUpMostCommented(page)
+      updateComment(username, comment, page)
+      io.sockets.emit('updatedComment', findOccupationComments(page))
+    }
   })
 
   socket.on('updateLike', (index, row, username, page) => {
