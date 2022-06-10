@@ -25,7 +25,14 @@ function getCookie(cname) {
     return ""
 }
 
-socket.emit('addOnlineUser', getCookie('current-user'))
+try {
+    if ($('#signIn').html() === 'Sign in') {
+    } else {
+        socket.emit('addOnlineUser', getCookie('current-user'))
+    }
+} catch (error) {
+    console.error(error);
+}
 
 socket.on('getOnlineUsers', (onlineUsers) => {
     loggedinUserTable.innerHTML = '<thead></thead><tbody></tbody>'

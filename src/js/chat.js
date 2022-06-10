@@ -1,8 +1,16 @@
-socket.emit('addOnlineUser', getCookie('current-user'))
 const chatUsersTable = document.getElementById('chatUsers')
 const chatContentsTable = document.getElementById('chatContents')
 const user = { 
     selected: ''
+}
+
+try {
+    if ($('#signIn').html() === 'Sign in') {
+    } else {
+        socket.emit('addOnlineUser', getCookie('current-user'))
+    }
+} catch (error) {
+    console.error(error);
 }
 
 const getSelectedChatUser = function() {

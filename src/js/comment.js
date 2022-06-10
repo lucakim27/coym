@@ -13,18 +13,24 @@ const getQueryVariable = function(variable) {
     }
 }
 
-searchBtn.setAttribute("onclick", "comment()")
-
+try {
+    searchBtn.setAttribute("onclick", "comment()")
+} catch (error) {
+    console.error(error);
+}
+  
 socket.emit('emitPage', getQueryVariable('occupation'))
 
 socket.on('getComments', (occupationArray) => {
     displayUpdatedComments(0, occupationArray)
-    if (getCookie('current-user') === '') {
-        $("#inputAndCommentBtn").css('display', 'none')
-    } else {
-        $("#inputAndCommentBtn").css('display', 'block')
+    try {
+        if ($('#signIn').html() === 'Sign in') {
+        } else {
+            socket.emit('addOnlineUser', getCookie('current-user'))
+        }
+    } catch (error) {
+        console.error(error);
     }
-    socket.emit('addOnlineUser', getCookie('current-user'))
 })
 
 socket.on('updatedComment', (occupationArray) => {

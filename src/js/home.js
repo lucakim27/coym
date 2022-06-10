@@ -28,7 +28,14 @@ function getCookie(cname) {
 socket.on('userEnter', (array) => {
     pushOccupationArray(array, 0)
     listOccupations(0)
-    socket.emit('addOnlineUser', getCookie('current-user'))
+    try {
+        if ($('#signIn').html() === 'Sign in') {
+        } else {
+            socket.emit('addOnlineUser', getCookie('current-user'))
+        }
+    } catch (error) {
+        console.error(error);
+    }
 })
 
 socket.on('updatedComment', (array) => {
