@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <%- include('partials/head'); -%>
+    <head>
+        <%- include('partials/head'); -%>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 </head>
 <body>
     <%- include('partials/header'); -%>
@@ -16,7 +17,7 @@
 
         <div style="display: flex; padding: 10px; justify-content: center;">
             <div style="
-                height: 70vh;
+                height: 80vh;
                 min-width: 40%;
                 flex: 0;
                 border-style: solid;
@@ -24,10 +25,11 @@
                 margin-right: 30px;
                 border-radius: 5px;"
             >
-                <table id="mostViewedOccuaptions" class="table table-striped header-fixed"></table>
+                <h1>Most Visited Pages</h1><hr>
+                <canvas id="mostViewedPages"></canvas>
             </div>
             <div style="
-                height: 70vh;
+                height: 80vh;
                 min-width: 40%;
                 flex: 0; 
                 border-style: solid;
@@ -35,7 +37,8 @@
                 margin-left: 30px;
                 border-radius: 5px;"
             >
-                <table id="mostCommentedOccuaptions" class="table table-striped header-fixed"></table>
+                <h1>Most Commented Pages</h1><hr>
+                <canvas id="mostCommentedPages"></canvas>
             </div>
         </div>
     </center>

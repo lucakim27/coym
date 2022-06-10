@@ -25,32 +25,72 @@ function getCookie(cname) {
     return ""
 }
 
+const getRandomRgb = function() {
+    var num = Math.round(0xffffff * Math.random());
+    var r = num >> 16;
+    var g = num >> 8 & 255;
+    var b = num & 255;
+    return 'rgb(' + r + ', ' + g + ', ' + b + ')';
+}
+
 socket.emit('addOnlineUser', getCookie('current-user'))
 
-// implement chart.js library here
 socket.on('getMostViewed', (value) => {
-    mostViewedOccuaptionsTable.innerHTML = '<thead></thead><tbody></tbody>'
-    var header1 = mostViewedOccuaptionsTable.getElementsByTagName('thead')[0].insertRow(0).insertCell(0)
-    header1.innerHTML = "<b>Most Viewed Pages</b>"
+    const data = {
+        labels: [],
+        datasets: [{
+          label: 'My First Dataset',
+          data: [],
+          backgroundColor: [],
+          hoverOffset: 4
+        }]
+    };
+    
+    const config = {
+        type: 'doughnut',
+        data: data,
+    }
+    
     const keys = Object.keys(value)
+
     keys.forEach((key, index) => {
-        var row = mostViewedOccuaptionsTable.getElementsByTagName('tbody')[0].insertRow(index).insertCell(0)
-        var p = document.createElement('p')
-        p.innerHTML = `${key}: ${value[key]}`
-        row.appendChild(p)
+        data.labels.push(key)
+        data.datasets[0].data.push(value[key])
+        data.datasets[0].backgroundColor.push(getRandomRgb())
     })
+
+    const myChart = new Chart(
+        document.getElementById('mostViewedPages'),
+        config
+    )
 })
 
-// implement chart.js library here
 socket.on('getMostCommented', (value) => {
-    mostCommentedOccuaptionsTable.innerHTML = '<thead></thead><tbody></tbody>'
-    var header2 = mostCommentedOccuaptionsTable.getElementsByTagName('thead')[0].insertRow(0).insertCell(0)
-    header2.innerHTML = "<b>Most Commented Pages</b>"
+    const data = {
+        labels: [],
+        datasets: [{
+          label: 'My First Dataset',
+          data: [],
+          backgroundColor: [],
+          hoverOffset: 4
+        }]
+    };
+    
+    const config = {
+        type: 'doughnut',
+        data: data,
+    }
+    
     const keys = Object.keys(value)
+
     keys.forEach((key, index) => {
-        var row = mostCommentedOccuaptionsTable.getElementsByTagName('tbody')[0].insertRow(index).insertCell(0)
-        var p = document.createElement('p')
-        p.innerHTML = `${key}: ${value[key]}`
-        row.appendChild(p)
+        data.labels.push(key)
+        data.datasets[0].data.push(value[key])
+        data.datasets[0].backgroundColor.push(getRandomRgb())
     })
+
+    const myChart = new Chart(
+        document.getElementById('mostCommentedPages'),
+        config
+    )
 })
