@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const routes = require('./routes/index')
 
-const { 
+const {
   getOccupationsArray,
   updateComment,
   updateLike,
@@ -88,6 +88,10 @@ io.on('connection', (socket) => {
 
   socket.on('updateComment', (username, comment, page) => {
     var check = true
+    var dateObj = new Date()
+    var month = dateObj.getUTCMonth() + 1
+    var day = dateObj.getUTCDate()
+    var year = dateObj.getUTCFullYear()
     findOccupationComments(page).comments.forEach(element => {
       if (element === comment) {
         check = false
@@ -96,7 +100,7 @@ io.on('connection', (socket) => {
     })
     if (check) {
       countUpMostCommented(page)
-      updateComment(username, comment, page)
+      updateComment(username, comment, page, `${year}-${month}-${day}`)
       io.sockets.emit('updatedComment', findOccupationComments(page))
     }
   })
@@ -136,11 +140,12 @@ io.on('connection', (socket) => {
   })
 
   socket.on('sendChatContents', (input, user, counterpart) => {
-    if (counterpart === '') {
-      io.to(findOnlineUserByUsername(user)).emit('declineSendChatContents')
+    if (user === '') {
+      io.to(socket.id).emit('declineSendChatContents', 0)
+    } else if (counterpart === '') {
+      io.to(socket.id).emit('declineSendChatContents', 1)
     } else {
       addChatContent(user, counterpart, input)
-      // do we have to emit to the counterpart as well?
       io.to(findOnlineUserByUsername(counterpart)).emit('updateChatContents', getChat(user, counterpart))
       io.to(findOnlineUserByUsername(user)).emit('updateChatContents', getChat(user, counterpart))
     }

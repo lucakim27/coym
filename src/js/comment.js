@@ -127,6 +127,7 @@ const appendComments = function(i, j, occupationArray) {
                     ${occupationArray.username[j]}
                 </p>
                 <p>${occupationArray.comments[j]}</p>
+                <p>${occupationArray.dates[j]}</p>
                 <button onclick=like(${[i, j]})>
                     ${occupationArray.likes[j].length} Likes
                 </button>

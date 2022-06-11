@@ -2442,7 +2442,7 @@ function getOccupationsArray() {
 }
 
 const findOccupationComments = function(page) {
-  var list = {comments: [], likes: [] , username: []}
+  var list = {comments: [], likes: [] , username: [], dates: []}
   occupations.forEach(array => {
     if (array[0] === page) {
       for (var i = 0; i < array[1].length; i++) {
@@ -2454,18 +2454,21 @@ const findOccupationComments = function(page) {
       for (var i = 0; i < array[3].length; i++) {
         list.username.push(array[3][i])
       }
+      for (var i = 0; i < array[4].length; i++) {
+        list.dates.push(array[4][i])
+      }
     }
   })
   return list
 }
 
-function updateComment(username, comment, page) {
+function updateComment(username, comment, page, date) {
   occupations.forEach(array => {
     if (array[0] === page) {
       array[1].push(comment)
       array[2].push([])
       array[3].push(username)
-      
+      array[4].push(date)
       return 0
     }
   })

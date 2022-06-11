@@ -81,6 +81,9 @@ const displayGetChatUsersTable = function(i, chatUsers) {
 }
 
 const sendChat = function() {
+    console.log( $('#chatContent').val())
+    console.log(getCookie('current-user'))
+    console.log(getSelectedChatUser())
     socket.emit('sendChatContents', $('#chatContent').val(), getCookie('current-user'), getSelectedChatUser())
     $('#chatContent').val('')
 }
@@ -110,6 +113,10 @@ const displayChatContentsTable = function(i, chatContents) {
     }
 }
 
-socket.on('declineSendChatContents', () => {
-    toastr.error('You have not chosen anyone to chat with yet...')
+socket.on('declineSendChatContents', (val) => {
+    if (val === 0) {
+        toastr.error('You are not logged in...')
+    } else if (val === 1) {
+        toastr.error('You have not chosen anyone to chat with yet...')
+    }
 })
