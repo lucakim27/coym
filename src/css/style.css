@@ -99,6 +99,7 @@ center {
 
 #eachComment button {
     color: #888;
+    border-radius: 5px;
     font-size: 1.5em;
     font-family: 'Heebo', sans-serif;
     background-color: transparent;
@@ -112,7 +113,7 @@ center {
 }
 
 #eachComment button:hover {
-    color: indianred;
+    color: rgb(54, 153, 207);
 }
 
 #eachComment button:active {

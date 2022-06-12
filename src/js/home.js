@@ -38,10 +38,6 @@ socket.on('userEnter', (array) => {
     }
 })
 
-socket.on('updatedComment', (array) => {
-    occupationArray = array
-})
-
 const pushOccupationArray = function(array, i) {
     if (i < array.length) {
         occupationArray.push(array[i])

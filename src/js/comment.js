@@ -16,7 +16,7 @@ const getQueryVariable = function(variable) {
 try {
     searchBtn.setAttribute("onclick", "comment()")
 } catch (error) {
-    console.error(error);
+    console.error(error)
 }
   
 socket.emit('emitPage', getQueryVariable('occupation'))
@@ -29,13 +29,18 @@ socket.on('getComments', (occupationArray) => {
             socket.emit('addOnlineUser', getCookie('current-user'))
         }
     } catch (error) {
-        console.error(error);
+        console.error(error)
     }
 })
 
-socket.on('updatedComment', (occupationArray) => {
+socket.on('updatedComment', (occupationArray, val) => {
     displayUpdatedComments(0, occupationArray)
-    toastr.success('Successfully commented!')
+    if (val === 0) {
+        toastr.success('Successfully commented!')
+    } else if (val === 1) {
+        console.log(occupationArray)
+        toastr.success('Successfully liked or unliked!')
+    }
 })
 
 socket.on('duplicatedComment', () => {
@@ -102,12 +107,10 @@ const like = function(index, row) {
         return 0
     } else {
         socket.emit('updateLike',
-            index,
             row,
             getCookie('current-user'),
             getQueryVariable('occupation')
         )
-        toastr.success('Successfully liked!')
     }
 }
 
@@ -117,20 +120,30 @@ const displayUpdatedComments = function(i, occupationArray) {
     appendComments(i, 0, occupationArray)          
 }
 
+const showReply = function(row) {
+    $(`.${row}_input`).show()
+}
+
+const hideReply = function(row) {
+    $(`.${row}_input`).hide()
+}
+
 const appendComments = function(i, j, occupationArray) {
     if (j < occupationArray.comments.length) {
         document.getElementById('comments').innerHTML +=
         `
-            <div id="eachComment">
+            <div id="eachComment" class="${j}">
                 <img src='../img/accountIMG.jpeg' style='width: 50px; height: 50px;'>
-                <p style='font-weight: bold;'>
-                    ${occupationArray.username[j]}
-                </p>
-                <p>${occupationArray.comments[j]}</p>
-                <p>${occupationArray.dates[j]}</p>
-                <button onclick=like(${[i, j]})>
-                    ${occupationArray.likes[j].length} Likes
-                </button>
+                <p style='font-weight: bold;'> ${occupationArray.username[j]} </p>
+                <p> ${occupationArray.comments[j]} </p>
+                <p> ${occupationArray.dates[j]} </p>
+                <button onclick=like(${[i, j]});> ${occupationArray.likes[j].length} Likes </button>
+                <a onclick=showReply(${j}); style="font-size: 27px; margin-left: 10px; color: rgb(54, 153, 207);"> Reply </a>
+                <div class='${j}_input' style='display: none; margin-top: 20px;'>
+                    <input type='text' id='userInput' placeholder='Reply here...'>
+                    <button id='searchBtn'> > </button>
+                    <button id='searchBtn' onclick='hideReply(${j})'> x </button>
+                </div>
             </div><hr>
         `
         appendComments(i, j+1, occupationArray)

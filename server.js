@@ -101,15 +101,15 @@ io.on('connection', (socket) => {
     if (check) {
       countUpMostCommented(page)
       updateComment(username, comment, page, `${year}-${month}-${day}`)
-      io.sockets.emit('updatedComment', findOccupationComments(page))
+      io.sockets.emit('updatedComment', findOccupationComments(page), 0)
     }
   })
 
-  socket.on('updateLike', (index, row, username, page) => {
-    updateLike(index, row, username, page)
-    io.sockets.emit('updatedComment', findOccupationComments(page))
+  socket.on('updateLike', (row, username, page) => {
+    updateLike(row, username, page)
+    io.sockets.emit('updatedComment', findOccupationComments(page), 1)
   })
-  
+
   socket.on('disconnect', function () {
     removeOnlineUser(socket.id)
     io.emit('getOnlineUsers', getOnlineUsers())

@@ -39,7 +39,7 @@ try {
         socket.emit('addOnlineUser', getCookie('current-user'))
     }
 } catch (error) {
-    console.error(error);
+    console.error(error)
 }
 
 socket.on('getMostViewed', (value) => {

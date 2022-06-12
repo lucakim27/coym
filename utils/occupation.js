@@ -2474,23 +2474,20 @@ function updateComment(username, comment, page, date) {
   })
 }
 
-function updateLike(index, row, username, page) {
-  occupations.forEach(array => {
-    if (array[0] === page) {
-      for (var i = 0; i < array[1].length; i++) {
-        if (array[1][i] === occupations[index][1][row]) {
-          for (var j = 0; j < array[2][i].length; j++) {
-            if (array[2][i][j] === username) {
-              array[2][i].splice(j, 1)
-              return 0
+function updateLike(row, username, page) {
+    for (var i = 0; i < occupations.length; i++) {
+        if (occupations[i][0] === page) {
+          if (occupations[i][2][row].includes(username)) {
+            for (var j = 0; j < occupations[i][2].length; j++) {
+              if (occupations[i][2][row][j] === username) {
+                occupations[i][2][row].splice(j, 1)
+              }
             }
+          } else {
+            occupations[i][2][row].push(username)
           }
-          array[2][i].push(username)
-          return 0
         }
-      }
     }
-  })
 }
 
 module.exports = {
