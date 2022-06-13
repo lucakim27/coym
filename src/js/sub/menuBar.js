@@ -23,7 +23,6 @@ var renderMenubar;
   `
   for (var i = 0; i < div.getElementsByTagName('a').length; i++) {
     if (window.location.pathname === div.getElementsByTagName('a')[i].pathname) {
-      div.getElementsByTagName('a')[i].style.border = "solid 5px"
       div.getElementsByTagName('a')[i].style.color = 'rgb(54, 153, 207)'
     }
   }

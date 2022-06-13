@@ -16,11 +16,13 @@ const {
 router.get('/', function(req, res, next) {
   if (req.cookies['current-user'] != undefined && searchAccounts(req.cookies['current-user'].id, req.cookies['current-user'].pwd)) {
     res.render(__dirname + '/../views/index.ejs', {
-        user: req.cookies['current-user'].id
+      user: req.cookies['current-user'].id,
+      page: 'COYO - Welcome'
     })
   } else {
     res.render(__dirname + '/../views/index.ejs', {
-        user: ''
+      user: '',
+      page: 'COYO - Welcome'
     })
   }
 })
@@ -28,11 +30,13 @@ router.get('/', function(req, res, next) {
 router.get('/home', function(req, res, next) {
   if (req.cookies['current-user'] != undefined && searchAccounts(req.cookies['current-user'].id, req.cookies['current-user'].pwd)) {
     res.render(__dirname + '/../views/home.ejs', {
-        user: req.cookies['current-user'].id
+      user: req.cookies['current-user'].id,
+      page: 'COYO - Home'
     })
   } else {
     res.render(__dirname + '/../views/home.ejs', {
-        user: ''
+      user: '',
+      page: 'COYO - Home'
     })
   }
 })
@@ -40,11 +44,13 @@ router.get('/home', function(req, res, next) {
 router.get('/comment', function(req, res, next) {
   if (req.cookies['current-user'] != undefined && searchAccounts(req.cookies['current-user'].id, req.cookies['current-user'].pwd)) {
     res.render(__dirname + '/../views/comment.ejs', {
-        user: req.cookies['current-user'].id
+      user: req.cookies['current-user'].id,
+      page: 'COYO - Comment'
     })
   } else {
     res.render(__dirname + '/../views/comment.ejs', {
-        user: ''
+      user: '',
+      page: 'COYO - Comment'
     })
   }
 })
@@ -52,11 +58,13 @@ router.get('/comment', function(req, res, next) {
 router.get('/chat', function(req, res, next) {
   if (req.cookies['current-user'] != undefined && searchAccounts(req.cookies['current-user'].id, req.cookies['current-user'].pwd)) {
     res.render(__dirname + '/../views/chat.ejs', {
-        user: req.cookies['current-user'].id
+      user: req.cookies['current-user'].id,
+      page: 'COYO - Chat'
     })
   } else {
     res.render(__dirname + '/../views/chat.ejs', {
-        user: ''
+      user: '',
+      page: 'COYO - Chat'
     })
   }
 })
@@ -64,11 +72,13 @@ router.get('/chat', function(req, res, next) {
 router.get('/chart', function(req, res, next) {
   if (req.cookies['current-user'] != undefined && searchAccounts(req.cookies['current-user'].id, req.cookies['current-user'].pwd)) {
     res.render(__dirname + '/../views/chart.ejs', {
-        user: req.cookies['current-user'].id
+        user: req.cookies['current-user'].id,
+        page: 'COYO - Chart'
     })
   } else {
     res.render(__dirname + '/../views/chart.ejs', {
-        user: ''
+        user: '',
+        page: 'COYO - Chart'
     })
   }
 })
@@ -76,11 +86,13 @@ router.get('/chart', function(req, res, next) {
 router.get('/about', function(req, res, next) {
   if (req.cookies['current-user'] != undefined && searchAccounts(req.cookies['current-user'].id, req.cookies['current-user'].pwd)) {
     res.render(__dirname + '/../views/about.ejs', {
-        user: req.cookies['current-user'].id
+        user: req.cookies['current-user'].id,
+        page: 'COYO - About'
     })
   } else {
     res.render(__dirname + '/../views/about.ejs', {
-        user: ''
+        user: '',
+        page: 'COYO - About'
     })
   }
 })
@@ -89,7 +101,9 @@ router.get('/login', function(req, res, next) {
   if (req.cookies['current-user'] != undefined && searchAccounts(req.cookies['current-user'].id, req.cookies['current-user'].pwd)) {
     return res.status(422).json({ errors: "You're already logged in" })
   } else {
-    res.render(__dirname + '/../views/login.ejs')
+    res.render(__dirname + '/../views/login.ejs', {
+      page: 'COYO - Login'
+    })
   }
 })
 
@@ -97,30 +111,22 @@ router.get('/register', function(req, res, next) {
   if (req.cookies['current-user'] != undefined && searchAccounts(req.cookies['current-user'].id, req.cookies['current-user'].pwd)) {
     return res.status(422).json({ errors: "You're already logged in" })
   } else {
-    res.render(__dirname + '/../views/register.ejs')
+    res.render(__dirname + '/../views/register.ejs', {
+      page: 'COYO - Register'
+    })
   }
 })
 
 router.get('/online', function(req, res, next) {
   if (req.cookies['current-user'] != undefined && searchAccounts(req.cookies['current-user'].id, req.cookies['current-user'].pwd)) {
     res.render(__dirname + '/../views/online.ejs', {
-        user: req.cookies['current-user'].id
+        user: req.cookies['current-user'].id,
+        page: 'COYO - Online'
     })
   } else {
     res.render(__dirname + '/../views/online.ejs', {
-        user: ''
-    })
-  }
-})
-
-router.get('/request', function(req, res, next) {
-  if (req.cookies['current-user'] != undefined && searchAccounts(req.cookies['current-user'].id, req.cookies['current-user'].pwd)) {
-    res.render(__dirname + '/../views/request.ejs', {
-        user: req.cookies['current-user'].id
-    })
-  } else {
-    res.render(__dirname + '/../views/request.ejs', {
-        user: ''
+        user: '',
+        page: 'COYO - Online'
     })
   }
 })
