@@ -1,5 +1,6 @@
 const occupationArray = []
-var occupationTable = document.getElementById("occupationTable")
+var options = document.getElementById('options')
+// var occupationTable = document.getElementById("occupationTable")
 
 function getCookie(cname) {
     let id = ''
@@ -27,7 +28,7 @@ function getCookie(cname) {
 
 socket.on('userEnter', (array) => {
     pushOccupationArray(array, 0)
-    listOccupations(0)
+    // listOccupations(0)
     try {
         if ($('#signIn').html() === 'Sign in') {
         } else {
@@ -45,19 +46,19 @@ const pushOccupationArray = function(array, i) {
     }
 }
 
-const listOccupations = function(i) {
-    if (i < occupationArray.length) {
-        var row = occupationTable.insertRow(i)
-        var cell = row.insertCell(0)
-        cell.insertAdjacentHTML('beforeend', `
-            <a  href='/comment?occupation=${occupationArray[i][0]}' 
-                onclick="countForCharts('${occupationArray[i][0]}')"
-            >${occupationArray[i][0]}
-            </a><hr>`
-        )
-        listOccupations(i+1)
-    }
-}
+// const listOccupations = function(i) {
+//     if (i < occupationArray.length) {
+//         var row = occupationTable.insertRow(i)
+//         var cell = row.insertCell(0)
+//         cell.insertAdjacentHTML('beforeend', `
+//             <a  href='/comment?occupation=${occupationArray[i][0]}' 
+//                 onclick="countForCharts('${occupationArray[i][0]}')"
+//             >${occupationArray[i][0]}
+//             </a><hr>`
+//         )
+//         listOccupations(i+1)
+//     }
+// }
 
 const searchOccupations = function(i, j, input) {
     if (i < occupationArray.length && occupationArray[i][0].toLowerCase().includes(input.toLowerCase())) {
@@ -98,12 +99,40 @@ $.event.special.inputchange = {
     }
 };
 
+
 $('input').on('inputchange', function() {
-    occupationTable.innerHTML = ''
-    if (this.value.length !== 0) {
-        searchOccupations(0, 0, this.value)
-    } else {
-        listOccupations(0)
+    options.innerHTML = ''
+    options.style.display = 'block'
+    for (var i = 0; i < occupationArray.length; i++) {
+        if (occupationArray[i][0].toLowerCase().includes(this.value.toLowerCase())) {
+            options.innerHTML += `<a href='/comment?occupation=${occupationArray[i][0]}'>  ${occupationArray[i][0]}  </a><hr>`;
+        }
     }
 })
+
+document.body.onclick=function(event) {
+    if(event.target!=input) {
+        options.style.display = 'none'
+    }
+}
+
+// (function() {
+//     input=document.getElementById('input');
+//     options.innerHTML+= '<hr>';
+//     for(i=0;i<occupationArray.length;i++) {
+//         options.innerHTML+='<li>' + occupationArray[i] + '</li><hr>';
+//     }
     
+    
+//     input.onclick=function() {
+//         this.value='';
+//           options.style.display='block';
+//     }
+    
+    
+//     for(i=0;i<occupationArray.length;i++) {
+//        options.getElementsByTagName('li')[i].onclick = function(){
+//            input.value= this.textContent;
+//         }    
+//     }
+// })();
