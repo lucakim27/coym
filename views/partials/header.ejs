@@ -4,9 +4,14 @@
         <div id="userId" style="width: 100px; margin-right: -90px;"><a href="/login" id="signIn"
         >Sign in</a></div>
       <% } else{ %>  
-        <div id="userId" data-toggle="modal" data-target="#myModal">
-          <img src='../img/accountIMG.jpeg' style='width: 50px; height: 50px; margin-left: 110px; margin-top: -5px;'>
-        </div>
+          <img data-toggle="modal" data-target="#myModal" src='../img/accountIMG.jpeg' style='position: absolute;
+            right: 10px;
+            background-color: rgb(255, 255, 255);
+            font-family: fantasy;
+            top: 8px;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+          font-size: 30px;'>
      <% } %>
 </header>
-<hr id="hrAfterHeader">

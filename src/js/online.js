@@ -35,9 +35,7 @@ try {
 }
 
 socket.on('getOnlineUsers', (onlineUsers) => {
-    loggedinUserTable.innerHTML = '<thead></thead><tbody></tbody>'
-    var header = loggedinUserTable.getElementsByTagName('thead')[0].insertRow(0).insertCell(0)
-    header.innerHTML = `<b>Online users</b>`
+    loggedinUserTable.innerHTML = '<tbody></tbody>'
     const keys = Object.keys(onlineUsers)
     var tableIndex = 0
     keys.forEach((key) => {
@@ -55,9 +53,7 @@ socket.on('getOnlineUsers', (onlineUsers) => {
 })
 
 socket.on('getFriendsList', (friendsList) => {
-    friendsListTable.innerHTML = '<thead></thead><tbody></tbody>'
-    var header = friendsListTable.getElementsByTagName('thead')[0].insertRow(0).insertCell(0)
-    header.innerHTML = `<b>Your friends</b>`
+    friendsListTable.innerHTML = '<tbody></tbody>'
     if (friendsList === null) return 0
     else {
         displayGetFriendsListTable(0, friendsList)

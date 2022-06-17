@@ -1,6 +1,7 @@
 body {
     background-color: rgb(255, 255, 255);
-    /* overflow-y: hidden; */
+    overflow-y: scroll;
+    height: 100%;
 }
 
 #divScroll a {
@@ -58,12 +59,8 @@ center {
     font-size: 30px;
 }
 
-#hrAfterHeader {
-    margin-top: 53px;
-}
-
-#header, #occupationTitle {
-    /* font-family: fantasy; */
+.waviy {
+    width: 500px;
 }
 
 #searchBtn {
@@ -363,20 +360,23 @@ li {
 footer {
     text-align: center;
     padding: 10px;
-    margin-top: 100px;
     height: 500px;
     background-color: black;
+    position: absolute;
+    top: 100%;
+    width: 100%;
 }
 
-footer h1 span {
-    color: white !important;
+footer div {
+    position: relative;
+    top: 30%;
 }
 
 footer a {
     font-size: 20px;
 }
 
-footer p {
+footer p, footer h1{
     color: white;
 }
 
@@ -426,11 +426,13 @@ footer p {
 }
 
 .Wrapper {
-  flex: 0 0 80%;
-  max-width: 80%;
-  border-style: solid;
+  /* flex: 0 0 80%; */
+  max-width: 60%;
+  /* border-style: solid; */
   /* padding: 10px; */
-  margin-top: 60px;
+  border-radius: 5px;
+  position: relative;
+  bottom: 350px;
 }
 
 .Input {
@@ -502,27 +504,31 @@ footer p {
     z-index 0ms;
 }
 
-#homeParagraphTag {
-    font-size: 30px;
-    margin-top: 40px;
-}
-
-#options {
+/* #options {
+    border-radius: 5px;
     height: 200px;
     overflow-y: scroll;
     font-size: 30px;
     margin-top: 1px;
     padding:0;
+    list-style-type: none;
+} */
+
+#options {
     display: none;
-    /* list-style-type: none; */
-    border:1px solid #666;
-    position: absolute;
-    width:100%;
-    background-color: rgb(255, 255, 255);
+    height: 580px;
+    overflow-y: scroll;
+    border-radius: 5px;
+    border: 2px solid;
+    background-color: white;
 }
 
-#options li {
-    /* line-height:25px; */
+#options tbody tr td{
+    width: 400vh;
+}
+
+/* #options li {
+    line-height:25px;
      color: rgb(0, 0, 0);
     cursor: pointer;
-}
+} */

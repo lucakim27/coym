@@ -1,6 +1,5 @@
-const occupationArray = []
+var occupationArray = []
 var options = document.getElementById('options')
-// var occupationTable = document.getElementById("occupationTable")
 
 function getCookie(cname) {
     let id = ''
@@ -46,23 +45,23 @@ const pushOccupationArray = function(array, i) {
     }
 }
 
-// const listOccupations = function(i) {
-//     if (i < occupationArray.length) {
-//         var row = occupationTable.insertRow(i)
-//         var cell = row.insertCell(0)
-//         cell.insertAdjacentHTML('beforeend', `
-//             <a  href='/comment?occupation=${occupationArray[i][0]}' 
-//                 onclick="countForCharts('${occupationArray[i][0]}')"
-//             >${occupationArray[i][0]}
-//             </a><hr>`
-//         )
-//         listOccupations(i+1)
-//     }
-// }
+const listOccupations = function(i) {
+    if (i < occupationArray.length) {
+        var row = options.insertRow(i)
+        var cell = row.insertCell(0)
+        cell.insertAdjacentHTML('beforeend', `
+            <a  href='/comment?occupation=${occupationArray[i][0]}' 
+                onclick="countForCharts('${occupationArray[i][0]}')"
+            >${occupationArray[i][0]}
+            </a><hr>`
+        )
+        listOccupations(i+1)
+    }
+}
 
 const searchOccupations = function(i, j, input) {
     if (i < occupationArray.length && occupationArray[i][0].toLowerCase().includes(input.toLowerCase())) {
-        var row = occupationTable.insertRow(j)
+        var row = options.insertRow(j)
         var cell = row.insertCell(0)
         cell.insertAdjacentHTML('beforeend', `
             <a  href='/comment?occupation=${occupationArray[i][0]}' 
@@ -101,38 +100,17 @@ $.event.special.inputchange = {
 
 
 $('input').on('inputchange', function() {
-    options.innerHTML = ''
+    options.innerHTML = '<hr>'
     options.style.display = 'block'
-    for (var i = 0; i < occupationArray.length; i++) {
-        if (occupationArray[i][0].toLowerCase().includes(this.value.toLowerCase())) {
-            options.innerHTML += `<a href='/comment?occupation=${occupationArray[i][0]}'>  ${occupationArray[i][0]}  </a><hr>`;
-        }
+    if (this.value.length !== 0) {
+        searchOccupations(0, 0, this.value)
+    } else {
+        listOccupations(0)
     }
 })
 
 document.body.onclick=function(event) {
-    if(event.target!=input) {
+    if(event.target != input) {
         options.style.display = 'none'
     }
 }
-
-// (function() {
-//     input=document.getElementById('input');
-//     options.innerHTML+= '<hr>';
-//     for(i=0;i<occupationArray.length;i++) {
-//         options.innerHTML+='<li>' + occupationArray[i] + '</li><hr>';
-//     }
-    
-    
-//     input.onclick=function() {
-//         this.value='';
-//           options.style.display='block';
-//     }
-    
-    
-//     for(i=0;i<occupationArray.length;i++) {
-//        options.getElementsByTagName('li')[i].onclick = function(){
-//            input.value= this.textContent;
-//         }    
-//     }
-// })();
