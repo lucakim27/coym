@@ -60,7 +60,7 @@ center {
 }
 
 .waviy {
-    width: 500px;
+    width: 80%;
 }
 
 #searchBtn {
@@ -428,11 +428,8 @@ footer p, footer h1{
 .Wrapper {
   /* flex: 0 0 80%; */
   max-width: 60%;
-  /* border-style: solid; */
-  /* padding: 10px; */
-  border-radius: 5px;
   position: relative;
-  bottom: 350px;
+  bottom: 40vh;
 }
 
 .Input {

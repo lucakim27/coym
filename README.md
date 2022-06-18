@@ -16,12 +16,12 @@ Many students in the world are facing difficulties in figuring out what occupati
 
 # Back-end
 - node.js
-- socket.io
+
+# Middle-ware
 - express
+- socket.io
 
 # Front-end
-- socket.io
-- jquery
 - ejs
 
 # How to hop on the project
@@ -29,14 +29,11 @@ You're welcome to make as many pull requests as you want to as well as the issue
 
 # How to open the website
 ```
-git clone https://github.com/lucakim27/Comment-On-Your-Occupation.git
-```
-```
 npm install
 ```
 ```
-node server.js
+npm run-script build
 ```
 ```
-Browse 'localhost:3000'
+npm start
 ```
