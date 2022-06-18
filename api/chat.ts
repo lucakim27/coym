@@ -1,12 +1,12 @@
-const chat = {}
+export const chat = {}
 
 /**
  * Function that returns a chat history between user and counterpart
  * @param {String} user
  * @param {String} counterpart
- * @return {array} array of the chat log for user and counterpart
+ * @return {array}
  */
-const getChat = function(user, counterpart) {
+ export const getChat = function(user: any, counterpart: any | number, chat?: any): Array<any> {
     var array = []
     if (chat[user] != undefined) {
         array.push(chat[user])
@@ -17,12 +17,12 @@ const getChat = function(user, counterpart) {
     return array
 }
 
-const getAllChats = function() {
+export const getAllChats = function() {
     return chat
 }
 
-function toISOStringLocal(d) {
-    function z(n){
+export function toISOStringLocal(d: Date) {
+    function z(n: number){
         return (n<10?'0':'') + n
     }
     return d.getFullYear() + '-' + z(d.getMonth()+1) + '-' +
@@ -30,12 +30,12 @@ function toISOStringLocal(d) {
            z(d.getMinutes()) + ':' + z(d.getSeconds())       
 }
 
-const addChatContent = function(user, counterpart, text) {
+export const addChatContent = function(user: any, counterpart: any, text: any, chat?: any) {
     var bool = true
     if (chat[user] === undefined || chat[user] === 'undefined') {
         chat[user] = [[counterpart, [text], [toISOStringLocal(new Date())]]]
     } else  {
-        chat[user].forEach(key => {
+        chat[user].forEach((key: any[]) => {
             if (key[0] === counterpart) {
                 bool = false
                 chat[user][0][1].push(text)
@@ -46,10 +46,4 @@ const addChatContent = function(user, counterpart, text) {
             chat[user][0].push([counterpart, [text], [toISOStringLocal(new Date())]])
         }
     }
-}
-
-module.exports = {
-    getChat,
-    addChatContent,
-    getAllChats
 }

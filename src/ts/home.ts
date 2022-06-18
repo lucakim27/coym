@@ -1,7 +1,99 @@
-var occupationArray = []
+import { io } from "socket.io-client"
+
+const socket: any = io()
+var occupationArray: any[] = []
 var options = document.getElementById('options')
 
-function getCookie(cname) {
+socket.on('userEnter', (array: any) => {
+    pushOccupationArray(array, 0)
+    // listOccupations(0)
+    try {
+        if ($('#signIn').html() === 'Sign in') {
+        } else {
+            socket.emit('addOnlineUser', getCookie('current-user'))
+        }
+    } catch (error) {
+        console.error(error);
+    }
+})
+
+const pushOccupationArray = function(array: string | any[], i: number) {
+    if (i < array.length) {
+        occupationArray.push(array[i])
+        pushOccupationArray(array, i+1)
+    }
+}
+
+const listOccupations = function(i: number, options?: any) {
+    if (i < occupationArray.length) {
+        var row = options.insertRow(i)
+        var cell = row.insertCell(0)
+        cell.insertAdjacentHTML('beforeend', `
+            <a  href='/comment?occupation=${occupationArray[i][0]}' 
+                onclick="countForCharts('${occupationArray[i][0]}')"
+            >${occupationArray[i][0]}
+            </a><hr>`
+        )
+        listOccupations(i+1)
+    }
+}
+
+const searchOccupations = function(i: number, j: number, input: string, options?: any) {
+    if (i < occupationArray.length && occupationArray[i][0].toLowerCase().includes(input.toLowerCase())) {
+        var row = options.insertRow(j)
+        var cell = row.insertCell(0)
+        cell.insertAdjacentHTML('beforeend', `
+            <a  href='/comment?occupation=${occupationArray[i][0]}' 
+                onclick="countForCharts('${occupationArray[i][0]}')"
+            >${occupationArray[i][0]}
+            </a><hr>`
+        )
+        searchOccupations(i+1, j+1, input)
+    } else if (i < occupationArray.length) {
+        searchOccupations(i+1, j, input)
+    }
+}
+
+const countForCharts = function (occupationName: any) {
+    socket.emit('countUpMostViewed', occupationName)
+}
+
+// $.event.special.inputchange = {
+//     setup: function() {
+//         var self = this, val
+//         $.data(this, 'timer', window.setInterval(function() {
+//             val = self.value
+//             if ( $.data( self, 'cache') != val ) {
+//                 $.data( self, 'cache', val )
+//                 $( self ).trigger( 'inputchange' )
+//             }
+//         }, 20))
+//     },
+//     teardown: function() {
+//         window.clearInterval( $.data(this, 'timer') )
+//     },
+//     add: function() {
+//         $.data(this, 'cache', this.value)
+//     }
+// }
+
+// $('input').on('inputchange', function(options:? any) {
+//     options.innerHTML = '<hr>'
+//     options.style.display = 'block'
+//     if (this.value.length !== 0) {
+//         searchOccupations(0, 0, this.value)
+//     } else {
+//         listOccupations(0)
+//     }
+// })
+
+document.body.onclick=function(event: any, input?: any, options?: any) {
+    if(event.target != input) {
+        options.style.display = 'none'
+    }
+}
+
+function getCookie(cname: string) {
     let id = ''
     let name = cname + "="
     let decodedCookie = decodeURIComponent(document.cookie)
@@ -23,94 +115,4 @@ function getCookie(cname) {
       }
     }
     return ""
-}
-
-socket.on('userEnter', (array) => {
-    pushOccupationArray(array, 0)
-    // listOccupations(0)
-    try {
-        if ($('#signIn').html() === 'Sign in') {
-        } else {
-            socket.emit('addOnlineUser', getCookie('current-user'))
-        }
-    } catch (error) {
-        console.error(error);
-    }
-})
-
-const pushOccupationArray = function(array, i) {
-    if (i < array.length) {
-        occupationArray.push(array[i])
-        pushOccupationArray(array, i+1)
-    }
-}
-
-const listOccupations = function(i) {
-    if (i < occupationArray.length) {
-        var row = options.insertRow(i)
-        var cell = row.insertCell(0)
-        cell.insertAdjacentHTML('beforeend', `
-            <a  href='/comment?occupation=${occupationArray[i][0]}' 
-                onclick="countForCharts('${occupationArray[i][0]}')"
-            >${occupationArray[i][0]}
-            </a><hr>`
-        )
-        listOccupations(i+1)
-    }
-}
-
-const searchOccupations = function(i, j, input) {
-    if (i < occupationArray.length && occupationArray[i][0].toLowerCase().includes(input.toLowerCase())) {
-        var row = options.insertRow(j)
-        var cell = row.insertCell(0)
-        cell.insertAdjacentHTML('beforeend', `
-            <a  href='/comment?occupation=${occupationArray[i][0]}' 
-                onclick="countForCharts('${occupationArray[i][0]}')"
-            >${occupationArray[i][0]}
-            </a><hr>`
-        )
-        searchOccupations(i+1, j+1, input)
-    } else if (i < occupationArray.length) {
-        searchOccupations(i+1, j, input)
-    }
-}
-
-const countForCharts = function (occupationName) {
-    socket.emit('countUpMostViewed', occupationName)
-}
-
-$.event.special.inputchange = {
-    setup: function() {
-        var self = this, val
-        $.data(this, 'timer', window.setInterval(function() {
-            val = self.value
-            if ( $.data( self, 'cache') != val ) {
-                $.data( self, 'cache', val )
-                $( self ).trigger( 'inputchange' )
-            }
-        }, 20))
-    },
-    teardown: function() {
-        window.clearInterval( $.data(this, 'timer') )
-    },
-    add: function() {
-        $.data(this, 'cache', this.value)
-    }
-};
-
-
-$('input').on('inputchange', function() {
-    options.innerHTML = '<hr>'
-    options.style.display = 'block'
-    if (this.value.length !== 0) {
-        searchOccupations(0, 0, this.value)
-    } else {
-        listOccupations(0)
-    }
-})
-
-document.body.onclick=function(event) {
-    if(event.target != input) {
-        options.style.display = 'none'
-    }
 }

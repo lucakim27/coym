@@ -1,4 +1,15 @@
-const getQueryVariable = function(variable) {
+import { io } from "socket.io-client"
+
+const socket: any = io()
+const searchBtn: any = document.getElementById('searchBtn')
+
+try {
+    searchBtn.setAttribute("onclick", "comment()")
+} catch (error) {
+    console.error(error)
+}
+
+const getQueryVariable = function(variable: any): any {
     var query = window.location.search.substring(1)
     var vars = query.split('&')
     for (var i = 0; i < vars.length; i++) {
@@ -12,16 +23,10 @@ const getQueryVariable = function(variable) {
         }
     }
 }
-
-try {
-    searchBtn.setAttribute("onclick", "comment()")
-} catch (error) {
-    console.error(error)
-}
   
 socket.emit('emitPage', getQueryVariable('occupation'))
 
-socket.on('getComments', (occupationArray) => {
+socket.on('getComments', (occupationArray: any) => {
     displayUpdatedComments(0, occupationArray)
     try {
         if ($('#signIn').html() === 'Sign in') {
@@ -33,7 +38,7 @@ socket.on('getComments', (occupationArray) => {
     }
 })
 
-socket.on('updatedComment', (occupationArray, val) => {
+socket.on('updatedComment', (occupationArray: any, val: number, toastr?: any) => {
     displayUpdatedComments(0, occupationArray)
     if (val === 0) {
         toastr.success('Successfully commented!')
@@ -43,11 +48,11 @@ socket.on('updatedComment', (occupationArray, val) => {
     }
 })
 
-socket.on('duplicatedComment', () => {
+socket.on('duplicatedComment', (toastr?: any) => {
     toastr.error('The comment is dupliacted...')
 })
 
-function getCookie(cname) {
+function getCookie(cname: string) {
     let id = ''
     let name = cname + "="
     let decodedCookie = decodeURIComponent(document.cookie)
@@ -72,7 +77,7 @@ function getCookie(cname) {
 }
 
 
-const animateText = function(text) {
+const animateText = function(text: string | any[]) {
     var value = '<h1 id="header" class="waviy" style="color: black;">'
     for (var i = 0; i < text.length; i++) {
         if (text[i] === ' ') {
@@ -87,7 +92,7 @@ const animateText = function(text) {
 
 $("#occupationTitle").html(animateText(getQueryVariable('occupation')))
 
-const comment = function() {
+const comment = function(toastr?: any) {
     if ($('#userInput').val() === '') {
         toastr.error('You have not typed anything yet...')
         return 0
@@ -101,7 +106,7 @@ const comment = function() {
     }
 }
 
-const like = function(index, row) {
+const like = function(index: any, row: any, toastr?: any) {
     if (getCookie('current-user') == '') {
         toastr.error('You are not logged in...')
         return 0
@@ -114,23 +119,25 @@ const like = function(index, row) {
     }
 }
 
-const displayUpdatedComments = function(i, occupationArray) {
+const displayUpdatedComments = function(i: number, occupationArray: undefined) {
     if (occupationArray === undefined) return 0
     $("#comments").html('')
     appendComments(i, 0, occupationArray)          
 }
 
-const showReply = function(row) {
+const showReply = function(row: any) {
     $(`.${row}_input`).show()
 }
 
-const hideReply = function(row) {
+const hideReply = function(row: any) {
     $(`.${row}_input`).hide()
 }
 
-const appendComments = function(i, j, occupationArray) {
+const commentsDiv: any = document.getElementById('comments')
+
+const appendComments = function(i: number, j: number, occupationArray: any) {
     if (j < occupationArray.comments.length) {
-        document.getElementById('comments').innerHTML +=
+        commentsDiv.innerHTML +=
         `
             <div id="eachComment" class="${j}">
                 <img src='../img/accountIMG.jpeg' style='width: 50px; height: 50px;'>

@@ -1,29 +1,10 @@
-const loggedinUserTable = document.getElementById("loggedinUser")
-const friendsListTable = document.getElementById("friendsList")
+import { io } from "socket.io-client"
+const socket: any = io()
 
-function getCookie(cname: string) {
-    let id = ''
-    let name = cname + "="
-    let decodedCookie = decodeURIComponent(document.cookie)
-    let ca = decodedCookie.split(';')
-    for(let i = 0; i <ca.length; i++) {
-      let c = ca[i]
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1)
-      }
-      if (c.indexOf(name) == 0) {
-        for (var j = 9; j < c.substring(name.length, c.length).length; j++) {
-            if (c.substring(name.length, c.length)[j] === '"') {
-                break
-            } else {
-                id += c.substring(name.length, c.length)[j]
-            }
-        }
-        return id
-      }
-    }
-    return ""
-}
+const loggedinUserTable: any = document.getElementById("loggedinUser")
+const friendsListTable: any = document.getElementById("friendsList")
+const pendingFriendsRequestTable: any = document.getElementById("pendingFriendsRequest")
+
 
 try {
     if ($('#signIn').html() === 'Sign in') {
@@ -60,13 +41,13 @@ socket.on('getFriendsList', (friendsList: any) => {
     }
 })
 
-socket.on('updateFriendsRequest', (PendingFriendsRequest: any) => {
+socket.on('updateFriendsRequest', (PendingFriendsRequest: any, toastr?: any) => {
     pendingFriendsRequestTable.innerHTML = '<tbody></tbody>'
     displayUpdateFriendsRequest(0, PendingFriendsRequest)
     toastr.success('Successfully added to your friends!')
 })
 
-socket.on('declineFriendsRequest', (val: number) => {
+socket.on('declineFriendsRequest', (val: number, toastr?: any) => {
     if (val === 0) {
         toastr.warning('You are already friends with him/her..')
     } else if (val === 1) {
@@ -99,4 +80,28 @@ const displayUpdateFriendsRequest = function(i: number, PendingFriendsRequest: s
         row.innerHTML = PendingFriendsRequest[i]  + `<button style='width: 50px; margin-left: 30px; border-radius: 30px;' id='${PendingFriendsRequest[i]}' onclick='acceptFriendsRequest(this.id)'>O</button><button style='width: 50px; margin-left: 30px; border-radius: 30px;' id='${PendingFriendsRequest[i]}' onclick='declineFriendsRequest(this.id)'>X</button>`
         displayUpdateFriendsRequest(i+1, PendingFriendsRequest)
     }
+}
+
+function getCookie(cname: string) {
+    let id = ''
+    let name = cname + "="
+    let decodedCookie = decodeURIComponent(document.cookie)
+    let ca = decodedCookie.split(';')
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i]
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1)
+      }
+      if (c.indexOf(name) == 0) {
+        for (var j = 9; j < c.substring(name.length, c.length).length; j++) {
+            if (c.substring(name.length, c.length)[j] === '"') {
+                break
+            } else {
+                id += c.substring(name.length, c.length)[j]
+            }
+        }
+        return id
+      }
+    }
+    return ""
 }

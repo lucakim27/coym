@@ -1,4 +1,4 @@
-const occupations = [
+export const occupations = [
   [
       "Academic librarian",
       [],
@@ -2437,13 +2437,13 @@ const occupations = [
   ]
 ]
 
-function getOccupationsArray() {
+export function getOccupationsArray() {
   return occupations
 }
 
-const findOccupationComments = function(page) {
-  var list = {comments: [], likes: [] , username: [], dates: []}
-  occupations.forEach(array => {
+export const findOccupationComments = function(page: string | never[], occupations?: any) {
+  var list: any = {comments: [], likes: [] , username: [], dates: []}
+  occupations.forEach((array: any[][]) => {
     if (array[0] === page) {
       for (var i = 0; i < array[1].length; i++) {
         list.comments.push(array[1][i])
@@ -2462,8 +2462,8 @@ const findOccupationComments = function(page) {
   return list
 }
 
-function updateComment(username, comment, page, date) {
-  occupations.forEach(array => {
+export function updateComment(username: any, comment: any, page: string | never[], date: any, occupations?: any) {
+  occupations.forEach((array: any[][]) => {
     if (array[0] === page) {
       array[1].push(comment)
       array[2].push([])
@@ -2474,7 +2474,7 @@ function updateComment(username, comment, page, date) {
   })
 }
 
-function updateLike(row, username, page) {
+export function updateLike(row: number, username: string, page: string | never[], occupations?: any) {
     for (var i = 0; i < occupations.length; i++) {
         if (occupations[i][0] === page) {
           if (occupations[i][2][row].includes(username)) {
@@ -2488,11 +2488,4 @@ function updateLike(row, username, page) {
           }
         }
     }
-}
-
-module.exports = {
-  getOccupationsArray,
-  updateComment,
-  updateLike,
-  findOccupationComments
 }

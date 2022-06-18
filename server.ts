@@ -1,11 +1,11 @@
 import path from 'path';
 import http from 'http';
 import express from 'express';
-import { Server } from "socket.io";
+// import { Server } from "socket.io";
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 
-import * as routes from './routes/index';
+import route from './routes/index';
 
 import { getOccupationsArray, updateComment, updateLike, findOccupationComments } from './api/occupation';
 
@@ -14,20 +14,24 @@ import { countUpMostViewed, getMostViewed, countUpMostCommented, getMostCommente
 import { getOnlineUsers, addOnlineUser, removeOnlineUser, getPendingFriendsRequest, addPendingFriendsRequest, findOnlineUserByUsername, addFriendsList, getFriendsListByUsername, removePendingFriendsRequest, sentFriendsRequest } from './api/online';
 
 import { getChat, addChatContent, getAllChats } from './api/chat';
-
 const app = express()
 const server = http.createServer(app)
-const io = new Server(server);
+import { createServer } from "http";
+import { Server, Socket } from "socket.io";
+
+const httpServer = createServer();
+const io = new Server(httpServer, {
+  // ...
+});
 const PORT = process.env.PORT || 3000
 
 app.engine('html', require('ejs').renderFile)
-app.set('views', path.join(__dirname, 'views'))
+app.set('views', path.join(__dirname, '/../views'))
 app.set("view engine", "html")
 app.use(express.static(path.join(__dirname, 'src')))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
-app.use('/', routes)
-
+app.use('/', route)
 app.use(function (req: any, res: any, next: (arg0: Error) => void) {
   var err = new Error('Not Found')
   // err.status = 404

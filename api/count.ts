@@ -1,7 +1,7 @@
-const theMostViewedOccupations = {}
-const theMostCommentedOccupations = {}
+export const theMostViewedOccupations = {}
+export const theMostCommentedOccupations = {}
 
-function countUpMostViewed(occupationName) {
+export function countUpMostViewed(occupationName: string | number, theMostViewedOccupations?: any) {
     if (theMostViewedOccupations[occupationName] == undefined) {
         theMostViewedOccupations[occupationName] = 1
     } else {
@@ -9,11 +9,11 @@ function countUpMostViewed(occupationName) {
     }
 }
 
-function getMostViewed() {
+export function getMostViewed() {
     return theMostViewedOccupations
 }
 
-function countUpMostCommented(occupationName) {
+export function countUpMostCommented(occupationName: string | number, theMostCommentedOccupations?: any) {
     if (theMostCommentedOccupations[occupationName] == undefined) {
         theMostCommentedOccupations[occupationName] = 1
     } else {
@@ -21,13 +21,6 @@ function countUpMostCommented(occupationName) {
     }
 }
 
-function getMostCommented() {
+export function getMostCommented() {
     return theMostCommentedOccupations
-}
-
-module.exports = {
-    countUpMostViewed,
-    getMostViewed,
-    countUpMostCommented,
-    getMostCommented
 }

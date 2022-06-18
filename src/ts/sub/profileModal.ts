@@ -2,7 +2,7 @@
 
     var div = document.createElement('div')
 
-    function getCookie(cname) {
+    function getCookie(cname: string) {
         let id = ''
         let name = cname + "="
         let decodedCookie = decodeURIComponent(document.cookie)
@@ -75,13 +75,19 @@
         </div>
     `
 
+    let logoutBtn: any = document.getElementById('logoutForm')
+
+    let loginBtn: any = document.getElementById('loginBtn')
+
+    let body: any = document.getElementById('loginBtn')
+
     if (getCookie('current-user') === "Login") {
-        div.getElementsByClassName('logoutForm')[0].style.display = 'none'
+        logoutBtn[0].style.display = 'none'
     } else {
-        div.getElementsByClassName('loginBtn')[0].style.display = 'none'
+        loginBtn[0].style.display = 'none'
     }
     
-    document.querySelector('body').appendChild(div)
+    body.appendChild(div)
 })()
 
 const clickTab1 = function() {

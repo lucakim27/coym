@@ -1,10 +1,10 @@
-const accounts = []
+export const accounts: any[] = []
 
-function addAccount(newAcc) {
+export function addAccount(newAcc: any) {
     accounts.push(newAcc)
 }
 
-function searchAccounts(id, pwd) {
+export function searchAccounts(id: any, pwd: any) {
     for (var i = 0; i < accounts.length; i++) {
         if (accounts[i][0] == id && accounts[i][1] == pwd) {
             return true
@@ -13,7 +13,7 @@ function searchAccounts(id, pwd) {
     return false
 }
 
-function checkAccountsById(id) {
+export function checkAccountsById(id: any) {
     for (var i = 0; i < accounts.length; i++) {
         if (accounts[i][0] == id) {
             return true
@@ -22,18 +22,11 @@ function checkAccountsById(id) {
     return false
 }
 
-function checkAccountsByPassword(Password) {
+export function checkAccountsByPassword(Password: any) {
     for (var i = 0; i < accounts.length; i++) {
         if (accounts[i][1] == Password) {
             return true
         }
     }
     return false
-}
-
-module.exports = {
-    searchAccounts,
-    addAccount,
-    checkAccountsById,
-    checkAccountsByPassword
 }

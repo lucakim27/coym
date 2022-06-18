@@ -1,7 +1,9 @@
+let navigationBar: any = document.getElementById('mySidenav')
+
 const sidebarOpen = function() {
-  document.getElementById("mySidenav").style.width = "250px"
+  navigationBar.style.width = "250px"
 }
 
 const sidebarClose = function() {
-  document.getElementById("mySidenav").style.width = "0"
+  navigationBar.style.width = "0"
 }

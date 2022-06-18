@@ -1,14 +1,18 @@
-const onlineUsers = {}
-const friendsList = {}
-const pendingFriendsRequest = {}
+export const onlineUsers = {}
+export const friendsList = {}
+export const pendingFriendsRequest = {}
 
-function getOnlineUsers() {
+export function getOnlineUsers(onlineUsers?: any): any {
     return onlineUsers
 }
 
-function addOnlineUser(newUser, socketid) {
-    if (newUser != 'Login') {
-        onlineUsers[socketid] = newUser
+export function setOnlineUser(username: string, socketid: any, onlineUsers?: any) {
+    onlineUsers[socketid] = username
+}
+
+export function addOnlineUser(username: string, socketid: string, onlineUsers?: any) {
+    if (username != 'Login') {
+        setOnlineUser(username, socketid)
     }
 }
 
@@ -17,16 +21,16 @@ function addOnlineUser(newUser, socketid) {
 * @param {String} username
 * @return {String}
 */
-const findOnlineUserByUsername = function(username) {
+export const findOnlineUserByUsername = function(username: any, onlineUsers?: any) {
     for (const [key, value] of Object.entries(onlineUsers)) {
         if (value === username) {
             return key
         }
     }
-    return 0
+    return ''
 }
 
-function removeOnlineUser(socketid) {
+export function removeOnlineUser(socketid: string | number, onlineUsers?: any) {
     delete onlineUsers[socketid]
 }
 
@@ -35,7 +39,7 @@ function removeOnlineUser(socketid) {
 * @param {String} socketId
 * @return {String || 0}
 */
-const getPendingFriendsRequest = function(counterpart) {
+export const getPendingFriendsRequest = function(counterpart: string) {
     for (const [key, value] of Object.entries(pendingFriendsRequest)) {
         if (key === counterpart) {
             return value
@@ -44,7 +48,7 @@ const getPendingFriendsRequest = function(counterpart) {
     return 0
 }
 
-const getAllPendingFriendsRequest = function() {
+export const getAllPendingFriendsRequest = function() {
     return pendingFriendsRequest
 }
 
@@ -53,13 +57,13 @@ const getAllPendingFriendsRequest = function() {
 * @param {String} socketId
 * @return {String || 0}
 */
-const addPendingFriendsRequest = function(counterpart, user) {
+export const addPendingFriendsRequest = function(counterpart: PropertyKey, user: any, pendingFriendsRequest?: any) {
     if (!pendingFriendsRequest.hasOwnProperty(counterpart)) {
         pendingFriendsRequest[counterpart] = [user]
     } else {
         for (const [key, value] of Object.entries(pendingFriendsRequest)) {
             if (key === counterpart) {
-                var array = value
+                var array: any = value
                 array.push(user)
                 delete pendingFriendsRequest[key]
                 pendingFriendsRequest[key] = array
@@ -69,23 +73,23 @@ const addPendingFriendsRequest = function(counterpart, user) {
     }
 }
 
-const removePendingFriendsRequest = function(counterpart) {
-    var container = []
-    Object.keys(getAllPendingFriendsRequest()).forEach(key => {
-      for (var i = 0; i < getAllPendingFriendsRequest()[key].length; i++) {
-        if (getAllPendingFriendsRequest()[key][i] != counterpart) {
+export const removePendingFriendsRequest = function(counterpart: any, pendingFriendsRequest?: any) {
+    var container: any[] = []
+    Object.keys(pendingFriendsRequest).forEach(key => {
+      for (var i = 0; i < pendingFriendsRequest[key].length; i++) {
+        if (pendingFriendsRequest[key][i] != counterpart) {
           container.push(counterpart)
         }
       }
-      getAllPendingFriendsRequest()[key] = container
+      pendingFriendsRequest[key] = container
     })
 }
 
-const getFriendsListByUsername = function(user) {
+export const getFriendsListByUsername = function(user: string | number, friendsList?: any) {
     return friendsList[user]
 }
 
-const addFriendsList = function(user, counterpart) {
+export const addFriendsList = function(user: PropertyKey, counterpart: any, friendsList?: any) {
     if (!friendsList.hasOwnProperty(user)) {
         friendsList[user] = [counterpart]
     } else {
@@ -93,28 +97,14 @@ const addFriendsList = function(user, counterpart) {
     }
 }
 
-const sentFriendsRequest = function(user) {
-    var container = []
-    Object.keys(getAllPendingFriendsRequest()).forEach(key => {
-        for (var i = 0; i < getAllPendingFriendsRequest()[key].length; i++) {
-          if (getAllPendingFriendsRequest()[key][i] === user) {
+export const sentFriendsRequest = function(user: any, pendingFriendsRequest?: any) {
+    var container: string[] = []
+    Object.keys(pendingFriendsRequest).forEach(key => {
+        for (var i = 0; i < pendingFriendsRequest.length; i++) {
+          if (pendingFriendsRequest[key][i] === user) {
             container.push(key.toString())
           }
         }
     })
     return container
-}
-
-module.exports = {
-    getOnlineUsers,
-    addOnlineUser,
-    removeOnlineUser,
-    addPendingFriendsRequest,
-    getPendingFriendsRequest,
-    findOnlineUserByUsername,
-    addFriendsList,
-    getFriendsListByUsername,
-    removePendingFriendsRequest,
-    getAllPendingFriendsRequest,
-    sentFriendsRequest
 }
