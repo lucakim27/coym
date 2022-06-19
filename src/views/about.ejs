@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('partials/head'); -%>
+  </head>
+  <body>
+    <%- include('partials/navigation'); -%> <%- include('partials/header'); -%>
+    <center style="height: 800px">
+      <h1 id="header" class="waviy">
+        <span style="--i: 0">A</span>
+        <span style="--i: 1">b</span>
+        <span style="--i: 2">o</span>
+        <span style="--i: 3">u</span>
+        <span style="--i: 4">t</span>
+      </h1>
+      <hr />
+
+      <div style="display: flex; padding: 5px; margin: 15px">
+        <div
+          style="
+            border: solid;
+            border-radius: 5px;
+            width: 500px;
+            height: 300px;
+            flex: 1;
+            margin: 15px;
+          "
+        >
+          <h2 style="margin-left: 10px">
+            What can you benefit from the website?
+          </h2>
+          <ol style="padding: 20px">
+            <li style="font-size: 20px">
+              1. Ease a pain of choosing a major for the pre-university
+              students.
+            </li>
+            <br /><br />
+            <li style="font-size: 20px">
+              2. Chat with the experts of the occupation you're interested in.
+            </li>
+            <br /><br />
+            <li style="font-size: 20px">
+              3. Read all the comments from people in the occupation.
+            </li>
+            <br />
+          </ol>
+        </div>
+        <div
+          style="
+            border: solid;
+            border-radius: 5px;
+            width: 500px;
+            height: 300px;
+            flex: 1;
+            margin: 15px;
+          "
+        >
+          <h2 style="margin-left: 10px">When was the website created?</h2>
+          <ol style="padding: 20px">
+            <li style="font-size: 30px">Dec / 22 / 2021</li>
+            <br /><br />
+          </ol>
+        </div>
+      </div>
+      <br />
+      <div style="display: flex; padding: 5px; margin: 15px">
+        <div
+          style="
+            border: solid;
+            border-radius: 5px;
+            width: 500px;
+            height: 300px;
+            flex: 1;
+            margin: 15px;
+          "
+        >
+          <h2 style="margin-left: 10px">
+            How to hop on the website development?
+          </h2>
+          <ol style="padding: 20px">
+            <li>
+              <a
+                style="font-size: 30px"
+                href="https://github.com/lucakim27/Comment-On-Your-Occupation"
+                >Click Here</a
+              >
+            </li>
+            <br /><br />
+          </ol>
+        </div>
+        <div
+          style="
+            border: solid;
+            border-radius: 5px;
+            width: 500px;
+            height: 300px;
+            flex: 1;
+            margin: 15px;
+          "
+        >
+          <h2 style="margin-left: 10px">Who's the creater of the website?</h2>
+          <ol style="padding: 20px">
+            <li>
+              <a
+                style="font-size: 30px"
+                href="https://www.instagram.com/he_is_heesu/"
+              >
+                Instagram
+              </a>
+            </li>
+            <br /><br />
+            <li>
+              <a style="font-size: 30px" href="https://github.com/lucakim27">
+                Github
+              </a>
+            </li>
+            <br /><br />
+            <li>
+              <a
+                style="font-size: 30px"
+                href="https://www.linkedin.com/in/heesu-kim-6883b11a3/"
+              >
+                Linkedin
+              </a>
+            </li>
+            <br /><br />
+          </ol>
+        </div>
+      </div>
+    </center>
+    <%- include('partials/footer'); -%>
+  </body>
+  <%- include('partials/script'); -%>
+  <!-- <script src="/js/about.js"></script> -->
+  <script>
+    try {
+      if ($("#signIn").html() === "Sign in") {
+      } else {
+        socket.emit("addOnlineUser", getCookie("current-user"));
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  </script>
+</html>

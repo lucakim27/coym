@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('partials/head'); -%>
+  </head>
+  <body>
+    <%- include('partials/navigation'); -%>
+    <span
+      style="font-size: 40px; margin-left: 10px; cursor: pointer"
+      onclick="sidebarOpen()"
+      >&#9776;</span
+    >
+    <header style="margin-top: -40px"></header>
+    <hr id="hrAfterHeader" />
+
+    <center id="registerContainer" style="height: 223px">
+      <form action="/registerAccount" method="post">
+        <h1 id="header">Register</h1>
+        <input
+          type="text"
+          name="username"
+          placeholder="Enter your ID"
+          required
+        /><br /><br />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+        /><br /><br />
+        <input
+          type="password"
+          name="repassword"
+          placeholder="Password Again"
+          required
+        /><br /><br />
+        <button type="submit" value="register">Register</button><br />
+      </form>
+    </center>
+    <%- include('partials/footer'); -%>
+  </body>
+  <%- include('partials/script'); -%>
+</html>
