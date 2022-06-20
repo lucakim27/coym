@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('partials/head'); -%>
+  </head>
+  <body>
+    <%- include('partials/navigation'); -%> <%- include('partials/header'); -%>
+    <center>
+      <h1 id="occupationTitle"></h1>
+      <% if(user === ''){ %> <% } else { %>
+      <div id="inputAndCommentBtn">
+        <input type="text" id="userInput" placeholder="Comment here..." />
+        <button id="searchBtn">></button>
+      </div>
+      <% } %>
+      <hr />
+      <div id="comments" style="height: 800px; overflow-y: scroll"></div>
+    </center>
+    <%- include('partials/footer'); -%>
+  </body>
+  <%- include('partials/script'); -%>
+  <script src="js/comment.js"></script>
+</html>

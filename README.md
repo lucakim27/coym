@@ -14,15 +14,8 @@ Many students in the world are facing difficulties in figuring out what occupati
 - Contact: A function that opens the e-mail program and has my e-mail address.
 - Each occupations sub page: A page where you comment and like on the comments.
 
-# Back-end
-- node.js
-
-# Middle-ware
-- express
-- socket.io
-
-# Front-end
-- ejs
+# Frameworks
+- node.js for backend
 
 # How to hop on the project
 You're welcome to make as many pull requests as you want to as well as the issues.
@@ -32,7 +25,7 @@ You're welcome to make as many pull requests as you want to as well as the issue
 npm install
 ```
 ```
-npm run-script build
+npm run build
 ```
 ```
 npm start

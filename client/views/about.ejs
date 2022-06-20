@@ -131,15 +131,5 @@
     <%- include('partials/footer'); -%>
   </body>
   <%- include('partials/script'); -%>
-  <!-- <script src="/js/about.js"></script> -->
-  <script>
-    try {
-      if ($("#signIn").html() === "Sign in") {
-      } else {
-        socket.emit("addOnlineUser", getCookie("current-user"));
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  </script>
+  <script src="js/about.js"></script>
 </html>
