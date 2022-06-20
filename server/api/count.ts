@@ -2,6 +2,9 @@ export const theMostViewedOccupations = {}
 export const theMostCommentedOccupations = {}
 
 export function countUpMostViewed(occupationName: string | number, theMostViewedOccupations?: any) {
+    if (theMostViewedOccupations === undefined || theMostViewedOccupations === null) {
+        return 0
+    }
     if (theMostViewedOccupations[occupationName] == undefined) {
         theMostViewedOccupations[occupationName] = 1
     } else {

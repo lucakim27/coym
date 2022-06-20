@@ -1,4 +1,4 @@
-const socket = io()
+const socket = io();
 const pendingFriendsRequestTable = document.getElementById("pendingFriendsRequest")
 const sentFriendsRequestTable = document.getElementById("sentFriendsRequest")
 

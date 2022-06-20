@@ -14,12 +14,17 @@ import { getOnlineUsers, addOnlineUser, removeOnlineUser, getPendingFriendsReque
 
 import { getChat, addChatContent, getAllChats } from './api/chat';
 const app = express()
-const server = http.createServer(app)
+// const server = http.createServer(app)
 import { createServer } from "http";
-import { Server } from "socket.io";
+// import { Server } from "socket.io";
 
-const httpServer = createServer();
-const io = new Server(httpServer);
+// const httpServer = createServer();
+// const io = new Server(httpServer).listen(httpServer);
+
+const { Server } = require("socket.io");
+const server = http.createServer(app);
+const io = new Server(server);
+
 const PORT = process.env.PORT || 3000
 
 app.engine('html', require('ejs').renderFile)
@@ -29,11 +34,11 @@ app.use(express.static(path.join(__dirname, 'src')))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use('/', router)
-app.use(function (req: any, res: any, next: (arg0: Error) => void) {
-  var err: any = new Error('Not Found')
-  err.status = 404
-  next(err)
-})
+// app.use(function (req: any, res: any, next: (arg0: Error) => void) {
+//   var err: any = new Error('Not Found')
+//   err.status = 404
+//   next(err)
+// })
 
 // app.use(function (err: { status: any; message: any; }, req: any, res: { status: (arg0: any) => void; render: (arg0: string, arg1: { status: any; message: any; }) => void; }, next: any) {
 //   res.status(err.status || 500)

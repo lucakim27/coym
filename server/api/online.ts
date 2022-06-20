@@ -21,7 +21,7 @@ export function addOnlineUser(username: string, socketid: string, onlineUsers?: 
 * @param {String} username
 * @return {String}
 */
-export const findOnlineUserByUsername = function(username: any, onlineUsers?: any) {
+export const findOnlineUserByUsername = function (username: any, onlineUsers?: any) {
     for (const [key, value] of Object.entries(onlineUsers)) {
         if (value === username) {
             return key
@@ -31,6 +31,9 @@ export const findOnlineUserByUsername = function(username: any, onlineUsers?: an
 }
 
 export function removeOnlineUser(socketid: string | number, onlineUsers?: any) {
+    if (onlineUsers === undefined || onlineUsers === null) {
+        return 0
+    }
     delete onlineUsers[socketid]
 }
 
@@ -39,7 +42,7 @@ export function removeOnlineUser(socketid: string | number, onlineUsers?: any) {
 * @param {String} socketId
 * @return {String || 0}
 */
-export const getPendingFriendsRequest = function(counterpart: string) {
+export const getPendingFriendsRequest = function (counterpart: string) {
     for (const [key, value] of Object.entries(pendingFriendsRequest)) {
         if (key === counterpart) {
             return value
@@ -48,7 +51,7 @@ export const getPendingFriendsRequest = function(counterpart: string) {
     return 0
 }
 
-export const getAllPendingFriendsRequest = function() {
+export const getAllPendingFriendsRequest = function () {
     return pendingFriendsRequest
 }
 
@@ -57,7 +60,7 @@ export const getAllPendingFriendsRequest = function() {
 * @param {String} socketId
 * @return {String || 0}
 */
-export const addPendingFriendsRequest = function(counterpart: PropertyKey, user: any, pendingFriendsRequest?: any) {
+export const addPendingFriendsRequest = function (counterpart: PropertyKey, user: any, pendingFriendsRequest?: any) {
     if (!pendingFriendsRequest.hasOwnProperty(counterpart)) {
         pendingFriendsRequest[counterpart] = [user]
     } else {
@@ -73,23 +76,23 @@ export const addPendingFriendsRequest = function(counterpart: PropertyKey, user:
     }
 }
 
-export const removePendingFriendsRequest = function(counterpart: any, pendingFriendsRequest?: any) {
+export const removePendingFriendsRequest = function (counterpart: any, pendingFriendsRequest?: any) {
     var container: any[] = []
     Object.keys(pendingFriendsRequest).forEach(key => {
-      for (var i = 0; i < pendingFriendsRequest[key].length; i++) {
-        if (pendingFriendsRequest[key][i] != counterpart) {
-          container.push(counterpart)
+        for (var i = 0; i < pendingFriendsRequest[key].length; i++) {
+            if (pendingFriendsRequest[key][i] != counterpart) {
+                container.push(counterpart)
+            }
         }
-      }
-      pendingFriendsRequest[key] = container
+        pendingFriendsRequest[key] = container
     })
 }
 
-export const getFriendsListByUsername = function(user: string | number, friendsList?: any) {
+export const getFriendsListByUsername = function (user: string | number, friendsList?: any) {
     return friendsList[user]
 }
 
-export const addFriendsList = function(user: PropertyKey, counterpart: any, friendsList?: any) {
+export const addFriendsList = function (user: PropertyKey, counterpart: any, friendsList?: any) {
     if (!friendsList.hasOwnProperty(user)) {
         friendsList[user] = [counterpart]
     } else {
@@ -97,13 +100,16 @@ export const addFriendsList = function(user: PropertyKey, counterpart: any, frie
     }
 }
 
-export const sentFriendsRequest = function(user: any, pendingFriendsRequest?: any) {
+export const sentFriendsRequest = function (user: any, pendingFriendsRequest?: any) {
     var container: string[] = []
+    if (pendingFriendsRequest === undefined || pendingFriendsRequest === null) {
+        return 0
+    }
     Object.keys(pendingFriendsRequest).forEach(key => {
         for (var i = 0; i < pendingFriendsRequest.length; i++) {
-          if (pendingFriendsRequest[key][i] === user) {
-            container.push(key.toString())
-          }
+            if (pendingFriendsRequest[key][i] === user) {
+                container.push(key.toString())
+            }
         }
     })
     return container
