@@ -1,4 +1,4 @@
-export const accounts: any[] = []
+export let accounts: any[] = []
 
 export function addAccount(newAcc: any) {
     accounts.push(newAcc)

@@ -1,4 +1,4 @@
-export const occupations = [
+export let occupations: any = [
     [
         "Academic librarian",
         [],
@@ -2437,14 +2437,15 @@ export const occupations = [
     ]
 ]
 
-export function getOccupationsArray() {
+export const getOccupationsArray = function() {
     return occupations
 }
 
-export const findOccupationComments = function (page: string | never[], occupations?: any) {
-    if (occupations === undefined || occupations === null) {
-        return 0
-    }
+const setOccupationsArray = function(newOccupationsArray: any) {
+    occupations = newOccupationsArray
+}
+
+export const findOccupationComments = function (page: any) {
     var list: any = { comments: [], likes: [], username: [], dates: [] }
     occupations.forEach((array: any[][]) => {
         if (array[0] === page) {
@@ -2465,7 +2466,7 @@ export const findOccupationComments = function (page: string | never[], occupati
     return list
 }
 
-export function updateComment(username: any, comment: any, page: string | never[], date: any, occupations?: any) {
+export function updateComment(username: any, comment: any, page: any, date: any) {
     occupations.forEach((array: any[][]) => {
         if (array[0] === page) {
             array[1].push(comment)
@@ -2477,7 +2478,8 @@ export function updateComment(username: any, comment: any, page: string | never[
     })
 }
 
-export function updateLike(row: number, username: string, page: string | never[], occupations?: any) {
+// rewrite the function... its not good...
+export function updateLike(row: number, username: string, page: string | never[]) {
     for (var i = 0; i < occupations.length; i++) {
         if (occupations[i][0] === page) {
             if (occupations[i][2][row].includes(username)) {
@@ -2491,4 +2493,5 @@ export function updateLike(row: number, username: string, page: string | never[]
             }
         }
     }
+
 }

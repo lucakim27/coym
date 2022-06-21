@@ -1,4 +1,4 @@
-export const chat = {}
+export let chat: any = {}
 
 /**
  * Function that returns a chat history between user and counterpart
@@ -6,7 +6,7 @@ export const chat = {}
  * @param {String} counterpart
  * @return {array}
  */
- export const getChat = function(user: any, counterpart: any | number, chat?: any): Array<any> {
+ export const getChat = function(user: any, counterpart: any): Array<any> {
     var array = []
     if (chat[user] != undefined) {
         array.push(chat[user])

@@ -1,27 +1,27 @@
-export const onlineUsers = {}
-export const friendsList = {}
-export const pendingFriendsRequest = {}
+export let onlineUsers: any = {}
+export let friendsList: any = {}
+export let pendingFriendsRequest: any = {}
 
-export function getOnlineUsers(onlineUsers?: any): any {
+export function getOnlineUsers() {
     return onlineUsers
 }
 
-export function setOnlineUser(username: string, socketid: any, onlineUsers?: any) {
+export function setOnlineUser(username: any, socketid: any) {
     onlineUsers[socketid] = username
 }
 
-export function addOnlineUser(username: string, socketid: string, onlineUsers?: any) {
+export function addOnlineUser(username: string, socketid: string) {
     if (username != 'Login') {
         setOnlineUser(username, socketid)
     }
 }
 
 /**
-* Function that returns socketId by username
+* Returns socketid by username
 * @param {String} username
 * @return {String}
 */
-export const findOnlineUserByUsername = function (username: any, onlineUsers?: any) {
+export const findOnlineUserByUsername = function (username: any) {
     for (const [key, value] of Object.entries(onlineUsers)) {
         if (value === username) {
             return key
@@ -30,7 +30,7 @@ export const findOnlineUserByUsername = function (username: any, onlineUsers?: a
     return ''
 }
 
-export function removeOnlineUser(socketid: string | number, onlineUsers?: any) {
+export function removeOnlineUser(socketid: any) {
     if (onlineUsers === undefined || onlineUsers === null) {
         return 0
     }
@@ -42,7 +42,7 @@ export function removeOnlineUser(socketid: string | number, onlineUsers?: any) {
 * @param {String} socketId
 * @return {String || 0}
 */
-export const getPendingFriendsRequest = function (counterpart: string) {
+export const getPendingFriendsRequest = function (counterpart: any) {
     for (const [key, value] of Object.entries(pendingFriendsRequest)) {
         if (key === counterpart) {
             return value
@@ -60,7 +60,7 @@ export const getAllPendingFriendsRequest = function () {
 * @param {String} socketId
 * @return {String || 0}
 */
-export const addPendingFriendsRequest = function (counterpart: PropertyKey, user: any, pendingFriendsRequest?: any) {
+export const addPendingFriendsRequest = function (counterpart: any, user: any) {
     if (!pendingFriendsRequest.hasOwnProperty(counterpart)) {
         pendingFriendsRequest[counterpart] = [user]
     } else {
@@ -76,7 +76,7 @@ export const addPendingFriendsRequest = function (counterpart: PropertyKey, user
     }
 }
 
-export const removePendingFriendsRequest = function (counterpart: any, pendingFriendsRequest?: any) {
+export const removePendingFriendsRequest = function (counterpart: any) {
     var container: any[] = []
     Object.keys(pendingFriendsRequest).forEach(key => {
         for (var i = 0; i < pendingFriendsRequest[key].length; i++) {
@@ -88,11 +88,11 @@ export const removePendingFriendsRequest = function (counterpart: any, pendingFr
     })
 }
 
-export const getFriendsListByUsername = function (user: string | number, friendsList?: any) {
+export const getFriendsListByUsername = function (user: any) {
     return friendsList[user]
 }
 
-export const addFriendsList = function (user: PropertyKey, counterpart: any, friendsList?: any) {
+export const addFriendsList = function (user: any, counterpart: any) {
     if (!friendsList.hasOwnProperty(user)) {
         friendsList[user] = [counterpart]
     } else {
@@ -100,7 +100,7 @@ export const addFriendsList = function (user: PropertyKey, counterpart: any, fri
     }
 }
 
-export const sentFriendsRequest = function (user: any, pendingFriendsRequest?: any) {
+export const sentFriendsRequest = function (user: any) {
     var container: string[] = []
     if (pendingFriendsRequest === undefined || pendingFriendsRequest === null) {
         return 0
