@@ -1,4 +1,4 @@
-export let occupations: any = [
+let occupations: any = [
     [
         "Academic librarian",
         [],
@@ -2437,12 +2437,8 @@ export let occupations: any = [
     ]
 ]
 
-export const getOccupationsArray = function() {
+export const getOccupationsArray = function () {
     return occupations
-}
-
-const setOccupationsArray = function(newOccupationsArray: any) {
-    occupations = newOccupationsArray
 }
 
 export const findOccupationComments = function (page: any) {
@@ -2466,7 +2462,24 @@ export const findOccupationComments = function (page: any) {
     return list
 }
 
-export function updateComment(username: any, comment: any, page: any, date: any) {
+export const findComment = function (comment: any, page: any) {
+    var list: any = { comments: [], likes: [], username: [], dates: [], check: [] }
+    for (var i = 0; i < occupations.length; i++) {
+        if (occupations[i][0] === page) {
+            for (var j = 0; j < occupations[i][1].length; j++) {
+                if (comment === occupations[i][1][j]) {
+                    list.comments.push(occupations[i][1][j])
+                    list.likes.push(occupations[i][2][j])
+                    list.username.push(occupations[i][3][j])
+                    list.dates.push(occupations[i][4][j])
+                }
+            }
+        }
+    }
+    return list
+}
+
+export const updateComment = function (username: any, comment: any, page: any, date: any) {
     occupations.forEach((array: any[][]) => {
         if (array[0] === page) {
             array[1].push(comment)
@@ -2479,7 +2492,7 @@ export function updateComment(username: any, comment: any, page: any, date: any)
 }
 
 // rewrite the function... its not good...
-export function updateLike(row: number, username: string, page: string | never[]) {
+export const updateLike = function (row: number, username: string, page: string | never[]) {
     for (var i = 0; i < occupations.length; i++) {
         if (occupations[i][0] === page) {
             if (occupations[i][2][row].includes(username)) {
@@ -2493,5 +2506,4 @@ export function updateLike(row: number, username: string, page: string | never[]
             }
         }
     }
-
 }

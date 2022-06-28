@@ -1,4 +1,5 @@
-export let accounts: any[] = []
+// Array is better in this case since we need a search function for accounts
+let accounts: any[] = []
 
 export function addAccount(newAcc: any) {
     accounts.push(newAcc)

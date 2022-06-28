@@ -1,16 +1,16 @@
-export let onlineUsers: any = {}
-export let friendsList: any = {}
-export let pendingFriendsRequest: any = {}
+let onlineUsers: any = {}
+let friendsList: any = {}
+let pendingFriendsRequest: any = {}
 
-export function getOnlineUsers() {
+export const getOnlineUsers = function(): any {
     return onlineUsers
 }
 
-export function setOnlineUser(username: any, socketid: any) {
+export const setOnlineUser = function(username: any, socketid: any) {
     onlineUsers[socketid] = username
 }
 
-export function addOnlineUser(username: string, socketid: string) {
+export const addOnlineUser = function(username: string, socketid: string) {
     if (username != 'Login') {
         setOnlineUser(username, socketid)
     }
@@ -21,7 +21,7 @@ export function addOnlineUser(username: string, socketid: string) {
 * @param {String} username
 * @return {String}
 */
-export const findOnlineUserByUsername = function (username: any) {
+export const findOnlineUserByUsername = function (username: any): string {
     for (const [key, value] of Object.entries(onlineUsers)) {
         if (value === username) {
             return key
@@ -39,10 +39,10 @@ export function removeOnlineUser(socketid: any) {
 
 /**
 * Function that returns value by socketId
-* @param {String} socketId
+* @param {String} counterpart
 * @return {String || 0}
 */
-export const getPendingFriendsRequest = function (counterpart: any) {
+export const getPendingFriendsRequest = function (counterpart: any): any {
     for (const [key, value] of Object.entries(pendingFriendsRequest)) {
         if (key === counterpart) {
             return value
@@ -51,7 +51,7 @@ export const getPendingFriendsRequest = function (counterpart: any) {
     return 0
 }
 
-export const getAllPendingFriendsRequest = function () {
+export const getAllPendingFriendsRequest = function (): any {
     return pendingFriendsRequest
 }
 
@@ -88,7 +88,7 @@ export const removePendingFriendsRequest = function (counterpart: any) {
     })
 }
 
-export const getFriendsListByUsername = function (user: any) {
+export const getFriendsListByUsername = function (user: any): any {
     return friendsList[user]
 }
 
@@ -100,7 +100,7 @@ export const addFriendsList = function (user: any, counterpart: any) {
     }
 }
 
-export const sentFriendsRequest = function (user: any) {
+export const sentFriendsRequest = function (user: any): any {
     var container: string[] = []
     if (pendingFriendsRequest === undefined || pendingFriendsRequest === null) {
         return 0
