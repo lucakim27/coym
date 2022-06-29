@@ -77,9 +77,9 @@ socket.on('getComments', (newOccupationArray, occupation) => {
     }
 })
 
-socket.on('updatedComment', (updatedOccupationArray, occupation, toastrContent) => {
+socket.on('updatedComment', (updatedOccupationArray, occupation) => {
     displayComments(updatedOccupationArray, occupation.replaceAll(' ', '-'))
-    toastr.success(toastrContent)
+    toastr.success('Successfully commented')
 })
 
 const displayComments = function (occupationArray, occupation) {
@@ -108,18 +108,27 @@ const appendComments = function (j, newOccupationArray, occupation) {
                     <p style='font-weight: bold;'> ${newOccupationArray.username[j]} </p>
                     <p> ${newOccupationArray.comments[j]} </p>
                     <p> ${newOccupationArray.dates[j]} </p>
-                    <button onclick=like();> ${newOccupationArray.likes[j].length} Likes </button>
+                    <button id='${newOccupationArray.comments[j]}' onClick='like(this.id)'> ${newOccupationArray.likes[j].length} Likes </button>
                     <a style="font-size: 27px; margin-left: 10px; color: rgb(54, 153, 207);"> Reply </a>
-                </div><hr>
+                    </div><hr>
             `
         )
-        appendComments(j+1, newOccupationArray, occupation)
+        appendComments(j + 1, newOccupationArray, occupation)
     }
 }
 
-socket.on('duplicatedComment', () => {
-    toastr.error('The comment is dupliacted...')
-})
+const like = function(comment) {
+    if (getCookie('current-user') == '') {
+        toastr.error('You are not logged in...')
+        return 0
+    } else {
+        socket.emit('updateLike',
+            comment,
+            getCookie('current-user'),
+            getQueryVariable('occupation')
+        )
+    }
+}
 
 const comment = function () {
     if ($('#userInput').val() === '') {
@@ -127,31 +136,18 @@ const comment = function () {
         return 0
     } else if (confirm("Are you sure you wanna comment?")) {
         socket.emit('updateComment',
-            getCookie('current-user'),
-            $('#userInput').val(),
+        getCookie('current-user'),
+        $('#userInput').val(),
             getQueryVariable('occupation')
         )
         $('#userInput').val('')
-    }
+    }   
 }
 
-const like = function () {
-    // if (getCookie('current-user') == '') {
-    //     toastr.error('You are not logged in...')
-    //     return 0
-    // } else {
-    //     socket.emit('updateLike',
-    //         row,
-    //         getCookie('current-user'),
-    //         getQueryVariable('occupation')
-    //     )
-    // }
-}
+socket.on('duplicatedComment', () => {
+    toastr.error('The comment is dupliacted...')
+})
 
-const showReply = function (row) {
-    $(`.${row}_input`).show()
-}
-
-const hideReply = function (row) {
-    $(`.${row}_input`).hide()
-}
+socket.on('updatedLike', (like, comment) => {
+    document.getElementById(comment).innerHTML = `${like} Likes`
+})

@@ -4,7 +4,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import router from './routes/index';
-import { getOccupationsArray, updateComment, updateLike, findOccupationComments, findComment } from './models/occupation'
+import { getOccupationsArray, updateComment, updateLike, findOccupationComments, findComment, findLike } from './models/occupation'
 import { countUpMostViewed, getMostViewed, countUpMostCommented, getMostCommented } from './models/count'
 import { getOnlineUsers, addOnlineUser, removeOnlineUser, getPendingFriendsRequest, addPendingFriendsRequest, findOnlineUserByUsername, addFriendsList, getFriendsListByUsername, removePendingFriendsRequest, sentFriendsRequest } from './models/online'
 import { searchChat, storeChatContent } from './models/chat'
@@ -61,14 +61,13 @@ io.on('connection', (socket: any) => {
     if (check) {
       countUpMostCommented(page)
       updateComment(username, comment, page, `${year}-${month}-${day}`)
-      io.sockets.emit('updatedComment', findComment(comment, page), page, 'Sucessfully updated comment')
+      io.sockets.emit('updatedComment', findComment(comment, page), page)
     }
   })
 
-  // need to make it responsive on the front end bit
-  socket.on('updateLike', (row: any, username: any, page: any) => {
-    // updateLike(row, username, page)
-    // io.sockets.emit('updatedComment', findOccupationComments(page), page, 'Sucessfully updated like')
+  socket.on('updateLike', (comment: any, username: any, page: any) => {
+    updateLike(comment, username, page)
+    io.sockets.emit('updatedLike', findLike(comment, page), comment)
   })
 
   socket.on('disconnect', function () {
