@@ -109,7 +109,6 @@ const appendComments = function (j, newOccupationArray, occupation) {
                     <p> ${newOccupationArray.comments[j]} </p>
                     <p> ${newOccupationArray.dates[j]} </p>
                     <button id='${newOccupationArray.comments[j]}' onClick='like(this.id)'> ${newOccupationArray.likes[j].length} Likes </button>
-                    <a style="font-size: 27px; margin-left: 10px; color: rgb(54, 153, 207);"> Reply </a>
                     </div><hr>
             `
         )
