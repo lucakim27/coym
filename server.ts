@@ -31,62 +31,62 @@ import { searchChat, storeChatContent } from './models/chat'
   });
 */
 
-var mysql2 = require('mysql2')
+// var mysql2 = require('mysql2')
 
-var con = mysql2.createConnection({
-  host: "localhost",
-  user: "root",
-  database: "coyo"
-})
+// var con = mysql2.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   database: "coyo"
+// })
 
-// connect to mysql2
-con.connect(function (err: any) {
-  if (err) throw err
-  console.log("Connected!")
+// // connect to mysql2
+// con.connect(function (err: any) {
+//   if (err) throw err
+//   console.log("Connected!")
 
-  // create database
-  con.query(`CREATE DATABASE IF NOT EXISTS \`${con.database}\`;`, function (err: any, result: any) {
-    if (err) throw err
-    console.log("Database either exists or created")
-  })
+//   // create database
+//   con.query(`CREATE DATABASE IF NOT EXISTS \`${con.database}\`;`, function (err: any, result: any) {
+//     if (err) throw err
+//     console.log("Database either exists or created")
+//   })
 
-  // create table into the database
-  var sql = "CREATE TABLE IF NOT EXISTS customers (name VARCHAR(255), address VARCHAR(255))"
-  con.query(sql, function (err: any, result: any) {
-    if (err) throw err
-    console.log("customers table either exists or created")
-  })
+//   // create table into the database
+//   var sql = "CREATE TABLE IF NOT EXISTS customers (name VARCHAR(255), address VARCHAR(255))"
+//   con.query(sql, function (err: any, result: any) {
+//     if (err) throw err
+//     console.log("customers table either exists or created")
+//   })
 
-  // insert values into the table
-  var sql = "INSERT INTO customers (name, address) VALUES ('Company Inc', 'Highway 37')";
-  con.query(sql, function (err: any, result: any) {
-    if (err) throw err
-    console.log("1 record inserted")
-  })
+//   // insert values into the table
+//   var sql = "INSERT INTO customers (name, address) VALUES ('Company Inc', 'Highway 37')";
+//   con.query(sql, function (err: any, result: any) {
+//     if (err) throw err
+//     console.log("1 record inserted")
+//   })
 
-  // select all the values from customers table
-  con.query("SELECT * FROM customers", function (err: any, result: any, fields: any) {
-    if (err) throw err
-    for (var i = 0; i < result.length; i++) {
-      console.log(result[i])
-    }
-  })
+//   // select all the values from customers table
+//   con.query("SELECT * FROM customers", function (err: any, result: any, fields: any) {
+//     if (err) throw err
+//     for (var i = 0; i < result.length; i++) {
+//       console.log(result[i])
+//     }
+//   })
 
-  // delete a row in the customer
-  var sql = "DELETE FROM customers WHERE address = 'Highway 37'"
-  con.query(sql, function (err: any, result: any) {
-    if (err) throw err
-    console.log("Number of records deleted: " + result.affectedRows)
-  })
+//   // delete a row in the customer
+//   var sql = "DELETE FROM customers WHERE address = 'Highway 37'"
+//   con.query(sql, function (err: any, result: any) {
+//     if (err) throw err
+//     console.log("Number of records deleted: " + result.affectedRows)
+//   })
 
-  // drop a customers table
-  var sql = "DROP TABLE customers"
-  con.query(sql, function (err: any, result: any) {
-    if (err) throw err
-    console.log("Table deleted")
-  })
+//   // drop a customers table
+//   var sql = "DROP TABLE customers"
+//   con.query(sql, function (err: any, result: any) {
+//     if (err) throw err
+//     console.log("Table deleted")
+//   })
 
-})
+// })
 
 const app = express()
 const { Server } = require("socket.io")

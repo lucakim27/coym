@@ -2,6 +2,7 @@ var express = require('express')
 var router = express.Router()
 export default router
 
+import mysql2 from 'mysql2'
 import { check, validationResult } from 'express-validator'
 import { searchAccounts, addAccount, checkAccountsById, checkAccountsByPassword } from '../models/account'
 
@@ -174,12 +175,36 @@ router.post('/auth', loginValidate, (req: any, res: any) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() })
-  } else if (!searchAccounts(req.body.username, req.body.password)) {
-    return res.status(422).json({ errors: "Your id or pw is incorrect" })
-  } else {
-    res.cookie('current-user', { id: req.body.username, pwd: req.body.password })
-    res.redirect('/home')
   }
+  const con = mysql2.createConnection({
+    host: "localhost",
+    user: "root",
+    database: "coyo"
+  })
+
+  con.connect(function (err: any) {
+    if (err) throw err
+
+    con.query("SELECT * FROM accounts", function (err: any, result: any, fields: any) {
+      if (err) throw err
+      for (var i = 0; i < result.length; i++) {
+        if (req.body.username === result[i].username && req.body.password === result[i].password) {
+          console.log("Wrong username or password")
+          res.redirect('/login')
+          // res.send(`<script>alert("Wrong username or password"); window.location.href = "/login"; </script>`)
+        } else {
+          res.cookie('current-user', { id: req.body.username, pwd: req.body.password })
+          res.redirect('/home')
+        }
+      }
+    })
+
+  })
+
+
+
+
+
 })
 
 router.post('/logout', function (req: any, res: { cookie: (arg0: string, arg1: undefined) => void; redirect: (arg0: string) => void }) {
@@ -196,7 +221,43 @@ router.post('/registerAccount', registerValidate, function (req: any, res: any) 
   } else if (checkAccountsByPassword(req.body.password)) {
     return res.status(422).json({ errors: "Password is duplicated" })
   } else {
-    addAccount([req.body.username, req.body.password])
-    res.redirect('/login')
+
+    const connection = mysql2.createConnection({
+      host: "localhost",
+      user: "root",
+      database: "coyo"
+    })
+
+    connection.connect(function (err: any) {
+      if (err) throw err
+
+      connection.query(`CREATE TABLE IF NOT EXISTS accounts (username VARCHAR(255), password VARCHAR(255))`, function (err: any, result: any) {
+        if (err) throw err
+      })
+
+      connection.query("SELECT * FROM accounts", function (err: any, result: any, fields: any) {
+        if (err) throw err
+
+        if (result.length !== 0) {
+          var existing = false
+
+          for (var i = 0; i < result.length; i++) {
+            if (req.body.username === result[i].username && req.body.password === result[i].password) {
+              res.send(`<script>alert("Account already exists"); window.location.href = "/register"; </script>`)
+              existing = true
+              connection.end()
+            }
+          }
+
+          if (!existing) {
+            addAccount(req.body.username, req.body.password)
+            res.redirect('/login')
+            connection.end()
+          }
+        }
+      })
+
+    })
+
   }
 })

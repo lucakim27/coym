@@ -1,8 +1,34 @@
-// Array is better in this case since we need a search function for accounts
+import mysql2 from 'mysql2'
+
 let accounts: any[] = []
 
-export function addAccount(newAcc: any) {
-    accounts.push(newAcc)
+const host = "localhost"
+const user = "root"
+const database = "coyo"
+
+export const addAccount = function(username: any, password: any) {
+    const connection = mysql2.createConnection({
+        host: host,
+        user: user,
+        database: database
+    })
+
+    connection.connect(function (err: any) {
+        if (err) throw err
+
+        connection.query(`CREATE DATABASE IF NOT EXISTS coyo;`, function (err: any, result: any) {
+            if (err) throw err
+        })
+
+        connection.query(`CREATE TABLE IF NOT EXISTS accounts (username VARCHAR(255), password VARCHAR(255))`, function (err: any, result: any) {
+            if (err) throw err
+        })
+
+        connection.query(`INSERT INTO accounts (username, password) VALUES ('${username}', '${password}')`, function (err: any, result: any) {
+            if (err) throw err
+        })
+
+    })
 }
 
 export function searchAccounts(id: any, pwd: any) {
