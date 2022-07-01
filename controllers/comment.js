@@ -1,27 +1,3 @@
-function getCookie(cname) {
-    let id = ''
-    let name = cname + "="
-    let decodedCookie = decodeURIComponent(document.cookie)
-    let ca = decodedCookie.split(';')
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i]
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1)
-        }
-        if (c.indexOf(name) == 0) {
-            for (var j = 9; j < c.substring(name.length, c.length).length; j++) {
-                if (c.substring(name.length, c.length)[j] === '"') {
-                    break
-                } else {
-                    id += c.substring(name.length, c.length)[j]
-                }
-            }
-            return id
-        }
-    }
-    return ""
-}
-
 const getQueryVariable = function (variable) {
     var query = window.location.search.substring(1)
     var vars = query.split('&')
@@ -50,24 +26,12 @@ const animateText = function (text) {
     return value
 }
 
-// once user enters
-$("#occupationTitle").html(animateText(getQueryVariable('occupation')))
-
-// append comment div tag
-$('#commentCenterTag').append(`<div id='${getQueryVariable('occupation').replaceAll(' ', '-')}' style="height: 800px; overflow-y: scroll"></div>`)
-
-try {
-    searchBtn.setAttribute("onclick", "comment()")
-} catch (error) {
-    console.error(error)
-}
-
-// To let server knows which page the user is on
 socket.emit('emitPage', getQueryVariable('occupation'))
 
 socket.on('getComments', (newOccupationArray, occupation) => {
+    $("#occupationTitle").html(animateText(getQueryVariable('occupation')))
+    $('#commentCenterTag').append(`<div id='${getQueryVariable('occupation').replaceAll(' ', '-')}' style="height: 800px; overflow-y: scroll"></div>`)
     displayComments(newOccupationArray, occupation.replaceAll(' ', '-'))
-
     try {
         if ($('#signIn').html() !== 'Sign in') {
             socket.emit('addOnlineUser', getCookie('current-user'))
@@ -129,7 +93,7 @@ const like = function(comment) {
     }
 }
 
-const comment = function () {
+$('#commentBtn').click(function () {
     if ($('#userInput').val() === '') {
         toastr.error('You have not typed anything yet...')
         return 0
@@ -141,7 +105,7 @@ const comment = function () {
         )
         $('#userInput').val('')
     }   
-}
+})
 
 socket.on('duplicatedComment', () => {
     toastr.error('The comment is dupliacted...')

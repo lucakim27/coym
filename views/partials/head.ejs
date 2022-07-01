@@ -68,7 +68,8 @@
     width: 80%;
   }
 
-  #searchBtn {
+  #searchBtn,
+  #commentBtn {
     background-color: rgb(54, 153, 207);
     cursor: pointer;
     border-radius: 5px;
@@ -181,8 +182,6 @@
     width: 0;
     position: fixed;
     z-index: 1;
-    /* top: 0;
-    left: 0; */
     background-color: #111;
     overflow-x: hidden;
     transition: 0.5s;
@@ -277,7 +276,8 @@
     width: 100%;
   }
 
-  #userInput, #userInputForReply {
+  #userInput,
+  #userInputForReply {
     border-radius: 5px;
     text-align: center;
     width: 400px;
@@ -504,16 +504,6 @@
       z-index 0ms;
   }
 
-  /* #options {
-    border-radius: 5px;
-    height: 200px;
-    overflow-y: scroll;
-    font-size: 30px;
-    margin-top: 1px;
-    padding:0;
-    list-style-type: none;
-} */
-
   #options {
     display: none;
     height: 580px;
@@ -526,16 +516,9 @@
   #options tbody tr td {
     width: 400vh;
   }
-
-  /* #options li {
-    line-height:25px;
-     color: rgb(0, 0, 0);
-    cursor: pointer;
-} */
 </style>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<!-- <script src="http://localhost:3000/home/socket.io/socket.io"></script> -->
 <script
   src="https://cdn.socket.io/3.1.3/socket.io.min.js"
   integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh"
@@ -549,5 +532,5 @@
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
 />
-<title><%= page %></title>
+<title><%= title %></title>
 <link rel="shortcut icon" href="#" />

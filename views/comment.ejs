@@ -7,10 +7,10 @@
     <%- include('partials/navigation'); -%> <%- include('partials/header'); -%>
     <center id="commentCenterTag">
       <h1 id="occupationTitle"></h1>
-      <% if(user === ''){ %> <% } else { %>
+      <% if(user !== undefined){ %>
       <div id="inputAndCommentBtn">
         <input type="text" id="userInput" placeholder="Comment here..." />
-        <button id="searchBtn">></button>
+        <button id="commentBtn">></button>
       </div>
       <% } %>
       <hr />

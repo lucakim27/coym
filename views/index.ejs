@@ -6,7 +6,7 @@
 <body>
     <center style="margin-top: 30vh">
         <h1 style="color: rgb(0, 0, 0)">Comment On Your <b style="color: rgb(54, 153, 207)">Occupation</b></h1>
-            <% if(user != ""){ %>
+            <% if(user !== undefined){ %>
                 Welcome back <b><%= user %></b><br>
             <% } %>
         </h3>
@@ -19,7 +19,7 @@
                 <span style="--i:4">r</span>
                 <span style="--i:5">t</span>
             </button>
-            <% if(user === ""){ %>
+            <% if(user === undefined){ %>
                 <a href="/login" class="loginBtn" style="margin-left: 10px;">Sign in</a>
             <% } %>
     </center>
