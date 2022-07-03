@@ -39,9 +39,7 @@ router.get('/chat', function (req: any, res: any, next: any) {
 router.get('/chart', function (req: any, res: any, next: any) {
   res.render(__dirname + '/../../views/chart.ejs', {
     user: (req.cookies['current-user'] === undefined) ? undefined : req.cookies['current-user'].id,
-    title: 'COYO - Chart',
-    // getMostViewed: getMostViewed(),
-    // getMostCommented: getMostCommented()
+    title: 'COYO - Chart'
   })
 })
 

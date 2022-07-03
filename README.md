@@ -18,14 +18,3 @@ Many students in the world are facing difficulties in figuring out what occupati
 
 # How to hop on the project
 You're welcome to make as many pull requests as you want to as well as the issues.
-
-# How to open the website
-```
-npm install
-```
-```
-npm run build
-```
-```
-npm start
-```
