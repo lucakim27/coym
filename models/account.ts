@@ -1,19 +1,31 @@
 import mysql2 from 'mysql2'
 
-export const addAccount = function (username: any, password: any) {
-    const connection = mysql2.createConnection({
-        host: "localhost",
-        user: "root",
-        database: "coyo"
-    })
+const connection = mysql2.createConnection({
+    host: "localhost",
+    user: "root",
+    database: "coyo"
+})
+
+export const initializeAccountsTable = function () {
     connection.connect(function (err: any) {
         if (err) throw err
-        connection.query(`CREATE DATABASE IF NOT EXISTS coyo;`, function (err: any, result: any) {
+        connection.query(`SELECT table_name
+            FROM information_schema.tables
+            WHERE table_schema = 'coyo'
+            AND table_name = 'accounts';`, function (err: any, result: any) {
             if (err) throw err
+            if (!result.length) {
+                connection.query(`CREATE TABLE accounts (id INT AUTO_INCREMENT, username VARCHAR(255), password VARCHAR(255), PRIMARY KEY (id)) `, function (err: any, result: any) {
+                    if (err) throw err
+                })
+            }
         })
-        connection.query(`CREATE TABLE IF NOT EXISTS accounts (username VARCHAR(255), password VARCHAR(255))`, function (err: any, result: any) {
-            if (err) throw err
-        })
+    })
+}
+
+export const addAccount = function (username: any, password: any) {
+    connection.connect(function (err: any) {
+        if (err) throw err
         connection.query(`INSERT INTO accounts (username, password) VALUES ('${username}', '${password}')`, function (err: any, result: any) {
             if (err) throw err
         })
@@ -21,16 +33,8 @@ export const addAccount = function (username: any, password: any) {
 }
 
 export const authRegistration = function (res: any, req: any) {
-    const connection = mysql2.createConnection({
-        host: "localhost",
-        user: "root",
-        database: "coyo"
-    })
     connection.connect(function (err: any) {
         if (err) throw err
-        connection.query(`CREATE TABLE IF NOT EXISTS accounts (username VARCHAR(255), password VARCHAR(255))`, function (err: any, result: any) {
-            if (err) throw err
-        })
         connection.query("SELECT * FROM accounts", function (err: any, result: any, fields: any) {
             if (err) throw err
             if (result.length !== 0) {
@@ -54,14 +58,9 @@ export const authRegistration = function (res: any, req: any) {
 }
 
 export const authLogin = function (res: any, req: any) {
-    const con = mysql2.createConnection({
-        host: "localhost",
-        user: "root",
-        database: "coyo"
-    })
-    con.connect(function (err: any) {
+    connection.connect(function (err: any) {
         if (err) throw err
-        con.query("SELECT * FROM accounts", function (err: any, result: any, fields: any) {
+        connection.query("SELECT * FROM accounts", function (err: any, result: any, fields: any) {
             if (err) throw err
             var existing = false
             for (var i = 0; i < result.length; i++) {

@@ -10,26 +10,28 @@
       onclick="sidebarOpen()"
       >&#9776;</span
     >
-    <header style="margin-top: -40px"></header>
+    <header style="margin-top: -10px"></header>
     <hr id="hrAfterHeader" />
 
-    <center id="loginContainer" style="height: 223px">
+    <center id="loginContainer" style="height: 900px">
+      <h1 id="header" style="font-size: 80px;">Login</h1><br>
       <form action="/auth" method="post">
-        <h1 id="header">Login</h1>
         <input
           type="text"
           name="username"
           placeholder="Enter your ID"
+          style="font-size: 80px; border-radius: 10px;"
           required
         /><br /><br />
         <input
           type="password"
           name="password"
           placeholder="Enter your Password"
+          style="font-size: 80px; border-radius: 10px;"
           required
         /><br /><br />
-        <button type="submit" value="login">Login</button><br />
-        <p>Register <a href="/register">here</a>!</p>
+        <button type="submit" value="login" style="font-size: 50px; border-radius: 10px; background-color: white;">Login</button>
+        <p style="font-size: 50px;">Register <a href="/register">here</a>!</p>
       </form>
     </center>
     <%- include('partials/footer'); -%>

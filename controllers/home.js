@@ -1,5 +1,10 @@
-var occupationArray = []
-var options = document.getElementById('options')
+const occupationArray = []
+const options = document.getElementById('options')
+
+for (var i = 0; i < options.rows.length; i++) {
+    console.log(options.rows[i])
+    occupationArray.push(options.rows[i].innerText.replaceAll('  ', '').replaceAll('\n', ''))
+}
 
 function getCookie(cname) {
     let id = ''
@@ -25,24 +30,12 @@ function getCookie(cname) {
     return ""
 }
 
-socket.on('userEnter', (array) => {
-    pushOccupationArray(array, 0)
-    // listOccupations(0)
-    try {
-        if ($('#signIn').html() === 'Sign in') {
-        } else {
-            socket.emit('addOnlineUser', getCookie('current-user'))
-        }
-    } catch (error) {
-        console.error(error);
+try {
+    if ($('#signIn').html() !== 'Sign in') {
+        socket.emit('addOnlineUser', getCookie('current-user'))
     }
-})
-
-const pushOccupationArray = function (array, i) {
-    if (i < array.length) {
-        occupationArray.push(array[i])
-        pushOccupationArray(array, i + 1)
-    }
+} catch (error) {
+    console.error(error)
 }
 
 const listOccupations = function (i) {
@@ -50,28 +43,28 @@ const listOccupations = function (i) {
         var row = options.insertRow(i)
         var cell = row.insertCell(0)
         cell.insertAdjacentHTML('beforeend', `
-            <a  href='/comment?occupation=${occupationArray[i][0]}' 
-                onclick="countForCharts('${occupationArray[i][0]}')"
-            >${occupationArray[i][0]}
+            <a  href='/comment?occupation=${occupationArray[i]}' 
+                onclick="countForCharts('${occupationArray[i]}')"
+            >${occupationArray[i]}
             </a><hr>`
         )
-        listOccupations(i + 1)
+        listOccupations(i+1)
     }
 }
 
 const searchOccupations = function (i, j, input) {
-    if (i < occupationArray.length && occupationArray[i][0].toLowerCase().includes(input.toLowerCase())) {
+    if (i < occupationArray.length && occupationArray[i].toLowerCase().includes(input.toLowerCase())) {
         var row = options.insertRow(j)
         var cell = row.insertCell(0)
         cell.insertAdjacentHTML('beforeend', `
-            <a  href='/comment?occupation=${occupationArray[i][0]}' 
-                onclick="countForCharts('${occupationArray[i][0]}')"
-            >${occupationArray[i][0]}
+            <a  href='/comment?occupation=${occupationArray[i]}' 
+                onclick="countForCharts('${occupationArray[i]}')"
+            >${occupationArray[i]}
             </a><hr>`
         )
-        searchOccupations(i + 1, j + 1, input)
+        searchOccupations(i+1, j+1, input)
     } else if (i < occupationArray.length) {
-        searchOccupations(i + 1, j, input)
+        searchOccupations(i+1, j, input)
     }
 }
 
@@ -96,8 +89,7 @@ $.event.special.inputchange = {
     add: function () {
         $.data(this, 'cache', this.value)
     }
-};
-
+}
 
 $('input').on('inputchange', function () {
     options.innerHTML = '<hr>'

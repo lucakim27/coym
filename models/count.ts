@@ -1,44 +1,40 @@
-let theMostViewedOccupations: any = {}
-let theMostCommentedOccupations: any = {}
+import mysql2 from 'mysql2'
 
-/**
- * Returns theMostViewedOccupations object
- * @return {Object}
- */
-export const getMostViewed = function(): any {
-    return theMostViewedOccupations
+const connection = mysql2.createConnection({
+    host: "localhost",
+    user: "root",
+    database: "coyo"
+})
+
+export const initializeCountsTable = function () {
+    connection.connect(function (err: any) {
+        if (err) throw err
+        connection.query(`SELECT table_name
+            FROM information_schema.tables
+            WHERE table_schema = 'coyo'
+            AND table_name = 'counts';`, function (err: any, result: any) {
+            if (err) throw err
+            if (!result.length) {
+                connection.query(`CREATE TABLE counts (id INT AUTO_INCREMENT, occupationName VARCHAR(255), number INT, PRIMARY KEY (id)) `, function (err: any, result: any) {
+                    if (err) throw err
+                })
+            }
+        })
+    })
 }
 
-/**
- * Returns theMostCommentedOccupations object
- * @return {Object}
- */
-export const getMostCommented = function(): any {
-    return theMostCommentedOccupations
-}
+// export const countUpMostViewed = function(occupationName: any) {
+//     if (theMostViewedOccupations[occupationName] == undefined) {
+//         theMostViewedOccupations[occupationName] = 1
+//     } else {
+//         theMostViewedOccupations[occupationName] += 1
+//     }
+// }
 
-/**
- * Set the integer variable with a key of the parameter to 1 in the object
- * Count up the integer variable with a key of the parameter in the object
- * @param {String} occupationName
- */
-export const countUpMostViewed = function(occupationName: any) {
-    if (theMostViewedOccupations[occupationName] == undefined) {
-        theMostViewedOccupations[occupationName] = 1
-    } else {
-        theMostViewedOccupations[occupationName] += 1
-    }
-}
-
-/**
- * Set the integer variable with a key of the parameter to 1 in the object
- * Count up the integer variable with a key of the parameter in the object
- * @param {String} occupationName
- */
-export const countUpMostCommented = function(occupationName: any) {
-    if (theMostCommentedOccupations[occupationName] == undefined) {
-        theMostCommentedOccupations[occupationName] = 1
-    } else {
-        theMostCommentedOccupations[occupationName] += 1
-    }
-}
+// export const countUpMostCommented = function(occupationName: any) {
+//     if (theMostCommentedOccupations[occupationName] == undefined) {
+//         theMostCommentedOccupations[occupationName] = 1
+//     } else {
+//         theMostCommentedOccupations[occupationName] += 1
+//     }
+// }

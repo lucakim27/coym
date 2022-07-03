@@ -26,9 +26,7 @@ function getCookie(cname) {
     return ""
 }
 
-socket.on('getUsername', () => {
-    socket.emit('passBackUsername', getCookie('current-user'))
-})
+socket.emit('passBackUsername', getCookie('current-user'))
 
 socket.on('getFriendsRequestPending', (array) => {
     pendingFriendsRequestTable.innerHTML = '<tbody></tbody>'

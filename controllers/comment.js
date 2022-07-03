@@ -26,19 +26,23 @@ const animateText = function (text) {
     return value
 }
 
+$("#occupationTitle").html(animateText(getQueryVariable('occupation')))
+$('#commentCenterTag').append(`<div id='${getQueryVariable('occupation').replaceAll(' ', '-')}' style="height: 800px; overflow-y: scroll"></div>`)
+
+try {
+    if ($('#signIn').html() !== 'Sign in') {
+        socket.emit('addOnlineUser', getCookie('current-user'))
+    }
+} catch (error) {
+    console.error(error)
+}
+
 socket.emit('emitPage', getQueryVariable('occupation'))
 
-socket.on('getComments', (newOccupationArray, occupation) => {
-    $("#occupationTitle").html(animateText(getQueryVariable('occupation')))
-    $('#commentCenterTag').append(`<div id='${getQueryVariable('occupation').replaceAll(' ', '-')}' style="height: 800px; overflow-y: scroll"></div>`)
-    displayComments(newOccupationArray, occupation.replaceAll(' ', '-'))
-    try {
-        if ($('#signIn').html() !== 'Sign in') {
-            socket.emit('addOnlineUser', getCookie('current-user'))
-        }
-    } catch (error) {
-        console.error(error)
-    }
+socket.on('getComments', (commentsArray, page) => {
+    console.log(page)
+    console.log(commentsArray[0])
+    displayComments(commentsArray, page.replaceAll(' ', '-'))
 })
 
 socket.on('updatedComment', (updatedOccupationArray, occupation) => {

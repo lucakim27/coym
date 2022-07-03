@@ -5,8 +5,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
   </head>
   <body>
+    <div id="mydiv" data-test=<%= getMostViewed %></div>
     <%- include('partials/navigation'); -%> <%- include('partials/header'); -%>
-    <center style="height: 800px">
+    <center style="height: 1100px">
       <h1 id="header" class="waviy">
         <span style="--i: 0">C</span>
         <span style="--i: 1">h</span>
@@ -15,7 +16,6 @@
         <span style="--i: 4">t</span>
       </h1>
       <hr />
-
       <div
         style="
           display: flex;
@@ -26,7 +26,7 @@
       >
         <div
           style="
-            height: 80vh;
+            height: 83vh;
             min-width: 40%;
             flex: 0;
             border-style: solid;
@@ -37,11 +37,11 @@
         >
           <h1>Most Visited Pages</h1>
           <hr />
-          <canvas id="mostViewedPages"></canvas>
+          <canvas id="mostViewedPages" style="max-width: 90%"></canvas>
         </div>
         <div
           style="
-            height: 80vh;
+            height: 83vh;
             min-width: 40%;
             flex: 0;
             border-style: solid;
@@ -52,7 +52,7 @@
         >
           <h1>Most Commented Pages</h1>
           <hr />
-          <canvas id="mostCommentedPages"></canvas>
+          <canvas id="mostCommentedPages" style="max-width: 90%"></canvas>
         </div>
       </div>
     </center>

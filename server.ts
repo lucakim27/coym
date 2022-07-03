@@ -1,12 +1,16 @@
 import path from 'path'
 import http from 'http'
+import mysql2 from 'mysql2'
 import express from 'express'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
-import router from './routes/index';
-import { getOccupationsArray, updateComment, updateLike, findOccupationComments, findComment, findLike } from './models/occupation'
-import { countUpMostViewed, getMostViewed, countUpMostCommented, getMostCommented } from './models/count'
-import { getOnlineUsers, addOnlineUser, removeOnlineUser, getPendingFriendsRequest, addPendingFriendsRequest, findOnlineUserByUsername, addFriendsList, getFriendsListByUsername, removePendingFriendsRequest, sentFriendsRequest } from './models/online'
+import router from './routes/index'
+import { initializeOccupationsTable } from './models/occupation'
+import { initializeCommentsTable } from './models/comment'
+import { initializeCountsTable } from './models/count'
+import { initializeAccountsTable } from './models/account'
+import { getOnlineUsers, addOnlineUser, removeOnlineUser, findOnlineUserByUsername } from './models/online'
+import { getPendingFriendsRequest, addPendingFriendsRequest, addFriendsList, getFriendsListByUsername, removePendingFriendsRequest, sentFriendsRequest } from './models/friend'
 import { searchChat, storeChatContent } from './models/chat'
 
 const app = express()
@@ -23,14 +27,26 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use('/', router)
 
-io.on('connection', (socket: any) => {
-  io.to(socket.id).emit('userEnter', getOccupationsArray())
-  io.to(socket.id).emit('getMostViewed', getMostViewed())
-  io.to(socket.id).emit('getMostCommented', getMostCommented())
-  io.to(socket.id).emit('getUsername')
+/* create 'coyo' database before you run */
+initializeOccupationsTable()
+initializeCommentsTable()
+initializeCountsTable()
+initializeAccountsTable()
 
-  socket.on('emitPage', (page: any) => {
-    io.to(socket.id).emit('getComments', findOccupationComments(page), page)
+const connection = mysql2.createConnection({
+  host: "localhost",
+  user: "root",
+  database: "coyo"
+})
+
+io.on('connection', (socket: any) => {
+
+  // you dont need these... just render in ejs through express..
+  // io.to(socket.id).emit('getMostViewed', getMostViewed())
+  // io.to(socket.id).emit('getMostCommented', getMostCommented())
+
+  socket.on('emitPage', async (page: any) => {
+    io.to(socket.id).emit('getComments', await connection.promise().query(`SELECT * FROM comments`), page)
   })
 
   socket.on('addOnlineUser', (user: any) => {
@@ -52,22 +68,22 @@ io.on('connection', (socket: any) => {
     var month = dateObj.getUTCMonth() + 1
     var day = dateObj.getUTCDate()
     var year = dateObj.getUTCFullYear()
-    findOccupationComments(page).comments.forEach((element: any) => {
-      if (element === comment) {
-        check = false
-        io.sockets.emit('duplicatedComment')
-      }
-    })
+    // findOccupationComments(page).comments.forEach((element: any) => {
+    //   if (element === comment) {
+    //     check = false
+    //     io.sockets.emit('duplicatedComment')
+    //   }
+    // })
     if (check) {
-      countUpMostCommented(page)
-      updateComment(username, comment, page, `${year}-${month}-${day}`)
-      io.sockets.emit('updatedComment', findComment(comment, page), page)
+      // countUpMostCommented(page)
+      // updateComment(username, comment, page, `${year}-${month}-${day}`)
+      // io.sockets.emit('updatedComment', findComment(comment, page), page)
     }
   })
 
   socket.on('updateLike', (comment: any, username: any, page: any) => {
-    updateLike(comment, username, page)
-    io.sockets.emit('updatedLike', findLike(comment, page), comment)
+    // updateLike(comment, username, page)
+    // io.sockets.emit('updatedLike', findLike(comment, page), comment)
   })
 
   socket.on('disconnect', function () {
@@ -76,7 +92,7 @@ io.on('connection', (socket: any) => {
   })
 
   socket.on('countUpMostViewed', (occupationName: any) => {
-    countUpMostViewed(occupationName)
+    // countUpMostViewed(occupationName)
   })
 
   socket.on('acceptFriendsRequest', (counterpart: any, user: any) => {

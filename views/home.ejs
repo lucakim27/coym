@@ -6,22 +6,45 @@
 <body>
     <%- include('partials/navigation'); -%>
     <%- include('partials/header'); -%>
-    <center style="height: 800px;">
+    <center style="height: 1600px;">
         <h1 id="header" class="waviy">
             <span style="--i:0">H</span>
             <span style="--i:1">O</span>
             <span style="--i:2">M</span>
             <span style="--i:3">E</span>
         </h1>
-        <img src='https://img.freepik.com/free-vector/group-different-occupations-standing-white-background_218660-287.jpg?w=2000' style='width: 100%; height: 80%; filter: brightness(70%);'>
+        <img src='https://img.freepik.com/free-vector/group-different-occupations-standing-white-background_218660-287.jpg?w=2000' style='width: 100%; height: 50%; filter: brightness(70%);'>
         <div class="Wrapper">
             <div class="Input">
             <div id="autocomplete">
                 <input type="text" id="input" autocomplete="off" class="Input-text" placeholder="Occupation, e.g. Software Engineer">
-                <table id="options"></table>
+                <table id="options">
+                    <% for(var i=0; i < occupationsList.length; i++) { %>
+                        <tr>
+                            <td><%= occupationsList[i] %></td>
+                        </tr>
+                    <% } %>
+                </table>
             </div>
               <label for="input" class="Input-label">Occupation</label>
             </div>
+        </div>
+        <div style="margin-bottom: 40px;">
+            <h1>What is COYO?</h1>
+            <h4>A website where you comment on your occupation and have a better understanding of it</h4>
+        </div>
+        <div style="margin-bottom: 40px;">
+            <h1>How does COYO work?</h1>
+            <h4>1. Direct yourself to the comment page through the search bar</h4>
+            <h4>2. Comment on the page or like others comments</h4>
+            <h4>3. Talk to your friends or people who are currently online</h4>
+            <h4>4. Send a friend request to the strangers and become friends with them</h4>
+        </div>
+        <div style="margin-bottom: 40px;">
+            <h1>Current records of COYO</h1>
+            <h4>? comments commented by COYO members</h4>
+            <h4>? likes on all the comments in the pages</h4>
+            <h4>? online people at the moment</h4>
         </div>
         <div>
             <svg style="margin: 20px;" xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/> <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/> </svg>
