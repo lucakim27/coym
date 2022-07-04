@@ -357,7 +357,7 @@ const connection = mysql2.createConnection({
     database: "coyo"
 })
 
-export const initializeOccupationsTable = function () {
+export const createOccupationsTable = function () {
     connection.connect(function (err: any) {
         if (err) throw err
         connection.query(`SELECT table_name

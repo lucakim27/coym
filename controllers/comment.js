@@ -37,7 +37,8 @@ try {
     console.error(error)
 }
 
-socket.emit('emitPage', getQueryVariable('occupation'))
+const comments = JSON.parse(document.getElementById('comments').innerHTML)[0]
+console.log(comments)
 
 socket.on('getComments', (commentsArray, page) => {
     console.log(page)

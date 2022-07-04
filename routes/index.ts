@@ -1,11 +1,15 @@
-var express = require('express')
-var router = express.Router()
-export default router
+import mysql2 from 'mysql2'
 import { check, validationResult } from 'express-validator'
 import { authLogin, authRegistration } from '../models/account'
 import { occupationsList } from '../models/occupation'
-// import { getMostViewed, getMostCommented } from '../models/count'
-
+var express = require('express')
+var router = express.Router()
+export default router
+const connection = mysql2.createConnection({
+  host: "localhost",
+  user: "root",
+  database: "coyo"
+})
 
 router.get('/', function (req: any, res: any, next: any) {
   res.render(__dirname + '/../../views/index.ejs', {
@@ -22,10 +26,11 @@ router.get('/home', function (req: any, res: any, next: any) {
   })
 })
 
-router.get('/comment', function (req: any, res: any, next: any) {
+router.get('/comment', async function (req: any, res: any, next: any) {
   res.render(__dirname + '/../../views/comment.ejs', {
     user: (req.cookies['current-user'] === undefined) ? undefined : req.cookies['current-user'].id,
-    title: 'COYO - Comment'
+    title: 'COYO - Comment',
+    comments: JSON.stringify(await connection.promise().query(`SELECT * FROM comments`))
   })
 })
 
@@ -36,10 +41,11 @@ router.get('/chat', function (req: any, res: any, next: any) {
   })
 })
 
-router.get('/chart', function (req: any, res: any, next: any) {
+router.get('/chart', async function (req: any, res: any, next: any) {
   res.render(__dirname + '/../../views/chart.ejs', {
     user: (req.cookies['current-user'] === undefined) ? undefined : req.cookies['current-user'].id,
-    title: 'COYO - Chart'
+    title: 'COYO - Chart',
+    counts: JSON.stringify(await connection.promise().query(`SELECT * FROM counts`)),
   })
 })
 

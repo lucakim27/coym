@@ -1,40 +1,79 @@
-
-
-
-const mostViewedOccuaptionsTable = document.getElementById("mostViewedOccuaptions")
-const mostCommentedOccuaptionsTable = document.getElementById("mostCommentedOccuaptions")
-
-function getCookie(cname) {
-    let id = ''
-    let name = cname + "="
-    let decodedCookie = decodeURIComponent(document.cookie)
-    let ca = decodedCookie.split(';')
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i]
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1)
-        }
-        if (c.indexOf(name) == 0) {
-            for (var j = 9; j < c.substring(name.length, c.length).length; j++) {
-                if (c.substring(name.length, c.length)[j] === '"') {
-                    break
-                } else {
-                    id += c.substring(name.length, c.length)[j]
-                }
-            }
-            return id
-        }
-    }
-    return ""
-}
+const counts = JSON.parse(document.getElementById('counts').innerHTML)[0]
 
 const getRandomRgb = function () {
-    var num = Math.round(0xffffff * Math.random());
-    var r = num >> 16;
-    var g = num >> 8 & 255;
-    var b = num & 255;
-    return 'rgb(' + r + ', ' + g + ', ' + b + ')';
+    var num = Math.round(0xffffff * Math.random())
+    return 'rgb(' + num >> 16 + ', ' + num >> 8 & 255 + ', ' + num & 255 + ')'
 }
+
+const data = {
+    'view': {
+        labels: [],
+        datasets: [{
+            label: 'Most Viewed Pages',
+            data: [],
+            backgroundColor: [],
+            hoverOffset: 4
+        }]
+    },
+    'comment': {
+        labels: [],
+        datasets: [{
+            label: 'Most Commented Pages',
+            data: [],
+            backgroundColor: [],
+            hoverOffset: 4
+        }]
+    }
+}
+
+const config = {
+    'view': {
+        type: 'doughnut',
+        data: data['view'],
+    },
+    'comment': {
+        type: 'doughnut',
+        data: data['comment'],
+    }
+}
+
+const counter = {
+    'view': {},
+    'comment': {}
+}
+
+for (var i = 0; i < counts.length; i++) {
+    if (counts[i].type === 'view') {
+        counter['view'][counts[i].page] = counts[i].count
+    } else {
+        counter['comment'][counts[i].page] = counts[i].count
+    }
+}
+
+const keysForView = Object.keys(counter['view'])
+
+keysForView.forEach((key, index) => {
+    data['view'].labels.push(key)
+    data['view'].datasets[0].data.push(counter['view'][key])
+    data['view'].datasets[0].backgroundColor.push(getRandomRgb())
+})
+
+const chartForView = new Chart(
+    document.getElementById('mostViewedPages'),
+    config['view']
+)
+
+const keysForComment = Object.keys(counter['comment'])
+keysForComment.forEach((key, index) => {
+    data['comment'].labels.push(key)
+    data['comment'].datasets[0].data.push(counter['comment'][key])
+    data['comment'].datasets[0].backgroundColor.push(getRandomRgb())
+})
+
+const chartForComment = new Chart(
+    document.getElementById('mostCommentedPages'),
+    config['comment']
+)
 
 try {
     if ($('#signIn').html() === 'Sign in') {
@@ -44,63 +83,3 @@ try {
 } catch (error) {
     console.error(error)
 }
-
-socket.on('getMostViewed', (value) => {
-    const data = {
-        labels: [],
-        datasets: [{
-            label: 'My First Dataset',
-            data: [],
-            backgroundColor: [],
-            hoverOffset: 4
-        }]
-    };
-
-    const config = {
-        type: 'doughnut',
-        data: data,
-    }
-
-    const keys = Object.keys(value)
-
-    keys.forEach((key, index) => {
-        data.labels.push(key)
-        data.datasets[0].data.push(value[key])
-        data.datasets[0].backgroundColor.push(getRandomRgb())
-    })
-
-    const myChart = new Chart(
-        document.getElementById('mostViewedPages'),
-        config
-    )
-})
-
-socket.on('getMostCommented', (value) => {
-    const data = {
-        labels: [],
-        datasets: [{
-            label: 'My First Dataset',
-            data: [],
-            backgroundColor: [],
-            hoverOffset: 4
-        }]
-    };
-
-    const config = {
-        type: 'doughnut',
-        data: data,
-    }
-
-    const keys = Object.keys(value)
-
-    keys.forEach((key, index) => {
-        data.labels.push(key)
-        data.datasets[0].data.push(value[key])
-        data.datasets[0].backgroundColor.push(getRandomRgb())
-    })
-
-    const myChart = new Chart(
-        document.getElementById('mostCommentedPages'),
-        config
-    )
-})

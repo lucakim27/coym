@@ -6,7 +6,7 @@ const connection = mysql2.createConnection({
     database: "coyo"
 })
 
-export const initializeCountsTable = function () {
+export const createCountsTable = function () {
     connection.connect(function (err: any) {
         if (err) throw err
         connection.query(`SELECT table_name
@@ -15,7 +15,7 @@ export const initializeCountsTable = function () {
             AND table_name = 'counts';`, function (err: any, result: any) {
             if (err) throw err
             if (!result.length) {
-                connection.query(`CREATE TABLE counts (id INT AUTO_INCREMENT, occupationName VARCHAR(255), number INT, PRIMARY KEY (id)) `, function (err: any, result: any) {
+                connection.query(`CREATE TABLE counts (id INT AUTO_INCREMENT, page VARCHAR(255) UNIQUE KEY, type VARCHAR(255), count INT, PRIMARY KEY (id)) `, function (err: any, result: any) {
                     if (err) throw err
                 })
             }
@@ -23,18 +23,11 @@ export const initializeCountsTable = function () {
     })
 }
 
-// export const countUpMostViewed = function(occupationName: any) {
-//     if (theMostViewedOccupations[occupationName] == undefined) {
-//         theMostViewedOccupations[occupationName] = 1
-//     } else {
-//         theMostViewedOccupations[occupationName] += 1
-//     }
-// }
-
-// export const countUpMostCommented = function(occupationName: any) {
-//     if (theMostCommentedOccupations[occupationName] == undefined) {
-//         theMostCommentedOccupations[occupationName] = 1
-//     } else {
-//         theMostCommentedOccupations[occupationName] += 1
-//     }
-// }
+export const addCounts = function(page: any, type: any) {
+    connection.connect(function (err: any) {
+        if (err) throw err
+          connection.query(`INSERT INTO counts (page, type, count) VALUES('${page}', '${type}', 1) ON DUPLICATE KEY UPDATE count = count + 1;`, function (err: any, result: any) {
+              if (err) throw err
+          })
+      })
+}

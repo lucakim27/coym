@@ -2,22 +2,27 @@ import path from 'path'
 import http from 'http'
 import mysql2 from 'mysql2'
 import express from 'express'
+import router from './routes/index'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
-import router from './routes/index'
-import { initializeOccupationsTable } from './models/occupation'
-import { initializeCommentsTable } from './models/comment'
-import { initializeCountsTable } from './models/count'
-import { initializeAccountsTable } from './models/account'
+import { createAccountsTable } from './models/account'
+import { searchChat, storeChatContent } from './models/chat'
+import { createOccupationsTable } from './models/occupation'
+import { createCountsTable, addCounts } from './models/count'
+import { createCommentsTable, addComment } from './models/comment'
 import { getOnlineUsers, addOnlineUser, removeOnlineUser, findOnlineUserByUsername } from './models/online'
 import { getPendingFriendsRequest, addPendingFriendsRequest, addFriendsList, getFriendsListByUsername, removePendingFriendsRequest, sentFriendsRequest } from './models/friend'
-import { searchChat, storeChatContent } from './models/chat'
 
 const app = express()
 const { Server } = require("socket.io")
 const server = http.createServer(app)
 const io = new Server(server)
 const PORT = process.env.PORT || 3000
+const connection = mysql2.createConnection({
+  host: "localhost",
+  user: "root",
+  database: "coyo"
+})
 
 app.engine('html', require('ejs').renderFile)
 app.set('views', path.join(__dirname, '/../views'))
@@ -28,26 +33,12 @@ app.use(cookieParser())
 app.use('/', router)
 
 /* create 'coyo' database before you run */
-initializeOccupationsTable()
-initializeCommentsTable()
-initializeCountsTable()
-initializeAccountsTable()
-
-const connection = mysql2.createConnection({
-  host: "localhost",
-  user: "root",
-  database: "coyo"
-})
+createOccupationsTable()
+createCommentsTable()
+createCountsTable()
+createAccountsTable()
 
 io.on('connection', (socket: any) => {
-
-  // you dont need these... just render in ejs through express..
-  // io.to(socket.id).emit('getMostViewed', getMostViewed())
-  // io.to(socket.id).emit('getMostCommented', getMostCommented())
-
-  socket.on('emitPage', async (page: any) => {
-    io.to(socket.id).emit('getComments', await connection.promise().query(`SELECT * FROM comments`), page)
-  })
 
   socket.on('addOnlineUser', (user: any) => {
     addOnlineUser(user, socket.id)
@@ -62,23 +53,10 @@ io.on('connection', (socket: any) => {
     io.to(socket.id).emit('getSentFriendsRequestPending', sentFriendsRequest(username))
   })
 
-  socket.on('updateComment', (username: any, comment: any, page: any) => {
-    var check = true
-    var dateObj = new Date()
-    var month = dateObj.getUTCMonth() + 1
-    var day = dateObj.getUTCDate()
-    var year = dateObj.getUTCFullYear()
-    // findOccupationComments(page).comments.forEach((element: any) => {
-    //   if (element === comment) {
-    //     check = false
-    //     io.sockets.emit('duplicatedComment')
-    //   }
-    // })
-    if (check) {
-      // countUpMostCommented(page)
-      // updateComment(username, comment, page, `${year}-${month}-${day}`)
-      // io.sockets.emit('updatedComment', findComment(comment, page), page)
-    }
+  socket.on('updateComment', async (username: any, comment: any, page: any) => {
+    addCounts(page, 'comment')
+    addComment(page, username, comment)
+    io.sockets.emit('updatedComment', JSON.stringify(await connection.promise().query(`SELECT * FROM comments`)))
   })
 
   socket.on('updateLike', (comment: any, username: any, page: any) => {
@@ -91,8 +69,8 @@ io.on('connection', (socket: any) => {
     io.emit('getOnlineUsers', getOnlineUsers())
   })
 
-  socket.on('countUpMostViewed', (occupationName: any) => {
-    // countUpMostViewed(occupationName)
+  socket.on('countUpMostViewed', (page: any) => {
+    addCounts(page, 'view')
   })
 
   socket.on('acceptFriendsRequest', (counterpart: any, user: any) => {
