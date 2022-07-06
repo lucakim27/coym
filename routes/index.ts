@@ -50,13 +50,6 @@ router.get('/chart', async function (req: any, res: any, next: any) {
   })
 })
 
-router.get('/faq', function (req: any, res: any, next: any) {
-  res.render(__dirname + '/../../views/faq.ejs', {
-    user: (req.cookies['current-user'] === undefined) ? undefined : req.cookies['current-user'].id,
-    title: 'COYO - FAQ'
-  })
-})
-
 router.get('/online', function (req: any, res: any, next: any) {
   res.render(__dirname + '/../../views/online.ejs', {
     user: (req.cookies['current-user'] === undefined) ? undefined : req.cookies['current-user'].id,

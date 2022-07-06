@@ -33,12 +33,18 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use('/', router)
 
-/* create 'coyo' database before you run */
-createOccupationsTable()
-createCommentsTable()
-createCountsTable()
-createAccountsTable()
-createLikesTable()
+/* 
+
+  create 'coyo' database before you run
+  below lines are for creating tables for each models
+
+  createOccupationsTable()
+  createCommentsTable()
+  createCountsTable()
+  createAccountsTable()
+  createLikesTable()
+
+*/
 
 io.on('connection', (socket: any) => {
 
