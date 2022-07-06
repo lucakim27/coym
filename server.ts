@@ -5,6 +5,7 @@ import express from 'express'
 import router from './routes/index'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
+import { createLikesTable, addLike } from './models/like'
 import { createAccountsTable } from './models/account'
 import { searchChat, storeChatContent } from './models/chat'
 import { createOccupationsTable } from './models/occupation'
@@ -37,6 +38,7 @@ createOccupationsTable()
 createCommentsTable()
 createCountsTable()
 createAccountsTable()
+createLikesTable()
 
 io.on('connection', (socket: any) => {
 
@@ -60,8 +62,10 @@ io.on('connection', (socket: any) => {
   })
 
   socket.on('updateLike', (comment: any, username: any, page: any) => {
-    // updateLike(comment, username, page)
-    // io.sockets.emit('updatedLike', findLike(comment, page), comment)
+    addLike(comment, page, username)
+    setTimeout(async function() {
+      io.sockets.emit('updatedLike', JSON.stringify(await connection.promise().query(`SELECT * FROM likes`)))
+    }, 500)
   })
 
   socket.on('disconnect', function () {
@@ -69,8 +73,10 @@ io.on('connection', (socket: any) => {
     io.emit('getOnlineUsers', getOnlineUsers())
   })
 
-  socket.on('countUpMostViewed', (page: any) => {
+  socket.on('countUpMostViewed', async (page: any) => {
     addCounts(page, 'view')
+    // Didnt work on the below one yet
+    io.sockets.emit('updateCount', JSON.stringify(await connection.promise().query(`SELECT * FROM counts`)))
   })
 
   socket.on('acceptFriendsRequest', (counterpart: any, user: any) => {

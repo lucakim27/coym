@@ -15,7 +15,7 @@ export const createCountsTable = function () {
             AND table_name = 'counts';`, function (err: any, result: any) {
             if (err) throw err
             if (!result.length) {
-                connection.query(`CREATE TABLE counts (id INT AUTO_INCREMENT, page VARCHAR(255) UNIQUE KEY, type VARCHAR(255), count INT, PRIMARY KEY (id)) `, function (err: any, result: any) {
+                connection.query(`CREATE TABLE counts (id INT AUTO_INCREMENT, page VARCHAR(255) UNIQUE KEY, comment INT, view INT, PRIMARY KEY (id)) `, function (err: any, result: any) {
                     if (err) throw err
                 })
             }
@@ -23,11 +23,26 @@ export const createCountsTable = function () {
     })
 }
 
-export const addCounts = function(page: any, type: any) {
+export const addCounts = function (page: any, type: any) {
     connection.connect(function (err: any) {
         if (err) throw err
-          connection.query(`INSERT INTO counts (page, type, count) VALUES('${page}', '${type}', 1) ON DUPLICATE KEY UPDATE count = count + 1;`, function (err: any, result: any) {
-              if (err) throw err
-          })
-      })
+        connection.query(`INSERT IGNORE INTO counts (page, view, comment) VALUES('${page}', 0, 0);`, function (err: any, result: any) {
+            if (err) throw err
+        })
+    })
+    if (type === 'comment') {
+        connection.connect(function (err: any) {
+            if (err) throw err
+            connection.query(`UPDATE counts SET comment = comment + 1 WHERE page = '${page}';`, function (err: any, result: any) {
+                if (err) throw err
+            })
+        })
+    } else {
+        connection.connect(function (err: any) {
+            if (err) throw err
+            connection.query(`UPDATE counts SET view = view + 1 WHERE page = '${page}';`, function (err: any, result: any) {
+                if (err) throw err
+            })
+        })
+    }
 }

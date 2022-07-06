@@ -30,7 +30,8 @@ router.get('/comment', async function (req: any, res: any, next: any) {
   res.render(__dirname + '/../../views/comment.ejs', {
     user: (req.cookies['current-user'] === undefined) ? undefined : req.cookies['current-user'].id,
     title: 'COYO - Comment',
-    comments: JSON.stringify(await connection.promise().query(`SELECT * FROM comments`))
+    comments: JSON.stringify(await connection.promise().query(`SELECT * FROM comments`)),
+    likes: JSON.stringify(await connection.promise().query(`SELECT * FROM likes`))
   })
 })
 

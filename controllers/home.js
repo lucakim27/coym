@@ -2,7 +2,6 @@ const occupationArray = []
 const options = document.getElementById('options')
 
 for (var i = 0; i < options.rows.length; i++) {
-    console.log(options.rows[i])
     occupationArray.push(options.rows[i].innerText.replaceAll('  ', '').replaceAll('\n', ''))
 }
 

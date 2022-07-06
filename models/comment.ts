@@ -10,9 +10,7 @@ const toISOStringLocal = function (d: any) {
     function z(n: any) {
         return (n < 10 ? '0' : '') + n;
     }
-    return d.getFullYear() + '-' + z(d.getMonth() + 1) + '-' +
-        z(d.getDate()) + 'T' + z(d.getHours()) + ':' +
-        z(d.getMinutes()) + ':' + z(d.getSeconds());
+    return d.getFullYear() + '-' + z(d.getMonth() + 1) + '-' + z(d.getDate())
 }
 
 export const createCommentsTable = function () {
@@ -35,8 +33,19 @@ export const createCommentsTable = function () {
 export const addComment = function (page: any, username: any, comment: any) {
     connection.connect(function (err: any) {
         if (err) throw err
-        connection.query(`INSERT INTO comments (comment, page, username, date) VALUES ('${comment}', '${page}', '${username}', ${toISOStringLocal(new Date())})`, function (err: any, result: any) {
+        connection.query(`SELECT * FROM comments`, function (err: any, result: any) {
             if (err) throw err
+            var existing = false
+            for (var i = 0; i < result.length; i++) {
+                if (comment === result[i].comment) {
+                    existing = true
+                }
+            }
+            if (!existing) {
+                connection.query(`INSERT INTO comments (comment, page, username, date) VALUES ('${comment}', '${page}', '${username}', '${toISOStringLocal(new Date())}')`, function (err: any, result: any) {
+                    if (err) throw err
+                })
+            }
         })
     })
 }
