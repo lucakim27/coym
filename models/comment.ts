@@ -37,7 +37,7 @@ export const addComment = function (page: any, username: any, comment: any) {
             if (err) throw err
             var existing = false
             for (var i = 0; i < result.length; i++) {
-                if (comment === result[i].comment) {
+                if (comment === result[i].comment && result[i].page === page) {
                     existing = true
                 }
             }
@@ -48,4 +48,10 @@ export const addComment = function (page: any, username: any, comment: any) {
             }
         })
     })
+}
+
+export const emitComment = function (page: any, username: any, comment: any, io: any) {
+    setTimeout(async function () {
+        io.sockets.emit('updatedComment', JSON.stringify(await connection.promise().query(`SELECT * FROM comments WHERE page = '${page}' AND username = '${username}' AND comment = '${comment}';`)))
+    }, 500)
 }

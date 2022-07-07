@@ -4,6 +4,7 @@
     <%- include('partials/head'); -%>
   </head>
   <body>
+    <div style="display: none" id="onlineUsers"><%= onlineUsers %></div>
     <%- include('partials/navigation'); -%> <%- include('partials/header'); -%>
     <center style="height: 1100px">
       <h1 id="header" class="waviy">
@@ -24,28 +25,11 @@
           justify-content: center;
         "
       >
+        
         <div
           style="
             height: 80vh;
-            min-width: 40%;
-            flex: 0;
-            border-style: solid;
-            padding: 10px;
-            margin-right: 30px;
-            border-radius: 5px;
-          "
-        >
-          <h1>Friends List</h1>
-          <hr />
-          <table
-            id="friendsList"
-            class="table table-striped header-fixed"
-          ></table>
-        </div>
-        <div
-          style="
-            height: 80vh;
-            min-width: 40%;
+            min-width: 80%;
             flex: 0;
             border-style: solid;
             padding: 10px;
@@ -54,11 +38,9 @@
           "
         >
           <h1>Online Users</h1>
-          <hr />
-          <table
-            id="loggedinUser"
-            class="table table-striped header-fixed"
-          ></table>
+          <table id="loggedinUser" class="table table-striped header-fixed">
+            <tbody></tbody>
+          </table>
         </div>
       </div>
     </center>

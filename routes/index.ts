@@ -50,10 +50,11 @@ router.get('/chart', async function (req: any, res: any, next: any) {
   })
 })
 
-router.get('/online', function (req: any, res: any, next: any) {
+router.get('/online', async function (req: any, res: any, next: any) {
   res.render(__dirname + '/../../views/online.ejs', {
     user: (req.cookies['current-user'] === undefined) ? undefined : req.cookies['current-user'].id,
-    title: 'COYO - Online'
+    title: 'COYO - Online',
+    onlineUsers: JSON.stringify(await connection.promise().query(`SELECT * FROM online`))
   })
 })
 

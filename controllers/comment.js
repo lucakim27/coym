@@ -138,16 +138,21 @@ $('#commentBtn').click(function () {
     } else if (confirm("Are you sure you wanna comment?")) {
         socket.emit('updateComment',
             getCookie('current-user'),
+            $('#userInput').val(),
             getQueryVariable('occupation')
         )
-        $('#userInput').val('')
     }
+    $('#userInput').val('')
 })
 
 socket.on('duplicatedComment', () => {
     toastr.error('The comment is dupliacted...')
 })
 
-socket.on('updatedLike', (array) => {
+socket.on('updatedLikes', (array) => {
     updateLikes(JSON.parse(array)[0])
+})
+
+socket.on('updatedComment', (array) => {
+    appendComments(JSON.parse(array)[0][0])
 })
