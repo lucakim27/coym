@@ -16,33 +16,24 @@
         <span style="--i: 5">e</span>
       </h1>
       <hr />
-
-      <div
-        style="
-          display: flex;
-          padding: 10px;
-          margin-top: 40px;
-          justify-content: center;
-        "
+      <table
+        class="table"
+        id="myTable"
+        border="1"
+        style="margin: 20px; width: 90%"
       >
-        
-        <div
-          style="
-            height: 80vh;
-            min-width: 80%;
-            flex: 0;
-            border-style: solid;
-            padding: 10px;
-            margin-left: 30px;
-            border-radius: 5px;
-          "
-        >
-          <h1>Online Users</h1>
-          <table id="loggedinUser" class="table table-striped header-fixed">
-            <tbody></tbody>
-          </table>
-        </div>
-      </div>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Username</th>
+            <th scope="col">Major</th>
+            <th scope="col">Country</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr></tr>
+        </tbody>
+      </table>
     </center>
 
     <div class="modal fade" id="showOtherUserProfileModal" role="dialog">

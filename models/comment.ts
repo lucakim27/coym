@@ -3,7 +3,7 @@ import mysql2 from 'mysql2'
 const connection = mysql2.createConnection({
     host: "localhost",
     user: "root",
-    database: "coyo"
+    database: "coym"
 })
 
 const toISOStringLocal = function (d: any) {
@@ -18,7 +18,7 @@ export const createCommentsTable = function () {
         if (err) throw err
         connection.query(`SELECT table_name
             FROM information_schema.tables
-            WHERE table_schema = 'coyo'
+            WHERE table_schema = 'coym'
             AND table_name = 'comments';`, function (err: any, result: any) {
             if (err) throw err
             if (!result.length) {
@@ -50,8 +50,8 @@ export const addComment = function (page: any, username: any, comment: any) {
     })
 }
 
-export const emitComment = function (page: any, username: any, comment: any, io: any) {
+export const sendComment = function (io: any) {
     setTimeout(async function () {
-        io.sockets.emit('updatedComment', JSON.stringify(await connection.promise().query(`SELECT * FROM comments WHERE page = '${page}' AND username = '${username}' AND comment = '${comment}';`)))
+        io.sockets.emit('updatedComment', JSON.stringify(await connection.promise().query(`SELECT * FROM comments;`)))
     }, 500)
 }

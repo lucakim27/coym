@@ -3,7 +3,7 @@ import mysql2 from 'mysql2'
 const connection = mysql2.createConnection({
     host: "localhost",
     user: "root",
-    database: "coyo"
+    database: "coym"
 })
 
 export const createOnlineTable = function () {
@@ -11,7 +11,7 @@ export const createOnlineTable = function () {
         if (err) throw err
         connection.query(`SELECT table_name
             FROM information_schema.tables
-            WHERE table_schema = 'coyo'
+            WHERE table_schema = 'coym'
             AND table_name = 'online';`, function (err: any, result: any) {
             if (err) throw err
             if (!result.length) {
@@ -43,9 +43,9 @@ export const addOnlineUser = function (username: any, socketId: any) {
     })
 }
 
-export const updateNewOnlineUser = function (socketId: any, io: any) {
+export const sendOnlineUsers = async function (io: any) {
     setTimeout(async function () {
-        io.sockets.emit('updateNewOnlineUser', JSON.stringify(await connection.promise().query(`SELECT * FROM online WHERE socketId = '${socketId}';`)))
+        io.sockets.emit('updateOnlineUsers', JSON.stringify(await connection.promise().query(`SELECT * FROM online;`)))
     }, 500)
 }
 

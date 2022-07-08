@@ -1,11 +1,11 @@
 const counts = JSON.parse(document.getElementById('counts').innerHTML)[0]
 
-function random_rgba() {
+const random_rgba = function () {
     var o = Math.round, r = Math.random, s = 255;
     return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
 }
 
-const data = {
+var data = {
     'view': {
         labels: [],
         datasets: [{
@@ -26,7 +26,7 @@ const data = {
     }
 }
 
-const config = {
+var config = {
     'view': {
         type: 'doughnut',
         data: data['view'],
@@ -37,7 +37,7 @@ const config = {
     }
 }
 
-const counter = {
+var counter = {
     'view': {},
     'comment': {}
 }
@@ -51,36 +51,108 @@ for (var i = 0; i < counts.length; i++) {
     }
 }
 
-const keysForView = Object.keys(counter['view'])
-
+var keysForView = Object.keys(counter['view'])
 keysForView.forEach((key, index) => {
     data['view'].labels.push(key)
     data['view'].datasets[0].data.push(counter['view'][key])
     data['view'].datasets[0].backgroundColor.push(random_rgba())
 })
 
-const chartForView = new Chart(
+var chartForView = new Chart(
     document.getElementById('mostViewedPages'),
     config['view']
 )
 
-const keysForComment = Object.keys(counter['comment'])
+var keysForComment = Object.keys(counter['comment'])
 keysForComment.forEach((key, index) => {
     data['comment'].labels.push(key)
     data['comment'].datasets[0].data.push(counter['comment'][key])
     data['comment'].datasets[0].backgroundColor.push(random_rgba())
 })
 
-const chartForComment = new Chart(
+var chartForComment = new Chart(
     document.getElementById('mostCommentedPages'),
     config['comment']
 )
 
 try {
-    if ($('#signIn').html() === 'Sign in') {
-    } else {
-        socket.emit('addOnlineUser', getCookie('current-user'))
-    }
+    if ($('#signIn').html() !== 'Sign in') {
+        socket.emit('join', getCookie('current-user'))
+    } 
 } catch (error) {
     console.error(error)
 }
+
+socket.on('updatedCounts', (array) => {
+    data = {
+        'view': {
+            labels: [],
+            datasets: [{
+                label: 'Most Viewed Pages',
+                data: [],
+                backgroundColor: [],
+                hoverOffset: 4
+            }]
+        },
+        'comment': {
+            labels: [],
+            datasets: [{
+                label: 'Most Commented Pages',
+                data: [],
+                backgroundColor: [],
+                hoverOffset: 4
+            }]
+        }
+    }
+    
+    config = {
+        'view': {
+            type: 'doughnut',
+            data: data['view'],
+        },
+        'comment': {
+            type: 'doughnut',
+            data: data['comment'],
+        }
+    }
+
+    counter = {
+        'view': {},
+        'comment': {}
+    }
+
+    for (var i = 0; i < JSON.parse(array)[0].length; i++) {
+        if (JSON.parse(array)[0][i].view) {
+            counter['view'][JSON.parse(array)[0][i].page] = JSON.parse(array)[0][i].view
+        }
+        if (JSON.parse(array)[0][i].comment) {
+            counter['comment'][JSON.parse(array)[0][i].page] = JSON.parse(array)[0][i].comment
+        }
+    }
+
+    const keysForView = Object.keys(counter['view'])
+
+    keysForView.forEach((key, index) => {
+        data['view'].labels.push(key)
+        data['view'].datasets[0].data.push(counter['view'][key])
+        data['view'].datasets[0].backgroundColor.push(random_rgba())
+    })
+
+    chartForView = new Chart(
+        document.getElementById('mostViewedPages'),
+        config['view']
+    )
+
+    const keysForComment = Object.keys(counter['comment'])
+    keysForComment.forEach((key, index) => {
+        data['comment'].labels.push(key)
+        data['comment'].datasets[0].data.push(counter['comment'][key])
+        data['comment'].datasets[0].backgroundColor.push(random_rgba())
+    })
+
+    chartForComment = new Chart(
+        document.getElementById('mostCommentedPages'),
+        config['comment']
+    )
+    
+})

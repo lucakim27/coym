@@ -7,7 +7,7 @@ const user = {
 try {
     if ($('#signIn').html() === 'Sign in') {
     } else {
-        socket.emit('addOnlineUser', getCookie('current-user'))
+        socket.emit('join', getCookie('current-user'))
     }
 } catch (error) {
     console.error(error)

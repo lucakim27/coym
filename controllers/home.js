@@ -1,8 +1,8 @@
-const occupationArray = []
+const majorArray = []
 const options = document.getElementById('options')
 
 for (var i = 0; i < options.rows.length; i++) {
-    occupationArray.push(options.rows[i].innerText.replaceAll('  ', '').replaceAll('\n', ''))
+    majorArray.push(options.rows[i].innerText.replaceAll('  ', '').replaceAll('\n', ''))
 }
 
 function getCookie(cname) {
@@ -31,44 +31,44 @@ function getCookie(cname) {
 
 try {
     if ($('#signIn').html() !== 'Sign in') {
-        socket.emit('addOnlineUser', getCookie('current-user'))
+        socket.emit('join', getCookie('current-user'))
     }
 } catch (error) {
     console.error(error)
 }
 
-const listOccupations = function (i) {
-    if (i < occupationArray.length) {
+const listMajors = function (i) {
+    if (i < majorArray.length) {
         var row = options.insertRow(i)
         var cell = row.insertCell(0)
         cell.insertAdjacentHTML('beforeend', `
-            <a  href='/comment?occupation=${occupationArray[i]}' 
-                onclick="countForCharts('${occupationArray[i]}')"
-            >${occupationArray[i]}
+            <a  href='/comment?major=${majorArray[i]}' 
+                onclick="countForCharts('${majorArray[i]}')"
+            >${majorArray[i]}
             </a><hr>`
         )
-        listOccupations(i+1)
+        listMajors(i+1)
     }
 }
 
-const searchOccupations = function (i, j, input) {
-    if (i < occupationArray.length && occupationArray[i].toLowerCase().includes(input.toLowerCase())) {
+const searchMajors = function (i, j, input) {
+    if (i < majorArray.length && majorArray[i].toLowerCase().includes(input.toLowerCase())) {
         var row = options.insertRow(j)
         var cell = row.insertCell(0)
         cell.insertAdjacentHTML('beforeend', `
-            <a  href='/comment?occupation=${occupationArray[i]}' 
-                onclick="countForCharts('${occupationArray[i]}')"
-            >${occupationArray[i]}
+            <a  href='/comment?major=${majorArray[i]}' 
+                onclick="countForCharts('${majorArray[i]}')"
+            >${majorArray[i]}
             </a><hr>`
         )
-        searchOccupations(i+1, j+1, input)
-    } else if (i < occupationArray.length) {
-        searchOccupations(i+1, j, input)
+        searchMajors(i+1, j+1, input)
+    } else if (i < majorArray.length) {
+        searchMajors(i+1, j, input)
     }
 }
 
-const countForCharts = function (occupationName) {
-    socket.emit('countUpMostViewed', occupationName)
+const countForCharts = function (majorName) {
+    socket.emit('updateCount', majorName)
 }
 
 $.event.special.inputchange = {
@@ -94,9 +94,9 @@ $('input').on('inputchange', function () {
     options.innerHTML = '<hr>'
     options.style.display = 'block'
     if (this.value.length !== 0) {
-        searchOccupations(0, 0, this.value)
+        searchMajors(0, 0, this.value)
     } else {
-        listOccupations(0)
+        listMajors(0)
     }
 })
 

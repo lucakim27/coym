@@ -268,10 +268,6 @@ table td a {
   text-decoration: none;
 }
 
-#occupationTable {
-  width: 100%;
-}
-
 #userInput,
 #userInputForReply {
   border-radius: 5px;
@@ -324,10 +320,6 @@ table td a {
 }
 
 table tbody tr {
-  background-color: rgb(255, 255, 255) !important;
-}
-
-#occupationTable tbody tr {
   background-color: rgb(255, 255, 255) !important;
 }
 

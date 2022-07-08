@@ -26,51 +26,37 @@ const animateText = function (text) {
     return value
 }
 
-$("#occupationTitle").html(animateText(getQueryVariable('occupation')))
-$('#commentCenterTag').append(`<div id='${getQueryVariable('occupation').replaceAll(' ', '-')}' style="height: 800px; overflow-y: scroll"></div>`)
+$("#majorTitle").html(animateText(getQueryVariable('major')))
+$('#commentCenterTag').append(`<div id='${getQueryVariable('major').replaceAll(' ', '-')}' style="height: 800px; overflow-y: scroll"></div>`)
 
 try {
     if ($('#signIn').html() !== 'Sign in') {
-        socket.emit('addOnlineUser', getCookie('current-user'))
+        socket.emit('join', getCookie('current-user'))
     }
 } catch (error) {
     console.error(error)
 }
 
-const appendComments = function (row) {
-    $(`#${row.page.replaceAll(' ', '-')}`).append(
-        `
-            <div id="eachComment">
-                <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="44"
-                height="44"
-                fill="currentColor"
-                class="bi bi-person-circle"
-                viewBox="0 0 16 16"
-                >
-                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                    <path
-                        fill-rule="evenodd"
-                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
-                    />
-                </svg>
-                <p style='font-weight: bold;'> ${row.username} </p>
-                <p> ${row.comment} </p>
-                <p> ${row.date.slice(0, 10)} </p>
-                <button id='${row.comment}' onClick='like(this.id)'> 0 Likes </button>
-            </div><hr>
-        `
-    )
-}
+const commentsTable = document.getElementById('commentsArea')
 
+const appendComments = function (array) {
+
+ 
+     var tableRef = document.getElementById('myTable').getElementsByTagName('tbody')[0];
+ 
+     for (let index = 0; index < array.length; index++){
+         tableRef.insertRow().innerHTML = 
+         "<th scope='row'>" + `<a>${array[index].username}</a>` + "</th>" + 
+         "<td>" + array[index].comment + "</td>"+
+         "<td>" + array[index].date.slice(0, 10) + "</td>" +
+         "<td>" + `<p id='${array[index].comment}'> 0 </p>` + "</td>" + 
+         "<td>" + `<button id='${array[index].comment}' onClick='like(this.id)'> Likes </button>` + "</td>";
+     }
+}
 
 const comments = JSON.parse(document.getElementById('comments').innerHTML)[0]
-for (var i = 0; i < comments.length; i++) {
-    if (comments[i].page === getQueryVariable('occupation')) {
-        appendComments(comments[i])
-    }
-}
+appendComments(comments)
+   
 
 const like = function (comment) {
     if (getCookie('current-user') == '') {
@@ -80,8 +66,9 @@ const like = function (comment) {
         socket.emit('updateLike',
             comment,
             getCookie('current-user'),
-            getQueryVariable('occupation')
+            getQueryVariable('major')
         )
+        toastr.success('Successfully liked...')
     }
 }
 
@@ -95,7 +82,7 @@ const renderLikes = function (array) {
         }
     }
     Object.keys(container).forEach(key => {
-        $(`#${key}`).html(`${container[key]} Likes`)
+        $(`#${key}`).html(`${container[key]}`)
     })
 }
 
@@ -114,13 +101,13 @@ const updateLikes = function (newArray) {
     if (Object.keys(container).length > Object.keys(newContainer).length) {
         Object.keys(container).forEach(key => {
             if (container[key] !== newContainer[key]) {
-                $(`#${key}`).html(`${(newContainer[key]===undefined) ? 0 : newContainer[key]} Likes`)
+                $(`#${key}`).html(`${(newContainer[key] === undefined) ? 0 : newContainer[key]} Likes`)
             }
         })
     } else {
         Object.keys(newContainer).forEach(key => {
             if (container[key] !== newContainer[key]) {
-                $(`#${key}`).html(`${(newContainer[key]===undefined) ? 0 : newContainer[key]} Likes`)
+                $(`#${key}`).html(`${(newContainer[key] === undefined) ? 0 : newContainer[key]} Likes`)
             }
         })
     }
@@ -139,20 +126,19 @@ $('#commentBtn').click(function () {
         socket.emit('updateComment',
             getCookie('current-user'),
             $('#userInput').val(),
-            getQueryVariable('occupation')
+            getQueryVariable('major')
         )
     }
     $('#userInput').val('')
-})
-
-socket.on('duplicatedComment', () => {
-    toastr.error('The comment is dupliacted...')
+    toastr.success('Successfully commented...')
 })
 
 socket.on('updatedLikes', (array) => {
-    updateLikes(JSON.parse(array)[0])
+    console.log('updatedLikes')
+    console.log(JSON.parse(array)[0])
 })
 
 socket.on('updatedComment', (array) => {
-    appendComments(JSON.parse(array)[0][0])
+    console.log('updatedComment')
+    console.log(JSON.parse(array)[0])
 })

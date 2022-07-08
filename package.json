@@ -1,5 +1,5 @@
 {
-  "name": "comment-on-your-occupation",
+  "name": "comment-on-your-major",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -14,14 +14,11 @@
   "license": "ISC",
   "dependencies": {
     "@types/socket.io-client": "^3.0.0",
-    "axios": "^0.21.1",
     "cookie-parser": "^1.4.6",
-    "cors": "^2.8.5",
     "ejs": "^3.1.6",
     "express": "^4.18.1",
     "express-ejs-layouts": "^2.5.1",
     "express-validator": "^6.14.0",
-    "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
     "nodemailer": "^6.7.2",
     "socket.io": "^4.4.0",

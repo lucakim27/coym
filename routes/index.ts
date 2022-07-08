@@ -1,51 +1,51 @@
 import mysql2 from 'mysql2'
 import { check, validationResult } from 'express-validator'
 import { authLogin, authRegistration } from '../models/account'
-import { occupationsList } from '../models/occupation'
+import { majorsList } from '../models/major'
 var express = require('express')
 var router = express.Router()
 export default router
 const connection = mysql2.createConnection({
   host: "localhost",
   user: "root",
-  database: "coyo"
+  database: "coym"
 })
 
 router.get('/', function (req: any, res: any, next: any) {
   res.render(__dirname + '/../../views/index.ejs', {
     user: (req.cookies['current-user'] === undefined) ? undefined : req.cookies['current-user'].id,
-    title: 'COYO - Welcome'
+    title: 'Welcome'
   })
 })
 
 router.get('/home', function (req: any, res: any, next: any) {
   res.render(__dirname + '/../../views/home.ejs', {
     user: (req.cookies['current-user'] === undefined) ? undefined : req.cookies['current-user'].id,
-    title: 'COYO - Home',
-    occupationsList: occupationsList
+    title: 'Home',
+    majorsList: majorsList
   })
 })
 
 router.get('/comment', async function (req: any, res: any, next: any) {
   res.render(__dirname + '/../../views/comment.ejs', {
     user: (req.cookies['current-user'] === undefined) ? undefined : req.cookies['current-user'].id,
-    title: 'COYO - Comment',
-    comments: JSON.stringify(await connection.promise().query(`SELECT * FROM comments`)),
-    likes: JSON.stringify(await connection.promise().query(`SELECT * FROM likes`))
+    title: 'Comment',
+    comments: JSON.stringify(await connection.promise().query(`SELECT * FROM comments WHERE page = "${decodeURIComponent(req.originalUrl.split('=')[1])}"`)),
+    likes: JSON.stringify(await connection.promise().query(`SELECT * FROM likes  WHERE page = "${decodeURIComponent(req.originalUrl.split('=')[1])}"`))
   })
 })
 
 router.get('/chat', function (req: any, res: any, next: any) {
   res.render(__dirname + '/../../views/chat.ejs', {
     user: (req.cookies['current-user'] === undefined) ? undefined : req.cookies['current-user'].id,
-    title: 'COYO - Chat'
+    title: 'Chat'
   })
 })
 
 router.get('/chart', async function (req: any, res: any, next: any) {
   res.render(__dirname + '/../../views/chart.ejs', {
     user: (req.cookies['current-user'] === undefined) ? undefined : req.cookies['current-user'].id,
-    title: 'COYO - Chart',
+    title: 'Chart',
     counts: JSON.stringify(await connection.promise().query(`SELECT * FROM counts`)),
   })
 })
@@ -53,7 +53,7 @@ router.get('/chart', async function (req: any, res: any, next: any) {
 router.get('/online', async function (req: any, res: any, next: any) {
   res.render(__dirname + '/../../views/online.ejs', {
     user: (req.cookies['current-user'] === undefined) ? undefined : req.cookies['current-user'].id,
-    title: 'COYO - Online',
+    title: 'Online',
     onlineUsers: JSON.stringify(await connection.promise().query(`SELECT * FROM online`))
   })
 })
@@ -63,7 +63,7 @@ router.get('/login', function (req: any, res: any, next: any) {
     return res.status(422).json({ errors: "You're already logged in" })
   } else {
     res.render(__dirname + '/../../views/login.ejs', {
-      title: 'COYO - Login'
+      title: 'Login'
     })
   }
 })
@@ -73,7 +73,7 @@ router.get('/register', function (req: any, res: any, next: any) {
     return res.status(422).json({ errors: "You're already logged in" })
   } else {
     res.render(__dirname + '/../../views/register.ejs', {
-      title: 'COYO - Register'
+      title: 'Register'
     })
   }
 })
