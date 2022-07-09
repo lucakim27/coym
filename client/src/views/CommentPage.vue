@@ -1,21 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <%- include('partials/head'); -%>
-  </head>
-  <body>
-    <div style="display: none" id="comments"><%= comments %></div>
-    <div style="display: none" id="likes"><%= likes %></div>
-    <%- include('partials/navigation'); -%> <%- include('partials/header'); -%>
-    <center id="commentCenterTag">
+<template>
+  <div>
+    <center style="height: 1100px">
       <h1 id="majorTitle"></h1>
       <hr />
-      <% if(user !== undefined){ %>
       <div id="inputAndCommentBtn">
         <input type="text" id="userInput" placeholder="Comment here..." />
         <button id="commentBtn">></button>
       </div>
-      <% } %>
       <table
         class="table"
         id="myTable"
@@ -37,8 +28,10 @@
       </table>
       <hr />
     </center>
-    <%- include('partials/footer'); -%>
-  </body>
-  <%- include('partials/script'); -%>
-  <script src="comment.js"></script>
-</html>
+  </div>
+</template>
+<script>
+export default {
+  name: 'LoginPage',
+};
+</script>

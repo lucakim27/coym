@@ -1,17 +1,14 @@
+# CURRENTLY ON THE MIGRATION TO VUE 3 FOR THE FRONT END
+
 # Title
-Comment-On-Your-Major - COYM
+Comment On Your Major - COYM
 
-# Libraries
-- jquery
-- ejs template
-- socket.io
+# Front-end
+- Vue3
 
-# Frameworks
-- node.js
+# Back-end
+- node.js (typescript)
 - express
 
 # Database
 - mysql2
-
-# How to hop on the project
-You're welcome to make as many pull requests as you want to as well as the issues.
