@@ -6,18 +6,18 @@
                 style='width: 100%; height: 60%; filter: brightness(70%);'>
             <div class="Wrapper">
                 <div class="Input">
-                    <div id="autocomplete">
-                        <input type="text" id="input" autocomplete="off" class="Input-text"
-                            placeholder="Major, e.g. Computer Science">
-                        <table id="options"></table>
-                    </div>
+                    <input class="Input-text" id="input" placeholder="Major, e.g. Computer Science" type="search"
+                        @input="searchChangeFunc($event)" />
+                    <table id="options">
+                        <tr v-for="(major, i) in filteredMajorsList" :key="i">
+                            <td scope="row">
+                                <a v-bind:href="'/comment?major=' + major">{{ major }}</a>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
-            <div style='position: absolute; top: 90%; margin-left: auto;
-        margin-right: auto;
-        left: 0;
-        right: 0;
-        text-align: center;'>
+            <div style='position: absolute; top: 100%; margin-left: auto; margin-right: auto; left: 0; right: 0; text-align: center;'>
                 <div>
                     <svg style="margin: 20px;" xmlns="http://www.w3.org/2000/svg" width="100" height="100"
                         fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
@@ -72,97 +72,414 @@
 <script>
 export default {
     name: 'HomePage',
-    components: {
-
+    data() {
+        return {
+            magic_flag: false,
+            majorsList: [
+                "Accounting",
+                "Accounting Technician",
+                "Actuarial Science*",
+                "Adult Development & Aging/Gerontology",
+                "Advertising",
+                "Aeronautical/Aerospace Engineering Technologies",
+                "Aerospace/Aeronautical Engineering",
+                "African American Studies",
+                "Agribusiness Operations",
+                "Agricultural Business & Management",
+                "Agricultural Economics",
+                "Agricultural Education",
+                "Agricultural Mechanization",
+                "Agricultural Production",
+                "Agricultural/Bioengineering",
+                "Agriculture, General",
+                "Agronomy & Crop Science",
+                "Aircraft Mechanics/Technology",
+                "Aircraft Piloting & Navigation",
+                "Alcohol/Drug Abuse Counseling",
+                "American Indian/Native American Studies",
+                "American/English Literature",
+                "Animal Sciences",
+                "Anthropology",
+                "Applied Mathematics",
+                "Architectural Drafting/CAD Technology",
+                "Architectural Engineering",
+                "Architectural Engineering Technology",
+                "Architectural Environmental Design",
+                "Architecture, General",
+                "Area Studies, General (e.g., African, Middle Eastern)",
+                "Art Education",
+                "Art History, Criticism & Conservation",
+                "Art, General",
+                "Asian Area Studies",
+                "Asian Languages & Literatures",
+                "Astronomy",
+                "Athletic Training",
+                "Atmospheric Sciences & Meteorology",
+                "Autobody Repair/Technology",
+                "Automotive Engineering Technology",
+                "Automotive Mechanics/Technology",
+                "Aviation & Airway Science, General",
+                "Aviation Management & Operations",
+                "Avionics Technology",
+                "Banking & Financial Support Services",
+                "Bible/Biblical Studies",
+                "Biochemistry & Biophysics",
+                "Biology, General",
+                "Biomedical Engineering",
+                "Business Administration & Management, General",
+                "Business Education",
+                "Business/Management Quantitative Methods, General",
+                "Business/Managerial Economics",
+                "Career & Technical Education",
+                "Cell/Cellular Biology",
+                "Chemical Engineering",
+                "Chemistry",
+                "Child Care Services Management",
+                "Child Development",
+                "Chiropractic (Pre-Chiropractic)",
+                "Cinema/Film",
+                "Cinematography/Film/Vide Production",
+                "City/Urban/Regional Planning",
+                "Civil Engineering",
+                "Civil Engineering Technology",
+                "Classical/Ancient Languages & Literatures",
+                "Communication Disorder Services (e.g., Speech Pathology)",
+                "Communications Technology, General",
+                "Communications, General",
+                "Community Organization & Advocacy",
+                "Comparative Literature",
+                "Computer & Information Sciences, General",
+                "Computer Engineering",
+                "Computer Engineering Technology",
+                "Computer Networking/Telecommunications",
+                "Computer Science & Programming",
+                "Computer Software & Media Applications",
+                "Computer System Administration",
+                "Construction Engineering/Management",
+                "Construction Trades (e.g., carpentry, plumbing, electrical)",
+                "Construction/Building Technology",
+                "Consumer & Family Economics",
+                "Corrections",
+                "Cosmetology/Hairstyling*",
+                "Counseling & Student Services",
+                "Court Reporting*",
+                "Creative Writing",
+                "Criminal Justice",
+                "Criminology",
+                "Culinary Arts/Chef Training",
+                "Curriculum & Instruction",
+                "Dance",
+                "Data Management Technology",
+                "Dental Assisting",
+                "Dental Hygiene",
+                "Dentistry (Pre-Dentistry)",
+                "Design & Visual Communications, General",
+                "Diesel Mechanics/Technology",
+                "Digital Communications/Media",
+                "Divinity/Ministry",
+                "Drafting/CAD Technology, General",
+                "Early Childhood Education",
+                "Ecology",
+                "Economics",
+                "Educational Administration",
+                "Electrical, Electronics & Communications Engineering",
+                "Electrical, Electronics Engineering Technologies",
+                "Electrical/Electronics Equip Installation & Repair",
+                "Electromechanical/Biomedical Engineering Technologies",
+                "Elementary Education",
+                "Emergency Medical Technology",
+                "Engineering (Pre-Engineering), General",
+                "Engineering Technology, General",
+                "English Language & Literature, General",
+                "English-as-a-Second-Language Education",
+                "English/Language Arts Education",
+                "Environmental Control Technologies",
+                "Environmental Health Engineering",
+                "Environmental Science",
+                "Ethnic & Minority Studies, General",
+                "European Area Studies",
+                "Exercise Science/Physiology/Kinesiology",
+                "Family & Consumer Sciences, General",
+                "Fashion Merchandising",
+                "Fashion/Apparel Design",
+                "Finance, General",
+                "Financial Planning & Services",
+                "Fine/Studio Arts",
+                "Fire Protection & Safety Technology",
+                "Food & Nutrition",
+                "Food Sciences & Technology",
+                "Foreign Languages Education",
+                "Foreign Languages/Literatures, General",
+                "Forestry",
+                "French Language & Literature",
+                "Funeral Services & Mortuary Science",
+                "Genetics",
+                "Geography",
+                "Geological & Earth Sciences",
+                "German Language & Literature",
+                "Graphic & Printing Equipment Operation*",
+                "Graphic Design",
+                "Health & Physical Education/Fitness",
+                "Health Education",
+                "Health Services Administration,General",
+                "Health-Related Professions & Services, General*",
+                "Health/Medical Technology, General",
+                "Heating/Air Cond/Refrig Install/Repair",
+                "History",
+                "Horticulture Operations & Management",
+                "Horticulture Science",
+                "Hospital/Facilities Administration",
+                "Hotel/Motel Management",
+                "Human Resources Development/Training",
+                "Human Resources Management",
+                "Industrial Design",
+                "Industrial Engineering",
+                "Industrial Production Technologies",
+                "Information Science",
+                "Insurance & Risk Management",
+                "Interior Architecture",
+                "Interior Design",
+                "International Business Management",
+                "International Relations & Affairs",
+                "Investments & Securities",
+                "Journalism, Broadcast",
+                "Journalism, Print",
+                "Junior High/Middle School Education",
+                "Labor/Industrial Relations",
+                "Landscape Architecture",
+                "Latin American Area Studies",
+                "Latino/Chicano Studies",
+                "Law (Pre-Law)",
+                "Law Enforcement",
+                "Legal Administrative Assisting/Secretarial*",
+                "Legal Studies, General*",
+                "Liberal Arts & General Studies*",
+                "Library Science",
+                "Linguistics",
+                "Logistics & Materials Management",
+                "Machine Tool Technology",
+                "Management Information Systems",
+                "Marine/Aquatic Biology",
+                "Marketing Management & Research",
+                "Mass Communications",
+                "Massage Therapy",
+                "Mathematics Education",
+                "Mathematics, General",
+                "Mechanical Drafting/CAD Technology",
+                "Mechanical Engineering",
+                "Mechanical Engineering Technology",
+                "Mechanics & Repairers, General",
+                "Medical Assisting",
+                "Medical Laboratory Technology",
+                "Medical Office/Secretarial",
+                "Medical Radiologic Technology",
+                "Medical Records",
+                "Medical/Clinical Assisting, General",
+                "Medicine (Pre-Medicine)",
+                "Mental Health Counseling",
+                "Microbiology & Immunology",
+                "Middle Eastern Languages & Literatures",
+                "Military Technologies*",
+                "Multi/Interdisciplinary Studies*",
+                "Multimedia/Animation/Special Effects",
+                "Music Education",
+                "Music, General",
+                "Music, Performance",
+                "Music, Theory & Composition",
+                "Natural Resources Conservation, General",
+                "Natural Resources Management",
+                "North American Area Studies",
+                "Nuclear Engineering",
+                "Nuclear Medicine Technology",
+                "Nursing, Practical/Vocational (LPN)",
+                "Nursing, Registered (BS/RN)",
+                "Occupational Therapy",
+                "Occupational Therapy Assisting",
+                "Office Supervision & Management",
+                "Operations Management & Supervision",
+                "Optometry (Pre-Optometry)",
+                "Organizational Behavior",
+                "Osteopathic Medicine",
+                "Paralegal/Legal Assistant",
+                "Parks, Recreation, & Leisure, General",
+                "Parks/Rec/Leisure Facilities Management",
+                "Personal Services, General*",
+                "Pharmacy (Pre-Pharmacy)",
+                "Philosophy",
+                "Photography",
+                "Physical Education & Coaching",
+                "Physical Sciences, General",
+                "Physical Therapy (Pre-Physical Therapy)",
+                "Physical Therapy Assisting",
+                "Physician Assisting",
+                "Physics",
+                "Political Science & Government",
+                "Postsecondary Education",
+                "Precision Production Trades, General",
+                "Protective Services, General",
+                "Psychiatric/Mental Health Technician",
+                "Psychology, Clinical & Counseling",
+                "Psychology, General",
+                "Public Administration",
+                "Public Administration & Services, General",
+                "Public Affairs & Public Policy Analysis",
+                "Public Health",
+                "Public Relations & Organizational Communication",
+                "Public Speaking",
+                "Purchasing/Procurement/Contracts Management",
+                "Quality Control & Safety Technologies",
+                "Radio & Television Broadcasting",
+                "Radio & Television Broadcasting Technology*",
+                "Real Estate",
+                "Rehabilitation Therapy",
+                "Religion",
+                "Religious Education",
+                "Respiratory Therapy Technology",
+                "Restaurant/Food Services Management",
+                "Sales, Merchandising, & Marketing, General",
+                "Science Education",
+                "Secondary Education",
+                "Secretarial Studies & Office Administration",
+                "Small Business Management/Operations",
+                "Social Sciences, General",
+                "Social Studies/Sciences Education",
+                "Social Work",
+                "Sociology",
+                "Spanish Language & Literature",
+                "Special Education",
+                "Sport & Fitness Administration/Management",
+                "Statistics",
+                "Surgical Technology",
+                "Surveying Technology",
+                "Teacher Assisting/Aide Education",
+                "Teacher Education, General",
+                "Teacher Education, Subject-Specific*",
+                "Textile & Apparel",
+                "Theatre Arts/Drama",
+                "Theology, General",
+                "Therapy & Rehabilitation, General",
+                "Tourism & Travel Marketing",
+                "Transportation & Materials Moving (e.g., air, ground, & marine)",
+                "Travel/Tourism Management",
+                "Urban Studies/Urban Affairs",
+                "Veterinarian Assisting/Technology",
+                "Veterinary Medicine (Pre-Veterinarian)",
+                "Vocational Rehabilitation Counseling",
+                "Webpage Design",
+                "Welding Technology",
+                "Wildlife & Wildlands Management",
+                "Women’s Studies",
+                "Zoology"
+            ],
+            filteredMajorsList: []
+        }
+    },
+    methods: {
+        searchChangeFunc(event) {
+            this.filteredMajorsList = []
+            if (event.target.value.length > 0) {
+                for (var i = 0; i < this.majorsList.length; i++) {
+                    if (this.majorsList[i].toLowerCase().includes(event.target.value.toLowerCase())) {
+                        this.filteredMajorsList.push(this.majorsList[i])
+                    }
+                }
+                document.getElementById('options').style.display = 'block'
+            } else {
+                document.getElementById('options').style.display = 'none'
+            }
+        }
     }
-};
+}
 </script>
 <style scoped>
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .Wrapper {
-  max-width: 60%;
-  position: relative;
-  bottom: 50vh;
+    max-width: 60%;
+    position: relative;
+    bottom: 50vh;
 }
 
 .Input {
-  position: relative;
-  height: 100px;
+    position: relative;
+    height: 100px;
 }
 
 .Input-text {
-  display: block;
-  margin: 0;
-  padding: var(--inputPaddingV) var(--inputPaddingH);
-  color: inherit;
-  width: 100%;
-  font-family: inherit;
-  font-size: var(--inputFontSize);
-  font-weight: inherit;
-  line-height: var(--inputLineHeight);
-  border: none;
-  border-radius: 0.4rem;
-  transition: box-shadow var(--transitionDuration);
+    display: block;
+    margin: 0;
+    padding: var(--inputPaddingV) var(--inputPaddingH);
+    color: inherit;
+    width: 100%;
+    font-family: inherit;
+    font-size: 45px;
+    font-weight: inherit;
+    line-height: var(--inputLineHeight);
+    border: solid 1px;
+    border-radius: 5px;
+    transition: box-shadow var(--transitionDuration);
 }
 
 .Input-text::placeholder {
-  color: #b0bec5;
+    color: #b0bec5;
+    padding: 10px;
 }
 
 .Input-text:focus {
-  outline: none;
-  box-shadow: 0.2rem 0.8rem 1.6rem var(--colorPrimary600);
+    outline: none;
+    box-shadow: 0.2rem 0.8rem 1.6rem var(--colorPrimary600);
+    padding: 5px;
 }
 
 .Input-label {
-  display: block;
-  position: absolute;
-  bottom: 50%;
-  left: 1rem;
-  color: rgb(0, 0, 0);
-  font-family: inherit;
-  font-size: var(--inputFontSize);
-  font-weight: inherit;
-  line-height: var(--inputLineHeight);
-  opacity: 0;
-  transform: translate3d(0, var(--labelDefaultPosY), 0) scale(1);
-  transform-origin: 0 0;
-  transition: opacity var(--inputTransitionDuration) var(--inputTransitionTF),
-    transform var(--inputTransitionDuration) var(--inputTransitionTF),
-    visibility 0ms var(--inputTransitionDuration) var(--inputTransitionTF),
-    z-index 0ms var(--inputTransitionDuration) var(--inputTransitionTF);
+    display: block;
+    position: absolute;
+    bottom: 50%;
+    left: 1rem;
+    color: rgb(0, 0, 0);
+    font-family: inherit;
+    font-size: var(--inputFontSize);
+    font-weight: inherit;
+    line-height: var(--inputLineHeight);
+    opacity: 0;
+    transform: translate3d(0, var(--labelDefaultPosY), 0) scale(1);
+    transform-origin: 0 0;
+    transition: opacity var(--inputTransitionDuration) var(--inputTransitionTF),
+        transform var(--inputTransitionDuration) var(--inputTransitionTF),
+        visibility 0ms var(--inputTransitionDuration) var(--inputTransitionTF),
+        z-index 0ms var(--inputTransitionDuration) var(--inputTransitionTF);
 }
 
 .Input-text:placeholder-shown+.Input-label {
-  visibility: hidden;
-  z-index: -1;
+    visibility: hidden;
+    z-index: -1;
 }
 
 .Input-text:not(:placeholder-shown)+.Input-label,
 .Input-text:focus:not(:placeholder-shown)+.Input-label {
-  visibility: visible;
-  z-index: 1;
-  opacity: 1;
-  transform: translate3d(0, var(--labelTransformedPosY), 0) scale(var(--labelScaleFactor));
-  transition: transform var(--inputTransitionDuration), visibility 0ms,
-    z-index 0ms;
+    visibility: visible;
+    z-index: 1;
+    opacity: 1;
+    transform: translate3d(0, var(--labelTransformedPosY), 0) scale(var(--labelScaleFactor));
+    transition: transform var(--inputTransitionDuration), visibility 0ms,
+        z-index 0ms;
 }
 
 #options {
-  display: none;
-  height: 380px;
-  overflow-y: scroll;
-  border-radius: 5px;
-  border: 2px solid;
-  background-color: white;
+    display: none;
+    height: 300px;
+    overflow-y: scroll;
+    border-radius: 5px;
+    border: 2px solid;
+    background-color: white;
 }
 
-#options tbody tr td {
-  width: 400vh;
+
+#options tr td {
+    width: 400vh;
 }
 </style>

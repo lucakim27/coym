@@ -132,11 +132,12 @@ router.post('/logout', function (req: any, res: any) {
   res.redirect('/home')
 })
 
-router.post('/authRegistration', registerValidate, function (req: any, res: any) {
-  const errors = validationResult(req)
-  if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.array() })
-  } else {
-    authRegistration(res, req)
-  }
+router.post('/authRegistration', function (req: any, res: any) {
+  console.log('POST SUCCESS!!')
+  // const errors = validationResult(req)
+  // if (!errors.isEmpty()) {
+  //   return res.status(422).json({ errors: errors.array() })
+  // } else {
+  //   authRegistration(res, req)
+  // }
 })
