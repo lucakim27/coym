@@ -1,6 +1,6 @@
 <template>
     <div>
-        <center style="height: 1100px">
+        <div style="height: 1100px; text-align: center;">
             <h1 id="header" class="waviy">CHART</h1>
             <hr />
             <div style="
@@ -36,7 +36,7 @@
                     <canvas id="mostCommentedPages" style="max-width: 90%"></canvas>
                 </div>
             </div>
-        </center>
+        </div>
     </div>
 </template>
 <script>

@@ -1,33 +1,38 @@
 import path from 'path'
 import http from 'http'
+import cors from "cors"
 import express from 'express'
-import router from './routes/index'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import { createMajorsTable } from './models/major'
-import { createAccountsTable } from './models/account'
+import { createAccountsTable, authRegistration } from './models/account'
 import { createLikesTable, addLike, sendLikes } from './models/like'
 import { createCountsTable, addCounts, sendCounts } from './models/count'
 import { createCommentsTable, addComment, sendComment } from './models/comment'
 import { createOnlineTable, addOnlineUser, sendOnlineUsers, removeOnlineUser } from './models/online'
 
+const router = express.Router()
+const corsOptions ={
+   origin:'*', 
+   credentials:true,            //access-control-allow-credentials:true
+   optionSuccessStatus:200,
+}
 const app = express()
 const { Server } = require("socket.io")
 const server = http.createServer(app)
 const io = new Server(server)
 const PORT = process.env.PORT || 3000
 
-app.engine('html', require('ejs').renderFile)
-app.set('views', path.join(__dirname, '/../views'))
-app.set("view engine", "html")
+app.use(express.json());
+app.use(cors(corsOptions))
 app.use(express.static(path.join(__dirname, '/../controllers')))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use('/', router)
 
 /* 
-  create 'coym' database before you run
-  below lines are for creating tables for each models
+create 'coym' database before you run
+below lines are for creating tables for each models
 */
 createMajorsTable()
 createCommentsTable()
@@ -35,6 +40,11 @@ createCountsTable()
 createAccountsTable()
 createLikesTable()
 createOnlineTable()
+
+router.post('/signUp', function (req: any, res: any) {
+  authRegistration(res, req)
+})
+
 
 io.on('connection', (socket: any) => {
 
@@ -66,4 +76,4 @@ io.on('connection', (socket: any) => {
 
 })
 
-server.listen(PORT, () => console.log(`Server running on port ${PORT}. Click here: http://localhost:3000`))
+server.listen(PORT, () => console.log(`Server running on port ${PORT}.`))

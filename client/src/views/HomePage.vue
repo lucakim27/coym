@@ -1,10 +1,10 @@
 <template>
     <div>
-        <center style="height: 1200px;">
+        <div style="height: 1200px; text-align: center;">
             <h1>HOME</h1>
             <img src='https://img.freepik.com/free-vector/group-different-occupations-standing-white-background_218660-287.jpg?w=2000'
                 style='width: 100%; height: 60%; filter: brightness(70%);'>
-            <div class="Wrapper">
+
                 <div class="Input">
                     <input class="Input-text" id="input" placeholder="Major, e.g. Computer Science" type="search"
                         @input="searchChangeFunc($event)" />
@@ -16,7 +16,7 @@
                         </tr>
                     </table>
                 </div>
-            </div>
+
             <div style='position: absolute; top: 100%; margin-left: auto; margin-right: auto; left: 0; right: 0; text-align: center;'>
                 <div>
                     <svg style="margin: 20px;" xmlns="http://www.w3.org/2000/svg" width="100" height="100"
@@ -66,7 +66,7 @@
                 </div>
                 <h4>Getting reviews on the majors has never been this easy before!</h4>
             </div>
-        </center>
+        </div>
     </div>
 </template>
 <script>
@@ -378,7 +378,7 @@ export default {
         searchChangeFunc(event) {
             this.filteredMajorsList = []
             if (event.target.value.length > 0) {
-                for (var i = 0; i < this.majorsList.length; i++) {
+                for (let i = 0; i < this.majorsList.length; i++) {
                     if (this.majorsList[i].toLowerCase().includes(event.target.value.toLowerCase())) {
                         this.filteredMajorsList.push(this.majorsList[i])
                     }
@@ -398,78 +398,18 @@ export default {
     box-sizing: border-box;
 }
 
-.Wrapper {
-    max-width: 60%;
-    position: relative;
-    bottom: 50vh;
-}
-
 .Input {
-    position: relative;
-    height: 100px;
+  position: absolute; top: 90%; margin-left: auto; margin-right: auto; left: 0; right: 0; text-align: center;
 }
 
-.Input-text {
-    display: block;
-    margin: 0;
-    padding: var(--inputPaddingV) var(--inputPaddingH);
-    color: inherit;
-    width: 100%;
-    font-family: inherit;
-    font-size: 45px;
-    font-weight: inherit;
-    line-height: var(--inputLineHeight);
-    border: solid 1px;
-    border-radius: 5px;
-    transition: box-shadow var(--transitionDuration);
-}
-
-.Input-text::placeholder {
-    color: #b0bec5;
-    padding: 10px;
-}
-
-.Input-text:focus {
-    outline: none;
-    box-shadow: 0.2rem 0.8rem 1.6rem var(--colorPrimary600);
-    padding: 5px;
-}
-
-.Input-label {
-    display: block;
-    position: absolute;
-    bottom: 50%;
-    left: 1rem;
-    color: rgb(0, 0, 0);
-    font-family: inherit;
-    font-size: var(--inputFontSize);
-    font-weight: inherit;
-    line-height: var(--inputLineHeight);
-    opacity: 0;
-    transform: translate3d(0, var(--labelDefaultPosY), 0) scale(1);
-    transform-origin: 0 0;
-    transition: opacity var(--inputTransitionDuration) var(--inputTransitionTF),
-        transform var(--inputTransitionDuration) var(--inputTransitionTF),
-        visibility 0ms var(--inputTransitionDuration) var(--inputTransitionTF),
-        z-index 0ms var(--inputTransitionDuration) var(--inputTransitionTF);
-}
-
-.Input-text:placeholder-shown+.Input-label {
-    visibility: hidden;
-    z-index: -1;
-}
-
-.Input-text:not(:placeholder-shown)+.Input-label,
-.Input-text:focus:not(:placeholder-shown)+.Input-label {
-    visibility: visible;
-    z-index: 1;
-    opacity: 1;
-    transform: translate3d(0, var(--labelTransformedPosY), 0) scale(var(--labelScaleFactor));
-    transition: transform var(--inputTransitionDuration), visibility 0ms,
-        z-index 0ms;
+.Input input {
+  width: 50%;
+  border-radius: 5px;
 }
 
 #options {
+  position: absolute; top: 90%; margin-left: auto; margin-right: auto; left: 0; right: 0; text-align: center; z-index: 999999999999;
+    width: 50%;
     display: none;
     height: 300px;
     overflow-y: scroll;
@@ -480,6 +420,6 @@ export default {
 
 
 #options tr td {
-    width: 400vh;
+  width: 50%;
 }
 </style>

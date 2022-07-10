@@ -1,13 +1,13 @@
 <template>
   <div>
-    <center style="height: 1100px">
+    <div style="height: 1100px; text-align: center;">
       <h1>{{getQueryVariable('major')}}</h1>
       <hr />
       <div id="inputAndCommentBtn">
         <input type="text" id="userInput" placeholder="Comment here..." />
         <button id="commentBtn">></button>
       </div>
-      <table class="table" id="myTable" border="1" style="margin: 20px; width: 90%">
+      <table class="table" id="myTable" border="1" style="margin: 20px; width: 80%; position: absolute; top: 10; margin-left: auto; margin-right: auto; left: 0; right: 0; text-align: center;">
         <thead>
           <tr>
             <th scope="col">Username</th>
@@ -22,7 +22,7 @@
         </tbody>
       </table>
       <hr />
-    </center>
+    </div>
   </div>
 </template>
 <script>

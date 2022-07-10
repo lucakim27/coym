@@ -41,17 +41,17 @@ export const authRegistration = function (res: any, req: any) {
                 var existing = false
                 for (var i = 0; i < result.length; i++) {
                     if (req.body.username === result[i].username || req.body.password === result[i].password) {
-                        res.send(`<script>alert("Account already exists"); window.location.href = "/register"; </script>`)
+                        res.json('register')
                         existing = true
                     }
                 }
                 if (!existing) {
                     addAccount(req.body.username, req.body.password)
-                    res.redirect('/login')
+                    res.json('login')
                 }
             } else {
                 addAccount(req.body.username, req.body.password)
-                res.redirect('/login')
+                res.json('login')
             }
         })
     })
