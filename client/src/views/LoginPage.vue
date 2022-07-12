@@ -52,6 +52,10 @@ export default {
 #container {
   height: 1100px;
   text-align: center;
+  /* margin: 100px; */
+}
+
+form {
   margin: 100px;
 }
 

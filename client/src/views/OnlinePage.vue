@@ -1,7 +1,7 @@
 <template>
   <div id='container'>
-    <table class="table" id="onlineTable" border="1">
-      <thead>
+    <table class="table" id="onlineTable">
+      <!-- <thead>
         <tr>
           <th scope="col">#</th>
           <th scope="col">Username</th>
@@ -9,7 +9,7 @@
           <th scope="col">Country</th>
           <th scope="col">Online</th>
         </tr>
-      </thead>
+      </thead> -->
       <tbody>
         <tr></tr>
       </tbody>

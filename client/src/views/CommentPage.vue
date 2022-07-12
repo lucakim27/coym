@@ -4,8 +4,8 @@
       <input type="text" id="userInput" placeholder="Comment here..." />
       <button id="commentBtn">></button>
     </div>
-    <table class="table" id="myTable" border="1">
-      <thead>
+    <table class="table" id="myTable">
+      <!-- <thead>
         <tr>
           <th scope="col">Username</th>
           <th scope="col">Comment</th>
@@ -13,7 +13,7 @@
           <th scope="col">Likes</th>
           <th scope="col">Replies</th>
         </tr>
-      </thead>
+      </thead> -->
       <tbody>
         <tr></tr>
       </tbody>

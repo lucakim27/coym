@@ -411,7 +411,7 @@ export default {
     z-index: 999999999999;
     width: 50%;
     display: none;
-    height: 300px;
+    height: 200px;
     overflow-y: scroll;
     border-radius: 5px;
     border: 2px solid;
@@ -424,12 +424,14 @@ export default {
 
 #descriptionContainer {
     position: absolute;
-    top: 95%;
+    top: 90%;
     margin-left: auto;
     margin-right: auto;
     left: 0;
     right: 0;
     text-align: center;
+    margin-bottom: 35px;
+    padding: 50px;
 }
 
 svg {
@@ -452,8 +454,7 @@ img {
 }
 
 #container {
-    height: 1200px;
     text-align: center;
-    /* overflow-y: scroll; */
+    overflow-y: scroll;
 }
 </style>
