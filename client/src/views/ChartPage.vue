@@ -1,40 +1,15 @@
 <template>
-    <div>
-        <div style="height: 1100px; text-align: center;">
-            <h1 id="header" class="waviy">CHART</h1>
-            <hr />
-            <div style="
-          display: flex;
-          padding: 10px;
-          margin-top: 40px;
-          justify-content: center;
-        ">
-                <div style="
-            height: 83vh;
-            min-width: 40%;
-            flex: 0;
-            border-style: solid;
-            padding: 10px;
-            margin-right: 30px;
-            border-radius: 5px;
-          ">
-                    <h1>Most Visited Pages</h1>
-                    <hr />
-                    <canvas id="mostViewedPages" style="max-width: 90%"></canvas>
-                </div>
-                <div style="
-            height: 83vh;
-            min-width: 40%;
-            flex: 0;
-            border-style: solid;
-            padding: 10px;
-            margin-left: 30px;
-            border-radius: 5px;
-          ">
-                    <h1>Most Commented Pages</h1>
-                    <hr />
-                    <canvas id="mostCommentedPages" style="max-width: 90%"></canvas>
-                </div>
+    <div id='container'>
+        <div id='BothContainer'>
+            <div id='mostViewedContainer'>
+                <h1>Most Visited Pages</h1>
+                <hr />
+                <canvas id="mostViewedPages"></canvas>
+            </div>
+            <div id='mostCommentedContainer'>
+                <h1>Most Commented Pages</h1>
+                <hr />
+                <canvas id="mostCommentedPages"></canvas>
             </div>
         </div>
     </div>
@@ -44,3 +19,41 @@ export default {
     name: 'ChartPage',
 };
 </script>
+<style scoped>
+#container {
+    height: 1100px;
+    text-align: center;
+}
+
+#BothContainer {
+    display: flex;
+    padding: 10px;
+    /* margin-top: 40px; */
+    justify-content: center;
+}
+
+#mostViewedContainer {
+    height: 83vh;
+    min-width: 40%;
+    flex: 0;
+    border-style: solid;
+    padding: 10px;
+    margin-right: 30px;
+    border-radius: 5px;
+}
+
+#mostCommentedContainer {
+    height: 83vh;
+    min-width: 40%;
+    flex: 0;
+    border-style: solid;
+    padding: 10px;
+    margin-left: 30px;
+    border-radius: 5px;
+}
+
+#mostViewedPages,
+#mostCommentedPages {
+    max-width: 90%;
+}
+</style>

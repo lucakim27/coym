@@ -1,22 +1,13 @@
 <template>
-  <div>
-    <!-- <form method="post" @submit.prevent="postNow">
-      <input type="text" v-model="name">
-      <button type="submit" name="button">Submit</button>
-    </form> -->
-    <div id="registerContainer" style="height: 1100px; text-align: center;">
-      <form method="post" @submit.prevent="postNow">
-        <h1 id="header" style="font-size: 80px;">Register</h1><br>
-        <input type="text" name="username" v-model="username" placeholder="Enter your ID" style="font-size: 80px; border-radius: 10px;"
-          required /><br /><br />
-        <input type="password" name="password" v-model="password" placeholder="Password" style="font-size: 80px; border-radius: 10px;"
-          required /><br /><br />
-        <input type="password" name="repassword" v-model="repassword" placeholder="Password Again"
-          style="font-size: 80px; border-radius: 10px;" required /><br /><br />
-        <button type="submit" value="register"
-          style="font-size: 50px; border-radius: 10px; background-color: white;">Register</button><br />
-      </form>
-    </div>
+  <div id="container">
+    <h1>Register</h1>
+    <form method="post" @submit.prevent="signUp">
+      <input type="text" name="username" v-model="username" placeholder="Username" required /><br /><br />
+      <input type="password" name="password" v-model="password" placeholder="Password" required /><br /><br />
+      <input type="password" name="repassword" v-model="passwordConfirm" placeholder="Password Confirm"
+        required /><br /><br />
+      <button type="submit" value="register">Register</button><br />
+    </form>
   </div>
 </template>
 
@@ -29,18 +20,51 @@ export default {
     return {
       username: '',
       password: '',
-      repassword: ''
+      passwordConfirm: ''
     }
   },
   methods: {
-    postNow() {
+    signUp() {
+      const self = this
       axios({
         method: "POST",
         url: "http://localhost:3000/signUp",
         headers: { 'Content-Type': 'application/json' },
-        data: { username: this.username, password: this.password, repassword: this.repassword  }
-      }).then(response => window.location.href = `http://localhost:8080/${response.data}`)
+        data: { username: this.username, password: this.password, passwordConfirm: this.passwordConfirm }
+      }).then(function (response) {
+        if (!response.data.status) {
+          alert(response.data.message)
+          self.$router.push('/register')
+        } else {
+          alert(response.data.message)
+          self.$router.push('/login')
+        }
+      })
     }
   }
 }
 </script>
+<style scoped>
+#container {
+  height: 1100px;
+  text-align: center;
+  margin: 100px;
+}
+
+#header {
+  font-size: 40px;
+}
+
+input {
+  font-size: 40px;
+  background-color: rgb(241, 241, 241);
+  border-radius: 5px;
+}
+
+button {
+  font-size: 30px;
+  border-radius: 5px;
+  background-color: rgb(0, 0, 0);
+  color: white;
+}
+</style>

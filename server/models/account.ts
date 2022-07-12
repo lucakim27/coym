@@ -32,46 +32,57 @@ export const addAccount = function (username: any, password: any) {
     })
 }
 
-export const authRegistration = function (res: any, req: any) {
-    connection.connect(function (err: any) {
-        if (err) throw err
-        connection.query("SELECT * FROM accounts", function (err: any, result: any, fields: any) {
-            if (err) throw err
-            if (result.length !== 0) {
-                var existing = false
-                for (var i = 0; i < result.length; i++) {
-                    if (req.body.username === result[i].username || req.body.password === result[i].password) {
-                        res.json('register')
-                        existing = true
-                    }
-                }
-                if (!existing) {
-                    addAccount(req.body.username, req.body.password)
-                    res.json('login')
-                }
-            } else {
-                addAccount(req.body.username, req.body.password)
-                res.json('login')
-            }
-        })
-    })
+const validateSignUp = function (username: any, password: any, passwordConfirm: any) {
+    if (username.length < 6 || password.length < 6 || password !== passwordConfirm) {
+        return 1
+    } else {
+        return 0
+    }
 }
 
-export const authLogin = function (res: any, req: any) {
+export const authSignUp = function (res: any, req: any) {
+    if (validateSignUp(req.body.username, req.body.password, req.body.passwordConfirm)) {
+        res.send({status: false, message: 'It is either too short or doesnt match.'})
+    } else {
+        connection.connect(function (err: any) {
+            if (err) throw err
+            connection.query("SELECT * FROM accounts", function (err: any, result: any, fields: any) {
+                if (err) throw err
+                if (result.length !== 0) {
+                    var existing = false
+                    for (var i = 0; i < result.length; i++) {
+                        if (req.body.username === result[i].username || req.body.password === result[i].password) {
+                            res.send({status: false, message: 'It already exits.'})
+                            existing = true
+                        }
+                    }
+                    if (!existing) {
+                        addAccount(req.body.username, req.body.password)
+                        res.send({status: true, message: 'Successfully signed up.'})
+                    }
+                } else {
+                    addAccount(req.body.username, req.body.password)
+                    res.send({status: true, message: 'Successfully signed up.'})
+                }
+            })
+        })
+    }
+}
+
+export const authSignIn = function (res: any, req: any) {
     connection.connect(function (err: any) {
         if (err) throw err
         connection.query("SELECT * FROM accounts", function (err: any, result: any, fields: any) {
             if (err) throw err
             var existing = false
             for (var i = 0; i < result.length; i++) {
-                if (req.body.username === result[i].username && req.body.password === result[i].password) {
-                    res.cookie('current-user', { id: req.body.username, pwd: req.body.password })
-                    res.redirect('/home')
+                if (req.query.username === result[i].username && req.query.password === result[i].password) {
+                    res.send({status: true, message: 'Successfully signed in.'})
                     existing = true
                 }
             }
             if (!existing) {
-                res.send(`<script>alert("Wrong username or password"); window.location.href = "/login"; </script>`)
+                res.send({status: false, message: 'You failed to sign in.'})
             }
         })
     })
