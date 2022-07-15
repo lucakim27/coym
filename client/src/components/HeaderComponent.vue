@@ -6,8 +6,8 @@ import { useCookies } from "vue3-cookies"
 export default {
     name: 'HeaderComponent',
     components: {
-		ModalComponent
-	},
+        ModalComponent
+    },
     data() {
         return {
             username: '',
@@ -27,13 +27,6 @@ export default {
         }
     },
     methods: {
-        modalButton() {
-            this.showModal = !this.showModal
-		},
-		closeModal(bool) {
-            // bool === false
-			this.showModal = bool
-		},
         sidebarOpen() {
             document.getElementById("mySidenav").style.width = "250px"
         }
@@ -75,10 +68,9 @@ export default {
                 <a href="/login" id="signIn">Sign in</a>
             </div>
             <h1>{{ getTitle }}</h1>
-            <svg v-if='loggedIn && username.length !== 0'  @click="modalButton"
-                style="cursor: pointer; position: absolute; right: 15px; top: 10px" 
-                 xmlns="http://www.w3.org/2000/svg" width="44" height="44" fill="black"
-                class="bi bi-person-circle" viewBox="0 0 16 16">
+            <svg v-if='loggedIn && username.length !== 0' @click="showModal = true"
+                style="cursor: pointer; position: absolute; right: 15px; top: 10px" xmlns="http://www.w3.org/2000/svg"
+                width="44" height="44" fill="black" class="bi bi-person-circle" viewBox="0 0 16 16">
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                 <path fill-rule="evenodd"
                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
@@ -86,7 +78,13 @@ export default {
         </header>
     </div>
     <div>
-        <ModalComponent :should-render="showModal" @finishHabitCreation="closeModal"></ModalComponent>
+        <transition name="modal">
+            <ModalComponent v-if="showModal" @close="showModal = false">
+                <template v-slot:header>
+                    <h3>User Profile</h3><hr>
+                </template>
+            </ModalComponent>
+        </transition>
     </div>
 </template>
 <style scoped>
@@ -134,4 +132,65 @@ header h1 {
     margin-left: auto;
     margin-right: auto;
 }
+
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: table;
+  transition: opacity 0.3s ease;
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal-container {
+  width: 300px;
+  margin: 0px auto;
+  padding: 20px 30px;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+  transition: all 0.3s ease;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.modal-header h3 {
+  margin-top: 0;
+  color: #42b983;
+}
+
+.modal-body {
+  margin: 20px 0;
+}
+
+.modal-default-button {
+  float: right;
+}
+
+/*
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+
+.modal-enter-from, .modal-leave-to {
+  opacity: 0;
+}
+
+.modal-enter-active .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
 </style>

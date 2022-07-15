@@ -4,7 +4,17 @@
       <input type="text" id="userInput" v-model="commentInput" placeholder="Comment here..." />
       <button @click="comment()" id="commentBtn">></button>
     </div>
-    <table class="table" id="commentTable" border="1"></table>
+    <center id="commentDiv">
+      <div v-for="comment in getComment" :key="comment.comment" style="padding: 10px; margin: 10px; display: flex; width: 80%; background: black; border-radius: 10px;">
+        <a href='' style='color: white; margin: 10px; width: 20%; transform: translateY(30%);'>{{ comment.username }}</a>
+        <p style='color: white; margin: 10px; width: 40%; transform: translateY(30%);'>{{ comment.comment }}</p>
+        <p style='color: white; margin: 10px; width: 20%; transform: translateY(30%);'>{{ comment.date.slice(0, 10) }}</p>
+        <div style='width: 10%; margin: 10px; '>
+          <button @click="like('{{ comment.comment }}')" style='margin: 10px; width: 100%; background-color: rgb(54, 153, 207); color: white; border-radius: 5px;'>0 Like</button>
+          <button @click="reply('{{ comment.comment }}')" style='margin: 10px; width: 100%; background-color: rgb(54, 153, 207); color: white; border-radius: 5px;'>0 Reply</button>
+        </div>
+      </div>
+    </center>
   </div>
 </template>
 <script>
@@ -20,10 +30,12 @@ export default {
     return {
       username: '',
       commentInput: '',
-      loggedIn: false
+      loggedIn: false,
+      getComment: []
     }
   },
   mounted() {
+    let self = this
     let user = this.cookies.get("user")
     if (user !== null) {
         this.username = this.cookies.get("user").username
@@ -37,22 +49,7 @@ export default {
       }
     }).then(function (response) {
       if (response.data.status) {
-        for (var i = 0; i < response.data.message.length; i++) {
-          var table = document.getElementById("commentTable")
-          var row = table.insertRow(0)
-          var cell1 = row.insertCell(0)
-          var cell2 = row.insertCell(1)
-          var cell3 = row.insertCell(2)
-          var cell4 = row.insertCell(3)
-          var cell5 = row.insertCell(4)
-          cell1.innerHTML = response.data.message[i].username
-          cell2.innerHTML = response.data.message[i].comment
-          cell3.innerHTML = response.data.message[i].date
-          cell4.innerHTML = "<button>Likes</button>"
-          cell5.innerHTML = "<button>Replies</button>"
-        }
-
-
+        self.getComment = response.data.message
       }
     })
   },
@@ -76,7 +73,10 @@ export default {
       return decodeURIComponent(returnValue)
     },
     comment() {
-      alert(`Are you sure you want to comment '${this.commentInput}' on the '${this.getQueryVariable()}' page?`)
+      if (this.commentInput === '') {
+        alert("You have not input anything yet.")
+        return 0
+      }
       axios({
         method: "POST",
         url: "http://localhost:3000/postComment",
@@ -85,40 +85,61 @@ export default {
       }).then(function (response) {
         if (response.data.status) {
           alert("You have successfully commented.")
+        } else {
+          alert("Your comment is duplicated.")
         }
       })
-    }
+    },
+    like(comment) {
+      alert("like")
+      axios({
+        method: "POST",
+        url: "http://localhost:3000/postLike",
+        headers: { 'Content-Type': 'application/json' },
+        data: { comment: comment, page: this.getQueryVariable() }
+      }).then(function (response) {
+        if (response.data.status) {
+          alert("You have successfully liked.")
+        } else {
+          alert("You have successfully disliked.")
+        }
+      })
+    },
+    reply(comment) {
+      alert("reply")
+      axios({
+        method: "POST",
+        url: "http://localhost:3000/postReply",
+        headers: { 'Content-Type': 'application/json' },
+        data: { comment: comment, page: this.getQueryVariable() }
+      }).then(function (response) {
+        if (response.data.status) {
+          alert("")
+        } else {
+          alert("")
+        }
+      })
+    },
   }
 }
 </script>
 <style scoped>
-#commentTable {
-  margin: 20px;
-  width: 80%;
-  position: absolute;
-  top: 10;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  text-align: center;
-  margin-top: 100px;
-}
-
 #commentBtn {
   background-color: rgb(54, 153, 207);
   cursor: pointer;
   border-radius: 5px;
   color: white;
   font-size: 20px;
-  width: 90px;
+  width: 20%;
+  margin: 10px;
 }
 
 #userInput {
   border-radius: 5px;
   text-align: center;
-  width: 400px;
+  width: 60%;
   font-size: 20px;
+  margin: 10px;
 }
 
 #container {
@@ -127,6 +148,7 @@ export default {
 }
 
 #ipnutContainer {
+  margin: 10px;
   margin-top: 100px;
 }
 </style>

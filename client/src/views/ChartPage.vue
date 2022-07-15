@@ -22,6 +22,7 @@ export default {
 <style scoped>
 #container {
     height: 1100px;
+    margin-top: 100px;
     text-align: center;
 }
 

@@ -75,6 +75,7 @@ export const postComment = function (res: any, req: any) {
             for (var i = 0; i < result.length; i++) {
                 if (req.body.comment === result[i].comment) {
                     existing = true
+                    res.send({ status: false })
                 }
             }
             if (!existing) {
