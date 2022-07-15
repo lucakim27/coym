@@ -8,7 +8,7 @@ import { createMajorsTable } from './models/major'
 import { createAccountsTable, authSignUp, authSignIn } from './models/account'
 import { createLikesTable } from './models/like'
 import { createCountsTable } from './models/count'
-import { createCommentsTable } from './models/comment'
+import { createCommentsTable, getComment } from './models/comment'
 import { createOnlineTable } from './models/online'
 
 const router = express.Router()
@@ -46,6 +46,10 @@ router.post('/signUp', function (req: any, res: any) {
 
 router.get('/signIn', function (req: any, res: any) {
   authSignIn(res, req)
+})
+
+router.get('/getComment', function (req: any, res: any) {
+  getComment(res, req)
 })
 
 

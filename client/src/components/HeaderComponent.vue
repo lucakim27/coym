@@ -21,7 +21,7 @@ export default {
     },
     mounted() {
         let user = this.cookies.get("user")
-        if (user !== undefined) {
+        if (user !== null) {
             this.username = this.cookies.get("user").username
             this.loggedIn = true
         }

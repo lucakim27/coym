@@ -55,3 +55,13 @@ export const sendComment = function (io: any) {
         io.sockets.emit('updatedComment', JSON.stringify(await connection.promise().query(`SELECT * FROM comments;`)))
     }, 500)
 }
+
+export const getComment = function (res: any, req: any) {
+    connection.connect(function (err: any) {
+        if (err) throw err
+        connection.query(`SELECT * FROM comments WHERE page = '${req.query.page}'`, function (err: any, result: any, fields: any) {
+            if (err) throw err
+            res.send({ status: true, message: result })
+        })
+    })
+}
