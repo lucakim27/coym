@@ -65,3 +65,24 @@ export const getComment = function (res: any, req: any) {
         })
     })
 }
+
+export const postComment = function (res: any, req: any) {
+    connection.connect(function (err: any) {
+        if (err) throw err
+        connection.query(`SELECT * FROM comments WHERE page = '${req.body.page}'`, function (err: any, result: any) {
+            if (err) throw err
+            var existing = false
+            for (var i = 0; i < result.length; i++) {
+                if (req.body.comment === result[i].comment) {
+                    existing = true
+                }
+            }
+            if (!existing) {
+                connection.query(`INSERT INTO comments (comment, page, username, date) VALUES ('${req.body.comment}', '${req.body.page}', '${req.body.username}', '${toISOStringLocal(new Date())}')`, function (err: any, result: any) {
+                    if (err) throw err
+                    res.send({ status: true })
+                })
+            }
+        })
+    })
+}
