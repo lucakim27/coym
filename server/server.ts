@@ -6,7 +6,7 @@ import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import { createMajorsTable } from './models/major'
 import { createAccountsTable, authSignUp, authSignIn } from './models/account'
-import { createLikesTable } from './models/like'
+import { createLikesTable, getLike, postLike } from './models/like'
 import { createCountsTable } from './models/count'
 import { createCommentsTable, getComment, postComment } from './models/comment'
 import { createOnlineTable } from './models/online'
@@ -55,6 +55,18 @@ router.get('/getComment', function (req: any, res: any) {
 router.post('/postComment', function (req: any, res: any) {
   postComment(res, req)
 })
+
+router.get('/getLike', function (req: any, res: any) {
+  getLike(res, req)
+}) 
+
+router.post('/postLike', function (req: any, res: any) {
+  postLike(res, req)
+})
+
+router.get('/getChart', function (req: any, res: any) {
+  getLike(res, req)
+}) 
 
 // io.on('connection', (socket: any) => {
 

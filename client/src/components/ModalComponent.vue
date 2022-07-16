@@ -13,7 +13,11 @@ export default {
         return { cookies }
     },
 	methods: {
-
+		logout() {
+			this.cookies.remove('user')
+			alert("You're logged out.")
+			window.location.reload()
+		}
 	},
 	computed: {
 
@@ -45,7 +49,7 @@ export default {
 
 				<div class="modal-footer">
 					<slot name="footer">
-						<button class="modal-default-button logoutBtn">
+						<button @click='logout()' class="modal-default-button logoutBtn">
 							Logout
 						</button>
 						<button class="modal-default-button closeBtn" @click="$emit('close')">

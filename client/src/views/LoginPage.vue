@@ -85,8 +85,8 @@ export default {
       }).then(function (response) {
         if (response.data.status) {
           self.$cookies.set("user", { username: self.username, password: self.password })
-          self.$router.push('/')
-          alert("You're logged in. Please refresh the page.")
+          alert("You're logged in.")
+          window.location.href = "/"
         } else {
           alert(response.data.message)
         }

@@ -7,7 +7,7 @@
             <table id="options">
                 <tr v-for="(major, i) in filteredMajorsList" :key="i">
                     <td scope="row">
-                        <a v-bind:href="'/comment?major=' + major">{{ major }}</a>
+                        <a v-bind:href="'/comment?major=' + major">{{ major }}</a><hr>
                     </td>
                 </tr>
             </table>
@@ -419,7 +419,7 @@ export default {
 }
 
 #options tr td {
-    width: 50%;
+    width: 10%;
 }
 
 #descriptionContainer {
@@ -456,5 +456,10 @@ img {
 #container {
     text-align: center;
     overflow-y: scroll;
+}
+
+table a {
+    color: black;
+    text-decoration: none;
 }
 </style>

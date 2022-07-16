@@ -23,23 +23,25 @@ export const createLikesTable = function () {
     })
 }
 
-export const addLike = function (comment: any, page: any, username: any) {
+export const postLike = function (res: any, req: any) {
     connection.connect(function (err: any) {
         if (err) throw err
-        connection.query(`SELECT * FROM likes`, function (err: any, result: any) {
+        connection.query(`SELECT * FROM likes WHERE page = '${req.body.page}'`, function (err: any, result: any) {
             if (err) throw err
             var existing = false
             for (var i = 0; i < result.length; i++) {
-                if (username === result[i].username && comment === result[i].comment) {
+                if (req.body.comment === result[i].comment && req.body.username === result[i].username) {
                     existing = true
-                    connection.query(`DELETE FROM likes WHERE comment = '${comment}' AND username = '${username}';`, function (err: any, result: any) {
+                    connection.query(`DELETE FROM likes WHERE comment = '${req.body.comment}';`, function (err: any, result: any) {
                         if (err) throw err
+                        res.send({ status: true, message: 'You have successfully disliked the comment.' })
                     })
                 }
             }
             if (!existing) {
-                connection.query(`INSERT INTO likes (comment, page, username) VALUES ('${comment}', '${page}', '${username}')`, function (err: any, result: any) {
+                connection.query(`INSERT INTO likes (comment, page, username) VALUES ('${req.body.comment}', '${req.body.page}', '${req.body.username}')`, function (err: any, result: any) {
                     if (err) throw err
+                    res.send({ status: true, message: 'You have successfully liked the comment.' })
                 })
             }
         })
@@ -50,4 +52,14 @@ export const sendLikes = function (io: any) {
     setTimeout(async function () {
         io.sockets.emit('updatedLikes', JSON.stringify(await connection.promise().query(`SELECT * FROM likes;`)))
     }, 500)
+}
+
+export const getLike = function(res: any, req: any) {
+    connection.connect(function (err: any) {
+        if (err) throw err
+        connection.query(`SELECT * FROM likes WHERE page = '${req.query.page}'`, function (err: any, result: any, fields: any) {
+            if (err) throw err
+            res.send({ status: true, message: result })
+        })
+    })
 }
