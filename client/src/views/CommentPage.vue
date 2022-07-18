@@ -1,22 +1,34 @@
 <template>
   <div id='container'>
     <div id="ipnutContainer" v-show='loggedIn'>
-      <input type="text" id="userInput" v-model="commentInput" placeholder="Comment here..." @focus="magic_flag = true"/>
+      <input type="text" id="userInput" v-model="commentInput" placeholder="Comment here..."
+        @focus="magic_flag = true" />
       <button @click="comment()" id="commentBtn" v-show="magic_flag">Comment</button>
       <button @click="magic_flag = !magic_flag" class="closeBtn" v-show="magic_flag">Close</button>
     </div>
     <center id="commentDiv">
-      <div v-for="comment in getComment" :key="comment.comment" class='eachCommentDiv'>
+      <div v-for="comment in getComment" :key="comment.comment" class='eachCommentDiv'
+        :id="comment.comment + 'Container'">
         <div class="firstRow">
           <a class='username' href=''>{{ comment.username }}</a>
           <p class='date'>{{ comment.date.slice(0, 10) }}</p>
-        </div><hr>
-        <p class='comment'>{{ comment.comment }}</p><hr>
+        </div><br>
+        <p class='comment'>{{ comment.comment }}</p><br>
         <div class='likeAndReplyContainer'>
           <center class='lastRow'>
             <button v-bind:id="comment.comment" class='like' @click="like(comment.comment)">0 Likes</button>
-            <button v-bind:id="comment.comment" class='reply' @click="reply(comment.comment)">View Replies</button>
+            <button v-bind:id="comment.comment + 'Reply'" class='reply' @click="reply(comment.comment)">Reply</button>
+            <button v-bind:id="comment.comment + 'ViewReply'" class='viewReply' @click="viewReply(comment.comment)">View
+              Replies</button>
           </center>
+        </div>
+        <div :id="comment.comment + 'ReplyContainer'" class="replyContainer">
+          <input placeholder='Reply here...'>
+          <button>Reply</button>
+          <button @click="closeReplyContainer(comment.comment)">Close</button>
+        </div>
+        <div :id="comment.comment + 'ViewReplyContainer'" class="viewReplyContainer">
+          <p>WOWOOWO SO COOL!</p>
         </div>
       </div>
     </center>
@@ -74,7 +86,10 @@ export default {
 
   },
   methods: {
-    getQueryVariable: function () {
+    closeReplyContainer(comment) {
+      document.getElementById(comment + 'ReplyContainer').style.display = 'none'
+    },
+    getQueryVariable() {
       var query = window.location.search.substring(1)
       var vars = query.split('&')
       var returnValue = ''
@@ -116,7 +131,7 @@ export default {
         method: "POST",
         url: "http://localhost:3000/postLike",
         headers: { 'Content-Type': 'application/json' },
-        data: { comment: comment, page: this.getQueryVariable(), username: this.username  }
+        data: { comment: comment, page: this.getQueryVariable(), username: this.username }
       }).then(function (response) {
         if (response.data.status) {
           alert(response.data.message)
@@ -125,8 +140,7 @@ export default {
       })
     },
     reply(comment) {
-      alert("reply")
-      console.log(comment)
+      document.getElementById(comment + 'ReplyContainer').style.display = 'flex'
       // axios({
       //   method: "POST",
       //   url: "http://localhost:3000/postReply",
@@ -140,8 +154,16 @@ export default {
       //   }
       // })
     },
+    viewReply(comment) {
+      if (document.getElementById(comment + 'ViewReplyContainer').style.display === 'flex') {
+        document.getElementById(comment + 'ViewReplyContainer').style.display = 'none'
+        document.getElementById(comment + 'ViewReply').innerText = 'View Replies'
+      } else {
+        document.getElementById(comment + 'ViewReplyContainer').style.display = 'flex'
+        document.getElementById(comment + 'ViewReply').innerText = 'Close Replies'
+      }
+    },
     renderLike(like) {
-      console.log(like)
       setTimeout(() => {
         for (var i = 0; i < like.length; i++) {
           document.getElementById(`${like[i].comment}`).innerText = (parseInt(document.getElementById(`${like[i].comment}`).innerText.replace(/([a-z]+)/i, "")) + 1).toString() + " Likes"
@@ -153,29 +175,29 @@ export default {
 </script>
 <style scoped>
 #commentBtn {
-  background-color: rgb(54, 153, 207);
+  background-color: rgb(0, 0, 0);
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 10px;
   color: white;
   font-size: 20px;
-  width: 40.5%;
+  width: auto;
   margin: 10px;
 }
 
 .closeBtn {
-  background-color: rgb(207, 54, 54);
+  background-color: rgb(0, 0, 0);
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 10px;
   color: white;
   font-size: 20px;
-  width: 40.5%;
+  width: auto;
   margin: 10px;
 }
 
 #userInput {
-  border-radius: 5px;
+  border-radius: 10px;
   text-align: center;
-  width: 82%;
+  width: auto;
   font-size: 20px;
   margin: 10px;
 }
@@ -193,8 +215,8 @@ export default {
 .eachCommentDiv {
   padding: 10px;
   margin: 10px;
-  width: 80%;
-  background: rgb(0, 0, 0);
+  width: auto;
+  background: rgb(146, 156, 161);
   border-radius: 10px;
 }
 
@@ -202,8 +224,8 @@ export default {
   font-weight: bold;
   color: white;
   margin: 10px;
-  width: 50%;
-  /* transform: translateY(30%); */
+  /* width: 50%; */
+  text-decoration: none;
 }
 
 .comment {
@@ -211,29 +233,55 @@ export default {
   color: white;
   margin: 10px;
   font-size: 50px;
-  /* transform: translateY(30%); */
+  /* margin-left: auto;
+  margin-right: auto; */
 }
 
 .date {
   font-weight: lighter;
-  color: white;
+  color: rgb(213, 213, 213);
   margin: 10px;
-  width: 50%;
-  /* transform: translateY(30%); */
+  /* width: 50%; */
 }
 
-.firstRow,
-.lastRow {
+.firstRow {
   display: flex;
 }
 
-.like,
-.reply {
-  margin: 10px;
-  background-color: rgb(60, 61, 62);
-  color: white;
-  border-radius: 5px;
-  width: 50%;
+.lastRow {
+  display: flex;
+  justify-content: flex-end;
 }
 
+.like,
+.reply,
+.viewReply {
+  margin: 10px;
+  background-color: rgba(0, 0, 0, 0.478);
+  color: rgb(255, 255, 255);
+  border-radius: 10px;
+  width: auto;
+  /* margin-left: auto; */
+  cursor: pointer;
+}
+
+.replyContainer,
+.viewReplyContainer {
+  display: none;
+}
+
+.replyContainer input {
+  width: 60%;
+  margin: 5px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.replyContainer button {
+  width: 20%;
+  margin: 5px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.478);
+  color: white;
+}
 </style>

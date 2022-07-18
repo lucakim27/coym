@@ -4,18 +4,18 @@
         <div id='BothContainer'>
             <div id='mostViewedContainer'>
                 <h1>Most Visited Pages</h1>
-                <hr>
-                <div v-for="row in sortedMostVisitedTable" :key="row.page">
-                    <p><a v-bind:href="'/comment?major=' + row.page">{{ row.page }}</a>: {{ row.view }}</p>
-                    <hr>
+                <div class='eachRow' v-for="row in sortedMostVisitedTable" :key="row.page">
+                    <p>
+                        <a v-bind:href="'/comment?major=' + row.page">{{ row.page }}</a>: {{ row.view }}
+                    </p>
                 </div>
             </div>
             <div id='mostCommentedContainer'>
                 <h1>Most Commented Pages</h1>
-                <hr>
-                <div v-for="row in sortedMostCommentedTable" :key="row.page">
-                    <p><a v-bind:href="'/comment?major=' + row.page">{{ row.page }}</a>: {{ row.comment }}</p>
-                    <hr>
+                <div class='eachRow' v-for="row in sortedMostCommentedTable" :key="row.page">
+                    <p>
+                        <a v-bind:href="'/comment?major=' + row.page">{{ row.page }}</a>: {{ row.comment }}
+                    </p>
                 </div>
             </div>
         </div>
@@ -94,24 +94,45 @@ export default {
     height: 83vh;
     min-width: 40%;
     flex: 0;
-    border-style: solid;
+    /* border-style: solid; */
     padding: 10px;
     margin-right: 30px;
-    border-radius: 5px;
+    border-radius: 10px;
+    background: rgb(146, 156, 161);
+}
+
+#mostViewedContainer h1, #mostCommentedContainer h1 {
+    color: white;
 }
 
 #mostCommentedContainer {
     height: 83vh;
     min-width: 40%;
     flex: 0;
-    border-style: solid;
+    /* border-style: solid; */
     padding: 10px;
     margin-left: 30px;
-    border-radius: 5px;
+    border-radius: 10px;
+    background: rgb(146, 156, 161);
 }
 
 #mostViewedPages,
 #mostCommentedPages {
     max-width: 90%;
+}
+
+.eachRow {
+    background: rgb(89, 95, 98);
+    border-radius: 10px;
+}
+
+.eachRow p {
+    padding: 20px;
+    color: white;
+}
+
+.eachRow p a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
 }
 </style>
