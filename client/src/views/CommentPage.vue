@@ -158,7 +158,7 @@ export default {
   border-radius: 5px;
   color: white;
   font-size: 20px;
-  width: 10%;
+  width: 40.5%;
   margin: 10px;
 }
 
@@ -168,14 +168,14 @@ export default {
   border-radius: 5px;
   color: white;
   font-size: 20px;
-  width: 10%;
+  width: 40.5%;
   margin: 10px;
 }
 
 #userInput {
   border-radius: 5px;
   text-align: center;
-  width: 59%;
+  width: 82%;
   font-size: 20px;
   margin: 10px;
 }

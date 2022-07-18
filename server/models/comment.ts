@@ -30,32 +30,6 @@ export const createCommentsTable = function () {
     })
 }
 
-export const addComment = function (page: any, username: any, comment: any) {
-    connection.connect(function (err: any) {
-        if (err) throw err
-        connection.query(`SELECT * FROM comments`, function (err: any, result: any) {
-            if (err) throw err
-            var existing = false
-            for (var i = 0; i < result.length; i++) {
-                if (comment === result[i].comment && result[i].page === page) {
-                    existing = true
-                }
-            }
-            if (!existing) {
-                connection.query(`INSERT INTO comments (comment, page, username, date) VALUES ('${comment}', '${page}', '${username}', '${toISOStringLocal(new Date())}')`, function (err: any, result: any) {
-                    if (err) throw err
-                })
-            }
-        })
-    })
-}
-
-export const sendComment = function (io: any) {
-    setTimeout(async function () {
-        io.sockets.emit('updatedComment', JSON.stringify(await connection.promise().query(`SELECT * FROM comments;`)))
-    }, 500)
-}
-
 export const getComment = function (res: any, req: any) {
     connection.connect(function (err: any) {
         if (err) throw err

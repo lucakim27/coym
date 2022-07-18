@@ -48,12 +48,6 @@ export const postLike = function (res: any, req: any) {
     })
 }
 
-export const sendLikes = function (io: any) {
-    setTimeout(async function () {
-        io.sockets.emit('updatedLikes', JSON.stringify(await connection.promise().query(`SELECT * FROM likes;`)))
-    }, 500)
-}
-
 export const getLike = function(res: any, req: any) {
     connection.connect(function (err: any) {
         if (err) throw err

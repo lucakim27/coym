@@ -38,8 +38,12 @@ export const addCounts = function (page: any, type: any) {
     })
 }
 
-export const sendCounts = function (io: any) {
-    setTimeout(async function () {
-        io.sockets.emit('updatedCounts', JSON.stringify(await connection.promise().query(`SELECT * FROM counts;`)))
-    }, 500)
+export const getCount = function (res: any, req: any) {
+    connection.connect(function (err: any) {
+        if (err) throw err
+        connection.query(`SELECT * FROM counts`, function (err: any, result: any, fields: any) {
+            if (err) throw err
+            res.send({ status: true, message: result })
+        })
+    })
 }
