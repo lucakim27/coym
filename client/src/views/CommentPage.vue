@@ -119,7 +119,13 @@ export default {
         data: { comment: this.commentInput, username: this.username, page: this.getQueryVariable() }
       }).then(function (response) {
         if (response.data.status) {
-          alert("You have successfully commented.")
+          alert("You have successfully commented.") 
+          axios({
+              method: "POST",
+              url: "http://localhost:3000/postCount",
+              headers: { 'Content-Type': 'application/json' },
+              data: { page: response.data.page , type: 'comment' }
+          })
           window.location.reload()
         } else {
           alert("Your comment is duplicated.")

@@ -23,16 +23,16 @@ export const createCountsTable = function () {
     })
 }
 
-export const addCounts = function (page: any, type: any) {
+export const postCount = function (res: any, req: any) {
     connection.connect(function (err: any) {
         if (err) throw err
-        connection.query(`INSERT IGNORE INTO counts (page, view, comment) VALUES('${page}', 0, 0);`, function (err: any, result: any) {
+        connection.query(`INSERT IGNORE INTO counts (page, view, comment) VALUES('${req.body.page}', 0, 0);`, function (err: any, result: any) {
             if (err) throw err
         })
     })
     connection.connect(function (err: any) {
         if (err) throw err
-        connection.query(`UPDATE counts SET ${type} = ${type} + 1 WHERE page = '${page}';`, function (err: any, result: any) {
+        connection.query(`UPDATE counts SET ${req.body.type} = ${req.body.type} + 1 WHERE page = '${req.body.page}';`, function (err: any, result: any) {
             if (err) throw err
         })
     })

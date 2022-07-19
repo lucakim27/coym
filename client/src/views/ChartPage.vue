@@ -34,25 +34,31 @@ export default {
     },
     computed: {
         sortedMostVisitedTable() {
-            return this.sortObj(this.mostVisitedTable, 'view')
+            return this.sortDescending(this.mostVisitedTable, 'view')
         },
         sortedMostCommentedTable() {
-            return this.sortObj(this.mostCommentedTable, 'comment')
+            return this.sortDescending(this.mostCommentedTable, 'comment')
         }
     },
     methods: {
-        sortObj(list, key) {
+        sortDescending(list, key) {
             function compare(a, b) {
-                a = a[key];
-                b = b[key];
+                a = a[key]
+                b = b[key]
+
                 var type = (typeof (a) === 'string' ||
-                    typeof (b) === 'string') ? 'string' : 'number';
-                var result;
-                if (type === 'string') result = a.localeCompare(b);
-                else result = a - b;
-                return result;
+                    typeof (b) === 'string') ? 'string' : 'number'
+                var result
+
+                if (type === 'string') {
+                    result = a.localeCompare(b)
+                } else {
+                    result = b - a
+                }
+                return result
             }
-            return list.sort(compare);
+
+            return list.sort(compare)
         }
     },
     mounted() {
@@ -99,9 +105,11 @@ export default {
     margin-right: 30px;
     border-radius: 10px;
     background: rgb(146, 156, 161);
+    overflow-y: scroll;
 }
 
-#mostViewedContainer h1, #mostCommentedContainer h1 {
+#mostViewedContainer h1,
+#mostCommentedContainer h1 {
     color: white;
 }
 
@@ -114,11 +122,7 @@ export default {
     margin-left: 30px;
     border-radius: 10px;
     background: rgb(146, 156, 161);
-}
-
-#mostViewedPages,
-#mostCommentedPages {
-    max-width: 90%;
+    overflow-y: scroll;
 }
 
 .eachRow {
