@@ -17,18 +17,23 @@
         <div class='likeAndReplyContainer'>
           <center class='lastRow'>
             <button v-bind:id="comment.comment" class='like' @click="like(comment.comment)">0 Likes</button>
-            <button v-bind:id="comment.comment + 'Reply'" class='reply' @click="reply(comment.comment)">Reply</button>
+            <button v-bind:id="comment.comment + 'Reply'" class='reply'
+              @click="showReplyContainer(comment.comment)">Reply</button>
             <button v-bind:id="comment.comment + 'ViewReply'" class='viewReply' @click="viewReply(comment.comment)">View
               Replies</button>
           </center>
         </div>
         <div :id="comment.comment + 'ReplyContainer'" class="replyContainer">
-          <input placeholder='Reply here...'>
-          <button>Reply</button>
+          <input :id="comment.comment + 'ReplyInput'" placeholder='Reply here...'>
+          <button @click="reply(comment.comment)">Reply</button>
           <button @click="closeReplyContainer(comment.comment)">Close</button>
         </div>
         <div :id="comment.comment + 'ViewReplyContainer'" class="viewReplyContainer">
-          <p>WOWOOWO SO COOL!</p>
+          <div v-for="reply in getReply" :key="reply.reply">
+            <div v-if="reply.comment === comment.comment">
+              <a href="" class="replyUsername">{{ reply.username }}</a>: {{ reply.reply }}
+            </div>
+          </div>
         </div>
       </div>
     </center>
@@ -50,7 +55,8 @@ export default {
       loggedIn: false,
       magic_flag: false,
       getComment: [],
-      getLike: []
+      getLike: [],
+      getReply: []
     }
   },
   mounted() {
@@ -79,13 +85,42 @@ export default {
       }
     }).then(function (response) {
       if (response.data.status) {
+        console.log(response.data.message)
         self.getLike = response.data.message
         self.renderLike(self.getLike)
       }
     })
-
+    axios({
+      method: "GET",
+      url: "http://localhost:3000/getReply",
+      params: {
+        page: this.getQueryVariable()
+      }
+    }).then(function (response) {
+      if (response.data.status) {
+        self.getReply = response.data.message
+        console.log(self.getReply)
+      }
+    })
   },
   methods: {
+    reply(comment) {
+      if (document.getElementById(comment + 'ReplyInput').value === '') {
+        alert("You have not input anything yet.")
+        return 0
+      }
+      axios({
+        method: "POST",
+        url: "http://localhost:3000/postReply",
+        headers: { 'Content-Type': 'application/json' },
+        data: { comment: comment, username: this.username, page: this.getQueryVariable(), reply: document.getElementById(comment + 'ReplyInput').value }
+      }).then(function (response) {
+        if (response.data.status) {
+          alert(response.data.message)
+          window.location.reload()
+        }
+      })
+    },
     closeReplyContainer(comment) {
       document.getElementById(comment + 'ReplyContainer').style.display = 'none'
     },
@@ -119,12 +154,12 @@ export default {
         data: { comment: this.commentInput, username: this.username, page: this.getQueryVariable() }
       }).then(function (response) {
         if (response.data.status) {
-          alert("You have successfully commented.") 
+          alert("You have successfully commented.")
           axios({
-              method: "POST",
-              url: "http://localhost:3000/postCount",
-              headers: { 'Content-Type': 'application/json' },
-              data: { page: response.data.page , type: 'comment' }
+            method: "POST",
+            url: "http://localhost:3000/postCount",
+            headers: { 'Content-Type': 'application/json' },
+            data: { page: response.data.page, type: 'comment' }
           })
           window.location.reload()
         } else {
@@ -145,27 +180,15 @@ export default {
         }
       })
     },
-    reply(comment) {
+    showReplyContainer(comment) {
       document.getElementById(comment + 'ReplyContainer').style.display = 'flex'
-      // axios({
-      //   method: "POST",
-      //   url: "http://localhost:3000/postReply",
-      //   headers: { 'Content-Type': 'application/json' },
-      //   data: { comment: comment, page: this.getQueryVariable() }
-      // }).then(function (response) {
-      //   if (response.data.status) {
-      //     alert("")
-      //   } else {
-      //     alert("")
-      //   }
-      // })
     },
     viewReply(comment) {
-      if (document.getElementById(comment + 'ViewReplyContainer').style.display === 'flex') {
+      if (document.getElementById(comment + 'ViewReplyContainer').style.display === 'block') {
         document.getElementById(comment + 'ViewReplyContainer').style.display = 'none'
         document.getElementById(comment + 'ViewReply').innerText = 'View Replies'
       } else {
-        document.getElementById(comment + 'ViewReplyContainer').style.display = 'flex'
+        document.getElementById(comment + 'ViewReplyContainer').style.display = 'block'
         document.getElementById(comment + 'ViewReply').innerText = 'Close Replies'
       }
     },
@@ -226,7 +249,8 @@ export default {
   border-radius: 10px;
 }
 
-.username {
+.username,
+.replyUsername {
   font-weight: bold;
   color: white;
   margin: 10px;
@@ -274,6 +298,13 @@ export default {
 .replyContainer,
 .viewReplyContainer {
   display: none;
+}
+
+.viewReplyContainer div div {
+  color: white;
+  /* margin: 10px; */
+  padding: 5px;
+  text-align: left;
 }
 
 .replyContainer input {

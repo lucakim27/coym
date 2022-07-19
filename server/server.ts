@@ -10,6 +10,7 @@ import { createLikesTable, getLike, postLike } from './models/like'
 import { createCountsTable, getCount, postCount } from './models/count'
 import { createCommentsTable, getComment, postComment } from './models/comment'
 import { createOnlineTable } from './models/online'
+import { createReplyTable, getReply, postReply } from './models/reply'
 
 const router = express.Router()
 const corsOptions ={
@@ -39,6 +40,7 @@ createCountsTable()
 createAccountsTable()
 createLikesTable()
 createOnlineTable()
+createReplyTable()
 
 router.post('/signUp', function (req: any, res: any) {
   authSignUp(res, req)
@@ -70,6 +72,14 @@ router.get('/getCount', function (req: any, res: any) {
 
 router.post('/postCount', function (req: any, res: any) {
   postCount(res, req)
+}) 
+
+router.get('/getReply', function (req: any, res: any) {
+  getReply(res, req)
+})
+
+router.post('/postReply', function (req: any, res: any) {
+  postReply(res, req)
 }) 
 
 
