@@ -1,7 +1,7 @@
 <script>
 import ModalComponent from './ModalComponent.vue'
-
 import { useCookies } from "vue3-cookies"
+import io from 'socket.io-client'
 
 export default {
     name: 'HeaderComponent',
@@ -12,7 +12,8 @@ export default {
         return {
             username: '',
             loggedIn: false,
-            showModal: false
+            showModal: false,
+            socket : io('localhost:3001', { transports : ['websocket'] })
         }
     },
     setup() {
@@ -24,6 +25,7 @@ export default {
         if (user !== null) {
             this.username = this.cookies.get("user").username
             this.loggedIn = true
+            this.socket.emit('join', this.username)
         }
     },
     methods: {
@@ -65,7 +67,7 @@ export default {
         <header>
             <span v-on:click="sidebarOpen()">&#9776;</span>
             <div v-if='!loggedIn && username.length === 0' id="userId">
-                <a href="/login" id="signIn">Sign in</a>
+                <a href="/login">Sign in</a>
             </div>
             <h1>{{ getTitle }}</h1>
             <svg v-if='loggedIn && username.length !== 0' @click="showModal = true"
@@ -115,6 +117,15 @@ export default {
 
 header {
     height: 10px
+}
+
+header div a {
+    text-decoration: none;
+    color: black;
+}
+
+header div a:hover {
+    color: rgb(98, 203, 255);
 }
 
 header span {

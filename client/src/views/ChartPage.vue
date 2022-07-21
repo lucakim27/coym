@@ -139,4 +139,8 @@ export default {
     color: rgb(255, 255, 255);
     text-decoration: none;
 }
+
+.eachRow p a:hover {
+    color: rgb(98, 203, 255);
+}
 </style>

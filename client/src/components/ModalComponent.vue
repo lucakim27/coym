@@ -15,7 +15,6 @@ export default {
 	methods: {
 		logout() {
 			this.cookies.remove('user')
-			alert("You're logged out.")
 			window.location.reload()
 		}
 	},

@@ -1,41 +1,114 @@
 <template>
-  <div id='container'>
-    <table class="table" id="onlineTable">
-      <!-- <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Username</th>
-          <th scope="col">Major</th>
-          <th scope="col">Country</th>
-          <th scope="col">Online</th>
-        </tr>
-      </thead> -->
-      <tbody>
-        <tr></tr>
-      </tbody>
-    </table>
+  <div class='container'>
+    <div class="onlineDiv">
+      <div class="onlineHead">
+        <div>Name</div>
+        <div>Gender</div>
+        <div>Country</div>
+        <div>Major</div>
+        <div>School</div>
+      </div>
+      <div class="onlineBody">
+        <div class='eachRow' v-for="user in users" :key="user.username">
+          <div class="row">
+
+            <div v-if="user.username !== undefined">{{ user.username }}</div>
+            <div v-if="user.username === undefined">Anonymous</div>
+
+            <div v-if="user.gender !== undefined">{{ user.gender }}</div>
+            <div v-if="user.gender === undefined">N/A</div>
+
+            <div v-if="user.country !== undefined">{{ user.country }}</div>
+            <div v-if="user.country === undefined">N/A</div>
+
+            <div v-if="user.major !== undefined">{{ user.major }}</div>
+            <div v-if="user.major === undefined">N/A</div>
+
+            <div v-if="user.school !== undefined">{{ user.school }}</div>
+            <div v-if="user.school === undefined">N/A</div>
+
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
+import io from 'socket.io-client';
 export default {
   name: 'OnlinePage',
-};
+  data() {
+    return {
+      users: [],
+      socket: io('localhost:3001', {
+        transports: ['websocket']
+      })
+    }
+  },
+  mounted() {
+    this.socket.on('updateOnlineUsers', (data) => {
+      this.users = [...JSON.parse(data)[0]]
+    })
+  }
+}
 </script>
 <style scoped>
-#onlineTable {
-  margin: 20px;
-  width: 80%;
-  position: absolute;
-  top: 50px;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
+.onlineDiv {
+  height: 83vh;
+  min-width: 80%;
+  flex: 0;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgb(146, 156, 161);
+}
+
+.onlineHead {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.onlineHead div {
+  padding: 10px;
+  color: white;
+  font-size: 30px;
+  width: 16%;
   text-align: center;
 }
 
-#container {
-  height: 1100px;
+.onlineBody {
+  overflow-y: scroll;
+  justify-content: center;
+  padding: 10px;
+
+}
+
+.container {
+  margin-top: 100px;
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+}
+
+.eachRow {
+  padding: 10px;
+  justify-content: center;
+  margin: 20px;
+  background: rgb(89, 95, 98);
+  border-radius: 10px;
+}
+
+.row {
+  justify-content: center;
+  display: flex;
+  padding: 10px;
+  color: white;
+  width: 100%;
+}
+
+.row div {
+  width: 16%;
+  padding: 10px;
   text-align: center;
 }
 </style>

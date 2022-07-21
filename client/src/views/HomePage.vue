@@ -407,6 +407,13 @@ export default {
 }
 
 .Input input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
     width: 50%;
     border-radius: 5px;
 }
@@ -422,7 +429,7 @@ export default {
     z-index: 999999999999;
     width: 50%;
     display: none;
-    height: 200px;
+    height: 230px;
     overflow-y: scroll;
     border-radius: 5px;
     border: 2px solid;
@@ -472,5 +479,9 @@ img {
 table a {
     color: black;
     text-decoration: none;
+}
+
+b {
+    font-family: fantasy;
 }
 </style>
