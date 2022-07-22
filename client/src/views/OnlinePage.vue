@@ -12,7 +12,9 @@
         <div class='eachRow' v-for="user in users" :key="user.username">
           <div class="row">
 
-            <div v-if="user.username !== undefined">{{ user.username }}</div>
+            <div v-if="user.username !== undefined">
+              <a href="">{{ user.username }}</a>
+            </div>
             <div v-if="user.username === undefined">Anonymous</div>
 
             <div v-if="user.gender !== undefined">{{ user.gender }}</div>
@@ -110,5 +112,14 @@ export default {
   width: 16%;
   padding: 10px;
   text-align: center;
+}
+
+.row div a {
+  text-decoration: none;
+  color: white;
+}
+
+.row div a:hover {
+  color: rgb(98, 203, 255);
 }
 </style>

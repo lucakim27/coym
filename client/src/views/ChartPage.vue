@@ -1,5 +1,4 @@
 <template>
-
     <div id='container'>
         <div id='BothContainer'>
             <div id='mostViewedContainer'>
@@ -20,7 +19,6 @@
             </div>
         </div>
     </div>
-
 </template>
 <script>
 import axios from 'axios'

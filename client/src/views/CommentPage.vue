@@ -204,31 +204,48 @@ export default {
 </script>
 <style scoped>
 #commentBtn {
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(57, 255, 206);
   cursor: pointer;
-  border-radius: 10px;
-  color: white;
-  font-size: 20px;
+  /* color: white; */
   width: auto;
   margin: 10px;
+  padding: 12px 20px;
+  /* margin: 8px; */
+  display: inline-block;
+  border-radius: 4px;
+  box-sizing: border-box;
+  border-radius: 5px;
 }
 
 .closeBtn {
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(255, 65, 147);
   cursor: pointer;
-  border-radius: 10px;
   color: white;
-  font-size: 20px;
   width: auto;
-  margin: 10px;
+  /* margin: 10px; */
+  padding: 12px 20px;
+  /* margin: 8px; */
+  display: inline-block;
+  border-radius: 4px;
+  box-sizing: border-box;
+  border-radius: 5px;
 }
 
 #userInput {
-  border-radius: 10px;
+  /* border-radius: 10px; */
   text-align: center;
-  width: auto;
-  font-size: 20px;
-  margin: 10px;
+  /* width: auto; */
+  /* font-size: 20px; */
+  /* margin: 10px; */
+
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  width: 50%;
+  border-radius: 5px;
 }
 
 #container {
