@@ -83,8 +83,6 @@ export default {
 }
 
 .container {
-    height: 800px;
-    margin-top: 100px;
     text-align: center;
 }
 

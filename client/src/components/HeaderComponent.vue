@@ -13,7 +13,7 @@ export default {
             username: '',
             loggedIn: false,
             showModal: false,
-            socket : io('localhost:3001', { transports : ['websocket'] })
+            socket: io('localhost:3001', { transports: ['websocket'] })
         }
     },
     setup() {
@@ -31,6 +31,9 @@ export default {
     methods: {
         sidebarOpen() {
             document.getElementById("mySidenav").style.width = "250px"
+        },
+        closeModal() {
+            this.showModal = false
         }
     },
     computed: {
@@ -59,7 +62,6 @@ export default {
             }
         }
     }
-
 }
 </script>
 <template>
@@ -67,7 +69,7 @@ export default {
         <header>
             <span v-on:click="sidebarOpen()">&#9776;</span>
             <div v-if='!loggedIn && username.length === 0' id="userId">
-                <a href="/login">Sign in</a>
+                <a href="/login" v-if="getTitle !== 'LOGIN' && getTitle !== 'REGISTER'">Sign in</a>
             </div>
             <h1>{{ getTitle }}</h1>
             <svg v-if='loggedIn && username.length !== 0' @click="showModal = true"
@@ -82,16 +84,16 @@ export default {
     <div>
         <transition name="modal">
             <ModalComponent v-if="showModal" @close="showModal = false">
-                <template v-slot:header>
-                    <h3>User Profile</h3><hr>
-                </template>
+                <!-- <template v-slot:header>
+                    <h3>User Profile</h3>
+                    <span @closeModal="showModal = false">&times;</span>
+                </template> -->
             </ModalComponent>
         </transition>
     </div>
 </template>
 <style scoped>
 #headerContainer {
-    position: fixed;
     left: 0;
     top: 0;
     width: 100%;
@@ -107,7 +109,7 @@ export default {
     position: absolute;
     right: 100px;
     background-color: rgb(255, 255, 255);
-    font-family: fantasy;
+    font-family: Arial;
     top: 15px;
     width: 100px;
     height: 40px;
@@ -125,7 +127,7 @@ header div a {
 }
 
 header div a:hover {
-    color: rgb(98, 203, 255);
+    color: rgb(0, 136, 255);
 }
 
 header span {
@@ -142,66 +144,6 @@ header h1 {
     font-size: 45px;
     margin-left: auto;
     margin-right: auto;
+    overflow: auto;
 }
-
-.modal-mask {
-  position: fixed;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: table;
-  transition: opacity 0.3s ease;
-}
-
-.modal-wrapper {
-  display: table-cell;
-  vertical-align: middle;
-}
-
-.modal-container {
-  width: 300px;
-  margin: 0px auto;
-  padding: 20px 30px;
-  background-color: #fff;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-  transition: all 0.3s ease;
-  font-family: Helvetica, Arial, sans-serif;
-}
-
-.modal-header h3 {
-  margin-top: 0;
-  color: #42b983;
-}
-
-.modal-body {
-  margin: 20px 0;
-}
-
-.modal-default-button {
-  float: right;
-}
-
-/*
- * The following styles are auto-applied to elements with
- * transition="modal" when their visibility is toggled
- * by Vue.js.
- *
- * You can easily play with the modal transition by editing
- * these styles.
- */
-
-.modal-enter-from, .modal-leave-to {
-  opacity: 0;
-}
-
-.modal-enter-active .modal-container,
-.modal-leave-active .modal-container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-}
-
 </style>

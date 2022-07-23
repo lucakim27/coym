@@ -22,7 +22,7 @@ export default {
 </script>
 <style scoped>
 .sidenav {
-  height: 95vh;
+  height: 100%;
   width: 0;
   top: 0;
   left: 0;

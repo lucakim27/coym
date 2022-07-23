@@ -204,40 +204,34 @@ export default {
 </script>
 <style scoped>
 #commentBtn {
-  background-color: rgb(57, 255, 206);
-  cursor: pointer;
-  /* color: white; */
-  width: auto;
-  margin: 10px;
-  padding: 12px 20px;
-  /* margin: 8px; */
-  display: inline-block;
-  border-radius: 4px;
-  box-sizing: border-box;
-  border-radius: 5px;
-}
-
-.closeBtn {
-  background-color: rgb(255, 65, 147);
+  background-color: rgb(0, 149, 255);
   cursor: pointer;
   color: white;
   width: auto;
-  /* margin: 10px; */
+  margin: 10px;
   padding: 12px 20px;
-  /* margin: 8px; */
   display: inline-block;
   border-radius: 4px;
   box-sizing: border-box;
   border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.closeBtn {
+  background-color: rgb(255, 0, 0);
+  cursor: pointer;
+  color: white;
+  width: auto;
+  padding: 12px 20px;
+  display: inline-block;
+  border-radius: 4px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
 #userInput {
-  /* border-radius: 10px; */
   text-align: center;
-  /* width: auto; */
-  /* font-size: 20px; */
-  /* margin: 10px; */
-
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -249,13 +243,11 @@ export default {
 }
 
 #container {
-  height: 1100px;
   text-align: center;
 }
 
 #ipnutContainer {
   margin: 10px;
-  margin-top: 100px;
 }
 
 .eachCommentDiv {
@@ -264,6 +256,7 @@ export default {
   width: auto;
   background: rgb(146, 156, 161);
   border-radius: 10px;
+  overflow: auto;
 }
 
 .username,
@@ -271,24 +264,20 @@ export default {
   font-weight: bold;
   color: white;
   margin: 10px;
-  /* width: 50%; */
   text-decoration: none;
 }
 
 .comment {
   display: flex;
-  color: white;
+  color: rgb(255, 255, 255);
   margin: 10px;
-  font-size: 50px;
-  /* margin-left: auto;
-  margin-right: auto; */
+  font-size: 40px;
 }
 
 .date {
   font-weight: lighter;
   color: rgb(213, 213, 213);
   margin: 10px;
-  /* width: 50%; */
 }
 
 .firstRow {
@@ -308,7 +297,6 @@ export default {
   color: rgb(255, 255, 255);
   border-radius: 10px;
   width: auto;
-  /* margin-left: auto; */
   cursor: pointer;
 }
 
@@ -319,7 +307,6 @@ export default {
 
 .viewReplyContainer div div {
   color: white;
-  /* margin: 10px; */
   padding: 5px;
   text-align: left;
 }

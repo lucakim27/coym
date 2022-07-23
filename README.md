@@ -1,14 +1,9 @@
-# CURRENTLY ON THE MIGRATION TO VUE 3 FOR THE FRONT END
-
 # Title
-Comment On Your Major - COYM
+Comment On Your Major
 
-# Front-end
-- Vue3
-
-# Back-end
-- node.js (typescript)
-- express
-
-# Database
-- mysql2
+# Frameworks/Libraries & Database
+- Vue 3 (Front-end Framework)
+- Node.js Express (Typescript) (Back-end Framework)
+- Axios (Http request)
+- Socket.io (Websocket)
+- Mysql2 (Database)

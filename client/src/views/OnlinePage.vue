@@ -2,7 +2,7 @@
   <div class='container'>
     <div class="onlineDiv">
       <div class="onlineHead">
-        <div>Name</div>
+        <div>Username</div>
         <div>Gender</div>
         <div>Country</div>
         <div>Major</div>
@@ -68,6 +68,7 @@ export default {
   display: flex;
   justify-content: center;
   padding: 10px;
+  margin-left: 2%;
 }
 
 .onlineHead div {
@@ -86,7 +87,6 @@ export default {
 }
 
 .container {
-  margin-top: 100px;
   display: flex;
   padding: 10px;
   justify-content: center;

@@ -2,19 +2,23 @@
     <div id='container'>
         <div id='BothContainer'>
             <div id='mostViewedContainer'>
-                <h1>Most Visited Pages</h1>
-                <div class='eachRow' v-for="row in sortedMostVisitedTable" :key="row.page">
-                    <p>
-                        <a v-bind:href="'/comment?major=' + row.page">{{ row.page }}</a>: {{ row.view }}
-                    </p>
+                <h1>Visit</h1>
+                <div class="mostViewedPages">
+                    <div class='eachRow' v-for="row in sortedMostVisitedTable" :key="row.page">
+                        <p>
+                            <a v-bind:href="'/comment?major=' + row.page">{{ row.page }}</a>: {{ row.view }}
+                        </p>
+                    </div>
                 </div>
             </div>
             <div id='mostCommentedContainer'>
-                <h1>Most Commented Pages</h1>
-                <div class='eachRow' v-for="row in sortedMostCommentedTable" :key="row.page">
-                    <p>
-                        <a v-bind:href="'/comment?major=' + row.page">{{ row.page }}</a>: {{ row.comment }}
-                    </p>
+                <h1>Comment</h1>
+                <div class="mostCommentedPages">
+                    <div class='eachRow' v-for="row in sortedMostCommentedTable" :key="row.page">
+                        <p>
+                            <a v-bind:href="'/comment?major=' + row.page">{{ row.page }}</a>: {{ row.comment }}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -82,27 +86,26 @@ export default {
 </script>
 <style scoped>
 #container {
-    height: 800px;
-    margin-top: 100px;
     text-align: center;
 }
 
 #BothContainer {
     display: flex;
-    padding: 10px;
-    /* margin-top: 40px; */
+    padding: 1%;
     justify-content: center;
 }
 
 #mostViewedContainer {
-    height: 83vh;
     min-width: 40%;
     flex: 0;
-    /* border-style: solid; */
-    padding: 10px;
-    margin-right: 30px;
+    padding: 1%;
+    margin-right: 2%;
     border-radius: 10px;
     background: rgb(146, 156, 161);
+}
+
+.mostViewedPages {
+    height: 70vh;
     overflow-y: scroll;
 }
 
@@ -112,15 +115,17 @@ export default {
 }
 
 #mostCommentedContainer {
-    height: 83vh;
     min-width: 40%;
     flex: 0;
-    /* border-style: solid; */
-    padding: 10px;
-    margin-left: 30px;
+    padding: 1%;
+    margin-left: 2%;
     border-radius: 10px;
     background: rgb(146, 156, 161);
+}
+
+.mostCommentedPages {
     overflow-y: scroll;
+    height: 70vh;
 }
 
 .eachRow {
