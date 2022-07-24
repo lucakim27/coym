@@ -59,26 +59,41 @@
     padding: 10px;
     border-radius: 10px;
     background: rgb(146, 156, 161);
-    overflow-y: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
     position: relative;
-    text-align: center;
 }
 
-.eachRow {
+.mostCommentedContainer .eachRow {
+    display: flex;
+    margin: 10px;
+    justify-content: right;
+}
+
+.mostCommentedContainer .eachRow div {
+    background: rgb(89, 95, 98);
+    border-radius: 10px;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.mostViewedContainer .eachRow {
     background: rgb(89, 95, 98);
     border-radius: 10px;
 }
 
-.eachRow p {
+.mostViewedContainer .eachRow p {
     padding: 20px;
     color: white;
 }
 
-.eachRow p a {
+.mostViewedContainer .eachRow p a {
     color: rgb(255, 255, 255);
     text-decoration: none;
 }
 
-.eachRow p a:hover {
+.mostViewedContainer .eachRow p a:hover {
     color: rgb(98, 203, 255);
 }

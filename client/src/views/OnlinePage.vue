@@ -13,7 +13,7 @@
           <div class="row">
 
             <div v-if="user.username !== undefined">
-              <a v-bind:href="'/chat?username=' + user.username" class="tooltip">{{ user.username }}
+              <a v-bind:href="'/chat?counterpart=' + user.username" class="tooltip">{{ user.username }}
                 <span class="tooltiptext">Click to chat</span>
               </a>
             </div>

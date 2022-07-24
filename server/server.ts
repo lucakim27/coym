@@ -11,13 +11,13 @@ import { createCountsTable, getCount, postCount } from './models/count'
 import { createCommentsTable, getComment, postComment } from './models/comment'
 import { createOnlineTable, addOnlineUser, sendOnlineUsers, removeOnlineUser } from './models/online'
 import { createReplyTable, getReply, postReply } from './models/reply'
-import { addChatUser, createChatTable, createChatUserTable, sendChatUser } from './models/chat'
+import { addChatUserAndChat, createChatTable, createChatUserTable, sendChatUser, sendChat } from './models/chat'
 
 const router = express.Router()
 const corsOptions = {
   origin: '*',
   credentials: true,
-  optionSuccessStatus: 200,
+  optionSuccessStatus: 200
 }
 const app = express()
 const expressServer = http.createServer(app)
@@ -29,10 +29,6 @@ const io = require('socket.io')(socketIoServer)
 
 io.on('connection', function (socket: any) {
 
-  socket.on('SEND_MESSAGE', function (data: any) {
-    io.emit('MESSAGE', data)
-  })
-
   socket.on('join', (username: any) => {
     addOnlineUser(username, socket.id)
     sendOnlineUsers(io)
@@ -43,13 +39,13 @@ io.on('connection', function (socket: any) {
     sendOnlineUsers(io)
   })
 
-  socket.on('chatPageJoin', function (username: any) {
+  socket.on('chatPageJoin', function (username: any, counterpart: any) {
+    sendChat(username, counterpart, io)
     sendChatUser(username, io)
   })
 
   socket.on('sendMessage', function (username: any, counterpart: any, text: any) {
-    console.log(`${username} ${counterpart} ${text}`)
-    addChatUser(username, counterpart, text)
+    addChatUserAndChat(username, counterpart, text)
   })
   
 })

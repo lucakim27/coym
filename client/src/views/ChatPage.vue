@@ -4,16 +4,29 @@
             <div class='mostViewedContainer'>
                 <h2>Users</h2>
                 <div class='eachRow' v-for="user in users" :key="user">
-                    <p>
-                        <a v-bind:href="'/chat?counterpart=' + user" v-bind:id="user">
-                            {{ user }}
+                    <p v-if="user.username !== username">
+                        <a v-bind:href="'/chat?counterpart=' + user.username" v-bind:id="user.username">
+                            {{ user.username }}
+                        </a>
+                    </p>
+                    <p v-else>
+                        <a v-bind:href="'/chat?counterpart=' + user.counterpart" v-bind:id="user.counterpart">
+                            {{ user.counterpart }}
                         </a>
                     </p>
                 </div>
             </div>
             <div class='mostCommentedContainer'>
-                <div class='eachRow' v-for="(msg, index) in messages" :key="index">
-                    <p>{{ msg.user }}: {{ msg.message }}</p>
+                <div class='eachRow' v-for="chat in chats" :key="chat">
+                    <div v-if="chat.username === username" style="text-align: right; background-color: rgb(89, 95, 98);">
+                        {{ chat.text }}
+                    </div>
+                    <div v-else-if="chat.username === counterpart" style="text-align: left; background-color: rgb(146, 156, 161);">
+                        {{ chat.text }}
+                    </div>
+                    <!-- <p v-if="chat.username === username" style="text-align: right;">{{ chat.username }}: {{ chat.text }} {{ chat.date }}</p>
+                    <p v-else-if="chat.username === counterpart" style="text-align: left;">{{ chat.username }}: {{ chat.text }} {{ chat.date }}</p> -->
+                    <!-- <p>{{ chat.username }}: {{ chat.text }} {{ chat.date }}</p> -->
                 </div>
                 <form class="input" @submit.prevent="sendMessage">
                     <input type="text" placeholder="Enter your chat..." v-model="message">
@@ -33,17 +46,17 @@ export default {
             username: '',
             message: '',
             counterpart: '',
-            users: ['user1', 'user2', 'user3'],
-            messages: [],
+            users: [],
+            chats: [],
             socket: io('localhost:3001', {
                 transports: ['websocket']
             })
         }
     },
     setup() {
-		const { cookies } = useCookies()
-		return { cookies }
-	},
+        const { cookies } = useCookies()
+        return { cookies }
+    },
     methods: {
         getQueryVariable() {
             var query = window.location.search.substring(1)
@@ -65,7 +78,7 @@ export default {
         },
         sendMessage(e) {
             e.preventDefault();
-            this.socket.emit('sendMessage', 
+            this.socket.emit('sendMessage',
                 this.username,
                 this.counterpart,
                 this.message
@@ -74,19 +87,26 @@ export default {
         }
     },
     mounted() {
-
         let user = this.cookies.get("user")
-		if (user !== null) {
-			this.username = this.cookies.get("user").username
-		}
+        if (user !== null) {
+            this.username = this.cookies.get("user").username
+        }
 
         this.counterpart = this.getQueryVariable()
-        document.getElementById(this.getQueryVariable()).style.color = 'orange'
+        this.socket.emit('chatPageJoin', this.username, this.counterpart)
 
-        this.socket.on('MESSAGE', (data) => {
-            this.messages = [...this.messages, data]
+        this.socket.on('sendChatUser', (data) => {
+            this.users = [...JSON.parse(data)[0]]
         })
 
+        this.socket.on('sendChat', (data) => {
+            console.log(...JSON.parse(data)[0])
+            this.chats = [...JSON.parse(data)[0]]
+        })
+
+    },
+    updated() {
+        document.getElementById(this.counterpart).style.color = 'orange'
     }
 }
 </script>
