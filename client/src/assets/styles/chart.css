@@ -1,0 +1,84 @@
+#container {
+    text-align: center;
+}
+
+#BothContainer {
+    display: flex;
+    padding: 1%;
+    justify-content: center;
+}
+
+#mostViewedContainer {
+    min-width: 40%;
+    flex: 0;
+    padding: 1%;
+    margin-right: 2%;
+    border-radius: 10px;
+    background: rgb(146, 156, 161);
+}
+
+.mostViewedPages {
+    height: 70vh;
+    overflow-y: scroll;
+}
+
+#mostViewedContainer h1,
+#mostCommentedContainer h1 {
+    color: white;
+}
+
+#mostCommentedContainer {
+    min-width: 40%;
+    flex: 0;
+    padding: 1%;
+    margin-left: 2%;
+    border-radius: 10px;
+    background: rgb(146, 156, 161);
+}
+
+.mostCommentedPages {
+    overflow-y: scroll;
+    height: 70vh;
+}
+
+.eachRow {
+    background: rgb(89, 95, 98);
+    border-radius: 10px;
+}
+
+.eachRow p {
+    padding: 20px;
+    color: white;
+}
+
+.eachRow p a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+.eachRow p a:hover {
+    color: rgb(98, 203, 255);
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    background-color: rgb(50, 50, 50);
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 15px;
+    margin: 5px;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}

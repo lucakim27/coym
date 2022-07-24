@@ -1,0 +1,60 @@
+#headerContainer {
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    height: 70px;
+    color: black;
+    text-align: center;
+    z-index: 99999999999999999 !important;
+}
+
+#userId {
+    margin-right: -90px;
+    position: absolute;
+    right: 100px;
+    background-color: rgb(255, 255, 255);
+    font-family: Arial;
+    top: 15px;
+    width: 100px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+header {
+    height: 10px
+}
+
+header div a {
+    text-decoration: none;
+    color: black;
+}
+
+header div a:hover {
+    color: rgb(0, 136, 255);
+}
+
+header span {
+    font-size: 40px;
+    cursor: pointer;
+    position: absolute;
+    left: 15px;
+    top: 10px;
+}
+
+header h1 {
+    font-family: fantasy;
+    margin-top: 5px;
+    font-size: 45px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: auto;
+}
+
+.profileSVG {
+    cursor: pointer; 
+    position: absolute; 
+    right: 15px; 
+    top: 10px;
+}

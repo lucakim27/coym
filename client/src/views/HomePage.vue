@@ -15,7 +15,7 @@
             </table>
         </div>
 
-        <div id='descriptionContainer'>
+        <div class='descriptionContainer'>
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-house"
                     viewBox="0 0 16 16">
@@ -390,98 +390,5 @@ export default {
 }
 </script>
 <style scoped>
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
-.Input {
-    position: absolute;
-    top: 85%;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    text-align: center;
-}
-
-.Input input {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    width: 50%;
-    border-radius: 5px;
-}
-
-#options {
-    position: absolute;
-    top: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 999999999999;
-    width: 50%;
-    display: none;
-    height: 230px;
-    overflow-y: scroll;
-    border-radius: 5px;
-    border: 2px solid;
-    background-color: white;
-}
-
-#options tr td {
-    width: 10%;
-}
-
-#descriptionContainer {
-    position: absolute;
-    top: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    text-align: center;
-    margin-bottom: 35px;
-    padding: 50px;
-}
-
-svg {
-    margin: 20px;
-}
-
-img {
-    width: 100%;
-    height: 70%;
-    filter: brightness(70%);
-    z-index: -10000;
-    margin-top: 100px;
-    position: absolute;
-    top: 0%;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    text-align: center;
-}
-
-#container {
-    text-align: center;
-    overflow-y: scroll;
-}
-
-table a {
-    color: black;
-    text-decoration: none;
-}
-
-b {
-    font-family: fantasy;
-}
+@import '../assets/styles/home.css';
 </style>

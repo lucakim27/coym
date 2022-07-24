@@ -6,7 +6,9 @@
                 <div class="mostViewedPages">
                     <div class='eachRow' v-for="row in sortedMostVisitedTable" :key="row.page">
                         <p>
-                            <a v-bind:href="'/comment?major=' + row.page">{{ row.page }}</a>: {{ row.view }}
+                            <a class="tooltip" v-bind:href="'/comment?major=' + row.page">{{ row.page }}
+                                <span class="tooltiptext">Click to visit</span>
+                            </a>: {{ row.view }}
                         </p>
                     </div>
                 </div>
@@ -16,7 +18,9 @@
                 <div class="mostCommentedPages">
                     <div class='eachRow' v-for="row in sortedMostCommentedTable" :key="row.page">
                         <p>
-                            <a v-bind:href="'/comment?major=' + row.page">{{ row.page }}</a>: {{ row.comment }}
+                            <a class="tooltip" v-bind:href="'/comment?major=' + row.page">{{ row.page }}
+                                <span class="tooltiptext">Click to visit</span>
+                            </a>: {{ row.comment }}
                         </p>
                     </div>
                 </div>
@@ -85,65 +89,5 @@ export default {
 };
 </script>
 <style scoped>
-#container {
-    text-align: center;
-}
-
-#BothContainer {
-    display: flex;
-    padding: 1%;
-    justify-content: center;
-}
-
-#mostViewedContainer {
-    min-width: 40%;
-    flex: 0;
-    padding: 1%;
-    margin-right: 2%;
-    border-radius: 10px;
-    background: rgb(146, 156, 161);
-}
-
-.mostViewedPages {
-    height: 70vh;
-    overflow-y: scroll;
-}
-
-#mostViewedContainer h1,
-#mostCommentedContainer h1 {
-    color: white;
-}
-
-#mostCommentedContainer {
-    min-width: 40%;
-    flex: 0;
-    padding: 1%;
-    margin-left: 2%;
-    border-radius: 10px;
-    background: rgb(146, 156, 161);
-}
-
-.mostCommentedPages {
-    overflow-y: scroll;
-    height: 70vh;
-}
-
-.eachRow {
-    background: rgb(89, 95, 98);
-    border-radius: 10px;
-}
-
-.eachRow p {
-    padding: 20px;
-    color: white;
-}
-
-.eachRow p a {
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-}
-
-.eachRow p a:hover {
-    color: rgb(98, 203, 255);
-}
+@import '../assets/styles/chart.css';
 </style>

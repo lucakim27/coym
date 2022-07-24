@@ -5,8 +5,6 @@
     <router-view />
   </div>
 </template>
-
-
 <script>
 import NavigationComponent from '@/components/NavigationComponent';
 import HeaderComponent from '@/components/HeaderComponent';

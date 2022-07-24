@@ -11,6 +11,7 @@ import { createCountsTable, getCount, postCount } from './models/count'
 import { createCommentsTable, getComment, postComment } from './models/comment'
 import { createOnlineTable, addOnlineUser, sendOnlineUsers, removeOnlineUser } from './models/online'
 import { createReplyTable, getReply, postReply } from './models/reply'
+import { addChatUser, createChatTable, createChatUserTable, sendChatUser } from './models/chat'
 
 const router = express.Router()
 const corsOptions = {
@@ -28,8 +29,6 @@ const io = require('socket.io')(socketIoServer)
 
 io.on('connection', function (socket: any) {
 
-  console.log('User joins: ' + socket.id)
-
   socket.on('SEND_MESSAGE', function (data: any) {
     io.emit('MESSAGE', data)
   })
@@ -40,9 +39,16 @@ io.on('connection', function (socket: any) {
   })
 
   socket.on('disconnect', function () {
-    console.log("User disconnects: " + socket.id)
     removeOnlineUser(socket.id)
     sendOnlineUsers(io)
+  })
+
+  socket.on('chatPageJoin', function () {
+    sendChatUser(io)
+  })
+
+  socket.on('sendMessage', function (username: any, counterpart: any) {
+    addChatUser(username, counterpart)
   })
   
   //   socket.on('updateComment', (username: any, comment: any, page: any) => {
@@ -80,6 +86,8 @@ createAccountsTable()
 createLikesTable()
 createOnlineTable()
 createReplyTable()
+createChatTable()
+createChatUserTable()
 
 router.post('/signUp', function (req: any, res: any) {
   authSignUp(res, req)
