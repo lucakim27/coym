@@ -14,12 +14,22 @@
 	background: rgba(255, 0, 0, 0.744);
 	color: white;
 	border: 1px solid rgb(146, 156, 161);
+	cursor: pointer;
+}
+
+.logoutBtn:hover {
+	color: black;
 }
 
 .updateBtn {
-	background: rgba(0, 0, 0, 0.478);
+	background: rgb(98, 203, 255);
 	color: white;
 	border: 1px solid rgb(146, 156, 161);
+	cursor: pointer;
+}
+
+.updateBtn:hover {
+	color: black;
 }
 
 .modal-wrapper {
@@ -28,8 +38,8 @@
 }
 
 .modal-container {
-	width: 50vw;
-	height: 60%;
+	width: 80vw;
+	height: 80vh;
 	margin: 0px auto;
 	padding: 20px 30px;
 	background-color: rgb(146, 156, 161);

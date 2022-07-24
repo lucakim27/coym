@@ -1,122 +1,160 @@
 #commentBtn {
-    background-color: rgb(0, 149, 255);
-    cursor: pointer;
-    color: white;
-    width: auto;
-    margin: 10px;
-    padding: 12px 20px;
-    display: inline-block;
-    border-radius: 4px;
-    box-sizing: border-box;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  .closeBtn {
-    background-color: rgb(255, 0, 0);
-    cursor: pointer;
-    color: white;
-    width: auto;
-    padding: 12px 20px;
-    display: inline-block;
-    border-radius: 4px;
-    box-sizing: border-box;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  #userInput {
-    text-align: center;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    width: 50%;
-    border-radius: 5px;
-  }
-  
-  #container {
-    text-align: center;
-  }
-  
-  #ipnutContainer {
-    margin: 10px;
-  }
-  
-  .eachCommentDiv {
-    padding: 10px;
-    margin: 10px;
-    width: auto;
-    background: rgb(146, 156, 161);
-    border-radius: 10px;
-    overflow: auto;
-  }
-  
-  .username,
-  .replyUsername {
-    font-weight: bold;
-    color: white;
-    margin: 10px;
-    text-decoration: none;
-  }
-  
-  .comment {
-    display: flex;
-    color: rgb(255, 255, 255);
-    margin: 10px;
-    font-size: 40px;
-  }
-  
-  .date {
-    font-weight: lighter;
-    color: rgb(213, 213, 213);
-    margin: 10px;
-  }
-  
-  .firstRow {
-    display: flex;
-  }
-  
-  .lastRow {
-    display: flex;
-    justify-content: flex-end;
-  }
-  
-  .like,
-  .reply,
-  .viewReply {
-    margin: 10px;
-    background-color: rgba(0, 0, 0, 0.478);
-    color: rgb(255, 255, 255);
-    border-radius: 10px;
-    width: auto;
-    cursor: pointer;
-  }
-  
-  .replyContainer,
-  .viewReplyContainer {
-    display: none;
-  }
-  
-  .viewReplyContainer div div {
-    color: white;
-    padding: 5px;
-    text-align: left;
-  }
-  
-  .replyContainer input {
-    width: 60%;
-    margin: 5px;
-    border-radius: 10px;
-    text-align: center;
-  }
-  
-  .replyContainer button {
-    width: 20%;
-    margin: 5px;
-    border-radius: 10px;
-    background: rgba(0, 0, 0, 0.478);
-    color: white;
-  }
+  background-color: rgb(98, 203, 255);
+  cursor: pointer;
+  color: white;
+  width: auto;
+  margin: 10px;
+  padding: 12px 20px;
+  display: inline-block;
+  border-radius: 4px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.closeBtn {
+  background-color: rgb(255, 0, 0);
+  cursor: pointer;
+  color: white;
+  width: auto;
+  padding: 12px 20px;
+  display: inline-block;
+  border-radius: 4px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+#userInput {
+  text-align: center;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  width: 50%;
+  border-radius: 5px;
+}
+
+#container {
+  text-align: center;
+}
+
+#ipnutContainer {
+  margin: 10px;
+}
+
+.eachCommentDiv {
+  padding: 10px;
+  margin: 10px;
+  width: auto;
+  background: rgb(146, 156, 161);
+  border-radius: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.username,
+.replyUsername {
+  font-weight: bold;
+  color: white;
+  margin: 10px;
+  text-decoration: none;
+}
+
+.username:hover,
+.replyUsername:hover {
+  color: rgb(98, 203, 255);
+}
+
+.comment {
+  display: flex;
+  color: rgb(255, 255, 255);
+  margin: 10px;
+  font-size: 40px;
+}
+
+.date {
+  font-weight: lighter;
+  color: rgb(213, 213, 213);
+  margin: 10px;
+}
+
+.firstRow {
+  display: flex;
+}
+
+.lastRow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.like,
+.reply,
+.viewReply {
+  margin: 10px;
+  background-color: rgba(0, 0, 0, 0.478);
+  color: rgb(255, 255, 255);
+  border-radius: 10px;
+  width: auto;
+  cursor: pointer;
+}
+
+.replyContainer,
+.viewReplyContainer {
+  display: none;
+}
+
+.viewReplyContainer div div {
+  color: white;
+  padding: 5px;
+  text-align: left;
+}
+
+.replyContainer input {
+  width: 60%;
+  margin: 5px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.replyContainer button {
+  width: 20%;
+  margin: 5px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.478);
+  color: white;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  background-color: rgb(50, 50, 50);
+  color: white;
+  text-align: center;
+  border-radius: 6px;
+  padding: 15px;
+  margin: 5px;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+button:hover,
+#commentBtn:hover {
+  color: black;
+}
+
+footer {
+  height: 1000px;
+}

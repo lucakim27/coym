@@ -89,6 +89,16 @@ table a {
     text-decoration: none;
 }
 
+table a:hover {
+    color: rgb(98, 203, 255);
+}
+
 b {
     font-family: fantasy;
+}
+
+footer {
+    position: absolute;
+    bottom: -70%;
+    box-sizing: content-box;
 }

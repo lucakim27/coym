@@ -10,7 +10,9 @@
       <div v-for="comment in getComment" :key="comment.comment" class='eachCommentDiv'
         :id="comment.comment + 'Container'">
         <div class="firstRow">
-          <a class='username' href=''>{{ comment.username }}</a>
+          <a class='username tooltip' :href="'/chat?counterpart=' + comment.username">{{ comment.username }}
+            <span class="tooltiptext">Click to chat</span>
+          </a>
           <p class='date'>{{ comment.date.slice(0, 10) }}</p>
         </div><br>
         <p class='comment'>{{ comment.comment }}</p><br>
@@ -31,7 +33,9 @@
         <div :id="comment.comment + 'ViewReplyContainer'" class="viewReplyContainer">
           <div v-for="reply in getReply" :key="reply.reply">
             <div v-if="reply.comment === comment.comment">
-              <a href="" class="replyUsername">{{ reply.username }}</a>: {{ reply.reply }}
+              <a class="replyUsername tooltip" :href="'/chat?counterpart=' + reply.username">{{ reply.username }}
+                <span class="tooltiptext">Click to chat</span>
+              </a>: {{ reply.reply }}
             </div>
           </div>
         </div>

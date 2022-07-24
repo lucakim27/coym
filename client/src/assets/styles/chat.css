@@ -52,16 +52,19 @@
 }
 
 .mostCommentedContainer {
-    height: 83vh;
     min-width: 60%;
     flex: 0;
     margin: 10px;
     padding: 10px;
     border-radius: 10px;
     background: rgb(146, 156, 161);
-    overflow-y: auto;
     overflow-x: hidden;
     position: relative;
+}
+
+.commentArea {
+    overflow-y: auto;
+    height: 73vh;
 }
 
 .mostCommentedContainer .eachRow {

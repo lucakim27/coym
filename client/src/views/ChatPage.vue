@@ -17,16 +17,18 @@
                 </div>
             </div>
             <div class='mostCommentedContainer'>
-                <div class='eachRow' v-for="chat in chats" :key="chat">
-                    <div v-if="chat.username === username" style="text-align: right; background-color: rgb(89, 95, 98);">
-                        {{ chat.text }}
+                <div class="commentArea">
+                    <div class='eachRow' v-for="chat in chats" :key="chat">
+                        <div v-if="chat.username === username" style="text-align: right; background-color: rgb(89, 95, 98);">
+                            {{ chat.text }}
+                        </div>
+                        <div v-else-if="chat.username === counterpart" style="text-align: left; background-color: rgb(146, 156, 161);">
+                            {{ chat.text }}
+                        </div>
+                        <!-- <p v-if="chat.username === username" style="text-align: right;">{{ chat.username }}: {{ chat.text }} {{ chat.date }}</p>
+                        <p v-else-if="chat.username === counterpart" style="text-align: left;">{{ chat.username }}: {{ chat.text }} {{ chat.date }}</p> -->
+                        <!-- <p>{{ chat.username }}: {{ chat.text }} {{ chat.date }}</p> -->
                     </div>
-                    <div v-else-if="chat.username === counterpart" style="text-align: left; background-color: rgb(146, 156, 161);">
-                        {{ chat.text }}
-                    </div>
-                    <!-- <p v-if="chat.username === username" style="text-align: right;">{{ chat.username }}: {{ chat.text }} {{ chat.date }}</p>
-                    <p v-else-if="chat.username === counterpart" style="text-align: left;">{{ chat.username }}: {{ chat.text }} {{ chat.date }}</p> -->
-                    <!-- <p>{{ chat.username }}: {{ chat.text }} {{ chat.date }}</p> -->
                 </div>
                 <form class="input" @submit.prevent="sendMessage">
                     <input type="text" placeholder="Enter your chat..." v-model="message">
@@ -106,7 +108,7 @@ export default {
 
     },
     updated() {
-        document.getElementById(this.counterpart).style.color = 'orange'
+        document.getElementById(this.counterpart).style.color = 'rgb(98, 203, 255)'
     }
 }
 </script>
