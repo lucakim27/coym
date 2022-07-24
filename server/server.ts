@@ -43,35 +43,22 @@ io.on('connection', function (socket: any) {
     sendOnlineUsers(io)
   })
 
-  socket.on('chatPageJoin', function () {
-    sendChatUser(io)
+  socket.on('chatPageJoin', function (username: any) {
+    sendChatUser(username, io)
   })
 
-  socket.on('sendMessage', function (username: any, counterpart: any) {
-    addChatUser(username, counterpart)
+  socket.on('sendMessage', function (username: any, counterpart: any, text: any) {
+    console.log(`${username} ${counterpart} ${text}`)
+    addChatUser(username, counterpart, text)
   })
   
-  //   socket.on('updateComment', (username: any, comment: any, page: any) => {
-  //     addComment(page, username, comment)
-  //     addCounts(page, 'comment')
-  //     sendComment(io)
-  //   })
-  
-  //   socket.on('updateLike', (comment: any, username: any, page: any) => {
-  //     addLike(comment, page, username)
-  //     sendLikes(io)
-  //   })
-  
-  //   socket.on('updateCount', (page: any) => {
-  //     addCounts(page, 'view')
-  //     sendCounts(io)
-  //   })
-
 })
 
-app.use(express.json());
+app.use(express.json())
 app.use(cors(corsOptions))
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({
+   extended: false 
+}))
 app.use(cookieParser())
 app.use('/', router)
 
