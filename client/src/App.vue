@@ -3,20 +3,17 @@
     <HeaderComponent />
     <NavigationComponent />
     <router-view />
-    <FooterComponent />
   </div>
 </template>
 <script>
-import NavigationComponent from '@/components/NavigationComponent';
-import HeaderComponent from '@/components/HeaderComponent';
-import FooterComponent from '@/components/FooterComponent';
+import NavigationComponent from '@/components/NavigationComponent'
+import HeaderComponent from '@/components/HeaderComponent'
 
 export default {
   name: 'App',
   components: {
     NavigationComponent,
-    HeaderComponent,
-    FooterComponent
+    HeaderComponent
   }
 }
 </script>

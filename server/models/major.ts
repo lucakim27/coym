@@ -324,3 +324,13 @@ export const createMajorsTable = function () {
         })
     })
 }
+
+export const getMajorList = function (res: any, req: any) {
+    connection.connect(function (err: any) {
+        if (err) throw err
+        connection.query(`SELECT * FROM majors;`, function (err: any, result: any, fields: any) {
+            if (err) throw err
+            res.send({ status: true, message: result })
+        })
+    })
+}

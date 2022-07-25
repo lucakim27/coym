@@ -21,14 +21,14 @@
 	color: black;
 }
 
-.updateBtn {
+.settingsBtn {
 	background: rgb(98, 203, 255);
 	color: white;
 	border: 1px solid rgb(146, 156, 161);
 	cursor: pointer;
 }
 
-.updateBtn:hover {
+.settingsBtn:hover {
 	color: black;
 }
 

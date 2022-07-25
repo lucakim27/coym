@@ -89,7 +89,6 @@ export default {
       }
     }).then(function (response) {
       if (response.data.status) {
-        console.log(response.data.message)
         self.getLike = response.data.message
         self.renderLike(self.getLike)
       }
@@ -103,7 +102,6 @@ export default {
     }).then(function (response) {
       if (response.data.status) {
         self.getReply = response.data.message
-        console.log(self.getReply)
       }
     })
   },

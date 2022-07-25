@@ -18,9 +18,6 @@ export default {
 			window.location.reload()
 		}
 	},
-	computed: {
-
-	},
 	mounted() {
 		let user = this.cookies.get("user")
 		if (user !== null) {
@@ -65,8 +62,8 @@ export default {
 						<button @click='logout()' class="modal-default-button logoutBtn">
 							Logout
 						</button>
-						<button class="modal-default-button updateBtn">
-							Update
+						<button class="modal-default-button settingsBtn">
+							Settings
 						</button>
 					</slot>
 				</div>
@@ -74,7 +71,6 @@ export default {
 		</div>
 	</div>
 </template>
-
 <style scoped>
 @import '../assets/componentStyles/modalComponent.css';
 </style>

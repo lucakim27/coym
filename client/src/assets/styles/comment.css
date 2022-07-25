@@ -140,7 +140,7 @@
   border-radius: 6px;
   padding: 15px;
   margin: 5px;
-
+  width: 200px;
   /* Position the tooltip */
   position: absolute;
   z-index: 1;
@@ -153,8 +153,4 @@
 button:hover,
 #commentBtn:hover {
   color: black;
-}
-
-footer {
-  height: 1000px;
 }

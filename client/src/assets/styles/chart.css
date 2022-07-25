@@ -20,6 +20,7 @@
 .mostViewedPages {
     height: 70vh;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 #mostViewedContainer h1,
@@ -39,6 +40,7 @@
 .mostCommentedPages {
     overflow-y: scroll;
     height: 70vh;
+    overflow-x: hidden;
 }
 
 .eachRow {
@@ -73,7 +75,6 @@
     border-radius: 6px;
     padding: 15px;
     margin: 5px;
-
     /* Position the tooltip */
     position: absolute;
     z-index: 1;

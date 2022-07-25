@@ -4,7 +4,7 @@ import cors from "cors"
 import express from 'express'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
-import { createMajorsTable } from './models/major'
+import { createMajorsTable, getMajorList } from './models/major'
 import { createAccountsTable, authSignUp, authSignIn } from './models/account'
 import { createLikesTable, getLike, postLike } from './models/like'
 import { createCountsTable, getCount, postCount } from './models/count'
@@ -110,6 +110,11 @@ router.get('/getReply', function (req: any, res: any) {
 
 router.post('/postReply', function (req: any, res: any) {
   postReply(res, req)
+})
+
+router.get('/getMajorList', function (req: any, res: any) {
+  console.log("YOOO")
+  getMajorList(res, req)
 })
 
 expressServer.listen(PORT, () => console.log(`Express Server running on port ${PORT}.`))

@@ -96,9 +96,3 @@ table a:hover {
 b {
     font-family: fantasy;
 }
-
-footer {
-    position: absolute;
-    bottom: -70%;
-    box-sizing: content-box;
-}
