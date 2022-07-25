@@ -1,5 +1,3 @@
-import mysql2 from 'mysql2'
-
 export const majorsList = [
     "Accounting",
     "Accounting Technician",
@@ -297,40 +295,65 @@ export const majorsList = [
     "Zoology"
 ]
 
-const connection = mysql2.createConnection({
-    host: "localhost",
-    user: "root",
-    database: "coym"
-})
+export const createMajorsTable = function (connection: any) {
 
-export const createMajorsTable = function () {
+    const majorsTableDuplicationQuery = `SELECT table_name
+        FROM information_schema.tables
+        WHERE table_schema = 'coym'
+        AND table_name = 'majors'
+    `
+
+    const createMajorsQuery = `CREATE TABLE IF NOT EXISTS 
+        majors (
+            id INT AUTO_INCREMENT, 
+            name VARCHAR(255), 
+            PRIMARY KEY (id)
+        ) 
+    `
+
+    const insertMajorsQuery = function (i: any) {
+        return `INSERT INTO 
+            majors (
+                name
+            ) VALUES (
+                "${majorsList[i]}"
+            )
+        `
+    }
+
     connection.connect(function (err: any) {
         if (err) throw err
-        connection.query(`SELECT table_name
-            FROM information_schema.tables
-            WHERE table_schema = 'coym'
-            AND table_name = 'majors';`, function (err: any, result: any) {
+        connection.query(majorsTableDuplicationQuery, function (err: any, result: any) {
             if (err) throw err
             if (!result.length) {
-                connection.query(`CREATE TABLE IF NOT EXISTS majors (id INT AUTO_INCREMENT, name VARCHAR(255), PRIMARY KEY (id)) `, function (err: any, result: any) {
+                connection.query(createMajorsQuery, function (err: any, result: any) {
                     if (err) throw err
                 })
                 for (var i = 0; i < majorsList.length; i++) {
-                    connection.query(`INSERT INTO majors (name) VALUES ("${majorsList[i]}")`, function (err: any, result: any) {
+                    connection.query(insertMajorsQuery(i), function (err: any, result: any) {
                         if (err) throw err
                     })
                 }
             }
         })
     })
+    
 }
 
-export const getMajorList = function (res: any, req: any) {
+export const getMajorList = function (connection: any, res: any, req: any) {
+
+    const selectMajorsQuery = `SELECT * 
+        FROM majors
+    `
+
     connection.connect(function (err: any) {
         if (err) throw err
-        connection.query(`SELECT * FROM majors;`, function (err: any, result: any, fields: any) {
+        connection.query(selectMajorsQuery, function (err: any, result: any, fields: any) {
             if (err) throw err
-            res.send({ status: true, message: result })
+            res.send({ 
+                status: true, 
+                message: result 
+            })
         })
     })
 }

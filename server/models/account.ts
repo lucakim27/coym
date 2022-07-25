@@ -1,21 +1,26 @@
-import mysql2 from 'mysql2'
+export const createAccountsTable = function (connection: any) {
 
-const connection = mysql2.createConnection({
-    host: "localhost",
-    user: "root",
-    database: "coym"
-})
+    const tableDuplicationQuery = `SELECT table_name
+        FROM information_schema.tables
+        WHERE table_schema = 'coym'
+        AND table_name = 'accounts';
+    `
 
-export const createAccountsTable = function () {
+    const createAccountsTableQuery = `CREATE TABLE 
+        accounts (
+            id INT AUTO_INCREMENT,
+            username VARCHAR(255), 
+            password VARCHAR(255), 
+            PRIMARY KEY (id)
+        )
+    `
+    
     connection.connect(function (err: any) {
         if (err) throw err
-        connection.query(`SELECT table_name
-            FROM information_schema.tables
-            WHERE table_schema = 'coym'
-            AND table_name = 'accounts';`, function (err: any, result: any) {
+        connection.query(tableDuplicationQuery, function (err: any, result: any) {
             if (err) throw err
             if (!result.length) {
-                connection.query(`CREATE TABLE accounts (id INT AUTO_INCREMENT, username VARCHAR(255), password VARCHAR(255), PRIMARY KEY (id)) `, function (err: any, result: any) {
+                connection.query(createAccountsTableQuery, function (err: any, result: any) {
                     if (err) throw err
                 })
             }
@@ -23,10 +28,23 @@ export const createAccountsTable = function () {
     })
 }
 
-export const addAccount = function (username: any, password: any) {
+export const addAccount = function (connection: any, username: any, password: any) {
+
+    const insertAccountsQuery = function (username: any, password: any) {
+        return `INSERT INTO
+            accounts (
+                username, 
+                password
+            ) VALUES (
+                '${username}', 
+                '${password}'
+            )
+        `
+    }
+
     connection.connect(function (err: any) {
         if (err) throw err
-        connection.query(`INSERT INTO accounts (username, password) VALUES ('${username}', '${password}')`, function (err: any, result: any) {
+        connection.query(insertAccountsQuery(username, password), function (err: any, result: any) {
             if (err) throw err
         })
     })
@@ -40,49 +58,73 @@ const validateSignUp = function (username: any, password: any, passwordConfirm: 
     }
 }
 
-export const authSignUp = function (res: any, req: any) {
+export const authSignUp = function (connection: any, res: any, req: any) {
+    
+    const selectAccountsQuery = "SELECT * FROM accounts"
+
     if (validateSignUp(req.body.username, req.body.password, req.body.passwordConfirm)) {
-        res.send({status: false, message: 'It is either too short or doesnt match.'})
+        res.send({
+            status: false,
+            message: 'It is either too short or doesnt match.'
+        })
     } else {
         connection.connect(function (err: any) {
             if (err) throw err
-            connection.query("SELECT * FROM accounts", function (err: any, result: any, fields: any) {
+            connection.query(selectAccountsQuery, function (err: any, result: any, fields: any) {
                 if (err) throw err
                 if (result.length !== 0) {
                     var existing = false
                     for (var i = 0; i < result.length; i++) {
                         if (req.body.username === result[i].username || req.body.password === result[i].password) {
-                            res.send({status: false, message: 'It already exits.'})
+                            res.send({
+                                status: false,
+                                message: 'It already exists.'
+                            })
                             existing = true
                         }
                     }
                     if (!existing) {
-                        addAccount(req.body.username, req.body.password)
-                        res.send({status: true, message: 'Successfully signed up.'})
+                        addAccount(connection, req.body.username, req.body.password)
+                        res.send({
+                            status: true,
+                            message: 'Successfully signed up.'
+                        })
                     }
                 } else {
-                    addAccount(req.body.username, req.body.password)
-                    res.send({status: true, message: 'Successfully signed up.'})
+                    addAccount(connection, req.body.username, req.body.password)
+                    res.send({
+                        status: true,
+                        message: 'Successfully signed up.'
+                    })
                 }
             })
         })
     }
 }
 
-export const authSignIn = function (res: any, req: any) {
+export const authSignIn = function (connection: any, res: any, req: any) {
+
+    const selectAccountsQuery = "SELECT * FROM accounts"
+
     connection.connect(function (err: any) {
         if (err) throw err
-        connection.query("SELECT * FROM accounts", function (err: any, result: any, fields: any) {
+        connection.query(selectAccountsQuery, function (err: any, result: any, fields: any) {
             if (err) throw err
             var existing = false
             for (var i = 0; i < result.length; i++) {
                 if (req.query.username === result[i].username && req.query.password === result[i].password) {
-                    res.send({status: true, message: 'Successfully signed in.'})
+                    res.send({
+                        status: true,
+                        message: 'Successfully signed in.'
+                    })
                     existing = true
                 }
             }
             if (!existing) {
-                res.send({status: false, message: 'You failed to sign in.'})
+                res.send({
+                    status: false,
+                    message: 'You failed to sign in.'
+                })
             }
         })
     })

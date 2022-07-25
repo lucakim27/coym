@@ -1,32 +1,53 @@
-import mysql2 from 'mysql2'
+export const createOnlineTable = function (connection: any) {
 
-const connection = mysql2.createConnection({
-    host: "localhost",
-    user: "root",
-    database: "coym"
-})
+    const onlineTableDuplicationQuery = `SELECT table_name
+        FROM information_schema.tables
+        WHERE table_schema = 'coym'
+        AND table_name = 'online'
+    `
 
-export const createOnlineTable = function () {
+    const createOnlineTable = `CREATE TABLE IF NOT EXISTS 
+        online (
+            id INT AUTO_INCREMENT, 
+            socketId VARCHAR(255), 
+            username VARCHAR(255), 
+            PRIMARY KEY (id)
+        ) 
+    `
+
     connection.connect(function (err: any) {
         if (err) throw err
-        connection.query(`SELECT table_name
-            FROM information_schema.tables
-            WHERE table_schema = 'coym'
-            AND table_name = 'online';`, function (err: any, result: any) {
+        connection.query(onlineTableDuplicationQuery, function (err: any, result: any) {
             if (err) throw err
             if (!result.length) {
-                connection.query(`CREATE TABLE IF NOT EXISTS online (id INT AUTO_INCREMENT, socketId VARCHAR(255), username VARCHAR(255), PRIMARY KEY (id)) `, function (err: any, result: any) {
+                connection.query(createOnlineTable, function (err: any, result: any) {
                     if (err) throw err
                 })
             }
         })
     })
+
 }
 
-export const addOnlineUser = function (username: any, socketId: any) {
+export const addOnlineUser = function (connection: any, username: any, socketId: any) {
+
+    const selectOnlineQuery = `SELECT * 
+        FROM online
+    `
+
+    const insertOnlineQuery = `INSERT INTO 
+        online (
+            socketId, 
+            username
+        ) VALUES (
+            '${socketId}', 
+            '${username}'
+        )
+    `
+
     connection.connect(function (err: any) {
         if (err) throw err
-        connection.query(`SELECT * FROM online`, function (err: any, result: any) {
+        connection.query(selectOnlineQuery, function (err: any, result: any) {
             if (err) throw err
             var existing = false
             for (var i = 0; i < result.length; i++) {
@@ -35,7 +56,7 @@ export const addOnlineUser = function (username: any, socketId: any) {
                 }
             }
             if (!existing) {
-                connection.query(`INSERT INTO online (socketId, username) VALUES ('${socketId}', '${username}')`, function (err: any, result: any) {
+                connection.query(insertOnlineQuery, function (err: any, result: any) {
                     if (err) throw err
                 })
             }
@@ -43,16 +64,26 @@ export const addOnlineUser = function (username: any, socketId: any) {
     })
 }
 
-export const sendOnlineUsers = async function (io: any) {
+export const sendOnlineUsers = async function (connection: any, io: any) {
+
+    const selectOnlineQuery = `SELECT * 
+        FROM online
+    `
+
     setTimeout(async function () {
-        io.sockets.emit('updateOnlineUsers', JSON.stringify(await connection.promise().query(`SELECT * FROM online;`)))
+        io.sockets.emit('updateOnlineUsers', JSON.stringify(await connection.promise().query(selectOnlineQuery)))
     }, 500)
 }
 
-export const removeOnlineUser = function (socketId: any) {
+export const removeOnlineUser = function (connection: any, socketId: any) {
+
+    const deleteOnlineColumnQuery = `DELETE FROM online 
+        WHERE socketId = '${socketId}'
+    `
+
     connection.connect(function (err: any) {
     if (err) throw err
-        connection.query(`DELETE FROM online WHERE socketId = '${socketId}';`, function (err: any, result2: any) {
+        connection.query(deleteOnlineColumnQuery, function (err: any, result2: any) {
             if (err) throw err
         })
     })
