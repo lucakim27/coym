@@ -14,8 +14,8 @@
             <span class="tooltiptext">Click to chat</span>
           </a>
           <p class='date'>{{ comment.date.slice(0, 10) }}</p>
-        </div><br>
-        <p class='comment'>{{ comment.comment }}</p><br>
+        </div>
+        <p class='comment'>{{ comment.comment }}</p>
         <div class='likeAndReplyContainer'>
           <center class='lastRow'>
             <button v-bind:id="comment.comment" class='like' @click="like(comment.comment)">0 Likes</button>

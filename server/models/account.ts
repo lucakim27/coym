@@ -9,8 +9,12 @@ export const createAccountsTable = function (connection: any) {
     const createAccountsTableQuery = `CREATE TABLE 
         accounts (
             id INT AUTO_INCREMENT,
-            username VARCHAR(255), 
-            password VARCHAR(255), 
+            username VARCHAR(255) NOT NULL, 
+            password VARCHAR(255) NOT NULL, 
+            gender VARCHAR(255),
+            country VARCHAR(255),
+            major VARCHAR(255),
+            school VARCHAR(255),
             PRIMARY KEY (id)
         )
     `

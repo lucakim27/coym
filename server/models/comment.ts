@@ -17,10 +17,12 @@ export const createCommentsTable = function (connection: any) {
         comments (
             id INT AUTO_INCREMENT, 
             comment VARCHAR(255), 
-            page VARCHAR(255), 
-            username VARCHAR(255), 
+            majorID INT, 
+            userID INT, 
             date DATE, 
-            PRIMARY KEY (id)
+            PRIMARY KEY (id),
+            FOREIGN KEY (majorID) REFERENCES majors(id),
+            FOREIGN KEY (userID) REFERENCES accounts(id)
         ) 
     `
 

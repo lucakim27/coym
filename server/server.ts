@@ -10,7 +10,7 @@ import { createAccountsTable, authSignUp, authSignIn } from './models/account'
 import { createLikesTable, getLike, postLike } from './models/like'
 import { createCountsTable, getCount, postCount } from './models/count'
 import { createCommentsTable, getComment, postComment } from './models/comment'
-import { createOnlineTable, addOnlineUser, sendOnlineUsers, removeOnlineUser } from './models/online'
+import { createOnlineTable, addOnlineUser, sendOnlineUsers, removeOnlineUser, dropOnlineTable } from './models/online'
 import { createReplyTable, getReply, postReply } from './models/reply'
 import { addChatUserAndChat, createChatTable, createChatUserTable, sendChatUser, sendChat } from './models/chat'
 
@@ -64,19 +64,23 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser())
 app.use('/', router)
 
-/* 
-create 'coym' database before you run
-below lines are for creating tables for each models
-*/
+
+// SELECT u.*, s.*
+// FROM users u
+//     inner join statuses s on u.status_id = s.id
+// WHERE u.status_id = 2
+
+// create 'coym' database before you run
 createMajorsTable(connection)
-createCommentsTable(connection)
-createCountsTable(connection)
 createAccountsTable(connection)
-createLikesTable(connection)
-createOnlineTable(connection)
-createReplyTable(connection)
-createChatTable(connection)
-createChatUserTable(connection)
+createCountsTable(connection) // belongs to the majors table
+createCommentsTable(connection) // belongs to the majors & accounts tables
+createLikesTable(connection) // belongs to the comments & accounts tables
+// dropOnlineTable(connection)
+createOnlineTable(connection) // belongs to the accounts table
+createReplyTable(connection) // belongs to the majors, accounts & comments tables
+createChatUserTable(connection) // belongs to the accounts table
+createChatTable(connection) // belongs to the accounts & chatUser tables
 
 
 router.post('/signUp', function (req: any, res: any) {

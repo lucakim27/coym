@@ -9,9 +9,10 @@ export const createOnlineTable = function (connection: any) {
     const createOnlineTable = `CREATE TABLE IF NOT EXISTS 
         online (
             id INT AUTO_INCREMENT, 
-            socketId VARCHAR(255), 
-            username VARCHAR(255), 
-            PRIMARY KEY (id)
+            socketID VARCHAR(255) NOT NULL, 
+            userID INT NOT NULL, 
+            PRIMARY KEY (id),
+            FOREIGN KEY (userID) REFERENCES accounts(id)
         ) 
     `
 
@@ -24,6 +25,19 @@ export const createOnlineTable = function (connection: any) {
                     if (err) throw err
                 })
             }
+        })
+    })
+
+}
+
+export const dropOnlineTable = function (connection: any) {
+
+    const dropTableQuery = "DROP TABLE online"
+
+    connection.connect(function (err: any) {
+        if (err) throw err
+        connection.query(dropTableQuery, function (err: any, result: any) {
+            if (err) throw err
         })
     })
 

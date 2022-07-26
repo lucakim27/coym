@@ -16,9 +16,11 @@ export const createChatUserTable = function (connection: any) {
     const createChatUserTableQuery = `CREATE TABLE chatUser 
         (
             id INT AUTO_INCREMENT,
-            username VARCHAR(255),
-            counterpart VARCHAR(255),
-            PRIMARY KEY (id)
+            userID INT NOT NULL,
+            counterpartID INT NOT NULL,
+            PRIMARY KEY (id),
+            FOREIGN KEY (userID) REFERENCES accounts(id),
+            FOREIGN KEY (counterpartID) REFERENCES accounts(id)
         )
     `
 
@@ -46,10 +48,14 @@ export const createChatTable = function (connection: any) {
 
     const createChatTableQuery = `CREATE TABLE chat 
         (
-            id INT,
-            text TEXT,
-            username VARCHAR(255),
-            date DATE
+            id INT AUTO_INCREMENT,
+            text TEXT NOT NULL,
+            chatUserID INT NOT NULL,
+            userID INT NOT NULL,
+            date DATE NOT NULL,
+            PRIMARY KEY (id),
+            FOREIGN KEY (chatUserID) REFERENCES chatUser(id),
+            FOREIGN KEY (userID) REFERENCES accounts(id)
         )
     `
 

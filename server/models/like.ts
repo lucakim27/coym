@@ -9,10 +9,13 @@ export const createLikesTable = function (connection: any) {
     const createLikesQuery = `CREATE TABLE IF NOT EXISTS 
         likes (
             id INT AUTO_INCREMENT, 
-            comment VARCHAR(255), 
-            page VARCHAR(255), 
-            username VARCHAR(255), 
-            PRIMARY KEY (id)
+            commentID INT NOT NULL, 
+            majorID INT NOT NULL, 
+            userID INT NOT NULL, 
+            PRIMARY KEY (id),
+            FOREIGN KEY (commentID) REFERENCES comments(id),
+            FOREIGN KEY (majorID) REFERENCES majors(id),
+            FOREIGN KEY (userID) REFERENCES accounts(id)
         ) 
     `
 

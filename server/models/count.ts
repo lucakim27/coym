@@ -9,10 +9,11 @@ export const createCountsTable = function (connection: any) {
     const createCountsTableQuery = `CREATE TABLE 
         counts (
             id INT AUTO_INCREMENT, 
-            page VARCHAR(255) UNIQUE KEY, 
+            majorID INT NOT NULL, 
             comment INT, 
             view INT, 
-            PRIMARY KEY (id)
+            PRIMARY KEY (id),
+            FOREIGN KEY (majorID) REFERENCES majors(id)
         ) 
     `
 

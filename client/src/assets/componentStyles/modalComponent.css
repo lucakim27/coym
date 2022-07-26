@@ -11,25 +11,22 @@
 }
 
 .logoutBtn {
-	background: rgba(255, 0, 0, 0.744);
-	color: white;
-	border: 1px solid rgb(146, 156, 161);
+	background: rgb(255, 255, 255);
+	color: rgb(0, 0, 0);
+	border: 1px solid rgb(0, 0, 0);
 	cursor: pointer;
-}
-
-.logoutBtn:hover {
-	color: black;
 }
 
 .settingsBtn {
-	background: rgb(98, 203, 255);
-	color: white;
-	border: 1px solid rgb(146, 156, 161);
+	background: rgb(255, 255, 255);
+	color: rgb(0, 0, 0);
+	border: 1px solid rgb(0, 0, 0);
 	cursor: pointer;
 }
 
+.logoutBtn:hover,
 .settingsBtn:hover {
-	color: black;
+	color: rgb(199, 199, 199);
 }
 
 .modal-wrapper {

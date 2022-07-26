@@ -19,10 +19,10 @@
             <div class='mostCommentedContainer'>
                 <div class="commentArea">
                     <div class='eachRow' v-for="chat in chats" :key="chat">
-                        <div v-if="chat.username === username" style="text-align: right; background-color: rgb(89, 95, 98);">
+                        <div v-if="chat.username === username" class="userChat">
                             {{ chat.text }}
                         </div>
-                        <div v-else-if="chat.username === counterpart" style="text-align: left; background-color: rgb(146, 156, 161);">
+                        <div v-else-if="chat.username === counterpart" class="counterpartChat">
                             {{ chat.text }}
                         </div>
                         <!-- <p v-if="chat.username === username" style="text-align: right;">{{ chat.username }}: {{ chat.text }} {{ chat.date }}</p>

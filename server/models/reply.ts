@@ -9,11 +9,14 @@ export const createReplyTable = function (connection: any) {
     const createReplyQuery = `CREATE TABLE IF NOT EXISTS 
         reply (
             id INT AUTO_INCREMENT, 
-            page VARCHAR(255), 
-            username VARCHAR(255), 
-            comment VARCHAR(255), 
-            reply VARCHAR(255), 
-            PRIMARY KEY (id)
+            majorID INT NOT NULL, 
+            userID INT NOT NULL, 
+            commentID INT NOT NULL, 
+            reply TEXT NOT NULL, 
+            PRIMARY KEY (id),
+            FOREIGN KEY (majorID) REFERENCES majors(id),
+            FOREIGN KEY (userID) REFERENCES accounts(id),
+            FOREIGN KEY (commentID) REFERENCES comments(id)
         )
     `
 

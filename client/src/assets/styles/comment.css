@@ -1,7 +1,7 @@
 #commentBtn {
-  background-color: rgb(98, 203, 255);
+  background-color: rgb(255, 255, 255);
   cursor: pointer;
-  color: white;
+  color: rgb(0, 0, 0);
   width: auto;
   margin: 10px;
   padding: 12px 20px;
@@ -9,20 +9,20 @@
   border-radius: 4px;
   box-sizing: border-box;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid rgb(0, 0, 0);
 }
 
 .closeBtn {
-  background-color: rgb(255, 0, 0);
+  background-color: rgb(255, 255, 255);
   cursor: pointer;
-  color: white;
+  color: rgb(0, 0, 0);
   width: auto;
   padding: 12px 20px;
   display: inline-block;
   border-radius: 4px;
   box-sizing: border-box;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid rgb(0, 0, 0);
 }
 
 #userInput {
@@ -110,6 +110,10 @@
   color: white;
   padding: 5px;
   text-align: left;
+  border-style: solid;
+  border-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  margin: 5px;
 }
 
 .replyContainer input {
@@ -152,5 +156,5 @@
 
 button:hover,
 #commentBtn:hover {
-  color: black;
+  color: rgb(199, 199, 199);
 }
