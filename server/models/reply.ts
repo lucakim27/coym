@@ -13,6 +13,8 @@ export const createReplyTable = function (connection: any) {
             userID INT NOT NULL, 
             commentID INT NOT NULL, 
             reply TEXT NOT NULL, 
+            createdAt DATETIME NOT NULL,
+            updatedAt DATETIME,
             PRIMARY KEY (id),
             FOREIGN KEY (majorID) REFERENCES majors(id),
             FOREIGN KEY (userID) REFERENCES accounts(id),
@@ -35,9 +37,8 @@ export const createReplyTable = function (connection: any) {
 
 export const getReply = function (connection: any, res: any, req: any) {
 
-    const selectReplyQuery = `SELECT * 
-        FROM reply 
-        where page = '${req.query.page}'
+    const selectReplyQuery = `SELECT * FROM reply 
+        WHERE majorID = (SELECT id FROM majors WHERE name = '${req.query.page}')
     `
 
     connection.connect(function (err: any) {

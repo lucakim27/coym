@@ -6,7 +6,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import { createMajorsTable, getMajorList } from './models/major'
-import { createAccountsTable, authSignUp, authSignIn } from './models/account'
+import { createAccountsTable, authSignUp, authSignIn, cookieValidation } from './models/account'
 import { createLikesTable, getLike, postLike } from './models/like'
 import { createCountsTable, getCount, postCount } from './models/count'
 import { createCommentsTable, getComment, postComment } from './models/comment'
@@ -124,8 +124,12 @@ router.post('/postReply', function (req: any, res: any) {
 })
 
 router.get('/getMajorList', function (req: any, res: any) {
-  console.log("YOOO")
   getMajorList(connection, res, req)
 })
+
+router.get('/cookieValidation', function (req: any, res: any) {
+  cookieValidation(connection, res, req)
+})
+
 
 expressServer.listen(PORT, () => console.log(`Express Server running on port ${PORT}.`))

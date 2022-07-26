@@ -13,7 +13,7 @@
           <a class='username tooltip' :href="'/chat?counterpart=' + comment.username">{{ comment.username }}
             <span class="tooltiptext">Click to chat</span>
           </a>
-          <p class='date'>{{ comment.date.slice(0, 10) }}</p>
+          <p class='date'>{{ comment.createdAt.slice(0, 10) }}</p>
         </div>
         <p class='comment'>{{ comment.comment }}</p>
         <div class='likeAndReplyContainer'>
@@ -63,7 +63,7 @@ export default {
       getReply: []
     }
   },
-  mounted() {
+  beforeMount() {
     let self = this
     let user = this.cookies.get("user")
     if (user !== null) {

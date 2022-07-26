@@ -11,7 +11,7 @@ export const createLikesTable = function (connection: any) {
             id INT AUTO_INCREMENT, 
             commentID INT NOT NULL, 
             majorID INT NOT NULL, 
-            userID INT NOT NULL, 
+            userID INT NOT NULL,
             PRIMARY KEY (id),
             FOREIGN KEY (commentID) REFERENCES comments(id),
             FOREIGN KEY (majorID) REFERENCES majors(id),
@@ -89,9 +89,8 @@ export const postLike = function (connection: any, res: any, req: any) {
 
 export const getLike = function(connection: any, res: any, req: any) {
 
-    const selectLikesQuery = `SELECT * 
-        FROM likes 
-        WHERE page = '${req.query.page}'
+    const selectLikesQuery = `SELECT * FROM likes 
+        WHERE majorID = (SELECT id FROM majors WHERE name = '${req.query.page}')
     `
 
     connection.connect(function (err: any) {

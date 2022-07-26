@@ -98,6 +98,7 @@ export default {
         this.socket.emit('chatPageJoin', this.username, this.counterpart)
 
         this.socket.on('sendChatUser', (data) => {
+            console.log(...JSON.parse(data)[0])
             this.users = [...JSON.parse(data)[0]]
         })
 
@@ -108,7 +109,11 @@ export default {
 
     },
     updated() {
-        document.getElementById(this.counterpart).style.color = 'rgb(98, 203, 255)'
+        try {
+            document.getElementById(this.counterpart).style.color = 'rgb(98, 203, 255)'
+        } catch (e) {
+            console.log(e)
+        }
     }
 }
 </script>

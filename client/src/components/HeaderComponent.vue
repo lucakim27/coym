@@ -2,13 +2,12 @@
     <div id="headerContainer">
         <header>
             <span v-on:click="sidebarOpen()">&#9776;</span>
-            <div v-if='!loggedIn && username.length === 0' id="userId">
+            <div v-if='!loggedIn' id="userId">
                 <a href="/login" v-if="getTitle !== 'LOGIN' && getTitle !== 'REGISTER'">Sign in</a>
             </div>
             <h1>{{ getTitle }}</h1>
-            <svg v-if='loggedIn && username.length !== 0' @click="showModal = true"
-                class='profileSVG' xmlns="http://www.w3.org/2000/svg"
-                width="44" height="44" fill="black"  viewBox="0 0 16 16">
+            <svg v-if='loggedIn' @click="showModal = true" class='profileSVG' xmlns="http://www.w3.org/2000/svg"
+                width="44" height="44" fill="black" viewBox="0 0 16 16">
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                 <path fill-rule="evenodd"
                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
@@ -30,6 +29,7 @@
 import ModalComponent from './ModalComponent.vue'
 import { useCookies } from "vue3-cookies"
 import io from 'socket.io-client'
+import axios from 'axios'
 
 export default {
     name: 'HeaderComponent',
@@ -38,22 +38,33 @@ export default {
     },
     data() {
         return {
-            username: '',
             loggedIn: false,
             showModal: false,
-            socket: io('localhost:3001', { transports: ['websocket'] })
+            socket: io('localhost:3001', {
+                transports: ['websocket']
+            })
         }
     },
     setup() {
         const { cookies } = useCookies()
         return { cookies }
     },
-    mounted() {
-        let user = this.cookies.get("user")
-        if (user !== null) {
-            this.username = this.cookies.get("user").username
-            this.loggedIn = true
-            this.socket.emit('join', this.username)
+    beforeMount() {
+        let self = this
+        if (self.cookies.get('user') !== null) {
+            axios({
+                method: "GET",
+                url: "http://localhost:3000/cookieValidation",
+                params: {
+                    username: self.cookies.get("user").username,
+                    password: self.cookies.get("user").password
+                }
+            }).then(function (response) {
+                if (response.data.status) {
+                    self.loggedIn = response.data.status
+                    self.socket.emit('join', response.data.username)
+                }
+            })
         }
     },
     methods: {

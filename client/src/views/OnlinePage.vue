@@ -12,24 +12,24 @@
         <div class='eachRow' v-for="user in users" :key="user.username">
           <div class="row">
 
-            <div v-if="user.username !== undefined">
+            <div v-if="user.username !== null">
               <a v-bind:href="'/chat?counterpart=' + user.username" class="tooltip">{{ user.username }}
                 <span class="tooltiptext">Click to chat</span>
               </a>
             </div>
-            <div v-if="user.username === undefined">Anonymous</div>
+            <div v-if="user.username === null">Anonymous</div>
 
-            <div v-if="user.gender !== undefined">{{ user.gender }}</div>
-            <div v-if="user.gender === undefined">N/A</div>
+            <div v-if="user.gender !== null">{{ user.gender }}</div>
+            <div v-if="user.gender === null">N/A</div>
 
-            <div v-if="user.country !== undefined">{{ user.country }}</div>
-            <div v-if="user.country === undefined">N/A</div>
+            <div v-if="user.country !== null">{{ user.country }}</div>
+            <div v-if="user.country === null">N/A</div>
 
-            <div v-if="user.major !== undefined">{{ user.major }}</div>
-            <div v-if="user.major === undefined">N/A</div>
+            <div v-if="user.major !== null">{{ user.major }}</div>
+            <div v-if="user.major === null">N/A</div>
 
-            <div v-if="user.school !== undefined">{{ user.school }}</div>
-            <div v-if="user.school === undefined">N/A</div>
+            <div v-if="user.school !== null">{{ user.school }}</div>
+            <div v-if="user.school === null">N/A</div>
 
           </div>
         </div>

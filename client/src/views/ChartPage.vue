@@ -4,9 +4,9 @@
             <div id='mostViewedContainer'>
                 <h1>Visit</h1>
                 <div class="mostViewedPages">
-                    <div class='eachRow' v-for="row in sortedMostVisitedTable" :key="row.page">
+                    <div class='eachRow' v-for="row in sortedMostVisitedTable" :key="row.name">
                         <p>
-                            <a class="tooltip" v-bind:href="'/comment?major=' + row.page">{{ row.page }}
+                            <a class="tooltip" v-bind:href="'/comment?major=' + row.name">{{ row.name }}
                                 <span class="tooltiptext">Click to visit</span>
                             </a>: {{ row.view }}
                         </p>
@@ -16,9 +16,9 @@
             <div id='mostCommentedContainer'>
                 <h1>Comment</h1>
                 <div class="mostCommentedPages">
-                    <div class='eachRow' v-for="row in sortedMostCommentedTable" :key="row.page">
+                    <div class='eachRow' v-for="row in sortedMostCommentedTable" :key="row.name">
                         <p>
-                            <a class="tooltip" v-bind:href="'/comment?major=' + row.page">{{ row.page }}
+                            <a class="tooltip" v-bind:href="'/comment?major=' + row.name">{{ row.name }}
                                 <span class="tooltiptext">Click to visit</span>
                             </a>: {{ row.comment }}
                         </p>

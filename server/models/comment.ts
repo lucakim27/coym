@@ -19,7 +19,8 @@ export const createCommentsTable = function (connection: any) {
             comment VARCHAR(255), 
             majorID INT, 
             userID INT, 
-            date DATE, 
+            createdAt DATETIME NOT NULL,
+            updatedAt DATETIME,
             PRIMARY KEY (id),
             FOREIGN KEY (majorID) REFERENCES majors(id),
             FOREIGN KEY (userID) REFERENCES accounts(id)
@@ -42,15 +43,19 @@ export const createCommentsTable = function (connection: any) {
 
 export const getComment = function (connection: any, res: any, req: any) {
 
-    const selectCommentsTableQuery = `SELECT * 
-        FROM comments 
-        WHERE page = '${req.query.page}'
+    console.log(req.query.page)
+
+    const selectCommentsTableQuery = `SELECT a.username, c.comment, c.createdAt, m.name FROM comments c
+        inner join accounts a on a.id = c.userID
+        inner join majors m on m.id = c.majorID
+        WHERE m.name = '${req.query.page}'
     `
     
     connection.connect(function (err: any) {
         if (err) throw err
         connection.query(selectCommentsTableQuery, function (err: any, result: any, fields: any) {
             if (err) throw err
+            console.log(result)
             res.send({ 
                 status: true, 
                 message: result 
@@ -61,21 +66,20 @@ export const getComment = function (connection: any, res: any, req: any) {
 
 export const postComment = function (connection: any, res: any, req: any) {
 
-    const selectCommentsTableQuery = `SELECT * 
-        FROM comments 
-        WHERE page = '${req.body.page}'
+    const selectCommentsTableQuery = `SELECT * FROM comments 
+        WHERE majorID = (SELECT id FROM majors WHERE name = '${req.body.page}')
     `
 
     const insertCommentsTableQuery = `INSERT INTO 
         comments (
             comment, 
-            page, 
-            username, 
-            date
+            majorID, 
+            userID, 
+            createdAt
         ) VALUES (
             '${req.body.comment}', 
-            '${req.body.page}', 
-            '${req.body.username}', 
+            (SELECT id FROM majors WHERE name = '${req.body.page}'), 
+            (SELECT id FROM accounts WHERE username = '${req.body.username}'), 
             '${toISOStringLocal(new Date())}'
         )
     `

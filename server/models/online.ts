@@ -1,3 +1,5 @@
+import { exists } from "fs"
+
 export const createOnlineTable = function (connection: any) {
 
     const onlineTableDuplicationQuery = `SELECT table_name
@@ -45,22 +47,31 @@ export const dropOnlineTable = function (connection: any) {
 
 export const addOnlineUser = function (connection: any, username: any, socketId: any) {
 
-    const selectOnlineQuery = `SELECT * 
-        FROM online
-    `
+    // check if user account exists..
+
+    const selectOnlineQuery = `SELECT * FROM online`
+
+    const selectAccountsQuery = `SELECT * FROM accounts`
 
     const insertOnlineQuery = `INSERT INTO 
         online (
-            socketId, 
-            username
+            socketID, 
+            userID
         ) VALUES (
             '${socketId}', 
-            '${username}'
+            (SELECT id FROM accounts WHERE username = '${username}')
         )
     `
 
     connection.connect(function (err: any) {
         if (err) throw err
+
+        connection.query(selectAccountsQuery, function (err: any, result: any) {
+            if (err) throw err
+
+        })
+
+
         connection.query(selectOnlineQuery, function (err: any, result: any) {
             if (err) throw err
             var existing = false
@@ -76,17 +87,19 @@ export const addOnlineUser = function (connection: any, username: any, socketId:
             }
         })
     })
+
 }
 
 export const sendOnlineUsers = async function (connection: any, io: any) {
 
-    const selectOnlineQuery = `SELECT * 
-        FROM online
+    const selectOnlineQuery = `SELECT o.*, a.* FROM online o
+        inner join accounts a on a.id = o.userID
     `
 
     setTimeout(async function () {
         io.sockets.emit('updateOnlineUsers', JSON.stringify(await connection.promise().query(selectOnlineQuery)))
     }, 500)
+
 }
 
 export const removeOnlineUser = function (connection: any, socketId: any) {

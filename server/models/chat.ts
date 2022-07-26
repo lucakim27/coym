@@ -52,7 +52,8 @@ export const createChatTable = function (connection: any) {
             text TEXT NOT NULL,
             chatUserID INT NOT NULL,
             userID INT NOT NULL,
-            date DATE NOT NULL,
+            createdAt DATETIME NOT NULL,
+            updatedAt DATETIME,
             PRIMARY KEY (id),
             FOREIGN KEY (chatUserID) REFERENCES chatUser(id),
             FOREIGN KEY (userID) REFERENCES accounts(id)
@@ -75,106 +76,59 @@ export const createChatTable = function (connection: any) {
 
 export const addChatUserAndChat = function (connection: any, username: any, counterpart: any, text: any) {
 
-    const selectChatUserQuery = "SELECT * FROM chatUser"
-
-    const selectIdFromChatUserQuery = function (username: any, counterpart: any) {
-        return `SELECT id 
-            FROM chatUser 
-            WHERE username = '${username}' AND 
-            counterpart = '${counterpart}'
-        `
-    }
-
-    const insertChatQuery = function (result: any) {
-        return `INSERT INTO 
-            chat (
-                id, 
-                text, 
-                username, 
-                date
-            ) VALUES (
-                '${result[0].id}', 
-                '${text}', 
-                '${username}', 
-                '${toISOStringLocal(new Date())}'
-            )
-        `
-    }
+    const insertChatQuery = `INSERT INTO 
+        chat (
+            text, 
+            chatUserID, 
+            userID, 
+            createdAt
+        ) VALUES (
+            '${text}', 
+            (
+                SELECT id FROM chatUser WHERE (
+                    userID = (SELECT id FROM accounts WHERE username = '${username}') 
+                    AND counterpartID = (SELECT id FROM accounts WHERE username = '${counterpart}')
+                ) OR (
+                    userID = (SELECT id FROM accounts WHERE username = '${counterpart}') 
+                    AND counterpartID = (SELECT id FROM accounts WHERE username = '${username}')
+                )
+            ), 
+            (SELECT id FROM accounts WHERE username = '${username}'), 
+            '${toISOStringLocal(new Date())}'
+        )
+    `
 
     const insertChatUserQuery = `INSERT INTO 
         chatUser (
-            username, 
-            counterpart
+            userID, 
+            counterpartID
         ) VALUES (
-            '${username}', 
-            '${counterpart}'
+            (SELECT id FROM accounts WHERE username = '${username}'), 
+            (SELECT id FROM accounts WHERE username = '${counterpart}')
         )
     `
     
-    const selectIdFromChatUserAdvanced = `SELECT id 
-        FROM chatUser 
-        WHERE username = '${username}' AND counterpart = '${counterpart}' 
-        OR username = '${username}' AND counterpart = '${counterpart}'
-    `
-
     connection.connect(function (err: any) {
         if (err) throw err
-        connection.query(selectChatUserQuery, function (err: any, result: any, fields: any) {
+
+        // its duplicating so not working down below
+        connection.query(insertChatUserQuery, function (err: any, result: any) {
             if (err) throw err
-            if (result.length !== 0) {
-                var existing = false
-                for (var i = 0; i < result.length; i++) {
-                    if (username === result[i].username && counterpart === result[i].counterpart) {
-                        existing = true
-                        connection.query(selectIdFromChatUserQuery(username, counterpart), function (err: any, result: any) {
-                            if (err) throw err
-                            connection.query(insertChatQuery(result), function (err: any, result: any) {
-                                if (err) throw err
-                            })
-                        })
-                    } else if (counterpart === result[i].username && username === result[i].counterpart) {
-                        existing = true
-                        connection.query(selectIdFromChatUserQuery(counterpart, username), function (err: any, result: any) {
-                            if (err) throw err
-                            connection.query(insertChatQuery(result), function (err: any, result: any) {
-                                if (err) throw err
-                            })
-                        })
-                    }
-                }
-                if (!existing) {
-                    connection.query(insertChatUserQuery, function (err: any, result: any) {
-                        if (err) throw err
-                    })
-                    connection.query(selectIdFromChatUserAdvanced, function (err: any, result: any) {
-                        if (err) throw err
-                        connection.query(insertChatQuery(result), function (err: any, result: any) {
-                            if (err) throw err
-                        })
-                    })
-                }
-            } else {
-                connection.query(insertChatUserQuery, function (err: any, result: any) {
-                    if (err) throw err
-                })
-                connection.query(selectIdFromChatUserAdvanced, function (err: any, result: any) {
-                    if (err) throw err
-                    connection.query(insertChatQuery(result), function (err: any, result: any) {
-                        if (err) throw err
-                    })
-                })
-            }
+        })
+
+        // error here
+        connection.query(insertChatQuery, function (err: any, result: any) {
+            if (err) throw err
         })
     })
-    
+
 }
 
 export const sendChatUser = function (connection: any, username: any, io: any) {
 
-    const selectChatUserQuery = `SELECT * 
-        FROM chatUser 
-        WHERE username = '${username}' 
-        OR counterpart = '${username}'
+    const selectChatUserQuery = `SELECT * FROM chatUser 
+        WHERE userID = (SELECT id FROM accounts WHERE username = '${username}') 
+        OR counterpartID = (SELECT id FROM accounts WHERE username = '${username}')
     `
 
     setTimeout(async function () {
@@ -186,32 +140,17 @@ export const sendChatUser = function (connection: any, username: any, io: any) {
 
 export const sendChat = function (connection: any, username: any, counterpart: any, io: any) {
 
-    const selectChatUserQuery = `SELECT * 
-        FROM chatUser 
-        WHERE (
-            username = '${username}' AND counterpart = '${counterpart}'
-        ) 
-        OR (
-            username = '${counterpart}' AND counterpart = '${username}'
-        )
+    const selectChatQuery = `SELECT u.*, c.* FROM chatUser u
+        INNER JOIN chat c on u.id = c.chatUserID 
+        WHERE (u.userID = (SELECT id FROM accounts WHERE username = '${username}') 
+        AND u.counterpartID = (SELECT id FROM accounts WHERE username = '${counterpart}'))
+        OR (u.userID = (SELECT id FROM accounts WHERE username = '${counterpart}') 
+        AND u.counterpartID = (SELECT id FROM accounts WHERE username = '${username}'))
     `
 
-    const selectChatQuery = function (result: any) {
-        return `SELECT * 
-            FROM chat 
-            WHERE id = ${result[0].id}
-        `
-    }
-
-    connection.connect(function (err: any) {
-        if (err) throw err
-        connection.query(selectChatUserQuery, function (err: any, result: any, fields: any) {
-            if (err) throw err
-            setTimeout(async function () {
-                // send to the socket.id only..
-                io.sockets.emit('sendChat', JSON.stringify(await connection.promise().query(selectChatQuery(result))))
-            }, 500)
-        })
-    })
+    setTimeout(async function () {
+        // send to the socket.id only..
+        io.sockets.emit('sendChat', JSON.stringify(await connection.promise().query(selectChatQuery)))
+    }, 500)
 
 }

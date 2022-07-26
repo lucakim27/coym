@@ -1,3 +1,10 @@
+const toISOStringLocal = function (d: any) {
+    function z(n: any) {
+        return (n < 10 ? '0' : '') + n;
+    }
+    return d.getFullYear() + '-' + z(d.getMonth() + 1) + '-' + z(d.getDate())
+}
+
 export const createAccountsTable = function (connection: any) {
 
     const tableDuplicationQuery = `SELECT table_name
@@ -15,6 +22,8 @@ export const createAccountsTable = function (connection: any) {
             country VARCHAR(255),
             major VARCHAR(255),
             school VARCHAR(255),
+            createdAt DATETIME NOT NULL,
+            updatedAt DATETIME,
             PRIMARY KEY (id)
         )
     `
@@ -38,10 +47,12 @@ export const addAccount = function (connection: any, username: any, password: an
         return `INSERT INTO
             accounts (
                 username, 
-                password
+                password,
+                createdAt
             ) VALUES (
                 '${username}', 
-                '${password}'
+                '${password}',
+                '${toISOStringLocal(new Date())}'
             )
         `
     }
@@ -132,4 +143,32 @@ export const authSignIn = function (connection: any, res: any, req: any) {
             }
         })
     })
+}
+
+export const cookieValidation = function (connection: any, res: any, req: any) {
+
+    const selectAccountsQuery = "SELECT * FROM accounts"
+
+    connection.connect(function (err: any) {
+        if (err) throw err
+        connection.query(selectAccountsQuery, function (err: any, result: any, fields: any) {
+            if (err) throw err
+            var existing = false
+            for (var i = 0; i < result.length; i++) {
+                if (req.query.username === result[i].username && req.query.password === result[i].password) {
+                    res.send({
+                        status: true,
+                        username: req.query.username
+                    })
+                    existing = true
+                }
+            }
+            if (!existing) {
+                res.send({
+                    status: false
+                })
+            }
+        })
+    })
+
 }
