@@ -1,3 +1,10 @@
+const toISOStringLocal = function (d: any) {
+    function z(n: any) {
+        return (n < 10 ? '0' : '') + n;
+    }
+    return d.getFullYear() + '-' + z(d.getMonth() + 1) + '-' + z(d.getDate())
+}
+
 export const createReplyTable = function (connection: any) {
 
     const replyTableDuplicationQuery = `SELECT table_name
@@ -37,8 +44,15 @@ export const createReplyTable = function (connection: any) {
 
 export const getReply = function (connection: any, res: any, req: any) {
 
-    const selectReplyQuery = `SELECT * FROM reply 
-        WHERE majorID = (SELECT id FROM majors WHERE name = '${req.query.page}')
+    // const selectReplyQuery = `SELECT * FROM reply 
+    //     WHERE majorID = (SELECT id FROM majors WHERE name = '${req.query.page}')
+    // `
+
+    const selectReplyQuery = `SELECT a.username, c.comment, r.reply, m.name FROM reply r
+        inner join accounts a on a.id = r.userID
+        inner join majors m on m.id = r.majorID
+        inner join comments c on c.id = r.commentID
+        WHERE m.name = '${req.query.page}'
     `
 
     connection.connect(function (err: any) {
@@ -57,15 +71,17 @@ export const postReply = function (connection: any, res: any, req: any) {
 
     const insertReplyQuery = `INSERT INTO 
         reply (
-            page, 
-            username, 
-            comment, 
-            reply
+            majorID,
+            userID,
+            commentID,
+            reply,
+            createdAt
         ) VALUES (
-            '${req.body.page}', 
-            '${req.body.username}', 
-            '${req.body.comment}', 
-            '${req.body.reply}'
+            (SELECT id FROM majors WHERE name = '${req.body.page}'), 
+            (SELECT id FROM accounts WHERE username = '${req.body.username}'), 
+            (SELECT id FROM comments WHERE comment = '${req.body.comment}'), 
+            '${req.body.reply}',
+            '${toISOStringLocal(new Date())}'
         )
     `
 
