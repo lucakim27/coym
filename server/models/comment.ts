@@ -43,8 +43,6 @@ export const createCommentsTable = function (connection: any) {
 
 export const getComment = function (connection: any, res: any, req: any) {
 
-    console.log(req.query.page)
-
     const selectCommentsTableQuery = `SELECT a.username, c.comment, c.createdAt, m.name FROM comments c
         inner join accounts a on a.id = c.userID
         inner join majors m on m.id = c.majorID
@@ -55,7 +53,6 @@ export const getComment = function (connection: any, res: any, req: any) {
         if (err) throw err
         connection.query(selectCommentsTableQuery, function (err: any, result: any, fields: any) {
             if (err) throw err
-            console.log(result)
             res.send({ 
                 status: true, 
                 message: result 

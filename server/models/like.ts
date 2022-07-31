@@ -35,27 +35,30 @@ export const createLikesTable = function (connection: any) {
 
 export const postLike = function (connection: any, res: any, req: any) {
 
-    const selectLikesQuery = `SELECT * 
-        FROM likes 
-        WHERE page = '${req.body.page}'
+    const selectLikesQuery = `SELECT a.username, m.name, c.comment FROM likes l
+        inner join accounts a on a.id = l.userID
+        inner join majors m on m.id = l.majorID
+        inner join comments c on c.id = l.commentID
+        WHERE m.name = '${req.body.page}'
     `
 
     const deleteLikesColumnQuery = `DELETE FROM likes 
-        WHERE comment = '${req.body.comment}'    
+        WHERE commentID = (SELECT id FROM comments WHERE comment = '${req.body.comment}')
     `
 
     const insertLikesQuery = `INSERT INTO 
         likes (
-            comment, 
-            page, 
-            username
+            commentID, 
+            majorID, 
+            userID
         ) VALUES (
-            '${req.body.comment}', 
-            '${req.body.page}', 
-            '${req.body.username}'
+            (SELECT id FROM comments WHERE comment = '${req.body.comment}'), 
+            (SELECT id FROM majors WHERE name = '${req.body.page}'), 
+            (SELECT id FROM accounts WHERE username = '${req.body.username}')
         )
     `
 
+    // how do i check if the like is duplicated?
     connection.connect(function (err: any) {
         if (err) throw err
         connection.query(selectLikesQuery, function (err: any, result: any) {
@@ -89,8 +92,11 @@ export const postLike = function (connection: any, res: any, req: any) {
 
 export const getLike = function(connection: any, res: any, req: any) {
 
-    const selectLikesQuery = `SELECT * FROM likes 
-        WHERE majorID = (SELECT id FROM majors WHERE name = '${req.query.page}')
+    const selectLikesQuery =  `SELECT a.username, m.name, c.comment FROM likes l
+        inner join accounts a on a.id = l.userID
+        inner join majors m on m.id = l.majorID
+        inner join comments c on c.id = l.commentID
+        WHERE m.name = '${req.query.page}'
     `
 
     connection.connect(function (err: any) {
