@@ -3,17 +3,14 @@
         <div class='BothContainer'>
             <div class='mostViewedContainer'>
                 <h2>Users</h2>
-                <div class='eachRow' v-for="user in users" :key="user">
-                    <p v-if="user.username !== username">
-                        <a v-bind:href="'/chat?counterpart=' + user.username" v-bind:id="user.username">
-                            {{ user.username }}
-                        </a>
-                    </p>
-                    <p v-else>
-                        <a v-bind:href="'/chat?counterpart=' + user.counterpart" v-bind:id="user.counterpart">
-                            {{ user.counterpart }}
-                        </a>
-                    </p>
+                <div v-for="user in users" :key="user">
+                    <div class='eachRow' v-if="user.username !== username">
+                        <p>
+                            <a v-bind:href="'/chat?counterpart=' + user.username" v-bind:id="user.username">
+                                {{ user.username }}
+                            </a>
+                        </p>
+                    </div>
                 </div>
             </div>
             <div class='mostCommentedContainer'>
@@ -79,40 +76,47 @@ export default {
             return decodeURIComponent(returnValue)
         },
         sendMessage(e) {
-            e.preventDefault();
-            this.socket.emit('sendMessage',
-                this.username,
-                this.counterpart,
-                this.message
-            )
-            this.message = ''
+            e.preventDefault()
+            if (this.message === '') {
+                alert("You have not typed anything yet.")
+            } else {
+                this.socket.emit('sendMessage',
+                    this.username,
+                    this.counterpart,
+                    this.message
+                )
+                this.message = ''
+            }
         }
     },
     mounted() {
+        this.counterpart = this.getQueryVariable()
         let user = this.cookies.get("user")
         if (user !== null) {
             this.username = this.cookies.get("user").username
+
+            if (this.counterpart === '') {
+                this.socket.emit('chatPageJoin', this.username)
+            } else {
+                this.socket.emit('chatUserSelected', this.username, this.counterpart)
+            }
+
+            this.socket.on('sendChatUser', (data) => {
+                this.users = [...JSON.parse(data)]
+            })
+
+            this.socket.on('sendChat', (data) => {
+                this.chats = [...JSON.parse(data)[0]]
+            })
         }
 
-        this.counterpart = this.getQueryVariable()
-        this.socket.emit('chatPageJoin', this.username, this.counterpart)
-
-        this.socket.on('sendChatUser', (data) => {
-            console.log(...JSON.parse(data)[0])
-            this.users = [...JSON.parse(data)[0]]
-        })
-
-        this.socket.on('sendChat', (data) => {
-            console.log(...JSON.parse(data)[0])
-            this.chats = [...JSON.parse(data)[0]]
-        })
 
     },
     updated() {
         try {
             document.getElementById(this.counterpart).style.color = 'rgb(98, 203, 255)'
         } catch (e) {
-            console.log(e)
+            // console.log(e)
         }
     }
 }
