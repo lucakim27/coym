@@ -1,10 +1,3 @@
-const toISOStringLocal = function (d: any) {
-    function z(n: any) {
-        return (n < 10 ? '0' : '') + n;
-    }
-    return d.getFullYear() + '-' + z(d.getMonth() + 1) + '-' + z(d.getDate())
-}
-
 export const createCountsTable = function (connection: any) {
 
     const countsTableDuplicationQuery = `SELECT table_name
@@ -52,7 +45,7 @@ export const postCount = function (connection: any, res: any, req: any) {
             (SELECT id FROM majors WHERE name = '${req.body.page}'),
             0, 
             0,
-            '${toISOStringLocal(new Date())}'
+            '${new Date().toISOString().slice(0, 19).replace('T', ' ')}'
         )
     `
 

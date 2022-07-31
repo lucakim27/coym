@@ -1,10 +1,3 @@
-const toISOStringLocal = function (d: any) {
-    function z(n: any) {
-        return (n < 10 ? '0' : '') + n;
-    }
-    return d.getFullYear() + '-' + z(d.getMonth() + 1) + '-' + z(d.getDate())
-}
-
 export const createCommentsTable = function (connection: any) {
 
     const commentsTableDuplicationQuery = `SELECT table_name
@@ -77,7 +70,7 @@ export const postComment = function (connection: any, res: any, req: any) {
             '${req.body.comment}', 
             (SELECT id FROM majors WHERE name = '${req.body.page}'), 
             (SELECT id FROM accounts WHERE username = '${req.body.username}'), 
-            '${toISOStringLocal(new Date())}'
+            '${new Date().toISOString().slice(0, 19).replace('T', ' ')}'
         )
     `
 

@@ -1,10 +1,3 @@
-const toISOStringLocal = function (d: any) {
-    function z(n: any) {
-        return (n < 10 ? '0' : '') + n
-    }
-    return d.getFullYear() + '-' + z(d.getMonth() + 1) + '-' + z(d.getDate())
-}
-
 export const createChatUserTable = function (connection: any) {
 
     const chatUserTableDuplicationQuery = `SELECT table_name
@@ -94,7 +87,7 @@ export const addChatUserAndChat = function (connection: any, username: any, coun
                 )
             ), 
             (SELECT id FROM accounts WHERE username = '${username}'), 
-            '${toISOStringLocal(new Date())}'
+            '${new Date().toISOString().slice(0, 19).replace('T', ' ')}'
         )
     `
 
@@ -107,50 +100,69 @@ export const addChatUserAndChat = function (connection: any, username: any, coun
             (SELECT id FROM accounts WHERE username = '${counterpart}')
         )
     `
+
+    const selectChatUserQuery = `SELECT * FROM chatUser
+        WHERE (userID = (SELECT id FROM accounts WHERE username = '${username}')
+        AND counterpartID = (SELECT id FROM accounts WHERE username = '${counterpart}'))
+        OR (userID = (SELECT id FROM accounts WHERE username = '${counterpart}')
+        AND counterpartID = (SELECT id FROM accounts WHERE username = '${username}'))
+    `
     
     connection.connect(function (err: any) {
         if (err) throw err
-
-        // its duplicating so not working down below
-        connection.query(insertChatUserQuery, function (err: any, result: any) {
+        connection.query(selectChatUserQuery, function(err: any, result: any) {
             if (err) throw err
-        })
-
-        // error here
-        connection.query(insertChatQuery, function (err: any, result: any) {
-            if (err) throw err
+            if (!result.length) {
+                connection.query(insertChatUserQuery, function (err: any, result: any) {
+                    if (err) throw err
+                })
+                connection.query(insertChatQuery, function (err: any, result: any) {
+                    if (err) throw err
+                })
+            } else {
+                connection.query(insertChatQuery, function (err: any, result: any) {
+                    if (err) throw err
+                })
+            }
         })
     })
 
 }
 
-export const sendChatUser = function (connection: any, username: any, io: any) {
+export const sendChatUser = function (connection: any, username: any, io: any, socket: any) {
 
-    const selectChatUserQuery = `SELECT * FROM chatUser 
-        WHERE userID = (SELECT id FROM accounts WHERE username = '${username}') 
-        OR counterpartID = (SELECT id FROM accounts WHERE username = '${username}')
+    const selectChatUserQuery = `SELECT a.username, c.id FROM chatUser c
+        INNER JOIN accounts a on a.id = c.userID or a.id = c.counterpartID
+        WHERE c.userID = (SELECT id FROM accounts WHERE username = '${username}')
+        OR c.counterpartID = (SELECT id FROM accounts WHERE username = '${username}')
     `
-
-    setTimeout(async function () {
-        // send to the socket.id only..
-        io.sockets.emit('sendChatUser', JSON.stringify(await connection.promise().query(selectChatUserQuery)))
-    }, 500)
+    
+    connection.connect(function (err: any) {
+        if (err) throw err
+        connection.query(selectChatUserQuery, function (err: any, result: any) {
+            if (err) throw err
+            setTimeout(async function () {
+                // send to the socket.id only..
+                io.to(socket.id).emit('sendChatUser', JSON.stringify(result))
+            }, 500)
+        })
+    })
 
 }
 
-export const sendChat = function (connection: any, username: any, counterpart: any, io: any) {
+export const sendChat = function (connection: any, username: any, counterpart: any, io: any, socket: any) {
 
-    const selectChatQuery = `SELECT u.*, c.* FROM chatUser u
-        INNER JOIN chat c on u.id = c.chatUserID 
-        WHERE (u.userID = (SELECT id FROM accounts WHERE username = '${username}') 
-        AND u.counterpartID = (SELECT id FROM accounts WHERE username = '${counterpart}'))
-        OR (u.userID = (SELECT id FROM accounts WHERE username = '${counterpart}') 
-        AND u.counterpartID = (SELECT id FROM accounts WHERE username = '${username}'))
+    const selectChatQuery = `SELECT c.text, a.username FROM chat c
+        INNER JOIN chatUser u on c.chatUserID = u.id
+        INNER JOIN accounts a on a.id = c.userID
+        WHERE (u.userID = (SELECT id FROM accounts WHERE username = '${username}') AND u.counterpartID = (SELECT id FROM accounts WHERE username = '${counterpart}'))
+        OR (u.userID = (SELECT id FROM accounts WHERE username = '${counterpart}') AND u.counterpartID = (SELECT id FROM accounts WHERE username = '${username}'))
+        ORDER BY c.createdAt ASC
     `
 
     setTimeout(async function () {
         // send to the socket.id only..
-        io.sockets.emit('sendChat', JSON.stringify(await connection.promise().query(selectChatQuery)))
+        io.to(socket.id).emit('sendChat', JSON.stringify(await connection.promise().query(selectChatQuery)))
     }, 500)
 
 }

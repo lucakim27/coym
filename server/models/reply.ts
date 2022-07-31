@@ -1,10 +1,3 @@
-const toISOStringLocal = function (d: any) {
-    function z(n: any) {
-        return (n < 10 ? '0' : '') + n;
-    }
-    return d.getFullYear() + '-' + z(d.getMonth() + 1) + '-' + z(d.getDate())
-}
-
 export const createReplyTable = function (connection: any) {
 
     const replyTableDuplicationQuery = `SELECT table_name
@@ -44,10 +37,6 @@ export const createReplyTable = function (connection: any) {
 
 export const getReply = function (connection: any, res: any, req: any) {
 
-    // const selectReplyQuery = `SELECT * FROM reply 
-    //     WHERE majorID = (SELECT id FROM majors WHERE name = '${req.query.page}')
-    // `
-
     const selectReplyQuery = `SELECT a.username, c.comment, r.reply, m.name FROM reply r
         inner join accounts a on a.id = r.userID
         inner join majors m on m.id = r.majorID
@@ -81,7 +70,7 @@ export const postReply = function (connection: any, res: any, req: any) {
             (SELECT id FROM accounts WHERE username = '${req.body.username}'), 
             (SELECT id FROM comments WHERE comment = '${req.body.comment}'), 
             '${req.body.reply}',
-            '${toISOStringLocal(new Date())}'
+            '${new Date().toISOString().slice(0, 19).replace('T', ' ')}'
         )
     `
 

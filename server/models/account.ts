@@ -1,10 +1,3 @@
-const toISOStringLocal = function (d: any) {
-    function z(n: any) {
-        return (n < 10 ? '0' : '') + n;
-    }
-    return d.getFullYear() + '-' + z(d.getMonth() + 1) + '-' + z(d.getDate())
-}
-
 export const createAccountsTable = function (connection: any) {
 
     const tableDuplicationQuery = `SELECT table_name
@@ -52,7 +45,7 @@ export const addAccount = function (connection: any, username: any, password: an
             ) VALUES (
                 '${username}', 
                 '${password}',
-                '${toISOStringLocal(new Date())}'
+                '${new Date().toISOString().slice(0, 19).replace('T', ' ')}'
             )
         `
     }

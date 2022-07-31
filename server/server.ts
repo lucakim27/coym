@@ -45,9 +45,13 @@ io.on('connection', function (socket: any) {
     sendOnlineUsers(connection, io)
   })
 
-  socket.on('chatPageJoin', function (username: any, counterpart: any) {
-    sendChat(connection, username, counterpart, io)
-    sendChatUser(connection, username, io)
+  socket.on('chatPageJoin', function (username: any) {
+    sendChatUser(connection, username, io, socket)
+  })
+  
+  socket.on('chatUserSelected', function (username: any, counterpart: any) {
+    sendChatUser(connection, username, io, socket)
+    sendChat(connection, username, counterpart, io, socket)
   })
 
   socket.on('sendMessage', function (username: any, counterpart: any, text: any) {
