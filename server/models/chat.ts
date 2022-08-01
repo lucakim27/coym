@@ -142,7 +142,6 @@ export const sendChatUser = function (connection: any, username: any, io: any, s
         connection.query(selectChatUserQuery, function (err: any, result: any) {
             if (err) throw err
             setTimeout(async function () {
-                // send to the socket.id only..
                 io.to(socket.id).emit('sendChatUser', JSON.stringify(result))
             }, 500)
         })
@@ -161,7 +160,6 @@ export const sendChat = function (connection: any, username: any, counterpart: a
     `
 
     setTimeout(async function () {
-        // send to the socket.id only..
         io.to(socket.id).emit('sendChat', JSON.stringify(await connection.promise().query(selectChatQuery)))
     }, 500)
 

@@ -20,7 +20,7 @@ export const createAccountsTable = function (connection: any) {
             PRIMARY KEY (id)
         )
     `
-    
+
     connection.connect(function (err: any) {
         if (err) throw err
         connection.query(tableDuplicationQuery, function (err: any, result: any) {
@@ -67,7 +67,7 @@ const validateSignUp = function (username: any, password: any, passwordConfirm: 
 }
 
 export const authSignUp = function (connection: any, res: any, req: any) {
-    
+
     const selectAccountsQuery = "SELECT * FROM accounts"
 
     if (validateSignUp(req.body.username, req.body.password, req.body.passwordConfirm)) {
@@ -136,6 +136,7 @@ export const authSignIn = function (connection: any, res: any, req: any) {
             }
         })
     })
+
 }
 
 export const cookieValidation = function (connection: any, res: any, req: any) {
@@ -161,6 +162,32 @@ export const cookieValidation = function (connection: any, res: any, req: any) {
                     status: false
                 })
             }
+        })
+    })
+
+}
+
+export const getUserDetails = function (connection: any, res: any, req: any) {
+
+    const selectAccountsQuery = `SELECT * FROM accounts 
+        WHERE username = '${req.query.username}'
+    `
+
+    connection.connect(function (err: any) {
+        if (err) throw err
+        connection.query(selectAccountsQuery, function (err: any, result: any, fields: any) {
+            if (err) throw err
+            console.log(result)
+            res.send({
+                status: true,
+                userDetails: { 
+                    username: result[0].username,
+                    gender: result[0].gender,
+                    country: result[0].country,
+                    major: result[0].major,
+                    school: result[0].school
+                }
+            })
         })
     })
 

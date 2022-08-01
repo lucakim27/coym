@@ -34,7 +34,7 @@ export const createOnlineTable = function (connection: any) {
 
 export const dropOnlineTable = function (connection: any) {
 
-    const dropTableQuery = "DROP TABLE online"
+    const dropTableQuery = "DROP TABLE IF EXISTS online"
 
     connection.connect(function (err: any) {
         if (err) throw err
