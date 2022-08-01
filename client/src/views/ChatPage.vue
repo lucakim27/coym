@@ -2,12 +2,12 @@
     <div class='container'>
         <div class='BothContainer'>
             <div class='mostViewedContainer'>
-                <h2>Users</h2>
                 <div v-for="user in users" :key="user">
                     <div class='eachRow' v-if="user.username !== username">
                         <p>
-                            <a v-bind:href="'/chat?counterpart=' + user.username" v-bind:id="user.username">
+                            <a v-bind:href="'/chat?counterpart=' + user.username" v-bind:id="user.username" class="tooltip">
                                 {{ user.username }}
+                                <span class="tooltiptext">Click to chat</span>
                             </a>
                         </p>
                     </div>
@@ -29,7 +29,7 @@
                 </div>
                 <form class="input" @submit.prevent="sendMessage">
                     <input type="text" placeholder="Enter your chat..." v-model="message">
-                    <button type="submit">Send</button>
+                    <button type="submit" class="sendChatBtn">Send</button>
                 </form>
             </div>
         </div>

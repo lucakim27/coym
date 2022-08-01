@@ -1,0 +1,80 @@
+.backgroundContainer {
+    overflow-y: auto;
+    height: 83vh;
+    min-width: 80%;
+    flex: 0;
+    padding: 10px;
+    border-radius: 10px;
+    background: rgb(146, 156, 161);
+}
+
+.mainContainer {
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+}
+
+input {
+    width: 40%;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+button {
+    width: 10%;
+    padding: 12px 20px;
+    margin: 8px;
+    display: inline-block;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.478);
+    color: white;
+}
+
+.twoContainer {
+    justify-content: center;
+    display: flex;
+}
+
+.eachContainer {
+    min-width: 50%;
+    align-items: center;
+    /* padding: 10px; */
+}
+
+.eachContainer input {
+    width: 90%;
+    /* margin: 20px; */
+}
+
+.eachContainer h3 {
+    margin-left: 20px;
+    color: white;
+}
+
+.btnContainer {
+    justify-content: center;
+    display: flex;
+    margin: 10px;
+    padding: 10px;
+}
+
+.btnContainer button {
+    width: 20%;
+}
+
+.deleteContainer {
+    justify-content: center;
+    display: flex;
+}
+
+.deleteContainer button {
+    width: 50%;
+    font-size: 60px;
+    padding: 20px; 
+    margin: 20px;
+    color: white;
+    background-color: rgba(177, 23, 23, 0.752);
+    border-color:rgb(146, 156, 161);
+    font-family: fantasy;
+}

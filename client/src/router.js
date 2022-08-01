@@ -36,6 +36,11 @@ const routes = [
     name: 'ChartPage',
     component: () => import('@/views/ChartPage'),
   },
+  {
+    path: '/settings',
+    name: 'SettingsPage',
+    component: () => import('@/views/SettingsPage'),
+  },
 ]
 
 export const router = createRouter({
