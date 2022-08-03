@@ -1,4 +1,4 @@
-import { getLike, postLike } from '../models/like'
+import { getLike, postLike } from '../models/likeModel'
 import { connection } from '../configs/db'
 import express from 'express'
 export const router = express.Router()

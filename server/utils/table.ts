@@ -1,12 +1,12 @@
 import { connection } from '../configs/db'
-import { createLikesTable } from '../models/like'
-import { createReplyTable } from '../models/reply'
-import { createMajorsTable } from '../models/major'
-import { createCountsTable } from '../models/count'
-import { createAccountsTable } from '../models/account'
-import { createCommentsTable } from '../models/comment'
-import { dropOnlineTable, createOnlineTable } from '../models/online'
-import { createChatTable, createChatUserTable } from '../models/chat'
+import { createLikesTable } from '../models/likeModel'
+import { createReplyTable } from '../models/replyModel'
+import { createMajorsTable } from '../models/majorModel'
+import { createCountsTable } from '../models/countModel'
+import { createAccountsTable } from '../models/accountModel'
+import { createCommentsTable } from '../models/commentModel'
+import { dropOnlineTable, createOnlineTable } from '../models/onlineModel'
+import { createChatTable, createChatUserTable } from '../models/chatModel'
 
 // create 'coym' database before you run
 export const createTables = function () {

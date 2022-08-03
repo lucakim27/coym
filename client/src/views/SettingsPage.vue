@@ -1,10 +1,10 @@
 <template>
     <div class='mainContainer'>
-        <div class='backgroundContainer'>        
+        <div class='backgroundContainer'>
             <div class="twoContainer">
-                <div class="eachContainer">   
-                    <h3>Username</h3>
-                    <input type="text" placeholder="Your username..." v-model="username">
+                <div class="eachContainer">
+                    <h3>School</h3>
+                    <input type="text" placeholder="Your school..." v-model="school">
                 </div>
                 <div class="eachContainer">
                     <h3>Gender</h3>
@@ -21,21 +21,11 @@
                     <input type="text" placeholder="Your country..." v-model="country">
                 </div>
             </div>
-            <div class="twoContainer">
-                <div class="eachContainer">
-                    <h3>School</h3>
-                    <input type="text" placeholder="Your school..." v-model="school">
-                </div>
-                <div class="eachContainer">
-                    <h3>Password (compulsory)</h3>
-                    <input type="text" placeholder="Your password...">
-                </div>
+            <div class="passwordContainer">
+                <input type="password" placeholder="Your password...(Compulsory)" v-model="password">
             </div>
             <div class="btnContainer">
-                <button>Update</button>
-            </div>
-            <div class="deleteContainer">
-                <button>Delete Account</button>
+                <button @click="updateUserDetails">Update</button>
             </div>
         </div>
     </div>
@@ -52,25 +42,54 @@ export default {
             country: '',
             major: '',
             school: '',
-            gender: ''
+            gender: '',
+            password: ''
         }
     },
     setup() {
         const { cookies } = useCookies()
         return { cookies }
     },
-    mounted() {
+    beforeMount() {
         let user = this.cookies.get("user")
         if (user !== null) {
             this.username = this.cookies.get("user").username
         }
+        const self = this
         axios({
             method: "GET",
             url: "http://localhost:3000/getUserDetails",
             params: { username: this.username }
         }).then(function (response) {
-            console.log(response.data.userDetails)
+            self.username = response.data.userDetails.username === null ? '' : response.data.userDetails.username
+            self.country = response.data.userDetails.country === null ? '' : response.data.userDetails.country
+            self.major = response.data.userDetails.major === null ? '' : response.data.userDetails.major
+            self.school = response.data.userDetails.school === null ? '' : response.data.userDetails.school
+            self.gender = response.data.userDetails.gender === null ? '' : response.data.userDetails.gender
         })
+    },
+    methods: {
+        updateUserDetails() {
+            if (this.password === '') {
+                alert("Password is compulsory.")
+            } else if (this.username === '') {
+                alert("The username should not be empty.")
+            } else {
+                // const self = this
+                axios({
+                    method: "POST",
+                    url: "http://localhost:3000/updateUserDetails",
+                    headers: { 'Content-Type': 'application/json' },
+                    data: { username: this.username, country: this.country, major: this.major, school: this.school, gender: this.gender, password: this.password }
+                }).then(function (response) {
+                    if (!response.data.status) {
+                        alert(response.data.message)
+                    } else {
+                        alert(response.data.message)
+                    }
+                })
+            }
+        }
     }
 }
 </script>

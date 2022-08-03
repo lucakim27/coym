@@ -1,4 +1,4 @@
-import { getComment, postComment } from '../models/comment'
+import { getComment, postComment } from '../models/commentModel'
 import { connection } from '../configs/db'
 import express from 'express'
 export const router = express.Router()

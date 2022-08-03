@@ -2,11 +2,12 @@
 Comment On Your Major
 
 # Features
-- Comment, reply and like on the major
-- Chat with the online users
-- Charts for the popularity
 - Sign in, out and up
-- View online users
+- Charts for the popularity
+- Chat with the online users
+- View online users with details
+- Comment, reply and like on the major
+- Update user's details and delete the account
 
 # Frameworks/Libraries & Database
 - Vue 3 (Front-end Framework)

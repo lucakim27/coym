@@ -177,7 +177,6 @@ export const getUserDetails = function (connection: any, res: any, req: any) {
         if (err) throw err
         connection.query(selectAccountsQuery, function (err: any, result: any, fields: any) {
             if (err) throw err
-            console.log(result)
             res.send({
                 status: true,
                 userDetails: { 
@@ -188,6 +187,38 @@ export const getUserDetails = function (connection: any, res: any, req: any) {
                     school: result[0].school
                 }
             })
+        })
+    })
+
+}
+
+export const updateUserDetails = function (connection: any, res: any, req: any) {
+
+    const updateAllDetailsQuery = `UPDATE accounts
+        SET username = '${req.body.username}',
+            gender = '${req.body.gender}',
+            school = '${req.body.school}',
+            country = '${req.body.country}',
+            major = '${req.body.major}',
+            updatedAt = '${new Date().toISOString().slice(0, 19).replace('T', ' ')}'
+        WHERE username = '${req.body.username}' AND password = '${req.body.password}'
+    `
+
+    connection.connect(function (err: any) {
+        if (err) throw err
+        connection.query(updateAllDetailsQuery, function (err: any, result: any, fields: any) {
+            if (err) throw err
+            if (result.changedRows === 0) {
+                res.send({
+                    status: false,
+                    message: "Either username or password is not matching."
+                })
+            } else {
+                res.send({
+                    status: true,
+                    message: "You have successfully updated the details."
+                })
+            }
         })
     })
 

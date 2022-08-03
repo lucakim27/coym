@@ -1,4 +1,4 @@
-import { getCount, postCount } from '../models/count'
+import { getCount, postCount } from '../models/countModel'
 import { connection } from '../configs/db'
 import express from 'express'
 export const router = express.Router()

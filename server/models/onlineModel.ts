@@ -1,5 +1,3 @@
-import { exists } from "fs"
-
 export const createOnlineTable = function (connection: any) {
 
     const onlineTableDuplicationQuery = `SELECT table_name

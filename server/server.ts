@@ -4,20 +4,20 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 
-import authRouter from './routes/auth'
-import commentRouter from './routes/comment'
-import countRouter from './routes/count'
-import likeRouter from './routes/like'
-import majorRouter from './routes/major'
-import replyRouter from './routes/reply'
+import accountRouter from './routes/accountRoute'
+import commentRouter from './routes/commentRoute'
+import countRouter from './routes/countRoute'
+import likeRouter from './routes/likeRoute'
+import majorRouter from './routes/majorRoute'
+import replyRouter from './routes/replyRoute'
 
 import { connection } from './configs/db'
 import { corsOptions } from './configs/cors'
 
 import { createTables } from './utils/table'
 
-import { addChatUserAndChat, sendChatUser, sendChat } from './models/chat'
-import { addOnlineUser, sendOnlineUsers, removeOnlineUser } from './models/online'
+import { addChatUserAndChat, sendChatUser, sendChat } from './models/chatModel'
+import { addOnlineUser, sendOnlineUsers, removeOnlineUser } from './models/onlineModel'
 
 const app = express()
 const httpServer = http.createServer(app)
@@ -62,7 +62,7 @@ app.use(bodyParser.urlencoded({
    extended: false 
 }))
 app.use(cookieParser())
-app.use(authRouter)
+app.use(accountRouter)
 app.use(commentRouter)
 app.use(countRouter)
 app.use(likeRouter)

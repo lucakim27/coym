@@ -1,4 +1,4 @@
-import { getReply, postReply } from '../models/reply'
+import { getReply, postReply } from '../models/replyModel'
 import { connection } from '../configs/db'
 import express from 'express'
 export const router = express.Router()

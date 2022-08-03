@@ -1,4 +1,4 @@
-import { getMajorList } from '../models/major'
+import { getMajorList } from '../models/majorModel'
 import { connection } from '../configs/db'
 import express from 'express'
 export const router = express.Router()
