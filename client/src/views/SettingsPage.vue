@@ -21,8 +21,15 @@
                     <input type="text" placeholder="Your country..." v-model="country">
                 </div>
             </div>
-            <div class="passwordContainer">
-                <input type="password" placeholder="Your password...(Compulsory)" v-model="password">
+            <div class="twoContainer">
+                <div class="eachContainer">
+                    <h3>Password</h3>
+                    <input type="password" placeholder="Your password..." v-model="password">
+                </div>
+                <div class="eachContainer">
+                    <h3>Password Confirm</h3>
+                    <input type="password" placeholder="Your password confirm..." v-model="passwordConfirm">
+                </div>
             </div>
             <div class="btnContainer">
                 <button @click="updateUserDetails">Update</button>
@@ -43,7 +50,8 @@ export default {
             major: '',
             school: '',
             gender: '',
-            password: ''
+            password: '',
+            passwordConfirm: ''
         }
     },
     setup() {
@@ -61,7 +69,6 @@ export default {
             url: "http://localhost:3000/getUserDetails",
             params: { username: this.username }
         }).then(function (response) {
-            self.username = response.data.userDetails.username === null ? '' : response.data.userDetails.username
             self.country = response.data.userDetails.country === null ? '' : response.data.userDetails.country
             self.major = response.data.userDetails.major === null ? '' : response.data.userDetails.major
             self.school = response.data.userDetails.school === null ? '' : response.data.userDetails.school
@@ -74,8 +81,9 @@ export default {
                 alert("Password is compulsory.")
             } else if (this.username === '') {
                 alert("The username should not be empty.")
+            } else if (this.password !== this.passwordConfirm) {
+                alert('Password is not matching')
             } else {
-                // const self = this
                 axios({
                     method: "POST",
                     url: "http://localhost:3000/updateUserDetails",

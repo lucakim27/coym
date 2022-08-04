@@ -195,13 +195,13 @@ export const getUserDetails = function (connection: any, res: any, req: any) {
 export const updateUserDetails = function (connection: any, res: any, req: any) {
 
     const updateAllDetailsQuery = `UPDATE accounts
-        SET username = '${req.body.username}',
-            gender = '${req.body.gender}',
-            school = '${req.body.school}',
-            country = '${req.body.country}',
-            major = '${req.body.major}',
-            updatedAt = '${new Date().toISOString().slice(0, 19).replace('T', ' ')}'
-        WHERE username = '${req.body.username}' AND password = '${req.body.password}'
+        SET username = "${req.body.username}",
+            gender = "${req.body.gender}",
+            school = "${req.body.school}",
+            country = "${req.body.country}",
+            major = "${req.body.major}",
+            updatedAt = "${new Date().toISOString().slice(0, 19).replace('T', ' ')}"
+        WHERE username = "${req.body.username}" AND password = "${req.body.password}"
     `
 
     connection.connect(function (err: any) {

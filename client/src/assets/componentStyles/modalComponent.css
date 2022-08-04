@@ -46,11 +46,12 @@
 	font-family: Helvetica, Arial, sans-serif;
 	border-radius: 10px;
 	position: relative;
-	overflow: auto;
+	overflow: hidden;
 }
 
 .modal-header h3 {
 	margin-top: 0;
+	margin-left: 1%;
 	color: white;
 }
 
@@ -68,12 +69,17 @@
 	color: rgb(0, 0, 0);
 }
 
-.modal-body div {
+.modal-body div div {
 	background: rgb(89, 95, 98);
 	border-radius: 10px;
 	margin: 10px;
 	padding: 20px;
 	color: white;
+	width: 50%;
+}
+
+.detailsContainer {
+	display: flex;
 }
 
 .modal-body {
@@ -96,4 +102,12 @@
 .modal-leave-active .modal-container {
 	-webkit-transform: scale(1.1);
 	transform: scale(1.1);
+}
+
+.modal-footer {
+	position: absolute;
+	bottom: 0;
+	width: 93%;
+	padding: 20px;
+	margin: 20px;
 }
