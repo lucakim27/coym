@@ -21,9 +21,6 @@ export default {
 		logout() {
 			this.cookies.remove('user')
 			window.location.reload()
-		},
-		settings() {
-			window.location.href = '/settings'
 		}
 	},
 	mounted() {
@@ -101,9 +98,6 @@ export default {
 					<slot name="footer">
 						<button @click='logout()' class="modal-default-button logoutBtn">
 							Logout
-						</button>
-						<button @click="settings()" class="modal-default-button settingsBtn">
-							Settings
 						</button>
 					</slot>
 				</div>

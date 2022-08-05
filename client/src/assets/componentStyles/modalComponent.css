@@ -17,15 +17,7 @@
 	cursor: pointer;
 }
 
-.settingsBtn {
-	background: rgb(255, 255, 255);
-	color: rgb(0, 0, 0);
-	border: 1px solid rgb(0, 0, 0);
-	cursor: pointer;
-}
-
-.logoutBtn:hover,
-.settingsBtn:hover {
+.logoutBtn:hover {
 	color: rgb(199, 199, 199);
 }
 
