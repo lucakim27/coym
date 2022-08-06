@@ -54,7 +54,7 @@ export default {
         if (self.cookies.get('user') !== null) {
             axios({
                 method: "GET",
-                url: "http://localhost:3000/cookieValidation",
+                url: "https://coym-api.herokuapp.com/cookieValidation",
                 params: {
                     username: self.cookies.get("user").username,
                     password: self.cookies.get("user").password
