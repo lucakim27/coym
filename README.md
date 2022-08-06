@@ -15,3 +15,7 @@ Comment On Your Major
 - Axios (Http request library)
 - Socket.io (Websocket library)
 - Mysql2 (Relational database)
+
+# Deployment
+- Frontend deployed at [Here](https://coym.netlify.app/) (Netlify)
+- Backend in progress (Heroku)
