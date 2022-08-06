@@ -1,6 +1,6 @@
 .onlineDiv {
   height: 83vh;
-  min-width: 80%;
+  min-width: 90%;
   flex: 0;
   padding: 10px;
   border-radius: 10px;
@@ -23,7 +23,7 @@
 }
 
 .onlineBody {
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   justify-content: center;
   padding: 10px;
   height: 67vh;
@@ -33,6 +33,7 @@
   display: flex;
   padding: 10px;
   justify-content: center;
+  overflow: hidden;
 }
 
 .eachRow {
@@ -49,6 +50,15 @@
   padding: 10px;
   color: white;
   width: 100%;
+}
+
+.mobileRow {
+  display: block !important;
+  padding: 0 !important;
+}
+
+.mobileRow div {
+  width: auto !important;
 }
 
 .row div {

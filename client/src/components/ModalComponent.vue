@@ -18,6 +18,13 @@ export default {
 		return { cookies }
 	},
 	methods: {
+		isMobile() {
+			if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+				return true
+			} else {
+				return false
+			}
+		},
 		logout() {
 			this.cookies.remove('user')
 			window.location.reload()
@@ -43,17 +50,16 @@ export default {
 }
 </script>
 <template>
-	<div class="modal-mask">
+	<!-- Non Mobile Web View -->
+	<div class="modal-mask" v-if="!isMobile()">
 		<div class="modal-wrapper">
 			<div class="modal-container">
-
 				<div class="modal-header">
 					<slot name="header">
 						<h3>{{ this.username }}</h3>
 						<span @click="$emit('close')">&times;</span>
 					</slot>
 				</div>
-
 				<div class="modal-body">
 					<slot name="body">
 						<div class='detailsContainer'>
@@ -97,6 +103,62 @@ export default {
 				<div class="modal-footer">
 					<slot name="footer">
 						<button @click='logout()' class="modal-default-button logoutBtn">
+							Logout
+						</button>
+					</slot>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Mobile Web View -->
+	<div class="modal-mask" v-if="isMobile()">
+		<div class="modal-wrapper">
+			<div class="modal-container mobileContainer">
+				<div class="modal-header">
+					<slot name="header">
+						<h3>{{ this.username }}</h3>
+						<span @click="$emit('close')">&times;</span>
+					</slot>
+				</div>
+				<div class="modal-body">
+					<slot name="body">
+						<div class="mobileDetailsContainer">
+							<div v-if="this.school !== ''">School
+								<hr>{{ this.school }}
+							</div>
+							<div v-if="this.school === ''">School
+								<hr>N/A
+							</div>
+						</div>
+						<div class="mobileDetailsContainer">
+							<div v-if="this.gender !== ''">Gender
+								<hr>{{ this.gender }}
+							</div>
+							<div v-if="this.gender === ''">Gender
+								<hr>N/A
+							</div>
+						</div>
+						<div class="mobileDetailsContainer">
+							<div v-if="this.country !== ''">Country
+								<hr>{{ this.country }}
+							</div>
+							<div v-if="this.country === ''">Country
+								<hr>N/A
+							</div>
+						</div>
+						<div class="mobileDetailsContainer">
+							<div v-if="this.major !== ''">Major
+								<hr>{{ this.major }}
+							</div>
+							<div v-if="this.major === ''">Major
+								<hr> N/A
+							</div>
+						</div>
+					</slot>
+				</div>
+				<div class="modal-footer mobileFooter">
+					<slot name="footer">
+						<button @click='logout()' class="modal-default-button logoutBtn mobileBtn">
 							Logout
 						</button>
 					</slot>

@@ -8,6 +8,14 @@
     background: rgb(146, 156, 161);
 }
 
+.mobileContainer {
+    overflow-y: hidden;
+    height: auto;
+    min-width: 70% !important;
+    padding: 20px;
+    margin: 10px;
+}
+
 .mainContainer {
     display: flex;
     padding: 10px;
@@ -61,4 +69,8 @@
 
 .btnContainer button {
     width: 50%;
+}
+
+.mobileContainer div input {
+    width: 85% !important;
 }

@@ -103,3 +103,22 @@
 	padding: 20px;
 	margin: 20px;
 }
+
+.mobileDetailsContainer div {
+	width: 82% !important;
+}
+
+.mobileBtn {
+	width: 100%;
+}
+
+.mobileContainer {
+	overflow-y: auto;
+}
+
+.mobileFooter {
+	display: flex;
+	justify-content: center;
+	position:relative;
+	width: auto;
+}

@@ -47,6 +47,10 @@
     overflow-y: scroll;
 }
 
+.chatUserContainer {
+    min-width: 90% !important;
+}
+
 .mostViewedContainer h2 {
     color: white;
 }
@@ -60,6 +64,11 @@
     background: rgb(146, 156, 161);
     overflow-x: hidden;
     position: relative;
+}
+
+.chatContainer {
+    min-width: 90% !important;
+    height: 83vh;
 }
 
 .commentArea {

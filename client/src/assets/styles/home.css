@@ -44,6 +44,10 @@
     background-color: white;
 }
 
+.mobileOptions {
+    width: 80% !important;
+}
+
 #options tr td {
     width: 10%;
 }
@@ -95,4 +99,8 @@ table a:hover {
 
 b {
     font-family: fantasy;
+}
+
+.mobileInput {
+    width: 80% !important;
 }

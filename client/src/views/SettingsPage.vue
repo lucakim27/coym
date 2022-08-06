@@ -1,5 +1,5 @@
 <template>
-    <div class='mainContainer'>
+    <div class='mainContainer' v-if="!isMobile()">
         <div class='backgroundContainer'>
             <div class="twoContainer">
                 <div class="eachContainer">
@@ -36,6 +36,37 @@
             </div>
         </div>
     </div>
+    <div v-if="isMobile()">
+        <div class='backgroundContainer mobileContainer'>
+            <div class="eachContainer">
+                <h3>School</h3>
+                <input type="text" placeholder="Your school..." v-model="school">
+            </div>
+            <div class="eachContainer">
+                <h3>Gender</h3>
+                <input type="text" placeholder="Your gender..." v-model="gender">
+            </div>
+            <div class="eachContainer">
+                <h3>Major</h3>
+                <input type="text" placeholder="Your major..." v-model="major">
+            </div>
+            <div class="eachContainer">
+                <h3>Country</h3>
+                <input type="text" placeholder="Your country..." v-model="country">
+            </div>
+            <div class="eachContainer">
+                <h3>Password</h3>
+                <input type="password" placeholder="Your password..." v-model="password">
+            </div>
+            <div class="eachContainer">
+                <h3>Password Confirm</h3>
+                <input type="password" placeholder="Your password confirm..." v-model="passwordConfirm">
+            </div>
+            <div class="btnContainer">
+                <button @click="updateUserDetails">Update</button>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -64,23 +95,32 @@ export default {
             this.username = this.cookies.get("user").username
         }
         const self = this
-        axios({
-            method: "GET",
-            url: "http://localhost:3000/getUserDetails",
-            params: { username: this.username }
-        }).then(function (response) {
-            self.country = response.data.userDetails.country === null ? '' : response.data.userDetails.country
-            self.major = response.data.userDetails.major === null ? '' : response.data.userDetails.major
-            self.school = response.data.userDetails.school === null ? '' : response.data.userDetails.school
-            self.gender = response.data.userDetails.gender === null ? '' : response.data.userDetails.gender
-        })
+        if (this.username !== '') {
+            axios({
+                method: "GET",
+                url: "http://localhost:3000/getUserDetails",
+                params: { username: this.username }
+            }).then(function (response) {
+                self.country = response.data.userDetails.country === null ? '' : response.data.userDetails.country
+                self.major = response.data.userDetails.major === null ? '' : response.data.userDetails.major
+                self.school = response.data.userDetails.school === null ? '' : response.data.userDetails.school
+                self.gender = response.data.userDetails.gender === null ? '' : response.data.userDetails.gender
+            })
+        }
     },
     methods: {
+        isMobile() {
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                return true
+            } else {
+                return false
+            }
+        },
         updateUserDetails() {
-            if (this.password === '') {
+            if (this.username === '') {
+                alert("You're not logged in.")
+            } else if (this.password === '') {
                 alert("Password is compulsory.")
-            } else if (this.username === '') {
-                alert("The username should not be empty.")
             } else if (this.password !== this.passwordConfirm) {
                 alert('Password is not matching')
             } else {

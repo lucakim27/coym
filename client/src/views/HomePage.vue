@@ -3,9 +3,19 @@
         <img
             src='https://img.freepik.com/free-vector/group-different-occupations-standing-white-background_218660-287.jpg?w=2000'>
         <div class="Input">
-            <input class="Input-text" id="input" placeholder="Major, e.g. Computer Science" type="search"
+            <input v-if="isMobile()" class="Input-text mobileInput" id="input" placeholder="Major, e.g. Computer Science" type="search"
                 @input="searchChangeFunc($event)" />
-            <table id="options">
+            <input v-if="!isMobile()" class="Input-text" id="input" placeholder="Major, e.g. Computer Science" type="search"
+                @input="searchChangeFunc($event)" />
+            <table id="options" class="mobileOptions" v-if="isMobile()">
+                <tr v-for="(major, i) in filteredMajorsList" :key="i">
+                    <td scope="row">
+                        <a v-bind:href="'/comment?major=' + major" @click="viewPage(major)">{{ major }}</a>
+                        <hr>
+                    </td>
+                </tr>
+            </table>
+            <table id="options" v-if="!isMobile()">
                 <tr v-for="(major, i) in filteredMajorsList" :key="i">
                     <td scope="row">
                         <a v-bind:href="'/comment?major=' + major" @click="viewPage(major)">{{ major }}</a>
@@ -70,6 +80,13 @@ export default {
         }
     },
     methods: {
+        isMobile() {
+			if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+				return true
+			} else {
+				return false
+			}
+		},
         viewPage(page) {
             axios({
                 method: "POST",

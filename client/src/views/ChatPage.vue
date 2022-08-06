@@ -1,5 +1,5 @@
 <template>
-    <div class='container'>
+    <div class='container' v-if="!isMobile()">
         <div class='BothContainer'>
             <div class='mostViewedContainer'>
                 <div v-for="user in users" :key="user">
@@ -29,7 +29,43 @@
                 </div>
                 <form class="input" @submit.prevent="sendMessage">
                     <input type="text" placeholder="Enter your chat..." v-model="message">
-                    <button type="submit" class="sendChatBtn">Send</button>
+                    <button type="submit" class="sendChatBtn"><svg xmlns="http://www.w3.org/2000/svg" width='15' height='15' viewBox="0 0 512 512"> <path fill="var(--ci-primary-color, currentColor)" d="M474.444,19.857a20.336,20.336,0,0,0-21.592-2.781L33.737,213.8v38.066l176.037,70.414L322.69,496h38.074l120.3-455.4A20.342,20.342,0,0,0,474.444,19.857ZM337.257,459.693,240.2,310.37,389.553,146.788l-23.631-21.576L215.4,290.069,70.257,232.012,443.7,56.72Z" class="ci-primary"/> </svg></button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Web View -->
+    <div class='container' v-if="isMobile()">
+        <div class='BothContainer'>
+            <div class='chatUserContainer mostViewedContainer' v-if="!renderChat">
+                <div v-for="user in users" :key="user">
+                    <div class='eachRow' v-if="user.username !== username">
+                        <p>
+                            <a v-bind:href="'/chat?counterpart=' + user.username" v-bind:id="user.username" class="tooltip">
+                                {{ user.username }}
+                                <span class="tooltiptext">Click to chat</span>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class='chatContainer mostCommentedContainer' v-if="renderChat">
+                <div class="commentArea">
+                    <div class='eachRow' v-for="chat in chats" :key="chat">
+                        <div v-if="chat.username === username" class="userChat">
+                            {{ chat.text }}
+                        </div>
+                        <div v-else-if="chat.username === counterpart" class="counterpartChat">
+                            {{ chat.text }}
+                        </div>
+                        <!-- <p v-if="chat.username === username" style="text-align: right;">{{ chat.username }}: {{ chat.text }} {{ chat.date }}</p>
+                        <p v-else-if="chat.username === counterpart" style="text-align: left;">{{ chat.username }}: {{ chat.text }} {{ chat.date }}</p> -->
+                        <!-- <p>{{ chat.username }}: {{ chat.text }} {{ chat.date }}</p> -->
+                    </div>
+                </div>
+                <form class="input" @submit.prevent="sendMessage">
+                    <input type="text" placeholder="Enter your chat..." v-model="message">
+                    <button type="submit" class="sendChatBtn"><svg xmlns="http://www.w3.org/2000/svg" width='15' height='15' viewBox="0 0 512 512"> <path fill="var(--ci-primary-color, currentColor)" d="M474.444,19.857a20.336,20.336,0,0,0-21.592-2.781L33.737,213.8v38.066l176.037,70.414L322.69,496h38.074l120.3-455.4A20.342,20.342,0,0,0,474.444,19.857ZM337.257,459.693,240.2,310.37,389.553,146.788l-23.631-21.576L215.4,290.069,70.257,232.012,443.7,56.72Z" class="ci-primary"/> </svg></button>
                 </form>
             </div>
         </div>
@@ -49,7 +85,8 @@ export default {
             chats: [],
             socket: io('localhost:3001', {
                 transports: ['websocket']
-            })
+            }),
+            renderChat: false
         }
     },
     setup() {
@@ -57,6 +94,13 @@ export default {
         return { cookies }
     },
     methods: {
+        isMobile() {
+			if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+				return true
+			} else {
+				return false
+			}
+		},
         getQueryVariable() {
             var query = window.location.search.substring(1)
             var vars = query.split('&')
@@ -108,6 +152,12 @@ export default {
             this.socket.on('sendChat', (data) => {
                 this.chats = [...JSON.parse(data)[0]]
             })
+        }
+
+        if (this.counterpart === '') {
+            this.renderChat = false
+        } else {
+            this.renderChat = true
         }
 
 

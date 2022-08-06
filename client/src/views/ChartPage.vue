@@ -1,5 +1,5 @@
 <template>
-    <div id='container'>
+    <div id='container' v-if="!isMobile()">
         <div id='BothContainer'>
             <div id='mostViewedContainer'>
                 <h1>Visit</h1>
@@ -27,6 +27,33 @@
             </div>
         </div>
     </div>
+    <!-- Mobile Web View -->
+    <div v-if="isMobile()">
+        <div id='mostViewedContainer' class="mobileMostViewedContainer">
+                <h1 class="mobileHeader">Visit</h1>
+                <div class="mostViewedPages">
+                    <div class='eachRow' v-for="row in sortedMostVisitedTable" :key="row.name">
+                        <p>
+                            <a class="tooltip" v-bind:href="'/comment?major=' + row.name">{{ row.name }}
+                                <span class="tooltiptext">Click to visit</span>
+                            </a>: {{ row.view }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div id='mostCommentedContainer' class="mobileMostCommentedContainer">
+                <h1 class="mobileHeader">Comment</h1>
+                <div class="mostCommentedPages">
+                    <div class='eachRow' v-for="row in sortedMostCommentedTable" :key="row.name">
+                        <p>
+                            <a class="tooltip" v-bind:href="'/comment?major=' + row.name">{{ row.name }}
+                                <span class="tooltiptext">Click to visit</span>
+                            </a>: {{ row.comment }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+    </div>
 </template>
 <script>
 import axios from 'axios'
@@ -47,6 +74,13 @@ export default {
         }
     },
     methods: {
+        isMobile() {
+			if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+				return true
+			} else {
+				return false
+			}
+		},
         sortDescending(list, key) {
             function compare(a, b) {
                 a = a[key]

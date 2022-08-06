@@ -13,7 +13,7 @@
           <a class='username tooltip' :href="'/chat?counterpart=' + comment.username">{{ comment.username }}
             <span class="tooltiptext">Click to chat</span>
           </a>
-          <p class='date'>{{ comment.createdAt.slice(0, 10) }}</p>
+          <p class='date'>{{ comment.createdAt.slice(0, 19).replace('T', ' ') }}</p>
         </div>
         <p class='comment'>{{ comment.comment }}</p>
         <div class='likeAndReplyContainer'>
@@ -110,18 +110,21 @@ export default {
       if (document.getElementById(comment + 'ReplyInput').value === '') {
         alert("You have not input anything yet.")
         return 0
+      } else if (this.username === '') {
+        alert("You're not logged in.")
+      } else {
+        axios({
+          method: "POST",
+          url: "http://localhost:3000/postReply",
+          headers: { 'Content-Type': 'application/json' },
+          data: { comment: comment, username: this.username, page: this.getQueryVariable(), reply: document.getElementById(comment + 'ReplyInput').value }
+        }).then(function (response) {
+          if (response.data.status) {
+            alert(response.data.message)
+            window.location.reload()
+          }
+        })
       }
-      axios({
-        method: "POST",
-        url: "http://localhost:3000/postReply",
-        headers: { 'Content-Type': 'application/json' },
-        data: { comment: comment, username: this.username, page: this.getQueryVariable(), reply: document.getElementById(comment + 'ReplyInput').value }
-      }).then(function (response) {
-        if (response.data.status) {
-          alert(response.data.message)
-          window.location.reload()
-        }
-      })
     },
     closeReplyContainer(comment) {
       document.getElementById(comment + 'ReplyContainer').style.display = 'none'
@@ -170,17 +173,21 @@ export default {
       })
     },
     like(comment) {
-      axios({
-        method: "POST",
-        url: "http://localhost:3000/postLike",
-        headers: { 'Content-Type': 'application/json' },
-        data: { comment: comment, page: this.getQueryVariable(), username: this.username }
-      }).then(function (response) {
-        if (response.data.status) {
-          alert(response.data.message)
-          window.location.reload()
-        }
-      })
+      if (this.username === '') {
+        alert("You're not logged in.")
+      } else {
+        axios({
+          method: "POST",
+          url: "http://localhost:3000/postLike",
+          headers: { 'Content-Type': 'application/json' },
+          data: { comment: comment, page: this.getQueryVariable(), username: this.username }
+        }).then(function (response) {
+          if (response.data.status) {
+            alert(response.data.message)
+            window.location.reload()
+          }
+        })
+      }
     },
     showReplyContainer(comment) {
       document.getElementById(comment + 'ReplyContainer').style.display = 'flex'

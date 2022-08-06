@@ -83,3 +83,20 @@
 .tooltip:hover .tooltiptext {
     visibility: visible;
 }
+
+.mobileMostViewedContainer,
+.mobileMostCommentedContainer {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin: 15px !important;
+    padding: 20px !important;
+}
+
+.mobileHeader {
+    text-align: center;
+}
+
+.mostCommentedPages div,
+.mobileMostViewedContainer div {
+    text-align: center;
+}

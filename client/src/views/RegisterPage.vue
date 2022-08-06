@@ -6,7 +6,8 @@
       <input type="password" name="password" v-model="password" placeholder="Password" required /><br /><br />
       <input type="password" name="repassword" v-model="passwordConfirm" placeholder="Password Confirm"
         required /><br /><br />
-      <button type="submit" value="register">Sign Up</button>
+      <button type="submit" value="register">Sign Up</button><hr>
+      <button class='goBackBtn' type="button" @click="directToSignIn()">Go back</button>
     </form>
   </div>
 </template>
@@ -40,6 +41,9 @@ export default {
           self.$router.push('/login')
         }
       })
+    },
+    directToSignIn() {
+      window.location.href = '/login'
     }
   }
 }
