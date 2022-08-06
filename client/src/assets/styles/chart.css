@@ -89,7 +89,9 @@
     margin-left: 0 !important;
     margin-right: 0 !important;
     margin: 15px !important;
-    padding: 20px !important;
+    margin: auto;
+    /* padding: 10px !important; */
+    min-width: 90% !important;
 }
 
 .mobileHeader {

@@ -1,7 +1,7 @@
 <template>
   <div id="container">
     <form method="post" @submit.prevent="signUp">
-      <h1>COYM</h1>
+      <h1>Sign Up</h1>
       <input type="text" name="username" v-model="username" placeholder="Username" required /><br /><br />
       <input type="password" name="password" v-model="password" placeholder="Password" required /><br /><br />
       <input type="password" name="repassword" v-model="passwordConfirm" placeholder="Password Confirm"

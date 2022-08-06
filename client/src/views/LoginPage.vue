@@ -1,22 +1,23 @@
 <template>
   <div id="container">
     <form method="get" @submit.prevent="signIn">
-      <h1>COYM</h1>
+      <h1>Sign In</h1>
       <input type="text" name="username" v-model="username" placeholder="Enter your ID" required /><br/><br/>
       <input type="password" name="password" v-model="password" placeholder="Enter your Password" required /><br /><br />
       <button type="submit" value="login" class="signInBtn">Sign In</button><hr>
       <button type="button" @click="directToSignUp()">Sign Up</button><hr>
-      <div class="googleLogin">
+      <button class='goBackBtn' type="button" @click="directToHome()">Go back</button>
+      <!-- <div class="googleLogin">
         <GoogleLogin :callback="callback" prompt auto-login/>
-      </div>
+      </div> -->
     </form>
   </div>
 </template>
-<script setup>
+<!-- <script setup>
 const callback = (response) => {
   console.log("Handle the response", response)
 }
-</script>
+</script> -->
 <script>
 import axios from 'axios'
 import { useCookies } from "vue3-cookies"
@@ -54,6 +55,9 @@ export default {
     },
     directToSignUp() {
       window.location.href = '/register'
+    },
+    directToHome() {
+      window.location.href = '/'
     }
   }
 }

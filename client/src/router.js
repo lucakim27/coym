@@ -37,9 +37,9 @@ const routes = [
     component: () => import('@/views/ChartPage'),
   },
   {
-    path: '/settings',
-    name: 'SettingsPage',
-    component: () => import('@/views/SettingsPage'),
+    path: '/setting',
+    name: 'SettingPage',
+    component: () => import('@/views/SettingPage'),
   },
 ]
 

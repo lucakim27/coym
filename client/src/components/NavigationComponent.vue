@@ -1,11 +1,11 @@
 <template>
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" v-on:click="sidebarClose()">&times;</a>
-    <a id='chat' href="/chat">Chat</a>
-    <a id='chart' href="/chart">Chart</a>
     <a id='home' href="/">Home</a>
     <a id='online' href="/online">Online</a>
-    <a id='settings' href="/settings">Settings</a>
+    <a id='chat' href="/chat">Chat</a>
+    <a id='chart' href="/chart">Chart</a>
+    <a id='setting' href="/setting">Setting</a>
     <a id='about'>About us</a>
     <a onclick="window.location.href = 'mailto:nikolaikim27@google.com'">Contact us</a>
   </div>

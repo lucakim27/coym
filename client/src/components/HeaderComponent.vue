@@ -1,11 +1,11 @@
 <template>
     <div id="headerContainer">
         <header>
-            <span v-on:click="sidebarOpen()">&#9776;</span>
+            <span v-if="getTitle !== 'LOGIN' && getTitle !== 'REGISTER'" v-on:click="sidebarOpen()">&#9776;</span>
             <div v-if='!loggedIn' id="userId">
-                <a href="/login" v-if="getTitle !== 'LOGIN' && getTitle !== 'REGISTER'">Sign in</a>
+                <a href="/login" v-if="getTitle !== 'LOGIN' && getTitle !== 'REGISTER'"><svg height='40' width="40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <g> <path fill="none" d="M0 0h24v24H0z"/> <path d="M10 11V8l5 4-5 4v-3H1v-2h9zm-7.542 4h2.124A8.003 8.003 0 0 0 20 12 8 8 0 0 0 4.582 9H2.458C3.732 4.943 7.522 2 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10c-4.478 0-8.268-2.943-9.542-7z"/> </g> </svg></a>
             </div>
-            <h1>{{ getTitle }}</h1>
+            <h1 v-if="getTitle !== 'LOGIN' && getTitle !== 'REGISTER'">{{ getTitle }}</h1>
             <svg v-if='loggedIn' @click="showModal = true" class='profileSVG' xmlns="http://www.w3.org/2000/svg"
                 width="44" height="44" fill="black" viewBox="0 0 16 16">
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />

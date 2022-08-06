@@ -10,16 +10,17 @@
 }
 
 #userId {
-    margin-right: -90px;
+    margin-right: -60px;
     position: absolute;
-    right: 100px;
+    right: 70px;
     background-color: rgb(255, 255, 255);
     font-family: Arial;
-    top: 15px;
-    width: 100px;
+    top: 17px;
+    /* width: 100px; */
     height: 40px;
     cursor: pointer;
     font-size: 30px;
+    overflow-x: hidden;
 }
 
 header {

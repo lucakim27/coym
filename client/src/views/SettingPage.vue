@@ -73,7 +73,7 @@
 import axios from 'axios'
 import { useCookies } from "vue3-cookies"
 export default {
-    name: 'SettingsPage',
+    name: 'SettingPage',
     data() {
         return {
             username: '',
@@ -142,5 +142,5 @@ export default {
 }
 </script>
 <style scoped>
-@import '../assets/styles/settings.css';
+@import '../assets/styles/setting.css';
 </style>

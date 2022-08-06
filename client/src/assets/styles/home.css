@@ -24,6 +24,7 @@
     box-sizing: border-box;
     width: 50%;
     border-radius: 5px;
+    text-align: center;
 }
 
 #options {
