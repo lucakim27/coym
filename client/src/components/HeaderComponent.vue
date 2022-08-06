@@ -40,7 +40,7 @@ export default {
         return {
             loggedIn: false,
             showModal: false,
-            socket: io('localhost:3001', {
+            socket: io('https://coym-api.herokuapp.com:3001', {
                 transports: ['websocket']
             })
         }

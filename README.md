@@ -17,5 +17,7 @@ Comment On Your Major
 - Mysql2 (Relational database)
 
 # Deployment
-- Frontend deployed at [Here](https://coym.netlify.app/) (Netlify)
-- Backend in progress (Heroku)
+[Click here](https://coym.netlify.app/)
+- Frontend (Netlify)
+- Backend (Heroku)
+- Database (clearDB)

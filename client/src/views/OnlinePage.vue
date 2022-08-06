@@ -59,7 +59,7 @@ export default {
     return {
       users: [],
       username: '',
-      socket: io('localhost:3001', {
+      socket: io('https://coym-api.herokuapp.com:3001', {
         transports: ['websocket']
       })
     }
