@@ -39,7 +39,7 @@ export default {
       const self = this
       axios({
         method: "GET",
-        url: "https://coym-api.herokuapp.com/signIn",
+        url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/signIn",
         params: {
           username: this.username,
           password: this.password

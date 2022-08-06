@@ -90,7 +90,7 @@ export default {
         viewPage(page) {
             axios({
                 method: "POST",
-                url: "https://coym-api.herokuapp.com/postCount",
+                url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/postCount",
                 headers: { 'Content-Type': 'application/json' },
                 data: { page: page, type: 'view' }
             })
@@ -113,7 +113,7 @@ export default {
         let self = this
         axios({
             method: "GET",
-            url: "https://coym-api.herokuapp.com/getMajorList"
+            url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getMajorList"
         }).then(function (response) {
             if (response.data.status) {
                 response.data.message.forEach(key => {
