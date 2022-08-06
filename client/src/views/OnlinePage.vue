@@ -13,8 +13,8 @@
           <div class='eachRow' v-if="user.username !== username">
             <div class="row" v-if="!isMobile()">
               <div v-if="user.username !== null">
-                <a v-bind:href="'/chat?counterpart=' + user.username" class="tooltip">{{ user.username }}
-                  <span class="tooltiptext">Click to chat</span>
+                <a class="tooltip">{{ user.username }}
+                  <span class="tooltiptext">Click to see</span>
                 </a>
               </div>
               <div v-if="user.username === null">Anonymous</div>
@@ -26,6 +26,8 @@
               <div v-if="user.major === null">N/A</div>
               <div v-if="user.school !== null">{{ user.school }}</div>
               <div v-if="user.school === null">N/A</div>
+              <div v-if="user.joinedAt !== null">{{ user.joinedAt.slice(0, 10) }}</div>
+              <div v-if="user.joinedAt === null">N/A</div>
             </div>
             <div class="row mobileRow" v-if="isMobile()">
               <div v-if="user.username !== null">
@@ -33,15 +35,17 @@
                   <span class="tooltiptext">Click to chat</span>
                 </a>
               </div>
-              <div v-if="user.username === null">Anonymous</div>
+              <div v-if="user.username === null">Anonymous</div><hr>
               <div v-if="user.gender !== null">{{ user.gender }}</div>
-              <div v-if="user.gender === null">N/A</div>
+              <div v-if="user.gender === null">N/A</div><hr>
               <div v-if="user.country !== null">{{ user.country }}</div>
-              <div v-if="user.country === null">N/A</div>
+              <div v-if="user.country === null">N/A</div><hr>
               <div v-if="user.major !== null">{{ user.major }}</div>
-              <div v-if="user.major === null">N/A</div>
+              <div v-if="user.major === null">N/A</div><hr>
               <div v-if="user.school !== null">{{ user.school }}</div>
-              <div v-if="user.school === null">N/A</div>
+              <div v-if="user.school === null">N/A</div><hr>
+              <div v-if="user.joinedAt !== null">{{ user.joinedAt.slice(0, 10) }}</div>
+              <div v-if="user.joinedAt === null">N/A</div>
             </div>
           </div>
         </div>
@@ -50,8 +54,9 @@
   </div>
 </template>
 <script>
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 import { useCookies } from "vue3-cookies"
+import axios from 'axios'
 
 export default {
   name: 'OnlinePage',
@@ -59,9 +64,9 @@ export default {
     return {
       users: [],
       username: '',
-      socket: io('https://coym-api.herokuapp.com:3001', {
-        transports: ['websocket']
-      })
+      // socket: io('http://localhost:3001', {
+      //   transports: ['websocket']
+      // })
     }
   },
   methods: {
@@ -82,9 +87,9 @@ export default {
 		if (user !== null) {
 			this.username = this.cookies.get("user").username
 		}
-    this.socket.on('updateOnlineUsers', (data) => {
-      this.users = [...JSON.parse(data)[0]]
-    })
+    // this.socket.on('updateOnlineUsers', (data) => {
+    //   this.users = [...JSON.parse(data)[0]]
+    // })
   },
   computed: {
     mobileCheck() {
@@ -94,7 +99,28 @@ export default {
         return 'min-width: 90%';
       }
     }
-  }
+  },
+  beforeMount() {
+        let self = this
+        axios({
+            method: "GET",
+            url: "http://localhost:3000/getAllUsers"
+        }).then(function (response) {
+            if (response.data.status) {              
+              console.log(response.data.data)
+                response.data.data.forEach(key => {
+                    self.users.push({
+                      username: key.username,
+                      gender: key.gender, 
+                      school: key.school, 
+                      major: key.major, 
+                      country: key.country,
+                      joinedAt: key.createdAt
+                    })
+                })
+            }
+        })
+    }
 }
 </script>
 <style scoped>

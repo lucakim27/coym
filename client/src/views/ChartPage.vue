@@ -105,7 +105,7 @@ export default {
         let self = this
         axios({
             method: "GET",
-            url: "https://coym-api.herokuapp.com/getCount",
+            url: "http://localhost:3000/getCount",
             params: {}
         }).then(function (response) {
             if (response.data.status) {

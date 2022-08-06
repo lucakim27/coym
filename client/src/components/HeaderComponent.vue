@@ -28,7 +28,7 @@
 <script>
 import ModalComponent from './ModalComponent.vue'
 import { useCookies } from "vue3-cookies"
-import io from 'socket.io-client'
+// import io from 'socket.io-client'
 import axios from 'axios'
 
 export default {
@@ -40,9 +40,9 @@ export default {
         return {
             loggedIn: false,
             showModal: false,
-            socket: io('https://coym-api.herokuapp.com:3001', {
-                transports: ['websocket']
-            })
+            // socket: io('http://localhost:3001', {
+            //     transports: ['websocket']
+            // })
         }
     },
     setup() {
@@ -54,7 +54,7 @@ export default {
         if (self.cookies.get('user') !== null) {
             axios({
                 method: "GET",
-                url: "https://coym-api.herokuapp.com/cookieValidation",
+                url: "http://localhost:3000/cookieValidation",
                 params: {
                     username: self.cookies.get("user").username,
                     password: self.cookies.get("user").password
@@ -62,7 +62,7 @@ export default {
             }).then(function (response) {
                 if (response.data.status) {
                     self.loggedIn = response.data.status
-                    self.socket.emit('join', response.data.username)
+                    // self.socket.emit('join', response.data.username)
                 }
             })
         }

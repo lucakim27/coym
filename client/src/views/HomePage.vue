@@ -1,8 +1,8 @@
 <template>
     <div id='container'>
         <img
-            src='https://img.freepik.com/free-vector/group-different-occupations-standing-white-background_218660-287.jpg?w=2000'>
-        <div class="Input">
+            :style='mobileImg' :src='imageSrc'>
+        <div class="Input" :style="mobileInput">
             <input v-if="isMobile()" class="Input-text mobileInput" id="input" placeholder="Major, e.g. Computer Science" type="search"
                 @input="searchChangeFunc($event)" />
             <input v-if="!isMobile()" class="Input-text" id="input" placeholder="Major, e.g. Computer Science" type="search"
@@ -25,7 +25,7 @@
             </table>
         </div>
 
-        <div class='descriptionContainer'>
+        <div class='descriptionContainer' :style="mobileDescription">
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-house"
                     viewBox="0 0 16 16">
@@ -90,7 +90,7 @@ export default {
         viewPage(page) {
             axios({
                 method: "POST",
-                url: "https://coym-api.herokuapp.com/postCount",
+                url: "http://localhost:3000/postCount",
                 headers: { 'Content-Type': 'application/json' },
                 data: { page: page, type: 'view' }
             })
@@ -113,7 +113,7 @@ export default {
         let self = this
         axios({
             method: "GET",
-            url: "https://coym-api.herokuapp.com/getMajorList"
+            url: "http://localhost:3000/getMajorList"
         }).then(function (response) {
             if (response.data.status) {
                 response.data.message.forEach(key => {
@@ -121,6 +121,36 @@ export default {
                 })
             }
         })
+    },
+    computed: {
+        mobileImg() {
+            if (this.isMobile()) {
+                return 'height: 400px !important;'
+            } else {
+                return ''
+            }
+        },
+        imageSrc() {
+            if (this.isMobile()) {
+                return 'https://images.theconversation.com/files/222649/original/file-20180611-191974-12eqqqr.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=926&fit=clip'
+            } else {
+                return 'https://img.freepik.com/free-vector/group-different-occupations-standing-white-background_218660-287.jpg?w=2000'
+            }
+        },
+        mobileInput() {
+            if (this.isMobile()) {
+                return 'top: 65% !important;'
+            } else {
+                return ''
+            }
+        },
+        mobileDescription() {
+            if (this.isMobile()) {
+                return 'top: 70% !important;'
+            } else {
+                return ''
+            }
+        }
     }
 }
 </script>

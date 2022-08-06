@@ -223,3 +223,20 @@ export const updateUserDetails = function (connection: any, res: any, req: any) 
     })
 
 }
+
+export const getAllUsers = function (connection: any, res: any, req: any) {
+
+    const getAllUsers = `SELECT * FROM accounts`
+
+    connection.connect(function (err: any) {
+        if (err) throw err
+        connection.query(getAllUsers, function (err: any, result: any, fields: any) {
+            if (err) throw err
+            res.send({
+                status: true,
+                data: result
+            })
+        })
+    })
+
+}

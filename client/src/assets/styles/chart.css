@@ -46,6 +46,7 @@
 .eachRow {
     background: rgb(89, 95, 98);
     border-radius: 10px;
+    margin: 10px;
 }
 
 .eachRow p {

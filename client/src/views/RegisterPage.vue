@@ -29,7 +29,7 @@ export default {
       const self = this
       axios({
         method: "POST",
-        url: "https://coym-api.herokuapp.com/signUp",
+        url: "http://localhost:3000/signUp",
         headers: { 'Content-Type': 'application/json' },
         data: { username: this.username, password: this.password, passwordConfirm: this.passwordConfirm }
       }).then(function (response) {

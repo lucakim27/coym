@@ -10,8 +10,8 @@
       <div v-for="comment in getComment" :key="comment.comment" class='eachCommentDiv'
         :id="comment.comment + 'Container'">
         <div class="firstRow">
-          <a class='username tooltip' :href="'/chat?counterpart=' + comment.username">{{ comment.username }}
-            <span class="tooltiptext">Click to chat</span>
+          <a class='username tooltip'>{{ comment.username }}
+            <span class="tooltiptext">Click to see</span>
           </a>
           <p class='date'>{{ comment.createdAt.slice(0, 19).replace('T', ' ') }}</p>
         </div>
@@ -72,7 +72,7 @@ export default {
     }
     axios({
       method: "GET",
-      url: "https://coym-api.herokuapp.com/getComment",
+      url: "http://localhost:3000/getComment",
       params: {
         page: this.getQueryVariable()
       }
@@ -83,7 +83,7 @@ export default {
     })
     axios({
       method: "GET",
-      url: "https://coym-api.herokuapp.com/getLike",
+      url: "http://localhost:3000/getLike",
       params: {
         page: this.getQueryVariable()
       }
@@ -95,7 +95,7 @@ export default {
     })
     axios({
       method: "GET",
-      url: "https://coym-api.herokuapp.com/getReply",
+      url: "http://localhost:3000/getReply",
       params: {
         page: this.getQueryVariable()
       }
@@ -115,7 +115,7 @@ export default {
       } else {
         axios({
           method: "POST",
-          url: "https://coym-api.herokuapp.com/postReply",
+          url: "http://localhost:3000/postReply",
           headers: { 'Content-Type': 'application/json' },
           data: { comment: comment, username: this.username, page: this.getQueryVariable(), reply: document.getElementById(comment + 'ReplyInput').value }
         }).then(function (response) {
@@ -154,7 +154,7 @@ export default {
       }
       axios({
         method: "POST",
-        url: "https://coym-api.herokuapp.com/postComment",
+        url: "http://localhost:3000/postComment",
         headers: { 'Content-Type': 'application/json' },
         data: { comment: this.commentInput, username: this.username, page: this.getQueryVariable() }
       }).then(function (response) {
@@ -162,7 +162,7 @@ export default {
           alert("You have successfully commented.")
           axios({
             method: "POST",
-            url: "https://coym-api.herokuapp.com/postCount",
+            url: "http://localhost:3000/postCount",
             headers: { 'Content-Type': 'application/json' },
             data: { page: response.data.page, type: 'comment' }
           })
@@ -178,7 +178,7 @@ export default {
       } else {
         axios({
           method: "POST",
-          url: "https://coym-api.herokuapp.com/postLike",
+          url: "http://localhost:3000/postLike",
           headers: { 'Content-Type': 'application/json' },
           data: { comment: comment, page: this.getQueryVariable(), username: this.username }
         }).then(function (response) {

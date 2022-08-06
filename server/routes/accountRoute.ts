@@ -1,4 +1,4 @@
-import { authSignUp, authSignIn, cookieValidation, getUserDetails, updateUserDetails } from '../models/accountModel'
+import { authSignUp, authSignIn, cookieValidation, getUserDetails, updateUserDetails, getAllUsers } from '../models/accountModel'
 import { connection } from '../configs/db'
 import express from 'express'
 export const router = express.Router()
@@ -22,4 +22,8 @@ router.get('/getUserDetails', function (req: any, res: any) {
 
 router.post('/updateUserDetails', function (req: any, res: any) {
   updateUserDetails(connection, res, req)
+})
+
+router.get('/getAllUsers', function (req: any, res: any) {
+  getAllUsers(connection, res, req)
 })

@@ -26,6 +26,8 @@
   justify-content: center;
   padding: 10px;
   height: 67vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .container {
