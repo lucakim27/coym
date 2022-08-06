@@ -83,7 +83,7 @@ export default {
             counterpart: '',
             users: [],
             chats: [],
-            socket: io('https://coym-api.herokuapp.com:3001', {
+            socket: io('http://localhost:3001', {
                 transports: ['websocket']
             }),
             renderChat: false
