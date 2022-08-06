@@ -98,7 +98,7 @@ export default {
         if (this.username !== '') {
             axios({
                 method: "GET",
-                url: "http://localhost:3000/getUserDetails",
+                url: "https://coym-api.herokuapp.com/getUserDetails",
                 params: { username: this.username }
             }).then(function (response) {
                 self.country = response.data.userDetails.country === null ? '' : response.data.userDetails.country
@@ -126,7 +126,7 @@ export default {
             } else {
                 axios({
                     method: "POST",
-                    url: "http://localhost:3000/updateUserDetails",
+                    url: "https://coym-api.herokuapp.com/updateUserDetails",
                     headers: { 'Content-Type': 'application/json' },
                     data: { username: this.username, country: this.country, major: this.major, school: this.school, gender: this.gender, password: this.password }
                 }).then(function (response) {

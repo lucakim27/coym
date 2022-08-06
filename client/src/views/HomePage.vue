@@ -90,7 +90,7 @@ export default {
         viewPage(page) {
             axios({
                 method: "POST",
-                url: "http://localhost:3000/postCount",
+                url: "https://coym-api.herokuapp.com/postCount",
                 headers: { 'Content-Type': 'application/json' },
                 data: { page: page, type: 'view' }
             })
@@ -113,7 +113,7 @@ export default {
         let self = this
         axios({
             method: "GET",
-            url: "http://localhost:3000/getMajorList"
+            url: "https://coym-api.herokuapp.com/getMajorList"
         }).then(function (response) {
             if (response.data.status) {
                 response.data.message.forEach(key => {

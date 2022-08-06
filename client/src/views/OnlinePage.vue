@@ -104,7 +104,7 @@ export default {
         let self = this
         axios({
             method: "GET",
-            url: "http://localhost:3000/getAllUsers"
+            url: "https://coym-api.herokuapp.com/getAllUsers"
         }).then(function (response) {
             if (response.data.status) {              
               console.log(response.data.data)

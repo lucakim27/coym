@@ -72,7 +72,7 @@
     </div>
 </template>
 <script>
-import io from 'socket.io-client'
+// import io from 'socket.io-client'
 import { useCookies } from "vue3-cookies"
 
 export default {
@@ -82,11 +82,11 @@ export default {
             message: '',
             counterpart: '',
             users: [],
-            chats: [],
-            socket: io('http://localhost:3001', {
-                transports: ['websocket']
-            }),
-            renderChat: false
+            chats: []
+            // socket: io('http://localhost:3001', {
+            //     transports: ['websocket']
+            // }),
+            // renderChat: false
         }
     },
     setup() {
@@ -145,13 +145,13 @@ export default {
                 this.socket.emit('chatUserSelected', this.username, this.counterpart)
             }
 
-            this.socket.on('sendChatUser', (data) => {
-                this.users = [...JSON.parse(data)]
-            })
+            // this.socket.on('sendChatUser', (data) => {
+            //     this.users = [...JSON.parse(data)]
+            // })
 
-            this.socket.on('sendChat', (data) => {
-                this.chats = [...JSON.parse(data)[0]]
-            })
+            // this.socket.on('sendChat', (data) => {
+            //     this.chats = [...JSON.parse(data)[0]]
+            // })
         }
 
         if (this.counterpart === '') {

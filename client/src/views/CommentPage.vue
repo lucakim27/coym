@@ -72,7 +72,7 @@ export default {
     }
     axios({
       method: "GET",
-      url: "http://localhost:3000/getComment",
+      url: "https://coym-api.herokuapp.com/getComment",
       params: {
         page: this.getQueryVariable()
       }
@@ -83,7 +83,7 @@ export default {
     })
     axios({
       method: "GET",
-      url: "http://localhost:3000/getLike",
+      url: "https://coym-api.herokuapp.com/getLike",
       params: {
         page: this.getQueryVariable()
       }
@@ -95,7 +95,7 @@ export default {
     })
     axios({
       method: "GET",
-      url: "http://localhost:3000/getReply",
+      url: "https://coym-api.herokuapp.com/getReply",
       params: {
         page: this.getQueryVariable()
       }
@@ -115,7 +115,7 @@ export default {
       } else {
         axios({
           method: "POST",
-          url: "http://localhost:3000/postReply",
+          url: "https://coym-api.herokuapp.com/postReply",
           headers: { 'Content-Type': 'application/json' },
           data: { comment: comment, username: this.username, page: this.getQueryVariable(), reply: document.getElementById(comment + 'ReplyInput').value }
         }).then(function (response) {
@@ -154,7 +154,7 @@ export default {
       }
       axios({
         method: "POST",
-        url: "http://localhost:3000/postComment",
+        url: "https://coym-api.herokuapp.com/postComment",
         headers: { 'Content-Type': 'application/json' },
         data: { comment: this.commentInput, username: this.username, page: this.getQueryVariable() }
       }).then(function (response) {
@@ -162,7 +162,7 @@ export default {
           alert("You have successfully commented.")
           axios({
             method: "POST",
-            url: "http://localhost:3000/postCount",
+            url: "https://coym-api.herokuapp.com/postCount",
             headers: { 'Content-Type': 'application/json' },
             data: { page: response.data.page, type: 'comment' }
           })
@@ -178,7 +178,7 @@ export default {
       } else {
         axios({
           method: "POST",
-          url: "http://localhost:3000/postLike",
+          url: "https://coym-api.herokuapp.com/postLike",
           headers: { 'Content-Type': 'application/json' },
           data: { comment: comment, page: this.getQueryVariable(), username: this.username }
         }).then(function (response) {

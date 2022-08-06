@@ -10,14 +10,14 @@ import { createChatTable, createChatUserTable } from '../models/chatModel'
 
 // create 'coym' database before you run
 export const createTables = function () {
-    createMajorsTable(connection)
-    createAccountsTable(connection)
-    createCountsTable(connection)
-    createCommentsTable(connection)
-    createLikesTable(connection)
-    dropOnlineTable(connection)
-    createOnlineTable(connection)
-    createReplyTable(connection)
-    createChatUserTable(connection)
-    createChatTable(connection)
+    // createMajorsTable(connection)
+    // createAccountsTable(connection)
+    // createCountsTable(connection)
+    // createCommentsTable(connection)
+    // createLikesTable(connection)
+    // dropOnlineTable(connection)
+    // createOnlineTable(connection)
+    // createReplyTable(connection)
+    // createChatUserTable(connection)
+    // createChatTable(connection)
 }
