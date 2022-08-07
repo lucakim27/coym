@@ -118,6 +118,7 @@ export default {
         axios({
             method: "GET",
             url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getAllUsers"
+            // url: "http://localhost:3000/getAllUsers"
         }).then(function (response) {
             if (response.data.status) {              
               console.log(response.data.data)

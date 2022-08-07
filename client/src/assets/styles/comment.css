@@ -99,6 +99,8 @@
   border-radius: 10px;
   width: auto;
   cursor: pointer;
+  padding: 10px;
+  border-color: rgb(146, 156, 161);
 }
 
 .replyContainer,

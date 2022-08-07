@@ -91,6 +91,7 @@ export default {
             axios({
                 method: "POST",
                 url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/postCount",
+                // url: "http://localhost:3000/postCount",
                 headers: { 'Content-Type': 'application/json' },
                 data: { page: page, type: 'view' }
             })
@@ -114,6 +115,7 @@ export default {
         axios({
             method: "GET",
             url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getMajorList"
+            // url: "http://localhost:3000/getMajorList",
         }).then(function (response) {
             if (response.data.status) {
                 response.data.message.forEach(key => {

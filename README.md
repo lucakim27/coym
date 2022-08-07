@@ -3,18 +3,17 @@ Comment On Your Major
 
 # Features
 - Sign in, out and up
+- Comment on the major
+- like the comment
+- reply to the specific comment
 - Update user's details
-- Charts for the popularity
-- Chat with the online users
-- View online users with details
-- Comment, reply and like on the major
+- Popularity analysis
+- View signed up users with details
 
 # Frameworks/Libraries & Database
-- Vue 3 (Front-end Framework)
-- Node.js Express (Typescript) (Back-end Framework)
-- Axios (Http request library)
-- Socket.io (Websocket library)
-- Mysql2 (Relational database)
+- Vue 3 (FE Framework)
+- Node.js Express (Typescript) (BE Framework)
+- Mysql2 (DB)
 
 # Deployment
 - Frontend (Netlify)

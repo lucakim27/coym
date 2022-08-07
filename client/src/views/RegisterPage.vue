@@ -30,6 +30,7 @@ export default {
       axios({
         method: "POST",
         url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/signUp",
+        // url: "http://localhost:3000/signUp",
         headers: { 'Content-Type': 'application/json' },
         data: { username: this.username, password: this.password, passwordConfirm: this.passwordConfirm }
       }).then(function (response) {
