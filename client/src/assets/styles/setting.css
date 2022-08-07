@@ -1,4 +1,4 @@
-.backgroundContainer {
+/* .backgroundContainer {
     overflow-y: auto;
     height: 83vh;
     min-width: 80%;
@@ -6,71 +6,74 @@
     padding: 10px;
     border-radius: 10px;
     background: rgb(146, 156, 161);
-}
-
-.mobileContainer {
-    overflow-y: hidden;
-    height: auto;
-    min-width: 70% !important;
-    padding: 20px;
-    margin: 10px;
-}
+} */
 
 .mainContainer {
-    display: flex;
-    padding: 10px;
-    justify-content: center;
+    margin-top: 20px;
 }
 
-.eachContainer input {
-    width: 40%;
-    margin: 10px;
-    border-radius: 10px;
-    padding: 10px;
-}
-
-.btnContainer button {
-    width: 10%;
-    padding: 12px 20px;
-    margin: 8px;
-    display: inline-block;
-    border-radius: 10px;
-    background: rgba(0, 0, 0, 0.478);
-    color: white;
-}
-
-.twoContainer {
-    margin-left: 1%;
-    justify-content: center;
-    display: flex;
-}
-
-.eachContainer {
-    min-width: 50%;
-    align-items: center;
-}
 
 .eachContainer input {
     width: 90%;
+    margin: 10px;
+    border-radius: 20px;
+    padding: 20px;
+    font-family: fantasy;
+}
+
+.btnContainer button {
+    display: inline-block;
+    border-radius: 20px;
+    background: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    font-family: fantasy;
+    width: 60%;
+    margin: 10px;
+    padding: 10px;
+}
+
+.btnContainer button:hover {
+    color: rgb(116, 116, 116);
+    cursor: pointer;
+}
+
+.twoContainer {
+    justify-content: center;
+    display: flex;
+    margin: 10px;
+}
+
+.eachContainer {
+    min-width: 45%;
+    align-items: center;
+    background: rgb(146, 156, 161);
+    padding: 10px;
+    margin: 10px;
+    border-radius: 20px;
 }
 
 .eachContainer h3 {
     margin-left: 20px;
     color: white;
+    font-family: fantasy;
 }
 
 .btnContainer {
     justify-content: center;
     display: flex;
-    margin: 10px;
-    padding: 10px;
-    margin-top: 100px;
+    margin: 20px;
+    padding: 20px;
 }
 
-.btnContainer button {
-    width: 50%;
+.mobileContainer {
+    overflow: hidden;
+    /* height: auto; */
+    min-width: 100% !important;
+    /* padding: 20px; */
+    /* margin: 10px; */
+    margin-bottom:30px;
 }
 
 .mobileContainer div input {
-    width: 85% !important;
+    width: 80% !important;
 }

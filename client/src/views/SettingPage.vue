@@ -1,6 +1,5 @@
 <template>
     <div class='mainContainer' v-if="!isMobile()">
-        <div class='backgroundContainer'>
             <div class="twoContainer">
                 <div class="eachContainer">
                     <h3>School</h3>
@@ -23,18 +22,17 @@
             </div>
             <div class="twoContainer">
                 <div class="eachContainer">
-                    <h3>Password</h3>
+                    <h3>Password (*)</h3>
                     <input type="password" placeholder="Your password..." v-model="password">
                 </div>
                 <div class="eachContainer">
-                    <h3>Password Confirm</h3>
+                    <h3>Password Confirm (*)</h3>
                     <input type="password" placeholder="Your password confirm..." v-model="passwordConfirm">
                 </div>
             </div>
             <div class="btnContainer">
                 <button @click="updateUserDetails">Update</button>
             </div>
-        </div>
     </div>
     <div v-if="isMobile()">
         <div class='backgroundContainer mobileContainer'>
@@ -55,11 +53,11 @@
                 <input type="text" placeholder="Your country..." v-model="country">
             </div>
             <div class="eachContainer">
-                <h3>Password</h3>
+                <h3>Password (*)</h3>
                 <input type="password" placeholder="Your password..." v-model="password">
             </div>
             <div class="eachContainer">
-                <h3>Password Confirm</h3>
+                <h3>Password Confirm (*)</h3>
                 <input type="password" placeholder="Your password confirm..." v-model="passwordConfirm">
             </div>
             <div class="btnContainer">

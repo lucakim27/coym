@@ -2,8 +2,9 @@
   height: 83vh;
   flex: 0;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 20px;
   background: rgb(146, 156, 161);
+  width: 100%;
 }
 
 .onlineHead {
@@ -11,6 +12,16 @@
   justify-content: center;
   padding: 10px;
   margin-left: 2%;
+}
+
+.threeContainer {
+  display: flex;
+}
+
+.threeContainer div {
+  margin-left: 25px;
+  margin-right: 25px;
+  padding: 10px;
 }
 
 .onlineHead div {
@@ -30,6 +41,10 @@
   overflow-x: hidden;
 }
 
+.mobileBody {
+  height: 63vh !important;
+}
+
 .container {
   display: flex;
   padding: 10px;
@@ -42,7 +57,7 @@
   justify-content: center;
   margin: 20px;
   background: rgb(89, 95, 98);
-  border-radius: 10px;
+  border-radius: 20px;
 }
 
 .row {

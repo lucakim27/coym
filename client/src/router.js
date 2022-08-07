@@ -22,9 +22,9 @@ const routes = [
     component: () => import('@/views/CommentPage'),
   },
   {
-    path: '/online',
-    name: 'OnlinePage',
-    component: () => import('@/views/OnlinePage'),
+    path: '/users',
+    name: 'UsersPage',
+    component: () => import('@/views/UsersPage'),
   },
   // {
   //   path: '/chat',
@@ -32,9 +32,9 @@ const routes = [
   //   component: () => import('@/views/ChatPage'),
   // },
   {
-    path: '/chart',
-    name: 'ChartPage',
-    component: () => import('@/views/ChartPage'),
+    path: '/analysis',
+    name: 'AnalysisPage',
+    component: () => import('@/views/AnalysisPage'),
   },
   {
     path: '/setting',

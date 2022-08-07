@@ -13,7 +13,7 @@
     flex: 0;
     padding: 1%;
     margin-right: 2%;
-    border-radius: 10px;
+    border-radius: 20px;
     background: rgb(146, 156, 161);
 }
 
@@ -26,6 +26,7 @@
 #mostViewedContainer h1,
 #mostCommentedContainer h1 {
     color: white;
+    font-family: fantasy;
 }
 
 #mostCommentedContainer {
@@ -33,7 +34,7 @@
     flex: 0;
     padding: 1%;
     margin-left: 2%;
-    border-radius: 10px;
+    border-radius: 20px;
     background: rgb(146, 156, 161);
 }
 
@@ -45,7 +46,7 @@
 
 .eachRow {
     background: rgb(89, 95, 98);
-    border-radius: 10px;
+    border-radius: 20px;
     margin: 10px;
 }
 
