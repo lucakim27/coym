@@ -20,7 +20,7 @@ export const createCommentsTable = function (connection: any) {
         ) 
     `
 
-    connection.connect(function (err: any) {
+    connection.getConnection(function (err: any) {
         if (err) throw err
         connection.query(commentsTableDuplicationQuery, function (err: any, result: any) {
             if (err) throw err
@@ -42,7 +42,7 @@ export const getComment = function (connection: any, res: any, req: any) {
         WHERE m.name = '${req.query.page}'
     `
     
-    connection.connect(function (err: any) {
+    connection.getConnection(function (err: any) {
         if (err) throw err
         connection.query(selectCommentsTableQuery, function (err: any, result: any, fields: any) {
             if (err) throw err
@@ -74,7 +74,7 @@ export const postComment = function (connection: any, res: any, req: any) {
         )
     `
 
-    connection.connect(function (err: any) {
+    connection.getConnection(function (err: any) {
         if (err) throw err
         connection.query(selectCommentsTableQuery, function (err: any, result: any) {
             if (err) throw err

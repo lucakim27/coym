@@ -19,7 +19,7 @@ export const createCountsTable = function (connection: any) {
         ) 
     `
 
-    connection.connect(function (err: any) {
+    connection.getConnection(function (err: any) {
         if (err) throw err
         connection.query(countsTableDuplicationQuery, function (err: any, result: any) {
             if (err) throw err
@@ -54,7 +54,7 @@ export const postCount = function (connection: any, res: any, req: any) {
         WHERE majorID = (SELECT id FROM majors WHERE name = '${req.body.page}')
     `
 
-    connection.connect(function (err: any) {
+    connection.getConnection(function (err: any) {
         if (err) throw err
         connection.query(insertCountsQuery, function (err: any, result: any) {
             if (err) throw err
@@ -72,7 +72,7 @@ export const getCount = function (connection: any, res: any, req: any) {
         inner join counts c on m.id = c.majorID
     `
 
-    connection.connect(function (err: any) {
+    connection.getConnection(function (err: any) {
         if (err) throw err
         connection.query(selectCountsQuery, function (err: any, result: any, fields: any) {
             if (err) throw err

@@ -321,7 +321,7 @@ export const createMajorsTable = function (connection: any) {
         `
     }
 
-    connection.connect(function (err: any) {
+    connection.getConnection(function (err: any) {
         if (err) throw err
         connection.query(majorsTableDuplicationQuery, function (err: any, result: any) {
             if (err) throw err
@@ -346,7 +346,7 @@ export const getMajorList = function (connection: any, res: any, req: any) {
         FROM majors
     `
 
-    connection.connect(function (err: any) {
+    connection.getConnection(function (err: any) {
         if (err) throw err
         connection.query(selectMajorsQuery, function (err: any, result: any, fields: any) {
             if (err) throw err

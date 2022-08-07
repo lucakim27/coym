@@ -19,7 +19,7 @@ export const createLikesTable = function (connection: any) {
         ) 
     `
 
-    connection.connect(function (err: any) {
+    connection.getConnection(function (err: any) {
         if (err) throw err
         connection.query(likesTableDuplicationQuery, function (err: any, result: any) {
             if (err) throw err
@@ -59,7 +59,7 @@ export const postLike = function (connection: any, res: any, req: any) {
     `
 
     // how do i check if the like is duplicated?
-    connection.connect(function (err: any) {
+    connection.getConnection(function (err: any) {
         if (err) throw err
         connection.query(selectLikesQuery, function (err: any, result: any) {
             if (err) throw err
@@ -99,7 +99,7 @@ export const getLike = function(connection: any, res: any, req: any) {
         WHERE m.name = '${req.query.page}'
     `
 
-    connection.connect(function (err: any) {
+    connection.getConnection(function (err: any) {
         if (err) throw err
         connection.query(selectLikesQuery, function (err: any, result: any, fields: any) {
             if (err) throw err

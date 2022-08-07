@@ -22,7 +22,7 @@ export const createReplyTable = function (connection: any) {
         )
     `
 
-    connection.connect(function (err: any) {
+    connection.getConnection(function (err: any) {
         if (err) throw err
         connection.query(replyTableDuplicationQuery, function (err: any, result: any) {
             if (err) throw err
@@ -44,7 +44,7 @@ export const getReply = function (connection: any, res: any, req: any) {
         WHERE m.name = '${req.query.page}'
     `
 
-    connection.connect(function (err: any) {
+    connection.getConnection(function (err: any) {
         if (err) throw err
         connection.query(selectReplyQuery, function (err: any, result: any, fields: any) {
             if (err) throw err
@@ -74,7 +74,7 @@ export const postReply = function (connection: any, res: any, req: any) {
         )
     `
 
-    connection.connect(function (err: any) {
+    connection.getConnection(function (err: any) {
         if (err) throw err
         connection.query(insertReplyQuery, function (err: any, result: any) {
             if (err) throw err

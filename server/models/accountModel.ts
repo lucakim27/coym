@@ -21,7 +21,7 @@ export const createAccountsTable = function (connection: any) {
         )
     `
 
-    connection.connect(function (err: any) {
+    connection.getConnection(function (err: any) {
         if (err) throw err
         connection.query(tableDuplicationQuery, function (err: any, result: any) {
             if (err) throw err
@@ -50,7 +50,7 @@ export const addAccount = function (connection: any, username: any, password: an
         `
     }
 
-    connection.connect(function (err: any) {
+    connection.getConnection(function (err: any) {
         if (err) throw err
         connection.query(insertAccountsQuery(username, password), function (err: any, result: any) {
             if (err) throw err
@@ -76,7 +76,7 @@ export const authSignUp = function (connection: any, res: any, req: any) {
             message: 'It is either too short or doesnt match.'
         })
     } else {
-        connection.connect(function (err: any) {
+        connection.getConnection(function (err: any) {
             if (err) throw err
             connection.query(selectAccountsQuery, function (err: any, result: any, fields: any) {
                 if (err) throw err
@@ -114,7 +114,7 @@ export const authSignIn = function (connection: any, res: any, req: any) {
 
     const selectAccountsQuery = "SELECT * FROM accounts"
 
-    connection.connect(function (err: any) {
+    connection.getConnection(function (err: any) {
         if (err) throw err
         connection.query(selectAccountsQuery, function (err: any, result: any, fields: any) {
             if (err) throw err
@@ -143,7 +143,7 @@ export const cookieValidation = function (connection: any, res: any, req: any) {
 
     const selectAccountsQuery = "SELECT * FROM accounts"
 
-    connection.connect(function (err: any) {
+    connection.getConnection(function (err: any) {
         if (err) throw err
         connection.query(selectAccountsQuery, function (err: any, result: any, fields: any) {
             if (err) throw err
@@ -173,7 +173,7 @@ export const getUserDetails = function (connection: any, res: any, req: any) {
         WHERE username = '${req.query.username}'
     `
 
-    connection.connect(function (err: any) {
+    connection.getConnection(function (err: any) {
         if (err) throw err
         connection.query(selectAccountsQuery, function (err: any, result: any, fields: any) {
             if (err) throw err
@@ -204,7 +204,7 @@ export const updateUserDetails = function (connection: any, res: any, req: any) 
         WHERE username = "${req.body.username}" AND password = "${req.body.password}"
     `
 
-    connection.connect(function (err: any) {
+    connection.getConnection(function (err: any) {
         if (err) throw err
         connection.query(updateAllDetailsQuery, function (err: any, result: any, fields: any) {
             if (err) throw err
@@ -228,7 +228,7 @@ export const getAllUsers = function (connection: any, res: any, req: any) {
 
     const getAllUsers = `SELECT * FROM accounts`
 
-    connection.connect(function (err: any) {
+    connection.getConnection(function (err: any) {
         if (err) throw err
         connection.query(getAllUsers, function (err: any, result: any, fields: any) {
             if (err) throw err
