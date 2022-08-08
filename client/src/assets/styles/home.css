@@ -5,12 +5,12 @@
 } */
 
 .Input {
-    position: absolute;
-    top: 85%;
-    margin-left: auto;
+    /* position: absolute;
+    top: 85%; */
+    /* margin-left: auto;
     margin-right: auto;
     left: 0;
-    right: 0;
+    right: 0; */
     text-align: center;
 }
 
@@ -18,18 +18,19 @@
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
+    /* margin-top: 20px; */
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 20px;
     box-sizing: border-box;
     width: 50%;
     /* border-radius: 5px; */
-    text-align: center;
+    /* text-align: center; */
 }
 
 #options {
-    position: absolute;
-    top: 90%;
+    /* position: absolute;
+    top: 90%; */
     margin-left: auto;
     margin-right: auto;
     left: 0;
@@ -43,6 +44,7 @@
     border-radius: 20px;
     border: 2px solid;
     background-color: white;
+    border-color: grey;
 }
 
 .mobileOptions {
@@ -54,12 +56,12 @@
 }
 
 .descriptionContainer {
-    position: absolute;
-    top: 90%;
-    margin-left: auto;
+    /* position: absolute;
+    top: 90%; */
+    /* margin-left: auto;
     margin-right: auto;
     left: 0;
-    right: 0;
+    right: 0; */
     text-align: center;
     margin-bottom: 35px;
     padding: 50px;
@@ -70,18 +72,13 @@
 }
 
 img {
-    width: 100vw;
-    height: 70vh;
+    width: 97%;
+    height: 70%;
     filter: brightness(70%);
     z-index: -10000;
-    margin-top: 100px;
-    position: absolute;
-    top: 0%;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    text-align: center;
+    border-style: solid;
+    border-radius: 20px;
+    border-color: white;
 }
 
 #container {
@@ -95,7 +92,7 @@ table a {
 }
 
 table a:hover {
-    color: rgb(98, 203, 255);
+    color: rgb(0, 136, 255);
 }
 
 b {

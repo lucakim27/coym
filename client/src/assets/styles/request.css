@@ -2,9 +2,8 @@
     margin-top: 20px;
 }
 
-
 .eachContainer input {
-    width: 80%;
+    width: 100%;
     margin: 10px;
     border-radius: 20px;
     padding: 20px;
@@ -20,10 +19,11 @@
     width: 60%;
     margin: 10px;
     padding: 10px;
+    border-color: black;
 }
 
 .btnContainer button:hover {
-    color: rgb(116, 116, 116);
+    color: rgb(0, 136, 255);
     cursor: pointer;
 }
 
@@ -57,21 +57,19 @@
 
 .mobileContainer {
     overflow: hidden;
-    /* height: auto; */
     min-width: 100% !important;
-    /* padding: 20px; */
-    /* margin: 10px; */
     margin-bottom:30px;
 }
 
-.mobileContainer div input {
-    width: 80% !important;
-}
-
 select {
-    width: auto;
+    width: 100%;
     margin: 10px;
     border-radius: 20px;
     padding: 20px;
     font-family: fantasy;
+}
+
+.centerChild {
+    display: flex; 
+    justify-content:center;
 }

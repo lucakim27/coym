@@ -8,7 +8,6 @@
     <a id='analysis' href="/analysis">Analysis</a>
     <!-- <a id='setting' href="/setting">Setting</a> -->
     <a onclick="window.location.href = 'mailto:nikolaikim27@gmail.com'">Contact us</a>
-    <p class='copyright'><a href="https://github.com/lucakim27/Comment-On-Your-Major">&copy; - COYM</a></p>
   </div>
 </template>
 <script>

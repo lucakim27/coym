@@ -2,14 +2,18 @@
   <div class='mainContainer'>
     <div class="eachContainer">
       <h3>Type</h3>
-      <select @change="onChange">
-        <option value="Add major">Add major</option>
-        <option value="Report user">Report user</option>
-      </select>
+      <div class="centerChild">
+        <select @change="onChange">
+          <option value="Add major">Add major</option>
+          <option value="Report user">Report user</option>
+        </select>
+      </div>
     </div>
     <div class="eachContainer">
       <h3>{{ inputLabel }}</h3>
-      <input type="text" placeholder="Type here..." v-model="content">
+      <div class="centerChild">
+        <input type="text" placeholder="Type here..." v-model="content">
+      </div>
     </div>
     <div class="btnContainer">
       <button @click="request">Request</button>

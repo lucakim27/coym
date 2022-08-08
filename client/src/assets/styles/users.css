@@ -1,7 +1,7 @@
 .onlineDiv {
   height: 83vh;
   flex: 0;
-  padding: 10px;
+  /* padding: 10px; */
   border-radius: 20px;
   background: rgb(146, 156, 161);
   width: 100%;
@@ -42,7 +42,8 @@
 }
 
 .mobileBody {
-  height: 63vh !important;
+  height: 78vh !important;
+  padding: auto !important;
 }
 
 .container {
@@ -58,6 +59,7 @@
   margin: 20px;
   background: rgb(89, 95, 98);
   border-radius: 20px;
+  overflow: hidden;
 }
 
 .row {
@@ -74,7 +76,16 @@
 }
 
 .mobileRow div {
-  width: auto !important;
+  width: 120% !important;
+  display: flex;
+  justify-content: initial;
+  overflow-x: scroll;
+}
+
+.mobileRow div svg,
+.mobileRow div a,
+.mobileRow div p {
+  margin: 10px;
 }
 
 .mobileDiv {
@@ -95,29 +106,6 @@
 
 .row div a:hover {
   color: rgb(98, 203, 255);
-}
-
-.tooltip {
-  position: relative;
-  display: inline-block;
-}
-
-.tooltip .tooltiptext {
-  visibility: hidden;
-  background-color: rgb(50, 50, 50);
-  color: white;
-  text-align: center;
-  border-radius: 6px;
-  padding: 15px;
-  margin: 3px;
-  width: 200px;
-  /* Position the tooltip */
-  position: absolute;
-  z-index: 1;
-}
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
 }
 
 footer {

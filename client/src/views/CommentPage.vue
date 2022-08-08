@@ -2,7 +2,7 @@
   <div id='container'>
     <div id="ipnutContainer" v-show='loggedIn'>
       <input type="text" id="userInput" v-model="commentInput" placeholder="Comment here..."
-        @focus="magic_flag = true" />
+        @focus="magic_flag = true" /><br>
       <button @click="comment()" id="commentBtn" v-show="magic_flag">Comment</button>
       <button @click="magic_flag = !magic_flag" class="closeBtn" v-show="magic_flag">Close</button>
     </div>
@@ -10,9 +10,7 @@
       <div v-for="comment in getComment" :key="comment.comment" class='eachCommentDiv'
         :id="comment.comment + 'Container'">
         <div class="firstRow">
-          <a class='username tooltip'>{{ comment.username }}
-            <span class="tooltiptext">Click to see</span>
-          </a>
+          <a class='username '>{{ comment.username }}</a>
           <p class='date'>{{ comment.createdAt.slice(0, 19).replace('T', ' ') }}</p>
         </div>
         <p class='comment'>{{ comment.comment }}</p>
@@ -28,13 +26,11 @@
         <div :id="comment.comment + 'ReplyContainer'" class="replyContainer">
           <input :id="comment.comment + 'ReplyInput'" placeholder='Reply here...'>
           <button @click="reply(comment.comment)">Reply</button>
-          <button @click="closeReplyContainer(comment.comment)">Close</button>
         </div>
         <div :id="comment.comment + 'ViewReplyContainer'" class="viewReplyContainer">
           <div v-for="reply in getReply" :key="reply.reply">
             <div v-if="reply.comment === comment.comment">
-              <a class="replyUsername tooltip" :href="'/chat?counterpart=' + reply.username">{{ reply.username }}
-                <span class="tooltiptext">Click to chat</span>
+              <a class="replyUsername" :href="'/chat?counterpart=' + reply.username">{{ reply.username }}
               </a>: {{ reply.reply }}
             </div>
           </div>
@@ -208,7 +204,13 @@ export default {
       }
     },
     showReplyContainer(comment) {
-      document.getElementById(comment + 'ReplyContainer').style.display = 'flex'
+      if (document.getElementById(comment + 'Reply').innerText === 'Reply') {
+        document.getElementById(comment + 'Reply').innerText = 'Close'
+        document.getElementById(comment + 'ReplyContainer').style.display = 'flex'
+      } else {
+        document.getElementById(comment + 'Reply').innerText = 'Reply'
+        document.getElementById(comment + 'ReplyContainer').style.display = 'none'
+      }
     },
     viewReply(comment) {
       if (document.getElementById(comment + 'ViewReplyContainer').style.display === 'block') {

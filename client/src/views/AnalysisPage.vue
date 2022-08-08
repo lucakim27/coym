@@ -6,9 +6,7 @@
                 <div class="mostViewedPages">
                     <div class='eachRow' v-for="row in sortedMostVisitedTable" :key="row.name">
                         <p>
-                            <a class="tooltip" v-bind:href="'/comment?major=' + row.name">{{ row.name }}
-                                <span class="tooltiptext">Click to visit</span>
-                            </a>: {{ row.view }}
+                            <a v-bind:href="'/comment?major=' + row.name">{{ row.name }}</a>: {{ row.view }}
                         </p>
                     </div>
                 </div>
@@ -18,8 +16,7 @@
                 <div class="mostCommentedPages">
                     <div class='eachRow' v-for="row in sortedMostCommentedTable" :key="row.name">
                         <p>
-                            <a class="tooltip" v-bind:href="'/comment?major=' + row.name">{{ row.name }}
-                                <span class="tooltiptext">Click to visit</span>
+                            <a v-bind:href="'/comment?major=' + row.name">{{ row.name }}
                             </a>: {{ row.comment }}
                         </p>
                     </div>
@@ -34,8 +31,7 @@
                 <div class="mostViewedPages">
                     <div class='eachRow' v-for="row in sortedMostVisitedTable" :key="row.name">
                         <p>
-                            <a class="tooltip" v-bind:href="'/comment?major=' + row.name">{{ row.name }}
-                                <span class="tooltiptext">Click to visit</span>
+                            <a v-bind:href="'/comment?major=' + row.name">{{ row.name }}
                             </a>: {{ row.view }}
                         </p>
                     </div>
@@ -46,8 +42,7 @@
                 <div class="mostCommentedPages">
                     <div class='eachRow' v-for="row in sortedMostCommentedTable" :key="row.name">
                         <p>
-                            <a class="tooltip" v-bind:href="'/comment?major=' + row.name">{{ row.name }}
-                                <span class="tooltiptext">Click to visit</span>
+                            <a v-bind:href="'/comment?major=' + row.name">{{ row.name }}
                             </a>: {{ row.comment }}
                         </p>
                     </div>
@@ -124,5 +119,5 @@ export default {
 };
 </script>
 <style scoped>
-@import '../assets/styles/chart.css';
+@import '../assets/styles/analysis.css';
 </style>

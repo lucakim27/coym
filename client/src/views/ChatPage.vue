@@ -5,9 +5,8 @@
                 <div v-for="user in users" :key="user">
                     <div class='eachRow' v-if="user.username !== username">
                         <p>
-                            <a v-bind:href="'/chat?counterpart=' + user.username" v-bind:id="user.username" class="tooltip">
+                            <a v-bind:href="'/chat?counterpart=' + user.username" v-bind:id="user.username">
                                 {{ user.username }}
-                                <span class="tooltiptext">Click to chat</span>
                             </a>
                         </p>
                     </div>
@@ -41,9 +40,8 @@
                 <div v-for="user in users" :key="user">
                     <div class='eachRow' v-if="user.username !== username">
                         <p>
-                            <a v-bind:href="'/chat?counterpart=' + user.username" v-bind:id="user.username" class="tooltip">
+                            <a v-bind:href="'/chat?counterpart=' + user.username" v-bind:id="user.username">
                                 {{ user.username }}
-                                <span class="tooltiptext">Click to chat</span>
                             </a>
                         </p>
                     </div>

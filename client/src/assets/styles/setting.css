@@ -30,10 +30,11 @@
     width: 60%;
     margin: 10px;
     padding: 10px;
+    border-color: black;
 }
 
 .btnContainer button:hover {
-    color: rgb(168, 168, 168);
+    color: rgb(0, 136, 255);
     cursor: pointer;
 }
 
@@ -88,4 +89,9 @@
 
 .mobileContainer div input {
     width: 80% !important;
+}
+
+.centerChild {
+    display: flex;
+    justify-content: center;
 }
