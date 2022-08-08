@@ -96,14 +96,14 @@ export const authSignUp = function (pool: any, res: any, req: any) {
                         }
                     }
                     if (!existing) {
-                        addAccount(connection, req.body.username, req.body.password)
+                        addAccount(pool, req.body.username, req.body.password)
                         res.send({
                             status: true,
                             message: 'Successfully signed up.'
                         })
                     }
                 } else {
-                    addAccount(connection, req.body.username, req.body.password)
+                    addAccount(pool, req.body.username, req.body.password)
                     res.send({
                         status: true,
                         message: 'Successfully signed up.'
@@ -187,7 +187,7 @@ export const getUserDetails = function (pool: any, res: any, req: any) {
             if (err) throw err
             res.send({
                 status: true,
-                userDetails: { 
+                userDetails: {
                     username: result[0].username,
                     gender: result[0].gender,
                     country: result[0].country,
