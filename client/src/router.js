@@ -26,11 +26,11 @@ const routes = [
     name: 'UsersPage',
     component: () => import('@/views/UsersPage'),
   },
-  // {
-  //   path: '/chat',
-  //   name: 'ChatPage',
-  //   component: () => import('@/views/ChatPage'),
-  // },
+  {
+    path: '/request',
+    name: 'RequestPage',
+    component: () => import('@/views/RequestPage'),
+  },
   {
     path: '/analysis',
     name: 'AnalysisPage',

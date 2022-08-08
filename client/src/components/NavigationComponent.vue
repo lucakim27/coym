@@ -4,11 +4,11 @@
     <a id='home' href="/">Home</a>
     <a id='users' href="/users">Users</a>
     <!-- <a id='chat' href="/chat">Chat</a> -->
+    <a id='request' href="/request">Request</a>
     <a id='analysis' href="/analysis">Analysis</a>
     <!-- <a id='setting' href="/setting">Setting</a> -->
-    <!-- <a id='about'>About us</a> -->
-    <a onclick="window.location.href = 'mailto:nikolaikim27@google.com'">Contact us</a>
-    <p class='copyright'>&copy; - COYM</p>
+    <a onclick="window.location.href = 'mailto:nikolaikim27@gmail.com'">Contact us</a>
+    <p class='copyright'><a href="https://github.com/lucakim27/Comment-On-Your-Major">&copy; - COYM</a></p>
   </div>
 </template>
 <script>

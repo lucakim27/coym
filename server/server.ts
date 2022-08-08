@@ -9,6 +9,7 @@ import countRouter from './routes/countRoute'
 import likeRouter from './routes/likeRoute'
 import majorRouter from './routes/majorRoute'
 import replyRouter from './routes/replyRoute'
+import requestRouter from './routes/requestRoute'
 import { corsOptions } from './configs/cors'
 import { createTables } from './utils/table'
 // import { connection } from './configs/db'
@@ -64,5 +65,6 @@ app.use(countRouter)
 app.use(likeRouter)
 app.use(majorRouter)
 app.use(replyRouter)
+app.use(requestRouter)
 
 httpServer.listen(PORT, () => console.log(`Http Server running on port ${PORT}.`))

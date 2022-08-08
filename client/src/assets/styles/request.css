@@ -1,0 +1,77 @@
+.mainContainer {
+    margin-top: 20px;
+}
+
+
+.eachContainer input {
+    width: 80%;
+    margin: 10px;
+    border-radius: 20px;
+    padding: 20px;
+    font-family: fantasy;
+}
+
+.btnContainer button {
+    display: inline-block;
+    border-radius: 20px;
+    background: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    font-family: fantasy;
+    width: 60%;
+    margin: 10px;
+    padding: 10px;
+}
+
+.btnContainer button:hover {
+    color: rgb(116, 116, 116);
+    cursor: pointer;
+}
+
+.twoContainer {
+    justify-content: center;
+    display: flex;
+    margin: 10px;
+}
+
+.eachContainer {
+    min-width: 45%;
+    align-items: center;
+    background: rgb(146, 156, 161);
+    padding: 20px;
+    margin: 20px;
+    border-radius: 20px;
+}
+
+.eachContainer h3 {
+    margin-left: 20px;
+    color: white;
+    font-family: fantasy;
+}
+
+.btnContainer {
+    justify-content: center;
+    display: flex;
+    margin: 20px;
+    padding: 20px;
+}
+
+.mobileContainer {
+    overflow: hidden;
+    /* height: auto; */
+    min-width: 100% !important;
+    /* padding: 20px; */
+    /* margin: 10px; */
+    margin-bottom:30px;
+}
+
+.mobileContainer div input {
+    width: 80% !important;
+}
+
+select {
+    width: auto;
+    margin: 10px;
+    border-radius: 20px;
+    padding: 20px;
+    font-family: fantasy;
+}

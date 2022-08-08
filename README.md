@@ -8,9 +8,8 @@ Comment On Your Major
 - reply to the specific comment
 - Update user's details
 - Popularity analysis
-- View signed up users with details
 
-# Frameworks/Libraries & Database
+# Frameworks & Database
 - Vue 3 (FE Framework)
 - Node.js Express (Typescript) (BE Framework)
 - Mysql2 (DB)
@@ -21,4 +20,4 @@ Comment On Your Major
 - Database (clearDB)
 
 # Link
-- [https://coym.netlify.app/](https://coym.netlify.app/)
+- [coym.net](coym.net)
