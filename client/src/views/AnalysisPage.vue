@@ -58,7 +58,7 @@
 <script>
 import axios from 'axios'
 export default {
-    name: 'ChartPage',
+    name: 'AnalysisPage',
     data() {
         return {
             mostVisitedTable: [],

@@ -72,7 +72,7 @@ import { useCookies } from "vue3-cookies"
 import axios from 'axios'
 
 export default {
-  name: 'OnlinePage',
+  name: 'UsersPage',
   data() {
     return {
       users: [],
@@ -120,8 +120,7 @@ export default {
             url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getAllUsers"
             // url: "http://localhost:3000/getAllUsers"
         }).then(function (response) {
-            if (response.data.status) {              
-              console.log(response.data.data)
+            if (response.data.status) {         
                 response.data.data.forEach(key => {
                     self.users.push({
                       username: key.username,

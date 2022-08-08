@@ -1,6 +1,6 @@
 <template>
     <div class='mainContainer' v-if="!isMobile()">
-            <div class="twoContainer">
+            <div class="twoContainer passwordContainer">
                 <div class="eachContainer">
                     <h3>School</h3>
                     <input type="text" placeholder="Your school..." v-model="school">
@@ -10,7 +10,7 @@
                     <input type="text" placeholder="Your gender..." v-model="gender">
                 </div>
             </div>
-            <div class="twoContainer">
+            <div class="twoContainer passwordContainer">
                 <div class="eachContainer">
                     <h3>Major</h3>
                     <input type="text" placeholder="Your major..." v-model="major">
@@ -20,7 +20,7 @@
                     <input type="text" placeholder="Your country..." v-model="country">
                 </div>
             </div>
-            <div class="twoContainer">
+            <div class="twoContainer passwordContainer">
                 <div class="eachContainer">
                     <h3>Password (*)</h3>
                     <input type="password" placeholder="Your password..." v-model="password">
@@ -134,6 +134,7 @@ export default {
                         alert(response.data.message)
                     } else {
                         alert(response.data.message)
+                        window.location.reload()
                     }
                 })
             }

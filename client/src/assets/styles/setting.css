@@ -24,7 +24,7 @@
 .btnContainer button {
     display: inline-block;
     border-radius: 20px;
-    background: rgb(255, 255, 255);
+    background: rgba(255, 255, 255, 0.478);
     color: rgb(0, 0, 0);
     font-family: fantasy;
     width: 60%;
@@ -33,7 +33,7 @@
 }
 
 .btnContainer button:hover {
-    color: rgb(116, 116, 116);
+    color: rgb(168, 168, 168);
     cursor: pointer;
 }
 
@@ -41,6 +41,15 @@
     justify-content: center;
     display: flex;
     margin: 10px;
+}
+
+.passwordContainer {
+    background: rgb(146, 156, 161);
+    border-radius: 20px;
+    padding: 20px;
+    /* margin: 60px; */
+    margin-left: 40px;
+    margin-right: 40px;
 }
 
 .eachContainer {
@@ -61,8 +70,11 @@
 .btnContainer {
     justify-content: center;
     display: flex;
-    margin: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
     padding: 20px;
+    /* background: rgb(146, 156, 161); */
+    border-radius: 20px;
 }
 
 .mobileContainer {

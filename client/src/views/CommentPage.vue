@@ -21,7 +21,7 @@
             <button v-bind:id="comment.comment" class='like' @click="like(comment.comment)">0 Likes</button>
             <button v-bind:id="comment.comment + 'Reply'" class='reply'
               @click="showReplyContainer(comment.comment)">Reply</button>
-            <button v-bind:id="comment.comment + 'ViewReply'" class='viewReply' @click="viewReply(comment.comment)">View
+            <button v-if='renderReplyBtn.includes(comment.comment)' v-bind:id="comment.comment + 'ViewReply'" class='viewReply' @click="viewReply(comment.comment)">View
               Replies</button>
           </center>
         </div>
@@ -60,7 +60,8 @@ export default {
       magic_flag: false,
       getComment: [],
       getLike: [],
-      getReply: []
+      getReply: [],
+      renderReplyBtn: []
     }
   },
   beforeMount() {
@@ -105,10 +106,20 @@ export default {
     }).then(function (response) {
       if (response.data.status) {
         self.getReply = response.data.message
+        self.findReplyComments(self.getReply)
       }
     })
   },
   methods: {
+    findReplyComments(replies) {
+      let list = []
+      replies.forEach(key => {
+        if (!list.includes(key.comment)) {
+          list.push(key.comment)
+        }
+      })
+      this.renderReplyBtn = list
+    },
     reply(comment) {
       if (document.getElementById(comment + 'ReplyInput').value === '') {
         alert("You have not input anything yet.")
