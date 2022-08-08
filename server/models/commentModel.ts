@@ -1,4 +1,4 @@
-export const createCommentsTable = function (connection: any) {
+export const createCommentsTable = function (pool: any) {
 
     const commentsTableDuplicationQuery = `SELECT table_name
         FROM information_schema.tables
@@ -20,7 +20,7 @@ export const createCommentsTable = function (connection: any) {
         ) 
     `
 
-    connection.getConnection(function (err: any) {
+    pool.getConnection(function (err: any, connection: any) {
         if (err) throw err
         connection.query(commentsTableDuplicationQuery, function (err: any, result: any) {
             if (err) throw err
@@ -30,11 +30,13 @@ export const createCommentsTable = function (connection: any) {
                 })
             }
         })
+        connection.release()
     })
+
 
 }
 
-export const getComment = function (connection: any, res: any, req: any) {
+export const getComment = function (pool: any, res: any, req: any) {
 
     const selectCommentsTableQuery = `SELECT a.username, c.comment, c.createdAt, m.name FROM comments c
         inner join accounts a on a.id = c.userID
@@ -42,7 +44,7 @@ export const getComment = function (connection: any, res: any, req: any) {
         WHERE m.name = '${req.query.page}'
     `
     
-    connection.getConnection(function (err: any) {
+    pool.getConnection(function (err: any, connection: any) {
         if (err) throw err
         connection.query(selectCommentsTableQuery, function (err: any, result: any, fields: any) {
             if (err) throw err
@@ -51,10 +53,11 @@ export const getComment = function (connection: any, res: any, req: any) {
                 message: result 
             })
         })
+        connection.release()
     })
 }
 
-export const postComment = function (connection: any, res: any, req: any) {
+export const postComment = function (pool: any, res: any, req: any) {
 
     const selectCommentsTableQuery = `SELECT * FROM comments 
         WHERE majorID = (SELECT id FROM majors WHERE name = '${req.body.page}')
@@ -74,7 +77,7 @@ export const postComment = function (connection: any, res: any, req: any) {
         )
     `
 
-    connection.getConnection(function (err: any) {
+    pool.getConnection(function (err: any, connection: any) {
         if (err) throw err
         connection.query(selectCommentsTableQuery, function (err: any, result: any) {
             if (err) throw err
@@ -97,5 +100,7 @@ export const postComment = function (connection: any, res: any, req: any) {
                 })
             }
         })
+        connection.release()
     })
+
 }

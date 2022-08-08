@@ -1,4 +1,4 @@
-export const createLikesTable = function (connection: any) {
+export const createLikesTable = function (pool: any) {
 
     const likesTableDuplicationQuery = `SELECT table_name
         FROM information_schema.tables
@@ -19,7 +19,7 @@ export const createLikesTable = function (connection: any) {
         ) 
     `
 
-    connection.getConnection(function (err: any) {
+    pool.getConnection(function (err: any, connection: any) {
         if (err) throw err
         connection.query(likesTableDuplicationQuery, function (err: any, result: any) {
             if (err) throw err
@@ -29,11 +29,12 @@ export const createLikesTable = function (connection: any) {
                 })
             }
         })
+        connection.release()
     })
 
 }
 
-export const postLike = function (connection: any, res: any, req: any) {
+export const postLike = function (pool: any, res: any, req: any) {
 
     const selectLikesQuery = `SELECT a.username, m.name, c.comment FROM likes l
         inner join accounts a on a.id = l.userID
@@ -59,7 +60,7 @@ export const postLike = function (connection: any, res: any, req: any) {
     `
 
     // how do i check if the like is duplicated?
-    connection.getConnection(function (err: any) {
+    pool.getConnection(function (err: any, connection: any) {
         if (err) throw err
         connection.query(selectLikesQuery, function (err: any, result: any) {
             if (err) throw err
@@ -86,11 +87,12 @@ export const postLike = function (connection: any, res: any, req: any) {
                 })
             }
         })
+        connection.release()
     })
 
 }
 
-export const getLike = function(connection: any, res: any, req: any) {
+export const getLike = function(pool: any, res: any, req: any) {
 
     const selectLikesQuery =  `SELECT a.username, m.name, c.comment FROM likes l
         inner join accounts a on a.id = l.userID
@@ -99,7 +101,7 @@ export const getLike = function(connection: any, res: any, req: any) {
         WHERE m.name = '${req.query.page}'
     `
 
-    connection.getConnection(function (err: any) {
+    pool.getConnection(function (err: any, connection: any) {
         if (err) throw err
         connection.query(selectLikesQuery, function (err: any, result: any, fields: any) {
             if (err) throw err
@@ -108,5 +110,7 @@ export const getLike = function(connection: any, res: any, req: any) {
                 message: result 
             })
         })
+        connection.release()
     })
+
 }

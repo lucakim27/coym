@@ -1,4 +1,4 @@
-export const createAccountsTable = function (connection: any) {
+export const createAccountsTable = function (pool: any) {
 
     const tableDuplicationQuery = `SELECT table_name
         FROM information_schema.tables
@@ -21,7 +21,7 @@ export const createAccountsTable = function (connection: any) {
         )
     `
 
-    connection.getConnection(function (err: any) {
+    pool.getConnection(function (err: any, connection: any) {
         if (err) throw err
         connection.query(tableDuplicationQuery, function (err: any, result: any) {
             if (err) throw err
@@ -31,10 +31,12 @@ export const createAccountsTable = function (connection: any) {
                 })
             }
         })
+        connection.release()
     })
+
 }
 
-export const addAccount = function (connection: any, username: any, password: any) {
+export const addAccount = function (pool: any, username: any, password: any) {
 
     const insertAccountsQuery = function (username: any, password: any) {
         return `INSERT INTO
@@ -50,12 +52,14 @@ export const addAccount = function (connection: any, username: any, password: an
         `
     }
 
-    connection.getConnection(function (err: any) {
+    pool.getConnection(function (err: any, connection: any) {
         if (err) throw err
         connection.query(insertAccountsQuery(username, password), function (err: any, result: any) {
             if (err) throw err
         })
+        connection.release()
     })
+
 }
 
 const validateSignUp = function (username: any, password: any, passwordConfirm: any) {
@@ -66,7 +70,7 @@ const validateSignUp = function (username: any, password: any, passwordConfirm: 
     }
 }
 
-export const authSignUp = function (connection: any, res: any, req: any) {
+export const authSignUp = function (pool: any, res: any, req: any) {
 
     const selectAccountsQuery = "SELECT * FROM accounts"
 
@@ -76,7 +80,7 @@ export const authSignUp = function (connection: any, res: any, req: any) {
             message: 'It is either too short or doesnt match.'
         })
     } else {
-        connection.getConnection(function (err: any) {
+        pool.getConnection(function (err: any, connection: any) {
             if (err) throw err
             connection.query(selectAccountsQuery, function (err: any, result: any, fields: any) {
                 if (err) throw err
@@ -106,15 +110,17 @@ export const authSignUp = function (connection: any, res: any, req: any) {
                     })
                 }
             })
+            connection.release()
         })
+
     }
 }
 
-export const authSignIn = function (connection: any, res: any, req: any) {
+export const authSignIn = function (pool: any, res: any, req: any) {
 
     const selectAccountsQuery = "SELECT * FROM accounts"
 
-    connection.getConnection(function (err: any) {
+    pool.getConnection(function (err: any, connection: any) {
         if (err) throw err
         connection.query(selectAccountsQuery, function (err: any, result: any, fields: any) {
             if (err) throw err
@@ -135,15 +141,16 @@ export const authSignIn = function (connection: any, res: any, req: any) {
                 })
             }
         })
+        connection.release()
     })
 
 }
 
-export const cookieValidation = function (connection: any, res: any, req: any) {
+export const cookieValidation = function (pool: any, res: any, req: any) {
 
     const selectAccountsQuery = "SELECT * FROM accounts"
 
-    connection.getConnection(function (err: any) {
+    pool.getConnection(function (err: any, connection: any) {
         if (err) throw err
         connection.query(selectAccountsQuery, function (err: any, result: any, fields: any) {
             if (err) throw err
@@ -163,17 +170,18 @@ export const cookieValidation = function (connection: any, res: any, req: any) {
                 })
             }
         })
+        connection.release()
     })
 
 }
 
-export const getUserDetails = function (connection: any, res: any, req: any) {
+export const getUserDetails = function (pool: any, res: any, req: any) {
 
     const selectAccountsQuery = `SELECT * FROM accounts 
         WHERE username = '${req.query.username}'
     `
 
-    connection.getConnection(function (err: any) {
+    pool.getConnection(function (err: any, connection: any) {
         if (err) throw err
         connection.query(selectAccountsQuery, function (err: any, result: any, fields: any) {
             if (err) throw err
@@ -188,11 +196,12 @@ export const getUserDetails = function (connection: any, res: any, req: any) {
                 }
             })
         })
+        connection.release()
     })
 
 }
 
-export const updateUserDetails = function (connection: any, res: any, req: any) {
+export const updateUserDetails = function (pool: any, res: any, req: any) {
 
     const updateAllDetailsQuery = `UPDATE accounts
         SET username = "${req.body.username}",
@@ -204,7 +213,7 @@ export const updateUserDetails = function (connection: any, res: any, req: any) 
         WHERE username = "${req.body.username}" AND password = "${req.body.password}"
     `
 
-    connection.getConnection(function (err: any) {
+    pool.getConnection(function (err: any, connection: any) {
         if (err) throw err
         connection.query(updateAllDetailsQuery, function (err: any, result: any, fields: any) {
             if (err) throw err
@@ -220,15 +229,16 @@ export const updateUserDetails = function (connection: any, res: any, req: any) 
                 })
             }
         })
+        connection.release()
     })
 
 }
 
-export const getAllUsers = function (connection: any, res: any, req: any) {
+export const getAllUsers = function (pool: any, res: any, req: any) {
 
     const getAllUsers = `SELECT * FROM accounts`
 
-    connection.getConnection(function (err: any) {
+    pool.getConnection(function (err: any, connection: any) {
         if (err) throw err
         connection.query(getAllUsers, function (err: any, result: any, fields: any) {
             if (err) throw err
@@ -237,6 +247,7 @@ export const getAllUsers = function (connection: any, res: any, req: any) {
                 data: result
             })
         })
+        connection.release()
     })
 
 }

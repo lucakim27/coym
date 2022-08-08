@@ -1,13 +1,13 @@
 import { getReply, postReply } from '../models/replyModel'
-import { connection } from '../configs/db'
+import { pool } from '../configs/db'
 import express from 'express'
 export const router = express.Router()
 export default router
 
 router.get('/getReply', function (req: any, res: any) {
-  getReply(connection, res, req)
+  getReply(pool, res, req)
 })
 
 router.post('/postReply', function (req: any, res: any) {
-  postReply(connection, res, req)
+  postReply(pool, res, req)
 })

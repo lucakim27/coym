@@ -1,4 +1,4 @@
-export const createReplyTable = function (connection: any) {
+export const createReplyTable = function (pool: any) {
 
     const replyTableDuplicationQuery = `SELECT table_name
         FROM information_schema.tables
@@ -22,7 +22,7 @@ export const createReplyTable = function (connection: any) {
         )
     `
 
-    connection.getConnection(function (err: any) {
+    pool.getConnection(function (err: any, connection: any) {
         if (err) throw err
         connection.query(replyTableDuplicationQuery, function (err: any, result: any) {
             if (err) throw err
@@ -32,10 +32,12 @@ export const createReplyTable = function (connection: any) {
                 })
             }
         })
+        connection.release()
     })
+
 }
 
-export const getReply = function (connection: any, res: any, req: any) {
+export const getReply = function (pool: any, res: any, req: any) {
 
     const selectReplyQuery = `SELECT a.username, c.comment, r.reply, m.name FROM reply r
         inner join accounts a on a.id = r.userID
@@ -44,7 +46,7 @@ export const getReply = function (connection: any, res: any, req: any) {
         WHERE m.name = '${req.query.page}'
     `
 
-    connection.getConnection(function (err: any) {
+    pool.getConnection(function (err: any, connection: any) {
         if (err) throw err
         connection.query(selectReplyQuery, function (err: any, result: any, fields: any) {
             if (err) throw err
@@ -53,10 +55,12 @@ export const getReply = function (connection: any, res: any, req: any) {
                 message: result 
             })
         })
+        connection.release()
     })
+
 }
 
-export const postReply = function (connection: any, res: any, req: any) {
+export const postReply = function (pool: any, res: any, req: any) {
 
     const insertReplyQuery = `INSERT INTO 
         reply (
@@ -74,7 +78,7 @@ export const postReply = function (connection: any, res: any, req: any) {
         )
     `
 
-    connection.getConnection(function (err: any) {
+    pool.getConnection(function (err: any, connection: any) {
         if (err) throw err
         connection.query(insertReplyQuery, function (err: any, result: any) {
             if (err) throw err
@@ -83,5 +87,7 @@ export const postReply = function (connection: any, res: any, req: any) {
                 message: 'You have successfully replied.'
             })
         })
+        connection.release()
     })
+
 }

@@ -1,4 +1,4 @@
-export const createCountsTable = function (connection: any) {
+export const createCountsTable = function (pool: any) {
 
     const countsTableDuplicationQuery = `SELECT table_name
         FROM information_schema.tables
@@ -19,7 +19,7 @@ export const createCountsTable = function (connection: any) {
         ) 
     `
 
-    connection.getConnection(function (err: any) {
+    pool.getConnection(function (err: any, connection: any) {
         if (err) throw err
         connection.query(countsTableDuplicationQuery, function (err: any, result: any) {
             if (err) throw err
@@ -29,11 +29,12 @@ export const createCountsTable = function (connection: any) {
                 })
             }
         })
+        connection.release()
     })
 
 }
 
-export const postCount = function (connection: any, res: any, req: any) {
+export const postCount = function (pool: any, res: any, req: any) {
 
     const insertCountsQuery = `INSERT IGNORE INTO 
         counts (
@@ -54,7 +55,7 @@ export const postCount = function (connection: any, res: any, req: any) {
         WHERE majorID = (SELECT id FROM majors WHERE name = '${req.body.page}')
     `
 
-    connection.getConnection(function (err: any) {
+    pool.getConnection(function (err: any, connection: any) {
         if (err) throw err
         connection.query(insertCountsQuery, function (err: any, result: any) {
             if (err) throw err
@@ -62,17 +63,18 @@ export const postCount = function (connection: any, res: any, req: any) {
         connection.query(updateCountsQuery, function (err: any, result: any) {
             if (err) throw err
         })
+        connection.release()
     })
 
 }
 
-export const getCount = function (connection: any, res: any, req: any) {
+export const getCount = function (pool: any, res: any, req: any) {
 
     const selectCountsQuery = `SELECT m.*, c.* FROM majors m
         inner join counts c on m.id = c.majorID
     `
 
-    connection.getConnection(function (err: any) {
+    pool.getConnection(function (err: any, connection: any) {
         if (err) throw err
         connection.query(selectCountsQuery, function (err: any, result: any, fields: any) {
             if (err) throw err
@@ -81,6 +83,7 @@ export const getCount = function (connection: any, res: any, req: any) {
                 message: result 
             })
         })
+        connection.release()
     })
 
 }

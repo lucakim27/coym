@@ -14,7 +14,7 @@ export const majorsList = [
     "Agricultural Mechanization",
     "Agricultural Production",
     "Agricultural Bioengineering",
-    "Agriculture, General",
+    "Agriculture",
     "Agronomy and Crop Science",
     "Aircraft Mechanics Technology",
     "Aircraft Piloting and Navigation",
@@ -28,11 +28,11 @@ export const majorsList = [
     "Architectural Engineering",
     "Architectural Engineering Technology",
     "Architectural Environmental Design",
-    "Architecture, General",
-    "Area Studies, General",
+    "Architecture",
+    "Area Studies",
     "Art Education",
     "Art History, Criticism and Conservation",
-    "Art, General",
+    "Art",
     "Asian Area Studies",
     "Asian Languages and Literatures",
     "Astronomy",
@@ -41,17 +41,17 @@ export const majorsList = [
     "Autobody Repair Technology",
     "Automotive Engineering Technology",
     "Automotive Mechanics Technology",
-    "Aviation and Airway Science, General",
+    "Aviation and Airway Science",
     "Aviation Management and Operations",
     "Avionics Technology",
     "Banking and Financial Support Services",
     "Bible Biblical Studies",
     "Biochemistry and Biophysics",
-    "Biology, General",
+    "Biology",
     "Biomedical Engineering",
-    "Business Administration and Management, General",
+    "Business Administration and Management",
     "Business Education",
-    "Business Management Quantitative Methods, General",
+    "Business Management Quantitative Methods",
     "Business Managerial Economics",
     "Career and Technical Education",
     "Cell Cellular Biology",
@@ -67,15 +67,15 @@ export const majorsList = [
     "Civil Engineering Technology",
     "Classical Ancient Languages and Literatures",
     "Communication Disorder Services",
-    "Communications Technology, General",
-    "Communications, General",
+    "Communications Technology",
+    "Communications",
     "Community Organization and Advocacy",
     "Comparative Literature",
-    "Computer and Information Sciences, General",
+    "Computer and Information Sciences",
     "Computer Engineering",
     "Computer Engineering Technology",
     "Computer Networking Telecommunications",
-    "Computer Science and Programming",
+    "Computer Science",
     "Computer Software and Media Applications",
     "Computer System Administration",
     "Construction Engineering Management",
@@ -96,11 +96,11 @@ export const majorsList = [
     "Dental Assisting",
     "Dental Hygiene",
     "Dentistry",
-    "Design and Visual Communications, General",
+    "Design and Visual Communications",
     "Diesel Mechanics Technology",
     "Digital Communications Media",
     "Divinity Ministry",
-    "Drafting CAD Technology, General",
+    "Drafting CAD Technology",
     "Early Childhood Education",
     "Ecology",
     "Economics",
@@ -112,27 +112,27 @@ export const majorsList = [
     "Elementary Education",
     "Emergency Medical Technology",
     "Engineering",
-    "Engineering Technology, General",
-    "English Language and Literature, General",
+    "Engineering Technology",
+    "English Language and Literature",
     "English-as-a-Second-Language Education",
     "English Language Arts Education",
     "Environmental Control Technologies",
     "Environmental Health Engineering",
     "Environmental Science",
-    "Ethnic and Minority Studies, General",
+    "Ethnic and Minority Studies",
     "European Area Studies",
     "Exercise Science Physiology Kinesiology",
-    "Family and Consumer Sciences, General",
+    "Family and Consumer Sciences",
     "Fashion Merchandising",
     "Fashion Apparel Design",
-    "Finance, General",
+    "Finance",
     "Financial Planning and Services",
     "Fine Studio Arts",
     "Fire Protection and Safety Technology",
     "Food and Nutrition",
     "Food Sciences and Technology",
     "Foreign Languages Education",
-    "Foreign Languages Literatures, General",
+    "Foreign Languages Literatures",
     "Forestry",
     "French Language and Literature",
     "Funeral Services and Mortuary Science",
@@ -145,8 +145,8 @@ export const majorsList = [
     "Health and Physical Education Fitness",
     "Health Education",
     "Health Services Administration,General",
-    "Health-Related Professions and Services, General*",
-    "Health Medical Technology, General",
+    "Health-Related Professions and Services*",
+    "Health Medical Technology",
     "Heating Air Cond Refrig Install Repair",
     "History",
     "Horticulture Operations and Management",
@@ -159,6 +159,7 @@ export const majorsList = [
     "Industrial Engineering",
     "Industrial Production Technologies",
     "Information Science",
+    "Information Technology",
     "Insurance and Risk Management",
     "Interior Architecture",
     "Interior Design",
@@ -175,7 +176,7 @@ export const majorsList = [
     "Law",
     "Law Enforcement",
     "Legal Administrative Assisting Secretarial*",
-    "Legal Studies, General*",
+    "Legal Studies*",
     "Liberal Arts and General Studies*",
     "Library Science",
     "Linguistics",
@@ -187,17 +188,17 @@ export const majorsList = [
     "Mass Communications",
     "Massage Therapy",
     "Mathematics Education",
-    "Mathematics, General",
+    "Mathematics",
     "Mechanical Drafting CAD Technology",
     "Mechanical Engineering",
     "Mechanical Engineering Technology",
-    "Mechanics and Repairers, General",
+    "Mechanics and Repairers",
     "Medical Assisting",
     "Medical Laboratory Technology",
     "Medical Office Secretarial",
     "Medical Radiologic Technology",
     "Medical Records",
-    "Medical Clinical Assisting, General",
+    "Medical Clinical Assisting",
     "Medicine",
     "Mental Health Counseling",
     "Microbiology and Immunology",
@@ -206,10 +207,10 @@ export const majorsList = [
     "Multi Interdisciplinary Studies*",
     "Multimedia Animation Special Effects",
     "Music Education",
-    "Music, General",
+    "Music",
     "Music, Performance",
     "Music, Theory and Composition",
-    "Natural Resources Conservation, General",
+    "Natural Resources Conservation",
     "Natural Resources Management",
     "North American Area Studies",
     "Nuclear Engineering",
@@ -224,27 +225,27 @@ export const majorsList = [
     "Organizational Behavior",
     "Osteopathic Medicine",
     "Paralegal Legal Assistant",
-    "Parks, Recreation, and Leisure, General",
+    "Parks, Recreation, and Leisure",
     "Parks Rec Leisure Facilities Management",
-    "Personal Services, General*",
+    "Personal Services*",
     "Pharmacy",
     "Philosophy",
     "Photography",
     "Physical Education and Coaching",
-    "Physical Sciences, General",
+    "Physical Sciences",
     "Physical Therapy ",
     "Physical Therapy Assisting",
     "Physician Assisting",
     "Physics",
     "Political Science and Government",
     "Postsecondary Education",
-    "Precision Production Trades, General",
-    "Protective Services, General",
+    "Precision Production Trades",
+    "Protective Services",
     "Psychiatric Mental Health Technician",
     "Psychology, Clinical and Counseling",
-    "Psychology, General",
+    "Psychology",
     "Public Administration",
-    "Public Administration and Services, General",
+    "Public Administration and Services",
     "Public Affairs and Public Policy Analysis",
     "Public Health",
     "Public Relations and Organizational Communication",
@@ -259,12 +260,12 @@ export const majorsList = [
     "Religious Education",
     "Respiratory Therapy Technology",
     "Restaurant Food Services Management",
-    "Sales, Merchandising, and Marketing, General",
+    "Sales, Merchandising, and Marketing",
     "Science Education",
     "Secondary Education",
     "Secretarial Studies and Office Administration",
     "Small Business Management Operations",
-    "Social Sciences, General",
+    "Social Sciences",
     "Social Studies Sciences Education",
     "Social Work",
     "Sociology",
@@ -275,12 +276,12 @@ export const majorsList = [
     "Surgical Technology",
     "Surveying Technology",
     "Teacher Assisting Aide Education",
-    "Teacher Education, General",
+    "Teacher Education",
     "Teacher Education, Subject-Specific*",
     "Textile and Apparel",
     "Theatre Arts Drama",
-    "Theology, General",
-    "Therapy and Rehabilitation, General",
+    "Theology",
+    "Therapy and Rehabilitation",
     "Tourism and Travel Marketing",
     "Transportation and Materials Moving",
     "Travel Tourism Management",
@@ -295,7 +296,7 @@ export const majorsList = [
     "Zoology"
 ]
 
-export const createMajorsTable = function (connection: any) {
+export const createMajorsTable = function (pool: any) {
 
     const majorsTableDuplicationQuery = `SELECT table_name
         FROM information_schema.tables
@@ -321,7 +322,7 @@ export const createMajorsTable = function (connection: any) {
         `
     }
 
-    connection.getConnection(function (err: any) {
+    pool.getConnection(function (err: any, connection: any) {
         if (err) throw err
         connection.query(majorsTableDuplicationQuery, function (err: any, result: any) {
             if (err) throw err
@@ -336,17 +337,18 @@ export const createMajorsTable = function (connection: any) {
                 }
             }
         })
+        connection.release()
     })
     
 }
 
-export const getMajorList = function (connection: any, res: any, req: any) {
+export const getMajorList = function (pool: any, res: any, req: any) {
 
     const selectMajorsQuery = `SELECT * 
         FROM majors
     `
 
-    connection.getConnection(function (err: any) {
+    pool.getConnection(function (err: any, connection: any) {
         if (err) throw err
         connection.query(selectMajorsQuery, function (err: any, result: any, fields: any) {
             if (err) throw err
@@ -355,5 +357,7 @@ export const getMajorList = function (connection: any, res: any, req: any) {
                 message: result 
             })
         })
+        connection.release()
     })
+
 }
