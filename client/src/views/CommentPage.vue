@@ -69,8 +69,8 @@ export default {
     }
     axios({
       method: "GET",
-      // url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getComment",
-      url: "http://localhost:3000/getComment",
+      url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getComment",
+      // url: "http://localhost:3000/getComment",
       params: {
         page: this.getQueryVariable()
       }
@@ -81,8 +81,8 @@ export default {
     })
     axios({
       method: "GET",
-      // url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getLike",
-      url: "http://localhost:3000/getLike",
+      url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getLike",
+      // url: "http://localhost:3000/getLike",
       params: {
         page: this.getQueryVariable()
       }
@@ -94,8 +94,8 @@ export default {
     })
     axios({
       method: "GET",
-      // url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getReply",
-      url: "http://localhost:3000/getReply",
+      url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getReply",
+      // url: "http://localhost:3000/getReply",
       params: {
         page: this.getQueryVariable()
       }
@@ -125,8 +125,8 @@ export default {
       } else {
         axios({
           method: "POST",
-          // url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/postReply",
-          url: "http://localhost:3000/postReply",
+          url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/postReply",
+          // url: "http://localhost:3000/postReply",
           headers: { 'Content-Type': 'application/json' },
           data: { comment: comment, username: this.username, page: this.getQueryVariable(), reply: document.getElementById(comment + 'ReplyInput').value }
         }).then(function (response) {
@@ -165,8 +165,8 @@ export default {
       }
       axios({
         method: "POST",
-        // url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/postComment",
-        url: "http://localhost:3000/postComment",
+        url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/postComment",
+        // url: "http://localhost:3000/postComment",
         headers: { 'Content-Type': 'application/json' },
         data: { comment: this.commentInput, username: this.username, page: this.getQueryVariable() }
       }).then(function (response) {
@@ -174,8 +174,8 @@ export default {
           alert("You have successfully commented.")
           axios({
             method: "POST",
-            // url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/postCount",
-            url: "http://localhost:3000/postCount",
+            url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/postCount",
+            // url: "http://localhost:3000/postCount",
             headers: { 'Content-Type': 'application/json' },
             data: { page: response.data.page, type: 'comment' }
           })
@@ -191,8 +191,8 @@ export default {
       } else {
         axios({
           method: "POST",
-          // url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/postLike",
-          url: "http://localhost:3000/postLike",
+          url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/postLike",
+          // url: "http://localhost:3000/postLike",
           headers: { 'Content-Type': 'application/json' },
           data: { comment: comment, page: this.getQueryVariable(), username: this.username }
         }).then(function (response) {
