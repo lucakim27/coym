@@ -60,7 +60,7 @@ export default {
     beforeMount() {
         let self = this
         if (self.cookies.get('user') !== null) {
-            self.username = self.cookies.get('user')
+            self.username = self.cookies.get('user').username
             axios({
                 method: "GET",
                 url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/cookieValidation",
