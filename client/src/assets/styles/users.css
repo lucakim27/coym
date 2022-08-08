@@ -1,7 +1,6 @@
 .onlineDiv {
   height: 83vh;
   flex: 0;
-  /* padding: 10px; */
   border-radius: 20px;
   background: rgb(146, 156, 161);
   width: 100%;
@@ -33,17 +32,11 @@
 }
 
 .onlineBody {
-  /* overflow-y: scroll; */
   justify-content: center;
   padding: 10px;
   height: 67vh;
   overflow-y: scroll;
   overflow-x: hidden;
-}
-
-.mobileBody {
-  height: 78vh !important;
-  padding: auto !important;
 }
 
 .container {
@@ -70,28 +63,6 @@
   width: 100%;
 }
 
-.mobileRow {
-  display: block !important;
-  padding: 0 !important;
-}
-
-.mobileRow div {
-  width: 120% !important;
-  display: flex;
-  justify-content: initial;
-  overflow-x: scroll;
-}
-
-.mobileRow div svg,
-.mobileRow div a,
-.mobileRow div p {
-  margin: 10px;
-}
-
-.mobileDiv {
-  min-width: auto !important;
-}
-
 .row div {
   width: 16%;
   padding: 10px;
@@ -110,4 +81,36 @@
 
 footer {
   display: none;
+}
+
+/* MOBILE */
+
+#mostViewedContainer {
+  min-width: 40%;
+  flex: 0;
+  padding: 1%;
+  margin-right: 2%;
+  border-radius: 20px;
+  background: rgb(146, 156, 161);
+}
+
+.mobileMostViewedContainer {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin: 15px !important;
+    margin: auto;
+    min-width: 90% !important;
+}
+
+.alignChild {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.alignChild a {
+  width: 80%;
+  overflow-x: scroll;
+  color: white;
+  font-family: fantasy;
 }

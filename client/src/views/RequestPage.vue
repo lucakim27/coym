@@ -66,8 +66,8 @@ export default {
       } else {
         axios({
           method: "POST",
-          url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/postRequest",
-          // url: "http://localhost:3000/postRequest",
+          // url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/postRequest",
+          url: "http://localhost:3000/postRequest",
           headers: { 'Content-Type': 'application/json' },
           data: { username: this.username, type: this.selectedValue, content: this.content }
         }).then(function (response) {

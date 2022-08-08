@@ -27,9 +27,9 @@
     background: rgba(255, 255, 255, 0.478);
     color: rgb(0, 0, 0);
     font-family: fantasy;
-    width: 60%;
+    width: 100%;
     margin: 10px;
-    padding: 10px;
+    padding: 20px;
     border-color: black;
 }
 
@@ -48,7 +48,7 @@
     background: rgb(146, 156, 161);
     border-radius: 20px;
     padding: 20px;
-    /* margin: 60px; */
+    margin: 20px;
     margin-left: 40px;
     margin-right: 40px;
 }

@@ -38,8 +38,8 @@ export default {
 		const self = this
 		axios({
 			method: "GET",
-			url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getUserDetails",
-			// url: "http://localhost:3000/getUserDetails",
+			// url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getUserDetails",
+			url: "http://localhost:3000/getUserDetails",
 			params: { username: this.username }
 		}).then(function (response) {
 			self.country = response.data.userDetails.country === null ? '' : response.data.userDetails.country

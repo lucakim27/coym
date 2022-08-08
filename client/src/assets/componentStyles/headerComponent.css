@@ -93,3 +93,7 @@ header h1 {
     padding: 20px;
     border-radius: 20px;
 }
+
+.signOutBtn:hover {
+    color: rgb(255, 25, 0);
+}

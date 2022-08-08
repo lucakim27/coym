@@ -2,17 +2,18 @@
 Comment On Your Major
 
 # Features
+- like the comment
 - Sign in, out and up
 - Comment on the major
-- like the comment
 - reply to the specific comment
-- Update user's details
-- Popularity analysis
+- Update user's details on setting
+- Request new major or report users
+- Popularity analysis for the majors
 
 # Frameworks & Database
-- Vue 3 (FE Framework)
-- Node.js Express (Typescript) (BE Framework)
-- Mysql2 (DB)
+- Vue 3 (Frontend Framework)
+- Node.js Express (Typescript) (Backend Framework)
+- Mysql2 (Database)
 
 # Deployment
 - Frontend (Netlify)
@@ -20,4 +21,4 @@ Comment On Your Major
 - Database (clearDB)
 
 # Link
-- [coym.net](coym.net)
+- [coym.net](https://www.coym.net/)

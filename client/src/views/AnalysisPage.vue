@@ -27,27 +27,27 @@
     <!-- Mobile Web View -->
     <div v-if="isMobile()">
         <div id='mostViewedContainer' class="mobileMostViewedContainer">
-                <h1 class="mobileHeader">Visit</h1>
-                <div class="mostViewedPages">
-                    <div class='eachRow' v-for="row in sortedMostVisitedTable" :key="row.name">
-                        <p>
-                            <a v-bind:href="'/comment?major=' + row.name">{{ row.name }}
-                            </a>: {{ row.view }}
-                        </p>
-                    </div>
+            <h1 class="mobileHeader">Visit</h1>
+            <div class="mostViewedPages">
+                <div class='eachRow' v-for="row in sortedMostVisitedTable" :key="row.name">
+                    <p>
+                        <a v-bind:href="'/comment?major=' + row.name">{{ row.name }}
+                        </a>: {{ row.view }}
+                    </p>
                 </div>
             </div>
-            <div id='mostCommentedContainer' class="mobileMostCommentedContainer">
-                <h1 class="mobileHeader">Comment</h1>
-                <div class="mostCommentedPages">
-                    <div class='eachRow' v-for="row in sortedMostCommentedTable" :key="row.name">
-                        <p>
-                            <a v-bind:href="'/comment?major=' + row.name">{{ row.name }}
-                            </a>: {{ row.comment }}
-                        </p>
-                    </div>
+        </div>
+        <div id='mostCommentedContainer' class="mobileMostCommentedContainer">
+            <h1 class="mobileHeader">Comment</h1>
+            <div class="mostCommentedPages">
+                <div class='eachRow' v-for="row in sortedMostCommentedTable" :key="row.name">
+                    <p>
+                        <a v-bind:href="'/comment?major=' + row.name">{{ row.name }}
+                        </a>: {{ row.comment }}
+                    </p>
                 </div>
             </div>
+        </div>
     </div>
 </template>
 <script>
@@ -70,12 +70,12 @@ export default {
     },
     methods: {
         isMobile() {
-			if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-				return true
-			} else {
-				return false
-			}
-		},
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                return true
+            } else {
+                return false
+            }
+        },
         sortDescending(list, key) {
             function compare(a, b) {
                 a = a[key]
@@ -100,8 +100,8 @@ export default {
         let self = this
         axios({
             method: "GET",
-            url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getCount",
-            // url: "http://localhost:3000/getCount",
+            // url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getCount",
+            url: "http://localhost:3000/getCount",
             params: {}
         }).then(function (response) {
             if (response.data.status) {

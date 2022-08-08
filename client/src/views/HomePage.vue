@@ -11,7 +11,7 @@
                 <tr v-for="(major, i) in filteredMajorsList" :key="i">
                     <td scope="row">
                         <a v-bind:href="'/comment?major=' + major" @click="viewPage(major)">{{ major }}</a>
-                        <hr>
+                        <br>
                     </td>
                 </tr>
             </table>
@@ -19,7 +19,7 @@
                 <tr v-for="(major, i) in filteredMajorsList" :key="i">
                     <td scope="row">
                         <a v-bind:href="'/comment?major=' + major" @click="viewPage(major)">{{ major }}</a>
-                        <hr>
+                        <br>
                     </td>
                 </tr>
             </table>
@@ -90,8 +90,8 @@ export default {
         viewPage(page) {
             axios({
                 method: "POST",
-                url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/postCount",
-                // url: "http://localhost:3000/postCount",
+                // url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/postCount",
+                url: "http://localhost:3000/postCount",
                 headers: { 'Content-Type': 'application/json' },
                 data: { page: page, type: 'view' }
             })
@@ -114,8 +114,8 @@ export default {
         let self = this
         axios({
             method: "GET",
-            url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getMajorList"
-            // url: "http://localhost:3000/getMajorList",
+            // url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getMajorList"
+            url: "http://localhost:3000/getMajorList",
         }).then(function (response) {
             if (response.data.status) {
                 response.data.message.forEach(key => {
