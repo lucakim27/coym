@@ -9,7 +9,7 @@
             <table id="options" class="mobileOptions" v-if="isMobile()">
                 <tr v-for="(major, i) in filteredMajorsList" :key="i">
                     <td scope="row">
-                        <a v-bind:href="'/comment?major=' + major" @click="viewPage(major)">{{ major }}</a>
+                        <a v-bind:href="'/comment?major=' + major">{{ major }}</a>
                         <br>
                     </td>
                 </tr>
@@ -17,7 +17,7 @@
             <table id="options" v-if="!isMobile()">
                 <tr v-for="(major, i) in filteredMajorsList" :key="i">
                     <td scope="row">
-                        <a v-bind:href="'/comment?major=' + major" @click="viewPage(major)">{{ major }}</a>
+                        <a v-bind:href="'/comment?major=' + major">{{ major }}</a>
                         <br>
                     </td>
                 </tr>
@@ -172,15 +172,6 @@ export default {
             } else {
                 return false
             }
-        },
-        viewPage(page) {
-            axios({
-                method: "POST",
-                url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/postCount",
-                // url: "http://localhost:3000/postCount",
-                headers: { 'Content-Type': 'application/json' },
-                data: { page: page, type: 'view' }
-            })
         },
         searchChangeFunc(event) {
             this.filteredMajorsList = []

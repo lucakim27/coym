@@ -1,7 +1,7 @@
 <template>
   <div id='container'>
     <div id="ipnutContainer" v-show='loggedIn'>
-      <input type="text" id="userInput" v-model="commentInput" placeholder="Comment here..."
+      <textarea type="text" id="userInput" v-model="commentInput" placeholder="Comment here..."
         @focus="magic_flag = true" /><br>
       <button @click="comment()" id="commentBtn" v-show="magic_flag">Comment</button>
       <button @click="magic_flag = !magic_flag" class="closeBtn" v-show="magic_flag">Close</button>
@@ -172,13 +172,6 @@ export default {
       }).then(function (response) {
         if (response.data.status) {
           alert("You have successfully commented.")
-          axios({
-            method: "POST",
-            url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/postCount",
-            // url: "http://localhost:3000/postCount",
-            headers: { 'Content-Type': 'application/json' },
-            data: { page: response.data.page, type: 'comment' }
-          })
           window.location.reload()
         } else {
           alert("Your comment is duplicated.")

@@ -2,55 +2,35 @@
     <div id='container' v-if="!isMobile()">
         <div id='BothContainer'>
 
-            
             <div id='mostViewedContainer'>
-                <h1>Comment</h1>
+                <h1>Comment, Likes & Rplies</h1>
                 <div class="mostViewedPages">
-                    <div class='eachRow' v-for="row in sortedMostCommentedTable" :key="row.name">
+                    <div class='eachRow' v-for="row in mostCommentedTable" :key="row.name">
                         <p>
-                            <a v-bind:href="'/comment?major=' + row.name">{{ row.name }}
-                            </a>: {{ row.comment }}
+                            <a v-bind:href="'/comment?major=' + row.name">{{ row.name }}</a><hr>
+                            <div style="display: flex; justify-content: center" class="centerChild">
+                                <a>Comment: {{ row.comment }}</a><br>
+                                <a>Like: {{ row.like }}</a><br>
+                                <a>Reply: {{ row.reply }}</a>
+                            </div>
                         </p>
                     </div>
                 </div>
             </div>
-
-            <div id='mostCommentedContainer'>
-                <h1>Likes & Replies</h1>
-                <div class="mostCommentedPages">
-                    <div class='eachRow' v-for="row in sortedMostVisitedTable" :key="row.name">
-                        <p>
-                            <a v-bind:href="'/comment?major=' + row.name">{{ row.name }}
-                            </a>: {{ row.view }}
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-
 
         </div>
     </div>
     <!-- Mobile Web View -->
     <div v-if="isMobile()">
         <div id='mostViewedContainer' class="mobileMostViewedContainer">
-            <h1 class="mobileHeader">Comment</h1>
-            <div class="mostViewedPages">
-                <div class='eachRow' v-for="row in sortedMostCommentedTable" :key="row.name">
+            <h1 class="mobileHeader">Comment, Likes & Rplies</h1>
+            <div class="mostViewedPages mobileContainer">
+                <div class='eachRow' v-for="row in mostCommentedTable" :key="row.name">
                     <p>
-                        <a v-bind:href="'/comment?major=' + row.name">{{ row.name }}
-                        </a>: {{ row.comment }}
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div id='mostCommentedContainer' class="mobileMostCommentedContainer">
-            <h1 class="mobileHeader">Likes & Replies</h1>
-            <div class="mostCommentedPages">
-                <div class='eachRow' v-for="row in sortedMostVisitedTable" :key="row.name">
-                    <p>
-                        <a v-bind:href="'/comment?major=' + row.name">{{ row.name }}
-                        </a>: {{ row.view }}
+                        <a v-bind:href="'/comment?major=' + row.name">{{ row.name }}</a><hr>
+                        <a>Comment: {{ row.comment }}</a><br>
+                        <a>Like: {{ row.like }}</a><br>
+                        <a>Reply: {{ row.reply }}</a>
                     </p>
                 </div>
             </div>
@@ -63,17 +43,19 @@ export default {
     name: 'AnalysisPage',
     data() {
         return {
-            mostVisitedTable: [],
-            mostCommentedTable: []
+            mostVisitedTable: {},
+            mostCommentedTable: [],
+            mostReplied: [],
+            mostLiked: []
         }
     },
     computed: {
-        sortedMostVisitedTable() {
-            return this.sortDescending(this.mostVisitedTable, 'view')
-        },
-        sortedMostCommentedTable() {
-            return this.sortDescending(this.mostCommentedTable, 'comment')
-        }
+        // sortedMostVisitedTable() {
+        //     return this.sortDescending(this.mostVisitedTable, 'view')
+        // },
+        // sortedMostCommentedTable() {
+        //     return this.sortDescending(this.mostCommentedTable, 'comment')
+        // }
     },
     methods: {
         isMobile() {
@@ -83,45 +65,96 @@ export default {
                 return false
             }
         },
-        sortDescending(list, key) {
-            function compare(a, b) {
-                a = a[key]
-                b = b[key]
+        // sortDescending(list, key) {
+        //     function compare(a, b) {
+        //         a = a[key]
+        //         b = b[key]
 
-                var type = (typeof (a) === 'string' ||
-                    typeof (b) === 'string') ? 'string' : 'number'
-                var result
+        //         var type = (typeof (a) === 'string' ||
+        //             typeof (b) === 'string') ? 'string' : 'number'
+        //         var result
 
-                if (type === 'string') {
-                    result = a.localeCompare(b)
-                } else {
-                    result = b - a
-                }
-                return result
-            }
+        //         if (type === 'string') {
+        //             result = a.localeCompare(b)
+        //         } else {
+        //             result = b - a
+        //         }
+        //         return result
+        //     }
 
-            return list.sort(compare)
-        }
+        //     return list.sort(compare)
+        // }
     },
     mounted() {
         let self = this
-        axios({
-            method: "GET",
-            url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getCount",
-            // url: "http://localhost:3000/getCount",
-            params: {}
-        }).then(function (response) {
-            if (response.data.status) {
-                for (var i = 0; i < response.data.message.length; i++) {
-                    if (response.data.message[i].view !== 0) {
-                        self.mostVisitedTable.push(response.data.message[i])
+
+
+        axios.all([
+
+            // axios.get("https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getCount"),
+            axios.get("http://localhost:3000/getCommentCount"), 
+
+            // axios.get("https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getCount"),
+            axios.get("http://localhost:3000/getReplyCount"), 
+
+            // axios.get("https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getCount"),
+            axios.get("http://localhost:3000/getLikeCount"), 
+
+        ]).then(axios.spread((comment, reply, like) => {
+            let count = []
+
+            comment.data.message.forEach(key1 => {
+                let check = false
+                count.forEach(key2 => {
+                    if (key1.name === key2.name) {
+                        key2.comment += 1
+                        check = true
                     }
-                    if (response.data.message[i].comment !== 0) {
-                        self.mostCommentedTable.push(response.data.message[i])
-                    }
+                })
+                if (!check) {
+                    count.push({
+                        name: key1.name, comment: 1, reply: 0, like: 0
+                    })
                 }
-            }
-        })
+            })
+
+            reply.data.message.forEach(key1 => {
+                let check = false
+                count.forEach(key2 => {
+                    if (key1.name === key2.name) {
+                        key2.reply += 1
+                        check = true
+                    }
+                })
+                if (!check) {
+                    count.push({
+                        name: key1.name, reply: 1, comment: 0, like: 0
+                    })
+                }
+            })
+
+            like.data.message.forEach(key1 => {
+                let check = false
+                count.forEach(key2 => {
+                    if (key1.name === key2.name) {
+                        key2.like += 1
+                        check = true
+                    }
+                })
+                if (!check) {
+                    count.push({
+                        name: key1.name, like: 1, comment: 0, reply: 0
+                    })
+                }
+            })
+
+
+            console.log(count)
+            self.mostCommentedTable = count
+
+        }))
+
+
     }
 };
 </script>

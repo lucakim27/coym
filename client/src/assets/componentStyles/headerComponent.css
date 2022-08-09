@@ -9,18 +9,12 @@
     z-index: 99999999999999999 !important;
 }
 
-#userId {
+.signInIcon {
     margin-right: -60px;
     position: absolute;
     right: 70px;
-    background-color: rgb(255, 255, 255);
-    font-family: Arial;
     top: 17px;
-    /* width: 100px; */
-    height: 40px;
     cursor: pointer;
-    font-size: 30px;
-    overflow-x: hidden;
 }
 
 header {
