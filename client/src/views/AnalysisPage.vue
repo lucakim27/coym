@@ -3,17 +3,20 @@
         <div id='BothContainer'>
 
             <div id='mostViewedContainer'>
+
                 <h1>Comment, Likes & Rplies</h1>
                 <div class="mostViewedPages">
+
                     <div class='eachRow' v-for="row in mostCommentedTable" :key="row.name">
-                        <p>
+
+                        <div>
                             <a v-bind:href="'/comment?major=' + row.name">{{ row.name }}</a><hr>
                             <div style="display: flex; justify-content: center" class="centerChild">
                                 <a>Comment: {{ row.comment }}</a><br>
                                 <a>Like: {{ row.like }}</a><br>
                                 <a>Reply: {{ row.reply }}</a>
                             </div>
-                        </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -26,12 +29,12 @@
             <h1 class="mobileHeader">Comment, Likes & Rplies</h1>
             <div class="mostViewedPages mobileContainer">
                 <div class='eachRow' v-for="row in mostCommentedTable" :key="row.name">
-                    <p>
+                    <div>
                         <a v-bind:href="'/comment?major=' + row.name">{{ row.name }}</a><hr>
                         <a>Comment: {{ row.comment }}</a><br>
                         <a>Like: {{ row.like }}</a><br>
                         <a>Reply: {{ row.reply }}</a>
-                    </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -43,10 +46,7 @@ export default {
     name: 'AnalysisPage',
     data() {
         return {
-            mostVisitedTable: {},
-            mostCommentedTable: [],
-            mostReplied: [],
-            mostLiked: []
+            mostCommentedTable: []
         }
     },
     computed: {
@@ -148,8 +148,6 @@ export default {
                 }
             })
 
-
-            console.log(count)
             self.mostCommentedTable = count
 
         }))

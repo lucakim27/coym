@@ -50,17 +50,17 @@
     margin: 10px;
 }
 
-.eachRow p {
+.eachRow div {
     padding: 20px;
     color: white;
 }
 
-.eachRow p a {
+.eachRow div a {
     color: rgb(255, 255, 255);
     text-decoration: none;
 }
 
-.eachRow p a:hover {
+.eachRow div a:hover {
     color: rgb(98, 203, 255);
 }
 
