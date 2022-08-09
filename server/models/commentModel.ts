@@ -9,7 +9,7 @@ export const createCommentsTable = function (pool: any) {
     const createCommentsTableQuery = `CREATE TABLE IF NOT EXISTS 
         comments (
             id INT AUTO_INCREMENT, 
-            comment VARCHAR(255), 
+            comment TEXT, 
             majorID INT, 
             userID INT, 
             createdAt DATETIME NOT NULL,
@@ -42,7 +42,6 @@ export const createCommentsTable = function (pool: any) {
         connection.release()
     })
 
-
 }
 
 export const getComment = function (pool: any, res: any, req: any) {
@@ -70,6 +69,33 @@ export const getComment = function (pool: any, res: any, req: any) {
         })
         connection.release()
     })
+
+}
+
+export const getCommentCount = function (pool: any, res: any, req: any) {
+
+    const selectCommentsTableQuery = `SELECT m.name FROM comments c
+        inner join majors m on m.id = c.majorID
+    `
+
+    pool.getConnection(function (err: any, connection: any) {
+        if (err) {
+            connection.release()
+            throw err
+        }
+        connection.query(selectCommentsTableQuery, function (err: any, result: any, fields: any) {
+            if (err) {
+                connection.release()
+                throw err
+            }
+            res.send({
+                status: true,
+                message: result
+            })
+        })
+        connection.release()
+    })
+
 }
 
 export const postComment = function (pool: any, res: any, req: any) {

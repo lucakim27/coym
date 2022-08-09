@@ -5,7 +5,7 @@ import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import accountRouter from './routes/accountRoute'
 import commentRouter from './routes/commentRoute'
-import countRouter from './routes/countRoute'
+// import countRouter from './routes/countRoute'
 import likeRouter from './routes/likeRoute'
 import majorRouter from './routes/majorRoute'
 import replyRouter from './routes/replyRoute'
@@ -61,7 +61,7 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser())
 app.use(accountRouter)
 app.use(commentRouter)
-app.use(countRouter)
+// app.use(countRouter)
 app.use(likeRouter)
 app.use(majorRouter)
 app.use(replyRouter)

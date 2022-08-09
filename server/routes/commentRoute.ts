@@ -1,4 +1,4 @@
-import { getComment, postComment } from '../models/commentModel'
+import { getComment, postComment, getCommentCount } from '../models/commentModel'
 import { pool } from '../configs/db'
 import express from 'express'
 export const router = express.Router()
@@ -10,4 +10,8 @@ router.get('/getComment', function (req: any, res: any) {
 
 router.post('/postComment', function (req: any, res: any) {
   postComment(pool, res, req)
+})
+
+router.get('/getCommentCount', function (req: any, res: any) {
+  getCommentCount(pool, res, req)
 })
