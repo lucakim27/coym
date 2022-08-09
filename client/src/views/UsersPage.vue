@@ -128,14 +128,23 @@
                         <line x1="256" y1="320" x2="256" y2="448"
                           style="fill:#000;stroke:white;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" />
                       </svg>
-                      <a v-if="user.school !== null">{{ user.school }}</a>
-                      <a v-if="user.school === null">N/A</a>
+                      <a v-if="user.major !== null">{{ user.major }}</a>
+                      <a v-if="user.major === null">N/A</a>
                     </p>
                     <p class="alignChild">
                       <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" data-name="Layer 1"
                         viewBox="0 0 24 24">
                         <path
                           d="M21,10a.99974.99974,0,0,0,1-1V6a.9989.9989,0,0,0-.68359-.94824l-9-3a1.002,1.002,0,0,0-.63282,0l-9,3A.9989.9989,0,0,0,2,6V9a.99974.99974,0,0,0,1,1H4v7.18427A2.99507,2.99507,0,0,0,2,20v2a.99974.99974,0,0,0,1,1H21a.99974.99974,0,0,0,1-1V20a2.99507,2.99507,0,0,0-2-2.81573V10ZM20,21H4V20a1.001,1.001,0,0,1,1-1H19a1.001,1.001,0,0,1,1,1ZM6,17V10H8v7Zm4,0V10h4v7Zm6,0V10h2v7ZM4,8V6.7207l8-2.667,8,2.667V8Z" />
+                      </svg>
+                      <a v-if="user.school !== null">{{ user.school }}</a>
+                      <a v-if="user.school === null">N/A</a>
+                    </p>
+                    <p class="alignChild">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" viewBox="0 0 512 512">
+                        ! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.
+                        <path
+                          d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM349.8 349.8c5.594 12.03 .4375 26.31-11.56 31.94c-3.312 1.531-6.75 2.25-10.19 2.25c-9 0-17.66-5.125-21.75-13.81l-38.46-82.19H208v72c0 13.25-10.75 24-24 24s-24-10.75-24-24V152c0-13.25 10.75-24 24-24l88 .0044c44.13 0 80 35.88 80 80c0 28.32-14.87 53.09-37.12 67.31L349.8 349.8zM272 176h-64v64h64c17.66 0 32-14.34 32-32S289.7 176 272 176z" />
                       </svg>
                       <a>{{ user.joinedAt.slice(0, 10) }}</a>
                     </p>
