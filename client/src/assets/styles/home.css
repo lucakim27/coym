@@ -77,7 +77,7 @@
     margin: 20px;
 }
 
-img {
+.mainImage {
     width: 97%;
     height: 70%;
     filter: brightness(70%);

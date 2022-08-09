@@ -1,11 +1,10 @@
 <template>
     <div id='container'>
-        <img
-            :style='mobileImg' :src='imageSrc'>
+        <img :style='mobileImg' :src='imageSrc' class="mainImage">
         <div class="Input" :style="mobileInput">
-            <input v-if="isMobile()" class="Input-text mobileInput" id="input" placeholder="Major, e.g. Computer Science" type="search"
-                @input="searchChangeFunc($event)" />
-            <input v-if="!isMobile()" class="Input-text" id="input" placeholder="Major, e.g. Computer Science" type="search"
+            <input v-if="isMobile()" class="Input-text mobileInput" id="input" placeholder="Search for your major..."
+                type="search" @input="searchChangeFunc($event)" />
+            <input v-if="!isMobile()" class="Input-text" id="input" placeholder="Search for your major..." type="search"
                 @input="searchChangeFunc($event)" />
             <table id="options" class="mobileOptions" v-if="isMobile()">
                 <tr v-for="(major, i) in filteredMajorsList" :key="i">
@@ -24,7 +23,6 @@
                 </tr>
             </table>
         </div>
-
         <div class='descriptionContainer' :style="mobileDescription">
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-house"
@@ -64,7 +62,95 @@
                         d="M11.793 8.5H9v-1h5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.354-.146l-.853-.854zM5 7c0 .552-.448 0-1 0s-1 .552-1 0a1 1 0 0 1 2 0z" />
                 </svg>
             </div>
-            <b>Getting reviews on the majors has never been this easy before</b>
+            <b>Getting reviews on the major has never been this easy before</b>
+        </div>
+        <div style=" margin: 25px; border-radius: 20px;" v-if="!isMobile()">
+            <div style="display: flex; font-family: fantasy; width: 100%; overflow-x: scroll;">
+                <div
+                    style="min-width: 30%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
+                    <h2>Comment</h2>
+                    <p>A place where you comment on the major.</p>
+                </div>
+                <div
+                    style="min-width: 30%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
+                    <h2>Users</h2>
+                    <p>A place where you see the other user's details.</p>
+                </div>
+                <div
+                    style="min-width: 30%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
+                    <h2>Request</h2>
+                    <p>A place where you request to the admin.</p>
+                </div>
+                <div
+                    style="min-width: 30%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
+                    <h2>Analysis</h2>
+                    <p>A place where you see the popularity of the majors.</p>
+                </div>
+                <div
+                    style="min-width: 30%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
+                    <h2>Setting</h2>
+                    <p>A place where you update your user details.</p>
+                </div>
+                <div
+                    style="min-width: 30%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
+                    <h2>Contact us</h2>
+                    <p>A button that lets you email me.</p>
+                </div>
+                <div
+                    style="min-width: 30%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
+                    <h2>Like</h2>
+                    <p>You like the specific comment on the comment page.</p>
+                </div>
+                <div
+                    style="min-width: 30%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
+                    <h2>Reply</h2>
+                    <p>You reply to the specific comment on the comment page.</p>
+                </div>
+            </div>
+        </div>
+        <div style=" margin: 25px; border-radius: 20px;" v-if="isMobile()">
+            <div style="display: flex; font-family: fantasy; width: 100%; overflow-x: scroll;">
+                <div
+                    style="min-width: 60%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
+                    <h2>Comment</h2>
+                    <p>A place where you comment on the major.</p>
+                </div>
+                <div
+                    style="min-width: 60%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
+                    <h2>Users</h2>
+                    <p>A place where you see the other user's details.</p>
+                </div>
+                <div
+                    style="min-width: 60%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
+                    <h2>Request</h2>
+                    <p>A place where you request to the admin.</p>
+                </div>
+                <div
+                    style="min-width: 60%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
+                    <h2>Analysis</h2>
+                    <p>A place where you see the popularity of the majors.</p>
+                </div>
+                <div
+                    style="min-width: 60%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
+                    <h2>Setting</h2>
+                    <p>A place where you update your user details.</p>
+                </div>
+                <div
+                    style="min-width: 60%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
+                    <h2>Contact us</h2>
+                    <p>A button that lets you email me.</p>
+                </div>
+                <div
+                    style="min-width: 60%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
+                    <h2>Like</h2>
+                    <p>You like the specific comment on the comment page.</p>
+                </div>
+                <div
+                    style="min-width: 60%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
+                    <h2>Reply</h2>
+                    <p>You reply to the specific comment on the comment page.</p>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -81,12 +167,12 @@ export default {
     },
     methods: {
         isMobile() {
-			if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-				return true
-			} else {
-				return false
-			}
-		},
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                return true
+            } else {
+                return false
+            }
+        },
         viewPage(page) {
             axios({
                 method: "POST",
