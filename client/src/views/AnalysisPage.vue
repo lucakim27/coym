@@ -1,19 +1,11 @@
 <template>
     <div id='container' v-if="!isMobile()">
         <div id='BothContainer'>
+
+            
             <div id='mostViewedContainer'>
-                <h1>Visit</h1>
-                <div class="mostViewedPages">
-                    <div class='eachRow' v-for="row in sortedMostVisitedTable" :key="row.name">
-                        <p>
-                            <a v-bind:href="'/comment?major=' + row.name">{{ row.name }}</a>: {{ row.view }}
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div id='mostCommentedContainer'>
                 <h1>Comment</h1>
-                <div class="mostCommentedPages">
+                <div class="mostViewedPages">
                     <div class='eachRow' v-for="row in sortedMostCommentedTable" :key="row.name">
                         <p>
                             <a v-bind:href="'/comment?major=' + row.name">{{ row.name }}
@@ -22,28 +14,43 @@
                     </div>
                 </div>
             </div>
+
+            <div id='mostCommentedContainer'>
+                <h1>Likes & Replies</h1>
+                <div class="mostCommentedPages">
+                    <div class='eachRow' v-for="row in sortedMostVisitedTable" :key="row.name">
+                        <p>
+                            <a v-bind:href="'/comment?major=' + row.name">{{ row.name }}
+                            </a>: {{ row.view }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+
         </div>
     </div>
     <!-- Mobile Web View -->
     <div v-if="isMobile()">
         <div id='mostViewedContainer' class="mobileMostViewedContainer">
-            <h1 class="mobileHeader">Visit</h1>
+            <h1 class="mobileHeader">Comment</h1>
             <div class="mostViewedPages">
-                <div class='eachRow' v-for="row in sortedMostVisitedTable" :key="row.name">
+                <div class='eachRow' v-for="row in sortedMostCommentedTable" :key="row.name">
                     <p>
                         <a v-bind:href="'/comment?major=' + row.name">{{ row.name }}
-                        </a>: {{ row.view }}
+                        </a>: {{ row.comment }}
                     </p>
                 </div>
             </div>
         </div>
         <div id='mostCommentedContainer' class="mobileMostCommentedContainer">
-            <h1 class="mobileHeader">Comment</h1>
+            <h1 class="mobileHeader">Likes & Replies</h1>
             <div class="mostCommentedPages">
-                <div class='eachRow' v-for="row in sortedMostCommentedTable" :key="row.name">
+                <div class='eachRow' v-for="row in sortedMostVisitedTable" :key="row.name">
                     <p>
                         <a v-bind:href="'/comment?major=' + row.name">{{ row.name }}
-                        </a>: {{ row.comment }}
+                        </a>: {{ row.view }}
                     </p>
                 </div>
             </div>

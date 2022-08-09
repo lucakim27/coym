@@ -53,22 +53,22 @@
       </div>
       <div class="onlineBody mobileBody">
         <div v-for="user in users" :key="user.username">
-          <div class='eachRow' v-if="user.username !== username">
+          <div class='eachRow'>
             <div class="row">
-              <div v-if="user.username !== null">
-                <a>{{ user.username }}</a>
-              </div>
-              <div v-if="user.username === null">Anonymous</div>
-              <div v-if="user.gender !== null">{{ user.gender }}</div>
+              <div><a>{{ user.username }}</a></div>
+              <div v-if="user.gender !== null && user.gender !== ''">{{ user.gender }}</div>
               <div v-if="user.gender === null">N/A</div>
-              <div v-if="user.country !== null">{{ user.country }}</div>
+              <div v-if="user.gender === ''">N/A</div>
+              <div v-if="user.country !== null && user.country !== ''">{{ user.country }}</div>
               <div v-if="user.country === null">N/A</div>
-              <div v-if="user.major !== null">{{ user.major }}</div>
+              <div v-if="user.country === ''">N/A</div>
+              <div v-if="user.major !== null && user.major !== ''">{{ user.major }}</div>
               <div v-if="user.major === null">N/A</div>
-              <div v-if="user.school !== null">{{ user.school }}</div>
+              <div v-if="user.major === ''">N/A</div>
+              <div v-if="user.school !== null && user.school !== ''">{{ user.school }}</div>
               <div v-if="user.school === null">N/A</div>
-              <div v-if="user.joinedAt !== null">{{ user.joinedAt.slice(0, 10) }}</div>
-              <div v-if="user.joinedAt === null">N/A</div>
+              <div v-if="user.school === ''">N/A</div>
+              <div>{{ user.joinedAt.slice(0, 10) }}</div>
             </div>
           </div>
         </div>
@@ -86,8 +86,7 @@
                           <path fill-rule="evenodd"
                             d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
                         </svg>
-                        <a v-if="user.username !== null">{{ user.username }}</a>
-                        <a v-if="user.username === null">Anonymous</a>
+                        <a>{{ user.username }}</a>
                     </p>
                     <p class="alignChild">
                       <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-gender-ambiguous"
@@ -95,8 +94,9 @@
                         <path fill-rule="evenodd"
                           d="M11.5 1a.5.5 0 0 1 0-1h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V1.707l-3.45 3.45A4 4 0 0 1 8.5 10.97V13H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V14H6a.5.5 0 0 1 0-1h1.5v-2.03a4 4 0 1 1 3.471-6.648L14.293 1H11.5zm-.997 4.346a3 3 0 1 0-5.006 3.309 3 3 0 0 0 5.006-3.31z" />
                       </svg>
-                      <a v-if="user.gender !== null">{{ user.gender }}</a>
+                      <a v-if="user.gender !== null && user.gender !== ''">{{ user.gender }}</a>
                       <a v-if="user.gender === null">N/A</a>
+                      <a v-if="user.gender === ''">N/A</a>
                     </p>
                     <p class="alignChild">
                       <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" viewBox="0 0 512 512">
@@ -114,8 +114,9 @@
                         <path
                           d="M256,72a184,184,0,1,1-130.1,53.9A182.77,182.77,0,0,1,256,72m0-40C132.3,32,32,132.3,32,256S132.3,480,256,480,480,379.7,480,256,379.7,32,256,32Z" />
                       </svg>
-                      <a v-if="user.country !== null">{{ user.country }}</a>
+                      <a v-if="user.country !== null && user.country !== ''">{{ user.country }}</a>
                       <a v-if="user.country === null">N/A</a>
+                      <a v-if="user.country === ''">N/A</a>
                     </p>
                     <p class="alignChild">
                       <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" viewBox="0 0 512 512">
@@ -128,8 +129,9 @@
                         <line x1="256" y1="320" x2="256" y2="448"
                           style="fill:#000;stroke:white;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" />
                       </svg>
-                      <a v-if="user.major !== null">{{ user.major }}</a>
+                      <a v-if="user.major !== null && user.major !== ''">{{ user.major }}</a>
                       <a v-if="user.major === null">N/A</a>
+                      <a v-if="user.major === ''">N/A</a>
                     </p>
                     <p class="alignChild">
                       <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" data-name="Layer 1"
@@ -137,8 +139,9 @@
                         <path
                           d="M21,10a.99974.99974,0,0,0,1-1V6a.9989.9989,0,0,0-.68359-.94824l-9-3a1.002,1.002,0,0,0-.63282,0l-9,3A.9989.9989,0,0,0,2,6V9a.99974.99974,0,0,0,1,1H4v7.18427A2.99507,2.99507,0,0,0,2,20v2a.99974.99974,0,0,0,1,1H21a.99974.99974,0,0,0,1-1V20a2.99507,2.99507,0,0,0-2-2.81573V10ZM20,21H4V20a1.001,1.001,0,0,1,1-1H19a1.001,1.001,0,0,1,1,1ZM6,17V10H8v7Zm4,0V10h4v7Zm6,0V10h2v7ZM4,8V6.7207l8-2.667,8,2.667V8Z" />
                       </svg>
-                      <a v-if="user.school !== null">{{ user.school }}</a>
+                      <a v-if="user.school !== null && user.school !== ''">{{ user.school }}</a>
                       <a v-if="user.school === null">N/A</a>
+                      <a v-if="user.school === ''">N/A</a>
                     </p>
                     <p class="alignChild">
                       <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" viewBox="0 0 512 512">

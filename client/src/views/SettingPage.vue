@@ -1,37 +1,53 @@
 <template>
     <div class='mainContainer' v-if="!isMobile()">
             <div class="twoContainer passwordContainer">
-                <div class="eachContainer">
+                <div class="eachContainer desktopContainer">
                     <h3>School</h3>
-                    <input type="text" placeholder="Your school..." v-model="school">
+                    <div class="centerChild">
+                        <input type="text" placeholder="Your school..." v-model="school">
+                    </div>
                 </div>
-                <div class="eachContainer">
+                <div class="eachContainer desktopContainer">
                     <h3>Gender</h3>
-                    <input type="text" placeholder="Your gender..." v-model="gender">
+                    <div class="centerChild">
+                        <input type="text" placeholder="Your gender..." v-model="gender">
+                    </div>
                 </div>
             </div>
             <div class="twoContainer passwordContainer">
-                <div class="eachContainer">
+                <div class="eachContainer desktopContainer">
                     <h3>Major</h3>
-                    <input type="text" placeholder="Your major..." v-model="major">
+                    <div class="centerChild">
+                        <input type="text" placeholder="Your major..." v-model="major">
+                    </div>
                 </div>
-                <div class="eachContainer">
+                <div class="eachContainer desktopContainer">
                     <h3>Country</h3>
-                    <input type="text" placeholder="Your country..." v-model="country">
+                    <div class="centerChild">
+                        <input type="text" placeholder="Your country..." v-model="country">
+                    </div>
                 </div>
             </div>
             <div class="twoContainer passwordContainer">
-                <div class="eachContainer">
+                <div class="eachContainer desktopContainer">
                     <h3>Password (*)</h3>
-                    <input type="password" placeholder="Your password..." v-model="password">
+                    <div class="centerChild">
+                        <input type="password" placeholder="Your password..." v-model="password">
+                    </div>
                 </div>
-                <div class="eachContainer">
+                <div class="eachContainer desktopContainer">
                     <h3>Password Confirm (*)</h3>
-                    <input type="password" placeholder="Your password confirm..." v-model="passwordConfirm">
+                    <div class="centerChild">
+                        <input type="password" placeholder="Your password confirm..." v-model="passwordConfirm">
+                    </div>
                 </div>
             </div>
-            <div class="btnContainer">
-                <button @click="updateUserDetails">Update</button>
+            <div class="twoContainer passwordContainer">
+                <div class="eachContainer desktopContainer">
+                    <div class="centerChild">
+                        <button @click="updateUserDetails">Update</button>
+                    </div>
+                </div>
             </div>
     </div>
     <div v-if="isMobile()">
@@ -72,8 +88,10 @@
                     <input type="password" placeholder="Your password confirm..." v-model="passwordConfirm">
                 </div>
             </div>
-            <div class="btnContainer">
-                <button @click="updateUserDetails">Update</button>
+            <div class="eachContainer">
+                <div class="centerChild">
+                    <button @click="updateUserDetails">Update</button>
+                </div>
             </div>
         </div>
     </div>

@@ -15,8 +15,10 @@
         <input type="text" placeholder="Type here..." v-model="content">
       </div>
     </div>
-    <div class="btnContainer">
-      <button @click="request">Request</button>
+    <div class="eachContainer">
+      <div class="centerChild">
+        <button @click="request">Request</button>
+      </div>
     </div>
   </div>
 </template>

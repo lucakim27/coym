@@ -1,5 +1,9 @@
 .mainContainer {
     margin-top: 20px;
+    background-color:rgb(146, 156, 161);
+    padding: 10px;
+    margin: 10px;
+    border-radius: 20px;
 }
 
 .eachContainer input {
@@ -10,19 +14,18 @@
     font-family: fantasy;
 }
 
-.btnContainer button {
+.eachContainer button {
     display: inline-block;
-    border-radius: 20px;
-    background: rgb(255, 255, 255);
+    background: #ffffff;
     color: rgb(0, 0, 0);
     font-family: fantasy;
     width: 100%;
+    border-radius: 20px;
     margin: 10px;
     padding: 20px;
-    border-color: black;
 }
 
-.btnContainer button:hover {
+.eachContainer button:hover {
     color: rgb(0, 136, 255);
     cursor: pointer;
 }
@@ -34,9 +37,8 @@
 }
 
 .eachContainer {
-    min-width: 45%;
     align-items: center;
-    background: rgb(146, 156, 161);
+    background: #595f62;
     padding: 20px;
     margin: 20px;
     border-radius: 20px;
@@ -49,8 +51,14 @@
 }
 
 .btnContainer {
-    justify-content: center;
-    display: flex;
+    position: fixed;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   /* width: 100%; */
+   /* background-color: red; */
+   color: white;
+   text-align: center;
     margin: 20px;
     padding: 20px;
 }

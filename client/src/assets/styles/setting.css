@@ -10,6 +10,14 @@
 
 .mainContainer {
     margin-top: 20px;
+    background-color:rgb(146, 156, 161);
+    padding: 20px;
+    margin: 20px;
+    border-radius: 20px;
+}
+
+.desktopContainer {
+    margin: 10px !important;
 }
 
 
@@ -21,10 +29,10 @@
     font-family: fantasy;
 }
 
-.btnContainer button {
+.eachContainer button {
     display: inline-block;
     border-radius: 20px;
-    background: rgba(255, 255, 255, 0.478);
+    background: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
     font-family: fantasy;
     width: 100%;
@@ -33,7 +41,7 @@
     border-color: black;
 }
 
-.btnContainer button:hover {
+.eachContainer button:hover {
     color: rgb(0, 136, 255);
     cursor: pointer;
 }
@@ -41,24 +49,19 @@
 .twoContainer {
     justify-content: center;
     display: flex;
-    margin: 10px;
 }
 
 .passwordContainer {
     background: rgb(146, 156, 161);
     border-radius: 20px;
-    padding: 20px;
-    margin: 20px;
-    margin-left: 40px;
-    margin-right: 40px;
 }
 
 .eachContainer {
     min-width: 45%;
     align-items: center;
-    background: rgb(146, 156, 161);
-    padding: 10px;
-    margin: 10px;
+    background: #595f62;
+    padding: 20px;
+    margin: 20px;
     border-radius: 20px;
 }
 
@@ -81,9 +84,11 @@
 .mobileContainer {
     overflow: hidden;
     /* height: auto; */
-    min-width: 100% !important;
-    /* padding: 20px; */
-    /* margin: 10px; */
+    min-width: auto !important;
+    padding: 10px;
+    background:rgb(146, 156, 161);
+    border-radius: 20px;
+    margin: 10px;
     margin-bottom:30px;
 }
 

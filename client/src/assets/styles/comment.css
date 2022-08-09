@@ -34,7 +34,7 @@
 }
 
 #userInput {
-  text-align: center;
+  text-align: left;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -132,7 +132,7 @@
   margin: 8px;
   padding: 12px 20px;
   border-radius: 20px;
-  text-align: center;
+  text-align: left;
 }
 
 .replyContainer button {
