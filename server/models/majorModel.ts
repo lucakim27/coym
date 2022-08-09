@@ -300,8 +300,8 @@ export const createMajorsTable = function (pool: any) {
 
     const majorsTableDuplicationQuery = `SELECT table_name
         FROM information_schema.tables
-        WHERE table_schema = 'coym'
-        AND table_name = 'majors'
+        WHERE table_schema = "coym"
+        AND table_name = "majors"
     `
 
     const createMajorsQuery = `CREATE TABLE IF NOT EXISTS 
@@ -323,16 +323,28 @@ export const createMajorsTable = function (pool: any) {
     }
 
     pool.getConnection(function (err: any, connection: any) {
-        if (err) throw err
+        if (err) {
+            connection.release()
+            throw err
+        }
         connection.query(majorsTableDuplicationQuery, function (err: any, result: any) {
-            if (err) throw err
+            if (err) {
+                connection.release()
+                throw err
+            }
             if (!result.length) {
                 connection.query(createMajorsQuery, function (err: any, result: any) {
-                    if (err) throw err
+                    if (err) {
+                        connection.release()
+                        throw err
+                    }
                 })
                 for (var i = 0; i < majorsList.length; i++) {
                     connection.query(insertMajorsQuery(i), function (err: any, result: any) {
-                        if (err) throw err
+                        if (err) {
+                            connection.release()
+                            throw err
+                        }
                     })
                 }
             }
@@ -349,9 +361,15 @@ export const getMajorList = function (pool: any, res: any, req: any) {
     `
 
     pool.getConnection(function (err: any, connection: any) {
-        if (err) throw err
+        if (err) {
+            connection.release()
+            throw err
+        }
         connection.query(selectMajorsQuery, function (err: any, result: any, fields: any) {
-            if (err) throw err
+            if (err) {
+                connection.release()
+                throw err
+            }
             res.send({ 
                 status: true, 
                 message: result 

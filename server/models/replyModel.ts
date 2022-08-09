@@ -23,12 +23,21 @@ export const createReplyTable = function (pool: any) {
     `
 
     pool.getConnection(function (err: any, connection: any) {
-        if (err) throw err
+        if (err) {
+            connection.release()
+            throw err
+        }
         connection.query(replyTableDuplicationQuery, function (err: any, result: any) {
-            if (err) throw err
+            if (err) {
+                connection.release()
+                throw err
+            }
             if (!result.length) {
                 connection.query(createReplyQuery, function (err: any, result: any) {
-                    if (err) throw err
+                    if (err) {
+                        connection.release()
+                        throw err
+                    }
                 })
             }
         })
@@ -47,9 +56,15 @@ export const getReply = function (pool: any, res: any, req: any) {
     `
 
     pool.getConnection(function (err: any, connection: any) {
-        if (err) throw err
+        if (err) {
+            connection.release()
+            throw err
+        }
         connection.query(selectReplyQuery, function (err: any, result: any, fields: any) {
-            if (err) throw err
+            if (err) {
+                connection.release()
+                throw err
+            }
             res.send({ 
                 status: true, 
                 message: result 
@@ -70,18 +85,24 @@ export const postReply = function (pool: any, res: any, req: any) {
             reply,
             createdAt
         ) VALUES (
-            (SELECT id FROM majors WHERE name = '${req.body.page}'), 
-            (SELECT id FROM accounts WHERE username = '${req.body.username}'), 
-            (SELECT id FROM comments WHERE comment = '${req.body.comment}'), 
-            '${req.body.reply}',
-            '${new Date().toISOString().slice(0, 19).replace('T', ' ')}'
+            (SELECT id FROM majors WHERE name = "${req.body.page}"), 
+            (SELECT id FROM accounts WHERE username = "${req.body.username}"), 
+            (SELECT id FROM comments WHERE comment = "${req.body.comment}"), 
+            "${req.body.reply}",
+            "${new Date().toISOString().slice(0, 19).replace('T', ' ')}"
         )
     `
 
     pool.getConnection(function (err: any, connection: any) {
-        if (err) throw err
+        if (err) {
+            connection.release()
+            throw err
+        }
         connection.query(insertReplyQuery, function (err: any, result: any) {
-            if (err) throw err
+            if (err) {
+                connection.release()
+                throw err
+            }
             res.send({ 
                 status: true, 
                 message: 'You have successfully replied.'

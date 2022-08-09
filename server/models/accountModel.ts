@@ -2,8 +2,8 @@ export const createAccountsTable = function (pool: any) {
 
     const tableDuplicationQuery = `SELECT table_name
         FROM information_schema.tables
-        WHERE table_schema = 'coym'
-        AND table_name = 'accounts';
+        WHERE table_schema = "coym"
+        AND table_name = "accounts";
     `
 
     const createAccountsTableQuery = `CREATE TABLE 
@@ -22,12 +22,21 @@ export const createAccountsTable = function (pool: any) {
     `
 
     pool.getConnection(function (err: any, connection: any) {
-        if (err) throw err
+        if (err) {
+            connection.release()
+            throw err
+        }
         connection.query(tableDuplicationQuery, function (err: any, result: any) {
-            if (err) throw err
+            if (err) {
+                connection.release()
+                throw err
+            }
             if (!result.length) {
                 connection.query(createAccountsTableQuery, function (err: any, result: any) {
-                    if (err) throw err
+                    if (err) {
+                        connection.release()
+                        throw err
+                    }
                 })
             }
         })
@@ -45,17 +54,23 @@ export const addAccount = function (pool: any, username: any, password: any) {
                 password,
                 createdAt
             ) VALUES (
-                '${username}', 
-                '${password}',
-                '${new Date().toISOString().slice(0, 19).replace('T', ' ')}'
+                "${username}", 
+                "${password}",
+                "${new Date().toISOString().slice(0, 19).replace('T', ' ')}"
             )
         `
     }
 
     pool.getConnection(function (err: any, connection: any) {
-        if (err) throw err
+        if (err) {
+            connection.release()
+            throw err
+        }
         connection.query(insertAccountsQuery(username, password), function (err: any, result: any) {
-            if (err) throw err
+            if (err) {
+                connection.release()
+                throw err
+            }
         })
         connection.release()
     })
@@ -81,9 +96,15 @@ export const authSignUp = function (pool: any, res: any, req: any) {
         })
     } else {
         pool.getConnection(function (err: any, connection: any) {
-            if (err) throw err
+            if (err) {
+                connection.release()
+                throw err
+            }
             connection.query(selectAccountsQuery, function (err: any, result: any, fields: any) {
-                if (err) throw err
+                if (err) {
+                    connection.release()
+                    throw err
+                }
                 if (result.length !== 0) {
                     var existing = false
                     for (var i = 0; i < result.length; i++) {
@@ -121,9 +142,15 @@ export const authSignIn = function (pool: any, res: any, req: any) {
     const selectAccountsQuery = "SELECT * FROM accounts"
 
     pool.getConnection(function (err: any, connection: any) {
-        if (err) throw err
+        if (err) {
+            connection.release()
+            throw err
+        }
         connection.query(selectAccountsQuery, function (err: any, result: any, fields: any) {
-            if (err) throw err
+            if (err) {
+                connection.release()
+                throw err
+            }
             var existing = false
             for (var i = 0; i < result.length; i++) {
                 if (req.query.username === result[i].username && req.query.password === result[i].password) {
@@ -151,9 +178,15 @@ export const cookieValidation = function (pool: any, res: any, req: any) {
     const selectAccountsQuery = "SELECT * FROM accounts"
 
     pool.getConnection(function (err: any, connection: any) {
-        if (err) throw err
+        if (err) {
+            connection.release()
+            throw err
+        }
         connection.query(selectAccountsQuery, function (err: any, result: any, fields: any) {
-            if (err) throw err
+            if (err) {
+                connection.release()
+                throw err
+            }
             var existing = false
             for (var i = 0; i < result.length; i++) {
                 if (req.query.username === result[i].username && req.query.password === result[i].password) {
@@ -178,13 +211,19 @@ export const cookieValidation = function (pool: any, res: any, req: any) {
 export const getUserDetails = function (pool: any, res: any, req: any) {
 
     const selectAccountsQuery = `SELECT * FROM accounts 
-        WHERE username = '${req.query.username}'
+        WHERE username = "${req.query.username}"
     `
 
     pool.getConnection(function (err: any, connection: any) {
-        if (err) throw err
+        if (err) {
+            connection.release()
+            throw err
+        }
         connection.query(selectAccountsQuery, function (err: any, result: any, fields: any) {
-            if (err) throw err
+            if (err) {
+                connection.release()
+                throw err
+            }
             res.send({
                 status: true,
                 userDetails: {
@@ -214,9 +253,15 @@ export const updateUserDetails = function (pool: any, res: any, req: any) {
     `
 
     pool.getConnection(function (err: any, connection: any) {
-        if (err) throw err
+        if (err) {
+            connection.release()
+            throw err
+        }
         connection.query(updateAllDetailsQuery, function (err: any, result: any, fields: any) {
-            if (err) throw err
+            if (err) {
+                connection.release()
+                throw err
+            }
             if (result.changedRows === 0) {
                 res.send({
                     status: false,
@@ -239,9 +284,15 @@ export const getAllUsers = function (pool: any, res: any, req: any) {
     const getAllUsers = `SELECT * FROM accounts`
 
     pool.getConnection(function (err: any, connection: any) {
-        if (err) throw err
+        if (err) {
+            connection.release()
+            throw err
+        }
         connection.query(getAllUsers, function (err: any, result: any, fields: any) {
-            if (err) throw err
+            if (err) {
+                connection.release()
+                throw err
+            }
             res.send({
                 status: true,
                 data: result

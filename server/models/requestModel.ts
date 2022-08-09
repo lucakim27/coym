@@ -2,8 +2,8 @@ export const createRequestsTable = function (pool: any) {
 
     const tableDuplicationQuery = `SELECT table_name
         FROM information_schema.tables
-        WHERE table_schema = 'coym'
-        AND table_name = 'requests';
+        WHERE table_schema = "coym"
+        AND table_name = "requests";
     `
 
     const createRequestsTableQuery = `CREATE TABLE 
@@ -18,12 +18,21 @@ export const createRequestsTable = function (pool: any) {
     `
 
     pool.getConnection(function (err: any, connection: any) {
-        if (err) throw err
+        if (err) {
+            connection.release()
+            throw err
+        }
         connection.query(tableDuplicationQuery, function (err: any, result: any) {
-            if (err) throw err
+            if (err) {
+                connection.release()
+                throw err
+            }
             if (!result.length) {
                 connection.query(createRequestsTableQuery, function (err: any, result: any) {
-                    if (err) throw err
+                    if (err) {
+                        connection.release()
+                        throw err
+                    }
                 })
             }
         })
@@ -41,17 +50,23 @@ export const postRequest = function (pool: any, res: any, req: any) {
             content, 
             createdAt
         ) VALUES (
-            '${req.body.username}',
-            '${req.body.type}',
-            '${req.body.content}',
-            '${new Date().toISOString().slice(0, 19).replace('T', ' ')}'
+            "${req.body.username}",
+            "${req.body.type}",
+            "${req.body.content}",
+            "${new Date().toISOString().slice(0, 19).replace('T', ' ')}"
         )
     `
 
     pool.getConnection(function (err: any, connection: any) {
-        if (err) throw err
+        if (err) {
+            connection.release()
+            throw err
+        }
         connection.query(insertRequestQuery, function (err: any, result: any) {
-            if (err) throw err
+            if (err) {
+                connection.release()
+                throw err
+            }
             res.send({ 
                 status: true, 
                 message: 'You have successfully requested.' 

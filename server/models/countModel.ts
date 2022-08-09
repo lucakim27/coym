@@ -2,8 +2,8 @@ export const createCountsTable = function (pool: any) {
 
     const countsTableDuplicationQuery = `SELECT table_name
         FROM information_schema.tables
-        WHERE table_schema = 'coym'
-        AND table_name = 'counts'
+        WHERE table_schema = "coym"
+        AND table_name = "counts"
     `
 
     const createCountsTableQuery = `CREATE TABLE 
@@ -20,12 +20,21 @@ export const createCountsTable = function (pool: any) {
     `
 
     pool.getConnection(function (err: any, connection: any) {
-        if (err) throw err
+        if (err) {
+            connection.release()
+            throw err
+        }
         connection.query(countsTableDuplicationQuery, function (err: any, result: any) {
-            if (err) throw err
+            if (err) {
+                connection.release()
+                throw err
+            }
             if (!result.length) {
                 connection.query(createCountsTableQuery, function (err: any, result: any) {
-                    if (err) throw err
+                    if (err) {
+                        connection.release()
+                        throw err
+                    }
                 })
             }
         })
@@ -43,25 +52,34 @@ export const postCount = function (pool: any, res: any, req: any) {
             comment,
             createdAt
         ) VALUES(
-            (SELECT id FROM majors WHERE name = '${req.body.page}'),
+            (SELECT id FROM majors WHERE name = "${req.body.page}"),
             0, 
             0,
-            '${new Date().toISOString().slice(0, 19).replace('T', ' ')}'
+            "${new Date().toISOString().slice(0, 19).replace('T', ' ')}"
         )
     `
 
     const updateCountsQuery = `UPDATE counts 
         SET ${req.body.type} = ${req.body.type} + 1 
-        WHERE majorID = (SELECT id FROM majors WHERE name = '${req.body.page}')
+        WHERE majorID = (SELECT id FROM majors WHERE name = "${req.body.page}")
     `
 
     pool.getConnection(function (err: any, connection: any) {
-        if (err) throw err
+        if (err) {
+            connection.release()
+            throw err
+        }
         connection.query(insertCountsQuery, function (err: any, result: any) {
-            if (err) throw err
+            if (err) {
+                connection.release()
+                throw err
+            }
         })
         connection.query(updateCountsQuery, function (err: any, result: any) {
-            if (err) throw err
+            if (err) {
+                connection.release()
+                throw err
+            }
         })
         connection.release()
     })
@@ -75,12 +93,18 @@ export const getCount = function (pool: any, res: any, req: any) {
     `
 
     pool.getConnection(function (err: any, connection: any) {
-        if (err) throw err
+        if (err) {
+            connection.release()
+            throw err
+        }
         connection.query(selectCountsQuery, function (err: any, result: any, fields: any) {
-            if (err) throw err
-            res.send({ 
-                status: true, 
-                message: result 
+            if (err) {
+                connection.release()
+                throw err
+            }
+            res.send({
+                status: true,
+                message: result
             })
         })
         connection.release()

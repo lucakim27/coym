@@ -2,8 +2,8 @@ export const createCommentsTable = function (pool: any) {
 
     const commentsTableDuplicationQuery = `SELECT table_name
         FROM information_schema.tables
-        WHERE table_schema = 'coym'
-        AND table_name = 'comments'
+        WHERE table_schema = "coym"
+        AND table_name = "comments"
     `
 
     const createCommentsTableQuery = `CREATE TABLE IF NOT EXISTS 
@@ -21,12 +21,21 @@ export const createCommentsTable = function (pool: any) {
     `
 
     pool.getConnection(function (err: any, connection: any) {
-        if (err) throw err
+        if (err) {
+            connection.release()
+            throw err
+        }
         connection.query(commentsTableDuplicationQuery, function (err: any, result: any) {
-            if (err) throw err
+            if (err) {
+                connection.release()
+                throw err
+            }
             if (!result.length) {
                 connection.query(createCommentsTableQuery, function (err: any, result: any) {
-                    if (err) throw err
+                    if (err) {
+                        connection.release()
+                        throw err
+                    }
                 })
             }
         })
@@ -41,16 +50,22 @@ export const getComment = function (pool: any, res: any, req: any) {
     const selectCommentsTableQuery = `SELECT a.username, c.comment, c.createdAt, m.name FROM comments c
         inner join accounts a on a.id = c.userID
         inner join majors m on m.id = c.majorID
-        WHERE m.name = '${req.query.page}'
+        WHERE m.name = "${req.query.page}"
     `
-    
+
     pool.getConnection(function (err: any, connection: any) {
-        if (err) throw err
+        if (err) {
+            connection.release()
+            throw err
+        }
         connection.query(selectCommentsTableQuery, function (err: any, result: any, fields: any) {
-            if (err) throw err
-            res.send({ 
-                status: true, 
-                message: result 
+            if (err) {
+                connection.release()
+                throw err
+            }
+            res.send({
+                status: true,
+                message: result
             })
         })
         connection.release()
@@ -60,7 +75,7 @@ export const getComment = function (pool: any, res: any, req: any) {
 export const postComment = function (pool: any, res: any, req: any) {
 
     const selectCommentsTableQuery = `SELECT * FROM comments 
-        WHERE majorID = (SELECT id FROM majors WHERE name = '${req.body.page}')
+        WHERE majorID = (SELECT id FROM majors WHERE name = "${req.body.page}")
     `
 
     const insertCommentsTableQuery = `INSERT INTO 
@@ -70,32 +85,41 @@ export const postComment = function (pool: any, res: any, req: any) {
             userID, 
             createdAt
         ) VALUES (
-            '${req.body.comment}', 
-            (SELECT id FROM majors WHERE name = '${req.body.page}'), 
-            (SELECT id FROM accounts WHERE username = '${req.body.username}'), 
-            '${new Date().toISOString().slice(0, 19).replace('T', ' ')}'
+            "${req.body.comment}", 
+            (SELECT id FROM majors WHERE name = "${req.body.page}"), 
+            (SELECT id FROM accounts WHERE username = "${req.body.username}"), 
+            "${new Date().toISOString().slice(0, 19).replace('T', ' ')}"
         )
     `
 
     pool.getConnection(function (err: any, connection: any) {
-        if (err) throw err
+        if (err) {
+            connection.release()
+            throw err
+        }
         connection.query(selectCommentsTableQuery, function (err: any, result: any) {
-            if (err) throw err
+            if (err) {
+                connection.release()
+                throw err
+            }
             var existing = false
             for (var i = 0; i < result.length; i++) {
                 if (req.body.comment === result[i].comment) {
                     existing = true
-                    res.send({ 
-                        status: false 
+                    res.send({
+                        status: false
                     })
                 }
             }
             if (!existing) {
                 connection.query(insertCommentsTableQuery, function (err: any, result: any) {
-                    if (err) throw err
-                    res.send({ 
-                        status: true, 
-                        page: req.body.page 
+                    if (err) {
+                        connection.release()
+                        throw err
+                    }
+                    res.send({
+                        status: true,
+                        page: req.body.page
                     })
                 })
             }
