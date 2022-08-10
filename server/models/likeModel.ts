@@ -49,12 +49,16 @@ export const postLike = function (pool: any, res: any, req: any) {
         inner join accounts a on a.id = l.userID
         inner join majors m on m.id = l.majorID
         inner join comments c on c.id = l.commentID
-        WHERE m.name = "${req.body.page}"
+        WHERE m.name = ?
     `
 
+    const paramsForSelectLikesQuery = [req.body.page]
+
     const deleteLikesColumnQuery = `DELETE FROM likes 
-        WHERE commentID = (SELECT id FROM comments WHERE comment = "${req.body.comment}")
+        WHERE commentID = (SELECT id FROM comments WHERE comment = ?)
     `
+
+    const paramsForDeleteLikesColumnQuery = [req.body.comment]
 
     const insertLikesQuery = `INSERT INTO 
         likes (
@@ -62,19 +66,20 @@ export const postLike = function (pool: any, res: any, req: any) {
             majorID, 
             userID
         ) VALUES (
-            (SELECT id FROM comments WHERE comment = "${req.body.comment}"), 
-            (SELECT id FROM majors WHERE name = "${req.body.page}"), 
-            (SELECT id FROM accounts WHERE username = "${req.body.username}")
+            (SELECT id FROM comments WHERE comment = ?), 
+            (SELECT id FROM majors WHERE name = ?), 
+            (SELECT id FROM accounts WHERE username = ?)
         )
     `
 
-    // how do i check if the like is duplicated?
+    const paramsForInsertLikesQuery = [req.body.comment, req.body.page, req.body.username]
+
     pool.getConnection(function (err: any, connection: any) {
         if (err) {
             connection.release()
             throw err
         }
-        connection.query(selectLikesQuery, function (err: any, result: any) {
+        connection.query(selectLikesQuery, paramsForSelectLikesQuery, function (err: any, result: any) {
             if (err) {
                 connection.release()
                 throw err
@@ -83,7 +88,7 @@ export const postLike = function (pool: any, res: any, req: any) {
             for (var i = 0; i < result.length; i++) {
                 if (req.body.comment === result[i].comment && req.body.username === result[i].username) {
                     existing = true
-                    connection.query(deleteLikesColumnQuery, function (err: any, result: any) {
+                    connection.query(deleteLikesColumnQuery, paramsForDeleteLikesColumnQuery, function (err: any, result: any) {
                         if (err) {
                             connection.release()
                             throw err
@@ -96,7 +101,7 @@ export const postLike = function (pool: any, res: any, req: any) {
                 }
             }
             if (!existing) {
-                connection.query(insertLikesQuery, function (err: any, result: any) {
+                connection.query(insertLikesQuery, paramsForInsertLikesQuery, function (err: any, result: any) {
                     if (err) {
                         connection.release()
                         throw err
@@ -119,15 +124,17 @@ export const getLike = function (pool: any, res: any, req: any) {
         inner join accounts a on a.id = l.userID
         inner join majors m on m.id = l.majorID
         inner join comments c on c.id = l.commentID
-        WHERE m.name = "${req.query.page}"
+        WHERE m.name = ?
     `
+    
+    const paramsForSelectLikesQuery = [req.query.page]
 
     pool.getConnection(function (err: any, connection: any) {
         if (err) {
             connection.release()
             throw err
         }
-        connection.query(selectLikesQuery, function (err: any, result: any, fields: any) {
+        connection.query(selectLikesQuery, paramsForSelectLikesQuery, function (err: any, result: any, fields: any) {
             if (err) {
                 connection.release()
                 throw err

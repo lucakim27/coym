@@ -49,15 +49,17 @@ export const getComment = function (pool: any, res: any, req: any) {
     const selectCommentsTableQuery = `SELECT a.username, c.comment, c.createdAt, m.name FROM comments c
         inner join accounts a on a.id = c.userID
         inner join majors m on m.id = c.majorID
-        WHERE m.name = "${req.query.page}"
+        WHERE m.name = ?
     `
+
+    const paramForSelectCommentsTableQuery = [req.query.page]
 
     pool.getConnection(function (err: any, connection: any) {
         if (err) {
             connection.release()
             throw err
         }
-        connection.query(selectCommentsTableQuery, function (err: any, result: any, fields: any) {
+        connection.query(selectCommentsTableQuery, paramForSelectCommentsTableQuery, function (err: any, result: any, fields: any) {
             if (err) {
                 connection.release()
                 throw err
@@ -101,8 +103,10 @@ export const getCommentCount = function (pool: any, res: any, req: any) {
 export const postComment = function (pool: any, res: any, req: any) {
 
     const selectCommentsTableQuery = `SELECT * FROM comments 
-        WHERE majorID = (SELECT id FROM majors WHERE name = "${req.body.page}")
+        WHERE majorID = (SELECT id FROM majors WHERE name = ?)
     `
+
+    const paramsForSelectCommentsTableQuery = [req.body.page]
 
     const insertCommentsTableQuery = `INSERT INTO 
         comments (
@@ -111,19 +115,21 @@ export const postComment = function (pool: any, res: any, req: any) {
             userID, 
             createdAt
         ) VALUES (
-            "${req.body.comment}", 
-            (SELECT id FROM majors WHERE name = "${req.body.page}"), 
-            (SELECT id FROM accounts WHERE username = "${req.body.username}"), 
-            "${new Date().toISOString().slice(0, 19).replace('T', ' ')}"
+            ?, 
+            (SELECT id FROM majors WHERE name = ?), 
+            (SELECT id FROM accounts WHERE username = ?), 
+            ?
         )
     `
+
+    const paramsForInsertCommentsTableQuery = [req.body.comment, req.body.page, req.body.username, new Date().toISOString().slice(0, 19).replace('T', ' ')]
 
     pool.getConnection(function (err: any, connection: any) {
         if (err) {
             connection.release()
             throw err
         }
-        connection.query(selectCommentsTableQuery, function (err: any, result: any) {
+        connection.query(selectCommentsTableQuery, paramsForSelectCommentsTableQuery, function (err: any, result: any) {
             if (err) {
                 connection.release()
                 throw err
@@ -138,7 +144,7 @@ export const postComment = function (pool: any, res: any, req: any) {
                 }
             }
             if (!existing) {
-                connection.query(insertCommentsTableQuery, function (err: any, result: any) {
+                connection.query(insertCommentsTableQuery, paramsForInsertCommentsTableQuery, function (err: any, result: any) {
                     if (err) {
                         connection.release()
                         throw err

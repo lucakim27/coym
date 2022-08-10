@@ -52,15 +52,17 @@ export const getReply = function (pool: any, res: any, req: any) {
         inner join accounts a on a.id = r.userID
         inner join majors m on m.id = r.majorID
         inner join comments c on c.id = r.commentID
-        WHERE m.name = '${req.query.page}'
+        WHERE m.name = ?
     `
+
+    const paramsForSelectReplyQuery = [req.query.page]
 
     pool.getConnection(function (err: any, connection: any) {
         if (err) {
             connection.release()
             throw err
         }
-        connection.query(selectReplyQuery, function (err: any, result: any, fields: any) {
+        connection.query(selectReplyQuery, paramsForSelectReplyQuery, function (err: any, result: any, fields: any) {
             if (err) {
                 connection.release()
                 throw err
@@ -91,9 +93,9 @@ export const getReplyCount = function (pool: any, res: any, req: any) {
                 connection.release()
                 throw err
             }
-            res.send({ 
-                status: true, 
-                message: result 
+            res.send({
+                status: true,
+                message: result
             })
         })
         connection.release()

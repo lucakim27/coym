@@ -50,19 +50,21 @@ export const postRequest = function (pool: any, res: any, req: any) {
             content, 
             createdAt
         ) VALUES (
-            "${req.body.username}",
-            "${req.body.type}",
-            "${req.body.content}",
-            "${new Date().toISOString().slice(0, 19).replace('T', ' ')}"
+            ?,
+            ?,
+            ?,
+            ?
         )
     `
+    
+    const paramsForInsertRequestQuery = [req.body.username, req.body.type, req.body.content, new Date().toISOString().slice(0, 19).replace('T', ' ')]
 
     pool.getConnection(function (err: any, connection: any) {
         if (err) {
             connection.release()
             throw err
         }
-        connection.query(insertRequestQuery, function (err: any, result: any) {
+        connection.query(insertRequestQuery, paramsForInsertRequestQuery, function (err: any, result: any) {
             if (err) {
                 connection.release()
                 throw err

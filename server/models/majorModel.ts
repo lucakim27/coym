@@ -356,9 +356,7 @@ export const createMajorsTable = function (pool: any) {
 
 export const getMajorList = function (pool: any, res: any, req: any) {
 
-    const selectMajorsQuery = `SELECT * 
-        FROM majors
-    `
+    const selectMajorsQuery = `SELECT * FROM majors`
 
     pool.getConnection(function (err: any, connection: any) {
         if (err) {

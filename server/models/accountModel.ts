@@ -47,26 +47,26 @@ export const createAccountsTable = function (pool: any) {
 
 export const addAccount = function (pool: any, username: any, password: any) {
 
-    const insertAccountsQuery = function (username: any, password: any) {
-        return `INSERT INTO
-            accounts (
-                username, 
-                password,
-                createdAt
-            ) VALUES (
-                "${username}", 
-                "${password}",
-                "${new Date().toISOString().slice(0, 19).replace('T', ' ')}"
-            )
-        `
-    }
+    const insertAccountsQuery = `INSERT INTO
+        accounts (
+            username, 
+            password,
+            createdAt
+        ) VALUES (
+            ?, 
+            ?,
+            ?
+        )
+    `
+    
+    const paramsForInsertAccountsQuery = [username, password, new Date().toISOString().slice(0, 19).replace('T', ' ')]
 
     pool.getConnection(function (err: any, connection: any) {
         if (err) {
             connection.release()
             throw err
         }
-        connection.query(insertAccountsQuery(username, password), function (err: any, result: any) {
+        connection.query(insertAccountsQuery, paramsForInsertAccountsQuery, function (err: any, result: any) {
             if (err) {
                 connection.release()
                 throw err
@@ -87,7 +87,7 @@ const validateSignUp = function (username: any, password: any, passwordConfirm: 
 
 export const authSignUp = function (pool: any, res: any, req: any) {
 
-    const selectAccountsQuery = "SELECT * FROM accounts"
+    const selectAccountsQuery = "SELECT username, password FROM accounts"
 
     if (validateSignUp(req.body.username, req.body.password, req.body.passwordConfirm)) {
         res.send({
@@ -139,7 +139,7 @@ export const authSignUp = function (pool: any, res: any, req: any) {
 
 export const authSignIn = function (pool: any, res: any, req: any) {
 
-    const selectAccountsQuery = "SELECT * FROM accounts"
+    const selectAccountsQuery = "SELECT username, password FROM accounts"
 
     pool.getConnection(function (err: any, connection: any) {
         if (err) {
@@ -175,7 +175,7 @@ export const authSignIn = function (pool: any, res: any, req: any) {
 
 export const cookieValidation = function (pool: any, res: any, req: any) {
 
-    const selectAccountsQuery = "SELECT * FROM accounts"
+    const selectAccountsQuery = "SELECT username, password FROM accounts"
 
     pool.getConnection(function (err: any, connection: any) {
         if (err) {
@@ -211,15 +211,17 @@ export const cookieValidation = function (pool: any, res: any, req: any) {
 export const getUserDetails = function (pool: any, res: any, req: any) {
 
     const selectAccountsQuery = `SELECT * FROM accounts 
-        WHERE username = "${req.query.username}"
+        WHERE username = ?
     `
+
+    const paramsForSelectAccountsQuery = [req.query.username]
 
     pool.getConnection(function (err: any, connection: any) {
         if (err) {
             connection.release()
             throw err
         }
-        connection.query(selectAccountsQuery, function (err: any, result: any, fields: any) {
+        connection.query(selectAccountsQuery, paramsForSelectAccountsQuery, function (err: any, result: any, fields: any) {
             if (err) {
                 connection.release()
                 throw err
@@ -243,21 +245,23 @@ export const getUserDetails = function (pool: any, res: any, req: any) {
 export const updateUserDetails = function (pool: any, res: any, req: any) {
 
     const updateAllDetailsQuery = `UPDATE accounts
-        SET username = "${req.body.username}",
-            gender = "${req.body.gender}",
-            school = "${req.body.school}",
-            country = "${req.body.country}",
-            major = "${req.body.major}",
-            updatedAt = "${new Date().toISOString().slice(0, 19).replace('T', ' ')}"
-        WHERE username = "${req.body.username}" AND password = "${req.body.password}"
+        SET username = ?,
+            gender = ?,
+            school = ?,
+            country = ?,
+            major = ?,
+            updatedAt = ?
+        WHERE username = ? AND password = ?
     `
+
+    const paramsForUpdateAllDetailsQuery = [req.body.username, req.body.gender, req.body.school, req.body.country, req.body.major, new Date().toISOString().slice(0, 19).replace('T', ' '), req.body.username, req.body.password]
 
     pool.getConnection(function (err: any, connection: any) {
         if (err) {
             connection.release()
             throw err
         }
-        connection.query(updateAllDetailsQuery, function (err: any, result: any, fields: any) {
+        connection.query(updateAllDetailsQuery, paramsForUpdateAllDetailsQuery, function (err: any, result: any, fields: any) {
             if (err) {
                 connection.release()
                 throw err
@@ -281,7 +285,7 @@ export const updateUserDetails = function (pool: any, res: any, req: any) {
 
 export const getAllUsers = function (pool: any, res: any, req: any) {
 
-    const getAllUsers = `SELECT * FROM accounts`
+    const getAllUsers = `SELECT username, gender, country, major, school, createdAt FROM accounts`
 
     pool.getConnection(function (err: any, connection: any) {
         if (err) {
