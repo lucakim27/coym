@@ -9,10 +9,11 @@
   box-sizing: border-box;
   border-radius: 20px;
   border: 1px solid rgb(0, 0, 0);
+  font-family: fantasy;
 }
 
 #commentBtn:hover {
-  color: rgb(0, 136, 255) !important;
+  color: rgb(184, 184, 184);
 }
 
 .closeBtn {
@@ -26,11 +27,12 @@
   box-sizing: border-box;
   border-radius: 20px;
   border: 1px solid rgb(0, 0, 0);
+  font-family: fantasy;
 }
 
 .closeBtn:hover,
 .replyCloseBtn:hover {
-  color: rgb(255, 25, 0);
+  color: rgb(184, 184, 184);
 }
 
 #userInput {
@@ -43,6 +45,7 @@
   box-sizing: border-box;
   width: 100%;
   border-radius: 20px;
+  height: 150px !important;
 }
 
 #container {
@@ -109,6 +112,7 @@
   cursor: pointer;
   padding: 10px;
   border-color: rgb(146, 156, 161);
+  font-family: fantasy;
 }
 
 .replyContainer,
@@ -127,12 +131,13 @@
   margin-top: 10px;
 }
 
-.replyContainer input {
+.replyContainer textarea {
   width: 70%;
   margin: 8px;
   padding: 12px 20px;
   border-radius: 20px;
   text-align: left;
+  height: 100px !important;
 }
 
 .replyContainer button {
@@ -147,6 +152,6 @@
 
 button:hover,
 #commentBtn:hover {
-  color: rgb(98, 203, 255);
+  color: rgb(184, 184, 184);
   cursor: pointer;
 }

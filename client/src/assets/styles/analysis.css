@@ -1,5 +1,6 @@
 #container {
-    text-align: center;
+    text-align: left;
+    font-family: fantasy;
 }
 
 #BothContainer {
@@ -18,7 +19,7 @@
 }
 
 .mostViewedPages {
-    height: 70vh;
+    height: 83vh;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -48,6 +49,7 @@
     background: rgb(89, 95, 98);
     border-radius: 20px;
     margin: 10px;
+    font-family: fantasy;
 }
 
 .eachRow div {
@@ -61,7 +63,7 @@
 }
 
 .eachRow div a:hover {
-    color: rgb(98, 203, 255);
+    color: rgb(255, 255, 255);
 }
 
 .mobileMostViewedContainer,
@@ -93,8 +95,18 @@
 .centerChild {
     display: flex; 
     justify-content: center;
+    text-align: center;
 }
+
 .centerChild a {
-    
     width: 33%;
+}
+
+.centerChild a:hover {
+    width: 33%;
+    color: white !important;
+}
+
+.majorTitle:hover {
+    color: rgb(98, 203, 255) !important;
 }

@@ -62,14 +62,14 @@
                         d="M11.793 8.5H9v-1h5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.354-.146l-.853-.854zM5 7c0 .552-.448 0-1 0s-1 .552-1 0a1 1 0 0 1 2 0z" />
                 </svg>
             </div>
-            <b>Getting reviews on the major has never been this easy before</b>
+            <b>Getting reviews on a college major has never been this easy before</b>
         </div>
         <div style=" margin: 25px; border-radius: 20px;" v-if="!isMobile()">
             <div style="display: flex; font-family: fantasy; width: 100%; overflow-x: scroll;">
                 <div
                     style="min-width: 30%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
                     <h2>Comment</h2>
-                    <p>A place where you comment on the major.</p>
+                    <p>A place where you comment on a college major.</p>
                 </div>
                 <div
                     style="min-width: 30%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
@@ -79,12 +79,12 @@
                 <div
                     style="min-width: 30%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
                     <h2>Request</h2>
-                    <p>A place where you request to the admin.</p>
+                    <p>A place where you request admin.</p>
                 </div>
                 <div
                     style="min-width: 30%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
                     <h2>Analysis</h2>
-                    <p>A place where you see the popularity of the majors.</p>
+                    <p>A place where you see how popular the other majors are.</p>
                 </div>
                 <div
                     style="min-width: 30%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
@@ -94,7 +94,7 @@
                 <div
                     style="min-width: 30%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
                     <h2>Contact us</h2>
-                    <p>A button that lets you email me.</p>
+                    <p>A button that lets you email admin.</p>
                 </div>
                 <div
                     style="min-width: 30%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
@@ -191,8 +191,8 @@ export default {
         let self = this
         axios({
             method: "GET",
-            url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getMajorList"
-            // url: "http://localhost:3000/getMajorList",
+            // url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getMajorList"
+            url: "http://localhost:3000/getMajorList",
         }).then(function (response) {
             if (response.data.status) {
                 response.data.message.forEach(key => {

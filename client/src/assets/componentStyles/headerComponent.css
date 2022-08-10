@@ -30,6 +30,11 @@ header div a:hover {
     color: rgb(0, 136, 255);
 }
 
+.username:hover {
+    cursor: auto;
+    color: white !important;
+}
+
 header span {
     font-size: 40px;
     cursor: pointer;
@@ -80,6 +85,7 @@ header h1 {
 }
 
 .dropdown-content a {
+    font-family: fantasy;
     color: rgb(255, 255, 255);
     padding: 12px 16px;
     text-decoration: none;

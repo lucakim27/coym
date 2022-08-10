@@ -3,14 +3,12 @@
         <div id='BothContainer'>
 
             <div id='mostViewedContainer'>
-
-                <h1>Comment, Likes & Rplies</h1>
                 <div class="mostViewedPages">
 
                     <div class='eachRow' v-for="row in mostCommentedTable" :key="row.name">
 
                         <div>
-                            <a v-bind:href="'/comment?major=' + row.name">{{ row.name }}</a><hr>
+                            <a v-bind:href="'/comment?major=' + row.name" class="majorTitle">{{ row.name }}</a><hr>
                             <div style="display: flex; justify-content: center" class="centerChild">
                                 <a>Comment: {{ row.comment }}</a><br>
                                 <a>Like: {{ row.like }}</a><br>
@@ -26,11 +24,10 @@
     <!-- Mobile Web View -->
     <div v-if="isMobile()">
         <div id='mostViewedContainer' class="mobileMostViewedContainer">
-            <h1 class="mobileHeader">Comment, Likes & Rplies</h1>
             <div class="mostViewedPages mobileContainer">
                 <div class='eachRow' v-for="row in mostCommentedTable" :key="row.name">
                     <div>
-                        <a v-bind:href="'/comment?major=' + row.name">{{ row.name }}</a><hr>
+                        <a v-bind:href="'/comment?major=' + row.name" class="majorTitle">{{ row.name }}</a><hr>
                         <a>Comment: {{ row.comment }}</a><br>
                         <a>Like: {{ row.like }}</a><br>
                         <a>Reply: {{ row.reply }}</a>
@@ -91,14 +88,14 @@ export default {
 
         axios.all([
 
-            axios.get("https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getCommentCount"),
-            // axios.get("http://localhost:3000/getCommentCount"), 
+            // axios.get("https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getCommentCount"),
+            axios.get("http://localhost:3000/getCommentCount"), 
 
-            axios.get("https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getReplyCount"),
-            // axios.get("http://localhost:3000/getReplyCount"), 
+            // axios.get("https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getReplyCount"),
+            axios.get("http://localhost:3000/getReplyCount"), 
 
-            axios.get("https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getLikeCount"),
-            // axios.get("http://localhost:3000/getLikeCount"), 
+            // axios.get("https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getLikeCount"),
+            axios.get("http://localhost:3000/getLikeCount"), 
 
         ]).then(axios.spread((comment, reply, like) => {
             let count = []

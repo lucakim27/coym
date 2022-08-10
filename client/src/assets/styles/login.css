@@ -4,12 +4,22 @@
 }
 
 form {
-  width: 70%;
+  /* width: 70%; */
   height: 60%;
-  padding: 3%;
-  margin-top: 4%;
-  border-radius: 4px;
+  width: 60%;
+  padding: 10%;
+  margin-top: 0%;
+  border-radius: 20px;
   border: 1px solid #ccc;
+}
+
+.mobileForm {
+  height: 80% !important;
+  padding: 10% !important;
+  margin: 10% !important;
+  margin-top: -10% !important;
+  border-radius: 20px !important;
+  border: 1px solid #ccc !important;
 }
 
 form h1 {
@@ -23,9 +33,10 @@ input {
   padding: 12px 20px;
   display: inline-block;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 20px;
   box-sizing: border-box;
   width: 100%;
+  font-family: fantasy;
 }
 
 button {
@@ -33,7 +44,8 @@ button {
   background-color: rgb(255, 255, 255);
   width: 100%;
   padding: 10px;
-  border-radius: 4px;
+  border-radius: 20px;
+  font-family: fantasy;
 }
 
 .googleLogin {
