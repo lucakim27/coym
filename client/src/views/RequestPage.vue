@@ -6,6 +6,7 @@
         <select @change="onChange">
           <option value="Add major">Add major</option>
           <option value="Report user">Report user</option>
+          <option value="Change username">Change username</option>
         </select>
       </div>
     </div>
@@ -51,6 +52,8 @@ export default {
         return 'Major'
       } else if (this.selectedValue === 'Report user') {
         return 'Username & Reason being'
+      } else if (this.selectedValue === 'Change username') {
+        return 'New username (longer than 7 characters without spaces.)'
       } else {
         return 'Major'
       }

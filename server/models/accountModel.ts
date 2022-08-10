@@ -78,7 +78,7 @@ export const addAccount = function (pool: any, username: any, password: any) {
 }
 
 const validateSignUp = function (username: any, password: any, passwordConfirm: any) {
-    if (username.length < 6 || password.length < 6 || password !== passwordConfirm) {
+    if (username.length < 6 || password.length < 6 || password !== passwordConfirm || username.includes(" ") || password.includes(" ")) {
         return 1
     } else {
         return 0
@@ -92,7 +92,7 @@ export const authSignUp = function (pool: any, res: any, req: any) {
     if (validateSignUp(req.body.username, req.body.password, req.body.passwordConfirm)) {
         res.send({
             status: false,
-            message: 'It is either too short or doesnt match.'
+            message: 'Follow the conditions for the username and password above please.'
         })
     } else {
         pool.getConnection(function (err: any, connection: any) {

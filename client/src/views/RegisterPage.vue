@@ -2,7 +2,7 @@
   <div id="container" v-if="!isMobile()">
     <form method="post" @submit.prevent="signUp">
       <h1>Sign Up</h1>
-      <p>* Username & Password should be more than 7 digits.</p>
+      <p>* Username & Password should be no longer than 7 characters without spcaes.</p>
       <input type="text" name="username" v-model="username" placeholder="Username..." required /><br /><br />
       <input type="password" name="password" v-model="password" placeholder="Password..." required /><br /><br />
       <input type="password" name="repassword" v-model="passwordConfirm" placeholder="Password Confirm..."
@@ -21,7 +21,7 @@
   <div id="container" v-if="isMobile()">
     <form class='mobileForm' method="post" @submit.prevent="signUp">
       <h1>Sign Up</h1>
-      <p style="color: ; text-align: center;">* Username & Password should be more than 7 digits.</p>
+      <p style="color: ; text-align: center;">* Username & Password should be no longer than 7 characters without spcaes.</p>
       <input type="text" name="username" v-model="username" placeholder="Username..." required /><br /><br />
       <input type="password" name="password" v-model="password" placeholder="Password..." required /><br /><br />
       <input type="password" name="repassword" v-model="passwordConfirm" placeholder="Password Confirm..."
