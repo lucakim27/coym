@@ -1,6 +1,6 @@
 <template>
     <div id='container'>
-        <img :style='mobileImg' :src='imageSrc' class="mainImage">
+        <img :style='mobileImg' src='../assets/images/main.jpg' class="mainImage">
         <div class="Input" :style="mobileInput">
             <input v-if="isMobile()" class="Input-text mobileInput" id="input" placeholder="Search for your major..."
                 type="search" @input="searchChangeFunc($event)" />
@@ -64,94 +64,99 @@
             </div>
             <b>Getting reviews on a college major has never been this easy before</b>
         </div>
-        <div style=" margin: 25px; border-radius: 20px;" v-if="!isMobile()">
-            <div style="display: flex; font-family: fantasy; width: 100%; overflow-x: scroll;">
-                <div
-                    style="min-width: 30%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
-                    <h2>Comment</h2>
-                    <p>A place where you comment on a college major.</p>
+        <div style="margin: 10px; background-color: rgb(146, 156, 161); border-radius: 20px;">
+            <div style=" margin: 25px; border-radius: 20px;" v-if="!isMobile()">
+                <div style="display: flex; font-family: fantasy; width: 100%; overflow-x: scroll;">
+                    <div
+                        class='eachContainer'>
+                        <h2>Comment</h2>
+                        <p>A place where you comment on a college major.</p>
+                    </div>
+                    <div
+                        class='eachContainer'>
+                        <h2>Users</h2>
+                        <p>A place where you see the other user's details.</p>
+                    </div>
+                    <div
+                        class='eachContainer'>
+                        <h2>Request</h2>
+                        <p>A place where you request admin.</p>
+                    </div>
+                    <div
+                        class='eachContainer'>
+                        <h2>Analysis</h2>
+                        <p>A place where you see how popular the other majors are.</p>
+                    </div>
+                    <div
+                        class='eachContainer'>
+                        <h2>Setting</h2>
+                        <p>A place where you update your user details.</p>
+                    </div>
+                    <div
+                        class='eachContainer'>
+                        <h2>Contact us</h2>
+                        <p>A button that lets you email admin.</p>
+                    </div>
+                    <div
+                        class='eachContainer'>
+                        <h2>Like</h2>
+                        <p>You like the specific comment on the comment page.</p>
+                    </div>
+                    <div
+                        class='eachContainer'>
+                        <h2>Reply</h2>
+                        <p>You reply to the specific comment on the comment page.</p>
+                    </div>
                 </div>
-                <div
-                    style="min-width: 30%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
-                    <h2>Users</h2>
-                    <p>A place where you see the other user's details.</p>
-                </div>
-                <div
-                    style="min-width: 30%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
-                    <h2>Request</h2>
-                    <p>A place where you request admin.</p>
-                </div>
-                <div
-                    style="min-width: 30%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
-                    <h2>Analysis</h2>
-                    <p>A place where you see how popular the other majors are.</p>
-                </div>
-                <div
-                    style="min-width: 30%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
-                    <h2>Setting</h2>
-                    <p>A place where you update your user details.</p>
-                </div>
-                <div
-                    style="min-width: 30%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
-                    <h2>Contact us</h2>
-                    <p>A button that lets you email admin.</p>
-                </div>
-                <div
-                    style="min-width: 30%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
-                    <h2>Like</h2>
-                    <p>You like the specific comment on the comment page.</p>
-                </div>
-                <div
-                    style="min-width: 30%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
-                    <h2>Reply</h2>
-                    <p>You reply to the specific comment on the comment page.</p>
+            </div>
+            <div class='instructionMobileContainer' v-if="isMobile()">
+                <div class="instructionChildContainer">
+                    <div
+                        class='eachMobileContainer'>
+                        <h2>Comment</h2>
+                        <p>A place where you comment on the major.</p>
+                    </div>
+                    <div
+                        class='eachMobileContainer'>
+                        <h2>Users</h2>
+                        <p>A place where you see the other user's details.</p>
+                    </div>
+                    <div
+                        class='eachMobileContainer'>
+                        <h2>Request</h2>
+                        <p>A place where you request to the admin.</p>
+                    </div>
+                    <div
+                        class='eachMobileContainer'>
+                        <h2>Analysis</h2>
+                        <p>A place where you see the popularity of the majors.</p>
+                    </div>
+                    <div
+                        class='eachMobileContainer'>
+                        <h2>Setting</h2>
+                        <p>A place where you update your user details.</p>
+                    </div>
+                    <div
+                        class='eachMobileContainer'>
+                        <h2>Contact us</h2>
+                        <p>A button that lets you email me.</p>
+                    </div>
+                    <div
+                        class='eachMobileContainer'>
+                        <h2>Like</h2>
+                        <p>You like the specific comment on the comment page.</p>
+                    </div>
+                    <div
+                        class='eachMobileContainer'>
+                        <h2>Reply</h2>
+                        <p>You reply to the specific comment on the comment page.</p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div style=" margin: 25px; border-radius: 20px;" v-if="isMobile()">
-            <div style="display: flex; font-family: fantasy; width: 100%; overflow-x: scroll;">
-                <div
-                    style="min-width: 60%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
-                    <h2>Comment</h2>
-                    <p>A place where you comment on the major.</p>
-                </div>
-                <div
-                    style="min-width: 60%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
-                    <h2>Users</h2>
-                    <p>A place where you see the other user's details.</p>
-                </div>
-                <div
-                    style="min-width: 60%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
-                    <h2>Request</h2>
-                    <p>A place where you request to the admin.</p>
-                </div>
-                <div
-                    style="min-width: 60%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
-                    <h2>Analysis</h2>
-                    <p>A place where you see the popularity of the majors.</p>
-                </div>
-                <div
-                    style="min-width: 60%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
-                    <h2>Setting</h2>
-                    <p>A place where you update your user details.</p>
-                </div>
-                <div
-                    style="min-width: 60%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
-                    <h2>Contact us</h2>
-                    <p>A button that lets you email me.</p>
-                </div>
-                <div
-                    style="min-width: 60%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
-                    <h2>Like</h2>
-                    <p>You like the specific comment on the comment page.</p>
-                </div>
-                <div
-                    style="min-width: 60%; margin: 20px; padding: 20px; color: white; background-color: rgb(146, 156, 161); border-radius: 20px;">
-                    <h2>Reply</h2>
-                    <p>You reply to the specific comment on the comment page.</p>
-                </div>
-            </div>
-        </div>
+
+
+
     </div>
 </template>
 <script>
@@ -204,9 +209,9 @@ export default {
     computed: {
         mobileImg() {
             if (this.isMobile()) {
-                return 'height: 400px !important;'
+                return 'height: 20% !important;'
             } else {
-                return ''
+                return 'height: 650px !important;'
             }
         },
         imageSrc() {

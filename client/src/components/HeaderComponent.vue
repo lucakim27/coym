@@ -17,6 +17,7 @@
                     <a class="username" v-if="loggedIn">{{ username }}</a>
                     <a class="username" v-if="!loggedIn"> Anonymous </a>
                     <a href="/setting">Setting</a>
+                    <a href="/request">Request</a>
                     <a @click='logout()' class="signOutBtn">Sign out</a>
                 </div>
             </div>

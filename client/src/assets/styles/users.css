@@ -4,6 +4,7 @@
   border-radius: 20px;
   background: rgb(146, 156, 161);
   width: 100%;
+  margin-top: 20px !important;
 }
 
 .onlineHead {
@@ -11,6 +12,7 @@
   justify-content: center;
   padding: 10px;
   margin-left: 2%;
+  margin-top: 20px !important;
 }
 
 .threeContainer {
@@ -34,7 +36,8 @@
 .onlineBody {
   justify-content: center;
   padding: 10px;
-  height: 67vh;
+  height: 65vh;
+  margin-top: -10px;
   overflow-y: scroll;
   overflow-x: hidden;
 }

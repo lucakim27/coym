@@ -48,7 +48,8 @@
     border-radius: 20px;
     border: 2px solid;
     background-color: white;
-    border-color: rgba(0, 0, 0, 0.657);;
+    border-color: rgba(0, 0, 0, 0.657);
+    ;
 }
 
 .mobileOptions {
@@ -112,4 +113,34 @@ b {
 
 .mobileInput {
     width: 85% !important;
+}
+
+.eachContainer {
+    min-width: 30%;
+    margin: 20px;
+    padding: 20px;
+    color: white;
+    background-color: rgb(89, 95, 98);
+    border-radius: 20px;
+}
+
+.eachMobileContainer {
+    min-width: 100%;
+    margin: 20px;
+    padding: 20px;
+    color: white;
+    background-color: rgb(89, 95, 98);
+    border-radius: 20px;
+}
+
+.instructionMobileContainer {
+    margin: 25px;
+    border-radius: 20px;
+}
+
+.instructionChildContainer {
+    display: flex;
+    font-family: fantasy;
+    width: 100%;
+    overflow-x: scroll;
 }
