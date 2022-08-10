@@ -1,54 +1,48 @@
 <template>
-    <div class='mainContainer' v-if="!isMobile()">
-            <div class="twoContainer passwordContainer">
-                <div class="eachContainer desktopContainer">
-                    <h3>School</h3>
-                    <div class="centerChild">
-                        <input type="text" placeholder="Your school..." v-model="school">
-                    </div>
-                </div>
-                <div class="eachContainer desktopContainer">
-                    <h3>Gender</h3>
-                    <div class="centerChild">
-                        <input type="text" placeholder="Your gender..." v-model="gender">
-                    </div>
+    <div v-if="!isMobile()">
+        <div class='backgroundContainer mobileContainer'>
+            <div class="eachContainer">
+                <h3>School</h3>
+                <div class="centerChild">
+                    <input type="text" placeholder="Your school..." v-model="school">
                 </div>
             </div>
-            <div class="twoContainer passwordContainer">
-                <div class="eachContainer desktopContainer">
-                    <h3>Major</h3>
-                    <div class="centerChild">
-                        <input type="text" placeholder="Your major..." v-model="major">
-                    </div>
-                </div>
-                <div class="eachContainer desktopContainer">
-                    <h3>Country</h3>
-                    <div class="centerChild">
-                        <input type="text" placeholder="Your country..." v-model="country">
-                    </div>
+            <div class="eachContainer">
+                <h3>Gender</h3>
+                <div class="centerChild">
+                    <input type="text" placeholder="Your gender..." v-model="gender">
                 </div>
             </div>
-            <div class="twoContainer passwordContainer">
-                <div class="eachContainer desktopContainer">
-                    <h3>Password (*)</h3>
-                    <div class="centerChild">
-                        <input type="password" placeholder="Your password..." v-model="password">
-                    </div>
-                </div>
-                <div class="eachContainer desktopContainer">
-                    <h3>Password Confirm (*)</h3>
-                    <div class="centerChild">
-                        <input type="password" placeholder="Your password confirm..." v-model="passwordConfirm">
-                    </div>
+            <div class="eachContainer">
+                <h3>Major</h3>
+                <div class="centerChild">
+                    <input type="text" placeholder="Your major..." v-model="major">
                 </div>
             </div>
-            <div class="twoContainer passwordContainer">
-                <div class="eachContainer desktopContainer">
-                    <div class="centerChild">
-                        <button @click="updateUserDetails">Update</button>
-                    </div>
+            <div class="eachContainer">
+                <h3>Country</h3>
+                <div class="centerChild">
+                    <input type="text" placeholder="Your country..." v-model="country">
                 </div>
             </div>
+            <div class="eachContainer">
+                <h3>Password (*)</h3>
+                <div class="centerChild">
+                    <input type="password" placeholder="Your password..." v-model="password">
+                </div>
+            </div>
+            <div class="eachContainer">
+                <h3>Password Confirm (*)</h3>
+                <div class="centerChild">
+                    <input type="password" placeholder="Your password confirm..." v-model="passwordConfirm">
+                </div>
+            </div>
+            <div class="eachContainer">
+                <div class="centerChild">
+                    <button @click="updateUserDetails">Update</button>
+                </div>
+            </div>
+        </div>
     </div>
     <div v-if="isMobile()">
         <div class='backgroundContainer mobileContainer'>
