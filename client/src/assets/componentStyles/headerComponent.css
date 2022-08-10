@@ -71,7 +71,7 @@ header h1 {
 }
 
 .dropdown-content {
-    display: none;
+    /* display: none; */
     cursor: pointer;
     position: absolute;
     right: 0px;

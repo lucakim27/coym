@@ -7,13 +7,13 @@
             
             <h1 v-if="getTitle !== 'LOGIN' && getTitle !== 'REGISTER'">COYM</h1>
             <div class="dropdown">
-                <svg v-if='loggedIn' @click='showDropdown' class='profileSVG' xmlns="http://www.w3.org/2000/svg"
+                <svg v-if='loggedIn' @click.prevent="toggleDropdown" class='profileSVG' xmlns="http://www.w3.org/2000/svg"
                     width="35" height="44" fill="black" viewBox="0 0 16 16">
                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                     <path fill-rule="evenodd"
                         d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
                 </svg>
-                <div id='profileDropdown' class="dropdown-content">
+                <div id='profileDropdown' class="dropdown-content" v-show="state">
                     <a class="username" v-if="loggedIn">{{ username }}</a>
                     <a class="username" v-if="!loggedIn"> Anonymous </a>
                     <a href="/setting">Setting</a>
@@ -22,33 +22,20 @@
             </div>
         </header>
     </div>
-    <div>
-        <transition name="modal">
-            <ModalComponent v-if="showModal" @close="showModal = false">
-                <!-- <template v-slot:header>
-                    <h3>User Profile</h3>
-                    <span @closeModal="showModal = false">&times;</span>
-                </template> -->
-            </ModalComponent>
-        </transition>
-    </div>
 </template>
 <script>
-import ModalComponent from './ModalComponent.vue'
+// import ModalComponent from './ModalComponent.vue'
 import { useCookies } from "vue3-cookies"
 // import io from 'socket.io-client'
 import axios from 'axios'
 
 export default {
     name: 'HeaderComponent',
-    components: {
-        ModalComponent
-    },
     data() {
         return {
+            state: false,
             username: '',
             loggedIn: false,
-            showModal: false,
             // socket: io('http://localhost:3001', {
             //     transports: ['websocket']
             // })
@@ -78,26 +65,37 @@ export default {
             })
         }
     },
+    beforeUnmount () {
+    document.removeEventListener('click',this.close)
+  },
+    mounted() {
+document.addEventListener('click', this.close)
+    },
     methods: {
+        toggleDropdown () {
+      this.state = !this.state
+    },
+    close (e) {
+      if (!this.$el.contains(e.target)) {
+        this.state = false
+      }
+    },
         directToLogin() {
             window.location.href = '/login'
         },
-        showDropdown() {
-            if (document.getElementById('profileDropdown').style.display === 'block') {
-                document.getElementById('profileDropdown').style.display = 'none'
-            } else {
-                document.getElementById('profileDropdown').style.display = 'block'
-            }
-        },
+        // showDropdown() {
+        //     if (document.getElementById('profileDropdown').style.display === 'block') {
+        //         document.getElementById('profileDropdown').style.display = 'none'
+        //     } else {
+        //         document.getElementById('profileDropdown').style.display = 'block'
+        //     }
+        // },
         logout() {
 			this.cookies.remove('user')
 			window.location.reload()
 		},
         sidebarOpen() {
             document.getElementById("mySidenav").style.width = "250px"
-        },
-        closeModal() {
-            this.showModal = false
         }
     },
     computed: {
