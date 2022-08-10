@@ -88,14 +88,14 @@ export default {
 
         axios.all([
 
-            // axios.get("https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getCommentCount"),
-            axios.get("http://localhost:3000/getCommentCount"), 
+            axios.get("https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getCommentCount"),
+            // axios.get("http://localhost:3000/getCommentCount"), 
 
-            // axios.get("https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getReplyCount"),
-            axios.get("http://localhost:3000/getReplyCount"), 
+            axios.get("https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getReplyCount"),
+            // axios.get("http://localhost:3000/getReplyCount"), 
 
-            // axios.get("https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getLikeCount"),
-            axios.get("http://localhost:3000/getLikeCount"), 
+            axios.get("https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getLikeCount"),
+            // axios.get("http://localhost:3000/getLikeCount"), 
 
         ]).then(axios.spread((comment, reply, like) => {
             let count = []
