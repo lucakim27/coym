@@ -86,9 +86,9 @@
 .mainImage {
     width: 97%;
     height: 70%;
-    filter: brightness(70%);
+    /* filter: brightness(70%); */
     z-index: -10000;
-    border-style: solid;
+    /* border-style: solid; */
     border-radius: 20px;
     border-color: white;
 }
