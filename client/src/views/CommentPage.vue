@@ -17,7 +17,7 @@
         <div class='likeAndReplyContainer'>
           <center class='lastRow'>
             <button v-bind:id="comment.comment" class='like' @click="like(comment.comment)">0 Likes</button>
-            <button v-bind:id="comment.comment + 'Reply'" class='reply'
+            <button v-bind:id="comment.comment + 'Reply'" class='reply' v-if="username !== ''"
               @click="showReplyContainer(comment.comment)">Reply</button>
             <button v-if='renderReplyBtn.includes(comment.comment)' v-bind:id="comment.comment + 'ViewReply'" class='viewReply' @click="viewReply(comment.comment)">View
               Replies</button>
