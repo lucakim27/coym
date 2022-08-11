@@ -298,19 +298,13 @@
   
 </template>
 <script>
-// import io from 'socket.io-client';
-import { useCookies } from "vue3-cookies"
 import axios from 'axios'
 
 export default {
   name: 'UsersPage',
   data() {
     return {
-      users: [],
-      username: '',
-      // socket: io('http://localhost:3001', {
-      //   transports: ['websocket']
-      // })
+      users: []
     }
   },
   methods: {
@@ -321,19 +315,6 @@ export default {
         return false
       }
     }
-  },
-  setup() {
-    const { cookies } = useCookies()
-    return { cookies }
-  },
-  mounted() {
-    let user = this.cookies.get("user")
-    if (user !== null) {
-      this.username = this.cookies.get("user").username
-    }
-    // this.socket.on('updateOnlineUsers', (data) => {
-    //   this.users = [...JSON.parse(data)[0]]
-    // })
   },
   computed: {
     mobileCheck() {

@@ -45,6 +45,7 @@
   box-sizing: border-box;
   width: 100%;
   border-radius: 20px;
+  resize: none;
   height: 150px !important;
 }
 
@@ -86,6 +87,10 @@
   font-size: 40px;
 }
 
+.usernameDateContainer {
+  display: flex;
+}
+
 .date {
   font-weight: lighter;
   color: rgba(0, 0, 0, 0.478);
@@ -94,6 +99,11 @@
 
 .firstRow {
   display: flex;
+  justify-content: space-between;
+}
+
+.firstRow svg {
+  cursor: pointer;
 }
 
 .lastRow {
@@ -138,6 +148,7 @@
   border-radius: 20px;
   text-align: left;
   height: 100px !important;
+  resize: none;
 }
 
 .replyContainer button {

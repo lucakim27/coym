@@ -1,21 +1,28 @@
 <template>
     <div id="headerContainer">
-        <header>
-            <span v-if="getTitle !== 'LOGIN' && getTitle !== 'REGISTER'" v-on:click="sidebarOpen()">&#9776;</span>
-            
-            <svg class='signInIcon' @click="directToLogin()" v-if="!loggedIn && getTitle !== 'LOGIN' && getTitle !== 'REGISTER'" height='40' width="40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <g> <path fill="none" d="M0 0h24v24H0z"/> <path d="M10 11V8l5 4-5 4v-3H1v-2h9zm-7.542 4h2.124A8.003 8.003 0 0 0 20 12 8 8 0 0 0 4.582 9H2.458C3.732 4.943 7.522 2 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10c-4.478 0-8.268-2.943-9.542-7z"/> </g> </svg>
-            
-            <h1 v-if="getTitle !== 'LOGIN' && getTitle !== 'REGISTER'">COYM</h1>
+        <header v-if="getTitle !== 'LOGIN' && getTitle !== 'REGISTER'">
+            <span v-on:click="sidebarOpen()">&#9776;</span>
+            <svg class='signInIcon' @click="directToLogin()"
+                v-if="!loggedIn" height='40' width="40"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <g>
+                    <path fill="none" d="M0 0h24v24H0z" />
+                    <path
+                        d="M10 11V8l5 4-5 4v-3H1v-2h9zm-7.542 4h2.124A8.003 8.003 0 0 0 20 12 8 8 0 0 0 4.582 9H2.458C3.732 4.943 7.522 2 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10c-4.478 0-8.268-2.943-9.542-7z" />
+                </g>
+            </svg>
+            <h1>COYM</h1>
             <div class="dropdown">
-                <svg v-if='loggedIn' @click.prevent="toggleDropdown" class='profileSVG' xmlns="http://www.w3.org/2000/svg"
-                    width="35" height="44" fill="black" viewBox="0 0 16 16">
+                <svg v-if="loggedIn"
+                    @click.prevent="toggleDropdown" class='profileSVG' xmlns="http://www.w3.org/2000/svg" width="35"
+                    height="44" fill="black" viewBox="0 0 16 16">
                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                     <path fill-rule="evenodd"
                         d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
                 </svg>
                 <div id='profileDropdown' class="dropdown-content" v-show="state">
-                    <a class="username" v-if="loggedIn">{{ username }}</a>
-                    <a class="username" v-if="!loggedIn"> Anonymous </a>
+                    <a class="username" v-if="username !== null">{{ username }}</a>
+                    <a class="username" v-if="username === null"> Anonymous </a>
                     <a href="/setting">Setting</a>
                     <a href="/request">Request</a>
                     <a @click='logout()' class="signOutBtn">Sign out</a>
@@ -25,81 +32,57 @@
     </div>
 </template>
 <script>
-// import ModalComponent from './ModalComponent.vue'
 import { useCookies } from "vue3-cookies"
-// import io from 'socket.io-client'
-import axios from 'axios'
-
 export default {
     name: 'HeaderComponent',
+    props: ["pass_data"],
     data() {
         return {
-            state: false,
             username: '',
-            loggedIn: false,
-            // socket: io('http://localhost:3001', {
-            //     transports: ['websocket']
-            // })
+            state: false
         }
     },
     setup() {
         const { cookies } = useCookies()
         return { cookies }
     },
-    beforeMount() {
-        let self = this
-        if (self.cookies.get('user') !== null) {
-            self.username = self.cookies.get('user').username
-            axios({
-                method: "GET",
-                url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/cookieValidation",
-                // url: "http://localhost:3000/cookieValidation",
-                params: {
-                    username: self.cookies.get("user").username,
-                    password: self.cookies.get("user").password
-                }
-            }).then(function (response) {
-                if (response.data.status) {
-                    self.loggedIn = response.data.status
-                    // self.socket.emit('join', response.data.username)
-                }
-            })
-        }
+    updated() {
+        this.username = this.pass_data
     },
-    beforeUnmount () {
-    document.removeEventListener('click',this.close)
-  },
+    beforeUnmount() {
+        document.removeEventListener('click', this.close)
+    },
     mounted() {
-document.addEventListener('click', this.close)
+        document.addEventListener('click', this.close)
     },
     methods: {
-        toggleDropdown () {
-      this.state = !this.state
-    },
-    close (e) {
-      if (!this.$el.contains(e.target)) {
-        this.state = false
-      }
-    },
+        toggleDropdown() {
+            this.state = !this.state
+        },
+        close(e) {
+            if (!this.$el.contains(e.target)) {
+                this.state = false
+            }
+        },
         directToLogin() {
             window.location.href = '/login'
         },
-        // showDropdown() {
-        //     if (document.getElementById('profileDropdown').style.display === 'block') {
-        //         document.getElementById('profileDropdown').style.display = 'none'
-        //     } else {
-        //         document.getElementById('profileDropdown').style.display = 'block'
-        //     }
-        // },
         logout() {
-			this.cookies.remove('user')
-			window.location.reload()
-		},
+            this.cookies.remove('user')
+            window.location.reload()
+        },
         sidebarOpen() {
             document.getElementById("mySidenav").style.width = "250px"
         }
     },
     computed: {
+        loggedIn() {
+            if (this.username === '' || this.username === null) {
+                return false
+            } else {
+                return true
+            }
+        },
         getTitle() {
             if (new URL(window.location.href).pathname.slice(1, new URL(window.location.href).pathname.length) === '') {
                 return 'HOME'

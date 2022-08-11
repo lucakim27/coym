@@ -93,9 +93,9 @@
 
 <script>
 import axios from 'axios'
-import { useCookies } from "vue3-cookies"
 export default {
     name: 'SettingPage',
+    props: ["pass_data"],
     data() {
         return {
             username: '',
@@ -104,34 +104,33 @@ export default {
             school: '',
             gender: '',
             password: '',
-            passwordConfirm: ''
+            passwordConfirm: '',
+            state: ''
         }
     },
-    setup() {
-        const { cookies } = useCookies()
-        return { cookies }
-    },
-    beforeMount() {
-        let user = this.cookies.get("user")
-        if (user !== null) {
-            this.username = this.cookies.get("user").username
-        }
-        const self = this
-        if (this.username !== '') {
-            axios({
-                method: "GET",
-                url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getUserDetails",
-                // url: "http://localhost:3000/getUserDetails",
-                params: { username: this.username }
-            }).then(function (response) {
-                self.country = response.data.userDetails.country === null ? '' : response.data.userDetails.country
-                self.major = response.data.userDetails.major === null ? '' : response.data.userDetails.major
-                self.school = response.data.userDetails.school === null ? '' : response.data.userDetails.school
-                self.gender = response.data.userDetails.gender === null ? '' : response.data.userDetails.gender
-            })
-        }
+    mounted () {
+        setTimeout(() => {
+            this.username = this.pass_data
+            this.getUserDetails()
+        }, "300")
     },
     methods: {
+        getUserDetails() {
+            const self = this
+            if (this.username !== '' && this.username !== null) {
+                axios({
+                    method: "GET",
+                    url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getUserDetails",
+                    // url: "http://localhost:3000/getUserDetails",
+                    params: { username: this.username }
+                }).then(function (response) {
+                    self.country = response.data.userDetails.country === null ? '' : response.data.userDetails.country
+                    self.major = response.data.userDetails.major === null ? '' : response.data.userDetails.major
+                    self.school = response.data.userDetails.school === null ? '' : response.data.userDetails.school
+                    self.gender = response.data.userDetails.gender === null ? '' : response.data.userDetails.gender
+                })
+            }
+        },
         isMobile() {
             if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
                 return true
@@ -140,7 +139,7 @@ export default {
             }
         },
         updateUserDetails() {
-            if (this.username === '') {
+            if (this.username === '' && this.username === null) {
                 alert("You're not logged in.")
             } else if (this.password === '') {
                 alert("Password is compulsory.")

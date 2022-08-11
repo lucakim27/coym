@@ -1,6 +1,6 @@
 <script>
 import axios from 'axios'
-import { useCookies } from "vue3-cookies"
+// import { useCookies } from "vue3-cookies"
 export default {
 	props: ['shouldRender'],
 	data() {

@@ -25,14 +25,10 @@
 </template>
 <script>
 import axios from 'axios'
-import { useCookies } from "vue3-cookies"
 
 export default {
   name: 'RequestPage',
-  setup() {
-    const { cookies } = useCookies()
-    return { cookies }
-  },
+  props: ["pass_data"],
   data() {
     return {
       username: '',
@@ -40,11 +36,8 @@ export default {
       content: ''
     }
   },
-  beforeMount() {
-    let user = this.cookies.get("user")
-    if (user !== null) {
-      this.username = this.cookies.get("user").username
-    }
+  updated() {
+    this.username = this.pass_data
   },
   computed: {
     inputLabel() {
@@ -64,7 +57,7 @@ export default {
       this.selectedValue = event.target.value
     },
     request() {
-      if (this.username === '') {
+      if (this.username === '' || this.username === null) {
         alert("You're not loggged in.")
       } else if (this.content === '') {
         alert("You haven't typed anything yet.")
