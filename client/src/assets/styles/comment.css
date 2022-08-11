@@ -84,7 +84,8 @@
   display: flex;
   color: rgb(255, 255, 255);
   margin: 10px;
-  font-size: 40px;
+  text-align: left;
+  font-size: 30px;
 }
 
 .usernameDateContainer {
@@ -159,6 +160,7 @@
   background: rgba(0, 0, 0, 0.478);
   color: white;
   border-color: rgb(146, 156, 161);
+  font-family: fantasy;
 }
 
 button:hover,
