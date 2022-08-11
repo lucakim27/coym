@@ -2,7 +2,7 @@
   <div id='container'>
     <div id="ipnutContainer" v-show='loggedIn'>
       <textarea height="60" type="text" id="userInput" v-model="commentInput" placeholder="Comment here..."
-        @focus="magic_flag = true" /><br>
+        @focus="magic_flag = true"></textarea><br>
       <button @click="comment()" id="commentBtn" v-show="magic_flag">Comment</button>
       <button @click="magic_flag = !magic_flag" class="closeBtn" v-show="magic_flag">Close</button>
     </div>
@@ -14,22 +14,45 @@
             <a class='username '>{{ comment.username }}</a>
             <p class='date'>{{ comment.createdAt.slice(0, 10) }}</p>
           </div>
-          <svg v-if="comment.username === username" class="svg-icon" fill="white" width="40" height="40" viewBox="0 0 20 20">
-            <path d="M10,2.172c-4.324,0-7.828,3.504-7.828,7.828S5.676,17.828,10,17.828c4.324,0,7.828-3.504,7.828-7.828S14.324,2.172,10,2.172M10,17.004c-3.863,0-7.004-3.141-7.004-7.003S6.137,2.997,10,2.997c3.862,0,7.004,3.141,7.004,7.004S13.862,17.004,10,17.004M10,8.559c-0.795,0-1.442,0.646-1.442,1.442S9.205,11.443,10,11.443s1.441-0.647,1.441-1.443S10.795,8.559,10,8.559 M10,10.619c-0.34,0-0.618-0.278-0.618-0.618S9.66,9.382,10,9.382S10.618,9.661,10.618,10S10.34,10.619,10,10.619 M14.12,8.559c-0.795,0-1.442,0.646-1.442,1.442s0.647,1.443,1.442,1.443s1.442-0.647,1.442-1.443S14.915,8.559,14.12,8.559 M14.12,10.619c-0.34,0-0.618-0.278-0.618-0.618s0.278-0.618,0.618-0.618S14.738,9.661,14.738,10S14.46,10.619,14.12,10.619 M5.88,8.559c-0.795,0-1.442,0.646-1.442,1.442s0.646,1.443,1.442,1.443S7.322,10.796,7.322,10S6.675,8.559,5.88,8.559 M5.88,10.619c-0.34,0-0.618-0.278-0.618-0.618S5.54,9.382,5.88,9.382S6.498,9.661,6.498,10S6.22,10.619,5.88,10.619"></path>
-          </svg>
+          <div class="commentDropdown">
+            <svg @click.prevent="toggleDropdown(comment.comment)" v-bind:id="comment.comment + 'toggleDropdownBtn'"
+              v-if="comment.username === username" class="svg-icon" fill="white" width="40" height="40"
+              viewBox="0 0 20 20">
+              <path
+                d="M10,2.172c-4.324,0-7.828,3.504-7.828,7.828S5.676,17.828,10,17.828c4.324,0,7.828-3.504,7.828-7.828S14.324,2.172,10,2.172M10,17.004c-3.863,0-7.004-3.141-7.004-7.003S6.137,2.997,10,2.997c3.862,0,7.004,3.141,7.004,7.004S13.862,17.004,10,17.004M10,8.559c-0.795,0-1.442,0.646-1.442,1.442S9.205,11.443,10,11.443s1.441-0.647,1.441-1.443S10.795,8.559,10,8.559 M10,10.619c-0.34,0-0.618-0.278-0.618-0.618S9.66,9.382,10,9.382S10.618,9.661,10.618,10S10.34,10.619,10,10.619 M14.12,8.559c-0.795,0-1.442,0.646-1.442,1.442s0.647,1.443,1.442,1.443s1.442-0.647,1.442-1.443S14.915,8.559,14.12,8.559 M14.12,10.619c-0.34,0-0.618-0.278-0.618-0.618s0.278-0.618,0.618-0.618S14.738,9.661,14.738,10S14.46,10.619,14.12,10.619 M5.88,8.559c-0.795,0-1.442,0.646-1.442,1.442s0.646,1.443,1.442,1.443S7.322,10.796,7.322,10S6.675,8.559,5.88,8.559 M5.88,10.619c-0.34,0-0.618-0.278-0.618-0.618S5.54,9.382,5.88,9.382S6.498,9.661,6.498,10S6.22,10.619,5.88,10.619">
+              </path>
+            </svg>
+            <svg @click.prevent="closeEditMode(comment.comment)" class="svg-icon closeEditBtn"
+              v-bind:id="comment.comment + 'closeEditBtn'" v-if="comment.username === username" fill="white" width="35"
+              height="35" viewBox="0 0 20 20">
+              <path
+                d="M10.185,1.417c-4.741,0-8.583,3.842-8.583,8.583c0,4.74,3.842,8.582,8.583,8.582S18.768,14.74,18.768,10C18.768,5.259,14.926,1.417,10.185,1.417 M10.185,17.68c-4.235,0-7.679-3.445-7.679-7.68c0-4.235,3.444-7.679,7.679-7.679S17.864,5.765,17.864,10C17.864,14.234,14.42,17.68,10.185,17.68 M10.824,10l2.842-2.844c0.178-0.176,0.178-0.46,0-0.637c-0.177-0.178-0.461-0.178-0.637,0l-2.844,2.841L7.341,6.52c-0.176-0.178-0.46-0.178-0.637,0c-0.178,0.176-0.178,0.461,0,0.637L9.546,10l-2.841,2.844c-0.178,0.176-0.178,0.461,0,0.637c0.178,0.178,0.459,0.178,0.637,0l2.844-2.841l2.844,2.841c0.178,0.178,0.459,0.178,0.637,0c0.178-0.176,0.178-0.461,0-0.637L10.824,10z">
+              </path>
+            </svg>
+            <div v-bind:id="comment.comment + 'commentDropdown'" class="comment-dropdown-content">
+              <a @click.prevent="toggleDropdown(comment.comment)">Close</a>
+              <a @click.prevent="editComment(comment.comment)" v-bind:id="comment.comment + 'edit'">Edit</a>
+              <a @click.prevent="deleteComment(comment.comment)">Delete</a>
+            </div>
+          </div>
         </div>
-        <p class='comment'>{{ comment.comment }}</p>
+        <p class='comment' v-bind:id="comment.comment + 'commetParagraph'">{{ comment.comment }}</p>
+        <div v-bind:id="comment.comment + 'commentEditContainer'" class="editContainer">
+          <textarea class='commentEditTextarea' :value="comment.comment" v-bind:id="comment.comment + 'editTextArea'"></textarea><button class='editBtn'
+            @click="edit(comment.comment)">Edit</button>
+        </div>
         <div class='likeAndReplyContainer'>
           <center class='lastRow'>
             <button v-bind:id="comment.comment" class='like' @click="like(comment.comment)">0 Likes</button>
             <button v-bind:id="comment.comment + 'Reply'" class='reply' v-if="loggedIn"
               @click="showReplyContainer(comment.comment)">Reply</button>
-            <button v-if='renderReplyBtn.includes(comment.comment)' v-bind:id="comment.comment + 'ViewReply'" class='viewReply' @click="viewReply(comment.comment)">View
+            <button v-if='renderReplyBtn.includes(comment.comment)' v-bind:id="comment.comment + 'ViewReply'"
+              class='viewReply' @click="viewReply(comment.comment)">View
               Replies</button>
           </center>
         </div>
         <div :id="comment.comment + 'ReplyContainer'" class="replyContainer">
-          <textarea :id="comment.comment + 'ReplyInput'" placeholder='Reply here...'/>
+          <textarea :id="comment.comment + 'ReplyInput'" placeholder='Reply here...' />
           <button @click="reply(comment.comment)">Reply</button>
         </div>
         <div :id="comment.comment + 'ViewReplyContainer'" class="viewReplyContainer">
@@ -110,10 +133,43 @@ export default {
       }
     }
   },
-  updated() {
-    this.username = this.pass_data
+  mounted() {
+    // this.username = this.pass_data
+    setTimeout(() => {
+        this.username = this.pass_data
+        // this.getUserDetails()
+    }, "300")
   },
   methods: {
+    edit(comment) {
+      alert(document.getElementById(comment + 'editTextArea').value)
+      window.location.reload()
+    },
+    editComment(comment) {
+      document.getElementById(comment + 'commentDropdown').style.display = 'none'
+      document.getElementById(comment + 'closeEditBtn').style.display = 'block'
+      document.getElementById(comment + 'toggleDropdownBtn').style.display = 'none'
+      document.getElementById(comment + 'commetParagraph').style.display = 'none'
+      document.getElementById(comment + 'commentEditContainer').style.display = 'flex'
+    },
+    closeEditMode(comment) {
+      document.getElementById(comment + 'closeEditBtn').style.display = 'none'
+      document.getElementById(comment + 'toggleDropdownBtn').style.display = 'block'
+      document.getElementById(comment + 'commetParagraph').style.display = 'block'
+      document.getElementById(comment + 'commentEditContainer').style.display = 'none'
+    },
+    deleteComment(comment) {
+      if (confirm(`Are you sure you want to delete the comment which is '${comment}'?`)) {
+        window.location.reload()
+      }
+    },
+    toggleDropdown(comment) {
+      if (document.getElementById(comment + 'commentDropdown').style.display !== 'block') {
+        document.getElementById(comment + 'commentDropdown').style.display = 'block'
+      } else {
+        document.getElementById(comment + 'commentDropdown').style.display = 'none'
+      }
+    },
     findReplyComments(replies) {
       let list = []
       replies.forEach(key => {
