@@ -62,8 +62,9 @@
               <div class="firstRow">
                 <div class="usernameDateContainer">
                   <a class='username '>{{ reply.username }}</a>
+                  <p class='date'>{{ reply.createdAt.slice(0, 10) }}</p>
                 </div>
-                <div class="commentDropdown">
+                <!-- <div class="commentDropdown">
                   <svg @click.prevent="replyToggleDropdown(reply.reply)"
                     v-bind:id="reply.reply + 'toggleDropdownBtn'" v-if="reply.username === username"
                     class="svg-icon replySvg" fill="white" width="40" height="40" viewBox="0 0 20 20">
@@ -76,7 +77,7 @@
                     <a @click.prevent="" v-bind:id="reply.reply + 'edit'">Edit</a>
                     <a @click.prevent="">Delete</a>
                   </div>
-                </div>
+                </div> -->
               </div>
               <p class='replyParagraph' v-bind:id="reply.reply + 'replyParagraph'">{{ reply.reply }}</p>
             </div>
