@@ -80,7 +80,7 @@
 }
 
 .row div a:hover {
-  color: rgb(98, 203, 255);
+  color: rgb(98, 203, 255) !important;
   cursor: pointer;
 }
 
@@ -118,4 +118,9 @@ footer {
   overflow-x: scroll;
   color: white;
   font-family: fantasy;
+}
+
+.mobileUsername {
+  font-weight: bold !important;
+  /* color: rgb(98, 203, 255) !important; */
 }

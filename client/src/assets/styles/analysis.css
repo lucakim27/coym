@@ -107,6 +107,11 @@
     color: white !important;
 }
 
+.majorTitle {
+    font-weight: bold !important;
+    /* color: rgb(98, 203, 255) !important; */
+}
+
 .majorTitle:hover {
     color: rgb(98, 203, 255) !important;
 }

@@ -73,6 +73,7 @@
   color: white;
   margin: 10px;
   text-decoration: none;
+  font-family: fantasy;
 }
 
 .username:hover,
@@ -96,6 +97,7 @@
   font-weight: lighter;
   color: rgba(0, 0, 0, 0.478);
   margin: 10px;
+  font-family: fantasy;
 }
 
 .firstRow {
@@ -110,6 +112,19 @@
 .lastRow {
   display: flex;
   justify-content: flex-end;
+}
+
+.replySvg {
+  margin-right: 5px !important;
+}
+
+.replyParagraph {
+  display: flex;
+  color: rgb(255, 255, 255);
+  margin: 10px;
+  text-align: left;
+  font-size: 30px;
+  padding: 10px;
 }
 
 .like,
@@ -134,12 +149,10 @@
 .viewReplyContainer div div {
   color: white;
   background-color: rgb(89, 95, 98);
-  padding: 20px;
-  text-align: left;
-  /* border-style: solid;
-  border-color: rgb(255, 255, 255); */
+  /* text-align: left; */
   border-radius: 20px;
-  margin-top: 10px;
+  margin: 5px;
+  /* padding: 10px; */
 }
 
 .replyContainer textarea {
@@ -178,6 +191,7 @@ button:hover,
   right: 30px;
   /* top: 10px; */
 }
+
 .commentDropdown svg {
   /* cursor: pointer; */
   /* position: fixed; */
@@ -189,9 +203,9 @@ button:hover,
   display: none;
   cursor: pointer;
   position: relative;
-  background-color: #000000;
+  background-color: #000000 !important;
   /* min-width: 160px; */
-  top: -45px;
+  top: -48px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 3;
   border-radius: 20px;
