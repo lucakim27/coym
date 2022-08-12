@@ -55,10 +55,11 @@ export const postLike = function (pool: any, res: any, req: any) {
     const paramsForSelectLikesQuery = [req.body.page]
 
     const deleteLikesColumnQuery = `DELETE FROM likes 
-        WHERE commentID = (SELECT id FROM comments WHERE comment = ?)
+        WHERE commentID = (SELECT id FROM comments WHERE comment = ? AND majorID = (SELECT id FROM majors WHERE name = ?)) AND 
+            majorID = (SELECT id FROM majors WHERE name = ?)
     `
 
-    const paramsForDeleteLikesColumnQuery = [req.body.comment]
+    const paramsForDeleteLikesColumnQuery = [req.body.comment, req.body.page, req.body.page]
 
     const insertLikesQuery = `INSERT INTO 
         likes (
@@ -66,13 +67,13 @@ export const postLike = function (pool: any, res: any, req: any) {
             majorID, 
             userID
         ) VALUES (
-            (SELECT id FROM comments WHERE comment = ?), 
+            (SELECT id FROM comments WHERE comment = ? AND majorID = (SELECT id FROM majors WHERE name = ?)), 
             (SELECT id FROM majors WHERE name = ?), 
             (SELECT id FROM accounts WHERE username = ?)
         )
     `
 
-    const paramsForInsertLikesQuery = [req.body.comment, req.body.page, req.body.username]
+    const paramsForInsertLikesQuery = [req.body.comment, req.body.page, req.body.page, req.body.username]
 
     pool.getConnection(function (err: any, connection: any) {
         if (err) {

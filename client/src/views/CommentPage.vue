@@ -142,8 +142,21 @@ export default {
   },
   methods: {
     edit(comment) {
-      alert(document.getElementById(comment + 'editTextArea').value)
-      window.location.reload()
+      // alert(document.getElementById(comment + 'editTextArea').value)
+      axios({
+        method: "POST",
+        url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/editComment",
+        // url: "http://localhost:3000/editComment",
+        headers: { 'Content-Type': 'application/json' },
+        data: { comment: document.getElementById(comment + 'editTextArea').value, previousComment: comment, username: this.username, page: this.getQueryVariable() }
+      }).then(function (response) {
+        if (response.data.status) {
+          alert("You have successfully edited your comment.")
+          window.location.reload()
+        } else {
+          alert("You failed to edit your comment for some reasons.")
+        }
+      })
     },
     editComment(comment) {
       document.getElementById(comment + 'commentDropdown').style.display = 'none'
@@ -160,7 +173,20 @@ export default {
     },
     deleteComment(comment) {
       if (confirm(`Are you sure you want to delete the comment which is '${comment}'?`)) {
-        window.location.reload()
+        axios({
+          method: "POST",
+          url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/deleteComment",
+          // url: "http://localhost:3000/deleteComment",
+          headers: { 'Content-Type': 'application/json' },
+          data: { comment: comment, username: this.username, page: this.getQueryVariable() }
+        }).then(function (response) {
+          if (response.data.status) {
+            alert("You have successfully deleted your comment.")
+            window.location.reload()
+          } else {
+            alert("You failed to delete your comment for some reasons.")
+          }
+        })
       }
     },
     toggleDropdown(comment) {

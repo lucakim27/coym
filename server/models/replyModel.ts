@@ -113,20 +113,22 @@ export const postReply = function (pool: any, res: any, req: any) {
             reply,
             createdAt
         ) VALUES (
-            (SELECT id FROM majors WHERE name = "${req.body.page}"), 
-            (SELECT id FROM accounts WHERE username = "${req.body.username}"), 
-            (SELECT id FROM comments WHERE comment = "${req.body.comment}"), 
-            "${req.body.reply}",
-            "${new Date().toISOString().slice(0, 19).replace('T', ' ')}"
+            (SELECT id FROM majors WHERE name = ?), 
+            (SELECT id FROM accounts WHERE username = ?), 
+            (SELECT id FROM comments WHERE comment = ? AND majorID = (SELECT id FROM majors WHERE name = ?)), 
+            ?,
+            ?
         )
     `
+
+    const paramsForInsertReplyQuery = [req.body.page, req.body.username, req.body.comment, req.body.page, req.body.reply, new Date().toISOString().slice(0, 19).replace('T', ' ')]
 
     pool.getConnection(function (err: any, connection: any) {
         if (err) {
             connection.release()
             throw err
         }
-        connection.query(insertReplyQuery, function (err: any, result: any) {
+        connection.query(insertReplyQuery, paramsForInsertReplyQuery, function (err: any, result: any) {
             if (err) {
                 connection.release()
                 throw err

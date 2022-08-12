@@ -150,8 +150,130 @@ export const postComment = function (pool: any, res: any, req: any) {
                         throw err
                     }
                     res.send({
-                        status: true,
-                        page: req.body.page
+                        status: true
+                    })
+                })
+            }
+        })
+        connection.release()
+    })
+
+}
+
+export const editComment = function (pool: any, res: any, req: any) {
+
+    const selectCommentsTableQuery = `SELECT comment FROM comments 
+        WHERE majorID = (SELECT id FROM majors WHERE name = ?)
+    `
+
+    const paramsForSelectCommentsTableQuery = [req.body.page]
+
+    const updateCommentsQuery = `UPDATE comments
+        SET comment = ?,
+            updatedAt = ?
+        WHERE userID = (SELECT id FROM accounts WHERE username = ?) AND 
+            majorID = (SELECT id FROM majors WHERE name = ?) AND
+            comment = ?
+    `
+
+    const paramsForUpdateCommentsQuery = [req.body.comment, new Date().toISOString().slice(0, 19).replace('T', ' '), req.body.username, req.body.page, req.body.previousComment]
+
+    pool.getConnection(function (err: any, connection: any) {
+        if (err) {
+            connection.release()
+            throw err
+        }
+        connection.query(selectCommentsTableQuery, paramsForSelectCommentsTableQuery, function (err: any, result: any) {
+            if (err) {
+                connection.release()
+                throw err
+            }
+            var existing = false
+            for (var i = 0; i < result.length; i++) {
+                if (req.body.comment === result[i].comment) {
+                    existing = true
+                    res.send({
+                        status: false
+                    })
+                }
+            }
+            if (!existing) {
+                connection.query(updateCommentsQuery, paramsForUpdateCommentsQuery, function (err: any, result: any) {
+                    if (err) {
+                        connection.release()
+                        throw err
+                    }
+                    res.send({
+                        status: true
+                    })
+                })
+            }
+        })
+        connection.release()
+    })
+
+}
+
+export const deleteComment = function (pool: any, res: any, req: any) {
+
+    const selectCommentsTableQuery = `SELECT comment FROM comments 
+        WHERE comment = ? AND 
+            userID = (SELECT id FROM accounts WHERE username = ?) AND 
+            majorID = (SELECT id FROM majors WHERE name = ?)
+    `
+
+    const deleteLikesQuery = `DELETE FROM likes
+        WHERE commentID = (SELECT id FROM comments WHERE comment = ? AND majorID = (SELECT id FROM majors WHERE name = ?))
+    `
+
+    const deleteRepliesQuery = `DELETE FROM reply
+        WHERE commentID = (SELECT id FROM comments WHERE comment = ? AND majorID = (SELECT id FROM majors WHERE name = ?))
+    `
+
+    const deleteCommentQuery = `DELETE FROM comments
+        WHERE comment = ? AND 
+            userID = (SELECT id FROM accounts WHERE username = ?) AND 
+            majorID = (SELECT id FROM majors WHERE name = ?)
+    `
+    
+    const commentParam = [req.body.comment, req.body.page]
+
+    const commentUsernamePageParams = [req.body.comment, req.body.username, req.body.page]
+
+    pool.getConnection(function (err: any, connection: any) {
+        if (err) {
+            connection.release()
+            throw err
+        }
+
+        connection.query(selectCommentsTableQuery, commentUsernamePageParams, function (err: any, result: any) {
+            if (err) {
+                connection.release()
+                throw err
+            }
+
+            if (result.length !== 0) {
+                connection.query(deleteLikesQuery, commentParam, function (err: any, result: any) {
+                    if (err) {
+                        connection.release()
+                        throw err
+                    }
+                })
+        
+                connection.query(deleteRepliesQuery, commentParam, function (err: any, result: any) {
+                    if (err) {
+                        connection.release()
+                        throw err
+                    }
+                })
+        
+                connection.query(deleteCommentQuery, commentUsernamePageParams, function (err: any, result: any) {
+                    if (err) {
+                        connection.release()
+                        throw err
+                    }
+                    res.send({
+                        status: true
                     })
                 })
             }
