@@ -8,6 +8,9 @@
                         <div>
                             <a>Comment History</a>
                             <hr>
+                            <a v-if="commentDetails.length === 0">
+                                <p>There's no history</p>
+                            </a>
                             <a v-for="comment in commentDetails" :key="comment.name">
                                 <p><a v-bind:href="'/comment?major=' + comment.name">{{ comment.name }}</a>:
                                     {{ comment.count }}</p>
@@ -18,6 +21,9 @@
                         <div>
                             <a>Reply History</a>
                             <hr>
+                            <a v-if="replyDetails.length === 0">
+                               <p>There's no history</p>
+                            </a>
                             <a v-for="comment in replyDetails" :key="comment.name">
                                 <p><a v-bind:href="'/comment?major=' + comment.name">{{ comment.name }}</a>:
                                     {{ comment.count }}</p>
@@ -28,6 +34,9 @@
                         <div>
                             <a>Like History</a>
                             <hr>
+                            <a v-if="likeDetails.length === 0">
+                                <p>There's no history</p>
+                            </a>
                             <a v-for="comment in likeDetails" :key="comment.name">
                                 <p><a v-bind:href="'/comment?major=' + comment.name">{{ comment.name }}</a>:
                                     {{ comment.count }}</p>
@@ -46,6 +55,9 @@
                     <div>
                         <a>Comment History</a>
                         <hr>
+                        <a v-if="commentDetails.length === 0">
+                            <p>There's no history</p>
+                        </a>
                         <a v-for="comment in commentDetails" :key="comment.name">
                             <p><a v-bind:href="'/comment?major=' + comment.name">{{ comment.name }}</a>:
                                 {{ comment.count }}</p>
@@ -56,6 +68,9 @@
                     <div>
                         <a>Reply History</a>
                         <hr>
+                        <a v-if="replyDetails.length === 0">
+                            <p>There's no history</p>
+                        </a>
                         <a v-for="comment in replyDetails" :key="comment.name">
                             <p><a v-bind:href="'/comment?major=' + comment.name">{{ comment.name }}</a>:
                                 {{ comment.count }}</p>
@@ -66,6 +81,9 @@
                     <div>
                         <a>Like History</a>
                         <hr>
+                        <a v-if="likeDetails.length === 0">
+                            <p>There's no history</p>
+                        </a>
                         <a v-for="comment in likeDetails" :key="comment.name">
                             <p><a v-bind:href="'/comment?major=' + comment.name">{{ comment.name }}</a>:
                                 {{ comment.count }}</p>
