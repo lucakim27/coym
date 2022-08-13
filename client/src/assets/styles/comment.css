@@ -3,7 +3,6 @@
   cursor: pointer;
   color: rgb(0, 0, 0);
   width: 100%;
-  /* margin: 10px; */
   padding: 10px;
   display: inline-block;
   box-sizing: border-box;
@@ -189,15 +188,7 @@ button:hover,
 .commentDropdown {
   cursor: pointer;
   position: absolute;
-  right: 30px;
-  /* top: 10px; */
-}
-
-.commentDropdown svg {
-  /* cursor: pointer; */
-  /* position: fixed; */
-  right: 25px;
-  /* top: 10px; */
+  right: 23px;
 }
 
 .comment-dropdown-content {
@@ -205,8 +196,7 @@ button:hover,
   cursor: pointer;
   position: relative;
   background-color: #000000 !important;
-  /* min-width: 160px; */
-  top: -48px;
+  top: -40px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 3;
   border-radius: 20px;

@@ -30,6 +30,10 @@ header div a:hover {
     color: rgb(0, 136, 255);
 }
 
+.dropdownUsername {
+    margin: 0px !important;
+}
+
 .username:hover {
     cursor: auto;
     color: white !important;
