@@ -45,21 +45,19 @@ export const createLikesTable = function (pool: any) {
 
 export const postLike = function (pool: any, res: any, req: any) {
 
-    const selectLikesQuery = `SELECT a.username, m.name, c.comment FROM likes l
-        inner join accounts a on a.id = l.userID
-        inner join majors m on m.id = l.majorID
-        inner join comments c on c.id = l.commentID
-        WHERE m.name = ?
+    const selectLikesQuery = `SELECT * FROM likes
+        WHERE commentID = (SELECT id FROM comments WHERE comment = ? AND majorID = (SELECT id FROM majors WHERE name = ?)) AND 
+            majorID = (SELECT id FROM majors WHERE name = ?) AND 
+            userID = (SELECT id FROM accounts WHERE username = ?)
     `
-
-    const paramsForSelectLikesQuery = [req.body.page]
 
     const deleteLikesColumnQuery = `DELETE FROM likes 
         WHERE commentID = (SELECT id FROM comments WHERE comment = ? AND majorID = (SELECT id FROM majors WHERE name = ?)) AND 
-            majorID = (SELECT id FROM majors WHERE name = ?)
+            majorID = (SELECT id FROM majors WHERE name = ?) AND 
+            userID = (SELECT id FROM accounts WHERE username = ?)
     `
-
-    const paramsForDeleteLikesColumnQuery = [req.body.comment, req.body.page, req.body.page]
+    
+    const selectParams = [req.body.comment, req.body.page, req.body.page, req.body.username]
 
     const insertLikesQuery = `INSERT INTO 
         likes (
@@ -73,43 +71,38 @@ export const postLike = function (pool: any, res: any, req: any) {
         )
     `
 
-    const paramsForInsertLikesQuery = [req.body.comment, req.body.page, req.body.page, req.body.username]
+    const insertParams = [req.body.comment, req.body.page, req.body.page, req.body.username]
 
     pool.getConnection(function (err: any, connection: any) {
         if (err) {
             connection.release()
             throw err
         }
-        connection.query(selectLikesQuery, paramsForSelectLikesQuery, function (err: any, result: any) {
+        connection.query(selectLikesQuery, selectParams, function (err: any, result: any) {
             if (err) {
                 connection.release()
                 throw err
             }
-            var existing = false
-            for (var i = 0; i < result.length; i++) {
-                if (req.body.comment === result[i].comment && req.body.username === result[i].username) {
-                    existing = true
-                    connection.query(deleteLikesColumnQuery, paramsForDeleteLikesColumnQuery, function (err: any, result: any) {
-                        if (err) {
-                            connection.release()
-                            throw err
-                        }
-                        res.send({
-                            status: true,
-                            message: 'You have successfully disliked the comment.'
-                        })
-                    })
-                }
-            }
-            if (!existing) {
-                connection.query(insertLikesQuery, paramsForInsertLikesQuery, function (err: any, result: any) {
+            if (!result.length) {
+                connection.query(insertLikesQuery, insertParams, function (err: any, result: any) {
                     if (err) {
                         connection.release()
                         throw err
                     }
                     res.send({
                         status: true,
-                        message: 'You have successfully liked the comment.'
+                        message: 'You have liked the comment.'
+                    })
+                })
+            } else {
+                connection.query(deleteLikesColumnQuery, selectParams, function (err: any, result: any) {
+                    if (err) {
+                        connection.release()
+                        throw err
+                    }
+                    res.send({
+                        status: true,
+                        message: 'You have unliked the comment.'
                     })
                 })
             }
