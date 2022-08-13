@@ -25,7 +25,6 @@
 </template>
 <script>
 import axios from 'axios'
-
 export default {
   name: 'RequestPage',
   props: ["pass_data"],

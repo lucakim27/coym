@@ -3,10 +3,7 @@
     <a href="javascript:void(0)" class="closebtn" v-on:click="sidebarClose()">&times;</a>
     <a id='home' href="/">Home</a>
     <a id='users' href="/users">Users</a>
-    <!-- <a id='chat' href="/chat">Chat</a> -->
     <a id='analysis' href="/analysis">Analysis</a>
-    <!-- <a id='request' href="/request">Request</a> -->
-    <!-- <a id='setting' href="/setting">Setting</a> -->
     <a onclick="window.location.href = 'mailto:nikolaikim27@gmail.com'">Contact us</a>
   </div>
 </template>

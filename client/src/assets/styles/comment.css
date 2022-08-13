@@ -73,11 +73,13 @@
   margin: 10px;
   text-decoration: none;
   font-family: fantasy;
+  text-decoration: underline;
 }
 
 .username:hover,
 .replyUsername:hover {
-  color: rgb(98, 203, 255);
+  color: rgb(98, 203, 255) !important;
+  cursor: pointer;
 }
 
 .comment {

@@ -1,16 +1,4 @@
-/* *,
-*::before,
-*::after {
-    box-sizing: border-box;
-} */
-
 .Input {
-    /* position: absolute;
-    top: 85%; */
-    /* margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0; */
     text-align: center;
 }
 
@@ -22,19 +10,14 @@
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
-    /* margin-top: 20px; */
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 20px;
     box-sizing: border-box;
     width: 50%;
-    /* border-radius: 5px; */
-    /* text-align: center; */
 }
 
 #options {
-    /* position: absolute;
-    top: 90%; */
     margin-left: auto;
     margin-right: auto;
     left: 0;
@@ -68,12 +51,6 @@
 }
 
 .descriptionContainer {
-    /* position: absolute;
-    top: 90%; */
-    /* margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0; */
     text-align: center;
     margin-bottom: 35px;
     padding: 30px;
@@ -86,9 +63,7 @@
 .mainImage {
     width: 97%;
     height: 70%;
-    /* filter: brightness(70%); */
     z-index: -10000;
-    /* border-style: solid; */
     border-radius: 20px;
     border-color: white;
 }

@@ -306,3 +306,96 @@ export const getAllUsers = function (pool: any, res: any, req: any) {
     })
 
 }
+
+export const getUserCommentDetails = function (pool: any, res: any, req: any) {
+
+    const getUserCommentDetails = `SELECT m.name, COUNT(a.username) AS count FROM comments c
+        INNER JOIN majors m on m.id = c.majorID
+        INNER JOIN accounts a on a.id = c.userID
+        WHERE c.userID = (SELECT id FROM accounts WHERE username = ?)
+        GROUP BY m.name
+    `
+
+    const paramForGetUserCommentDetails = [req.query.username]
+
+    pool.getConnection(function (err: any, connection: any) {
+        if (err) {
+            connection.release()
+            throw err
+        }
+        connection.query(getUserCommentDetails, paramForGetUserCommentDetails, function (err: any, result: any, fields: any) {
+            if (err) {
+                connection.release()
+                throw err
+            }
+            res.send({
+                status: true,
+                data: result
+            })
+        })
+        connection.release()
+    })
+
+}
+
+export const getUserReplyDetails = function (pool: any, res: any, req: any) {
+
+    const getUserReplyDetails = `SELECT m.name, COUNT(a.username) AS count FROM reply r
+        INNER JOIN majors m on m.id = r.majorID
+        INNER JOIN accounts a on a.id = r.userID
+        WHERE r.userID = (SELECT id FROM accounts WHERE username = ?)
+        GROUP BY m.name
+    `
+
+    const paramForGetUserReplyDetails = [req.query.username]
+
+    pool.getConnection(function (err: any, connection: any) {
+        if (err) {
+            connection.release()
+            throw err
+        }
+        connection.query(getUserReplyDetails, paramForGetUserReplyDetails, function (err: any, result: any, fields: any) {
+            if (err) {
+                connection.release()
+                throw err
+            }
+            res.send({
+                status: true,
+                data: result
+            })
+        })
+        connection.release()
+    })
+
+}
+
+export const getUserLikeDetails = function (pool: any, res: any, req: any) {
+
+    const getUserLikeDetails = `SELECT m.name, COUNT(a.username) AS count FROM likes l
+        INNER JOIN majors m on m.id = l.majorID
+        INNER JOIN accounts a on a.id = l.userID
+        WHERE l.userID = (SELECT id FROM accounts WHERE username = ?)
+        GROUP BY m.name
+    `
+
+    const paramForGetUserLikeDetails = [req.query.username]
+
+    pool.getConnection(function (err: any, connection: any) {
+        if (err) {
+            connection.release()
+            throw err
+        }
+        connection.query(getUserLikeDetails, paramForGetUserLikeDetails, function (err: any, result: any, fields: any) {
+            if (err) {
+                connection.release()
+                throw err
+            }
+            res.send({
+                status: true,
+                data: result
+            })
+        })
+        connection.release()
+    })
+
+}

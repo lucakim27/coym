@@ -7,8 +7,7 @@
       <input type="password" name="password" v-model="password" placeholder="Password..." required /><br /><br />
       <input type="password" name="repassword" v-model="passwordConfirm" placeholder="Password Confirm..."
         required /><br /><br />
-      <button type="submit" value="register">Sign Up</button>
-      <hr>
+      <button type="submit" value="register">Sign Up</button><hr>
       <button class='goBackBtn' type="button" @click="directToSignIn()"><svg xmlns="http://www.w3.org/2000/svg"
           class="icon icon-tabler icon-tabler-arrow-back-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
           stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -17,7 +16,6 @@
         </svg></button>
     </form>
   </div>
-
   <div id="container" v-if="isMobile()">
     <form class='mobileForm' method="post" @submit.prevent="signUp">
       <h1>Sign Up</h1>
@@ -37,10 +35,8 @@
     </form>
   </div>
 </template>
-
 <script>
 import axios from 'axios'
-
 export default {
   name: 'RegisterPage',
   data() {

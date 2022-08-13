@@ -10,7 +10,6 @@ import NavigationComponent from '@/components/NavigationComponent'
 import HeaderComponent from '@/components/HeaderComponent'
 import { useCookies } from "vue3-cookies"
 import axios from 'axios'
-
 export default {
   name: 'App',
   components: {
@@ -44,6 +43,5 @@ export default {
         })
       }
   }
-  
 }
 </script>

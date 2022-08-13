@@ -24,8 +24,8 @@
     overflow-x: hidden;
 }
 
-#mostViewedContainer h1,
-#mostCommentedContainer h1 {
+#mostViewedContainer h3,
+#mostCommentedContainer h3 {
     color: white;
     font-family: fantasy;
 }
@@ -54,16 +54,32 @@
 
 .eachRow div {
     padding: 20px;
+}
+
+.eachRow div {
+    padding: 20px;
     color: white;
 }
 
-.eachRow div a {
+.eachRow a {
     color: rgb(255, 255, 255);
     text-decoration: none;
 }
 
-.eachRow div a:hover {
-    color: rgb(255, 255, 255);
+.eachRow p {
+    text-align: center;
+}
+
+.desktopHeader {
+    margin: 20px;
+}
+
+.eachRow p a:hover {
+    color: rgb(98, 203, 255);
+}
+
+.eachRow p a {
+    text-decoration: underline !important;
 }
 
 .mobileMostViewedContainer,

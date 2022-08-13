@@ -41,6 +41,11 @@ const routes = [
     name: 'SettingPage',
     component: () => import('@/views/SettingPage'),
   },
+  {
+    path: '/profile',
+    name: 'ProfilePage',
+    component: () => import('@/views/ProfilePage'),
+  },
 ]
 
 export const router = createRouter({

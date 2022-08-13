@@ -88,8 +88,6 @@ footer {
   display: none;
 }
 
-/* MOBILE */
-
 #mostViewedContainer {
   min-width: 40%;
   flex: 0;
@@ -122,5 +120,5 @@ footer {
 
 .mobileUsername {
   font-weight: bold !important;
-  /* color: rgb(98, 203, 255) !important; */
+  text-decoration: underline !important;
 }

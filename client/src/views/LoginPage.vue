@@ -14,12 +14,8 @@
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
           <path d="M9 13l-4 -4l4 -4m-4 4h11a4 4 0 0 1 0 8h-1" />
         </svg></button>
-      <!-- <div class="googleLogin">
-        <GoogleLogin :callback="callback" prompt auto-login/>
-      </div> -->
     </form>
   </div>
-
   <div id="container" v-if="isMobile()">
     <form method="get" class="mobileForm" @submit.prevent="signIn">
       <h1>Sign In</h1>
@@ -35,21 +31,12 @@
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
           <path d="M9 13l-4 -4l4 -4m-4 4h11a4 4 0 0 1 0 8h-1" />
         </svg></button>
-      <!-- <div class="googleLogin">
-        <GoogleLogin :callback="callback" prompt auto-login/>
-      </div> -->
     </form>
   </div>
 </template>
-<!-- <script setup>
-const callback = (response) => {
-  console.log("Handle the response", response)
-}
-</script> -->
 <script>
 import axios from 'axios'
 import { useCookies } from "vue3-cookies"
-
 export default {
   name: 'LoginPage',
   setup() {

@@ -11,7 +11,7 @@
         :id="comment.comment + 'Container'">
         <div class="firstRow">
           <div class="usernameDateContainer">
-            <a class='username '>{{ comment.username }}</a>
+            <a class='username' v-bind:href="'/profile?username=' + comment.username">{{ comment.username }}</a>
             <p class='date'>{{ comment.createdAt.slice(0, 10) }}</p>
           </div>
           <div class="commentDropdown">
@@ -61,7 +61,7 @@
             <div v-if="reply.comment === comment.comment">
               <div class="firstRow">
                 <div class="usernameDateContainer">
-                  <a class='username '>{{ reply.username }}</a>
+                  <a class='username' v-bind:href="'/profile?username=' + reply.username">{{ reply.username }}</a>
                   <p class='date'>{{ reply.createdAt.slice(0, 10) }}</p>
                 </div>
               </div>
@@ -146,20 +146,25 @@ export default {
   },
   methods: {
     edit(comment) {
-      axios({
-        method: "POST",
-        url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/editComment",
-        // url: "http://localhost:3000/editComment",
-        headers: { 'Content-Type': 'application/json' },
-        data: { comment: document.getElementById(comment + 'editTextArea').value, previousComment: comment, username: this.username, page: this.getQueryVariable() }
-      }).then(function (response) {
-        if (response.data.status) {
-          alert("You have successfully edited your comment.")
-          window.location.reload()
-        } else {
-          alert("You failed to edit your comment for some reasons.")
-        }
-      })
+      if (document.getElementById(comment + 'editTextArea').value === '') {
+        alert("You have not input anything yet.")
+        return 0
+      } else {
+        axios({
+          method: "POST",
+          url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/editComment",
+          // url: "http://localhost:3000/editComment",
+          headers: { 'Content-Type': 'application/json' },
+          data: { comment: document.getElementById(comment + 'editTextArea').value, previousComment: comment, username: this.username, page: this.getQueryVariable() }
+        }).then(function (response) {
+          if (response.data.status) {
+            alert("You have successfully edited your comment.")
+            window.location.reload()
+          } else {
+            alert("You failed to edit your comment for some reasons.")
+          }
+        })
+      }
     },
     editComment(comment) {
       document.getElementById(comment + 'commentDropdown').style.display = 'none'
