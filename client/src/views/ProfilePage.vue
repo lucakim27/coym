@@ -8,7 +8,10 @@
                         <div>
                             <a>Comment History</a>
                             <hr>
-                            <a v-if="commentDetails.length === 0">
+                            <a class="profileLoader" v-if="commentDetails === null">
+                                <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
+                            </a>
+                            <a v-if="commentDetails !== null && commentDetails.length === 0">
                                 <p>There's no history</p>
                             </a>
                             <a v-for="comment in commentDetails" :key="comment.name">
@@ -21,8 +24,11 @@
                         <div>
                             <a>Reply History</a>
                             <hr>
-                            <a v-if="replyDetails.length === 0">
-                               <p>There's no history</p>
+                            <a class="profileLoader" v-if="replyDetails === null">
+                               <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
+                            </a>
+                            <a v-if="replyDetails !== null && replyDetails.length === 0">
+                                <p>There's no history</p>
                             </a>
                             <a v-for="comment in replyDetails" :key="comment.name">
                                 <p><router-link :to="'/comment?major=' + comment.name">{{ comment.name }}</router-link>:
@@ -34,7 +40,10 @@
                         <div>
                             <a>Like History</a>
                             <hr>
-                            <a v-if="likeDetails.length === 0">
+                            <a class="profileLoader" v-if="likeDetails === null">
+                                <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
+                            </a>
+                            <a v-if="likeDetails !== null && likeDetails.length === 0">
                                 <p>There's no history</p>
                             </a>
                             <a v-for="comment in likeDetails" :key="comment.name">
@@ -55,7 +64,10 @@
                     <div>
                         <a>Comment History</a>
                         <hr>
-                        <a v-if="commentDetails.length === 0">
+                        <a class="profileLoader" v-if="commentDetails === null">
+                            <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
+                        </a>
+                        <a v-if="commentDetails !== null && commentDetails.length === 0">
                             <p>There's no history</p>
                         </a>
                         <a v-for="comment in commentDetails" :key="comment.name">
@@ -68,7 +80,10 @@
                     <div>
                         <a>Reply History</a>
                         <hr>
-                        <a v-if="replyDetails.length === 0">
+                        <a class="profileLoader" v-if="replyDetails === null">
+                            <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
+                        </a>
+                        <a v-if="replyDetails !== null && replyDetails.length === 0">
                             <p>There's no history</p>
                         </a>
                         <a v-for="comment in replyDetails" :key="comment.name">
@@ -81,7 +96,10 @@
                     <div>
                         <a>Like History</a>
                         <hr>
-                        <a v-if="likeDetails.length === 0">
+                        <a class="profileLoader" v-if="likeDetails === null">
+                            <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
+                        </a>
+                        <a v-if="likeDetails !== null && likeDetails.length === 0">
                             <p>There's no history</p>
                         </a>
                         <a v-for="comment in likeDetails" :key="comment.name">
@@ -96,14 +114,17 @@
 </template>
 <script>
 import axios from 'axios'
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 export default {
     name: 'ProfilePage',
+    components: {
+        PulseLoader
+    },
     data() {
         return {
-            commentDetails: [],
-            replyDetails: [],
-            likeDetails: []
-
+            commentDetails: null,
+            replyDetails: null,
+            likeDetails: null
         }
     },
     methods: {

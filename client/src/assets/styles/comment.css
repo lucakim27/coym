@@ -196,7 +196,10 @@ button:hover,
 }
 
 .comment-dropdown-content {
-  display: none;
+  /* display: none; */
+  transition: 0.5s;
+  height: 0;
+  overflow: hidden;
   cursor: pointer;
   position: relative;
   background-color: #000000 !important;
@@ -206,8 +209,15 @@ button:hover,
   border-radius: 20px;
 }
 
-.show {
-  display:block;
+.commentLoader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.height {
+  height: 116px;
 }
 
 .editContainer {

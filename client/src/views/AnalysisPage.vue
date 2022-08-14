@@ -1,5 +1,5 @@
 <template>
-    <div class='analysisContainer' v-if="!isMobile()">
+    <div class='analysisContainer' v-if="!isMobile() && mostCommentedTable.length">
         <div class='analysisBothContainer'>
             <div class='analysisMostViewedContainer'>
                 <div class="analysisMostViewedPages">
@@ -17,7 +17,10 @@
             </div>
         </div>
     </div>
-    <div v-if="isMobile()">
+    <div class="analysisLoader" v-if="!mostCommentedTable.length">
+        <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
+    </div>
+    <div v-if="isMobile() && mostCommentedTable.length">
         <div class="analysisMostViewedContainer mobileAnalysisMostViewedContainer">
             <div class="analysisMostViewedPages mobileAnalysisContainer">
                 <div class='analysisEachRow' v-for="row in mostCommentedTable" :key="row.name">
@@ -34,8 +37,12 @@
 </template>
 <script>
 import axios from 'axios'
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 export default {
     name: 'AnalysisPage',
+    components: {
+        PulseLoader
+    },
     data() {
         return {
             mostCommentedTable: []

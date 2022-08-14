@@ -3,6 +3,13 @@
     font-family: fantasy;
 }
 
+.analysisLoader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
 .analysisBothContainer {
     display: flex;
     padding: 1%;

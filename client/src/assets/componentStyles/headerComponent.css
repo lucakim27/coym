@@ -23,11 +23,12 @@ header {
 
 header div a {
     text-decoration: none;
-    color: black;
+    color: #ffffff !important;
 }
 
-header div a:hover {
-    color: rgb(0, 136, 255);
+header div a:hover,
+.username:hover {
+    color: #818181 !important;
 }
 
 .dropdownUsername {
@@ -36,7 +37,7 @@ header div a:hover {
 }
 
 .dropdownUsername:hover {
-    color: rgb(98, 203, 255) !important;
+    color: white !important;
     cursor: pointer !important;
 }
 
@@ -46,10 +47,6 @@ header span {
     position: absolute;
     left: 15px;
     top: 10px;
-}
-
-header span:hover {
-    color: rgb(88, 88, 88);
 }
 
 header h2 {
@@ -76,7 +73,8 @@ header h2 {
 }
 
 .dropdown-content {
-    /* display: none; */
+    transition: 0.5s;
+    height: 0;
     cursor: pointer;
     position: absolute;
     right: 0px;
@@ -86,7 +84,7 @@ header h2 {
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 9999999;
     border-radius: 20px;
-
+    overflow: hidden;
 }
 
 .dropdown-content a {
@@ -100,5 +98,5 @@ header h2 {
 }
 
 .signOutBtn:hover {
-    color: rgb(255, 25, 0);
+    color: rgb(255, 25, 0) !important;
 }

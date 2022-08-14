@@ -18,7 +18,7 @@
                     <path fill-rule="evenodd"
                         d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
                 </svg>
-                <div id='profileDropdown' class="dropdown-content" v-show="state">
+                <div id='profileDropdown' class="dropdown-content">
                     <a class="username dropdownUsername" @click="renderProfile(username)"
                         v-if="username !== null">{{ username }}</a>
                     <a class="username" v-if="username === null"> Anonymous </a>
@@ -71,23 +71,31 @@ export default {
     },
     methods: {
         renderSetting() {
-            this.state = false
+            document.getElementById('profileDropdown').style.height = '0'
             this.$router.push('/setting')
         },
         renderRequest() {
-            this.state = false
+            document.getElementById('profileDropdown').style.height = '0'
             this.$router.push('/request')
         },
         renderProfile(username) {
-            this.state = false
-            this.$router.push('/profile?username=' + username)
+            if (this.getTitle === 'PROFILE') {
+                window.location.href = '/profile?username=' + username
+            } else {
+                document.getElementById('profileDropdown').style.height = '0'
+                this.$router.push('/profile?username=' + username)
+            }
         },
         toggleDropdown() {
-            this.state = !this.state
+            if (document.getElementById('profileDropdown').style.height === '308px') {
+                document.getElementById('profileDropdown').style.height = '0'
+            } else {
+                document.getElementById('profileDropdown').style.height = '308px'
+            }
         },
         close(e) {
             if (!this.$el.contains(e.target)) {
-                this.state = false
+                document.getElementById('profileDropdown').style.height = '0'
             }
         },
         directToLogin() {

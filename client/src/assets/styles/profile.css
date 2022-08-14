@@ -9,6 +9,11 @@
     justify-content: center;
 }
 
+.profileLoader {
+    display: flex;
+    justify-content: center;
+}
+
 .profileMostViewedContainer {
     min-width: 80%;
     flex: 0;

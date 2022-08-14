@@ -7,6 +7,9 @@
       <button @click="magic_flag = !magic_flag" class="closeBtn" v-show="magic_flag">Close</button>
     </div>
     <center id="commentDiv">
+      <div class="commentLoader" v-if="!getComment.length">
+        <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
+      </div>
       <div v-for="comment in getComment" :key="comment.comment" class='eachCommentDiv'
         :id="comment.comment + 'Container'">
         <div class="firstRow">
@@ -76,8 +79,12 @@
 <script>
 import axios from 'axios'
 import { useCookies } from "vue3-cookies"
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 export default {
   name: 'CommentPage',
+  components: {
+    PulseLoader
+  },
   data() {
     return {
       username: '',
@@ -159,7 +166,8 @@ export default {
     onClick: function (event) {
       if (!event.target.matches('.commentEditBtn') && !event.target.matches('.commentDeleteBtn') && !event.target.matches('.svg-icon') && !event.target.matches('.svg-path')) {
         for (var i = 0; i < document.getElementsByClassName('comment-dropdown-content').length; i++) {
-          document.getElementsByClassName('comment-dropdown-content')[i].classList.remove("show")
+          document.getElementsByClassName('comment-dropdown-content')[i].classList.remove("height")
+          
         }
       }
     },
@@ -185,7 +193,7 @@ export default {
       }
     },
     editComment(comment) {
-      document.getElementById(comment + 'commentDropdown').classList.remove("show")
+      document.getElementById(comment + 'commentDropdown').classList.remove("height")
       document.getElementById(comment + 'closeEditBtn').style.display = 'block'
       document.getElementById(comment + 'toggleDropdownBtn').style.display = 'none'
       document.getElementById(comment + 'commetParagraph').style.display = 'none'
@@ -217,7 +225,7 @@ export default {
       }
     },
     toggleDropdown(comment) {
-      document.getElementById(comment + 'commentDropdown').classList.toggle("show")
+      document.getElementById(comment + 'commentDropdown').classList.toggle("height")
     },
     findReplyComments(replies) {
       let list = []

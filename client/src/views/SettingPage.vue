@@ -3,25 +3,37 @@
         <div class='backgroundContainer settingMobileContainer'>
             <div class="settingEachContainer">
                 <h3>School</h3>
-                <div class="settingCenterChild">
+                <div class="settingLoader" v-if="school === null">
+                    <pulse-loader :loading="loading" :color="color"></pulse-loader>
+                </div>
+                <div v-if="school !== null" class="settingCenterChild">
                     <input type="text" placeholder="Your school..." v-model="school">
                 </div>
             </div>
             <div class="settingEachContainer">
                 <h3>Gender</h3>
-                <div class="settingCenterChild">
+                <div class="settingLoader" v-if="gender === null">
+                    <pulse-loader :loading="loading" :color="color"></pulse-loader>
+                </div>
+                <div v-if="gender !== null" class="settingCenterChild">
                     <input type="text" placeholder="Your gender..." v-model="gender">
                 </div>
             </div>
             <div class="settingEachContainer">
                 <h3>Major</h3>
-                <div class="settingCenterChild">
+                <div class="settingLoader" v-if="major === null">
+                    <pulse-loader :loading="loading" :color="color"></pulse-loader>
+                </div>
+                <div v-if="major !== null" class="settingCenterChild">
                     <input type="text" placeholder="Your major..." v-model="major">
                 </div>
             </div>
             <div class="settingEachContainer">
                 <h3>Country</h3>
-                <div class="settingCenterChild">
+                <div class="settingLoader" v-if="country === null">
+                    <pulse-loader :loading="loading" :color="color"></pulse-loader>
+                </div>
+                <div v-if="country !== null" class="settingCenterChild">
                     <input type="text" placeholder="Your country..." v-model="country">
                 </div>
             </div>
@@ -48,25 +60,37 @@
         <div class='backgroundContainer settingMobileContainer'>
             <div class="settingEachContainer">
                 <h3>School</h3>
-                <div class="settingCenterChild">
+                <div class="settingLoader" v-if="school === null">
+                    <pulse-loader :loading="loading" :color="color"></pulse-loader>
+                </div>
+                <div v-if="school !== null" class="settingCenterChild">
                     <input type="text" placeholder="Your school..." v-model="school">
                 </div>
             </div>
             <div class="settingEachContainer">
                 <h3>Gender</h3>
-                <div class="settingCenterChild">
+                <div class="settingLoader" v-if="gender === null">
+                    <pulse-loader :loading="loading" :color="color"></pulse-loader>
+                </div>
+                <div v-if="gender !== null" class="settingCenterChild">
                     <input type="text" placeholder="Your gender..." v-model="gender">
                 </div>
             </div>
             <div class="settingEachContainer">
                 <h3>Major</h3>
-                <div class="settingCenterChild">
+                <div class="settingLoader" v-if="major === null">
+                    <pulse-loader :loading="loading" :color="color"></pulse-loader>
+                </div>
+                <div v-if="major !== null" class="settingCenterChild">
                     <input type="text" placeholder="Your major..." v-model="major">
                 </div>
             </div>
             <div class="settingEachContainer">
                 <h3>Country</h3>
-                <div class="settingCenterChild">
+                <div class="settingLoader" v-if="country === null">
+                    <pulse-loader :loading="loading" :color="color"></pulse-loader>
+                </div>
+                <div v-if="country !== null" class="settingCenterChild">
                     <input type="text" placeholder="Your country..." v-model="country">
                 </div>
             </div>
@@ -93,18 +117,21 @@
 <script>
 import axios from 'axios'
 import { useCookies } from "vue3-cookies"
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 export default {
     name: 'SettingPage',
+    components: {
+        PulseLoader
+    },
     data() {
         return {
             username: '',
-            country: '',
-            major: '',
-            school: '',
-            gender: '',
+            country: null,
+            major: null,
+            school: null,
+            gender: null,
             password: '',
-            passwordConfirm: '',
-            state: ''
+            passwordConfirm: ''
         }
     },
     created() {
