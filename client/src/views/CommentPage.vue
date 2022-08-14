@@ -1,6 +1,6 @@
 <template>
   <div id='container'>
-    <div id="ipnutContainer" v-show='loggedIn'>
+    <div id="ipnutContainer">
       <textarea height="60" type="text" id="userInput" v-model="commentInput" placeholder="Comment here..."
         @focus="magic_flag = true"></textarea><br>
       <button @click="comment()" id="commentBtn" v-show="magic_flag">Comment</button>
@@ -30,7 +30,8 @@
               </path>
             </svg>
             <div v-bind:id="comment.comment + 'commentDropdown'" class="comment-dropdown-content">
-              <a class="commentEditBtn" @click.prevent="editComment(comment.comment)" v-bind:id="comment.comment + 'edit'">Edit</a>
+              <a class="commentEditBtn" @click.prevent="editComment(comment.comment)"
+                v-bind:id="comment.comment + 'edit'">Edit</a>
               <a class="commentDeleteBtn" @click.prevent="deleteComment(comment.comment)">Delete</a>
             </div>
           </div>
@@ -44,7 +45,7 @@
         <div class='likeAndReplyContainer'>
           <center class='lastRow'>
             <button v-bind:id="comment.comment" class='like' @click="like(comment.comment)">0 Like</button>
-            <button v-bind:id="comment.comment + 'Reply'" class='reply' v-if="loggedIn"
+            <button v-bind:id="comment.comment + 'Reply'" class='reply'
               @click="showReplyContainer(comment.comment)">Reply</button>
             <button v-if='renderReplyBtn.includes(comment.comment)' v-bind:id="comment.comment + 'ViewReply'"
               class='viewReply' @click="viewReply(comment.comment)">View
@@ -74,8 +75,8 @@
 </template>
 <script>
 import axios from 'axios'
+import { useCookies } from "vue3-cookies"
 export default {
-  props: ["pass_data"],
   name: 'CommentPage',
   data() {
     return {
@@ -88,8 +89,23 @@ export default {
       renderReplyBtn: []
     }
   },
-  beforeMount() {
+  created() {
     let self = this
+      if (self.cookies.get('user') !== null) {
+        axios({
+          method: "GET",
+          url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/cookieValidation",
+          // url: "http://localhost:3000/cookieValidation",
+          params: {
+            username: self.cookies.get("user").username,
+            password: self.cookies.get("user").password
+          }
+        }).then(function (response) {
+          if (response.data.status) {
+            self.username = response.data.username
+          }
+        })
+      }
     axios({
       method: "GET",
       url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getComment",
@@ -129,19 +145,11 @@ export default {
       }
     })
   },
-  computed: {
-    loggedIn() {
-      if (this.username === '' || this.username === null) {
-        return false
-      } else {
-        return true
-      }
-    }
+  setup() {
+    const { cookies } = useCookies()
+    return { cookies }
   },
   mounted() {
-    setTimeout(() => {
-      this.username = this.pass_data
-    }, "300")
     this.$el.addEventListener('click', this.onClick)
   },
   beforeUnMount: function () {
@@ -202,7 +210,7 @@ export default {
             alert("You have successfully deleted your comment.")
             window.location.reload()
           } else {
-            alert("You failed to delete your comment for some reasons.")
+            alert("You have failed to delete your comment for some reasons.")
           }
         })
       }
@@ -220,12 +228,13 @@ export default {
       this.renderReplyBtn = list
     },
     reply(comment) {
-      if (document.getElementById(comment + 'ReplyInput').value === '') {
-        alert("You have not input anything yet.")
-        return 0
-      } else if (this.username === '' || this.username === null) {
-        alert("You're not logged in.")
-      } else {
+      if (this.username === '' || this.username === null) {
+        alert("Sign in please.")
+      }
+      else if (document.getElementById(comment + 'ReplyInput').value === '') {
+        alert("Please type in longer than a character.")
+      }
+      else {
         axios({
           method: "POST",
           url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/postReply",
@@ -262,28 +271,31 @@ export default {
       return decodeURIComponent(returnValue)
     },
     comment() {
-      if (this.commentInput === '') {
-        alert("You have not input anything yet.")
+      if (this.username === '' || this.username === null) {
+        alert("Sign in please.")
+      } else if (this.commentInput === '') {
+        alert("Please type in longer than a character.")
         return 0
+      } else {
+        axios({
+          method: "POST",
+          url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/postComment",
+          // url: "http://localhost:3000/postComment",
+          headers: { 'Content-Type': 'application/json' },
+          data: { comment: this.commentInput, username: this.username, page: this.getQueryVariable() }
+        }).then(function (response) {
+          if (response.data.status) {
+            alert("You have successfully commented.")
+            window.location.reload()
+          } else {
+            alert("Your comment is duplicated.")
+          }
+        })
       }
-      axios({
-        method: "POST",
-        url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/postComment",
-        // url: "http://localhost:3000/postComment",
-        headers: { 'Content-Type': 'application/json' },
-        data: { comment: this.commentInput, username: this.username, page: this.getQueryVariable() }
-      }).then(function (response) {
-        if (response.data.status) {
-          alert("You have successfully commented.")
-          window.location.reload()
-        } else {
-          alert("Your comment is duplicated.")
-        }
-      })
     },
     like(comment) {
       if (this.username === '' || this.username === null) {
-        alert("You're not logged in.")
+        alert("Sign in please.")
       } else {
         axios({
           method: "POST",

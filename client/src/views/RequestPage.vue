@@ -25,18 +25,37 @@
 </template>
 <script>
 import axios from 'axios'
+import { useCookies } from "vue3-cookies"
 export default {
   name: 'RequestPage',
-  props: ["pass_data"],
+  created() {
+    let self = this
+    if (self.cookies.get('user') !== null) {
+      axios({
+        method: "GET",
+        url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/cookieValidation",
+        // url: "http://localhost:3000/cookieValidation",
+        params: {
+          username: self.cookies.get("user").username,
+          password: self.cookies.get("user").password
+        }
+      }).then(function (response) {
+        if (response.data.status) {
+          self.username = response.data.username
+        }
+      })
+    }
+  },
+  setup() {
+    const { cookies } = useCookies()
+    return { cookies }
+  },
   data() {
     return {
       username: '',
       selectedValue: 'Add major',
       content: ''
     }
-  },
-  updated() {
-    this.username = this.pass_data
   },
   computed: {
     inputLabel() {
@@ -57,9 +76,9 @@ export default {
     },
     request() {
       if (this.username === '' || this.username === null) {
-        alert("You're not loggged in.")
+        alert("Sign in please.")
       } else if (this.content === '') {
-        alert("You haven't typed anything yet.")
+        alert("Please type in longer than a character.")
       } else {
         axios({
           method: "POST",
@@ -74,7 +93,7 @@ export default {
           }
         })
       }
-      }
+    }
   }
 }
 </script>

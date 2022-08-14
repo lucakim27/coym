@@ -92,9 +92,9 @@
 </template>
 <script>
 import axios from 'axios'
+import { useCookies } from "vue3-cookies"
 export default {
     name: 'SettingPage',
-    props: ["pass_data"],
     data() {
         return {
             username: '',
@@ -107,29 +107,40 @@ export default {
             state: ''
         }
     },
-    mounted () {
-        setTimeout(() => {
-            this.username = this.pass_data
-            this.getUserDetails()
-        }, "300")
+    created() {
+        let self = this
+        if (self.cookies.get('user') !== null) {
+            axios({
+                method: "GET",
+                url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/cookieValidation",
+                // url: "http://localhost:3000/cookieValidation",
+                params: {
+                    username: self.cookies.get("user").username,
+                    password: self.cookies.get("user").password
+                }
+            }).then(function (response) {
+                if (response.data.status) {
+                    self.username = response.data.username
+                    axios({
+                        method: "GET",
+                        url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getUserDetails",
+                        // url: "http://localhost:3000/getUserDetails",
+                        params: { username: response.data.username }
+                    }).then(function (response) {
+                        self.country = response.data.userDetails.country === null ? '' : response.data.userDetails.country
+                        self.major = response.data.userDetails.major === null ? '' : response.data.userDetails.major
+                        self.school = response.data.userDetails.school === null ? '' : response.data.userDetails.school
+                        self.gender = response.data.userDetails.gender === null ? '' : response.data.userDetails.gender
+                    })
+                }
+            })
+        }
+    },
+    setup() {
+        const { cookies } = useCookies()
+        return { cookies }
     },
     methods: {
-        getUserDetails() {
-            const self = this
-            if (this.username !== '' && this.username !== null) {
-                axios({
-                    method: "GET",
-                    url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getUserDetails",
-                    // url: "http://localhost:3000/getUserDetails",
-                    params: { username: this.username }
-                }).then(function (response) {
-                    self.country = response.data.userDetails.country === null ? '' : response.data.userDetails.country
-                    self.major = response.data.userDetails.major === null ? '' : response.data.userDetails.major
-                    self.school = response.data.userDetails.school === null ? '' : response.data.userDetails.school
-                    self.gender = response.data.userDetails.gender === null ? '' : response.data.userDetails.gender
-                })
-            }
-        },
         isMobile() {
             if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
                 return true
