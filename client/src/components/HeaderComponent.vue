@@ -87,10 +87,10 @@ export default {
             }
         },
         toggleDropdown() {
-            if (document.getElementById('profileDropdown').style.height === '350px') {
+            if (document.getElementById('profileDropdown').style.height === '320px') {
                 document.getElementById('profileDropdown').style.height = '0'
             } else {
-                document.getElementById('profileDropdown').style.height = '350px'
+                document.getElementById('profileDropdown').style.height = '320px'
             }
         },
         close(e) {

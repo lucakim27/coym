@@ -23,12 +23,12 @@ header {
 
 header div a {
     text-decoration: none;
-    color: #ffffff !important;
+    color: #ffffff;
 }
 
 header div a:hover,
 .username:hover {
-    color: #818181 !important;
+    color: rgb(0, 136, 255) !important;
 }
 
 .dropdownUsername {
@@ -88,7 +88,7 @@ header h2 {
 }
 
 .dropdown-content a {
-    margin-top: 10px;
+    margin: 0px;
     font-family: fantasy;
     color: rgb(255, 255, 255);
     padding: 20px;
