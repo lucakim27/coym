@@ -1,10 +1,10 @@
 <template>
-    <div id='container' v-if="!isMobile()">
-        <div id='BothContainer'>
-            <div id='mostViewedContainer'>
-                <div class="mostViewedPages">
-                    <h3 class="desktopHeader">{{ this.getQueryVariable() }}</h3>
-                    <div class='eachRow'>
+    <div class='profileContainer' v-if="!isMobile()">
+        <div class='profileBothContainer'>
+            <div class='profileMostViewedContainer'>
+                <div class="profileMostViewedPages">
+                    <h3 class="profileDesktopHeader">{{ this.getQueryVariable() }}</h3>
+                    <div class='profileEachRow'>
                         <div>
                             <a>Comment History</a>
                             <hr>
@@ -12,12 +12,12 @@
                                 <p>There's no history</p>
                             </a>
                             <a v-for="comment in commentDetails" :key="comment.name">
-                                <p><a v-bind:href="'/comment?major=' + comment.name">{{ comment.name }}</a>:
+                                <p><router-link :to="'/comment?major=' + comment.name">{{ comment.name }}</router-link>:
                                     {{ comment.count }}</p>
                             </a>
                         </div>
                     </div>
-                    <div class='eachRow'>
+                    <div class='profileEachRow'>
                         <div>
                             <a>Reply History</a>
                             <hr>
@@ -25,12 +25,12 @@
                                <p>There's no history</p>
                             </a>
                             <a v-for="comment in replyDetails" :key="comment.name">
-                                <p><a v-bind:href="'/comment?major=' + comment.name">{{ comment.name }}</a>:
+                                <p><router-link :to="'/comment?major=' + comment.name">{{ comment.name }}</router-link>:
                                     {{ comment.count }}</p>
                             </a>
                         </div>
                     </div>
-                    <div class='eachRow'>
+                    <div class='profileEachRow'>
                         <div>
                             <a>Like History</a>
                             <hr>
@@ -38,7 +38,7 @@
                                 <p>There's no history</p>
                             </a>
                             <a v-for="comment in likeDetails" :key="comment.name">
-                                <p><a v-bind:href="'/comment?major=' + comment.name">{{ comment.name }}</a>:
+                                <p><router-link :to="'/comment?major=' + comment.name">{{ comment.name }}</router-link>:
                                     {{ comment.count }}</p>
                             </a>
                         </div>
@@ -48,10 +48,10 @@
         </div>
     </div>
     <div v-if="isMobile()">
-        <div id='mostViewedContainer' class="mobileMostViewedContainer">
-            <div class="mostViewedPages mobileContainer">
+        <div class="profileMostViewedContainer profileMobileMostViewedContainer">
+            <div class="profileMostViewedPages profileMobileContainer">
                 <h3>{{ this.getQueryVariable() }}</h3>
-                <div class='eachRow'>
+                <div class='profileEachRow'>
                     <div>
                         <a>Comment History</a>
                         <hr>
@@ -59,12 +59,12 @@
                             <p>There's no history</p>
                         </a>
                         <a v-for="comment in commentDetails" :key="comment.name">
-                            <p><a v-bind:href="'/comment?major=' + comment.name">{{ comment.name }}</a>:
+                            <p><router-link :to="'/comment?major=' + comment.name">{{ comment.name }}</router-link>:
                                 {{ comment.count }}</p>
                         </a>
                     </div>
                 </div>
-                <div class='eachRow'>
+                <div class='profileEachRow'>
                     <div>
                         <a>Reply History</a>
                         <hr>
@@ -72,12 +72,12 @@
                             <p>There's no history</p>
                         </a>
                         <a v-for="comment in replyDetails" :key="comment.name">
-                            <p><a v-bind:href="'/comment?major=' + comment.name">{{ comment.name }}</a>:
+                            <p><router-link :to="'/comment?major=' + comment.name">{{ comment.name }}</router-link>:
                                 {{ comment.count }}</p>
                         </a>
                     </div>
                 </div>
-                <div class='eachRow'>
+                <div class='profileEachRow'>
                     <div>
                         <a>Like History</a>
                         <hr>
@@ -85,7 +85,7 @@
                             <p>There's no history</p>
                         </a>
                         <a v-for="comment in likeDetails" :key="comment.name">
-                            <p><a v-bind:href="'/comment?major=' + comment.name">{{ comment.name }}</a>:
+                            <p><router-link :to="'/comment?major=' + comment.name">{{ comment.name }}</router-link>:
                                 {{ comment.count }}</p>
                         </a>
                     </div>

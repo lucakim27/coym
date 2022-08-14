@@ -1,12 +1,12 @@
-.Input {
+.homeInput {
     text-align: center;
 }
 
-.Input-text {
+.homeInputText {
     font-family: fantasy;
 }
 
-.Input input {
+.homeInput input {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -17,7 +17,7 @@
     width: 50%;
 }
 
-#options {
+.homeOptions {
     margin-left: auto;
     margin-right: auto;
     left: 0;
@@ -35,28 +35,28 @@
     ;
 }
 
-.mobileOptions {
+.mobileHomeOptions {
     width: 85% !important;
 }
 
-#options tr td {
+.homeOptions tr td {
     width: 10%;
     margin: 20px;
     padding: 20px;
 }
 
-#options tr td a {
+.homeOptions tr td a {
     font-family: fantasy;
     min-width: 50%;
 }
 
-.descriptionContainer {
+.homeDescriptionContainer {
     text-align: center;
     margin-bottom: 35px;
     padding: 30px;
 }
 
-.descriptionContainer svg {
+.homeDescriptionContainer svg {
     margin: 20px;
 }
 
@@ -68,24 +68,24 @@
     border-color: white;
 }
 
-#container {
+.homeContainer {
     text-align: center;
     overflow-y: scroll;
 }
 
-table a {
+.homeOptions a {
     color: black;
     text-decoration: none;
 }
 
-table a:hover {
+.homeOptions a:hover {
     color: rgb(0, 136, 255);
 }
 
-b {
+.homeDescriptionExplanation {
     font-family: fantasy;
 }
 
-.mobileInput {
+.mobileHomeInput {
     width: 85% !important;
 }

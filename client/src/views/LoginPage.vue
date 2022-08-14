@@ -1,14 +1,14 @@
 <template>
-  <div id="container" v-if="!isMobile()">
-    <form method="get" @submit.prevent="signIn">
+  <div class="loginContainer" v-if="!isMobile()">
+    <form class="loginForm" method="get" @submit.prevent="signIn">
       <h1>Sign In</h1>
-      <input type="text" name="username" v-model="username" placeholder="Username..." required /><br /><br />
-      <input type="password" name="password" v-model="password" placeholder="Password..." required /><br /><br />
-      <button type="submit" value="login" class="signInBtn">Sign In</button>
+      <input class="loginInput" type="text" name="username" v-model="username" placeholder="Username..." required /><br /><br />
+      <input class="loginInput"  type="password" name="password" v-model="password" placeholder="Password..." required /><br /><br />
+      <button class="loginButton signInBtn" type="submit" value="login">Sign In</button>
       <hr>
-      <button type="button" @click="directToSignUp()">Sign Up</button>
+      <button class="loginButton" type="button" @click="directToSignUp()">Sign Up</button>
       <hr>
-      <button class='goBackBtn' type="button" @click="directToHome()"><svg xmlns="http://www.w3.org/2000/svg"
+      <button class='goBackBtn loginButton' type="button" @click="directToHome()"><svg xmlns="http://www.w3.org/2000/svg"
           class="icon icon-tabler icon-tabler-arrow-back-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
           stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -16,16 +16,16 @@
         </svg></button>
     </form>
   </div>
-  <div id="container" v-if="isMobile()">
-    <form method="get" class="mobileForm" @submit.prevent="signIn">
+  <div class="loginContainer" v-if="isMobile()">
+    <form method="get" class="loginForm mobileLoginForm" @submit.prevent="signIn">
       <h1>Sign In</h1>
-      <input type="text" name="username" v-model="username" placeholder="Username..." required /><br /><br />
-      <input type="password" name="password" v-model="password" placeholder="Password..." required /><br /><br />
-      <button type="submit" value="login" class="signInBtn">Sign In</button>
+      <input class="loginInput" type="text" name="username" v-model="username" placeholder="Username..." required /><br /><br />
+      <input class="loginInput" type="password" name="password" v-model="password" placeholder="Password..." required /><br /><br />
+      <button class="loginButton signInBtn" type="submit" value="login">Sign In</button>
       <hr>
-      <button type="button" @click="directToSignUp()">Sign Up</button>
+      <button class="loginButton" type="button" @click="directToSignUp()">Sign Up</button>
       <hr>
-      <button class='goBackBtn' type="button" @click="directToHome()"><svg xmlns="http://www.w3.org/2000/svg"
+      <button class='goBackBtn loginButton' type="button" @click="directToHome()"><svg xmlns="http://www.w3.org/2000/svg"
           class="icon icon-tabler icon-tabler-arrow-back-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
           stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -77,10 +77,10 @@ export default {
       })
     },
     directToSignUp() {
-      window.location.href = '/register'
+      this.$router.push('/register')
     },
     directToHome() {
-      window.location.href = '/'
+      this.$router.push('/')
     }
   }
 }

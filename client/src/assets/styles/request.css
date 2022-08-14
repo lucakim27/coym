@@ -1,4 +1,4 @@
-.mainContainer {
+.requestMainContainer {
     margin-top: 20px;
     background-color:rgb(146, 156, 161);
     padding: 10px;
@@ -6,7 +6,7 @@
     border-radius: 20px;
 }
 
-.eachContainer input {
+.requestEachContainer input {
     width: 100%;
     margin: 10px;
     border-radius: 20px;
@@ -14,7 +14,7 @@
     font-family: fantasy;
 }
 
-.eachContainer button {
+.requestEachContainer button {
     display: inline-block;
     background: #ffffff;
     color: rgb(0, 0, 0);
@@ -25,18 +25,12 @@
     padding: 20px;
 }
 
-.eachContainer button:hover {
+.requestEachContainer button:hover {
     color: rgb(0, 136, 255);
     cursor: pointer;
 }
 
-.twoContainer {
-    justify-content: center;
-    display: flex;
-    margin: 10px;
-}
-
-.eachContainer {
+.requestEachContainer {
     align-items: center;
     background: #595f62;
     padding: 20px;
@@ -44,30 +38,13 @@
     border-radius: 20px;
 }
 
-.eachContainer h3 {
+.requestEachContainer h3 {
     margin-left: 20px;
     color: white;
     font-family: fantasy;
 }
 
-.btnContainer {
-    position: fixed;
-   left: 0;
-   right: 0;
-   bottom: 0;
-   color: white;
-   text-align: center;
-    margin: 20px;
-    padding: 20px;
-}
-
-.mobileContainer {
-    overflow: hidden;
-    min-width: 100% !important;
-    margin-bottom: 30px;
-}
-
-select {
+.requestSelect {
     width: 100%;
     margin: 10px;
     border-radius: 20px;
@@ -75,7 +52,7 @@ select {
     font-family: fantasy;
 }
 
-.centerChild {
+.requestCenterChild {
     display: flex; 
     justify-content:center;
 }

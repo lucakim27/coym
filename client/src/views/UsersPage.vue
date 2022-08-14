@@ -1,7 +1,7 @@
 <template>
-  <div class='container' v-if="!isMobile()">
-    <div class="onlineDiv" :style="mobileCheck">
-      <div class="onlineHead" v-if="!isMobile()">
+  <div class='userContainer' v-if="!isMobile()">
+    <div class="userOnlineDiv" :style="mobileCheck">
+      <div class="userOnlineHead" v-if="!isMobile()">
         <div><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-person-circle"
             viewBox="0 0 16 16">
             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
@@ -51,11 +51,11 @@
               d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM349.8 349.8c5.594 12.03 .4375 26.31-11.56 31.94c-3.312 1.531-6.75 2.25-10.19 2.25c-9 0-17.66-5.125-21.75-13.81l-38.46-82.19H208v72c0 13.25-10.75 24-24 24s-24-10.75-24-24V152c0-13.25 10.75-24 24-24l88 .0044c44.13 0 80 35.88 80 80c0 28.32-14.87 53.09-37.12 67.31L349.8 349.8zM272 176h-64v64h64c17.66 0 32-14.34 32-32S289.7 176 272 176z" />
           </svg></div>
       </div>
-      <div class="onlineBody mobileBody">
+      <div class="userOnlineBody mobileBody">
         <div v-for="user in users" :key="user.username">
-          <div class='eachRow'>
-            <div class="row">
-              <div><a class="mobileUsername" v-bind:href="'/profile?username=' + user.username">{{ user.username }}</a></div>
+          <div class='userEachRow'>
+            <div class="userRow">
+              <div><router-link class="userMobileUsername" :to="'/profile?username=' + user.username">{{ user.username }}</router-link></div>
               <div v-if="user.gender !== null && user.gender !== ''">{{ user.gender }}</div>
               <div v-if="user.gender === null">N/A</div>
               <div v-if="user.gender === ''">N/A</div>
@@ -76,19 +76,19 @@
     </div>
   </div>
   <div v-if="isMobile()">
-    <div id='mostViewedContainer' class="mobileMostViewedContainer">
+    <div class="userMostViewedContainer mobileUserMostViewedContainer">
       <div class="mostViewedPages">
-        <div class='eachRow' v-for="user in users" :key="user.username">
-          <p class="alignChild">
+        <div class='userEachRow' v-for="user in users" :key="user.username">
+          <p class="userAlignChild">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-person-circle"
               viewBox="0 0 16 16">
               <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
               <path fill-rule="evenodd"
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
             </svg>
-            <a class="mobileUsername" v-bind:href="'/profile?username=' + user.username">{{ user.username }}</a>
+            <router-link class="mobileUsername" :to="'/profile?username=' + user.username">{{ user.username }}</router-link>
           </p>
-          <p class="alignChild">
+          <p class="userAlignChild">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-gender-ambiguous"
               viewBox="0 0 16 16">
               <path fill-rule="evenodd"
@@ -98,7 +98,7 @@
             <a v-if="user.gender === null">N/A</a>
             <a v-if="user.gender === ''">N/A</a>
           </p>
-          <p class="alignChild">
+          <p class="userAlignChild">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" viewBox="0 0 512 512">
               <path d="M267,474l-.8-.13A.85.85,0,0,0,267,474Z" />
               <path
@@ -118,7 +118,7 @@
             <a v-if="user.country === null">N/A</a>
             <a v-if="user.country === ''">N/A</a>
           </p>
-          <p class="alignChild">
+          <p class="userAlignChild">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" viewBox="0 0 512 512">
               <polygon points="32 192 256 64 480 192 256 320 32 192"
                 style="fill:rgb(89, 95, 98);stroke:white;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" />
@@ -133,7 +133,7 @@
             <a v-if="user.major === null">N/A</a>
             <a v-if="user.major === ''">N/A</a>
           </p>
-          <p class="alignChild">
+          <p class="userAlignChild">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" data-name="Layer 1"
               viewBox="0 0 24 24">
               <path
@@ -143,7 +143,7 @@
             <a v-if="user.school === null">N/A</a>
             <a v-if="user.school === ''">N/A</a>
           </p>
-          <p class="alignChild">
+          <p class="userAlignChild">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" viewBox="0 0 512 512">
               ! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License -
               https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright

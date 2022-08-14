@@ -1,4 +1,4 @@
-.onlineDiv {
+.userOnlineDiv {
   height: 83vh;
   flex: 0;
   border-radius: 20px;
@@ -7,7 +7,7 @@
   margin-top: 20px !important;
 }
 
-.onlineHead {
+.userOnlineHead {
   display: flex;
   justify-content: center;
   padding: 10px;
@@ -15,17 +15,7 @@
   margin-top: 20px !important;
 }
 
-.threeContainer {
-  display: flex;
-}
-
-.threeContainer div {
-  margin-left: 25px;
-  margin-right: 25px;
-  padding: 10px;
-}
-
-.onlineHead div {
+.userOnlineHead div {
   padding: 10px;
   color: white;
   font-size: 30px;
@@ -33,7 +23,7 @@
   text-align: center;
 }
 
-.onlineBody {
+.userOnlineBody {
   justify-content: center;
   padding: 10px;
   height: 65vh;
@@ -42,7 +32,7 @@
   overflow-x: hidden;
 }
 
-.container {
+.userContainer {
   display: flex;
   padding: 10px;
   justify-content: center;
@@ -50,7 +40,7 @@
   font-family: fantasy;
 }
 
-.eachRow {
+.userEachRow {
   padding: 10px;
   justify-content: center;
   margin: 20px;
@@ -59,7 +49,7 @@
   overflow: hidden;
 }
 
-.row {
+.userRow {
   justify-content: center;
   display: flex;
   padding: 10px;
@@ -67,28 +57,24 @@
   width: 100%;
 }
 
-.row div {
+.userRow div {
   width: 16%;
   padding: 10px;
   text-align: center;
   margin: auto;
 }
 
-.row div a {
+.userRow div a {
   text-decoration: none;
   color: rgb(255, 255, 255);
 }
 
-.row div a:hover {
+.userRow div a:hover {
   color: rgb(98, 203, 255) !important;
   cursor: pointer;
 }
 
-footer {
-  display: none;
-}
-
-#mostViewedContainer {
+.userMostViewedContainer {
   min-width: 40%;
   flex: 0;
   padding: 1%;
@@ -97,7 +83,7 @@ footer {
   background: rgb(146, 156, 161);
 }
 
-.mobileMostViewedContainer {
+.mobileUserMostViewedContainer {
     margin-left: 0 !important;
     margin-right: 0 !important;
     margin: 15px !important;
@@ -105,20 +91,20 @@ footer {
     min-width: 90% !important;
 }
 
-.alignChild {
+.userAlignChild {
   display: flex;
   justify-content: space-between;
   padding: 10px;
 }
 
-.alignChild a {
+.userAlignChild a {
   width: 80%;
   overflow-x: scroll;
   color: white;
   font-family: fantasy;
 }
 
-.mobileUsername {
+.userMobileUsername {
   font-weight: bold !important;
   text-decoration: underline !important;
 }

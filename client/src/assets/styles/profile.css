@@ -1,15 +1,15 @@
-#container {
+.profileContainer {
     text-align: left;
     font-family: fantasy;
 }
 
-#BothContainer {
+.profileBothContainer {
     display: flex;
     padding: 1%;
     justify-content: center;
 }
 
-#mostViewedContainer {
+.profileMostViewedContainer {
     min-width: 80%;
     flex: 0;
     padding: 1%;
@@ -18,72 +18,61 @@
     background: rgb(146, 156, 161);
 }
 
-.mostViewedPages {
+.profileMostViewedPages {
     height: 83vh;
     overflow-y: scroll;
     overflow-x: hidden;
 }
 
-#mostViewedContainer h3,
-#mostCommentedContainer h3 {
+.profileMostViewedContainer h3 {
     color: white;
     font-family: fantasy;
 }
 
-#mostCommentedContainer {
-    min-width: 80%;
-    flex: 0;
-    padding: 1%;
-    margin-left: 2%;
-    border-radius: 20px;
-    background: rgb(146, 156, 161);
-}
-
-.mostCommentedPages {
+.profileMostCommentedPages {
     overflow-y: scroll;
     height: 70vh;
     overflow-x: hidden;
 }
 
-.eachRow {
+.profileEachRow {
     background: rgb(89, 95, 98);
     border-radius: 20px;
     margin: 10px;
     font-family: fantasy;
 }
 
-.eachRow div {
+.profileEachRow div {
     padding: 20px;
 }
 
-.eachRow div {
+.profileEachRow div {
     padding: 20px;
     color: white;
 }
 
-.eachRow a {
+.profileEachRow a {
     color: rgb(255, 255, 255);
     text-decoration: none;
 }
 
-.eachRow p {
+.profileEachRow p {
     text-align: center;
 }
 
-.desktopHeader {
+.profileDesktopHeader {
     margin: 20px;
 }
 
-.eachRow p a:hover {
+.profileEachRow p a:hover {
     color: rgb(98, 203, 255);
 }
 
-.eachRow p a {
+.profileEachRow p a {
     text-decoration: underline !important;
 }
 
-.mobileMostViewedContainer,
-.mobileMostCommentedContainer {
+.profileMobileMostViewedContainer {
     margin-left: 0 !important;
     margin-right: 0 !important;
     margin: 15px !important;
@@ -91,42 +80,12 @@
     min-width: 90% !important;
 }
 
-.mobileContainer {
+.profileMobileContainer {
     height: auto !important;
     overflow-y: auto !important;
     overflow-x: hidden;
-
 }
 
-.mobileHeader {
+.profileMobileMostViewedContainer div {
     text-align: center;
-}
-
-.mostCommentedPages div,
-.mobileMostViewedContainer div {
-    text-align: center;
-}
-
-.centerChild {
-    display: flex; 
-    justify-content: center;
-    text-align: center;
-}
-
-.centerChild a {
-    width: 33%;
-}
-
-.centerChild a:hover {
-    width: 33%;
-    color: white !important;
-}
-
-.majorTitle {
-    font-weight: bold !important;
-    text-decoration: underline !important;
-}
-
-.majorTitle:hover {
-    color: rgb(98, 203, 255) !important;
 }

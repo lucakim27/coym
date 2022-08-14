@@ -1,12 +1,12 @@
 <template>
-    <div id='container' v-if="!isMobile()">
-        <div id='BothContainer'>
-            <div id='mostViewedContainer'>
-                <div class="mostViewedPages">
-                    <div class='eachRow' v-for="row in mostCommentedTable" :key="row.name">
+    <div class='analysisContainer' v-if="!isMobile()">
+        <div class='analysisBothContainer'>
+            <div class='analysisMostViewedContainer'>
+                <div class="analysisMostViewedPages">
+                    <div class='analysisEachRow' v-for="row in mostCommentedTable" :key="row.name">
                         <div>
-                            <a v-bind:href="'/comment?major=' + row.name" class="majorTitle">{{ row.name }}</a><hr>
-                            <div style="display: flex; justify-content: center" class="centerChild">
+                            <router-link :to="'/comment?major=' + row.name" class="analysisMajorTitle">{{ row.name }}</router-link><hr>
+                            <div style="display: flex; justify-content: center" class="analysisCenterChild">
                                 <a>Comment: {{ row.comment }}</a><br>
                                 <a>Like: {{ row.like }}</a><br>
                                 <a>Reply: {{ row.reply }}</a>
@@ -18,11 +18,11 @@
         </div>
     </div>
     <div v-if="isMobile()">
-        <div id='mostViewedContainer' class="mobileMostViewedContainer">
-            <div class="mostViewedPages mobileContainer">
-                <div class='eachRow' v-for="row in mostCommentedTable" :key="row.name">
+        <div class="analysisMostViewedContainer mobileAnalysisMostViewedContainer">
+            <div class="analysisMostViewedPages mobileAnalysisContainer">
+                <div class='analysisEachRow' v-for="row in mostCommentedTable" :key="row.name">
                     <div>
-                        <a v-bind:href="'/comment?major=' + row.name" class="majorTitle">{{ row.name }}</a><hr>
+                        <router-link :to="'/comment?major=' + row.name" class="analysisMajorTitle">{{ row.name }}</router-link><hr>
                         <a>Comment: {{ row.comment }}</a><br>
                         <a>Like: {{ row.like }}</a><br>
                         <a>Reply: {{ row.reply }}</a>

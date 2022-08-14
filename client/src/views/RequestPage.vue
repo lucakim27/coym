@@ -1,23 +1,23 @@
 <template>
-  <div class='mainContainer'>
-    <div class="eachContainer">
+  <div class='requestMainContainer'>
+    <div class="requestEachContainer">
       <h3>Type</h3>
-      <div class="centerChild">
-        <select @change="onChange">
+      <div class="requestCenterChild">
+        <select class="requestSelect" @change="onChange">
           <option value="Add major">Add major</option>
           <option value="Report user">Report user</option>
           <option value="Change username">Change username</option>
         </select>
       </div>
     </div>
-    <div class="eachContainer">
+    <div class="requestEachContainer">
       <h3>{{ inputLabel }}</h3>
-      <div class="centerChild">
+      <div class="requestCenterChild">
         <input type="text" placeholder="Type here..." v-model="content">
       </div>
     </div>
-    <div class="eachContainer">
-      <div class="centerChild">
+    <div class="requestEachContainer">
+      <div class="requestCenterChild">
         <button @click="request">Request</button>
       </div>
     </div>

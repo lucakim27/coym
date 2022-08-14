@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div class='container' v-if="!isMobile()">
         <div class='BothContainer'>
             <div class='mostViewedContainer'>
@@ -21,9 +21,7 @@
                         <div v-else-if="chat.username === counterpart" class="counterpartChat">
                             {{ chat.text }}
                         </div>
-                        <!-- <p v-if="chat.username === username" style="text-align: right;">{{ chat.username }}: {{ chat.text }} {{ chat.date }}</p>
-                        <p v-else-if="chat.username === counterpart" style="text-align: left;">{{ chat.username }}: {{ chat.text }} {{ chat.date }}</p> -->
-                        <!-- <p>{{ chat.username }}: {{ chat.text }} {{ chat.date }}</p> -->
+                     
                     </div>
                 </div>
                 <form class="input" @submit.prevent="sendMessage">
@@ -33,7 +31,6 @@
             </div>
         </div>
     </div>
-    <!-- Mobile Web View -->
     <div class='container' v-if="isMobile()">
         <div class='BothContainer'>
             <div class='chatUserContainer mostViewedContainer' v-if="!renderChat">
@@ -56,9 +53,7 @@
                         <div v-else-if="chat.username === counterpart" class="counterpartChat">
                             {{ chat.text }}
                         </div>
-                        <!-- <p v-if="chat.username === username" style="text-align: right;">{{ chat.username }}: {{ chat.text }} {{ chat.date }}</p>
-                        <p v-else-if="chat.username === counterpart" style="text-align: left;">{{ chat.username }}: {{ chat.text }} {{ chat.date }}</p> -->
-                        <!-- <p>{{ chat.username }}: {{ chat.text }} {{ chat.date }}</p> -->
+                       
                     </div>
                 </div>
                 <form class="input" @submit.prevent="sendMessage">
@@ -68,11 +63,10 @@
             </div>
         </div>
     </div>
-</template>
-<script>
+</template> -->
+<!-- <script>
 // import io from 'socket.io-client'
 import { useCookies } from "vue3-cookies"
-
 export default {
     data() {
         return {
@@ -81,10 +75,6 @@ export default {
             counterpart: '',
             users: [],
             chats: []
-            // socket: io('http://localhost:3001', {
-            //     transports: ['websocket']
-            // }),
-            // renderChat: false
         }
     },
     setup() {
@@ -136,29 +126,17 @@ export default {
         let user = this.cookies.get("user")
         if (user !== null) {
             this.username = this.cookies.get("user").username
-
             if (this.counterpart === '') {
                 this.socket.emit('chatPageJoin', this.username)
             } else {
                 this.socket.emit('chatUserSelected', this.username, this.counterpart)
             }
-
-            // this.socket.on('sendChatUser', (data) => {
-            //     this.users = [...JSON.parse(data)]
-            // })
-
-            // this.socket.on('sendChat', (data) => {
-            //     this.chats = [...JSON.parse(data)[0]]
-            // })
         }
-
         if (this.counterpart === '') {
             this.renderChat = false
         } else {
             this.renderChat = true
         }
-
-
     },
     updated() {
         try {
@@ -168,7 +146,7 @@ export default {
         }
     }
 }
-</script>
-<style scoped>
+</script> -->
+<!-- <style scoped>
 @import '../assets/styles/chat.css';
-</style>
+</style> -->

@@ -11,7 +11,7 @@
         :id="comment.comment + 'Container'">
         <div class="firstRow">
           <div class="usernameDateContainer">
-            <a class='username' v-bind:href="'/profile?username=' + comment.username">{{ comment.username }}</a>
+            <router-link class='username' :to="'/profile?username=' + comment.username">{{ comment.username }}</router-link>
             <p class='date'>{{ comment.createdAt.slice(0, 10) }}</p>
           </div>
           <div class="commentDropdown">
@@ -61,7 +61,7 @@
             <div v-if="reply.comment === comment.comment">
               <div class="firstRow">
                 <div class="usernameDateContainer">
-                  <a class='username' v-bind:href="'/profile?username=' + reply.username">{{ reply.username }}</a>
+                  <router-link class='username' :to="'/profile?username=' + reply.username">{{ reply.username }}</router-link>
                   <p class='date'>{{ reply.createdAt.slice(0, 10) }}</p>
                 </div>
               </div>
@@ -208,6 +208,7 @@ export default {
         }).then(function (response) {
           if (response.data.status) {
             alert("You have successfully deleted your comment.")
+            
             window.location.reload()
           } else {
             alert("You have failed to delete your comment for some reasons.")

@@ -1,9 +1,9 @@
-#container {
+.registerContainer {
   display: flex;
   justify-content: center;
 }
 
-form {
+.registerForm {
   height: 60%;
   width: 60%;
   padding: 10%;
@@ -12,23 +12,23 @@ form {
   border: 1px solid #ccc;
 }
 
-.mobileForm {
+.mobileRegisterForm {
   height: 80% !important;
   padding: 10% !important;
   margin: 10% !important;
-  margin-top: -10% !important;
+  margin-top: 5% !important;
   border-radius: 20px !important;
   border: 1px solid #ccc !important;
 }
 
-form h1 {
+.registerForm h1 {
   text-align: center;
   padding: 10px;
   margin: 10px;
   font-family: fantasy;
 }
 
-input {
+.registerInput {
   padding: 12px 20px;
   display: inline-block;
   border: 1px solid #ccc;
@@ -38,7 +38,7 @@ input {
   font-family: fantasy;
 }
 
-button {
+.registerButton {
   border: 1px solid #ccc;
   background-color: rgb(255, 255, 255);
   width: 100%;
@@ -49,12 +49,12 @@ button {
   font-family: fantasy;
 }
 
-.goBackBtn {
+.goBackRegisterBtn {
   background-color: white;
   color: black;
 }
 
-p {
+.regitserParagraph {
   color: grey;
   font-family: fantasy;
   text-align: center;

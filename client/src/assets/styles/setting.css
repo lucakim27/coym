@@ -1,16 +1,5 @@
-.mainContainer {
-    margin-top: 20px;
-    background-color:rgb(146, 156, 161);
-    padding: 20px;
-    margin: 20px;
-    border-radius: 20px;
-}
 
-.desktopContainer {
-    margin: 10px !important;
-}
-
-.eachContainer input {
+.settingEachContainer input {
     width: 90%;
     margin: 10px;
     border-radius: 20px;
@@ -18,7 +7,7 @@
     font-family: fantasy;
 }
 
-.eachContainer button {
+.settingEachContainer button {
     display: inline-block;
     border-radius: 20px;
     background: rgb(255, 255, 255);
@@ -30,22 +19,12 @@
     border-color: black;
 }
 
-.eachContainer button:hover {
+.settingEachContainer button:hover {
     color: rgb(0, 136, 255);
     cursor: pointer;
 }
 
-.twoContainer {
-    justify-content: center;
-    display: flex;
-}
-
-.passwordContainer {
-    background: rgb(146, 156, 161);
-    border-radius: 20px;
-}
-
-.eachContainer {
+.settingEachContainer {
     min-width: 45%;
     align-items: center;
     background: #595f62;
@@ -54,22 +33,13 @@
     border-radius: 20px;
 }
 
-.eachContainer h3 {
+.settingEachContainer h3 {
     margin-left: 20px;
     color: white;
     font-family: fantasy;
 }
 
-.btnContainer {
-    justify-content: center;
-    display: flex;
-    margin-left: 40px;
-    margin-right: 40px;
-    padding: 20px;
-    border-radius: 20px;
-}
-
-.mobileContainer {
+.settingMobileContainer {
     overflow: hidden;
     min-width: auto !important;
     padding: 10px;
@@ -79,11 +49,11 @@
     margin-bottom:30px;
 }
 
-.mobileContainer div input {
+.settingMobileContainer div input {
     width: 100% !important;
 }
 
-.centerChild {
+.settingCenterChild {
     display: flex;
     justify-content: center;
 }

@@ -1,14 +1,14 @@
 <template>
-  <div id="container" v-if="!isMobile()">
-    <form method="post" @submit.prevent="signUp">
+  <div class="registerContainer" v-if="!isMobile()">
+    <form class="registerForm" method="post" @submit.prevent="signUp">
       <h1>Sign Up</h1>
-      <p>* Username & Password should be longer than 7 characters without spaces.</p>
-      <input type="text" name="username" v-model="username" placeholder="Username..." required /><br /><br />
-      <input type="password" name="password" v-model="password" placeholder="Password..." required /><br /><br />
-      <input type="password" name="repassword" v-model="passwordConfirm" placeholder="Password Confirm..."
+      <p class="regitserParagraph">* Username & Password should be longer than 7 characters without spaces.</p>
+      <input class="registerInput" type="text" name="username" v-model="username" placeholder="Username..." required /><br /><br />
+      <input class="registerInput" type="password" name="password" v-model="password" placeholder="Password..." required /><br /><br />
+      <input class="registerInput" type="password" name="repassword" v-model="passwordConfirm" placeholder="Password Confirm..."
         required /><br /><br />
-      <button type="submit" value="register">Sign Up</button><hr>
-      <button class='goBackBtn' type="button" @click="directToSignIn()"><svg xmlns="http://www.w3.org/2000/svg"
+      <button class="registerButton" type="submit" value="register">Sign Up</button><hr>
+      <button class='registerButton goBackRegisterBtn' type="button" @click="directToSignIn()"><svg xmlns="http://www.w3.org/2000/svg"
           class="icon icon-tabler icon-tabler-arrow-back-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
           stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -16,17 +16,17 @@
         </svg></button>
     </form>
   </div>
-  <div id="container" v-if="isMobile()">
-    <form class='mobileForm' method="post" @submit.prevent="signUp">
+  <div class="registerContainer" v-if="isMobile()">
+    <form class='registerForm mobileRegisterForm' method="post" @submit.prevent="signUp">
       <h1>Sign Up</h1>
-      <p style="color: ; text-align: center;">* Username & Password should be longer than 7 characters without spaces.</p>
-      <input type="text" name="username" v-model="username" placeholder="Username..." required /><br /><br />
-      <input type="password" name="password" v-model="password" placeholder="Password..." required /><br /><br />
-      <input type="password" name="repassword" v-model="passwordConfirm" placeholder="Password Confirm..."
+      <p class="regitserParagraph">* Username & Password should be longer than 7 characters without spaces.</p>
+      <input class="registerInput" type="text" name="username" v-model="username" placeholder="Username..." required /><br /><br />
+      <input class="registerInput" type="password" name="password" v-model="password" placeholder="Password..." required /><br /><br />
+      <input class="registerInput" type="password" name="repassword" v-model="passwordConfirm" placeholder="Password Confirm..."
         required /><br /><br />
-      <button type="submit" value="register">Sign Up</button>
+      <button class="registerButton" type="submit" value="register">Sign Up</button>
       <hr>
-      <button class='goBackBtn' type="button" @click="directToSignIn()"><svg xmlns="http://www.w3.org/2000/svg"
+      <button class='registerButton goBackRegisterBtn' type="button" @click="directToSignIn()"><svg xmlns="http://www.w3.org/2000/svg"
           class="icon icon-tabler icon-tabler-arrow-back-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
           stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -73,7 +73,7 @@ export default {
       })
     },
     directToSignIn() {
-      window.location.href = '/login'
+      this.$router.push('/login')
     }
   }
 }

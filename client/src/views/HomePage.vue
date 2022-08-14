@@ -1,29 +1,29 @@
 <template>
-    <div id='container'>
+    <div class='homeContainer'>
         <img :style='mobileImg' src='../assets/images/main.jpg' class="mainImage">
-        <div class="Input" :style="mobileInput">
-            <input v-if="isMobile()" class="Input-text mobileInput" id="input" placeholder="Search for your major..."
+        <div class="homeInput" :style="mobileInput">
+            <input v-if="isMobile()" class="homeInputText mobileHomeInput" id="input" placeholder="Search for your major..."
                 type="search" @input="searchChangeFunc($event)" />
-            <input v-if="!isMobile()" class="Input-text" id="input" placeholder="Search for your major..." type="search"
+            <input v-if="!isMobile()" class="homeInputText" id="input" placeholder="Search for your major..." type="search"
                 @input="searchChangeFunc($event)" />
-            <table id="options" class="mobileOptions" v-if="isMobile()">
+            <table id="options" class="mobileHomeOptions homeOptions" v-if="isMobile()">
                 <tr v-for="(major, i) in filteredMajorsList" :key="i">
                     <td scope="row">
-                        <a v-bind:href="'/comment?major=' + major">{{ major }}</a>
+                        <router-link :to="'/comment?major=' + major">{{ major }}</router-link>
                         <br>
                     </td>
                 </tr>
             </table>
-            <table id="options" v-if="!isMobile()">
+            <table id="options" class="homeOptions" v-if="!isMobile()">
                 <tr v-for="(major, i) in filteredMajorsList" :key="i">
                     <td scope="row">
-                        <a v-bind:href="'/comment?major=' + major">{{ major }}</a>
+                        <router-link :to="'/comment?major=' + major">{{ major }}</router-link>
                         <br>
                     </td>
                 </tr>
             </table>
         </div>
-        <div class='descriptionContainer' :style="mobileDescription">
+        <div class='homeDescriptionContainer' :style="mobileDescription">
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-house"
                     viewBox="0 0 16 16">
@@ -62,7 +62,7 @@
                         d="M11.793 8.5H9v-1h5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.354-.146l-.853-.854zM5 7c0 .552-.448 0-1 0s-1 .552-1 0a1 1 0 0 1 2 0z" />
                 </svg>
             </div>
-            <b>Getting reviews on a college major has never been this easy before</b>
+            <b class="homeDescriptionExplanation">Getting reviews on a college major has never been this easy before</b>
         </div>
     </div>
 </template>
