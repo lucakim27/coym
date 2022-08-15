@@ -1,6 +1,9 @@
 <template>
     <div class='homeContainer'>
-        <img :style='mobileImg' src='../assets/images/main.jpg' class="mainImage">
+        <div class="homeLoader" v-if="isLoading">
+            <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
+        </div>
+        <img v-show="isLoaded" @load="loaded" :style='mobileImg' src='../assets/images/main.jpg' class="mainImage">
         <div class="homeInput" :style="mobileInput">
             <input v-if="isMobile()" class="homeInputText mobileHomeInput" id="input" placeholder="Search for your major..."
                 type="search" @input="searchChangeFunc($event)" />
@@ -68,16 +71,26 @@
 </template>
 <script>
 import axios from 'axios'
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 export default {
     name: 'HomePage',
+    components: {
+        PulseLoader
+    },
     data() {
         return {
             magic_flag: false,
             majorsList: [],
-            filteredMajorsList: []
+            filteredMajorsList: [],
+            isLoaded: false,
+            isLoading: false
         }
     },
     methods: {
+        loaded() {
+            this.isLoaded = true
+            this.isLoading = false
+        },
         isMobile() {
             if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
                 return true

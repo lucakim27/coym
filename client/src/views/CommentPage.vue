@@ -7,7 +7,7 @@
       <button @click="magic_flag = !magic_flag" class="closeBtn" v-show="magic_flag">Close</button>
     </div>
     <center id="commentDiv">
-      <div class="commentLoader" v-if="!getComment.length">
+      <div class="commentLoader" v-if="getComment === null">
         <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
       </div>
       <div v-for="comment in getComment" :key="comment.comment" class='eachCommentDiv'
@@ -90,7 +90,7 @@ export default {
       username: '',
       commentInput: '',
       magic_flag: false,
-      getComment: [],
+      getComment: null,
       getLike: [],
       getReply: [],
       renderReplyBtn: []

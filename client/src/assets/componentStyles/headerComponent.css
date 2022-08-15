@@ -37,7 +37,7 @@ header div a:hover,
 }
 
 .dropdownUsername:hover {
-    color: white !important;
+    color: rgb(98, 203, 255) !important;
     cursor: pointer !important;
 }
 
