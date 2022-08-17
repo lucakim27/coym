@@ -1,0 +1,54 @@
+.privacyPolicyContainer {
+    display: flex;
+    padding: 30px;
+    margin: 30px;
+    justify-content: center;
+    font-family: fantasy;
+    overflow-y: scroll;
+    height: 78vh;
+    background: rgb(146, 156, 161);
+    border-radius: 20px;
+    color: white;
+}
+
+.privacyPolicyChild a {
+    color: rgb(98, 203, 255);
+    cursor: pointer;
+}
+
+.privacyPolicyChild a:hover {
+    color: rgb(0, 136, 255);
+}
+
+.privacyPolicyMobileChild a {
+    color: rgb(98, 203, 255);
+    cursor: pointer;
+}
+
+.privacyPolicyMobileChild a:hover {
+    color: rgb(0, 136, 255);
+}
+
+.privacyPolicyMobileContainer {
+    padding: 1%;
+    margin: 15px;
+    font-family: fantasy;
+    background: rgb(146, 156, 161);
+    border-radius: 20px;
+    color: white;
+}
+
+.privacyPolicyRow {
+    background: rgb(89, 95, 98);
+    border-radius: 20px;
+    margin: 30px;
+    padding: 30px;
+}
+
+.privacyPolicyMobileRow {
+    overflow: hidden;
+    background: rgb(89, 95, 98);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 15px;
+}
