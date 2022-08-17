@@ -1,11 +1,8 @@
 .privacyPolicyContainer {
     display: flex;
-    padding: 30px;
     margin: 30px;
     justify-content: center;
     font-family: fantasy;
-    overflow-y: scroll;
-    height: 78vh;
     background: rgb(146, 156, 161);
     border-radius: 20px;
     color: white;

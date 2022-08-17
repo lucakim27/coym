@@ -83,7 +83,7 @@
                     </li>
                     <li>
                         <p><strong>Website</strong> refers to COYM, accessible from <a href="https://www.coym.net/"
-                                rel="external nofollow noopener" target="_blank">here</a></p>
+                                rel="external nofollow noopener" target="_blank">here</a>.</p>
                     </li>
                     <li>
                         <p><strong>You</strong> means the individual accessing or using the Service, or the company, or
@@ -153,7 +153,7 @@
                         for
                         disabling, or deleting local shared objects?&quot; available at <a
                             href="https://helpx.adobe.com/flash-player/kb/disable-local-shared-objects-flash.html#main_Where_can_I_change_the_settings_for_disabling__or_deleting_local_shared_objects_"
-                            rel="external nofollow noopener" target="_blank">here</a>
+                            rel="external nofollow noopener" target="_blank">here</a>.
                     </li>
                     <li><strong>Web Beacons.</strong> Certain sections of our Service and our emails may contain small
                         electronic files known as web beacons (also referred to as clear gifs, pixel tags, and
@@ -414,7 +414,7 @@
                 <h1>Contact Us</h1>
                 <p>If you have any questions about this Privacy Policy, You can contact us:</p>
                 <ul>
-                    <li>By email: <a onclick="window.location.href = 'mailto:nikolaikim27@gmail.com'">here</a></li>
+                    <li>By email: <a onclick="window.location.href = 'mailto:nikolaikim27@gmail.com'">here</a>.</li>
                 </ul>
             </div>
         </div>
@@ -502,7 +502,7 @@
                     </li>
                     <li>
                         <p><strong>Website</strong> refers to COYM, accessible from <a href="https://www.coym.net/"
-                                rel="external nofollow noopener" target="_blank">here</a></p>
+                                rel="external nofollow noopener" target="_blank">here</a>.</p>
                     </li>
                     <li>
                         <p><strong>You</strong> means the individual accessing or using the Service, or the company, or
@@ -572,7 +572,7 @@
                         for
                         disabling, or deleting local shared objects?&quot; available at <a
                             href="https://helpx.adobe.com/flash-player/kb/disable-local-shared-objects-flash.html#main_Where_can_I_change_the_settings_for_disabling__or_deleting_local_shared_objects_"
-                            rel="external nofollow noopener" target="_blank">here</a>
+                            rel="external nofollow noopener" target="_blank">here</a>.
                     </li>
                     <li><strong>Web Beacons.</strong> Certain sections of our Service and our emails may contain small
                         electronic files known as web beacons (also referred to as clear gifs, pixel tags, and
@@ -833,7 +833,7 @@
                 <h1>Contact Us</h1>
                 <p>If you have any questions about this Privacy Policy, You can contact us:</p>
                 <ul>
-                    <li>By email: <a onclick="window.location.href = 'mailto:nikolaikim27@gmail.com'">here</a></li>
+                    <li>By email: <a onclick="window.location.href = 'mailto:nikolaikim27@gmail.com'">here</a>.</li>
                 </ul>
             </div>
         </div>
