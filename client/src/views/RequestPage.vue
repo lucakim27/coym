@@ -1,5 +1,28 @@
 <template>
-  <div class='requestMainContainer'>
+  <div class='requestMainContainer' v-if="!isMobile()">
+    <div class="requestEachContainer requestDesktopEachContainer">
+      <h3>Type</h3>
+      <div class="requestCenterChild">
+        <select class="requestSelect" @change="onChange">
+          <option value="Add major">Add major</option>
+          <option value="Report user">Report user</option>
+          <option value="Change username">Change username</option>
+        </select>
+      </div>
+    </div>
+    <div class="requestEachContainer requestDesktopEachContainer">
+      <h3>{{ inputLabel }}</h3>
+      <div class="requestCenterChild">
+        <input type="text" placeholder="Type here..." v-model="content">
+      </div>
+    </div>
+    <div class="requestEachContainer requestDesktopEachContainer">
+      <div class="requestCenterChild">
+        <button @click="request">Request</button>
+      </div>
+    </div>
+  </div>
+  <div class='requestMainContainer' v-if="isMobile()">
     <div class="requestEachContainer">
       <h3>Type</h3>
       <div class="requestCenterChild">
@@ -71,6 +94,13 @@ export default {
     }
   },
   methods: {
+    isMobile() {
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                return true
+            } else {
+                return false
+            }
+        },
     onChange(event) {
       this.selectedValue = event.target.value
     },

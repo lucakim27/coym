@@ -45,6 +45,11 @@
     border-radius: 20px;
 }
 
+.settingDesktopEachContainer {
+    padding: 30px !important;
+    margin: 30px !important;
+}
+
 .settingEachContainer h3 {
     margin-left: 20px;
     color: white;

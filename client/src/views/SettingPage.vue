@@ -1,7 +1,7 @@
 <template>
     <div v-if="!isMobile()">
         <div class='backgroundContainer settingMobileContainer'>
-            <div class="settingEachContainer">
+            <div class="settingEachContainer settingDesktopEachContainer">
                 <h3>Gender</h3>
                 <div class="settingLoader" v-if="gender === null">
                     <pulse-loader :loading="loading" :color="color"></pulse-loader>
@@ -16,7 +16,7 @@
                     </select>
                 </div>
             </div>
-            <div class="settingEachContainer">
+            <div class="settingEachContainer settingDesktopEachContainer">
                 <h3>Country</h3>
                 <div class="settingLoader" v-if="country === null">
                     <pulse-loader :loading="loading" :color="color"></pulse-loader>
@@ -29,7 +29,7 @@
                     </select>
                 </div>
             </div>
-            <div class="settingEachContainer">
+            <div class="settingEachContainer settingDesktopEachContainer">
                 <h3>Major</h3>
                 <div class="settingLoader" v-if="major === null">
                     <pulse-loader :loading="loading" :color="color"></pulse-loader>
@@ -38,7 +38,7 @@
                     <input type="text" placeholder="Your major..." v-model="major">
                 </div>
             </div>
-            <div class="settingEachContainer">
+            <div class="settingEachContainer settingDesktopEachContainer">
                 <h3>School</h3>
                 <div class="settingLoader" v-if="school === null">
                     <pulse-loader :loading="loading" :color="color"></pulse-loader>
@@ -47,19 +47,19 @@
                     <input type="text" placeholder="Your school..." v-model="school">
                 </div>
             </div>
-            <div class="settingEachContainer">
+            <div class="settingEachContainer settingDesktopEachContainer">
                 <h3>Password (*)</h3>
                 <div class="settingCenterChild">
                     <input type="password" placeholder="Your password..." v-model="password">
                 </div>
             </div>
-            <div class="settingEachContainer">
+            <div class="settingEachContainer settingDesktopEachContainer">
                 <h3>Password Confirm (*)</h3>
                 <div class="settingCenterChild">
                     <input type="password" placeholder="Your password confirm..." v-model="passwordConfirm">
                 </div>
             </div>
-            <div class="settingEachContainer">
+            <div class="settingEachContainer settingDesktopEachContainer">
                 <div class="settingCenterChild">
                     <button @click="updateUserDetails">Update</button>
                 </div>
