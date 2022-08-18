@@ -58,6 +58,8 @@ export default {
                 if (response.data.status) {
                     self.username = response.data.username
                     self.loggedIn()
+                } else {
+                    self.loggedIn()
                 }
             })
         } else {
