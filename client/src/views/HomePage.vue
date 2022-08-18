@@ -65,9 +65,7 @@
                         d="M11.793 8.5H9v-1h5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.354-.146l-.853-.854zM5 7c0 .552-.448 0-1 0s-1 .552-1 0a1 1 0 0 1 2 0z" />
                 </svg>
             </div>
-            <b class="homeDescriptionExplanation">It's very important for you to choose a right path for the rest of your life but</b><br>
-            <b class="homeDescriptionExplanation">Getting reviews of a college major has been difficult and confusing at the same time so</b><br>
-            <b class="homeDescriptionExplanation">We made a college major commenting website where you would tremendously benefit from.</b><br>
+            <b class="homeDescriptionExplanation">A college major commenting website where you would tremendously benefit from.</b><br>
         </div>
     </div>
 </template>

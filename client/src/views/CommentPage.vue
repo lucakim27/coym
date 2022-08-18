@@ -3,8 +3,10 @@
     <div id="ipnutContainer">
       <textarea height="60" type="text" id="userInput" v-model="commentInput" placeholder="Comment here..."
         @focus="magic_flag = true"></textarea><br>
-      <button @click="comment()" id="commentBtn" v-show="magic_flag">Comment</button>
-      <button @click="magic_flag = !magic_flag" class="closeBtn" v-show="magic_flag">Close</button>
+        <div class="commentButtonContainer">
+          <button @click="comment()" id="commentBtn" v-show="magic_flag">Comment</button>
+          <button @click="magic_flag = !magic_flag" class="closeBtn" v-show="magic_flag">Close</button>
+        </div>
     </div>
     <center id="commentDiv">
       <div class="commentLoader" v-if="getComment === null">

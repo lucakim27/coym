@@ -2,7 +2,7 @@
     <div id="headerContainer">
         <header>
             <span v-on:click="sidebarOpen()">&#9776;</span>
-            <svg class='signInIcon' @click="directToLogin()" v-if="!loggedIn" height='40' width="40"
+            <svg class='signInIcon' @click="directToLogin()" v-if="loginIconShow" height='40' width="40"
                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <g>
                     <path fill="none" d="M0 0h24v24H0z" />
@@ -12,7 +12,7 @@
             </svg>
             <h2>COYM</h2>
             <div class="dropdown">
-                <svg v-if="loggedIn" @click.prevent="toggleDropdown" class='profileSVG'
+                <svg v-if="profileIconShow" @click.prevent="toggleDropdown" class='profileSVG'
                     xmlns="http://www.w3.org/2000/svg" width="35" height="44" fill="black" viewBox="0 0 16 16">
                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                     <path fill-rule="evenodd"
@@ -37,8 +37,10 @@ export default {
     name: 'HeaderComponent',
     data() {
         return {
-            username: '',
-            state: false
+            username: null,
+            state: false,
+            loginIconShow: false,
+            profileIconShow: false
         }
     },
     created() {
@@ -55,8 +57,11 @@ export default {
             }).then(function (response) {
                 if (response.data.status) {
                     self.username = response.data.username
+                    self.loggedIn()
                 }
             })
+        } else {
+            self.loggedIn()
         }
     },
     setup() {
@@ -107,16 +112,16 @@ export default {
         },
         sidebarOpen() {
             document.getElementById("mySidenav").style.width = "250px"
-        }
-    },
-    computed: {
+        },
         loggedIn() {
-            if (this.username === '' || this.username === null) {
-                return false
+            if (this.username === null) {
+                this.loginIconShow = true
             } else {
-                return true
+                this.profileIconShow = true
             }
         },
+    },
+    computed: {
         getTitle() {
             if (new URL(window.location.href).pathname.slice(1, new URL(window.location.href).pathname.length) === '') {
                 return 'HOME'
