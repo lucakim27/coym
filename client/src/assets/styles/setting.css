@@ -6,9 +6,17 @@
     font-family: fantasy;
 }
 
+.settingEachContainer select {
+    width: 100%;
+    margin: 10px;
+    border-radius: 20px;
+    padding: 20px;
+    font-family: fantasy;
+}
+
 .backgroundContainer {
     margin: 20px !important;
-    padding: 20px !important;
+    padding: 5px !important;
 }
 
 .settingEachContainer button {
@@ -32,8 +40,8 @@
     min-width: 45%;
     align-items: center;
     background: #595f62;
-    padding: 20px;
-    margin: 20px;
+    padding: 10px;
+    margin: 10px;
     border-radius: 20px;
 }
 
