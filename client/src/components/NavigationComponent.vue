@@ -12,6 +12,19 @@
 <script>
 export default {
   name: 'NavigationComponent',
+  mounted() {
+    if (this.getTitle() === 'HOME') {
+      document.getElementById('home').classList.toggle("highlight")
+    } else if (this.getTitle() === 'USERS') {
+      document.getElementById('users').classList.toggle("highlight")
+    } else if (this.getTitle() === 'ANALYSIS') {
+      document.getElementById('analysis').classList.toggle("highlight")
+    } else if (this.getTitle() === 'ABOUTUS') {
+      document.getElementById('aboutUs').classList.toggle("highlight")
+    } else if (this.getTitle() === 'PRIVACYPOLICY') {
+      document.getElementById('privacyPolicy').classList.toggle("highlight")
+    }
+  },
   methods: {
     renderHome() {
       this.$router.push('/')
@@ -52,7 +65,31 @@ export default {
       document.getElementById('analysis').classList.remove("highlight")
       document.getElementById('aboutUs').classList.remove("highlight")
       document.getElementById('privacyPolicy').classList.remove("highlight")
-    }
+    },
+    getTitle() {
+            if (new URL(window.location.href).pathname.slice(1, new URL(window.location.href).pathname.length) === '') {
+                return 'HOME'
+            } else if (new URL(window.location.href).pathname.slice(1, new URL(window.location.href).pathname.length) === 'comment') {
+                var query = window.location.search.substring(1)
+                var vars = query.split('&')
+                var returnValue = ''
+                for (var i = 0; i < vars.length; i++) {
+                    var pair = vars[i].split('=')
+                    if (pair.length !== 1) {
+                        for (var j = 0; j < pair.length; j++) {
+                            if (pair[j] !== 'major') {
+                                returnValue += pair[j]
+                            }
+                        }
+                    } else {
+                        returnValue += pair[0]
+                    }
+                }
+                return decodeURIComponent(returnValue)
+            } else {
+                return new URL(window.location.href).pathname.slice(1, new URL(window.location.href).pathname.length).toUpperCase()
+            }
+        }
   }
 }
 </script>

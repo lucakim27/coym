@@ -80,10 +80,12 @@ export default {
         renderSetting() {
             document.getElementById('profileDropdown').style.height = '0'
             this.$router.push('/setting')
+            this.removeHighlight()
         },
         renderRequest() {
             document.getElementById('profileDropdown').style.height = '0'
             this.$router.push('/request')
+            this.removeHighlight()
         },
         renderProfile(username) {
             if (this.getTitle === 'PROFILE') {
@@ -92,6 +94,7 @@ export default {
                 document.getElementById('profileDropdown').style.height = '0'
                 this.$router.push('/profile?username=' + username)
             }
+            this.removeHighlight()
         },
         toggleDropdown() {
             if (document.getElementById('profileDropdown').style.height === '320px') {
@@ -107,6 +110,7 @@ export default {
         },
         directToLogin() {
             this.$router.push('/login')
+            this.removeHighlight()
         },
         logout() {
             this.cookies.remove('user')
@@ -122,6 +126,13 @@ export default {
                 this.profileIconShow = true
             }
         },
+        removeHighlight() {
+            document.getElementById('home').classList.remove("highlight")
+            document.getElementById('users').classList.remove("highlight")
+            document.getElementById('analysis').classList.remove("highlight")
+            document.getElementById('aboutUs').classList.remove("highlight")
+            document.getElementById('privacyPolicy').classList.remove("highlight")
+        }
     },
     computed: {
         getTitle() {

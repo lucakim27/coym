@@ -80,6 +80,7 @@
 
 .homeOptions a:hover {
     color: rgb(0, 136, 255);
+    cursor: pointer;
 }
 
 .homeDescriptionExplanation {

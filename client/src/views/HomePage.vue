@@ -12,7 +12,7 @@
             <table id="options" class="mobileHomeOptions homeOptions" v-if="isMobile()">
                 <tr v-for="(major, i) in filteredMajorsList" :key="i">
                     <td scope="row">
-                        <router-link :to="'/comment?major=' + major">{{ major }}</router-link>
+                        <a @click="renderComment(major)">{{ major }}</a>
                         <br>
                     </td>
                 </tr>
@@ -20,7 +20,7 @@
             <table id="options" class="homeOptions" v-if="!isMobile()">
                 <tr v-for="(major, i) in filteredMajorsList" :key="i">
                     <td scope="row">
-                        <router-link :to="'/comment?major=' + major">{{ major }}</router-link>
+                        <a @click="renderComment(major)">{{ major }}</a>
                         <br>
                     </td>
                 </tr>
@@ -87,6 +87,17 @@ export default {
         }
     },
     methods: {
+        renderComment(major) {
+            this.$router.push('/comment?major=' + major)
+            this.removeHighlight()
+        },
+        removeHighlight() {
+            document.getElementById('home').classList.remove("highlight")
+            document.getElementById('users').classList.remove("highlight")
+            document.getElementById('analysis').classList.remove("highlight")
+            document.getElementById('aboutUs').classList.remove("highlight")
+            document.getElementById('privacyPolicy').classList.remove("highlight")
+        },
         loaded() {
             this.isLoaded = true
             this.isLoading = false
