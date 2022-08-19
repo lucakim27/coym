@@ -283,7 +283,6 @@ export default {
         }).then(function (response) {
           if (response.data.status) {
             alert("You have successfully deleted your comment.")
-
             window.location.reload()
           } else {
             alert("You have failed to delete your comment for some reasons.")

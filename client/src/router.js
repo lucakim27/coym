@@ -51,6 +51,11 @@ const routes = [
     name: 'PrivacyPolicyPage',
     component: () => import('@/views/PrivacyPolicyPage'),
   },
+  {
+    path: '/aboutUs',
+    name: 'AboutUsPage',
+    component: () => import('@/views/AboutUsPage'),
+  },
 ]
 
 export const router = createRouter({
