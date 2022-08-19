@@ -58,3 +58,11 @@
     margin: 10px;
     padding: 10px;
 }
+
+.githubSVG,
+.instagramSVG {
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px;
+    cursor: pointer;
+}

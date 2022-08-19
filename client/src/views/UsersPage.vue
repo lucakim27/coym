@@ -52,7 +52,7 @@
           </svg></div>
       </div>
       <div class="userOnlineBody mobileBody" v-if="users.length">
-        <div v-for="user in users" :key="user.username">
+        <div v-for="user in users.slice().reverse()" :key="user.username">
           <div class='userEachRow'>
             <div class="userRow">
               <div><router-link class="userMobileUsername" :to="'/profile?username=' + user.username">{{ user.username }}</router-link></div>
@@ -81,7 +81,7 @@
   <div v-if="isMobile() && users.length">
     <div class="userMostViewedContainer mobileUserMostViewedContainer" v-if="users.length">
       <div class="mostViewedPages">
-        <div class='userEachRow' v-for="user in users" :key="user.username">
+        <div class='userEachRow' v-for="user in users.slice().reverse()" :key="user.username">
           <p class="userAlignChild">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-person-circle"
               viewBox="0 0 16 16">
@@ -91,17 +91,15 @@
             </svg>
             <router-link class="mobileUsername" :to="'/profile?username=' + user.username">{{ user.username }}</router-link>
           </p>
-          <p class="userAlignChild">
+          <p class="userAlignChild" v-if="user.gender !== null && user.gender !== '' && user.gender !== 'N/A'">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-gender-ambiguous"
               viewBox="0 0 16 16">
               <path fill-rule="evenodd"
                 d="M11.5 1a.5.5 0 0 1 0-1h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V1.707l-3.45 3.45A4 4 0 0 1 8.5 10.97V13H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V14H6a.5.5 0 0 1 0-1h1.5v-2.03a4 4 0 1 1 3.471-6.648L14.293 1H11.5zm-.997 4.346a3 3 0 1 0-5.006 3.309 3 3 0 0 0 5.006-3.31z" />
             </svg>
-            <a v-if="user.gender !== null && user.gender !== ''">{{ user.gender }}</a>
-            <a v-if="user.gender === null">N/A</a>
-            <a v-if="user.gender === ''">N/A</a>
+            <a>{{ user.gender }}</a>
           </p>
-          <p class="userAlignChild">
+          <p class="userAlignChild" v-if="user.country !== null && user.country !== ''">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" viewBox="0 0 512 512">
               <path d="M267,474l-.8-.13A.85.85,0,0,0,267,474Z" />
               <path
@@ -117,11 +115,9 @@
               <path
                 d="M256,72a184,184,0,1,1-130.1,53.9A182.77,182.77,0,0,1,256,72m0-40C132.3,32,32,132.3,32,256S132.3,480,256,480,480,379.7,480,256,379.7,32,256,32Z" />
             </svg>
-            <a v-if="user.country !== null && user.country !== ''">{{ user.country }}</a>
-            <a v-if="user.country === null">N/A</a>
-            <a v-if="user.country === ''">N/A</a>
+            <a>{{ user.country }}</a>
           </p>
-          <p class="userAlignChild">
+          <p class="userAlignChild" v-if="user.major !== null && user.major !== ''">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" viewBox="0 0 512 512">
               <polygon points="32 192 256 64 480 192 256 320 32 192"
                 style="fill:rgb(89, 95, 98);stroke:white;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" />
@@ -132,19 +128,15 @@
               <line x1="256" y1="320" x2="256" y2="448"
                 style="fill:#000;stroke:white;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" />
             </svg>
-            <a v-if="user.major !== null && user.major !== ''">{{ user.major }}</a>
-            <a v-if="user.major === null">N/A</a>
-            <a v-if="user.major === ''">N/A</a>
+            <a>{{ user.major }}</a>
           </p>
-          <p class="userAlignChild">
+          <p class="userAlignChild" v-if="user.school !== null && user.school !== ''">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" data-name="Layer 1"
               viewBox="0 0 24 24">
               <path
                 d="M21,10a.99974.99974,0,0,0,1-1V6a.9989.9989,0,0,0-.68359-.94824l-9-3a1.002,1.002,0,0,0-.63282,0l-9,3A.9989.9989,0,0,0,2,6V9a.99974.99974,0,0,0,1,1H4v7.18427A2.99507,2.99507,0,0,0,2,20v2a.99974.99974,0,0,0,1,1H21a.99974.99974,0,0,0,1-1V20a2.99507,2.99507,0,0,0-2-2.81573V10ZM20,21H4V20a1.001,1.001,0,0,1,1-1H19a1.001,1.001,0,0,1,1,1ZM6,17V10H8v7Zm4,0V10h4v7Zm6,0V10h2v7ZM4,8V6.7207l8-2.667,8,2.667V8Z" />
             </svg>
-            <a v-if="user.school !== null && user.school !== ''">{{ user.school }}</a>
-            <a v-if="user.school === null">N/A</a>
-            <a v-if="user.school === ''">N/A</a>
+            <a>{{ user.school }}</a>
           </p>
           <p class="userAlignChild">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" viewBox="0 0 512 512">

@@ -26,9 +26,9 @@
                 <div class='analysisEachRow' v-for="row in mostCommentedTable" :key="row.name">
                     <div>
                         <router-link :to="'/comment?major=' + row.name" class="analysisMajorTitle">{{ row.name }}</router-link><hr>
-                        <a>Comment: {{ row.comment }}</a><br>
                         <a>Like: {{ row.like }}</a><br>
-                        <a>Reply: {{ row.reply }}</a>
+                        <a>Reply: {{ row.reply }}</a><br>
+                        <a>Comment: {{ row.comment }}</a>
                     </div>
                 </div>
             </div>
