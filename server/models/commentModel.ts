@@ -100,6 +100,30 @@ export const getCommentCount = function (pool: any, res: any, req: any) {
 
 }
 
+export const getTotalCommentCount = function (pool: any, res: any, req: any) {
+
+    const selectCommentsTableQuery = `SELECT COUNT(*) FROM comments`
+
+    pool.getConnection(function (err: any, connection: any) {
+        if (err) {
+            connection.release()
+            throw err
+        }
+        connection.query(selectCommentsTableQuery, function (err: any, result: any, fields: any) {
+            if (err) {
+                connection.release()
+                throw err
+            }
+            res.send({
+                status: true,
+                message: result
+            })
+        })
+        connection.release()
+    })
+
+}
+
 export const postComment = function (pool: any, res: any, req: any) {
 
     const selectCommentsTableQuery = `SELECT * FROM comments 

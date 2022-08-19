@@ -399,3 +399,27 @@ export const getUserLikeDetails = function (pool: any, res: any, req: any) {
     })
 
 }
+
+export const getTotalAccountCount = function (pool: any, res: any, req: any) {
+
+    const selectCommentsTableQuery = `SELECT COUNT(*) FROM accounts`
+
+    pool.getConnection(function (err: any, connection: any) {
+        if (err) {
+            connection.release()
+            throw err
+        }
+        connection.query(selectCommentsTableQuery, function (err: any, result: any, fields: any) {
+            if (err) {
+                connection.release()
+                throw err
+            }
+            res.send({
+                status: true,
+                message: result
+            })
+        })
+        connection.release()
+    })
+
+}

@@ -168,3 +168,27 @@ export const getLikeCount = function (pool: any, res: any, req: any) {
     })
 
 }
+
+export const getTotalLikeCount = function (pool: any, res: any, req: any) {
+
+    const selectLikesQuery = `SELECT COUNT(*) FROM likes`
+
+    pool.getConnection(function (err: any, connection: any) {
+        if (err) {
+            connection.release()
+            throw err
+        }
+        connection.query(selectLikesQuery, function (err: any, result: any, fields: any) {
+            if (err) {
+                connection.release()
+                throw err
+            }
+            res.send({
+                status: true,
+                message: result
+            })
+        })
+        connection.release()
+    })
+
+}

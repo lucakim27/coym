@@ -1,4 +1,4 @@
-import { authSignUp, authSignIn, cookieValidation, getUserDetails, updateUserDetails, getAllUsers, getUserCommentDetails, getUserReplyDetails, getUserLikeDetails } from '../models/accountModel'
+import { getTotalAccountCount, authSignUp, authSignIn, cookieValidation, getUserDetails, updateUserDetails, getAllUsers, getUserCommentDetails, getUserReplyDetails, getUserLikeDetails } from '../models/accountModel'
 import { pool } from '../configs/db'
 import express from 'express'
 export const router = express.Router()
@@ -38,4 +38,8 @@ router.get('/getUserReplyDetails', function (req: any, res: any) {
 
 router.get('/getUserLikeDetails', function (req: any, res: any) {
   getUserLikeDetails(pool, res, req)
+})
+
+router.get('/getTotalAccountCount', function (req: any, res: any) {
+  getTotalAccountCount(pool, res, req)
 })

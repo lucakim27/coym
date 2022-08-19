@@ -1,4 +1,4 @@
-import { getReply, postReply, getReplyCount, editReply, deleteReply } from '../models/replyModel'
+import { getReply, postReply, getReplyCount, editReply, deleteReply, getTotalReplyCount } from '../models/replyModel'
 import { pool } from '../configs/db'
 import express from 'express'
 export const router = express.Router()
@@ -22,4 +22,8 @@ router.post('/deleteReply', function (req: any, res: any) {
 
 router.post('/editReply', function (req: any, res: any) {
   editReply(pool, res, req)
+})
+
+router.get('/getTotalReplyCount', function (req: any, res:any) {
+  getTotalReplyCount(pool, res, req)
 })
