@@ -4,10 +4,8 @@
       <h1>Sign In</h1>
       <input class="loginInput" type="text" name="username" v-model="username" placeholder="Username..." required /><br /><br />
       <input class="loginInput"  type="password" name="password" v-model="password" placeholder="Password..." required /><br /><br />
-      <button class="loginButton signInBtn" type="submit" value="login">Sign In</button>
-      <hr>
-      <button class="loginButton" type="button" @click="directToSignUp()">Sign Up</button>
-      <hr>
+      <button class="loginButton signInBtn" type="submit" value="login">Sign In</button><br><br>
+      <button class="loginButton" type="button" @click="directToSignUp()">Sign Up</button><br><br>
       <button class='goBackBtn loginButton' type="button" @click="directToHome()"><svg xmlns="http://www.w3.org/2000/svg"
           class="icon icon-tabler icon-tabler-arrow-back-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
           stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -21,10 +19,8 @@
       <h1>Sign In</h1>
       <input class="loginInput" type="text" name="username" v-model="username" placeholder="Username..." required /><br /><br />
       <input class="loginInput" type="password" name="password" v-model="password" placeholder="Password..." required /><br /><br />
-      <button class="loginButton signInBtn" type="submit" value="login">Sign In</button>
-      <hr>
-      <button class="loginButton" type="button" @click="directToSignUp()">Sign Up</button>
-      <hr>
+      <button class="loginButton signInBtn" type="submit" value="login">Sign In</button><br><br>
+      <button class="loginButton" type="button" @click="directToSignUp()">Sign Up</button><br><br>
       <button class='goBackBtn loginButton' type="button" @click="directToHome()"><svg xmlns="http://www.w3.org/2000/svg"
           class="icon icon-tabler icon-tabler-arrow-back-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
           stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -81,7 +77,12 @@ export default {
     },
     directToHome() {
       this.$router.push('/')
+      document.getElementById('home').classList.toggle("highlight")
+      document.getElementById('headerContainer').style.display = 'block'
     }
+  },
+  mounted() {
+    document.getElementById('headerContainer').style.display = 'none'
   }
 }
 </script>

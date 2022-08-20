@@ -111,6 +111,7 @@ export default {
         directToLogin() {
             this.$router.push('/login')
             this.removeHighlight()
+            document.getElementById('headerContainer').style.display = 'none'
         },
         logout() {
             this.cookies.remove('user')
