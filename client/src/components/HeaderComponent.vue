@@ -2,7 +2,7 @@
     <div id="headerContainer">
         <header>
             <span v-on:click="sidebarOpen()">&#9776;</span>
-            <svg class='signInIcon' @click="directToLogin()" v-if="loginIconShow" height='40' width="40"
+            <svg class='signInIcon' @click="openLoginModal()" v-if="loginIconShow" height='40' width="40"
                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <g>
                     <path fill="none" d="M0 0h24v24H0z" />
@@ -10,7 +10,7 @@
                         d="M10 11V8l5 4-5 4v-3H1v-2h9zm-7.542 4h2.124A8.003 8.003 0 0 0 20 12 8 8 0 0 0 4.582 9H2.458C3.732 4.943 7.522 2 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10c-4.478 0-8.268-2.943-9.542-7z" />
                 </g>
             </svg>
-            <h2>COYM</h2>
+            <h2 @click="directToHome()">COYM</h2>
             <div class="dropdown">
                 <svg v-if="profileIconShow" @click.prevent="toggleDropdown" class='profileSVG'
                     xmlns="http://www.w3.org/2000/svg" width="35" height="44" fill="black" viewBox="0 0 16 16">
@@ -19,7 +19,7 @@
                         d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
                 </svg>
                 <div id='profileDropdown' class="dropdown-content">
-                    <a class="username dropdownUsername" @click="renderProfile(username)"
+                    <a class="dropdownUsername" @click="renderProfile(username)"
                         v-if="username !== null">{{ username }}</a>
                     <a class="username" v-if="username === null"> Anonymous </a>
                     <a @click="renderSetting()">Setting</a>
@@ -28,19 +28,25 @@
                 </div>
             </div>
         </header>
+        <div>
+            <SavedModal v-show="showModal" @close-modal="showModal = false"/>
+        </div>
     </div>
 </template>
 <script>
 import axios from 'axios'
 import { useCookies } from "vue3-cookies"
+import SavedModal from './ModalComponent.vue'
 export default {
     name: 'HeaderComponent',
+    components: { SavedModal },
     data() {
         return {
             username: null,
             state: false,
             loginIconShow: false,
-            profileIconShow: false
+            profileIconShow: false,
+            showModal: false
         }
     },
     created() {
@@ -77,6 +83,9 @@ export default {
         document.addEventListener('click', this.close)
     },
     methods: {
+        directToHome() {
+            this.$router.push('/')
+        },
         renderSetting() {
             document.getElementById('profileDropdown').style.height = '0'
             this.$router.push('/setting')
@@ -105,9 +114,8 @@ export default {
                 document.getElementById('profileDropdown').style.height = '0'
             }
         },
-        directToLogin() {
-            this.$router.push('/login')
-            document.getElementById('headerContainer').style.display = 'none'
+        openLoginModal() {
+            this.showModal = true
         },
         logout() {
             this.cookies.remove('user')

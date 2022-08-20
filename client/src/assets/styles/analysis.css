@@ -53,10 +53,6 @@
     text-decoration: none;
 }
 
-.analysisEachRow div a:hover {
-    color: rgb(255, 255, 255);
-}
-
 .mobileAnalysisMostViewedContainer {
     margin-left: 0 !important;
     margin-right: 0 !important;
@@ -94,8 +90,10 @@
 .analysisMajorTitle {
     font-weight: bold !important;
     text-decoration: underline !important;
+    padding: 5px;
 }
 
 .analysisMajorTitle:hover {
-    color: rgb(98, 203, 255) !important;
+    background-color: rgb(130, 130, 130) !important;
+    border-radius: 5px;
 }

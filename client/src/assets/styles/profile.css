@@ -70,11 +70,13 @@
 }
 
 .profileEachRow p a:hover {
-    color: rgb(98, 203, 255);
+    background-color: rgb(130, 130, 130) !important;
+    border-radius: 5px;
 }
 
 .profileEachRow p a {
     text-decoration: underline !important;
+    padding: 5px;
 }
 
 .profileMobileMostViewedContainer {

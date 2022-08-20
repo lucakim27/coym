@@ -74,11 +74,13 @@
 .userRow div a {
   text-decoration: none;
   color: rgb(255, 255, 255);
+  padding: 10px;
 }
 
 .userRow div a:hover {
-  color: rgb(98, 203, 255) !important;
+  background-color: rgb(130, 130, 130) !important;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .userMostViewedContainer {

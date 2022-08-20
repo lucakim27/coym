@@ -15,6 +15,12 @@
     right: 70px;
     top: 17px;
     cursor: pointer;
+    padding: 5px;
+}
+
+.signInIcon:hover {
+    background-color: rgb(221, 221, 221);
+    border-radius: 5px;
 }
 
 header {
@@ -37,7 +43,6 @@ header div a:hover,
 }
 
 .dropdownUsername:hover {
-    color: rgb(98, 203, 255) !important;
     cursor: pointer !important;
 }
 
@@ -47,15 +52,30 @@ header span {
     position: absolute;
     left: 10px;
     top: 10px;
+    padding: 5px;
+}
+
+header span:hover {
+    background-color: rgb(221, 221, 221);
+    border-radius: 5px;
 }
 
 header h2 {
+    width:fit-content;
     font-family: fantasy;
-    margin-top: 13px;
+    margin-top: 17px;
     font-size: 40px;
     margin-left: auto;
     margin-right: auto;
     overflow: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+header h2:hover {
+    cursor: pointer;
+    background-color: rgb(221, 221, 221);
+    border-radius: 5px;
 }
 
 .profileSVG {
@@ -63,6 +83,12 @@ header h2 {
     position: absolute;
     right: 7px;
     top: 4px;
+    padding: 5px;
+}
+
+.profileSVG:hover {
+    background-color: rgb(221, 221, 221);
+    border-radius: 5px;
 }
 
 .dropdown {

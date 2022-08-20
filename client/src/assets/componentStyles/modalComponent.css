@@ -1,0 +1,139 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  background-color: #000000da;
+}
+
+.modal {
+    background-color: white;
+    height: 50%;
+    width: 50%;
+    padding: 10%;
+    border-radius: 20px;
+    margin: 0 !important;
+    position: absolute !important;
+    top: 50% !important;
+    -ms-transform: translateY(-50%) !important;
+    transform: translateY(-50%) !important;
+    overflow: scroll;
+}
+
+.mobileModal {
+    height: 70% !important;
+    width: 70% !important;
+}
+
+.loginContainer {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .loginForm {
+    width: 50%;
+    top: 50% !important;
+    position: absolute !important;
+    -ms-transform: translateY(-50%) !important;
+    transform: translateY(-50%) !important;
+  }
+  
+  .mobileLoginForm {
+    width: 80%;
+    overflow: scroll;
+    height: 80%;
+    padding: 20px;
+  }
+  
+  .loginForm h1 {
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    font-family: fantasy;
+  }
+  
+  .loginInput {
+    padding: 12px 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-sizing: border-box;
+    width: 100%;
+    font-family: fantasy;
+  }
+  
+  .loginButton {
+    border: 1px solid #ccc;
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    font-family: fantasy;
+  }
+  
+  .signInBtn {
+    background-color: rgb(0, 149, 255);
+    color: white;
+  }
+
+  .registerContainer {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .registerForm {
+    width: 60%;
+    position: absolute !important;
+    top: 50% !important;
+    -ms-transform: translateY(-50%) !important;
+    transform: translateY(-50%) !important;
+  }
+  
+  .mobileRegisterForm {
+    width: 80%;
+    overflow: scroll;
+    height: 80%;
+    padding: 20px;
+  }
+  
+  .registerForm h1 {
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    font-family: fantasy;
+  }
+  
+  .registerInput {
+    padding: 12px 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-sizing: border-box;
+    width: 100%;
+    font-family: fantasy;
+  }
+  
+  .registerButton {
+    border: 1px solid #ccc;
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: rgb(0, 149, 255);
+    color: white;
+    font-family: fantasy;
+  }
+  
+  .goBackRegisterBtn {
+    background-color: white;
+    color: black;
+  }
+  
+  .regitserParagraph {
+    color: grey;
+    font-family: fantasy;
+    text-align: center;
+  }
