@@ -1,4 +1,10 @@
 <template>
+  <div class="userInputContainer">
+    <input v-if="isMobile()" class="userInputText mobileUserInput" id="input" placeholder="Search for username..."
+      type="search" @input="searchChangeFunc($event)" />
+    <input v-if="!isMobile()" class="userInputText" id="input" placeholder="Search for username..." type="search"
+      @input="searchChangeFunc($event)" />
+  </div>
   <div class='userContainer' v-if="!isMobile() && users.length">
     <div class="userOnlineDiv" :style="mobileCheck">
       <div class="userOnlineHead" v-if="!isMobile() && users.length">
@@ -52,10 +58,13 @@
           </svg></div>
       </div>
       <div class="userOnlineBody mobileBody" v-if="users.length">
-        <div v-for="user in users.slice().reverse()" :key="user.username">
+        <div v-for="user in filteredUsersList" :key="user.username">
           <div class='userEachRow'>
             <div class="userRow">
-              <div><router-link class="userMobileUsername" :to="'/profile?username=' + user.username">{{ user.username }}</router-link></div>
+              <div>
+                <router-link class="userMobileUsername" :to="'/profile?username=' + user.username">{{ user.username }}
+                </router-link>
+              </div>
               <div v-if="user.gender !== null && user.gender !== ''">{{ user.gender }}</div>
               <div v-if="user.gender === null">N/A</div>
               <div v-if="user.gender === ''">N/A</div>
@@ -81,7 +90,7 @@
   <div v-if="isMobile() && users.length">
     <div class="userMostViewedContainer mobileUserMostViewedContainer" v-if="users.length">
       <div class="mostViewedPages">
-        <div class='userEachRow' v-for="user in users.slice().reverse()" :key="user.username">
+        <div class='userEachRow' v-for="user in filteredUsersList" :key="user.username">
           <p class="userAlignChild">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-person-circle"
               viewBox="0 0 16 16">
@@ -89,7 +98,8 @@
               <path fill-rule="evenodd"
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
             </svg>
-            <router-link class="mobileUsername" :to="'/profile?username=' + user.username">{{ user.username }}</router-link>
+            <router-link class="mobileUsername" :to="'/profile?username=' + user.username">{{ user.username }}
+            </router-link>
           </p>
           <p class="userAlignChild" v-if="user.gender !== null && user.gender !== '' && user.gender !== 'N/A'">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-gender-ambiguous"
@@ -163,10 +173,23 @@ export default {
   },
   data() {
     return {
-      users: []
+      users: [],
+      filteredUsersList: []
     }
   },
   methods: {
+    searchChangeFunc(event) {
+      this.filteredUsersList = []
+      if (event.target.value.length) {
+        for (let i = 0; i < this.users.length; i++) {
+          if (this.users[i].username.toLowerCase().includes(event.target.value.toLowerCase())) {
+            this.filteredUsersList.push(this.users[i])
+          }
+        }
+      } else {
+        this.filteredUsersList = this.users
+      }
+    },
     isMobile() {
       if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         return true
@@ -192,8 +215,18 @@ export default {
       // url: "http://localhost:3000/getAllUsers"
     }).then(function (response) {
       if (response.data.status) {
-        response.data.data.forEach(key => {
+        response.data.data.slice().reverse().forEach(key => {
           self.users.push({
+            username: key.username,
+            gender: key.gender,
+            school: key.school,
+            major: key.major,
+            country: key.country,
+            joinedAt: key.createdAt
+          })
+        })
+        response.data.data.slice().reverse().forEach(key => {
+          self.filteredUsersList.push({
             username: key.username,
             gender: key.gender,
             school: key.school,

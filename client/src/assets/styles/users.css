@@ -115,3 +115,18 @@
   font-weight: bold !important;
   text-decoration: underline !important;
 }
+
+.userInputText {
+    width: 80%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+
+.userInputContainer {
+  display: flex;
+  justify-content: center;
+}
