@@ -77,7 +77,6 @@ export default {
     },
     directToHome() {
       this.$router.push('/')
-      document.getElementById('home').classList.toggle("highlight")
       document.getElementById('headerContainer').style.display = 'block'
     }
   },

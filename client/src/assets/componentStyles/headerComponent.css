@@ -28,7 +28,7 @@ header div a {
 
 header div a:hover,
 .username:hover {
-    color: rgb(0, 136, 255) !important;
+    color: rgb(184, 184, 184) !important;
 }
 
 .dropdownUsername {
@@ -97,8 +97,4 @@ header h2 {
     border-radius: 20px;
     text-align: center;
     height: 40px;
-}
-
-.signOutBtn:hover {
-    color: rgb(255, 25, 0) !important;
 }

@@ -80,21 +80,18 @@ export default {
         renderSetting() {
             document.getElementById('profileDropdown').style.height = '0'
             this.$router.push('/setting')
-            this.removeHighlight()
         },
         renderRequest() {
             document.getElementById('profileDropdown').style.height = '0'
             this.$router.push('/request')
-            this.removeHighlight()
         },
         renderProfile(username) {
-            if (this.getTitle === 'PROFILE') {
+            if (new URL(window.location.href).pathname.slice(1, new URL(window.location.href).pathname.length).toUpperCase() === 'PROFILE') {
                 window.location.href = '/profile?username=' + username
             } else {
                 document.getElementById('profileDropdown').style.height = '0'
                 this.$router.push('/profile?username=' + username)
             }
-            this.removeHighlight()
         },
         toggleDropdown() {
             if (document.getElementById('profileDropdown').style.height === '320px') {
@@ -110,7 +107,6 @@ export default {
         },
         directToLogin() {
             this.$router.push('/login')
-            this.removeHighlight()
             document.getElementById('headerContainer').style.display = 'none'
         },
         logout() {
@@ -125,39 +121,6 @@ export default {
                 this.loginIconShow = true
             } else {
                 this.profileIconShow = true
-            }
-        },
-        removeHighlight() {
-            document.getElementById('home').classList.remove("highlight")
-            document.getElementById('users').classList.remove("highlight")
-            document.getElementById('analysis').classList.remove("highlight")
-            document.getElementById('aboutUs').classList.remove("highlight")
-            document.getElementById('privacyPolicy').classList.remove("highlight")
-        }
-    },
-    computed: {
-        getTitle() {
-            if (new URL(window.location.href).pathname.slice(1, new URL(window.location.href).pathname.length) === '') {
-                return 'HOME'
-            } else if (new URL(window.location.href).pathname.slice(1, new URL(window.location.href).pathname.length) === 'comment') {
-                var query = window.location.search.substring(1)
-                var vars = query.split('&')
-                var returnValue = ''
-                for (var i = 0; i < vars.length; i++) {
-                    var pair = vars[i].split('=')
-                    if (pair.length !== 1) {
-                        for (var j = 0; j < pair.length; j++) {
-                            if (pair[j] !== 'major') {
-                                returnValue += pair[j]
-                            }
-                        }
-                    } else {
-                        returnValue += pair[0]
-                    }
-                }
-                return decodeURIComponent(returnValue)
-            } else {
-                return new URL(window.location.href).pathname.slice(1, new URL(window.location.href).pathname.length).toUpperCase()
             }
         }
     }

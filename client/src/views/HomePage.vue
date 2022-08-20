@@ -89,14 +89,6 @@ export default {
     methods: {
         renderComment(major) {
             this.$router.push('/comment?major=' + major)
-            this.removeHighlight()
-        },
-        removeHighlight() {
-            document.getElementById('home').classList.remove("highlight")
-            document.getElementById('users').classList.remove("highlight")
-            document.getElementById('analysis').classList.remove("highlight")
-            document.getElementById('aboutUs').classList.remove("highlight")
-            document.getElementById('privacyPolicy').classList.remove("highlight")
         },
         loaded() {
             this.isLoaded = true

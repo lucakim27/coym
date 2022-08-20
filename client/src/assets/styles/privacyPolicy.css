@@ -66,3 +66,8 @@
     padding: 10px;
     cursor: pointer;
 }
+
+.aboutUsContainer a {
+    color: #62cbff !important;
+    cursor: default;
+}
