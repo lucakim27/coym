@@ -17,9 +17,9 @@ export default {
       this.$router.push(page)
       this.sidebarClose()
     },
-    sidebarClose: function () {
+    sidebarClose () {
       document.getElementById("mySidenav").style.width = "0"
-    },
+    }
   }
 }
 </script>

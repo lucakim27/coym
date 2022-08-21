@@ -234,14 +234,10 @@ export default {
     mounted() {
         let self = this
         axios.all([
-            axios.get("https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getTotalCommentCount"),
-            // axios.get("http://localhost:3000/getTotalCommentCount"),
-            axios.get("https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getTotalReplyCount"),
-            // axios.get("http://localhost:3000/getTotalReplyCount"),
-            axios.get("https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getTotalLikeCount"),
-            // axios.get("http://localhost:3000/getTotalLikeCount"),
-            axios.get("https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getTotalAccountCount"),
-            // axios.get("http://localhost:3000/getTotalAccountCount"),
+            axios.get(process.env.VUE_APP_ROOT_API + "/getTotalCommentCount"),
+            axios.get(process.env.VUE_APP_ROOT_API + "/getTotalReplyCount"),
+            axios.get(process.env.VUE_APP_ROOT_API + "/getTotalLikeCount"),
+            axios.get(process.env.VUE_APP_ROOT_API + "/getTotalAccountCount"),
         ]).then(axios.spread((comment, reply, like, account) => {
             self.comment = comment.data.message[0]['COUNT(*)']
             self.reply = reply.data.message[0]['COUNT(*)']

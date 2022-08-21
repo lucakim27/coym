@@ -202,19 +202,14 @@ export default {
   },
   computed: {
     mobileCheck() {
-      if (this.isMobile()) {
-        return 'min-width: auto';
-      } else {
-        return 'min-width: 90%';
-      }
+      return this.isMobile() ? 'min-width: auto' : 'min-width: 90%'
     }
   },
   beforeMount() {
     let self = this
     axios({
       method: "GET",
-      url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getAllUsers"
-      // url: "http://localhost:3000/getAllUsers"
+      url: process.env.VUE_APP_ROOT_API + "/getAllUsers"
     }).then(function (response) {
       if (response.data.status) {
         response.data.data.slice().reverse().forEach(key => {
@@ -227,16 +222,7 @@ export default {
             joinedAt: key.createdAt
           })
         })
-        response.data.data.slice().reverse().forEach(key => {
-          self.filteredUsersList.push({
-            username: key.username,
-            gender: key.gender,
-            school: key.school,
-            major: key.major,
-            country: key.country,
-            joinedAt: key.createdAt
-          })
-        })
+        self.filteredUsersList = self.users
       }
     })
   }

@@ -158,8 +158,7 @@ export default {
         let self = this
         axios({
             method: "GET",
-            url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getUserCommentDetails",
-            // url: "http://localhost:3000/getUserCommentDetails",
+            url: process.env.VUE_APP_ROOT_API + "/getUserCommentDetails",
             params: {
                 username: this.getQueryVariable()
             }
@@ -170,8 +169,7 @@ export default {
         })
         axios({
             method: "GET",
-            url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getUserReplyDetails",
-            // url: "http://localhost:3000/getUserReplyDetails",
+            url: process.env.VUE_APP_ROOT_API + "/getUserReplyDetails",
             params: {
                 username: this.getQueryVariable()
             }
@@ -182,8 +180,7 @@ export default {
         })
         axios({
             method: "GET",
-            url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getUserLikeDetails",
-            // url: "http://localhost:3000/getUserLikeDetails",
+            url: process.env.VUE_APP_ROOT_API + "/getUserLikeDetails",
             params: {
                 username: this.getQueryVariable()
             }

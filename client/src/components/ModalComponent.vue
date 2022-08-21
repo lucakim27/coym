@@ -86,7 +86,7 @@
 import axios from 'axios'
 import { useCookies } from "vue3-cookies"
 export default {
-    name: 'LoginModalComponent',
+    name: 'ModalComponent',
     setup() {
         const { cookies } = useCookies()
         return { cookies }
@@ -122,8 +122,7 @@ export default {
             const self = this
             axios({
                 method: "GET",
-                url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/signIn",
-                // url: "http://localhost:3000/signIn",
+                url: process.env.VUE_APP_ROOT_API + "/signIn",
                 params: {
                     username: this.loginUsername,
                     password: this.loginPassword
@@ -141,8 +140,7 @@ export default {
             const self = this
             axios({
                 method: "POST",
-                url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/signUp",
-                // url: "http://localhost:3000/signUp",
+                url: process.env.VUE_APP_ROOT_API + "/signUp",
                 headers: { 'Content-Type': 'application/json' },
                 data: { username: this.registerUsername, password: this.registerPassword, passwordConfirm: this.registerPasswordConfirm }
             }).then(function (response) {

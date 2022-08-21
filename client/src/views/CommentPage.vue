@@ -2,10 +2,10 @@
   <div id='container'>
     <div id="ipnutContainer">
       <textarea height="60" type="text" id="userInput" v-model="commentInput" placeholder="Comment here..."
-        @focus="magic_flag = true"></textarea><br>
+        @focus="showBtns = true"></textarea><br>
       <div class="commentButtonContainer">
-        <button @click="comment()" id="commentBtn" v-show="magic_flag">Comment</button>
-        <button @click="magic_flag = !magic_flag" class="closeBtn" v-show="magic_flag">Close</button>
+        <button @click="comment()" id="commentBtn" v-show="showBtns">Comment</button>
+        <button @click="showBtns = !showBtns" class="closeBtn" v-show="showBtns">Close</button>
       </div>
     </div>
     <center id="commentDiv">
@@ -118,7 +118,7 @@ export default {
     return {
       username: '',
       commentInput: '',
-      magic_flag: false,
+      showBtns: false,
       getComment: null,
       getLike: [],
       getReply: [],
@@ -130,8 +130,7 @@ export default {
     if (self.cookies.get('user') !== null) {
       axios({
         method: "GET",
-        url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/cookieValidation",
-        // url: "http://localhost:3000/cookieValidation",
+        url: process.env.VUE_APP_ROOT_API + "/cookieValidation",
         params: {
           username: self.cookies.get("user").username,
           password: self.cookies.get("user").password
@@ -144,8 +143,7 @@ export default {
     }
     axios({
       method: "GET",
-      url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getComment",
-      // url: "http://localhost:3000/getComment",
+      url: process.env.VUE_APP_ROOT_API + "/getComment",
       params: {
         page: this.getQueryVariable()
       }
@@ -156,8 +154,7 @@ export default {
     })
     axios({
       method: "GET",
-      url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getLike",
-      // url: "http://localhost:3000/getLike",
+      url: process.env.VUE_APP_ROOT_API + "/getLike",
       params: {
         page: this.getQueryVariable()
       }
@@ -169,8 +166,7 @@ export default {
     })
     axios({
       method: "GET",
-      url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getReply",
-      // url: "http://localhost:3000/getReply",
+      url: process.env.VUE_APP_ROOT_API + "/getReply",
       params: {
         page: this.getQueryVariable()
       }
@@ -207,12 +203,10 @@ export default {
     edit(comment) {
       if (document.getElementById(comment + 'editTextArea').value === '') {
         alert("You have not input anything yet.")
-        return 0
       } else {
         axios({
           method: "POST",
-          url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/editComment",
-          // url: "http://localhost:3000/editComment",
+          url: process.env.VUE_APP_ROOT_API + "/editComment",
           headers: { 'Content-Type': 'application/json' },
           data: { comment: document.getElementById(comment + 'editTextArea').value, previousComment: comment, username: this.username, page: this.getQueryVariable() }
         }).then(function (response) {
@@ -228,12 +222,10 @@ export default {
     editReplyBtn(reply, comment) {
       if (document.getElementById(comment + reply + 'replyEditTextArea').value === '') {
         alert("You have not input anything yet.")
-        return 0
       } else {
         axios({
           method: "POST",
-          url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/editReply",
-          // url: "http://localhost:3000/editReply",
+          url: process.env.VUE_APP_ROOT_API + "/editReply",
           headers: { 'Content-Type': 'application/json' },
           data: { comment: comment, reply: document.getElementById(comment + reply + 'replyEditTextArea').value, previousReply: reply, username: this.username, page: this.getQueryVariable() }
         }).then(function (response) {
@@ -276,8 +268,7 @@ export default {
       if (confirm("Are you sure you want to delete the comment?")) {
         axios({
           method: "POST",
-          url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/deleteComment",
-          // url: "http://localhost:3000/deleteComment",
+          url: process.env.VUE_APP_ROOT_API + "/deleteComment",
           headers: { 'Content-Type': 'application/json' },
           data: { comment: comment, username: this.username, page: this.getQueryVariable() }
         }).then(function (response) {
@@ -294,8 +285,7 @@ export default {
       if (confirm("Are you sure you want to delete the reply?")) {
         axios({
           method: "POST",
-          url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/deleteReply",
-          // url: "http://localhost:3000/deleteReply",
+          url: process.env.VUE_APP_ROOT_API + "/deleteReply",
           headers: { 'Content-Type': 'application/json' },
           data: { comment: comment, reply: reply, username: this.username, page: this.getQueryVariable() }
         }).then(function (response) {
@@ -333,8 +323,7 @@ export default {
       else {
         axios({
           method: "POST",
-          url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/postReply",
-          // url: "http://localhost:3000/postReply",
+          url: process.env.VUE_APP_ROOT_API + "/postReply",
           headers: { 'Content-Type': 'application/json' },
           data: { comment: comment, username: this.username, page: this.getQueryVariable(), reply: document.getElementById(comment + 'ReplyInput').value }
         }).then(function (response) {
@@ -377,8 +366,7 @@ export default {
       } else {
         axios({
           method: "POST",
-          url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/postComment",
-          // url: "http://localhost:3000/postComment",
+          url: process.env.VUE_APP_ROOT_API + "/postComment",
           headers: { 'Content-Type': 'application/json' },
           data: { comment: this.commentInput, username: this.username, page: this.getQueryVariable() }
         }).then(function (response) {
@@ -397,8 +385,7 @@ export default {
       } else {
         axios({
           method: "POST",
-          url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/postLike",
-          // url: "http://localhost:3000/postLike",
+          url: process.env.VUE_APP_ROOT_API + "/postLike",
           headers: { 'Content-Type': 'application/json' },
           data: { comment: comment, page: this.getQueryVariable(), username: this.username }
         }).then(function (response) {

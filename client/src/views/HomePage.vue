@@ -5,10 +5,10 @@
         </div>
         <img v-show="isLoaded" @load="loaded" :style='mobileImg' src='../assets/images/main.jpg' class="mainImage">
         <div class="homeInput" :style="mobileInput">
-            <input v-if="isMobile()" class="homeInputText mobileHomeInput" id="input" placeholder="Search for your major..."
+            <input v-if="isMobile()" class="homeInputText mobileHomeInput" id="input"
+                placeholder="Search for your major..." type="search" @input="searchChangeFunc($event)" />
+            <input v-if="!isMobile()" class="homeInputText" id="input" placeholder="Search for your major..."
                 type="search" @input="searchChangeFunc($event)" />
-            <input v-if="!isMobile()" class="homeInputText" id="input" placeholder="Search for your major..." type="search"
-                @input="searchChangeFunc($event)" />
             <table id="options" class="mobileHomeOptions homeOptions" v-if="isMobile()">
                 <tr v-for="(major, i) in filteredMajorsList" :key="i">
                     <td scope="row">
@@ -65,7 +65,8 @@
                         d="M11.793 8.5H9v-1h5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.354-.146l-.853-.854zM5 7c0 .552-.448 0-1 0s-1 .552-1 0a1 1 0 0 1 2 0z" />
                 </svg>
             </div>
-            <b class="homeDescriptionExplanation">A college major commenting website where you would tremendously benefit from.</b><br>
+            <b class="homeDescriptionExplanation">A college major commenting website where you would tremendously
+                benefit from.</b><br>
         </div>
     </div>
 </template>
@@ -79,7 +80,6 @@ export default {
     },
     data() {
         return {
-            magic_flag: false,
             majorsList: [],
             filteredMajorsList: [],
             isLoaded: false,
@@ -119,8 +119,7 @@ export default {
         let self = this
         axios({
             method: "GET",
-            url: "https://proxy11112321321.herokuapp.com/https://coym-api.herokuapp.com/getMajorList"
-            // url: "http://localhost:3000/getMajorList",
+            url: process.env.VUE_APP_ROOT_API + "/getMajorList"
         }).then(function (response) {
             if (response.data.status) {
                 response.data.message.forEach(key => {
@@ -131,32 +130,13 @@ export default {
     },
     computed: {
         mobileImg() {
-            if (this.isMobile()) {
-                return 'height: 20% !important;'
-            } else {
-                return 'height: 650px !important;'
-            }
-        },
-        imageSrc() {
-            if (this.isMobile()) {
-                return 'https://images.theconversation.com/files/222649/original/file-20180611-191974-12eqqqr.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=926&fit=clip'
-            } else {
-                return 'https://img.freepik.com/free-vector/group-different-occupations-standing-white-background_218660-287.jpg?w=2000'
-            }
+            return this.isMobile() ? 'height: 20% !important;' : 'height: 650px !important;'
         },
         mobileInput() {
-            if (this.isMobile()) {
-                return 'top: 65% !important;'
-            } else {
-                return ''
-            }
+            return this.isMobile() ? 'top: 65% !important;' : ''
         },
         mobileDescription() {
-            if (this.isMobile()) {
-                return 'top: 70% !important;'
-            } else {
-                return ''
-            }
+            return this.isMobile() ? 'top: 70% !important;' : ''
         }
     }
 }
