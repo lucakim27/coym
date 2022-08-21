@@ -60,7 +60,7 @@
           <div class='userEachRow'>
             <div class="userRow">
               <div>
-                <router-link class="userMobileUsername" :to="'/profile?username=' + user.username">{{ user.username }}
+                <router-link class="userMobileUsername" :to="'/profile/' + user.id">{{ user.username }}
                 </router-link>
               </div>
               <div v-if="user.gender !== null && user.gender !== ''">{{ user.gender }}</div>
@@ -100,7 +100,7 @@
               <path fill-rule="evenodd"
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
             </svg>
-            <router-link class="mobileUsername" :to="'/profile?username=' + user.username">{{ user.username }}
+            <router-link class="mobileUsername" :to="'/profile/' + user.id">{{ user.username }}
             </router-link>
           </p>
           <p class="userAlignChild" v-if="user.gender !== null && user.gender !== '' && user.gender !== 'N/A'">
@@ -214,6 +214,7 @@ export default {
       if (response.data.status) {
         response.data.data.slice().reverse().forEach(key => {
           self.users.push({
+            id: key.id,
             username: key.username,
             gender: key.gender,
             school: key.school,

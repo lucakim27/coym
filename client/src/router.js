@@ -32,7 +32,7 @@ const routes = [
     component: () => import('@/views/SettingPage'),
   },
   {
-    path: '/profile',
+    path: '/profile/:id',
     name: 'ProfilePage',
     component: () => import('@/views/ProfilePage'),
   },

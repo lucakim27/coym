@@ -208,6 +208,32 @@ export const cookieValidation = function (pool: any, res: any, req: any) {
 
 }
 
+export const getUsername = function (pool: any, res: any, req: any) {
+
+    const selectAccountsQuery = `SELECT username FROM accounts WHERE id = ?`
+
+    const paramsForSelectAccountsQuery = [req.params.id]
+
+    pool.getConnection(function (err: any, connection: any) {
+        if (err) {
+            connection.release()
+            throw err
+        }
+        connection.query(selectAccountsQuery, paramsForSelectAccountsQuery, function (err: any, result: any, fields: any) {
+            if (err) {
+                connection.release()
+                throw err
+            }
+            res.send({
+                status: true,
+                data: { username: result[0] }
+            })
+        })
+        connection.release()
+    })
+
+}
+
 export const getUserDetails = function (pool: any, res: any, req: any) {
 
     const selectAccountsQuery = `SELECT * FROM accounts 
@@ -285,7 +311,7 @@ export const updateUserDetails = function (pool: any, res: any, req: any) {
 
 export const getAllUsers = function (pool: any, res: any, req: any) {
 
-    const getAllUsers = `SELECT username, gender, country, major, school, createdAt FROM accounts`
+    const getAllUsers = `SELECT id, username, gender, country, major, school, createdAt FROM accounts`
 
     pool.getConnection(function (err: any, connection: any) {
         if (err) {
@@ -312,11 +338,11 @@ export const getUserCommentDetails = function (pool: any, res: any, req: any) {
     const getUserCommentDetails = `SELECT m.name, COUNT(a.username) AS count FROM comments c
         INNER JOIN majors m on m.id = c.majorID
         INNER JOIN accounts a on a.id = c.userID
-        WHERE c.userID = (SELECT id FROM accounts WHERE username = ?)
+        WHERE c.userID = ?
         GROUP BY m.name
     `
 
-    const paramForGetUserCommentDetails = [req.query.username]
+    const paramForGetUserCommentDetails = [req.params.id]
 
     pool.getConnection(function (err: any, connection: any) {
         if (err) {
@@ -343,11 +369,11 @@ export const getUserReplyDetails = function (pool: any, res: any, req: any) {
     const getUserReplyDetails = `SELECT m.name, COUNT(a.username) AS count FROM reply r
         INNER JOIN majors m on m.id = r.majorID
         INNER JOIN accounts a on a.id = r.userID
-        WHERE r.userID = (SELECT id FROM accounts WHERE username = ?)
+        WHERE r.userID = ?
         GROUP BY m.name
     `
 
-    const paramForGetUserReplyDetails = [req.query.username]
+    const paramForGetUserReplyDetails = [req.params.id]
 
     pool.getConnection(function (err: any, connection: any) {
         if (err) {
@@ -374,11 +400,11 @@ export const getUserLikeDetails = function (pool: any, res: any, req: any) {
     const getUserLikeDetails = `SELECT m.name, COUNT(a.username) AS count FROM likes l
         INNER JOIN majors m on m.id = l.majorID
         INNER JOIN accounts a on a.id = l.userID
-        WHERE l.userID = (SELECT id FROM accounts WHERE username = ?)
+        WHERE l.userID = ?
         GROUP BY m.name
     `
 
-    const paramForGetUserLikeDetails = [req.query.username]
+    const paramForGetUserLikeDetails = [req.params.id]
 
     pool.getConnection(function (err: any, connection: any) {
         if (err) {
@@ -423,3 +449,4 @@ export const getTotalAccountCount = function (pool: any, res: any, req: any) {
     })
 
 }
+

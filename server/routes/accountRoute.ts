@@ -1,4 +1,4 @@
-import { getTotalAccountCount, authSignUp, authSignIn, cookieValidation, getUserDetails, updateUserDetails, getAllUsers, getUserCommentDetails, getUserReplyDetails, getUserLikeDetails } from '../models/accountModel'
+import { getUsername, getTotalAccountCount, authSignUp, authSignIn, cookieValidation, getUserDetails, updateUserDetails, getAllUsers, getUserCommentDetails, getUserReplyDetails, getUserLikeDetails } from '../models/accountModel'
 import { pool } from '../configs/db'
 import express from 'express'
 export const router = express.Router()
@@ -28,18 +28,22 @@ router.get('/getAllUsers', function (req: any, res: any) {
   getAllUsers(pool, res, req)
 })
 
-router.get('/getUserCommentDetails', function (req: any, res: any) {
+router.get('/getUserCommentDetails/:id', function (req: any, res: any) {
   getUserCommentDetails(pool, res, req)
 })
 
-router.get('/getUserReplyDetails', function (req: any, res: any) {
+router.get('/getUserReplyDetails/:id', function (req: any, res: any) {
   getUserReplyDetails(pool, res, req)
 })
 
-router.get('/getUserLikeDetails', function (req: any, res: any) {
+router.get('/getUserLikeDetails/:id', function (req: any, res: any) {
   getUserLikeDetails(pool, res, req)
 })
 
 router.get('/getTotalAccountCount', function (req: any, res: any) {
   getTotalAccountCount(pool, res, req)
+})
+
+router.get('/getUsername/:id', function (req: any, res: any) {
+  getUsername(pool, res, req)
 })
