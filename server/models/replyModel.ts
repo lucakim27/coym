@@ -48,7 +48,7 @@ export const createReplyTable = function (pool: any) {
 
 export const getReply = function (pool: any, res: any, req: any) {
 
-    const selectReplyQuery = `SELECT a.id, a.username, c.comment, r.reply, m.name, r.createdAt FROM reply r
+    const selectReplyQuery = `SELECT a.id, a.username, c.id AS commentID, c.comment, r.reply, m.name, r.createdAt, r.id AS replyID FROM reply r
         inner join accounts a on a.id = r.userID
         inner join majors m on m.id = r.majorID
         inner join comments c on c.id = r.commentID
@@ -129,14 +129,6 @@ export const getTotalReplyCount = function (pool: any, res: any, req: any) {
 
 export const postReply = function (pool: any, res: any, req: any) {
 
-    const selectRepliesTableQuery = `SELECT * FROM reply 
-        WHERE majorID = ? AND
-        commentID = (SELECT id FROM comments WHERE comment = ? AND majorID = ?) AND
-        reply = ?
-    `
-
-    const paramsForSelectRepliesTableQuery = [req.params.id, req.body.comment, req.params.id, req.body.reply]
-
     const insertReplyQuery = `INSERT INTO 
         reply (
             majorID,
@@ -147,43 +139,29 @@ export const postReply = function (pool: any, res: any, req: any) {
         ) VALUES (
             ?, 
             (SELECT id FROM accounts WHERE username = ?), 
-            (SELECT id FROM comments WHERE comment = ? AND majorID = ?), 
+            ?, 
             ?,
             ?
         )
     `
 
-    const paramsForInsertReplyQuery = [req.params.id, req.body.username, req.body.comment, req.params.id, req.body.reply, new Date().toISOString().slice(0, 19).replace('T', ' ')]
+    const paramsForInsertReplyQuery = [req.body.page, req.body.username, req.params.id, req.body.reply, new Date().toISOString().slice(0, 19).replace('T', ' ')]
 
     pool.getConnection(function (err: any, connection: any) {
         if (err) {
             connection.release()
             throw err
         }
-        connection.query(selectRepliesTableQuery, paramsForSelectRepliesTableQuery, function (err: any, result: any) {
+        connection.query(insertReplyQuery, paramsForInsertReplyQuery, function (err: any, result: any) {
             if (err) {
                 connection.release()
                 throw err
             }
-            if (!result.length) {
-                connection.query(insertReplyQuery, paramsForInsertReplyQuery, function (err: any, result: any) {
-                    if (err) {
-                        connection.release()
-                        throw err
-                    }
-                    res.send({ 
-                        status: true, 
-                        message: 'You have successfully replied.'
-                    })
-                })
-                connection.release()
-            } else {
-                res.send({ 
-                    status: false, 
-                    message: 'The reply is duplicated on the comment.'
-                })
-            }
-        })
+            res.send({ 
+                status: true, 
+                message: 'You have successfully replied.'
+            })
+        }) 
         connection.release()
     })
 
@@ -191,53 +169,28 @@ export const postReply = function (pool: any, res: any, req: any) {
 
 export const editReply = function (pool: any, res: any, req: any) {
 
-    const selectCommentsTableQuery = `SELECT reply FROM reply 
-        WHERE reply = ? AND 
-            majorID = ? AND
-            commentID = (SELECT id FROM comments WHERE comment = ? AND majorID = ?)
-    `
-
-    const replyParam = [req.body.reply, req.params.id, req.body.comment, req.params.id]
-
     const updateCommentsQuery = `UPDATE reply
         SET reply = ?,
             updatedAt = ?
-        WHERE userID = (SELECT id FROM accounts WHERE username = ?) AND 
-            majorID = ? AND
-            commentID = (SELECT id FROM comments WHERE comment = ? AND majorID = ?) AND
-            reply = ?
+        WHERE id = ?
     `
 
-    const paramsForUpdateCommentsQuery = [req.body.reply, new Date().toISOString().slice(0, 19).replace('T', ' '), req.body.username, req.params.id, req.body.comment, req.params.id, req.body.previousReply]
+    const paramsForUpdateCommentsQuery = [req.body.reply, new Date().toISOString().slice(0, 19).replace('T', ' '), req.params.id]
 
     pool.getConnection(function (err: any, connection: any) {
         if (err) {
             connection.release()
             throw err
         }
-        connection.query(selectCommentsTableQuery, replyParam, function (err: any, result: any) {
+        connection.query(updateCommentsQuery, paramsForUpdateCommentsQuery, function (err: any, result: any) {
             if (err) {
                 connection.release()
                 throw err
             }
-            if (!result.length) {
-                connection.query(updateCommentsQuery, paramsForUpdateCommentsQuery, function (err: any, result: any) {
-                    if (err) {
-                        connection.release()
-                        throw err
-                    }
-                    res.send({
-                        status: true
-                    })
-                })
-                connection.release()
-            } else {
-                res.send({
-                    status: false
-                })
-                connection.release()
-            }
-        })
+            res.send({
+                status: true
+            })
+        })   
         connection.release()
     })
 
@@ -246,20 +199,14 @@ export const editReply = function (pool: any, res: any, req: any) {
 export const deleteReply = function (pool: any, res: any, req: any) {
 
     const selectCommentsTableQuery = `SELECT reply FROM reply 
-        WHERE reply = ? AND 
-            userID = (SELECT id FROM accounts WHERE username = ?) AND 
-            majorID = ? AND
-            commentID = (SELECT id FROM comments WHERE comment = ? AND majorID = ?)
+        WHERE id = ?
     `
 
     const deleteCommentQuery = `DELETE FROM reply
-        WHERE reply = ? AND 
-            userID = (SELECT id FROM accounts WHERE username = ?) AND 
-            majorID = ? AND
-            commentID = (SELECT id FROM comments WHERE comment = ? AND majorID = ?)
+        WHERE id = ?
     `
     
-    const replyParam = [req.body.reply, req.body.username, req.params.id, req.body.comment, req.params.id]
+    const replyParam = [req.params.id]
 
     pool.getConnection(function (err: any, connection: any) {
         if (err) {

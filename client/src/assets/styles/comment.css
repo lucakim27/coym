@@ -140,6 +140,11 @@
   margin-top: -20px;
 }
 
+.like {
+  display: flex;
+  text-align: center;
+}
+
 .like,
 .reply,
 .viewReply {

@@ -46,18 +46,18 @@ export const createLikesTable = function (pool: any) {
 export const postLike = function (pool: any, res: any, req: any) {
 
     const selectLikesQuery = `SELECT * FROM likes
-        WHERE commentID = (SELECT id FROM comments WHERE comment = ? AND majorID = ?) AND 
+        WHERE commentID = ? AND
             majorID = ? AND 
             userID = (SELECT id FROM accounts WHERE username = ?)
     `
 
     const deleteLikesColumnQuery = `DELETE FROM likes 
-        WHERE commentID = (SELECT id FROM comments WHERE comment = ? AND majorID = ?) AND 
+        WHERE commentID = ? AND
             majorID = ? AND 
             userID = (SELECT id FROM accounts WHERE username = ?)
     `
     
-    const selectParams = [req.body.comment, req.params.id, req.params.id, req.body.username]
+    const selectParams = [req.params.id, req.body.page ,req.body.username]
 
     const insertLikesQuery = `INSERT INTO 
         likes (
@@ -65,13 +65,13 @@ export const postLike = function (pool: any, res: any, req: any) {
             majorID, 
             userID
         ) VALUES (
-            (SELECT id FROM comments WHERE comment = ? AND majorID = ?), 
+            ?, 
             ?, 
             (SELECT id FROM accounts WHERE username = ?)
         )
     `
 
-    const insertParams = [req.body.comment, req.params.id, req.params.id, req.body.username]
+    const insertParams = [req.params.id, req.body.page ,req.body.username]
 
     pool.getConnection(function (err: any, connection: any) {
         if (err) {
@@ -114,7 +114,7 @@ export const postLike = function (pool: any, res: any, req: any) {
 
 export const getLike = function (pool: any, res: any, req: any) {
 
-    const selectLikesQuery = `SELECT a.username, m.name, c.comment FROM likes l
+    const selectLikesQuery = `SELECT a.username, m.name, c.comment, c.id AS commentID FROM likes l
         inner join accounts a on a.id = l.userID
         inner join majors m on m.id = l.majorID
         inner join comments c on c.id = l.commentID

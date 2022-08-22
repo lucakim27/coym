@@ -46,7 +46,7 @@ export const createCommentsTable = function (pool: any) {
 
 export const getComment = function (pool: any, res: any, req: any) {
 
-    const selectCommentsTableQuery = `SELECT a.id, a.username, c.comment, c.createdAt, m.name FROM comments c
+    const selectCommentsTableQuery = `SELECT a.id, a.username, c.comment, c.createdAt, c.id AS commentID, m.name FROM comments c
         inner join accounts a on a.id = c.userID
         inner join majors m on m.id = c.majorID
         WHERE m.id = ?
@@ -126,12 +126,6 @@ export const getTotalCommentCount = function (pool: any, res: any, req: any) {
 
 export const postComment = function (pool: any, res: any, req: any) {
 
-    const selectCommentsTableQuery = `SELECT * FROM comments 
-        WHERE majorID = ?
-    `
-
-    const paramsForSelectCommentsTableQuery = [req.params.id]
-
     const insertCommentsTableQuery = `INSERT INTO 
         comments (
             comment, 
@@ -153,31 +147,14 @@ export const postComment = function (pool: any, res: any, req: any) {
             connection.release()
             throw err
         }
-        connection.query(selectCommentsTableQuery, paramsForSelectCommentsTableQuery, function (err: any, result: any) {
+        connection.query(insertCommentsTableQuery, paramsForInsertCommentsTableQuery, function (err: any, result: any) {
             if (err) {
                 connection.release()
                 throw err
             }
-            var existing = false
-            for (var i = 0; i < result.length; i++) {
-                if (req.body.comment === result[i].comment) {
-                    existing = true
-                    res.send({
-                        status: false
-                    })
-                }
-            }
-            if (!existing) {
-                connection.query(insertCommentsTableQuery, paramsForInsertCommentsTableQuery, function (err: any, result: any) {
-                    if (err) {
-                        connection.release()
-                        throw err
-                    }
-                    res.send({
-                        status: true
-                    })
-                })
-            }
+            res.send({
+                status: true
+            })
         })
         connection.release()
     })
@@ -190,17 +167,15 @@ export const editComment = function (pool: any, res: any, req: any) {
         WHERE majorID = ?
     `
 
-    const paramsForSelectCommentsTableQuery = [req.params.id]
+    const paramsForSelectCommentsTableQuery = [req.body.page]
 
     const updateCommentsQuery = `UPDATE comments
         SET comment = ?,
             updatedAt = ?
-        WHERE userID = (SELECT id FROM accounts WHERE username = ?) AND 
-            majorID = ? AND
-            comment = ?
+        WHERE id = ?
     `
 
-    const paramsForUpdateCommentsQuery = [req.body.comment, new Date().toISOString().slice(0, 19).replace('T', ' '), req.body.username, req.params.id, req.body.previousComment]
+    const paramsForUpdateCommentsQuery = [req.body.comment, new Date().toISOString().slice(0, 19).replace('T', ' '), req.params.id]
 
     pool.getConnection(function (err: any, connection: any) {
         if (err) {
@@ -241,28 +216,22 @@ export const editComment = function (pool: any, res: any, req: any) {
 export const deleteComment = function (pool: any, res: any, req: any) {
 
     const selectCommentsTableQuery = `SELECT comment FROM comments 
-        WHERE comment = ? AND 
-            userID = (SELECT id FROM accounts WHERE username = ?) AND 
-            majorID = ?
+        WHERE id = ?
     `
 
     const deleteLikesQuery = `DELETE FROM likes
-        WHERE commentID = (SELECT id FROM comments WHERE comment = ? AND majorID = ?)
+        WHERE commentID = ?
     `
 
     const deleteRepliesQuery = `DELETE FROM reply
-        WHERE commentID = (SELECT id FROM comments WHERE comment = ? AND majorID = ?)
+        WHERE commentID = ?
     `
 
     const deleteCommentQuery = `DELETE FROM comments
-        WHERE comment = ? AND 
-            userID = (SELECT id FROM accounts WHERE username = ?) AND 
-            majorID = ?
+        WHERE id = ?
     `
     
-    const commentParam = [req.body.comment, req.params.id]
-
-    const commentUsernamePageParams = [req.body.comment, req.body.username, req.params.id]
+    const commentParam = [req.params.id]
 
     pool.getConnection(function (err: any, connection: any) {
         if (err) {
@@ -270,7 +239,7 @@ export const deleteComment = function (pool: any, res: any, req: any) {
             throw err
         }
 
-        connection.query(selectCommentsTableQuery, commentUsernamePageParams, function (err: any, result: any) {
+        connection.query(selectCommentsTableQuery, commentParam, function (err: any, result: any) {
             if (err) {
                 connection.release()
                 throw err
@@ -291,7 +260,7 @@ export const deleteComment = function (pool: any, res: any, req: any) {
                     }
                 })
         
-                connection.query(deleteCommentQuery, commentUsernamePageParams, function (err: any, result: any) {
+                connection.query(deleteCommentQuery, commentParam, function (err: any, result: any) {
                     if (err) {
                         connection.release()
                         throw err
