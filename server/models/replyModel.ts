@@ -48,7 +48,7 @@ export const createReplyTable = function (pool: any) {
 
 export const getReply = function (pool: any, res: any, req: any) {
 
-    const selectReplyQuery = `SELECT a.username, c.comment, r.reply, m.name, r.createdAt FROM reply r
+    const selectReplyQuery = `SELECT a.id, a.username, c.comment, r.reply, m.name, r.createdAt FROM reply r
         inner join accounts a on a.id = r.userID
         inner join majors m on m.id = r.majorID
         inner join comments c on c.id = r.commentID

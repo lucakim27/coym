@@ -19,9 +19,8 @@
                         d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
                 </svg>
                 <div id='profileDropdown' class="dropdown-content">
-                    <a class="dropdownUsername" @click="renderProfile(username)" v-if="username !== null">{{ username
+                    <a class="dropdownUsername" @click="renderProfile()">{{ username
                     }}</a>
-                    <a class="username" v-if="username === null"> Anonymous </a>
                     <a @click="renderPages('/setting')">Setting</a>
                     <a @click="renderPages('/request')">Request</a>
                     <a @click='logout()' class="signOutBtn">Sign out</a>
@@ -88,13 +87,23 @@ export default {
             document.getElementById('profileDropdown').style.height = '0'
             this.$router.push(page)
         },
-        renderProfile(username) {
-            if (new URL(window.location.href).pathname.slice(1, new URL(window.location.href).pathname.length).toUpperCase() !== 'PROFILE') {
-                document.getElementById('profileDropdown').style.height = '0'
-                this.$router.push('/profile?username=' + username)
-            } else {
-                window.location.href = '/profile?username=' + username
-            }
+        renderProfile() {
+            let self = this
+            axios({
+                method: "GET",
+                url: process.env.VUE_APP_ROOT_API + "/getUserID",
+                params: {
+                    username: this.username
+                }
+            }).then(function (response) {
+                if (response.data.status) {
+                    if (document.URL.split('/').at(-2) === 'profile') {
+                        window.location.href = '/profile/' + response.data.data.id.id
+                    } else {
+                        self.$router.push('/profile/' + response.data.data.id.id)
+                    }
+                }
+            })
         },
         toggleDropdown() {
             document.getElementById('profileDropdown').style.height = document.getElementById('profileDropdown').style.height === '320px' ? '0' : '320px'

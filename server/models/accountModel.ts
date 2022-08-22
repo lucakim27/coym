@@ -234,6 +234,32 @@ export const getUsername = function (pool: any, res: any, req: any) {
 
 }
 
+export const getUserID = function (pool: any, res: any, req: any) {
+
+    const selectAccountsQuery = `SELECT id FROM accounts WHERE username = ?`
+
+    const paramsForSelectAccountsQuery = [req.query.username]
+
+    pool.getConnection(function (err: any, connection: any) {
+        if (err) {
+            connection.release()
+            throw err
+        }
+        connection.query(selectAccountsQuery, paramsForSelectAccountsQuery, function (err: any, result: any, fields: any) {
+            if (err) {
+                connection.release()
+                throw err
+            }
+            res.send({
+                status: true,
+                data: { id: result[0] }
+            })
+        })
+        connection.release()
+    })
+
+}
+
 export const getUserDetails = function (pool: any, res: any, req: any) {
 
     const selectAccountsQuery = `SELECT * FROM accounts 

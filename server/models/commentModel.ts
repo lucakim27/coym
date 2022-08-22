@@ -46,7 +46,7 @@ export const createCommentsTable = function (pool: any) {
 
 export const getComment = function (pool: any, res: any, req: any) {
 
-    const selectCommentsTableQuery = `SELECT a.username, c.comment, c.createdAt, m.name FROM comments c
+    const selectCommentsTableQuery = `SELECT a.id, a.username, c.comment, c.createdAt, m.name FROM comments c
         inner join accounts a on a.id = c.userID
         inner join majors m on m.id = c.majorID
         WHERE m.name = ?

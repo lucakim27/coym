@@ -16,7 +16,7 @@
         :id="comment.comment + 'Container'">
         <div class="firstRow">
           <div class="usernameDateContainer">
-            <router-link class='username' :to="'/profile?username=' + comment.username">{{ comment.username }}
+            <router-link class='username' :to="'/profile/' + comment.id">{{ comment.username }}
             </router-link>
             <p class='date'>{{ comment.createdAt.slice(0, 10) }}</p>
           </div>
@@ -67,7 +67,7 @@
             <div v-if="reply.comment === comment.comment">
               <div class="firstRow">
                 <div class="usernameDateContainer">
-                  <router-link class='username' :to="'/profile?username=' + reply.username">{{ reply.username }}
+                  <router-link class='username' :to="'/profile/' + reply.id">{{ reply.username }}
                   </router-link>
                   <p class='date'>{{ reply.createdAt.slice(0, 10) }}</p>
                   <div class="replyDropdown">
