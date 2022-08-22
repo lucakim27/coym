@@ -16,7 +16,7 @@
                             </a>
                             <a v-for="comment in commentDetails" :key="comment.name">
                                 <p>
-                                    <router-link :to="'/comment?major=' + comment.name">{{ comment.name }}</router-link>
+                                    <router-link :to="'/comment/' + comment.id">{{ comment.name }}</router-link>
                                     :
                                     {{ comment.count }}
                                 </p>
@@ -35,7 +35,7 @@
                             </a>
                             <a v-for="comment in replyDetails" :key="comment.name">
                                 <p>
-                                    <router-link :to="'/comment?major=' + comment.name">{{ comment.name }}</router-link>
+                                    <router-link :to="'/comment/' + comment.id">{{ comment.name }}</router-link>
                                     :
                                     {{ comment.count }}
                                 </p>
@@ -54,7 +54,7 @@
                             </a>
                             <a v-for="comment in likeDetails" :key="comment.name">
                                 <p>
-                                    <router-link :to="'/comment?major=' + comment.name">{{ comment.name }}</router-link>
+                                    <router-link :to="'/comment/' + comment.id">{{ comment.name }}</router-link>
                                     :
                                     {{ comment.count }}
                                 </p>
@@ -81,7 +81,7 @@
                         </a>
                         <a v-for="comment in commentDetails" :key="comment.name">
                             <p>
-                                <router-link :to="'/comment?major=' + comment.name">{{ comment.name }}</router-link>:
+                                <router-link :to="'/comment/' + comment.id">{{ comment.name }}</router-link>:
                                 {{ comment.count }}
                             </p>
                         </a>
@@ -99,7 +99,7 @@
                         </a>
                         <a v-for="comment in replyDetails" :key="comment.name">
                             <p>
-                                <router-link :to="'/comment?major=' + comment.name">{{ comment.name }}</router-link>:
+                                <router-link :to="'/comment/' + comment.id">{{ comment.name }}</router-link>:
                                 {{ comment.count }}
                             </p>
                         </a>
@@ -117,7 +117,7 @@
                         </a>
                         <a v-for="comment in likeDetails" :key="comment.name">
                             <p>
-                                <router-link :to="'/comment?major=' + comment.name">{{ comment.name }}</router-link>:
+                                <router-link :to="'/comment/' + comment.id">{{ comment.name }}</router-link>:
                                 {{ comment.count }}
                             </p>
                         </a>

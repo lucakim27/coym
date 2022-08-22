@@ -7,7 +7,7 @@ const routes = [
     component: () => import('@/views/HomePage'),
   },
   {
-    path: '/comment',
+    path: '/comment/:id',
     name: 'CommentPage',
     component: () => import('@/views/CommentPage'),
   },

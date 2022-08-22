@@ -4,11 +4,11 @@ import express from 'express'
 export const router = express.Router()
 export default router
 
-router.get('/getReply', function (req: any, res: any) {
+router.get('/getReply/:id', function (req: any, res: any) {
   getReply(pool, res, req)
 })
 
-router.post('/postReply', function (req: any, res: any) {
+router.post('/postReply/:id', function (req: any, res: any) {
   postReply(pool, res, req)
 })
 
@@ -16,11 +16,11 @@ router.get('/getReplyCount', function (req: any, res: any) {
   getReplyCount(pool, res, req)
 })
 
-router.post('/deleteReply', function (req: any, res: any) {
+router.post('/deleteReply/:id', function (req: any, res: any) {
   deleteReply(pool, res, req)
 })
 
-router.post('/editReply', function (req: any, res: any) {
+router.post('/editReply/:id', function (req: any, res: any) {
   editReply(pool, res, req)
 })
 

@@ -361,11 +361,11 @@ export const getAllUsers = function (pool: any, res: any, req: any) {
 
 export const getUserCommentDetails = function (pool: any, res: any, req: any) {
 
-    const getUserCommentDetails = `SELECT m.name, COUNT(a.username) AS count FROM comments c
+    const getUserCommentDetails = `SELECT m.id, m.name, COUNT(a.username) AS count FROM comments c
         INNER JOIN majors m on m.id = c.majorID
         INNER JOIN accounts a on a.id = c.userID
         WHERE c.userID = ?
-        GROUP BY m.name
+        GROUP BY m.id
     `
 
     const paramForGetUserCommentDetails = [req.params.id]
@@ -392,11 +392,11 @@ export const getUserCommentDetails = function (pool: any, res: any, req: any) {
 
 export const getUserReplyDetails = function (pool: any, res: any, req: any) {
 
-    const getUserReplyDetails = `SELECT m.name, COUNT(a.username) AS count FROM reply r
+    const getUserReplyDetails = `SELECT m.id, m.name, COUNT(a.username) AS count FROM reply r
         INNER JOIN majors m on m.id = r.majorID
         INNER JOIN accounts a on a.id = r.userID
         WHERE r.userID = ?
-        GROUP BY m.name
+        GROUP BY m.id
     `
 
     const paramForGetUserReplyDetails = [req.params.id]
@@ -423,11 +423,11 @@ export const getUserReplyDetails = function (pool: any, res: any, req: any) {
 
 export const getUserLikeDetails = function (pool: any, res: any, req: any) {
 
-    const getUserLikeDetails = `SELECT m.name, COUNT(a.username) AS count FROM likes l
+    const getUserLikeDetails = `SELECT m.id, m.name, COUNT(a.username) AS count FROM likes l
         INNER JOIN majors m on m.id = l.majorID
         INNER JOIN accounts a on a.id = l.userID
         WHERE l.userID = ?
-        GROUP BY m.name
+        GROUP BY m.id
     `
 
     const paramForGetUserLikeDetails = [req.params.id]

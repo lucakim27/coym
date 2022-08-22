@@ -5,7 +5,7 @@
                 <div class="analysisMostViewedPages">
                     <div class='analysisEachRow' v-for="row in mostCommentedTable" :key="row.name">
                         <div>
-                            <router-link :to="'/comment?major=' + row.name" class="analysisMajorTitle">{{ row.name }}</router-link><hr>
+                            <router-link :to="'/comment/' + row.id" class="analysisMajorTitle">{{ row.name }}</router-link><hr>
                             <div style="display: flex; justify-content: center" class="analysisCenterChild">
                                 <a>Comment: {{ row.comment }}</a><br>
                                 <a>Like: {{ row.like }}</a><br>
@@ -25,7 +25,7 @@
             <div class="analysisMostViewedPages mobileAnalysisContainer">
                 <div class='analysisEachRow' v-for="row in mostCommentedTable" :key="row.name">
                     <div>
-                        <router-link :to="'/comment?major=' + row.name" class="analysisMajorTitle">{{ row.name }}</router-link><hr>
+                        <router-link :to="'/comment/' + row.id" class="analysisMajorTitle">{{ row.name }}</router-link><hr>
                         <a>Like: {{ row.like }}</a><br>
                         <a>Reply: {{ row.reply }}</a><br>
                         <a>Comment: {{ row.comment }}</a>
@@ -75,7 +75,7 @@ export default {
                 })
                 if (!check) {
                     count.push({
-                        name: key1.name, comment: 1, reply: 0, like: 0
+                        id: key1.id, name: key1.name, comment: 1, reply: 0, like: 0
                     })
                 }
             })
@@ -89,7 +89,7 @@ export default {
                 })
                 if (!check) {
                     count.push({
-                        name: key1.name, reply: 1, comment: 0, like: 0
+                        id: key1.id, name: key1.name, reply: 1, comment: 0, like: 0
                     })
                 }
             })
@@ -103,11 +103,12 @@ export default {
                 })
                 if (!check) {
                     count.push({
-                        name: key1.name, like: 1, comment: 0, reply: 0
+                        id: key1.id, name: key1.name, like: 1, comment: 0, reply: 0
                     })
                 }
             })
             self.mostCommentedTable = count
+            console.log(self.mostCommentedTable)
         }))
     }
 }

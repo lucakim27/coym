@@ -143,10 +143,7 @@ export default {
     }
     axios({
       method: "GET",
-      url: process.env.VUE_APP_ROOT_API + "/getComment",
-      params: {
-        page: this.getQueryVariable()
-      }
+      url: `${process.env.VUE_APP_ROOT_API}/getComment/${this.$route.params.id}`
     }).then(function (response) {
       if (response.data.status) {
         self.getComment = response.data.message
@@ -154,10 +151,7 @@ export default {
     })
     axios({
       method: "GET",
-      url: process.env.VUE_APP_ROOT_API + "/getLike",
-      params: {
-        page: this.getQueryVariable()
-      }
+      url: `${process.env.VUE_APP_ROOT_API}/getLike/${this.$route.params.id}`
     }).then(function (response) {
       if (response.data.status) {
         self.getLike = response.data.message
@@ -166,10 +160,7 @@ export default {
     })
     axios({
       method: "GET",
-      url: process.env.VUE_APP_ROOT_API + "/getReply",
-      params: {
-        page: this.getQueryVariable()
-      }
+      url: `${process.env.VUE_APP_ROOT_API}/getReply/${this.$route.params.id}`
     }).then(function (response) {
       if (response.data.status) {
         self.getReply = response.data.message
@@ -206,9 +197,9 @@ export default {
       } else {
         axios({
           method: "POST",
-          url: process.env.VUE_APP_ROOT_API + "/editComment",
+          url: `${process.env.VUE_APP_ROOT_API}/editComment/${this.$route.params.id}`,
           headers: { 'Content-Type': 'application/json' },
-          data: { comment: document.getElementById(comment + 'editTextArea').value, previousComment: comment, username: this.username, page: this.getQueryVariable() }
+          data: { comment: document.getElementById(comment + 'editTextArea').value, previousComment: comment, username: this.username }
         }).then(function (response) {
           if (response.data.status) {
             alert("You have successfully edited your comment.")
@@ -225,9 +216,9 @@ export default {
       } else {
         axios({
           method: "POST",
-          url: process.env.VUE_APP_ROOT_API + "/editReply",
+          url: `${process.env.VUE_APP_ROOT_API}/editReply/${this.$route.params.id}`,
           headers: { 'Content-Type': 'application/json' },
-          data: { comment: comment, reply: document.getElementById(comment + reply + 'replyEditTextArea').value, previousReply: reply, username: this.username, page: this.getQueryVariable() }
+          data: { comment: comment, reply: document.getElementById(comment + reply + 'replyEditTextArea').value, previousReply: reply, username: this.username }
         }).then(function (response) {
           if (response.data.status) {
             alert("You have successfully edited your reply.")
@@ -268,9 +259,9 @@ export default {
       if (confirm("Are you sure you want to delete the comment?")) {
         axios({
           method: "POST",
-          url: process.env.VUE_APP_ROOT_API + "/deleteComment",
+          url: `${process.env.VUE_APP_ROOT_API}/deleteComment/${this.$route.params.id}`,
           headers: { 'Content-Type': 'application/json' },
-          data: { comment: comment, username: this.username, page: this.getQueryVariable() }
+          data: { comment: comment, username: this.username }
         }).then(function (response) {
           if (response.data.status) {
             alert("You have successfully deleted your comment.")
@@ -285,9 +276,9 @@ export default {
       if (confirm("Are you sure you want to delete the reply?")) {
         axios({
           method: "POST",
-          url: process.env.VUE_APP_ROOT_API + "/deleteReply",
+          url: `${process.env.VUE_APP_ROOT_API}/deleteReply/${this.$route.params.id}`,
           headers: { 'Content-Type': 'application/json' },
-          data: { comment: comment, reply: reply, username: this.username, page: this.getQueryVariable() }
+          data: { comment: comment, reply: reply, username: this.username }
         }).then(function (response) {
           if (response.data.status) {
             alert("You have successfully deleted your reply.")
@@ -323,9 +314,9 @@ export default {
       else {
         axios({
           method: "POST",
-          url: process.env.VUE_APP_ROOT_API + "/postReply",
+          url: `${process.env.VUE_APP_ROOT_API}/postReply/${this.$route.params.id}`,
           headers: { 'Content-Type': 'application/json' },
-          data: { comment: comment, username: this.username, page: this.getQueryVariable(), reply: document.getElementById(comment + 'ReplyInput').value }
+          data: { comment: comment, username: this.username, reply: document.getElementById(comment + 'ReplyInput').value }
         }).then(function (response) {
           if (response.data.status) {
             alert(response.data.message)
@@ -339,24 +330,6 @@ export default {
     closeReplyContainer(comment) {
       document.getElementById(comment + 'ReplyContainer').style.display = 'none'
     },
-    getQueryVariable() {
-      var query = window.location.search.substring(1)
-      var vars = query.split('&')
-      var returnValue = ''
-      for (var i = 0; i < vars.length; i++) {
-        var pair = vars[i].split('=')
-        if (pair.length !== 1) {
-          for (var j = 0; j < pair.length; j++) {
-            if (pair[j] !== 'major') {
-              returnValue += pair[j]
-            }
-          }
-        } else {
-          returnValue += pair[0]
-        }
-      }
-      return decodeURIComponent(returnValue)
-    },
     comment() {
       if (this.username === '' || this.username === null) {
         alert("Sign in please.")
@@ -366,9 +339,9 @@ export default {
       } else {
         axios({
           method: "POST",
-          url: process.env.VUE_APP_ROOT_API + "/postComment",
+          url: `${process.env.VUE_APP_ROOT_API}/postComment/${this.$route.params.id}`,
           headers: { 'Content-Type': 'application/json' },
-          data: { comment: this.commentInput, username: this.username, page: this.getQueryVariable() }
+          data: { comment: this.commentInput, username: this.username }
         }).then(function (response) {
           if (response.data.status) {
             alert("You have successfully commented.")
@@ -385,9 +358,9 @@ export default {
       } else {
         axios({
           method: "POST",
-          url: process.env.VUE_APP_ROOT_API + "/postLike",
+          url: `${process.env.VUE_APP_ROOT_API}/postLike/${this.$route.params.id}`,
           headers: { 'Content-Type': 'application/json' },
-          data: { comment: comment, page: this.getQueryVariable(), username: this.username }
+          data: { comment: comment, username: this.username }
         }).then(function (response) {
           if (response.data.status) {
             alert(response.data.message)

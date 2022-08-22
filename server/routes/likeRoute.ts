@@ -4,11 +4,11 @@ import express from 'express'
 export const router = express.Router()
 export default router
 
-router.get('/getLike', function (req: any, res: any) {
+router.get('/getLike/:id', function (req: any, res: any) {
   getLike(pool, res, req)
 })
 
-router.post('/postLike', function (req: any, res: any) {
+router.post('/postLike/:id', function (req: any, res: any) {
   postLike(pool, res, req)
 })
 

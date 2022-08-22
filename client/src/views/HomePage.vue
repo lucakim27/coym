@@ -10,17 +10,17 @@
             <input v-if="!isMobile()" class="homeInputText" id="input" placeholder="Search for your major..."
                 type="search" @input="searchChangeFunc($event)" />
             <table id="options" class="mobileHomeOptions homeOptions" v-if="isMobile()">
-                <tr v-for="(major, i) in filteredMajorsList" :key="i">
+                <tr v-for="major in filteredMajorsList" :key="major.id">
                     <td scope="row">
-                        <a @click="renderComment(major)">{{ major }}</a>
+                        <a @click="renderComment(major.id)">{{ major.name }}</a>
                         <br>
                     </td>
                 </tr>
             </table>
             <table id="options" class="homeOptions" v-if="!isMobile()">
-                <tr v-for="(major, i) in filteredMajorsList" :key="i">
+                <tr v-for="major in filteredMajorsList" :key="major.id">
                     <td scope="row">
-                        <a @click="renderComment(major)">{{ major }}</a>
+                        <a @click="renderComment(major.id)">{{ major.name }}</a>
                         <br>
                     </td>
                 </tr>
@@ -87,8 +87,8 @@ export default {
         }
     },
     methods: {
-        renderComment(major) {
-            this.$router.push('/comment?major=' + major)
+        renderComment(id) {
+            this.$router.push('/comment/' + id)
         },
         loaded() {
             this.isLoaded = true
@@ -105,7 +105,7 @@ export default {
             this.filteredMajorsList = []
             if (event.target.value.length > 0) {
                 for (let i = 0; i < this.majorsList.length; i++) {
-                    if (this.majorsList[i].toLowerCase().includes(event.target.value.toLowerCase())) {
+                    if (this.majorsList[i].name.toLowerCase().includes(event.target.value.toLowerCase())) {
                         this.filteredMajorsList.push(this.majorsList[i])
                     }
                 }
@@ -123,7 +123,7 @@ export default {
         }).then(function (response) {
             if (response.data.status) {
                 response.data.message.forEach(key => {
-                    self.majorsList.push(key.name)
+                    self.majorsList.push({ name: key.name, id: key.id })
                 })
             }
         })
