@@ -40,8 +40,13 @@ footer .footerLinksConatiner a:hover {
 footer b {
     font-size: 15px;
     font-family: fantasy;
+    color: rgba(255, 255, 255, 0.658);
 }
 
 .footerContainer {
     padding: 20px;
+}
+
+.footerLinksMoblieContainer {
+    display: block !important;
 }
