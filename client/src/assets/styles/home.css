@@ -68,6 +68,7 @@
 }
 
 .homeContainer {
+    margin-top: 100px;
     text-align: center;
     overflow-y: scroll;
 }

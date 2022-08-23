@@ -1,7 +1,6 @@
 <template>
   <div>
     <HeaderComponent />
-    <NavigationComponent />
     <router-view v-slot="{ Component, route }">
       <Transition name="fade" mode="out-in">
         <div :key="route.name">
@@ -13,13 +12,11 @@
   </div>
 </template>
 <script>
-import NavigationComponent from '@/components/NavigationComponent'
 import HeaderComponent from '@/components/HeaderComponent'
 import FooterComponent from './components/FooterComponent.vue'
 export default {
   name: 'App',
   components: {
-    NavigationComponent,
     HeaderComponent,
     FooterComponent
   }

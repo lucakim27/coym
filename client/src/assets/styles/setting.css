@@ -15,7 +15,10 @@
 }
 
 .backgroundContainer {
-    margin: 20px !important;
+    margin-top: 100px !important;
+    margin-left: 20px !important;
+    margin-right: 20px !important;
+    margin-bottom: 20px !important;
     padding: 5px !important;
 }
 
