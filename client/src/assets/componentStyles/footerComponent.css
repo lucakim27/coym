@@ -1,0 +1,38 @@
+footer {
+    background-color: rgb(0, 0, 0);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 20px;
+}
+
+footer img {
+    margin-top: 10px;
+}
+
+footer h3 {
+    font-family: fantasy;
+    padding: 10px;
+}
+
+footer .footerLinksConatiner {
+    display: flex;
+    justify-content: center;
+}
+
+footer .footerLinksConatiner a {
+    padding: 10px;
+    color: lightblue;
+    text-decoration: none;
+    font-family: fantasy;
+}
+
+footer b {
+    font-size: 15px;
+    font-family: fantasy;
+}
+
+.footerContainer {
+    padding: 20px;
+}

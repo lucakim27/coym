@@ -4,9 +4,6 @@
     <a @click="render('/')">Home</a>
     <a @click="render('/users')">Users</a>
     <a @click="render('/analysis')">Analysis</a>
-    <a @click="render('/aboutUs')">About Us</a>
-    <a onclick="window.location.href = 'mailto:nikolaikim27@gmail.com'">Contact Us</a>
-    <a @click="render('/privacyPolicy')">Privacy Policy</a>
   </div>
 </template>
 <script>

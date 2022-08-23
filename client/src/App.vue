@@ -9,16 +9,19 @@
         </div>
       </Transition>
     </router-view>
+    <FooterComponent />
   </div>
 </template>
 <script>
 import NavigationComponent from '@/components/NavigationComponent'
 import HeaderComponent from '@/components/HeaderComponent'
+import FooterComponent from './components/FooterComponent.vue'
 export default {
   name: 'App',
   components: {
     NavigationComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   }
 }
 </script>
