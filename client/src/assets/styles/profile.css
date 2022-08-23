@@ -23,12 +23,6 @@
     background: rgb(146, 156, 161);
 }
 
-.profileMostViewedPages {
-    height: 83vh;
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-
 .profileMostViewedContainer h3 {
     color: white;
     font-family: fantasy;

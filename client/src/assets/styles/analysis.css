@@ -25,12 +25,6 @@
     background: rgb(146, 156, 161);
 }
 
-.analysisMostViewedPages {
-    height: 83vh;
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-
 .analysisMostViewedContainer h1 {
     color: white;
     font-family: fantasy;

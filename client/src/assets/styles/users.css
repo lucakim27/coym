@@ -1,5 +1,4 @@
 .userOnlineDiv {
-  height: 83vh;
   flex: 0;
   border-radius: 20px;
   background: rgb(146, 156, 161);
@@ -33,10 +32,7 @@
 .userOnlineBody {
   justify-content: center;
   padding: 10px;
-  height: 65vh;
   margin-top: -10px;
-  overflow-y: scroll;
-  overflow-x: hidden;
 }
 
 .userContainer {
