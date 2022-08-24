@@ -7,6 +7,7 @@
   display: flex;
   justify-content: center;
   background-color: #000000da;
+  z-index: 999999999999 !important;
 }
 
 .modal {
@@ -24,7 +25,6 @@
 }
 
 .mobileModal {
-    height: 70% !important;
     width: 70% !important;
 }
 

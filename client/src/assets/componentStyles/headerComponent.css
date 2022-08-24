@@ -6,7 +6,7 @@
     height: 70px;
     color: rgb(0, 0, 0);
     text-align: center;
-    z-index: 99999999999999999 !important;
+    z-index: 9999999999 !important;
     position: fixed;
     box-shadow: 0 -6px 10px 5px rgba(0,0,0,0.5);
 }
@@ -56,9 +56,15 @@ header span {
 .signInIcon {
     cursor: pointer;
     position: absolute;
-    right: 55px;
-    top: 11px;
-    padding: 5px;
+    right: 57px;
+    top: 14px;
+}
+
+
+.headerCommentsSelect {
+    width: 50%;
+    float: right;
+    font-family: fantasy;
 }
 
 header span:hover {
@@ -92,7 +98,7 @@ header h2:hover {
     cursor: pointer;
     position: absolute;
     right: 57px;
-    top: 4px;
+    top: 11px;
 }
 
 .dropdown {
@@ -110,7 +116,8 @@ header h2:hover {
     right: 0px;
     top: 60px;
     background-color: #000000;
-    min-width: 160px;
+    /* width: 100%; */
+    min-width: 1600px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 9999999;
     border-radius: 20px;
@@ -129,7 +136,8 @@ header h2:hover {
     height: 40px;
 }
 
-.sidenav {
+.sidenav,
+.sidenav2 {
     height: 0;
     width: 100%;
     top: 0;
@@ -144,7 +152,8 @@ header h2:hover {
     font-family: fantasy;
   }
   
-  .sidenav a {
+  .sidenav a,
+  .sidenav2 a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
@@ -154,7 +163,8 @@ header h2:hover {
     cursor: pointer;
   }
   
-  .sidenav a:hover {
+  .sidenav a:hover,
+  .sidenav2 a:hover {
     color: #696969;
   }
   
