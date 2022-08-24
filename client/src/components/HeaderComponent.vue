@@ -1,6 +1,12 @@
 <template>
     <div id="mySidenav" class="sidenav">
         <hr>
+        <a @click="renderPages('/')">Home</a>
+        <hr>
+        <a @click="renderPages('/users')">Users</a>
+        <hr>
+        <a @click="renderPages('/analysis')">Analysis</a>
+        <hr>
         <div v-if="!loggedIn">
             <a @click="this.showSignInModal = true">Sign In</a>
             <hr>
@@ -17,11 +23,6 @@
             <a @click='logout()' class="signOutBtn">Sign out</a>
             <hr>
         </div>
-        <a @click="renderPages('/')">Home</a>
-        <hr>
-        <a @click="renderPages('/users')">Users</a>
-        <hr>
-        <a @click="renderPages('/analysis')">Analysis</a>
     </div>
     <div>
         <signInModal v-show="showSignInModal" @closeSignInModal="showSignInModal = false" />
@@ -125,7 +126,7 @@ export default {
         sidebarOpen() {
             this.sidebarOpenBtn = false
             this.sidebarCloseBtn = true
-            document.getElementById("mySidenav").style.height = "320px"
+            document.getElementById("mySidenav").style.height = "100%"
         },
         sidebarClose() {
             this.sidebarCloseBtn = false

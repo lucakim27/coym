@@ -1,8 +1,8 @@
 .requestMainContainer {
-    margin-top: 100px !important;
+    margin-top: 85px !important;
     background-color:rgb(146, 156, 161);
     padding: 5px;
-    margin: 20px;
+    margin-bottom: 10px;
     border-radius: 20px;
 }
 

@@ -7,12 +7,12 @@
 }
 
 .homeInput input {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
+    padding: 15px;
+    margin: 10px;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 20px;
+    background-color: white;
     box-sizing: border-box;
     width: 50%;
 }
@@ -68,7 +68,7 @@
 }
 
 .homeContainer {
-    margin-top: 100px;
+    margin-top: 85px;
     text-align: center;
     overflow-y: scroll;
 }

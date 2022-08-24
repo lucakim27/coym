@@ -97,9 +97,9 @@ header h2:hover {
     width: 100%;
     top: 0;
     left: 0;
-    /* margin-top: -103px; */
+    margin-top: 10px;
     position: fixed;
-    z-index: 0 !important;
+    z-index: 99999999999999999999999999999999999999999999999999999 !important;
     background-color: rgb(0, 0, 0);
     overflow: scroll;
     transition: 0.5s;

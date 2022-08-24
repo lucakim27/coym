@@ -15,11 +15,11 @@
 }
 
 .backgroundContainer {
-    margin-top: 100px !important;
-    margin-left: 20px !important;
-    margin-right: 20px !important;
+    margin-top: 85px !important;
+    /* margin-left: 20px !important;
+    margin-right: 20px !important; */
     margin-bottom: 20px !important;
-    padding: 5px !important;
+    /* padding: 5px !important; */
 }
 
 .settingEachContainer button {
@@ -65,8 +65,8 @@
     padding: 10px;
     background:rgb(146, 156, 161);
     border-radius: 20px;
-    margin: 10px;
-    margin-bottom:30px;
+    /* margin: 10px; */
+    /* margin-bottom: 30px; */
 }
 
 .settingMobileContainer div input {

@@ -1,6 +1,7 @@
 .privacyPolicyContainer {
+    margin-top: 85px !important;
     display: flex;
-    margin: 30px;
+    margin-bottom: 10px;
     justify-content: center;
     font-family: fantasy;
     background: rgb(146, 156, 161);
@@ -27,8 +28,9 @@
 }
 
 .privacyPolicyMobileContainer {
-    padding: 1%;
-    margin: 15px;
+    padding: 5px;
+    margin-bottom: 10px;
+    margin-top: 85px;
     font-family: fantasy;
     background: rgb(146, 156, 161);
     border-radius: 20px;
@@ -68,6 +70,6 @@
 }
 
 .aboutUsContainer a {
-    color: #62cbff !important;
+    color: rgb(169, 185, 194) !important;
     cursor: default;
 }

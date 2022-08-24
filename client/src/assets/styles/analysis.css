@@ -11,17 +11,16 @@
 }
 
 .analysisBothContainer {
-    margin-top: 100px;
+    margin-top: 80px;
     display: flex;
-    padding: 1%;
+    padding: 10px;
     justify-content: center;
 }
 
 .analysisMostViewedContainer {
-    min-width: 80%;
+    min-width: 100%;
     flex: 0;
-    padding: 1%;
-    margin-right: 2%;
+    padding: 10px;
     border-radius: 20px;
     background: rgb(146, 156, 161);
 }
@@ -49,11 +48,9 @@
 }
 
 .mobileAnalysisMostViewedContainer {
-    margin-left: 15px !important;
-    margin-right: 15px !important;
+    min-width: auto !important;
     margin-bottom: 15px !important;
-    margin-top: 100px !important;
-    min-width: 90% !important;
+    margin-top: 85px !important;
 }
 
 .mobileAnalysisContainer {

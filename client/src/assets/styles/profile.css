@@ -15,11 +15,8 @@
 }
 
 .profileMostViewedContainer {
-    margin-top: 100px;
-    min-width: 80%;
     flex: 0;
-    padding: 1%;
-    margin-right: 2%;
+    padding: 10px;
     border-radius: 20px;
     background: rgb(146, 156, 161);
 }
@@ -75,11 +72,8 @@
 }
 
 .profileMobileMostViewedContainer {
-    margin-left: 15px !important;
-    margin-right: 15px !important;
     margin-bottom: 15px !important;
-    margin-top: 100px !important;
-    min-width: 90% !important;
+    margin-top: 85px !important;
 }
 
 .profileMobileContainer {
