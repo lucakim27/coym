@@ -43,6 +43,7 @@
   border-style: solid;
   border-radius: 4px;
   box-sizing: border-box;
+  border-color: black;
   width: 100%;
   border-radius: 20px;
   resize: none;
@@ -178,6 +179,7 @@
 }
 
 .replyContainer textarea {
+  border-color: black;
   width: 70%;
   margin: 8px;
   padding: 12px 20px;
