@@ -1,7 +1,7 @@
 .userOnlineDiv {
   flex: 0;
   border-radius: 20px;
-  background: rgb(146, 156, 161);
+  /* background: rgb(146, 156, 161); */
   min-width: 100% !important;
   
 }
@@ -46,7 +46,8 @@
   padding: 10px;
   justify-content: center;
   margin: 10px;
-  background: rgb(89, 95, 98);
+  /* background: rgb(89, 95, 98); */
+  border-style: solid;
   border-radius: 20px;
   overflow: hidden;
 }
@@ -55,7 +56,7 @@
   justify-content: center;
   display: flex;
   padding: 10px;
-  color: white;
+  color: rgb(0, 0, 0);
   width: 100%;
 }
 
@@ -68,7 +69,7 @@
 
 .userRow div a {
   text-decoration: none;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   padding: 10px;
 }
 
@@ -82,8 +83,8 @@
   min-width: 40%;
   flex: 0;
   padding: 10px;
-  border-radius: 20px;
-  background: rgb(146, 156, 161);
+  /* border-radius: 20px; */
+  /* background: rgb(146, 156, 161); */
 }
 
 .mobileUserMostViewedContainer {
@@ -100,7 +101,7 @@
 .userAlignChild a {
   width: 80%;
   overflow-x: scroll;
-  color: white;
+  color: rgb(0, 0, 0);
   font-family: fantasy;
 }
 
@@ -114,7 +115,8 @@
     padding: 15px;
     margin: 10px;
     display: inline-block;
-    border: 1px solid #ccc;
+    /* border: 1px solid rgb(0, 0, 0); */
+    border-style: solid;
     border-radius: 20px;
     box-sizing: border-box;
     background-color: white;

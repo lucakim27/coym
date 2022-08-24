@@ -4,6 +4,7 @@
 }
 
 .profileBothContainer {
+    margin-top: 85px;
     display: flex;
     padding: 1%;
     justify-content: center;
@@ -16,13 +17,14 @@
 
 .profileMostViewedContainer {
     flex: 0;
-    padding: 10px;
+    /* padding: 10px; */
     border-radius: 20px;
-    background: rgb(146, 156, 161);
+    min-width: 100%;
+    /* background: rgb(146, 156, 161); */
 }
 
 .profileMostViewedContainer h3 {
-    color: white;
+    color: rgb(0, 0, 0);
     font-family: fantasy;
 }
 
@@ -33,7 +35,8 @@
 }
 
 .profileEachRow {
-    background: rgb(89, 95, 98);
+    /* background: rgb(89, 95, 98); */
+    border-style: solid;
     border-radius: 20px;
     margin: 10px;
     font-family: fantasy;
@@ -45,11 +48,11 @@
 
 .profileEachRow div {
     padding: 20px;
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 .profileEachRow a {
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     text-decoration: none;
 }
 
@@ -77,6 +80,7 @@
 }
 
 .profileMobileContainer {
+    min-width: auto !important;
     height: auto !important;
     overflow-y: auto !important;
     overflow-x: hidden;

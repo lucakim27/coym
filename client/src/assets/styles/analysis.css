@@ -22,7 +22,7 @@
     flex: 0;
     padding: 10px;
     border-radius: 20px;
-    background: rgb(146, 156, 161);
+    /* background: rgb(146, 156, 161); */
 }
 
 .analysisMostViewedContainer h1 {
@@ -31,7 +31,8 @@
 }
 
 .analysisEachRow {
-    background: rgb(89, 95, 98);
+    /* background: rgb(89, 95, 98); */
+    border-style: solid;
     border-radius: 20px;
     margin: 10px;
     font-family: fantasy;
@@ -39,11 +40,11 @@
 
 .analysisEachRow div {
     padding: 20px;
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 .analysisEachRow div a {
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     text-decoration: none;
 }
 
@@ -73,11 +74,11 @@
 .analysisCenterChild a {
     width: 33%;
 }
-
+/* 
 .analysisCenterChild a:hover {
     width: 33%;
-    color: white !important;
-}
+    color: rgb(0, 0, 0) !important;
+} */
 
 .analysisMajorTitle {
     font-weight: bold !important;

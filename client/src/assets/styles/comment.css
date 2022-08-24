@@ -40,7 +40,7 @@
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
-  border: 1px solid #ccc;
+  border-style: solid;
   border-radius: 4px;
   box-sizing: border-box;
   width: 100%;
@@ -62,7 +62,8 @@
   padding: 10px;
   margin: 10px;
   width: auto;
-  background: rgb(146, 156, 161);
+  border-style: solid;
+  /* background: rgb(146, 156, 161); */
   border-radius: 20px;
   overflow-x: auto;
   overflow-y: hidden;
@@ -71,7 +72,7 @@
 .username,
 .replyUsername {
   font-weight: bold;
-  color: white;
+  color: rgb(0, 0, 0);
   margin: 5px;
   padding: 5px;
   text-decoration: none;
@@ -94,7 +95,7 @@
 
 .comment {
   display: flex;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   margin: 10px;
   text-align: left;
   font-size: 30px;
@@ -106,7 +107,7 @@
 
 .date {
   font-weight: lighter;
-  color: rgba(0, 0, 0, 0.478);
+  color: rgb(0, 0, 0);
   margin: 10px;
   font-family: fantasy;
 }
@@ -133,7 +134,7 @@
 
 .replyParagraph {
   display: flex;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   margin: 10px;
   text-align: left;
   font-size: 30px;
@@ -150,13 +151,14 @@
 .reply,
 .viewReply {
   margin: 10px;
-  background-color: rgba(0, 0, 0, 0.478);
-  color: rgb(255, 255, 255);
+  border-style: solid;
+  background-color: rgba(255, 255, 255, 0.478);
+  /* color: rgb(255, 255, 255); */
   border-radius: 20px;
   width: auto;
   cursor: pointer;
   padding: 10px;
-  border-color: rgb(146, 156, 161);
+  border-color: rgb(0, 0, 0);
   font-family: fantasy;
 }
 
@@ -165,9 +167,10 @@
   display: none;
 }
 
-.viewReplyContainer div div {
-  color: white;
-  background-color: rgb(89, 95, 98);
+.replyContainers {
+  /* color: white; */
+  /* background-color: rgb(89, 95, 98); */
+  border-style: solid;
   /* text-align: left; */
   border-radius: 20px;
   margin: 5px;
@@ -180,6 +183,7 @@
   padding: 12px 20px;
   border-radius: 20px;
   text-align: left;
+  border-style: solid;
   height: 100px !important;
   resize: none;
 }
@@ -192,9 +196,10 @@
   margin: 8px;
   padding: 12px 20px;
   border-radius: 20px;
-  background: rgba(0, 0, 0, 0.478);
-  color: white;
-  border-color: rgb(146, 156, 161);
+  background: rgba(255, 255, 255, 0.478);
+  color: rgb(0, 0, 0);
+  border-style: solid;
+  border-color: rgb(0, 0, 0);
   font-family: fantasy;
 }
 

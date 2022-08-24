@@ -42,7 +42,8 @@
 .settingEachContainer {
     min-width: 45%;
     align-items: center;
-    background: #595f62;
+    border-style: solid;
+    /* background: #595f62; */
     padding: 10px;
     margin: 10px;
     border-radius: 20px;
@@ -55,7 +56,7 @@
 
 .settingEachContainer h3 {
     margin-left: 20px;
-    color: white;
+    color: rgb(0, 0, 0);
     font-family: fantasy;
 }
 
@@ -63,7 +64,8 @@
     overflow: hidden;
     min-width: auto !important;
     padding: 10px;
-    background:rgb(146, 156, 161);
+    /* border-style: solid; */
+    /* background:rgb(146, 156, 161); */
     border-radius: 20px;
     /* margin: 10px; */
     /* margin-bottom: 30px; */

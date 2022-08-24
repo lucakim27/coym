@@ -10,7 +10,8 @@
     padding: 15px;
     margin: 10px;
     display: inline-block;
-    border: 1px solid #ccc;
+    /* border: 1px solid rgb(0, 0, 0); */
+    border-style: solid;
     border-radius: 20px;
     background-color: white;
     box-sizing: border-box;
@@ -64,7 +65,8 @@
     height: 70%;
     z-index: -10000;
     border-radius: 20px;
-    border-color: white;
+    border-color: rgb(0, 0, 0);
+    border-style: solid;
 }
 
 .homeContainer {

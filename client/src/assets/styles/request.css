@@ -1,6 +1,6 @@
 .requestMainContainer {
     margin-top: 85px !important;
-    background-color:rgb(146, 156, 161);
+    /* background-color:rgb(146, 156, 161); */
     padding: 5px;
     margin-bottom: 10px;
     border-radius: 20px;
@@ -37,7 +37,8 @@
 
 .requestEachContainer {
     align-items: center;
-    background: #595f62;
+    /* background: #595f62; */
+    border-style: solid;
     padding: 10px;
     margin: 10px;
     border-radius: 20px;
@@ -45,7 +46,7 @@
 
 .requestEachContainer h3 {
     margin-left: 20px;
-    color: white;
+    color: rgb(0, 0, 0);
     font-family: fantasy;
 }
 
