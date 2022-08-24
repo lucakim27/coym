@@ -3,24 +3,25 @@
         <hr>
         <div v-if="!loggedIn">
             <a @click="this.showSignInModal = true">Sign In</a>
+            <hr>
             <a @click="this.showSignUpModal = true">Sign Up</a>
+            <hr>
         </div>
         <div v-if="loggedIn">
-            <a class="dropdownUsername" @click="toggleDropdown()">{{ username }}</a>
-            <div class="dropdown">
-                <div id='profileDropdown' class="dropdown-content">
-                    <a class="profileLink" @click="renderProfile()">Profile</a>
-                    <a class="settingLink" @click="renderPages('/setting')">Setting</a>
-                    <a class="requestLink" @click="renderPages('/request')">Request</a>
-                </div>
-            </div>
+            <a class="dropdownUsername" @click="renderProfile()">{{ username }}</a>
+            <hr>
+            <a class="settingLink" @click="renderPages('/setting')">Setting</a>
+            <hr>
+            <a class="requestLink" @click="renderPages('/request')">Request</a>
+            <hr>
             <a @click='logout()' class="signOutBtn">Sign out</a>
+            <hr>
         </div>
-        <hr>
         <a @click="renderPages('/')">Home</a>
-        <a @click="renderPages('/users')">Users</a>
-        <a @click="renderPages('/analysis')">Analysis</a>
         <hr>
+        <a @click="renderPages('/users')">Users</a>
+        <hr>
+        <a @click="renderPages('/analysis')">Analysis</a>
     </div>
     <div>
         <signInModal v-show="showSignInModal" @closeSignInModal="showSignInModal = false" />
@@ -85,6 +86,7 @@ export default {
             document.getElementById("mySidenav").style.height = "0"
             this.sidebarCloseBtn = false
             this.sidebarOpenBtn = true
+            window.scrollTo(0, 0)
             this.$router.push(page)
         },
         renderProfile() {
@@ -103,22 +105,17 @@ export default {
                         document.getElementById("mySidenav").style.height = "0"
                         self.sidebarCloseBtn = false
                         self.sidebarOpenBtn = true
+                        window.scrollTo(0, 0)
                         self.$router.push('/profile/' + response.data.data.id.id)
                     }
                 }
             })
-        },
-        toggleDropdown() {
-            document.getElementById('profileDropdown').style.height = document.getElementById('profileDropdown').style.height === '240px' ? '0' : '240px'
         },
         profileDropdownClose(event) {
             if (!event.target.matches('#headerContainer') && !event.target.matches('.dropdownUsername') && !event.target.matches('.sidebarOpenBtn') && !event.target.matches('.sidebarCloseBtn') && !event.target.matches('.sidenav')) {
                 document.getElementById("mySidenav").style.height = "0"
                 this.sidebarCloseBtn = false
                 this.sidebarOpenBtn = true
-            }
-            if (!event.target.matches('.dropdown-content') && !event.target.matches('.dropdownUsername') && !event.target.matches('.profileLink') && !event.target.matches('.settingLink') && !event.target.matches('.requestLink')) {
-                document.getElementById('profileDropdown').style.height = '0'
             }
         },
         logout() {
@@ -128,7 +125,7 @@ export default {
         sidebarOpen() {
             this.sidebarOpenBtn = false
             this.sidebarCloseBtn = true
-            document.getElementById("mySidenav").style.height = "325px"
+            document.getElementById("mySidenav").style.height = "320px"
         },
         sidebarClose() {
             this.sidebarCloseBtn = false

@@ -1,7 +1,6 @@
 <template>
     <div class="modal-overlay" @click="$emit('closeSignUpModal')">
         <div class="modal" @click.stop v-if="!isMobile()">
-            
             <div class="registerContainer">
                 <form class="registerForm" method="post" @submit.prevent="signUp">
                     <h1>Sign Up</h1>
