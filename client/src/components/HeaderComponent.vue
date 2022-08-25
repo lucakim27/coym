@@ -30,7 +30,7 @@
     <div id="headerContainer">
         <header>
             <img @click="renderPages('/')" src="../assets/images/favicon.png" height="50" alt="">
-            <svg class='signInIcon' v-if="!loggedIn" @click="this.showModal = true" height='40' width="40"
+            <svg class='signInIcon' v-if="showLoginIcon" @click="this.showModal = true" height='40' width="40"
                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <g>
                     <path fill="none" d="M0 0h24v24H0z" />
@@ -38,7 +38,7 @@
                         d="M10 11V8l5 4-5 4v-3H1v-2h9zm-7.542 4h2.124A8.003 8.003 0 0 0 20 12 8 8 0 0 0 4.582 9H2.458C3.732 4.943 7.522 2 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10c-4.478 0-8.268-2.943-9.542-7z" />
                 </g>
             </svg>
-            <svg v-if="loggedIn" @click.prevent="sidebarOpen2()" class='profileSVG' xmlns="http://www.w3.org/2000/svg"
+            <svg v-if="showProfileIcon" @click.prevent="sidebarOpen2()" class='profileSVG' xmlns="http://www.w3.org/2000/svg"
                 width="35" height="44" fill="black" viewBox="0 0 16 16">
                 <path class="profileSVGPath" d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                 <path class="profileSVGPath" fill-rule="evenodd"
@@ -58,7 +58,8 @@ export default {
     components: { Modal },
     data() {
         return {
-            loggedIn: false,
+            showLoginIcon: false,
+            showProfileIcon: false,
             username: null,
             showModal: false,
             sidebarOpenBtn: true,
@@ -80,9 +81,16 @@ export default {
             }).then(function (response) {
                 if (response.data.status) {
                     self.username = response.data.username
-                    self.loggedIn = true
+                    self.showLoginIcon = false
+                    self.showProfileIcon = true
+                } else {
+                    self.showProfileIcon = false
+                    self.showLoginIcon = true      
                 }
             })
+        } else {
+            self.showProfileIcon = false
+            self.showLoginIcon = true
         }
     },
     setup() {
