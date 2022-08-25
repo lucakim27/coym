@@ -208,9 +208,9 @@ export const cookieValidation = function (pool: any, res: any, req: any) {
 
 }
 
-export const getUsername = function (pool: any, res: any, req: any) {
+export const getUserDetailsByID = function (pool: any, res: any, req: any) {
 
-    const selectAccountsQuery = `SELECT username FROM accounts WHERE id = ?`
+    const selectAccountsQuery = `SELECT * FROM accounts WHERE id = ?`
 
     const paramsForSelectAccountsQuery = [req.params.id]
 

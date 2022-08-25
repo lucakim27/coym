@@ -35,10 +35,9 @@
 
 .profileEachRow {
     /* background: rgb(89, 95, 98); */
-    border-style: solid;
+    border: 1px solid;
     border-radius: 20px;
     margin: 10px;
-    font-family: fantasy;
 }
 
 .profileEachRow div {

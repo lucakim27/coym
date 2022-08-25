@@ -1,4 +1,4 @@
-import { getUserID, getUsername, getTotalAccountCount, authSignUp, authSignIn, cookieValidation, getUserDetails, updateUserDetails, getAllUsers, getUserCommentDetails, getUserReplyDetails, getUserLikeDetails } from '../models/accountModel'
+import { getUserID, getUserDetailsByID, getTotalAccountCount, authSignUp, authSignIn, cookieValidation, getUserDetails, updateUserDetails, getAllUsers, getUserCommentDetails, getUserReplyDetails, getUserLikeDetails } from '../models/accountModel'
 import { pool } from '../configs/db'
 import express from 'express'
 export const router = express.Router()
@@ -44,8 +44,8 @@ router.get('/getTotalAccountCount', function (req: any, res: any) {
   getTotalAccountCount(pool, res, req)
 })
 
-router.get('/getUsername/:id', function (req: any, res: any) {
-  getUsername(pool, res, req)
+router.get('/getUserDetailsByID/:id', function (req: any, res: any) {
+  getUserDetailsByID(pool, res, req)
 })
 
 router.get('/getUserID', function (req: any, res: any) {

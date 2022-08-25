@@ -3,7 +3,30 @@
         <div class='profileBothContainer'>
             <div class='profileMostViewedContainer'>
                 <div class="profileMostViewedPages">
-                    <h3 class="profileDesktopHeader">{{ username }}</h3>
+                    <h3 class="profileDesktopHeader" v-if="userDetails !== null">{{ userDetails.username }}</h3>
+                    <div class='profileEachRow'>
+                        <div>
+                            <a>User Details</a>
+                            <hr>
+                            <a class="profileLoader" v-if="userDetails === null">
+                                <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
+                            </a>
+                            <a v-if="userDetails !== null">
+                                <p v-if="userDetails.gender === null">Gender: N/A</p>
+                                <p v-if="userDetails.gender === ''">Gender: N/A</p>
+                                <p v-if="userDetails.gender !== null && userDetails.gender !== ''">Gender: {{ userDetails.gender }}</p>
+                                <p v-if="userDetails.country === null">Country: N/A</p>
+                                <p v-if="userDetails.country === ''">Country: N/A</p>
+                                <p v-if="userDetails.country !== null && userDetails.country !== ''">Country: {{ userDetails.country }}</p>
+                                <p v-if="userDetails.major === null">Major: N/A</p>
+                                <p v-if="userDetails.major === ''">Major: N/A</p>
+                                <p v-if="userDetails.major !== null && userDetails.major !== ''">Major: {{ userDetails.major }}</p>
+                                <p v-if="userDetails.school === null">School: N/A</p>
+                                <p v-if="userDetails.school === ''">School: N/A</p>
+                                <p v-if="userDetails.school !== null && userDetails.school !== ''">School: {{ userDetails.school}}</p>
+                            </a>
+                        </div>
+                    </div>
                     <div class='profileEachRow'>
                         <div>
                             <a>Comment History</a>
@@ -68,7 +91,30 @@
     <div v-if="isMobile()">
         <div class="profileMostViewedContainer profileMobileMostViewedContainer">
             <div class="profileMostViewedPages profileMobileContainer">
-                <h3>{{ username }}</h3>
+                <h3 v-if="userDetails !== null">{{ userDetails.username }}</h3>
+                <div class='profileEachRow'>
+                        <div>
+                            <a>User Details</a>
+                            <hr>
+                            <a class="profileLoader" v-if="userDetails === null">
+                                <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
+                            </a>
+                            <a v-if="userDetails !== null">
+                                <p v-if="userDetails.gender === null">Gender: N/A</p>
+                                <p v-if="userDetails.gender === ''">Gender: N/A</p>
+                                <p v-if="userDetails.gender !== null && userDetails.gender !== ''">Gender: {{ userDetails.gender }}</p>
+                                <p v-if="userDetails.country === null">Country: N/A</p>
+                                <p v-if="userDetails.country === ''">Country: N/A</p>
+                                <p v-if="userDetails.country !== null && userDetails.country !== ''">Country: {{ userDetails.country }}</p>
+                                <p v-if="userDetails.major === null">Major: N/A</p>
+                                <p v-if="userDetails.major === ''">Major: N/A</p>
+                                <p v-if="userDetails.major !== null && userDetails.major !== ''">Major: {{ userDetails.major }}</p>
+                                <p v-if="userDetails.school === null">School: N/A</p>
+                                <p v-if="userDetails.school === ''">School: N/A</p>
+                                <p v-if="userDetails.school !== null && userDetails.school !== ''">School: {{ userDetails.school}}</p>
+                            </a>
+                        </div>
+                    </div>
                 <div class='profileEachRow'>
                     <div>
                         <a>Comment History</a>
@@ -137,7 +183,7 @@ export default {
     },
     data() {
         return {
-            username: null,
+            userDetails: null,
             commentDetails: null,
             replyDetails: null,
             likeDetails: null
@@ -155,13 +201,13 @@ export default {
     beforeMount() {
         let self = this
         axios.all([
-            axios.get(`${process.env.VUE_APP_ROOT_API}/getUsername/${this.$route.params.id}`),
+            axios.get(`${process.env.VUE_APP_ROOT_API}/getUserDetailsByID/${this.$route.params.id}`),
             axios.get(`${process.env.VUE_APP_ROOT_API}/getUserCommentDetails/${this.$route.params.id}`),
             axios.get(`${process.env.VUE_APP_ROOT_API}/getUserReplyDetails/${this.$route.params.id}`),
             axios.get(`${process.env.VUE_APP_ROOT_API}/getUserLikeDetails/${this.$route.params.id}`),
         ]).then(axios.spread((account, comment, reply, like) => {
             if (account.data.status && comment.data.status && reply.data.status && like.data.status) {
-                self.username = account.data.data.username.username
+                self.userDetails = account.data.data.username
                 self.commentDetails = comment.data.data
                 self.replyDetails = reply.data.data
                 self.likeDetails = like.data.data
