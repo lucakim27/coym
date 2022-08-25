@@ -9,7 +9,7 @@
   box-sizing: border-box;
   border-radius: 20px;
   border: 1px solid rgb(0, 0, 0);
-  font-family: fantasy;
+   
 }
 
 #commentBtn:hover {
@@ -27,7 +27,7 @@
   box-sizing: border-box;
   border-radius: 20px;
   border: 1px solid rgb(0, 0, 0);
-  font-family: fantasy;
+   
 }
 
 .closeBtn:hover,
@@ -77,7 +77,7 @@
   margin: 5px;
   padding: 5px;
   text-decoration: none;
-  font-family: fantasy;
+   
   text-decoration: underline;
 }
 
@@ -110,7 +110,7 @@
   font-weight: lighter;
   color: rgb(0, 0, 0);
   margin: 10px;
-  font-family: fantasy;
+   
 }
 
 .firstRow {
@@ -160,7 +160,7 @@
   cursor: pointer;
   padding: 10px;
   border-color: rgb(0, 0, 0);
-  font-family: fantasy;
+   
 }
 
 .replyContainer,
@@ -202,7 +202,7 @@
   color: rgb(0, 0, 0);
   border-style: solid;
   border-color: rgb(0, 0, 0);
-  font-family: fantasy;
+   
 }
 
 .editReplyBtn {
@@ -281,7 +281,7 @@ button:hover,
 }
 
 .comment-dropdown-content a {
-  font-family: fantasy;
+   
   color: rgb(255, 255, 255);
   padding: 8px 16px;
   text-decoration: none;
@@ -292,7 +292,7 @@ button:hover,
 }
 
 .reply-dropdown-content a {
-  font-family: fantasy;
+   
   color: rgb(255, 255, 255);
   padding: 8px 16px !important;
   text-decoration: none !important;

@@ -11,14 +11,14 @@
     margin: 10px;
     border-radius: 20px;
     padding: 20px;
-    font-family: fantasy;
+     
 }
 
 .requestEachContainer button {
     display: inline-block;
     background: #ffffff;
     color: rgb(0, 0, 0);
-    font-family: fantasy;
+     
     width: 100%;
     border-radius: 20px;
     margin: 10px;
@@ -47,7 +47,7 @@
 .requestEachContainer h3 {
     margin-left: 20px;
     color: rgb(0, 0, 0);
-    font-family: fantasy;
+     
 }
 
 .requestSelect {
@@ -55,7 +55,7 @@
     margin: 10px;
     border-radius: 20px;
     padding: 20px;
-    font-family: fantasy;
+     
 }
 
 .requestCenterChild {

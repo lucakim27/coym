@@ -64,7 +64,7 @@ header span {
 .headerCommentsSelect {
     width: 50%;
     float: right;
-    font-family: fantasy;
+     
 }
 
 header span:hover {
@@ -80,7 +80,7 @@ header span:hover {
 
 header h2 {
     width:fit-content;
-    font-family: fantasy;
+     
     margin-top: 11px;
     font-size: 40px;
     overflow: auto;
@@ -98,7 +98,7 @@ header h2:hover {
     cursor: pointer;
     position: absolute;
     right: 57px;
-    top: 11px;
+    top: 14px;
 }
 
 .dropdown {
@@ -126,7 +126,7 @@ header h2:hover {
 
 .dropdown-content a {
     margin: 0px;
-    font-family: fantasy;
+     
     color: rgb(255, 255, 255);
     padding: 20px;
     text-decoration: none;
@@ -149,7 +149,7 @@ header h2:hover {
     overflow: scroll;
     transition: 0.5s;
     padding-top: 60px;
-    font-family: fantasy;
+     
   }
   
   .sidenav a,

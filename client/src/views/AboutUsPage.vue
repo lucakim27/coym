@@ -3,18 +3,18 @@
         <div class="privacyPolicyChild">
             <div class="privacyPolicyRow">
                 <h1>About COYM</h1>
-                <p>What does <a>COYM</a> stand for? It stands for <a>Comment On Your Major</a>.</p>
-                <p>COYM is the neat, simple platform for college major reviews. Founded in 2022, we've collected <a>{{
+                <p>What does COYM stand for? It stands for Comment On Your Major.</p>
+                <p>COYM is the neat, simple platform for college major reviews. Founded in 2022, we've collected {{
                         comment
-                }} comments</a>, <a>{{ reply }} replies</a> and <a>{{ like
-}} likes</a> to the reviews in about 300 college majors and <a>{{ account }} number of people
-                        signed up</a> on the website.</p>
+                }} comments, {{ reply }} replies and {{ like
+}} likes to the reviews in about 300 college majors and {{ account }} number of people
+                        signed up on the website.</p>
                 <p>Each school year, millions of high school graduates need to pick their majors. For decades, they've
                     only had word-of-mouth and forums to rely on to help with their decisions- until today. Our goal is
-                    <a>to help high school graduates make better informed decisions</a> during college admissions
+                    to help high school graduates make better informed decisions during college admissions
                     season.
                 </p>
-                <p>You can <a>read</a>, <a>comment</a>, <a>like</a> and <a>reply</a>, see the details of others, and
+                <p>You can read, comment, like and reply, see the details of others, and
                     connect with them via personal links.</p>
                 <p>Questions? send us an email through contact us page.</p>
             </div>
@@ -105,18 +105,18 @@
         <div class="privacyPolicyChild">
             <div class="privacyPolicyMobileRow">
                 <h1>About COYM</h1>
-                <p>What does <a>COYM</a> stand for? It stands for <a>Comment On Your Major</a>.</p>
-                <p>COYM is the neat, simple platform for college major reviews. Founded in 2022, we've collected <a>{{
+                <p>What does COYM stand for? It stands for Comment On Your Major.</p>
+                <p>COYM is the neat, simple platform for college major reviews. Founded in 2022, we've collected {{
                         comment
-                }} comments</a>, <a>{{ reply }} replies</a> and <a>{{ like
-}} likes</a> to the reviews in about 300 college majors and <a>{{ account }} number of people
-                        signed up</a> on the website.</p>
+                }} comments, {{ reply }} replies and {{ like
+}} likes to the reviews in about 300 college majors and {{ account }} number of people
+                        signed up on the website.</p>
                 <p>Each school year, millions of high school graduates need to pick their majors. For decades, they've
                     only had word-of-mouth and forums to rely on to help with their decisions- until today. Our goal is
-                    <a>to help high school graduates make better informed decisions</a> during college admissions
+                    to help high school graduates make better informed decisions during college admissions
                     season.
                 </p>
-                <p>You can <a>read</a>, <a>comment</a>, <a>like</a> and <a>reply</a>, see the details of others, and
+                <p>You can read, comment, like and reply, see the details of others, and
                     connect with them via personal links.</p>
                 <p>Questions? send us an email through contact us page.</p>
             </div>

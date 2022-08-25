@@ -1,6 +1,6 @@
 .analysisContainer {
     text-align: left;
-    font-family: fantasy;
+     
 }
 
 .analysisLoader {
@@ -27,7 +27,7 @@
 
 .analysisMostViewedContainer h1 {
     color: white;
-    font-family: fantasy;
+     
 }
 
 .analysisEachRow {
@@ -35,7 +35,7 @@
     border-style: solid;
     border-radius: 20px;
     margin: 10px;
-    font-family: fantasy;
+     
 }
 
 .analysisEachRow div {

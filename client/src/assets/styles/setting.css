@@ -3,7 +3,7 @@
     margin: 10px;
     border-radius: 20px;
     padding: 20px;
-    font-family: fantasy;
+     
 }
 
 .settingEachContainer select {
@@ -11,7 +11,7 @@
     margin: 10px;
     border-radius: 20px;
     padding: 20px;
-    font-family: fantasy;
+     
 }
 
 .backgroundContainer {
@@ -27,7 +27,7 @@
     border-radius: 20px;
     background: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
-    font-family: fantasy;
+     
     width: 100%;
     margin: 10px;
     padding: 20px;
@@ -57,7 +57,7 @@
 .settingEachContainer h3 {
     margin-left: 20px;
     color: rgb(0, 0, 0);
-    font-family: fantasy;
+     
 }
 
 .settingMobileContainer {

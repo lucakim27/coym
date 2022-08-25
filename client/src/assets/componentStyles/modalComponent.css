@@ -52,7 +52,7 @@
     text-align: center;
     padding: 10px;
     margin: 10px;
-    font-family: fantasy;
+     
   }
   
   .loginInput {
@@ -62,7 +62,7 @@
     border-radius: 20px;
     box-sizing: border-box;
     width: 100%;
-    font-family: fantasy;
+     
   }
   
   .loginButton {
@@ -71,7 +71,7 @@
     width: 100%;
     padding: 10px;
     border-radius: 20px;
-    font-family: fantasy;
+     
   }
   
   .signInBtn {
@@ -103,7 +103,7 @@
     text-align: center;
     padding: 10px;
     margin: 10px;
-    font-family: fantasy;
+     
   }
   
   .registerInput {
@@ -113,7 +113,7 @@
     border-radius: 20px;
     box-sizing: border-box;
     width: 100%;
-    font-family: fantasy;
+     
   }
   
   .registerButton {
@@ -124,7 +124,7 @@
     border-radius: 20px;
     background-color: rgb(0, 149, 255);
     color: white;
-    font-family: fantasy;
+     
   }
   
   .goBackRegisterBtn {
@@ -134,6 +134,6 @@
   
   .regitserParagraph {
     color: grey;
-    font-family: fantasy;
+     
     text-align: center;
   }

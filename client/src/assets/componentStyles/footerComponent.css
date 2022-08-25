@@ -16,7 +16,7 @@ footer img {
 }
 
 footer h3 {
-    font-family: fantasy;
+    
     padding: 10px;
 }
 
@@ -29,7 +29,7 @@ footer .footerLinksConatiner a {
     padding: 10px;
     color: rgb(146, 156, 161);
     text-decoration: none;
-    font-family: fantasy;
+    
 }
 
 footer .footerLinksConatiner a:hover {
@@ -39,7 +39,7 @@ footer .footerLinksConatiner a:hover {
 
 footer b {
     font-size: 15px;
-    font-family: fantasy;
+    
     color: rgba(255, 255, 255, 0.658);
 }
 
