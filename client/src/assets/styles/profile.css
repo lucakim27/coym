@@ -25,7 +25,6 @@
 
 .profileMostViewedContainer h3 {
     color: rgb(0, 0, 0);
-     
 }
 
 .profileMostCommentedPages {
@@ -39,10 +38,11 @@
     border-style: solid;
     border-radius: 20px;
     margin: 10px;
-     
+    font-family: fantasy;
 }
 
 .profileEachRow div {
+    font-size: 16px;
     padding: 20px;
 }
 

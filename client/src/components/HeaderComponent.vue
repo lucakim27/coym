@@ -7,7 +7,7 @@
         <a @click="renderPages('/analysis')">Analysis</a>
         <hr>
         <a class="headerComments">
-            Comments:
+            Comments
             <select @change="onChange()" v-model="selectedOption" class="headerCommentsSelect">
                 <option v-for="option in majorsList" :value="option.id" :key="option.id">{{ option.name }}</option>
             </select>
@@ -64,7 +64,7 @@ export default {
             sidebarOpenBtn: true,
             sidebarCloseBtn: false,
             majorsList: [],
-            selectedOption: 4
+            selectedOption: null
         }
     },
     created() {

@@ -103,7 +103,7 @@
     color: rgb(255, 255, 255);
     margin-right: auto;
     margin-left: 0;
-    border-style: solid;
+     border: 1px solid;
     border-color: white;
     border-radius: 10px;
 }
