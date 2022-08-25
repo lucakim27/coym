@@ -1,7 +1,7 @@
 <template>
   <div id='container'>
     <div id="ipnutContainer">
-      <textarea height="60" type="text" id="userInput" v-model="commentInput" placeholder="Comment here..."
+      <textarea height="60" type="text" id="userInput" v-model="commentInput" :placeholder="'Comment on ' + majorName + '...'"
         @focus="showBtns = true"></textarea><br>
       <div class="commentButtonContainer">
         <button @click="comment()" id="commentBtn" v-show="showBtns">Comment</button>
@@ -132,11 +132,20 @@ export default {
       getComment: null,
       getLike: [],
       getReply: [],
-      renderReplyBtn: []
+      renderReplyBtn: [],
+      majorName: null
     }
   },
   created() {
     let self = this
+    axios({
+      method: "GET",
+      url: `${process.env.VUE_APP_ROOT_API}/getMajorName/${this.$route.params.id}`
+    }).then(function (response) {
+      if (response.data.status) {
+        self.majorName = response.data.message[0].name
+      }
+    })
     if (self.cookies.get('user') !== null) {
       axios({
         method: "GET",
