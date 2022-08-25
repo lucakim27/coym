@@ -69,14 +69,19 @@
                 benefit from.</b><br>
         </div>
     </div>
+    <div>
+        <FooterComponent />
+    </div>
 </template>
 <script>
 import axios from 'axios'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+import FooterComponent from '../components/FooterComponent.vue'
 export default {
     name: 'HomePage',
     components: {
-        PulseLoader
+        PulseLoader,
+        FooterComponent
     },
     data() {
         return {

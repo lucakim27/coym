@@ -838,10 +838,17 @@
             </div>
         </div>
     </div>
+    <div>
+        <FooterComponent />
+    </div>
 </template>
 <script>
+import FooterComponent from '../components/FooterComponent.vue'
 export default {
-    name: 'privacyPolicyPage',
+    name: "privacyPolicyPage",
+    components: {
+        FooterComponent
+    },
     methods: {
         isMobile() {
             if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {

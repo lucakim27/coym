@@ -34,14 +34,19 @@
             </div>
         </div>
     </div>
+    <div>
+        <FooterComponent v-if="mostCommentedTable.length" />
+    </div>
 </template>
 <script>
 import axios from 'axios'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+import FooterComponent from '../components/FooterComponent.vue'
 export default {
     name: 'AnalysisPage',
     components: {
-        PulseLoader
+        PulseLoader,
+        FooterComponent
     },
     data() {
         return {

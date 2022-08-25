@@ -203,11 +203,18 @@
             </div>
         </div>
     </div>
+    <div>
+        <FooterComponent />
+    </div>
 </template>
 <script>
 import axios from 'axios'
+import FooterComponent from '../components/FooterComponent.vue'
 export default {
     name: 'privacyPolicyPage',
+    components: {
+        FooterComponent
+    },
     data() {
         return {
             comment: null,

@@ -109,16 +109,21 @@
       </div>
     </center>
   </div>
+  <div>
+    <FooterComponent v-if="getComment !== null" />
+  </div>
 </template>
 <script>
 import axios from 'axios'
 import { useCookies } from "vue3-cookies"
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+import FooterComponent from '../components/FooterComponent.vue'
 export default {
   name: 'CommentPage',
   components: {
-    PulseLoader
-  },
+    PulseLoader,
+    FooterComponent
+},
   data() {
     return {
       username: '',

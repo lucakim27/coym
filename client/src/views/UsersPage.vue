@@ -1,7 +1,7 @@
 <template>
-  <div class='userContainer' v-if="!isMobile() && users.length">
+  <div class='userContainer' v-if="!isMobile()">
     <div class="userOnlineDiv" :style="mobileCheck">
-      <div class="userOnlineHead" v-if="!isMobile() && users.length">
+      <div class="userOnlineHead" v-if="!isMobile()">
         <div><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="black" class="bi bi-person-circle"
             viewBox="0 0 16 16">
             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
@@ -55,6 +55,9 @@
             @input="searchChangeFunc($event)" />
         </div>
       </div>
+      <div class="userLoader" v-if="!users.length">
+        <pulse-loader :loading="loading" :color="color"></pulse-loader>
+      </div>
       <div class="userOnlineBody mobileBody" v-if="users.length">
         <div v-for="user in filteredUsersList" :key="user.username">
           <div class='userEachRow'>
@@ -82,15 +85,15 @@
       </div>
     </div>
   </div>
-  <div class="userLoader" v-if="!users.length">
-    <pulse-loader :loading="loading" :color="color"></pulse-loader>
-  </div>
-  <div v-if="isMobile() && users.length">
-    <div class="userMostViewedContainer mobileUserMostViewedContainer" v-if="users.length">
+  <div v-if="isMobile()">
+    <div class="userMostViewedContainer mobileUserMostViewedContainer">
       <div class="mostViewedPages">
         <div class="userMobileInputContainer">
           <input class="userInputText" id="input" placeholder="Search for username..." type="search"
             @input="searchChangeFunc($event)" />
+        </div>
+        <div class="userLoader" v-if="!users.length">
+          <pulse-loader :loading="loading" :color="color"></pulse-loader>
         </div>
         <div class='userEachRow' v-for="user in filteredUsersList" :key="user.username">
           <p class="userAlignChild">
@@ -164,14 +167,19 @@
       </div>
     </div>
   </div>
+  <div>
+    <FooterComponent v-if="users.length" />
+  </div>
 </template>
 <script>
 import axios from 'axios'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+import FooterComponent from '../components/FooterComponent.vue'
 export default {
   name: 'UsersPage',
   components: {
-    PulseLoader
+    PulseLoader,
+    FooterComponent
   },
   data() {
     return {

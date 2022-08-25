@@ -45,12 +45,19 @@
       </div>
     </div>
   </div>
+  <div>
+    <FooterComponent />
+  </div>
 </template>
 <script>
 import axios from 'axios'
 import { useCookies } from "vue3-cookies"
+import FooterComponent from '../components/FooterComponent.vue'
 export default {
   name: 'RequestPage',
+  components: {
+    FooterComponent
+  },
   created() {
     let self = this
     if (self.cookies.get('user') !== null) {
