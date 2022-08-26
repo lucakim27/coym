@@ -10,7 +10,6 @@
   box-sizing: border-box;
   border-radius: 20px;
   border: 1px solid rgb(0, 0, 0);
-   
 }
 
 .closeBtn {
@@ -25,7 +24,6 @@
   box-sizing: border-box;
   border-radius: 20px;
   border: 1px solid rgb(0, 0, 0);
-   
 }
 
 #userInput {
@@ -54,11 +52,11 @@
 }
 
 .eachCommentDiv {
+  box-shadow: -3px 5px 3px rgb(0 0 0 / 50%);
   padding: 10px;
   margin: 10px;
   width: auto;
-  border: 1px solid;
-  /* background: rgb(146, 156, 161); */
+  background-color: rgb(146, 156, 161);
   border-radius: 20px;
   overflow-x: auto;
   overflow-y: hidden;
@@ -67,11 +65,10 @@
 .username,
 .replyUsername {
   font-weight: bold;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   margin: 5px;
   padding: 5px;
   text-decoration: none;
-   
   text-decoration: underline;
 }
 
@@ -90,7 +87,7 @@
 
 .comment {
   display: flex;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   margin: 10px;
   text-align: left;
   font-size: 20px;
@@ -103,9 +100,8 @@
 .date {
   font-size: 16px;
   font-weight: lighter;
-  color: rgba(0, 0, 0, 0.589);
+  color: rgba(255, 255, 255, 0.589);
   margin: 15px;
-   
 }
 
 .firstRow {
@@ -130,7 +126,7 @@
 
 .replyParagraph {
   display: flex;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   margin: 0px;
   text-align: left;
   font-size: 20px;
@@ -146,6 +142,7 @@
 .like,
 .reply,
 .viewReply {
+  box-shadow: -3px 5px 3px rgb(0 0 0 / 50%);
   font-size: 16px;
   margin: 10px;
    border: 1px solid;
@@ -153,9 +150,10 @@
   /* color: rgb(255, 255, 255); */
   border-radius: 20px;
   width: auto;
+  color: white;
   cursor: pointer;
   /* padding: 10px; */
-  border-color: rgb(0, 0, 0);
+  border-color: rgb(146, 156, 161);
    
 }
 
@@ -165,13 +163,15 @@
 }
 
 .replyContainers {
+  box-shadow: -3px 5px 3px rgb(0 0 0 / 50%);
   /* color: white; */
   /* background-color: rgb(89, 95, 98); */
-   border: 1px solid;
+   /* border: 1px solid; */
   /* text-align: left; */
   border-radius: 20px;
   margin: 5px;
   /* padding: 10px; */
+  background: rgba(255, 255, 255, 0.478);
 }
 
 .replyContainer textarea {
@@ -191,15 +191,16 @@
 .editBtn,
 .editCancelBtn,
 .editReplyBtn {
+  box-shadow: -3px 5px 3px rgb(0 0 0 / 50%);
   font-size: 16px;
   width: 30%;
   margin: 8px;
   padding: 12px 20px;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.478);
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
    border: 1px solid;
-  border-color: rgb(0, 0, 0);
+  border-color: rgb(146, 156, 161);
    
 }
 

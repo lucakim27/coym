@@ -2,7 +2,7 @@
     <div class="privacyPolicyContainer aboutUsContainer" v-if="!isMobile()">
         <div class="privacyPolicyChild">
             <div class="privacyPolicyRow">
-                <h1>About COYM</h1>
+                <h3>About COYM</h3>
                 <p>What does COYM stand for? It stands for Comment On Your Major.</p>
                 <p>COYM is the neat, simple platform for college major reviews. Founded in 2022, we've collected {{
                         comment
@@ -19,7 +19,7 @@
                 <p>Questions? send us an email through contact us page.</p>
             </div>
             <div class="privacyPolicyRow">
-                <h1>Relevant links</h1>
+                <h3>Relevant links</h3>
                 <div class="privacyPolicySameRow">
                     <div>
                         <svg class="githubSVG" @click="directToGithub()" xmlns="http://www.w3.org/2000/svg" width="32px"
@@ -104,7 +104,7 @@
     <div class="privacyPolicyMobileContainer aboutUsContainer" v-if="isMobile()">
         <div class="privacyPolicyChild">
             <div class="privacyPolicyMobileRow">
-                <h1>About COYM</h1>
+                <h3>About COYM</h3>
                 <p>What does COYM stand for? It stands for Comment On Your Major.</p>
                 <p>COYM is the neat, simple platform for college major reviews. Founded in 2022, we've collected {{
                         comment
@@ -121,7 +121,7 @@
                 <p>Questions? send us an email through contact us page.</p>
             </div>
             <div class="privacyPolicyMobileRow">
-                <h1>Relevant links</h1>
+                <h3>Relevant links</h3>
                 <div class="privacyPolicySameRow">
                     <div>
                         <svg class="githubSVG" @click="directToGithub()" xmlns="http://www.w3.org/2000/svg" width="32px"

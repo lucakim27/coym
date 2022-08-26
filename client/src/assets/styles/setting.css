@@ -4,7 +4,10 @@
     margin: 10px;
     border-radius: 20px;
     padding: 20px;
-     
+    color: white;
+    border: 1px solid rgb(146, 156, 161);
+    box-shadow: -3px 5px 3px rgb(0 0 0 / 50%);
+    background-color: rgba(255, 255, 255, 0.478);
 }
 
 .settingEachContainer select {
@@ -12,7 +15,10 @@
     margin: 10px;
     border-radius: 20px;
     padding: 20px;
-     
+    color: white;
+    box-shadow: -3px 5px 3px rgb(0 0 0 / 50%);
+    border: 1px solid rgb(146, 156, 161);
+    background-color: rgba(255, 255, 255, 0.478);
 }
 
 .backgroundContainer {
@@ -26,24 +32,26 @@
 .settingEachContainer button {
     display: inline-block;
     border-radius: 20px;
-    background: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
-     
+    background: rgba(255, 255, 255, 0.478);
+    box-shadow: -3px 5px 3px rgb(0 0 0 / 50%);
+    border: 1px solid rgb(146, 156, 161);
     width: 100%;
     margin: 10px;
     padding: 20px;
-    border-color: black;
+    color: white;
 }
 
 .settingEachContainer button:hover {
-    color: rgb(0, 136, 255);
     cursor: pointer;
 }
 
 .settingEachContainer {
+    background-color: rgb(146, 156, 161);
+    box-shadow: -3px 5px 3px rgb(0, 0, 0);
     min-width: 45%;
     align-items: center;
-     border: 1px solid;
+     /* border: 1px solid; */
     /* background: #595f62; */
     padding: 10px;
     margin: 10px;
@@ -57,7 +65,7 @@
 
 .settingEachContainer h3 {
     margin-left: 20px;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
      
 }
 

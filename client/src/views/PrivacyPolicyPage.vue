@@ -2,7 +2,7 @@
     <div class="privacyPolicyContainer" v-if="!isMobile()">
         <div class="privacyPolicyChild">
             <div class="privacyPolicyRow">
-                <h1>Privacy Policy</h1>
+                <h3>Privacy Policy</h3>
                 <p>Last updated: August 17, 2022</p>
                 <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of
                     Your
@@ -19,15 +19,15 @@
             </div>
             <div class="privacyPolicyRow">
 
-                <h1>Interpretation and Definitions</h1>
-                <h2>Interpretation</h2>
+                <h3>Interpretation and Definitions</h3>
+                <h4>Interpretation</h4>
                 <p>The words of which the initial letter is capitalized have meanings defined under the following
                     conditions.
                     The following definitions shall have the same meaning regardless of whether they appear in singular
                     or
                     in
                     plural.</p>
-                <h2>Definitions</h2>
+                <h4>Definitions</h4>
                 <p>For the purposes of this Privacy Policy:</p>
                 <ul>
                     <li>
@@ -96,8 +96,8 @@
             </div>
             <div class="privacyPolicyRow">
 
-                <h1>Collecting and Using Your Personal Data</h1>
-                <h2>Types of Data Collected</h2>
+                <h3>Collecting and Using Your Personal Data</h3>
+                <h4>Types of Data Collected</h4>
                 <h3>Personal Data</h3>
                 <p>While using Our Service, We may ask You to provide Us with certain personally identifiable
                     information
@@ -208,7 +208,7 @@
                 <p>For more information about the cookies we use and your choices regarding cookies, please visit our
                     Cookies
                     Policy or the Cookies section of our Privacy Policy.</p>
-                <h2>Use of Your Personal Data</h2>
+                <h4>Use of Your Personal Data</h4>
                 <p>The Company may use Personal Data for the following purposes:</p>
                 <ul>
                     <li>
@@ -301,7 +301,7 @@
                         with
                         Your consent.</li>
                 </ul>
-                <h2>Retention of Your Personal Data</h2>
+                <h4>Retention of Your Personal Data</h4>
                 <p>The Company will retain Your Personal Data only for as long as is necessary for the purposes set out
                     in
                     this
@@ -317,7 +317,7 @@
                     functionality of Our Service, or We are legally obligated to retain this data for longer time
                     periods.
                 </p>
-                <h2>Transfer of Your Personal Data</h2>
+                <h4>Transfer of Your Personal Data</h4>
                 <p>Your information, including Personal Data, is processed at the Company's operating offices and in any
                     other
                     places where the parties involved in the processing are located. It means that this information may
@@ -337,7 +337,7 @@
                     or a country unless there are adequate controls in place including the security of Your data and
                     other
                     personal information.</p>
-                <h2>Disclosure of Your Personal Data</h2>
+                <h4>Disclosure of Your Personal Data</h4>
                 <h3>Business Transactions</h3>
                 <p>If the Company is involved in a merger, acquisition or asset sale, Your Personal Data may be
                     transferred.
@@ -362,7 +362,7 @@
                     <li>Protect the personal safety of Users of the Service or the public</li>
                     <li>Protect against legal liability</li>
                 </ul>
-                <h2>Security of Your Personal Data</h2>
+                <h4>Security of Your Personal Data</h4>
                 <p>The security of Your Personal Data is important to Us, but remember that no method of transmission
                     over
                     the
@@ -371,7 +371,7 @@
                     means to protect Your Personal Data, We cannot guarantee its absolute security.</p>
             </div>
             <div class="privacyPolicyRow">
-                <h1>Children's Privacy</h1>
+                <h3>Children's Privacy</h3>
                 <p>Our Service does not address anyone under the age of 13. We do not knowingly collect personally
                     identifiable
                     information from anyone under the age of 13. If You are a parent or guardian and You are aware that
@@ -388,7 +388,7 @@
                 </p>
             </div>
             <div class="privacyPolicyRow">
-                <h1>Links to Other Websites</h1>
+                <h3>Links to Other Websites</h3>
                 <p>Our Service may contain links to other websites that are not operated by Us. If You click on a third
                     party
                     link, You will be directed to that third party's site. We strongly advise You to review the Privacy
@@ -400,7 +400,7 @@
                     third party sites or services.</p>
             </div>
             <div class="privacyPolicyRow">
-                <h1>Changes to this Privacy Policy</h1>
+                <h3>Changes to this Privacy Policy</h3>
                 <p>We may update Our Privacy Policy from time to time. We will notify You of any changes by posting the
                     new
                     Privacy Policy on this page.</p>
@@ -411,7 +411,7 @@
                     are effective when they are posted on this page.</p>
             </div>
             <div class="privacyPolicyRow">
-                <h1>Contact Us</h1>
+                <h3>Contact Us</h3>
                 <p>If you have any questions about this Privacy Policy, You can contact us:</p>
                 <ul>
                     <li>By email: <a onclick="window.location.href = 'mailto:nikolaikim27@gmail.com'">here</a>.</li>
@@ -422,7 +422,7 @@
     <div class="privacyPolicyMobileContainer" v-if="isMobile()">
         <div class="privacyPolicyMobileChild">
             <div class="privacyPolicyMobileRow">
-                <h1>Privacy Policy</h1>
+                <h3>Privacy Policy</h3>
                 <p>Last updated: August 17, 2022</p>
                 <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of
                     Your
@@ -438,15 +438,15 @@
                         Privacy Policy Generator</a>.</p>
             </div>
             <div class="privacyPolicyMobileRow">
-                <h1>Interpretation and Definitions</h1>
-                <h2>Interpretation</h2>
+                <h3>Interpretation and Definitions</h3>
+                <h4>Interpretation</h4>
                 <p>The words of which the initial letter is capitalized have meanings defined under the following
                     conditions.
                     The following definitions shall have the same meaning regardless of whether they appear in singular
                     or
                     in
                     plural.</p>
-                <h2>Definitions</h2>
+                <h4>Definitions</h4>
                 <p>For the purposes of this Privacy Policy:</p>
                 <ul>
                     <li>
@@ -515,8 +515,8 @@
             </div>
             <div class="privacyPolicyMobileRow">
 
-                <h1>Collecting and Using Your Personal Data</h1>
-                <h2>Types of Data Collected</h2>
+                <h3>Collecting and Using Your Personal Data</h3>
+                <h4>Types of Data Collected</h4>
                 <h3>Personal Data</h3>
                 <p>While using Our Service, We may ask You to provide Us with certain personally identifiable
                     information
@@ -627,7 +627,7 @@
                 <p>For more information about the cookies we use and your choices regarding cookies, please visit our
                     Cookies
                     Policy or the Cookies section of our Privacy Policy.</p>
-                <h2>Use of Your Personal Data</h2>
+                <h4>Use of Your Personal Data</h4>
                 <p>The Company may use Personal Data for the following purposes:</p>
                 <ul>
                     <li>
@@ -720,7 +720,7 @@
                         with
                         Your consent.</li>
                 </ul>
-                <h2>Retention of Your Personal Data</h2>
+                <h4>Retention of Your Personal Data</h4>
                 <p>The Company will retain Your Personal Data only for as long as is necessary for the purposes set out
                     in
                     this
@@ -736,7 +736,7 @@
                     functionality of Our Service, or We are legally obligated to retain this data for longer time
                     periods.
                 </p>
-                <h2>Transfer of Your Personal Data</h2>
+                <h4>Transfer of Your Personal Data</h4>
                 <p>Your information, including Personal Data, is processed at the Company's operating offices and in any
                     other
                     places where the parties involved in the processing are located. It means that this information may
@@ -756,7 +756,7 @@
                     or a country unless there are adequate controls in place including the security of Your data and
                     other
                     personal information.</p>
-                <h2>Disclosure of Your Personal Data</h2>
+                <h4>Disclosure of Your Personal Data</h4>
                 <h3>Business Transactions</h3>
                 <p>If the Company is involved in a merger, acquisition or asset sale, Your Personal Data may be
                     transferred.
@@ -781,7 +781,7 @@
                     <li>Protect the personal safety of Users of the Service or the public</li>
                     <li>Protect against legal liability</li>
                 </ul>
-                <h2>Security of Your Personal Data</h2>
+                <h4>Security of Your Personal Data</h4>
                 <p>The security of Your Personal Data is important to Us, but remember that no method of transmission
                     over
                     the
@@ -790,7 +790,7 @@
                     means to protect Your Personal Data, We cannot guarantee its absolute security.</p>
             </div>
             <div class="privacyPolicyMobileRow">
-                <h1>Children's Privacy</h1>
+                <h3>Children's Privacy</h3>
                 <p>Our Service does not address anyone under the age of 13. We do not knowingly collect personally
                     identifiable
                     information from anyone under the age of 13. If You are a parent or guardian and You are aware that
@@ -807,7 +807,7 @@
                 </p>
             </div>
             <div class="privacyPolicyMobileRow">
-                <h1>Links to Other Websites</h1>
+                <h3>Links to Other Websites</h3>
                 <p>Our Service may contain links to other websites that are not operated by Us. If You click on a third
                     party
                     link, You will be directed to that third party's site. We strongly advise You to review the Privacy
@@ -819,7 +819,7 @@
                     third party sites or services.</p>
             </div>
             <div class="privacyPolicyMobileRow">
-                <h1>Changes to this Privacy Policy</h1>
+                <h3>Changes to this Privacy Policy</h3>
                 <p>We may update Our Privacy Policy from time to time. We will notify You of any changes by posting the
                     new
                     Privacy Policy on this page.</p>
@@ -830,7 +830,7 @@
                     are effective when they are posted on this page.</p>
             </div>
             <div class="privacyPolicyMobileRow">
-                <h1>Contact Us</h1>
+                <h3>Contact Us</h3>
                 <p>If you have any questions about this Privacy Policy, You can contact us:</p>
                 <ul>
                     <li>By email: <a onclick="window.location.href = 'mailto:nikolaikim27@gmail.com'">here</a>.</li>

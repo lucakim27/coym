@@ -2,13 +2,13 @@
     left: 0;
     top: 0;
     width: 100%;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
     height: 70px;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     text-align: center;
     /* z-index: 9999999999 !important; */
     position: fixed;
-    box-shadow: 0 -6px 10px 5px rgba(0,0,0,0.5);
+    box-shadow: 0 -6px 10px 5px rgb(0, 0, 0);
 }
 
 header {
@@ -16,10 +16,11 @@ header {
 }
 
 header img {
+    /* border: 1px solid white; */
     position: absolute;
     left: 13px;
     top: 10px;
-    border-radius: 8px;
+    /* border-radius: 8px; */
     cursor: pointer;
 }
 

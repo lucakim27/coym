@@ -6,14 +6,15 @@
     padding: 15px;
     margin: 10px;
     font-size: 16px;
-    display: inline-block;
+    /* display: inline-block; */
     /* border: 1px solid rgb(0, 0, 0); */
-     border: 1px solid;
+    border: 1px solid;
     border-radius: 20px;
-    background-color: white;
-    box-sizing: border-box;
-    border-color: black;
+    background-color: #ffffff;
+    /* box-sizing: border-box; */
+    border-color: rgb(0, 0, 0);
     width: 50%;
+    /* box-shadow: -6px 10px 5px rgb(0 0 0 / 50%); */
 }
 
 .homeOptions {
@@ -56,7 +57,11 @@
 }
 
 .homeDescriptionContainer svg {
-    margin: 20px;
+    margin: 10px;
+    box-shadow: -6px 10px 5px rgb(0, 0, 0);
+    border-radius: 20px;
+    padding: 10px;
+    background-color: rgb(146, 156, 161);
 }
 
 .mainImage {
@@ -66,6 +71,7 @@
     border-radius: 20px;
     /* border-color: rgb(255, 255, 255);
      border: 1px solid; */
+     box-shadow: -6px 10px 5px rgb(0 0 0 / 30%);
 }
 
 .homeContainer {

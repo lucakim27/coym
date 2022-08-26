@@ -34,8 +34,10 @@
 }
 
 .profileEachRow {
+    box-shadow: -3px 5px 3px rgb(0, 0, 0);
+    background-color: rgb(146, 156, 161);
     /* background: rgb(89, 95, 98); */
-    border: 1px solid;
+    /* border: 1px solid; */
     border-radius: 20px;
     margin: 10px;
 }
@@ -51,7 +53,7 @@
 }
 
 .profileEachRow a {
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     text-decoration: none;
 }
 

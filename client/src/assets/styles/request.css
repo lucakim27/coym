@@ -12,14 +12,19 @@
     margin: 10px;
     border-radius: 20px;
     padding: 20px;
-     
+     color: white;
+    background: rgba(255, 255, 255, 0.478);
+    box-shadow: -3px 5px 3px rgb(0 0 0 / 50%);
+    border: 1px solid rgb(146, 156, 161);
 }
 
 .requestEachContainer button {
     display: inline-block;
     background: #ffffff;
-    color: rgb(0, 0, 0);
-     
+    color: rgb(255, 255, 255);
+    background: rgba(255, 255, 255, 0.478);
+    box-shadow: -3px 5px 3px rgb(0 0 0 / 50%);
+    border: 1px solid rgb(146, 156, 161);
     width: 100%;
     border-radius: 20px;
     margin: 10px;
@@ -27,7 +32,6 @@
 }
 
 .requestEachContainer button:hover {
-    color: rgb(0, 136, 255);
     cursor: pointer;
 }
 
@@ -37,9 +41,11 @@
 }
 
 .requestEachContainer {
+    background-color: rgb(146, 156, 161);
+    box-shadow: -3px 5px 3px rgb(0, 0, 0);
     align-items: center;
     /* background: #595f62; */
-     border: 1px solid;
+     /* border: 1px solid white; */
     padding: 10px;
     margin: 10px;
     border-radius: 20px;
@@ -47,7 +53,7 @@
 
 .requestEachContainer h3 {
     margin-left: 20px;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
      
 }
 
@@ -56,7 +62,10 @@
     margin: 10px;
     border-radius: 20px;
     padding: 20px;
-     
+     color: white;
+    background: rgba(255, 255, 255, 0.478);
+    box-shadow: -3px 5px 3px rgb(0 0 0 / 50%);
+    border: 1px solid rgb(146, 156, 161);
 }
 
 .requestCenterChild {
