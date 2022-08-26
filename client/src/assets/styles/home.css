@@ -42,11 +42,10 @@
 .homeOptions tr td {
     width: 10%;
     margin: 20px;
-    padding: 20px;
+    padding: 10px;
 }
 
 .homeOptions tr td a {
-     
     min-width: 50%;
 }
 
@@ -91,7 +90,7 @@
 }
 
 .homeDescriptionExplanation {
-     
+     margin-top: 10px;
 }
 
 .mobileHomeInput {

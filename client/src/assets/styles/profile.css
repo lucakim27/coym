@@ -10,6 +10,46 @@
     justify-content: center;
 }
 
+.profileMobileContainer h2 {
+    margin-top: 20px;
+}
+
+.profileUserDetailsDesktopContainer {
+    display: flex !important;
+    justify-content: center;
+}
+
+.profileUserDetailsDesktopContainer div {
+    width: 25%;
+}
+
+.profileUserDetailsMobileContainer div {
+    justify-content: left !important;
+}
+
+.profileUserDetailsContainer div {
+    display: flex;
+    justify-content: center;
+    padding: 0px !important;
+}
+
+.profileUserDetailsContainer div svg {
+    padding-top: 20px;
+    margin-right: 10px;
+}
+
+.profileUserDetailsContainer {
+    text-align: left !important;
+}
+
+.profileUserDetailsContainer p {
+    text-align: left !important;
+}
+
+.profileUsernameContainer svg {
+    margin: 30px;
+}
+
 .profileLoader {
     display: flex;
     justify-content: center;
@@ -21,10 +61,6 @@
     border-radius: 20px;
     min-width: 100%;
     /* background: rgb(146, 156, 161); */
-}
-
-.profileMostViewedContainer h3 {
-    color: rgb(0, 0, 0);
 }
 
 .profileMostCommentedPages {
@@ -43,13 +79,12 @@
 }
 
 .profileEachRow div {
-    font-size: 16px;
     padding: 20px;
 }
 
 .profileEachRow div {
     padding: 20px;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 }
 
 .profileEachRow a {
@@ -85,8 +120,4 @@
     height: auto !important;
     overflow-y: auto !important;
     overflow-x: hidden;
-}
-
-.profileMobileMostViewedContainer div {
-    text-align: center;
 }

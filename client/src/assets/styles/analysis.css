@@ -1,6 +1,5 @@
 .analysisContainer {
     text-align: left;
-     
 }
 
 .analysisLoader {
@@ -22,7 +21,6 @@
     flex: 0;
     padding: 10px;
     border-radius: 20px;
-    /* background: rgb(146, 156, 161); */
 }
 
 .analysisMostViewedContainer h1 {
@@ -31,14 +29,16 @@
 
 .analysisEachRow {
     background: rgb(146, 156, 161);
-    /* border: 1px solid; */
     border-radius: 20px;
     margin: 10px;
     box-shadow: -3px 5px 3px rgb(0, 0, 0);
 }
 
+.leftAlign {
+    text-align: left !important;
+}
+
 .analysisEachRow div {
-    font-size: 16px;
     padding: 20px;
     color: rgb(255, 255, 255);
 }
@@ -58,27 +58,22 @@
     height: auto !important;
     overflow-y: auto !important;
     overflow-x: hidden;
-
-}
-
-.mobileAnalysisMostViewedContainer div {
-    text-align: center;
 }
 
 .analysisCenterChild {
-    display: flex; 
+    display: flex;
     justify-content: center;
     text-align: center;
+}
+
+.centerAlign {
+    text-align: center;
+    padding: 0px !important;
 }
 
 .analysisCenterChild a {
     width: 33%;
 }
-/* 
-.analysisCenterChild a:hover {
-    width: 33%;
-    color: rgb(0, 0, 0) !important;
-} */
 
 .analysisMajorTitle {
     font-weight: bold !important;

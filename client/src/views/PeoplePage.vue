@@ -176,7 +176,7 @@ import axios from 'axios'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 import FooterComponent from '../components/FooterComponent.vue'
 export default {
-  name: 'UsersPage',
+  name: 'PeoplePage',
   components: {
     PulseLoader,
     FooterComponent

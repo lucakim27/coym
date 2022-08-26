@@ -2,20 +2,13 @@
     <div id="mySidenav" class="sidenav"><br>
         <a @click="renderPages('/')">Home</a>
         <hr>
-        <a @click="renderPages('/users')">Users</a>
+        <a @click="renderPages('/chart')">Chart</a>
         <hr>
-        <a @click="renderPages('/analysis')">Analysis</a>
-        <hr>
-        <a class="headerComments">
-            Comments
-            <select @change="onChange()" v-model="selectedOption" class="headerCommentsSelect">
-                <option v-for="option in majorsList" :value="option.id" :key="option.id">{{ option.name }}</option>
-            </select>
-        </a>
+        <a @click="renderPages('/people')">People</a>
         <hr>
     </div>
     <div id="mySidenav2" class="sidenav2"><br>
-        <a @click="renderProfile()">{{ username }}'s Profile</a>
+        <a @click="renderProfile()">Profile</a>
         <hr>
         <a @click="renderPages('/setting')">Setting</a>
         <hr>
@@ -30,7 +23,7 @@
     <div id="headerContainer">
         <header>
             <img @click="renderPages('/')" src="../assets/images/favicon.png" height="50" alt="">
-            <svg class='signInIcon' v-if="showLoginIcon" @click="this.showModal = true" height='40' width="40"
+            <svg class='signInIcon' v-if="showLoginIcon" @click="this.showModal = true" height='40' width="40" fill="white"
                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <g>
                     <path fill="none" d="M0 0h24v24H0z" />
@@ -63,9 +56,7 @@ export default {
             username: null,
             showModal: false,
             sidebarOpenBtn: true,
-            sidebarCloseBtn: false,
-            majorsList: [],
-            selectedOption: null
+            sidebarCloseBtn: false
         }
     },
     created() {
@@ -102,19 +93,6 @@ export default {
     },
     mounted() {
         document.addEventListener('click', this.profileDropdownClose)
-    },
-    beforeMount() {
-        let self = this
-        axios({
-            method: "GET",
-            url: process.env.VUE_APP_ROOT_API + "/getMajorList"
-        }).then(function (response) {
-            if (response.data.status) {
-                response.data.message.forEach(key => {
-                    self.majorsList.push({ name: key.name, id: key.id })
-                })
-            }
-        })
     },
     methods: {
         onChange() {

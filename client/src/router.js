@@ -12,9 +12,9 @@ const routes = [
     component: () => import('@/views/CommentPage'),
   },
   {
-    path: '/users',
-    name: 'UsersPage',
-    component: () => import('@/views/UsersPage'),
+    path: '/people',
+    name: 'PeoplePage',
+    component: () => import('@/views/PeoplePage'),
   },
   {
     path: '/request',
@@ -22,9 +22,9 @@ const routes = [
     component: () => import('@/views/RequestPage'),
   },
   {
-    path: '/analysis',
-    name: 'AnalysisPage',
-    component: () => import('@/views/AnalysisPage'),
+    path: '/chart',
+    name: 'ChartPage',
+    component: () => import('@/views/ChartPage'),
   },
   {
     path: '/setting',

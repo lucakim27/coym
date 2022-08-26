@@ -5,7 +5,7 @@
                 <div class="analysisMostViewedPages">
                     <div class='analysisEachRow' v-for="row in mostCommentedTable" :key="row.name">
                         <div>
-                            <router-link :to="'/comment/' + row.id" class="analysisMajorTitle">{{ row.name }}</router-link><hr>
+                            <router-link :to="'/comment/' + row.id" class="analysisMajorTitle analysisMajorMobileTitle">{{ row.name }}</router-link><hr>
                             <div style="display: flex; justify-content: center" class="analysisCenterChild">
                                 <a>Comment: {{ row.comment }}</a><br>
                                 <a>Like: {{ row.like }}</a><br>
@@ -26,9 +26,11 @@
                 <div class='analysisEachRow' v-for="row in mostCommentedTable" :key="row.name">
                     <div>
                         <router-link :to="'/comment/' + row.id" class="analysisMajorTitle">{{ row.name }}</router-link><hr>
-                        <a>Like: {{ row.like }}</a><br>
-                        <a>Reply: {{ row.reply }}</a><br>
-                        <a>Comment: {{ row.comment }}</a>
+                        <div class="centerAlign">
+                            <a v-if="row.like !== 0">Like: {{ row.like }}<br></a>
+                            <a v-if="row.reply !== 0">Reply: {{ row.reply }}<br></a>
+                            <a v-if="row.comment !== 0">Comment: {{ row.comment }}</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -43,7 +45,7 @@ import axios from 'axios'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 import FooterComponent from '../components/FooterComponent.vue'
 export default {
-    name: 'AnalysisPage',
+    name: 'ChartPage',
     components: {
         PulseLoader,
         FooterComponent

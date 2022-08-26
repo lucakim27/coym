@@ -77,11 +77,6 @@
     cursor: pointer;
 }
 
-.privacyPolicyRow p,
-.privacyPolicyMobileRow p {
-    font-size: 16px;
-}
-
 .aboutUsContainer a {
     color: rgb(98, 203, 255) !important;
     cursor: default;
