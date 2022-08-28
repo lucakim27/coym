@@ -7,7 +7,7 @@
         <a @click="renderPages('/people')">People</a>
         <hr>
         <div v-if="showLoginIcon">
-            <a @click="this.showModal = true">Login</a>
+            <a class="loginBtn" @click="this.showModal = true">Login</a>
             <hr>
         </div>
         <div v-if="showProfileIcon">
@@ -150,7 +150,7 @@ export default {
             })
         },
         profileDropdownClose(event) {
-            if (!event.target.matches('.headerCommentsSelect') && !event.target.matches('.headerComments') && !event.target.matches('.dropdownUsername') && !event.target.matches('.sidebarOpenBtn') && !event.target.matches('.sidebarCloseBtn') && !event.target.matches('.sidenav')) {
+            if (!event.target.matches('.loginBtn') && !event.target.matches('.headerCommentsSelect') && !event.target.matches('.headerComments') && !event.target.matches('.dropdownUsername') && !event.target.matches('.sidebarOpenBtn') && !event.target.matches('.sidebarCloseBtn') && !event.target.matches('.sidenav')) {
                 document.getElementById("mySidenav").style.height = "0"
                 this.sidebarCloseBtn = false
                 this.sidebarOpenBtn = true
