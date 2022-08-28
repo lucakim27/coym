@@ -31,7 +31,7 @@
             <div class="modal mobileModal" @click.stop v-if="isMobile()">
                 <div class="loginContainer" v-if="login">
                     <form class="loginForm mobileLoginForm" method="get" @submit.prevent="signIn">
-                        <h1>Sign Up</h1>
+                        <h1>Sign In</h1>
                         <input class="loginInput" type="text" name="username" v-model="loginUsername"
                             placeholder="Username..." required /><br /><br />
                         <input class="loginInput" type="password" name="password" v-model="loginPassword"

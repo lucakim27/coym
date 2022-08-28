@@ -65,7 +65,7 @@
 
 .username,
 .replyUsername {
-  font-weight: bold;
+  /* font-weight: bold; */
   color: rgb(255, 255, 255);
   margin: 5px;
   padding: 5px;
@@ -98,11 +98,19 @@
   display: flex;
 }
 
+.replyUsername {
+  margin: 10px;
+}
+
+.replyDate {
+  margin-top: 15px !important;
+}
+
 .date {
   font-size: 16px;
   font-weight: lighter;
   color: rgba(255, 255, 255, 0.589);
-  margin: 15px;
+  margin: 12px;
 }
 
 .firstRow {

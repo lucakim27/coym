@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="masterContainer">
     <HeaderComponent />
     <router-view v-slot="{ Component, route }">
       <Transition name="fade" mode="out-in">
@@ -11,15 +11,17 @@
   </div>
 </template>
 <script>
-import HeaderComponent from '@/components/HeaderComponent'
-export default {
-  name: 'App',
-  components: {
-    HeaderComponent
+  
+  import HeaderComponent from '@/components/HeaderComponent'
+  export default {
+    name: 'App',
+    components: {
+      HeaderComponent
+    }
   }
-}
 </script>
 <style>
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s ease;
@@ -28,5 +30,9 @@ export default {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+.masterContainer {
+  font-family: 'Roboto', sans-serif;
 }
 </style>

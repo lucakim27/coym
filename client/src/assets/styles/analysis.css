@@ -76,7 +76,7 @@
 }
 
 .analysisMajorTitle {
-    font-weight: bold !important;
+    /* font-weight: bold !important; */
     text-decoration: underline !important;
     padding: 5px;
 }

@@ -72,9 +72,9 @@
             <div v-if="reply.commentID === comment.commentID" class="replyContainers">
               <div class="firstRow">
                 <div class="usernameDateContainer">
-                  <router-link class='username' :to="'/profile/' + reply.id">{{ reply.username }}
+                  <router-link class='username replyUsername' :to="'/profile/' + reply.id">{{ reply.username }}
                   </router-link>
-                  <a class='date'>{{ reply.createdAt.slice(0, 10) }}</a>
+                  <a class='date replyDate'>{{ reply.createdAt.slice(0, 10) }}</a>
                   <div class="replyDropdown">
                     <svg @click.prevent="toggleReplyDropdown(comment.commentID, reply.replyID)"
                       v-bind:id="`toggleReplyDropdownBtn/${comment.commentID}/${reply.replyID}`" v-if="reply.username === username"

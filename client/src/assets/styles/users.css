@@ -107,7 +107,7 @@
 }
 
 .userMobileUsername {
-  font-weight: bold !important;
+  /* font-weight: bold !important; */
   text-decoration: underline !important;
 }
 
