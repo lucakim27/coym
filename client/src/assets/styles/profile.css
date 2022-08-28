@@ -43,11 +43,17 @@
 }
 
 .profileUserDetailsContainer p {
+    margin-top: 25px;
     text-align: left !important;
 }
 
 .profileUsernameContainer svg {
     margin: 30px;
+}
+
+.profileUsernameContainer h3 {
+    margin-top: 33px;
+    margin-left: -14px;
 }
 
 .profileLoader {

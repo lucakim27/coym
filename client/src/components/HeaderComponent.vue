@@ -6,8 +6,22 @@
         <hr>
         <a @click="renderPages('/people')">People</a>
         <hr>
+        <div v-if="showLoginIcon">
+            <a @click="this.showModal = true">Login</a>
+            <hr>
+        </div>
+        <div v-if="showProfileIcon">
+            <a @click="renderProfile()">Profile</a>
+            <hr>
+            <a @click="renderPages('/setting')">Setting</a>
+            <hr>
+            <a @click="renderPages('/request')">Request</a>
+            <hr>
+            <a @click='logout()'>Sign Out</a>
+            <hr>    
+        </div>
     </div>
-    <div id="mySidenav2" class="sidenav2"><br>
+    <!-- <div id="mySidenav2" class="sidenav2"><br>
         <a @click="renderProfile()">Profile</a>
         <hr>
         <a @click="renderPages('/setting')">Setting</a>
@@ -16,14 +30,14 @@
         <hr>
         <a @click='logout()'>Sign Out</a>
         <hr>
-    </div>
+    </div> -->
     <div>
         <Modal v-show="showModal" @closeModal="showModal = false" />
     </div>
     <div id="headerContainer">
         <header>
             <img @click="renderPages('/')" src="../assets/images/favicon.png" height="50" alt="">
-            <svg class='signInIcon' v-if="showLoginIcon" @click="this.showModal = true" height='40' width="40" fill="white"
+            <!-- <svg class='signInIcon' v-if="showLoginIcon" @click="this.showModal = true" height='40' width="40" fill="white"
                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <g>
                     <path fill="none" d="M0 0h24v24H0z" />
@@ -36,7 +50,7 @@
                 <path class="profileSVGPath" d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
                 <path class="profileSVGPath" fill-rule="evenodd"
                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-            </svg>
+            </svg> -->
             <span v-if="sidebarOpenBtn" @click="sidebarOpen()" class="sidebarOpenBtn">&#9776;</span>
             <span v-if="sidebarCloseBtn" @click="sidebarClose()" class="sidebarCloseBtn">&times;</span>
         </header>
@@ -107,7 +121,6 @@ export default {
             }
         },
         renderPages(page) {
-            document.getElementById("mySidenav2").style.height = "0"
             document.getElementById("mySidenav").style.height = "0"
             this.sidebarCloseBtn = false
             this.sidebarOpenBtn = true
@@ -127,7 +140,6 @@ export default {
                     if (document.URL.split('/').at(-2) === 'profile') {
                         window.location.href = '/profile/' + response.data.data.id.id
                     } else {
-                        document.getElementById("mySidenav2").style.height = "0"
                         document.getElementById("mySidenav").style.height = "0"
                         self.sidebarCloseBtn = false
                         self.sidebarOpenBtn = true
@@ -143,9 +155,6 @@ export default {
                 this.sidebarCloseBtn = false
                 this.sidebarOpenBtn = true
             }
-            if (!event.target.matches('.profileSVG') && !event.target.matches('.profileSVGPath') && !event.target.matches('.sidenav2')) {
-                document.getElementById("mySidenav2").style.height = "0"
-            }
         },
         logout() {
             this.cookies.remove('user')
@@ -160,13 +169,6 @@ export default {
             this.sidebarCloseBtn = false
             this.sidebarOpenBtn = true
             document.getElementById("mySidenav").style.height = "0"
-        },
-        sidebarOpen2() {
-            if (document.getElementById("mySidenav2").style.height === "100%") {
-                document.getElementById("mySidenav2").style.height = "0"
-            } else {
-                document.getElementById("mySidenav2").style.height = "100%"
-            }
         }
     }
 }

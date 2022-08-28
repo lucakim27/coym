@@ -2,18 +2,20 @@
   <div class='userContainer' v-if="!isMobile()">
     <div class="userOnlineDiv" :style="mobileCheck">
       <div class="userOnlineHead" v-if="!isMobile()">
-        <div><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" :fill="mobileSVGColorCheck" class="bi bi-person-circle"
-            viewBox="0 0 16 16">
+        <div><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" :fill="mobileSVGColorCheck"
+            class="bi bi-person-circle" viewBox="0 0 16 16">
             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
             <path fill-rule="evenodd"
               d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
           </svg></div>
-        <div><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" :fill="mobileSVGColorCheck" class="bi bi-gender-ambiguous"
-            viewBox="0 0 16 16">
-            <path fill-rule="evenodd"
-              d="M11.5 1a.5.5 0 0 1 0-1h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V1.707l-3.45 3.45A4 4 0 0 1 8.5 10.97V13H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V14H6a.5.5 0 0 1 0-1h1.5v-2.03a4 4 0 1 1 3.471-6.648L14.293 1H11.5zm-.997 4.346a3 3 0 1 0-5.006 3.309 3 3 0 0 0 5.006-3.31z" />
-          </svg></div>
-        <div><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" :fill="mobileSVGColorCheck" viewBox="0 0 512 512">
+        <div><svg style="margin-top: -5px;" xmlns="http://www.w3.org/2000/svg" width="50" height="50"
+              viewBox="0 0 24 24" fill="black">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M12.1888 7L12.1909 5L19.1909 5.00746L19.1834 12.0075L17.1834 12.0053L17.1873 8.41678L14.143 11.4611C15.4612 13.4063 15.2587 16.0743 13.5355 17.7975C11.5829 19.7501 8.41709 19.7501 6.46447 17.7975C4.51184 15.8449 4.51184 12.6791 6.46447 10.7264C8.16216 9.02873 10.777 8.80709 12.7141 10.0615L15.7718 7.00382L12.1888 7ZM7.87868 12.1406C9.05025 10.9691 10.9497 10.9691 12.1213 12.1406C13.2929 13.3122 13.2929 15.2117 12.1213 16.3833C10.9497 17.5549 9.05025 17.5549 7.87868 16.3833C6.70711 15.2117 6.70711 13.3122 7.87868 12.1406Z"
+                fill="black" />
+            </svg></div>
+        <div><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" :fill="mobileSVGColorCheck"
+            viewBox="0 0 512 512">
             <title>ionicons-v5-k</title>
             <path d="M267,474l-.8-.13A.85.85,0,0,0,267,474Z" />
             <path
@@ -29,23 +31,63 @@
             <path
               d="M256,72a184,184,0,1,1-130.1,53.9A182.77,182.77,0,0,1,256,72m0-40C132.3,32,32,132.3,32,256S132.3,480,256,480,480,379.7,480,256,379.7,32,256,32Z" />
           </svg></div>
-        <div><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" :fill="mobileSVGColorCheck" viewBox="0 0 512 512">
-            <title>ionicons-v5-q</title>
-            <polygon points="32 192 256 64 480 192 256 320 32 192"
-              style="fill:black;stroke:black;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" />
-            <polyline points="112 240 112 368 256 448 400 368 400 240"
-              style="fill:black;stroke:black;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" />
-            <line x1="480" y1="368" x2="480" y2="192"
-              style="fill:white;stroke:black;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" />
-            <line x1="256" y1="320" x2="256" y2="448"
-              style="fill:white;stroke:black;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" />
-          </svg></div>
-        <div><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" :fill="mobileSVGColorCheck" data-name="Layer 1"
-            viewBox="0 0 24 24">
+        <div><svg xmlns="http://www.w3.org/2000/svg" fill="black" xmlns:xlink="http://www.w3.org/1999/xlink"
+              version="1.1" id="Layer_1" width="40" height="40" viewBox="0 0 512.001 512.001"
+              style="margin-top: 1px; enable-background:new 0 0 512.001 512.001;" xml:space="preserve">
+              <g>
+                <g>
+                  <path
+                    d="M64.682,0v349.827v30.422v81.125h75.125v50.628l41.293-16.055l41.293,16.055v-50.628h224.925v-81.125v-30.422V0H64.682z     M95.104,30.422h20.281v319.405H95.104V30.422z M139.807,430.952H95.104v-10.141h44.704V430.952z M170.229,467.533v-6.159v-40.562    h21.742v40.562v6.159l-10.871-4.226L170.229,467.533z M416.897,430.952H222.394v-10.141h194.503V430.952z M416.897,390.389    H222.394h-82.586H95.104v-10.141h321.793V390.389z M416.897,349.827H145.807V30.422h271.091V349.827z" />
+                </g>
+              </g>
+              <g>
+                <g>
+                  <rect x="212.496" y="84.329" width="137.719" height="30.422" />
+                </g>
+              </g>
+              <g>
+                <g>
+                  <rect x="212.496" y="135.032" width="137.719" height="30.422" />
+                </g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+            </svg></div>
+        <div><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" :fill="mobileSVGColorCheck"
+            data-name="Layer 1" viewBox="0 0 24 24">
             <path
               d="M21,10a.99974.99974,0,0,0,1-1V6a.9989.9989,0,0,0-.68359-.94824l-9-3a1.002,1.002,0,0,0-.63282,0l-9,3A.9989.9989,0,0,0,2,6V9a.99974.99974,0,0,0,1,1H4v7.18427A2.99507,2.99507,0,0,0,2,20v2a.99974.99974,0,0,0,1,1H21a.99974.99974,0,0,0,1-1V20a2.99507,2.99507,0,0,0-2-2.81573V10ZM20,21H4V20a1.001,1.001,0,0,1,1-1H19a1.001,1.001,0,0,1,1,1ZM6,17V10H8v7Zm4,0V10h4v7Zm6,0V10h2v7ZM4,8V6.7207l8-2.667,8,2.667V8Z" />
           </svg></div>
-        <div><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" :fill="mobileSVGColorCheck" viewBox="0 0 512 512">
+        <div><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" :fill="mobileSVGColorCheck"
+            viewBox="0 0 512 512">
             <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
             <path
               d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM349.8 349.8c5.594 12.03 .4375 26.31-11.56 31.94c-3.312 1.531-6.75 2.25-10.19 2.25c-9 0-17.66-5.125-21.75-13.81l-38.46-82.19H208v72c0 13.25-10.75 24-24 24s-24-10.75-24-24V152c0-13.25 10.75-24 24-24l88 .0044c44.13 0 80 35.88 80 80c0 28.32-14.87 53.09-37.12 67.31L349.8 349.8zM272 176h-64v64h64c17.66 0 32-14.34 32-32S289.7 176 272 176z" />
@@ -97,8 +139,8 @@
         </div>
         <div class='userEachRow' v-for="user in filteredUsersList" :key="user.username">
           <p class="userAlignChild">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" :fill="mobileSVGColorCheck" class="bi bi-person-circle"
-              viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" :fill="mobileSVGColorCheck"
+              class="bi bi-person-circle" viewBox="0 0 16 16">
               <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
               <path fill-rule="evenodd"
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
@@ -107,15 +149,17 @@
             </router-link>
           </p>
           <p class="userAlignChild" v-if="user.gender !== null && user.gender !== '' && user.gender !== 'N/A'">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" :fill="mobileSVGColorCheck" class="bi bi-gender-ambiguous"
-              viewBox="0 0 16 16">
-              <path fill-rule="evenodd"
-                d="M11.5 1a.5.5 0 0 1 0-1h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V1.707l-3.45 3.45A4 4 0 0 1 8.5 10.97V13H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V14H6a.5.5 0 0 1 0-1h1.5v-2.03a4 4 0 1 1 3.471-6.648L14.293 1H11.5zm-.997 4.346a3 3 0 1 0-5.006 3.309 3 3 0 0 0 5.006-3.31z" />
+            <svg style="margin-left: -4px;" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+              viewBox="0 0 24 24" fill="white">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M12.1888 7L12.1909 5L19.1909 5.00746L19.1834 12.0075L17.1834 12.0053L17.1873 8.41678L14.143 11.4611C15.4612 13.4063 15.2587 16.0743 13.5355 17.7975C11.5829 19.7501 8.41709 19.7501 6.46447 17.7975C4.51184 15.8449 4.51184 12.6791 6.46447 10.7264C8.16216 9.02873 10.777 8.80709 12.7141 10.0615L15.7718 7.00382L12.1888 7ZM7.87868 12.1406C9.05025 10.9691 10.9497 10.9691 12.1213 12.1406C13.2929 13.3122 13.2929 15.2117 12.1213 16.3833C10.9497 17.5549 9.05025 17.5549 7.87868 16.3833C6.70711 15.2117 6.70711 13.3122 7.87868 12.1406Z"
+                fill="white" />
             </svg>
             <a>{{ user.gender }}</a>
           </p>
           <p class="userAlignChild" v-if="user.country !== null && user.country !== ''">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" :fill="mobileSVGColorCheck" viewBox="0 0 512 512">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" :fill="mobileSVGColorCheck"
+              viewBox="0 0 512 512">
               <path d="M267,474l-.8-.13A.85.85,0,0,0,267,474Z" />
               <path
                 d="M448.9,187.78a5.51,5.51,0,0,0-10.67-.63h0A5.52,5.52,0,0,1,433,191H417.53a5.48,5.48,0,0,1-2.84-.79l-22.38-13.42a5.48,5.48,0,0,0-2.84-.79h-35.8a5.48,5.48,0,0,0-3.06.93l-44.15,29.43A5.52,5.52,0,0,0,304,211v41.74a5.51,5.51,0,0,0,2.92,4.87l57.89,30.9a5.55,5.55,0,0,1,2.92,4.8L368,316.8a5.53,5.53,0,0,0,2.85,4.75l23.26,12.87a5.54,5.54,0,0,1,2.85,4.83v48.6a5.52,5.52,0,0,0,9.17,4.14c9.38-8.26,22.83-20.32,24.62-23.08q4.44-6.87,8.33-14.07a207.39,207.39,0,0,0,13.6-31C465.36,287.13,455.34,221.14,448.9,187.78Z" />
@@ -133,28 +177,69 @@
             <a>{{ user.country }}</a>
           </p>
           <p class="userAlignChild" v-if="user.major !== null && user.major !== ''">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" :fill="mobileSVGColorCheck" viewBox="0 0 512 512">
-              <polygon points="32 192 256 64 480 192 256 320 32 192"
-                style="stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" />
-              <polyline points="112 240 112 368 256 448 400 368 400 240"
-                style="stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" />
-              <line x1="480" y1="368" x2="480" y2="192"
-                style="stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" />
-              <line x1="256" y1="320" x2="256" y2="448"
-                style="stroke-linecap:round;stroke-linejoin:round;stroke-width:32px" />
+            <svg xmlns="http://www.w3.org/2000/svg" fill="white" xmlns:xlink="http://www.w3.org/1999/xlink"
+              version="1.1" id="Layer_1" width="30" height="30" viewBox="0 0 512.001 512.001"
+              style="margin-top: 3px; enable-background:new 0 0 512.001 512.001;" xml:space="preserve">
+              <g>
+                <g>
+                  <path
+                    d="M64.682,0v349.827v30.422v81.125h75.125v50.628l41.293-16.055l41.293,16.055v-50.628h224.925v-81.125v-30.422V0H64.682z     M95.104,30.422h20.281v319.405H95.104V30.422z M139.807,430.952H95.104v-10.141h44.704V430.952z M170.229,467.533v-6.159v-40.562    h21.742v40.562v6.159l-10.871-4.226L170.229,467.533z M416.897,430.952H222.394v-10.141h194.503V430.952z M416.897,390.389    H222.394h-82.586H95.104v-10.141h321.793V390.389z M416.897,349.827H145.807V30.422h271.091V349.827z" />
+                </g>
+              </g>
+              <g>
+                <g>
+                  <rect x="212.496" y="84.329" width="137.719" height="30.422" />
+                </g>
+              </g>
+              <g>
+                <g>
+                  <rect x="212.496" y="135.032" width="137.719" height="30.422" />
+                </g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
+              <g>
+              </g>
             </svg>
             <a>{{ user.major }}</a>
           </p>
           <p class="userAlignChild" v-if="user.school !== null && user.school !== ''">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" :fill="mobileSVGColorCheck" data-name="Layer 1"
-              viewBox="0 0 24 24">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" :fill="mobileSVGColorCheck"
+              data-name="Layer 1" viewBox="0 0 24 24">
               <path
                 d="M21,10a.99974.99974,0,0,0,1-1V6a.9989.9989,0,0,0-.68359-.94824l-9-3a1.002,1.002,0,0,0-.63282,0l-9,3A.9989.9989,0,0,0,2,6V9a.99974.99974,0,0,0,1,1H4v7.18427A2.99507,2.99507,0,0,0,2,20v2a.99974.99974,0,0,0,1,1H21a.99974.99974,0,0,0,1-1V20a2.99507,2.99507,0,0,0-2-2.81573V10ZM20,21H4V20a1.001,1.001,0,0,1,1-1H19a1.001,1.001,0,0,1,1,1ZM6,17V10H8v7Zm4,0V10h4v7Zm6,0V10h2v7ZM4,8V6.7207l8-2.667,8,2.667V8Z" />
             </svg>
             <a>{{ user.school }}</a>
           </p>
           <p class="userAlignChild">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" :fill="mobileSVGColorCheck" viewBox="0 0 512 512">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" :fill="mobileSVGColorCheck"
+              viewBox="0 0 512 512">
               ! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License -
               https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright
               2022 Fonticons, Inc.
