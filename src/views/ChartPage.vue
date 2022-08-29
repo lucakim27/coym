@@ -3,7 +3,7 @@
         <div class='analysisBothContainer'>
             <div class='analysisMostViewedContainer'>
                 <div class="analysisMostViewedPages">
-                    <Bar v-if="loaded" :chart-data="chartData" />
+                    <Bar v-if="loaded" :chart-data="chartData" :chart-options="chartOptions" />
                 </div>
             </div>
         </div>
@@ -14,7 +14,7 @@
     <div v-if="isMobile() && loaded">
         <div class="analysisMostViewedContainer mobileAnalysisMostViewedContainer">
             <div class="analysisMostViewedPages mobileAnalysisContainer">
-                <Bar v-if="loaded" :chart-data="chartData" />
+                <Bar v-if="loaded" :chart-data="chartData" :chart-options="chartOptions" />
             </div>
         </div>
     </div>
@@ -39,6 +39,11 @@ export default {
     data() {
         return {
             loaded: false,
+            chartOptions: {
+                type: Object,
+                default: () => {},
+                indexAxis: "y"
+            },
             chartData: {
                 labels: [],
                 datasets: [
