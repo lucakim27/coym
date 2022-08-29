@@ -3,16 +3,7 @@
         <div class='analysisBothContainer'>
             <div class='analysisMostViewedContainer'>
                 <div class="analysisMostViewedPages">
-                    <div class='analysisEachRow' v-for="row in mostCommentedTable" :key="row.name">
-                        <div>
-                            <router-link :to="'/comment/' + row.id" class="analysisMajorTitle analysisMajorMobileTitle">{{ row.name }}</router-link><hr>
-                            <div style="display: flex; justify-content: center" class="analysisCenterChild">
-                                <a>Comment: {{ row.comment }}</a><br>
-                                <a>Like: {{ row.like }}</a><br>
-                                <a>Reply: {{ row.reply }}</a>
-                            </div>
-                        </div>
-                    </div>
+                    <Bar v-if="loaded" :chart-data="chartData"/>
                 </div>
             </div>
         </div>
@@ -23,16 +14,7 @@
     <div v-if="isMobile() && mostCommentedTable.length">
         <div class="analysisMostViewedContainer mobileAnalysisMostViewedContainer">
             <div class="analysisMostViewedPages mobileAnalysisContainer">
-                <div class='analysisEachRow' v-for="row in mostCommentedTable" :key="row.name">
-                    <div>
-                        <router-link :to="'/comment/' + row.id" class="analysisMajorTitle">{{ row.name }}</router-link><hr>
-                        <div class="centerAlign">
-                            <a v-if="row.like !== 0">Like: {{ row.like }}<br></a>
-                            <a v-if="row.reply !== 0">Reply: {{ row.reply }}<br></a>
-                            <a v-if="row.comment !== 0">Comment: {{ row.comment }}</a>
-                        </div>
-                    </div>
-                </div>
+                <Bar v-if="loaded" :chart-data="chartData"/>
             </div>
         </div>
     </div>
@@ -41,6 +23,9 @@
     </div>
 </template>
 <script>
+import { Bar } from 'vue-chartjs'
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 import axios from 'axios'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 import FooterComponent from '../components/FooterComponent.vue'
@@ -48,11 +33,14 @@ export default {
     name: 'ChartPage',
     components: {
         PulseLoader,
-        FooterComponent
+        FooterComponent,
+        Bar
     },
     data() {
         return {
-            mostCommentedTable: []
+            mostCommentedTable: [],
+            loaded: false,
+            chartData: null
         }
     },
     methods: {
@@ -115,7 +103,33 @@ export default {
                 }
             })
             self.mostCommentedTable = count
-            console.log(self.mostCommentedTable)
+            self.chartData = {
+                labels: [],
+                datasets: [
+                    {
+                        label: 'Comment',
+                        backgroundColor: '#ff6384',
+                        data: []
+                    },
+                    {
+                        label: 'Reply',
+                        backgroundColor: '#36a2eb',
+                        data: []
+                    },
+                    {
+                        label: 'Like',
+                        backgroundColor: '#ffce56',
+                        data: []
+                    }
+                ]
+            }
+            for (var i = 0; i < count.length; i++) {
+                self.chartData.labels.push(count[i].name)
+                self.chartData.datasets[0].data.push(count[i].comment)
+                self.chartData.datasets[1].data.push(count[i].reply)
+                self.chartData.datasets[2].data.push(count[i].like)
+            }            
+            self.loaded = true
         }))
     }
 }
