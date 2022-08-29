@@ -1,25 +1,25 @@
 <template>
-    <div class='analysisContainer' v-if="!isMobile() && mostCommentedTable.length">
+    <div class='analysisContainer' v-if="!isMobile() && loaded">
         <div class='analysisBothContainer'>
             <div class='analysisMostViewedContainer'>
                 <div class="analysisMostViewedPages">
-                    <Bar v-if="loaded" :chart-data="chartData"/>
+                    <Bar v-if="loaded" :chart-data="chartData" />
                 </div>
             </div>
         </div>
     </div>
-    <div class="analysisLoader" v-if="!mostCommentedTable.length">
+    <div class="analysisLoader" v-if="!loaded">
         <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
     </div>
-    <div v-if="isMobile() && mostCommentedTable.length">
+    <div v-if="isMobile() && loaded">
         <div class="analysisMostViewedContainer mobileAnalysisMostViewedContainer">
             <div class="analysisMostViewedPages mobileAnalysisContainer">
-                <Bar v-if="loaded" :chart-data="chartData"/>
+                <Bar v-if="loaded" :chart-data="chartData" />
             </div>
         </div>
     </div>
     <div>
-        <FooterComponent v-if="mostCommentedTable.length" />
+        <FooterComponent v-if="loaded" />
     </div>
 </template>
 <script>
@@ -38,72 +38,8 @@ export default {
     },
     data() {
         return {
-            mostCommentedTable: [],
             loaded: false,
-            chartData: null
-        }
-    },
-    methods: {
-        isMobile() {
-            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-                return true
-            } else {
-                return false
-            }
-        },
-    },
-    mounted() {
-        let self = this
-        axios.all([
-            axios.get(process.env.VUE_APP_ROOT_API + "/getCommentCount"),
-            axios.get(process.env.VUE_APP_ROOT_API + "/getReplyCount"),
-            axios.get(process.env.VUE_APP_ROOT_API + "/getLikeCount"),
-        ]).then(axios.spread((comment, reply, like) => {
-            let count = []
-            comment.data.message.forEach(key1 => {
-                let check = false
-                count.forEach(key2 => {
-                    if (key1.name === key2.name) {
-                        key2.comment += 1
-                        check = true
-                    }
-                })
-                if (!check) {
-                    count.push({
-                        id: key1.id, name: key1.name, comment: 1, reply: 0, like: 0
-                    })
-                }
-            })
-            reply.data.message.forEach(key1 => {
-                let check = false
-                count.forEach(key2 => {
-                    if (key1.name === key2.name) {
-                        key2.reply += 1
-                        check = true
-                    }
-                })
-                if (!check) {
-                    count.push({
-                        id: key1.id, name: key1.name, reply: 1, comment: 0, like: 0
-                    })
-                }
-            })
-            like.data.message.forEach(key1 => {
-                let check = false
-                count.forEach(key2 => {
-                    if (key1.name === key2.name) {
-                        key2.like += 1
-                        check = true
-                    }
-                })
-                if (!check) {
-                    count.push({
-                        id: key1.id, name: key1.name, like: 1, comment: 0, reply: 0
-                    })
-                }
-            })
-            self.mostCommentedTable = count
-            self.chartData = {
+            chartData: {
                 labels: [],
                 datasets: [
                     {
@@ -123,14 +59,61 @@ export default {
                     }
                 ]
             }
-            for (var i = 0; i < count.length; i++) {
-                self.chartData.labels.push(count[i].name)
-                self.chartData.datasets[0].data.push(count[i].comment)
-                self.chartData.datasets[1].data.push(count[i].reply)
-                self.chartData.datasets[2].data.push(count[i].like)
-            }            
-            self.loaded = true
-        }))
+        }
+    },
+    methods: {
+        isMobile() {
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                return true
+            } else {
+                return false
+            }
+        },
+        getCommentReplyLikeCount() {
+            let self = this
+            axios.all([
+                axios.get(process.env.VUE_APP_ROOT_API + "/getCommentCount"),
+                axios.get(process.env.VUE_APP_ROOT_API + "/getReplyCount"),
+                axios.get(process.env.VUE_APP_ROOT_API + "/getLikeCount"),
+            ]).then(axios.spread((comment, reply, like) => {
+                let count = []
+                count.push(...comment.data.message)
+                for (var i = 0; i < reply.data.message.length; i++) {
+                    let exist = false
+                    for (var j = 0; j < count.length; j++) {
+                        if (reply.data.message[i].name === count[j].name) {
+                            exist = true
+                            count[j].reply = reply.data.message[i].count
+                        }
+                    }
+                    if (!exist) {
+                        count.push(reply.data.message[i])
+                    }
+                }
+                for (var e = 0; e < like.data.message.length; e++) {
+                    let exist = false
+                    for (var f = 0; f < count.length; f++) {
+                        if (like.data.message[e].name === count[f].name) {
+                            exist = true
+                            count[f].like = like.data.message[e].count
+                        }
+                    }
+                    if (!exist) {
+                        count.push(like.data.message[e])
+                    }
+                }
+                for (var d = 0; d < count.length; d++) {
+                    self.chartData.labels.push(count[d].name)
+                    self.chartData.datasets[0].data.push(count[d].count)
+                    self.chartData.datasets[1].data.push(count[d].reply)
+                    self.chartData.datasets[2].data.push(count[d].like)
+                }
+                self.loaded = true
+            }))
+        }
+    },
+    mounted() {
+        this.getCommentReplyLikeCount()
     }
 }
 </script>

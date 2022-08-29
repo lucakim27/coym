@@ -10,7 +10,7 @@
                             <path fill-rule="evenodd"
                                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
                         </svg>
-                        <h3 v-if="userDetails !== null">{{ userDetails.username }}</h3>
+                        <h3 v-if="userDetails !== null">{{  userDetails.username  }}</h3>
                     </div>
                     <div class='profileEachRow'>
                         <div class="profileUserDetailsContainer">
@@ -31,8 +31,8 @@
                                     <p v-if="userDetails.gender === null">N/A</p>
                                     <p v-if="userDetails.gender === ''">N/A</p>
                                     <p v-if="userDetails.gender !== null && userDetails.gender !== ''">{{
-                                            userDetails.gender
-                                    }}</p>
+                                         userDetails.gender 
+                                        }}</p>
                                 </div>
                                 <div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
@@ -54,8 +54,8 @@
                                     <p v-if="userDetails.country === null">N/A</p>
                                     <p v-if="userDetails.country === ''">N/A</p>
                                     <p v-if="userDetails.country !== null && userDetails.country !== ''">{{
-                                            userDetails.country
-                                    }}</p>
+                                         userDetails.country 
+                                        }}</p>
                                 </div>
                                 <div>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="white"
@@ -113,8 +113,8 @@
                                     <p v-if="userDetails.major === null"> N/A</p>
                                     <p v-if="userDetails.major === ''">N/A</p>
                                     <p v-if="userDetails.major !== null && userDetails.major !== ''">{{
-                                            userDetails.major
-                                    }}</p>
+                                         userDetails.major 
+                                        }}</p>
                                 </div>
                                 <div>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
@@ -125,8 +125,8 @@
                                     <p v-if="userDetails.school === null"> N/A</p>
                                     <p v-if="userDetails.school === ''">N/A</p>
                                     <p v-if="userDetails.school !== null && userDetails.school !== ''">{{
-                                            userDetails.school
-                                    }}</p>
+                                         userDetails.school 
+                                        }}</p>
                                 </div>
                             </a>
                         </div>
@@ -143,9 +143,9 @@
                             </a>
                             <a v-for="comment in commentDetails" :key="comment.name">
                                 <p>
-                                    <router-link :to="'/comment/' + comment.id">{{ comment.name }}</router-link>
+                                    <router-link :to="'/comment/' + comment.id">{{  comment.name  }}</router-link>
                                     :
-                                    {{ comment.count }}
+                                    {{  comment.count  }}
                                 </p>
                             </a>
                         </div>
@@ -162,9 +162,9 @@
                             </a>
                             <a v-for="comment in replyDetails" :key="comment.name">
                                 <p>
-                                    <router-link :to="'/comment/' + comment.id">{{ comment.name }}</router-link>
+                                    <router-link :to="'/comment/' + comment.id">{{  comment.name  }}</router-link>
                                     :
-                                    {{ comment.count }}
+                                    {{  comment.count  }}
                                 </p>
                             </a>
                         </div>
@@ -181,9 +181,9 @@
                             </a>
                             <a v-for="comment in likeDetails" :key="comment.name">
                                 <p>
-                                    <router-link :to="'/comment/' + comment.id">{{ comment.name }}</router-link>
+                                    <router-link :to="'/comment/' + comment.id">{{  comment.name  }}</router-link>
                                     :
-                                    {{ comment.count }}
+                                    {{  comment.count  }}
                                 </p>
                             </a>
                         </div>
@@ -202,7 +202,7 @@
                         <path fill-rule="evenodd"
                             d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
                     </svg>
-                    <h3 v-if="userDetails !== null">{{ userDetails.username }}</h3>
+                    <h3 v-if="userDetails !== null">{{  userDetails.username  }}</h3>
                 </div>
                 <div class='profileEachRow'>
                     <div class="profileUserDetailsContainer profileUserDetailsMobileContainer">
@@ -213,17 +213,18 @@
                         </a>
                         <a v-if="userDetails !== null">
                             <div>
-                                <svg style="margin-top: -5px; margin-left: -4px;"
-                                        xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
-                                        fill="white">
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                            d="M12.1888 7L12.1909 5L19.1909 5.00746L19.1834 12.0075L17.1834 12.0053L17.1873 8.41678L14.143 11.4611C15.4612 13.4063 15.2587 16.0743 13.5355 17.7975C11.5829 19.7501 8.41709 19.7501 6.46447 17.7975C4.51184 15.8449 4.51184 12.6791 6.46447 10.7264C8.16216 9.02873 10.777 8.80709 12.7141 10.0615L15.7718 7.00382L12.1888 7ZM7.87868 12.1406C9.05025 10.9691 10.9497 10.9691 12.1213 12.1406C13.2929 13.3122 13.2929 15.2117 12.1213 16.3833C10.9497 17.5549 9.05025 17.5549 7.87868 16.3833C6.70711 15.2117 6.70711 13.3122 7.87868 12.1406Z"
-                                            fill="white" />
-                                    </svg>
+                                <svg style="margin-top: -5px; margin-left: -4px;" xmlns="http://www.w3.org/2000/svg"
+                                    width="40" height="40" viewBox="0 0 24 24" fill="white">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M12.1888 7L12.1909 5L19.1909 5.00746L19.1834 12.0075L17.1834 12.0053L17.1873 8.41678L14.143 11.4611C15.4612 13.4063 15.2587 16.0743 13.5355 17.7975C11.5829 19.7501 8.41709 19.7501 6.46447 17.7975C4.51184 15.8449 4.51184 12.6791 6.46447 10.7264C8.16216 9.02873 10.777 8.80709 12.7141 10.0615L15.7718 7.00382L12.1888 7ZM7.87868 12.1406C9.05025 10.9691 10.9497 10.9691 12.1213 12.1406C13.2929 13.3122 13.2929 15.2117 12.1213 16.3833C10.9497 17.5549 9.05025 17.5549 7.87868 16.3833C6.70711 15.2117 6.70711 13.3122 7.87868 12.1406Z"
+                                        fill="white" />
+                                </svg>
                                 <p style="margin-left: -7px;" v-if="userDetails.gender === null">N/A</p>
                                 <p style="margin-left: -7px;" v-if="userDetails.gender === ''">N/A</p>
-                                <p style="margin-left: -7px;" v-if="userDetails.gender !== null && userDetails.gender !== ''">{{ userDetails.gender
-                                }}</p>
+                                <p style="margin-left: -7px;"
+                                    v-if="userDetails.gender !== null && userDetails.gender !== ''">{{
+                                     userDetails.gender 
+                                    }}</p>
                             </div>
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
@@ -245,65 +246,65 @@
                                 <p v-if="userDetails.country === null">N/A</p>
                                 <p v-if="userDetails.country === ''">N/A</p>
                                 <p v-if="userDetails.country !== null && userDetails.country !== ''">{{
-                                        userDetails.country
-                                }}</p>
+                                     userDetails.country 
+                                    }}</p>
                             </div>
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="white"
-                                        xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" width="30"
-                                        height="30" viewBox="0 0 512.001 512.001"
-                                        style="margin-top: -0px; enable-background:new 0 0 512.001 512.001;"
-                                        xml:space="preserve">
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" width="30"
+                                    height="30" viewBox="0 0 512.001 512.001"
+                                    style="margin-top: -0px; enable-background:new 0 0 512.001 512.001;"
+                                    xml:space="preserve">
+                                    <g>
                                         <g>
-                                            <g>
-                                                <path
-                                                    d="M64.682,0v349.827v30.422v81.125h75.125v50.628l41.293-16.055l41.293,16.055v-50.628h224.925v-81.125v-30.422V0H64.682z     M95.104,30.422h20.281v319.405H95.104V30.422z M139.807,430.952H95.104v-10.141h44.704V430.952z M170.229,467.533v-6.159v-40.562    h21.742v40.562v6.159l-10.871-4.226L170.229,467.533z M416.897,430.952H222.394v-10.141h194.503V430.952z M416.897,390.389    H222.394h-82.586H95.104v-10.141h321.793V390.389z M416.897,349.827H145.807V30.422h271.091V349.827z" />
-                                            </g>
+                                            <path
+                                                d="M64.682,0v349.827v30.422v81.125h75.125v50.628l41.293-16.055l41.293,16.055v-50.628h224.925v-81.125v-30.422V0H64.682z     M95.104,30.422h20.281v319.405H95.104V30.422z M139.807,430.952H95.104v-10.141h44.704V430.952z M170.229,467.533v-6.159v-40.562    h21.742v40.562v6.159l-10.871-4.226L170.229,467.533z M416.897,430.952H222.394v-10.141h194.503V430.952z M416.897,390.389    H222.394h-82.586H95.104v-10.141h321.793V390.389z M416.897,349.827H145.807V30.422h271.091V349.827z" />
                                         </g>
+                                    </g>
+                                    <g>
                                         <g>
-                                            <g>
-                                                <rect x="212.496" y="84.329" width="137.719" height="30.422" />
-                                            </g>
+                                            <rect x="212.496" y="84.329" width="137.719" height="30.422" />
                                         </g>
+                                    </g>
+                                    <g>
                                         <g>
-                                            <g>
-                                                <rect x="212.496" y="135.032" width="137.719" height="30.422" />
-                                            </g>
+                                            <rect x="212.496" y="135.032" width="137.719" height="30.422" />
                                         </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                        <g>
-                                        </g>
-                                    </svg>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                </svg>
                                 <p v-if="userDetails.major === null"> N/A</p>
                                 <p v-if="userDetails.major === ''">N/A</p>
-                                <p v-if="userDetails.major !== null && userDetails.major !== ''">{{ userDetails.major }}
+                                <p v-if="userDetails.major !== null && userDetails.major !== ''">{{  userDetails.major  }}
                                 </p>
                             </div>
                             <div>
@@ -314,8 +315,8 @@
                                 </svg>
                                 <p v-if="userDetails.school === null"> N/A</p>
                                 <p v-if="userDetails.school === ''">N/A</p>
-                                <p v-if="userDetails.school !== null && userDetails.school !== ''">{{ userDetails.school
-                                }}</p>
+                                <p v-if="userDetails.school !== null && userDetails.school !== ''">{{  userDetails.school 
+                                    }}</p>
                             </div>
                         </a>
                     </div>
@@ -332,8 +333,8 @@
                         </a>
                         <a v-for="comment in commentDetails" :key="comment.name">
                             <p>
-                                <router-link :to="'/comment/' + comment.id">{{ comment.name }}</router-link>:
-                                {{ comment.count }}
+                                <router-link :to="'/comment/' + comment.id">{{  comment.name  }}</router-link>:
+                                {{  comment.count  }}
                             </p>
                         </a>
                     </div>
@@ -350,8 +351,8 @@
                         </a>
                         <a v-for="comment in replyDetails" :key="comment.name">
                             <p>
-                                <router-link :to="'/comment/' + comment.id">{{ comment.name }}</router-link>:
-                                {{ comment.count }}
+                                <router-link :to="'/comment/' + comment.id">{{  comment.name  }}</router-link>:
+                                {{  comment.count  }}
                             </p>
                         </a>
                     </div>
@@ -368,8 +369,8 @@
                         </a>
                         <a v-for="comment in likeDetails" :key="comment.name">
                             <p>
-                                <router-link :to="'/comment/' + comment.id">{{ comment.name }}</router-link>:
-                                {{ comment.count }}
+                                <router-link :to="'/comment/' + comment.id">{{  comment.name  }}</router-link>:
+                                {{  comment.count  }}
                             </p>
                         </a>
                     </div>
@@ -406,24 +407,26 @@ export default {
             } else {
                 return false
             }
+        },
+        getAllUserDetails() {
+            let self = this
+            axios.all([
+                axios.get(`${process.env.VUE_APP_ROOT_API}/getUserDetailsByID/${this.$route.params.id}`),
+                axios.get(`${process.env.VUE_APP_ROOT_API}/getUserCommentDetails/${this.$route.params.id}`),
+                axios.get(`${process.env.VUE_APP_ROOT_API}/getUserReplyDetails/${this.$route.params.id}`),
+                axios.get(`${process.env.VUE_APP_ROOT_API}/getUserLikeDetails/${this.$route.params.id}`),
+            ]).then(axios.spread((account, comment, reply, like) => {
+                if (account.data.status && comment.data.status && reply.data.status && like.data.status) {
+                    self.userDetails = account.data.data.username
+                    self.commentDetails = comment.data.data
+                    self.replyDetails = reply.data.data
+                    self.likeDetails = like.data.data
+                }
+            }))
         }
     },
     beforeMount() {
-        let self = this
-        axios.all([
-            axios.get(`${process.env.VUE_APP_ROOT_API}/getUserDetailsByID/${this.$route.params.id}`),
-            axios.get(`${process.env.VUE_APP_ROOT_API}/getUserCommentDetails/${this.$route.params.id}`),
-            axios.get(`${process.env.VUE_APP_ROOT_API}/getUserReplyDetails/${this.$route.params.id}`),
-            axios.get(`${process.env.VUE_APP_ROOT_API}/getUserLikeDetails/${this.$route.params.id}`),
-        ]).then(axios.spread((account, comment, reply, like) => {
-            if (account.data.status && comment.data.status && reply.data.status && like.data.status) {
-                self.userDetails = account.data.data.username
-                self.commentDetails = comment.data.data
-                self.replyDetails = reply.data.data
-                self.likeDetails = like.data.data
-            }
-        }))
-
+        this.getAllUserDetails()
     }
 }
 </script>

@@ -59,21 +59,7 @@ export default {
     FooterComponent
   },
   created() {
-    let self = this
-    if (self.cookies.get('user') !== null) {
-      axios({
-        method: "GET",
-        url: process.env.VUE_APP_ROOT_API + "/cookieValidation",
-        params: {
-          username: self.cookies.get("user").username,
-          password: self.cookies.get("user").password
-        }
-      }).then(function (response) {
-        if (response.data.status) {
-          self.username = response.data.username
-        }
-      })
-    }
+    this.cookieValidation()
   },
   setup() {
     const { cookies } = useCookies()
@@ -101,12 +87,12 @@ export default {
   },
   methods: {
     isMobile() {
-            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-                return true
-            } else {
-                return false
-            }
-        },
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        return true
+      } else {
+        return false
+      }
+    },
     onChange(event) {
       this.selectedValue = event.target.value
     },
@@ -125,6 +111,23 @@ export default {
           if (response.data.status) {
             alert(response.data.message)
             window.location.reload()
+          }
+        })
+      }
+    },
+    cookieValidation() {
+      let self = this
+      if (self.cookies.get('user') !== null) {
+        axios({
+          method: "GET",
+          url: process.env.VUE_APP_ROOT_API + "/cookieValidation",
+          params: {
+            username: self.cookies.get("user").username,
+            password: self.cookies.get("user").password
+          }
+        }).then(function (response) {
+          if (response.data.status) {
+            self.username = response.data.username
           }
         })
       }

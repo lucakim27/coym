@@ -1,8 +1,8 @@
 <template>
   <div id='container'>
     <div id="ipnutContainer">
-      <textarea height="60" type="text" id="userInput" v-model="commentInput" :placeholder="'Comment on ' + majorName + '...'"
-        @focus="showBtns = true"></textarea><br>
+      <textarea height="60" type="text" id="userInput" v-model="commentInput"
+        :placeholder="'Comment on ' + majorName + '...'" @focus="showBtns = true"></textarea><br>
       <div class="commentButtonContainer">
         <button @click="comment()" id="commentBtn" v-show="showBtns">Comment</button>
         <button @click="showBtns = !showBtns" class="closeBtn" v-show="showBtns">Close</button>
@@ -16,9 +16,9 @@
         :id="comment.commentID + 'Container'">
         <div class="firstRow">
           <div class="usernameDateContainer">
-            <router-link class='username' :to="'/profile/' + comment.id">{{ comment.username }}
+            <router-link class='username' :to="'/profile/' + comment.id">{{  comment.username  }}
             </router-link>
-            <a class='date'>{{ comment.createdAt.slice(0, 10) }}</a>
+            <a class='date'>{{  comment.createdAt.slice(0, 10)  }}</a>
           </div>
           <div class="commentDropdown">
             <svg @click.prevent="toggleDropdown(comment.commentID)" v-bind:id="`toggleDropdownBtn/${comment.commentID}`"
@@ -29,8 +29,8 @@
               </path>
             </svg>
             <svg @click.prevent="closeEditMode(comment.commentID)" class="svg-icon closeEditBtn"
-              v-bind:id="`closeEditBtn/${comment.commentID}`" v-if="comment.username === username" fill="black" width="25"
-              height="25" viewBox="0 0 20 20">
+              v-bind:id="`closeEditBtn/${comment.commentID}`" v-if="comment.username === username" fill="black"
+              width="25" height="25" viewBox="0 0 20 20">
               <path
                 d="M10.185,1.417c-4.741,0-8.583,3.842-8.583,8.583c0,4.74,3.842,8.582,8.583,8.582S18.768,14.74,18.768,10C18.768,5.259,14.926,1.417,10.185,1.417 M10.185,17.68c-4.235,0-7.679-3.445-7.679-7.68c0-4.235,3.444-7.679,7.679-7.679S17.864,5.765,17.864,10C17.864,14.234,14.42,17.68,10.185,17.68 M10.824,10l2.842-2.844c0.178-0.176,0.178-0.46,0-0.637c-0.177-0.178-0.461-0.178-0.637,0l-2.844,2.841L7.341,6.52c-0.176-0.178-0.46-0.178-0.637,0c-0.178,0.176-0.178,0.461,0,0.637L9.546,10l-2.841,2.844c-0.178,0.176-0.178,0.461,0,0.637c0.178,0.178,0.459,0.178,0.637,0l2.844-2.841l2.844,2.841c0.178,0.178,0.459,0.178,0.637,0c0.178-0.176,0.178-0.461,0-0.637L10.824,10z">
               </path>
@@ -42,7 +42,7 @@
             </div>
           </div>
         </div>
-        <p class='comment' v-bind:id="`commetParagraph/${comment.commentID}`">{{ comment.comment }}</p>
+        <p class='comment' v-bind:id="`commetParagraph/${comment.commentID}`">{{  comment.comment  }}</p>
         <div v-bind:id="`commentEditContainer/${comment.commentID}`" class="editContainer">
           <textarea class='commentEditTextarea' :value="comment.comment"
             v-bind:id="`editTextArea/${comment.commentID}`"></textarea><button class='editBtn'
@@ -52,7 +52,7 @@
           <center class='lastRow'>
             <button class='like' @click="likeComment(comment.commentID)">
               <p v-for="like in getLike" :key="like.commentID">
-                <a v-if="like.commentID === comment.commentID && like.count">{{ like.count }}</a>
+                <a v-if="like.commentID === comment.commentID && like.count">{{  like.count  }}</a>
               </p>
               <p>&nbsp;Like</p>
             </button>
@@ -72,36 +72,42 @@
             <div v-if="reply.commentID === comment.commentID" class="replyContainers">
               <div class="firstRow">
                 <div class="usernameDateContainer">
-                  <router-link class='username replyUsername' :to="'/profile/' + reply.id">{{ reply.username }}
+                  <router-link class='username replyUsername' :to="'/profile/' + reply.id">{{  reply.username  }}
                   </router-link>
-                  <a class='date replyDate'>{{ reply.createdAt.slice(0, 10) }}</a>
+                  <a class='date replyDate'>{{  reply.createdAt.slice(0, 10)  }}</a>
                   <div class="replyDropdown">
                     <svg @click.prevent="toggleReplyDropdown(comment.commentID, reply.replyID)"
-                      v-bind:id="`toggleReplyDropdownBtn/${comment.commentID}/${reply.replyID}`" v-if="reply.username === username"
-                      class="svg-icon replyDropdownBtn" fill="white" width="30" height="30" viewBox="0 0 20 20">
+                      v-bind:id="`toggleReplyDropdownBtn/${comment.commentID}/${reply.replyID}`"
+                      v-if="reply.username === username" class="svg-icon replyDropdownBtn" fill="white" width="30"
+                      height="30" viewBox="0 0 20 20">
                       <path class="svg-path"
                         d="M10,2.172c-4.324,0-7.828,3.504-7.828,7.828S5.676,17.828,10,17.828c4.324,0,7.828-3.504,7.828-7.828S14.324,2.172,10,2.172M10,17.004c-3.863,0-7.004-3.141-7.004-7.003S6.137,2.997,10,2.997c3.862,0,7.004,3.141,7.004,7.004S13.862,17.004,10,17.004M10,8.559c-0.795,0-1.442,0.646-1.442,1.442S9.205,11.443,10,11.443s1.441-0.647,1.441-1.443S10.795,8.559,10,8.559 M10,10.619c-0.34,0-0.618-0.278-0.618-0.618S9.66,9.382,10,9.382S10.618,9.661,10.618,10S10.34,10.619,10,10.619 M14.12,8.559c-0.795,0-1.442,0.646-1.442,1.442s0.647,1.443,1.442,1.443s1.442-0.647,1.442-1.443S14.915,8.559,14.12,8.559 M14.12,10.619c-0.34,0-0.618-0.278-0.618-0.618s0.278-0.618,0.618-0.618S14.738,9.661,14.738,10S14.46,10.619,14.12,10.619 M5.88,8.559c-0.795,0-1.442,0.646-1.442,1.442s0.646,1.443,1.442,1.443S7.322,10.796,7.322,10S6.675,8.559,5.88,8.559 M5.88,10.619c-0.34,0-0.618-0.278-0.618-0.618S5.54,9.382,5.88,9.382S6.498,9.661,6.498,10S6.22,10.619,5.88,10.619">
                       </path>
                     </svg>
-                    <svg @click.prevent="closeReplyEditMode(comment.commentID, reply.replyID)" class="svg-icon closeReplyEditBtn"
-                      v-bind:id="`closeReplyEditBtn/${comment.commentID}/${reply.replyID}`" v-if="reply.username === username" fill="black"
-                      width="25" height="25" viewBox="0 0 20 20">
+                    <svg @click.prevent="closeReplyEditMode(comment.commentID, reply.replyID)"
+                      class="svg-icon closeReplyEditBtn"
+                      v-bind:id="`closeReplyEditBtn/${comment.commentID}/${reply.replyID}`"
+                      v-if="reply.username === username" fill="black" width="25" height="25" viewBox="0 0 20 20">
                       <path
                         d="M10.185,1.417c-4.741,0-8.583,3.842-8.583,8.583c0,4.74,3.842,8.582,8.583,8.582S18.768,14.74,18.768,10C18.768,5.259,14.926,1.417,10.185,1.417 M10.185,17.68c-4.235,0-7.679-3.445-7.679-7.68c0-4.235,3.444-7.679,7.679-7.679S17.864,5.765,17.864,10C17.864,14.234,14.42,17.68,10.185,17.68 M10.824,10l2.842-2.844c0.178-0.176,0.178-0.46,0-0.637c-0.177-0.178-0.461-0.178-0.637,0l-2.844,2.841L7.341,6.52c-0.176-0.178-0.46-0.178-0.637,0c-0.178,0.176-0.178,0.461,0,0.637L9.546,10l-2.841,2.844c-0.178,0.176-0.178,0.461,0,0.637c0.178,0.178,0.459,0.178,0.637,0l2.844-2.841l2.844,2.841c0.178,0.178,0.459,0.178,0.637,0c0.178-0.176,0.178-0.461,0-0.637L10.824,10z">
                       </path>
                     </svg>
-                    <div v-bind:id="`replyDropdown/${comment.commentID}/${reply.replyID}`" class="reply-dropdown-content">
-                      <a @click.prevent="editReply(comment.commentID, reply.replyID)" v-bind:id="`replyEdit/${reply.replyID}`">Edit</a>
-                      <a class="replyDeleteBtn" @click.prevent="deleteReply(reply.replyID, comment.commentID)">Delete</a>
+                    <div v-bind:id="`replyDropdown/${comment.commentID}/${reply.replyID}`"
+                      class="reply-dropdown-content">
+                      <a @click.prevent="editReply(comment.commentID, reply.replyID)"
+                        v-bind:id="`replyEdit/${reply.replyID}`">Edit</a>
+                      <a class="replyDeleteBtn"
+                        @click.prevent="deleteReply(reply.replyID, comment.commentID)">Delete</a>
                     </div>
                   </div>
                 </div>
               </div>
-              <p class='replyParagraph' v-bind:id="`replyParagraph/${comment.commentID}/${reply.replyID}`">{{ reply.reply }}</p>
+              <p class='replyParagraph' v-bind:id="`replyParagraph/${comment.commentID}/${reply.replyID}`">{{
+                 reply.reply  }}</p>
               <div v-bind:id="`replyEditContainer/${comment.commentID}/${reply.replyID}`" class="replyEditContainer">
                 <textarea class='replyEditTextarea' :value="reply.reply"
-                  v-bind:id="`replyEditTextArea/${comment.commentID}/${reply.replyID}`"></textarea><button class='editReplyBtn'
-                  @click="editReplyBtn(reply.replyID, comment.commentID)">Edit</button>
+                  v-bind:id="`replyEditTextArea/${comment.commentID}/${reply.replyID}`"></textarea><button
+                  class='editReplyBtn' @click="editReplyBtn(reply.replyID, comment.commentID)">Edit</button>
               </div>
             </div>
           </div>
@@ -123,7 +129,7 @@ export default {
   components: {
     PulseLoader,
     FooterComponent
-},
+  },
   data() {
     return {
       username: '',
@@ -138,67 +144,11 @@ export default {
   },
   created() {
     let self = this
-    axios({
-      method: "GET",
-      url: `${process.env.VUE_APP_ROOT_API}/getMajorName/${this.$route.params.id}`
-    }).then(function (response) {
-      if (response.data.status) {
-        self.majorName = response.data.message[0].name
-      }
-    })
-    if (self.cookies.get('user') !== null) {
-      axios({
-        method: "GET",
-        url: process.env.VUE_APP_ROOT_API + "/cookieValidation",
-        params: {
-          username: self.cookies.get("user").username,
-          password: self.cookies.get("user").password
-        }
-      }).then(function (response) {
-        if (response.data.status) {
-          self.username = response.data.username
-        }
-      })
-    }
-    axios({
-      method: "GET",
-      url: `${process.env.VUE_APP_ROOT_API}/getComment/${this.$route.params.id}`
-    }).then(function (response) {
-      if (response.data.status) {
-        self.getComment = response.data.message
-      }
-    })
-    axios({
-      method: "GET",
-      url: `${process.env.VUE_APP_ROOT_API}/getLike/${this.$route.params.id}`
-    }).then(function (response) {
-      if (response.data.status) {
-        self.getLike = response.data.message
-        let likeList = []
-        for(var i = 0; i < self.getLike.length; i++) {
-          let check = false
-          for (var j = 0; j < likeList.length; j++) {
-            if (likeList[j].commentID === self.getLike[i].commentID) {
-              check = true
-              likeList[j].count++
-            }
-          }
-          if (!check) {
-            likeList.push({ commentID: self.getLike[i].commentID, count: 1 })
-          }
-        }
-        self.getLike = likeList
-      }
-    })
-    axios({
-      method: "GET",
-      url: `${process.env.VUE_APP_ROOT_API}/getReply/${this.$route.params.id}`
-    }).then(function (response) {
-      if (response.data.status) {
-        self.getReply = response.data.message
-        self.findReplyComments(self.getReply)
-      }
-    })
+    this.getMajorName(self)
+    this.cookieValidation(self)
+    this.initComment(self)
+    this.initLike(self)
+    this.initReply(self)
   },
   setup() {
     const { cookies } = useCookies()
@@ -211,6 +161,77 @@ export default {
     this.$el.removeEventListener('click', this.onClick)
   },
   methods: {
+    getMajorName(self) {
+      axios({
+        method: "GET",
+        url: `${process.env.VUE_APP_ROOT_API}/getMajorName/${this.$route.params.id}`
+      }).then(function (response) {
+        if (response.data.status) {
+          self.majorName = response.data.message[0].name
+        }
+      })
+    },
+    cookieValidation(self) {
+      if (self.cookies.get('user') !== null) {
+        axios({
+          method: "GET",
+          url: process.env.VUE_APP_ROOT_API + "/cookieValidation",
+          params: {
+            username: self.cookies.get("user").username,
+            password: self.cookies.get("user").password
+          }
+        }).then(function (response) {
+          if (response.data.status) {
+            self.username = response.data.username
+          }
+        })
+      }
+    },
+    initComment(self) {
+      axios({
+        method: "GET",
+        url: `${process.env.VUE_APP_ROOT_API}/getComment/${this.$route.params.id}`
+      }).then(function (response) {
+        if (response.data.status) {
+          self.getComment = response.data.message
+        }
+      })
+    },
+    initLike(self) {
+      axios({
+        method: "GET",
+        url: `${process.env.VUE_APP_ROOT_API}/getLike/${this.$route.params.id}`
+      }).then(function (response) {
+        if (response.data.status) {
+          self.getLike = response.data.message
+          let likeList = []
+          for (var i = 0; i < self.getLike.length; i++) {
+            let check = false
+            for (var j = 0; j < likeList.length; j++) {
+              if (likeList[j].commentID === self.getLike[i].commentID) {
+                check = true
+                likeList[j].count++
+              }
+            }
+            if (!check) {
+              likeList.push({ commentID: self.getLike[i].commentID, count: 1 })
+            }
+          }
+          self.getLike = likeList
+        }
+      })
+    },
+    initReply(self) {
+      axios({
+        method: "GET",
+        url: `${process.env.VUE_APP_ROOT_API}/getReply/${this.$route.params.id}`
+      }).then(function (response) {
+        if (response.data.status) {
+          self.getReply = response.data.message
+          self.findReplyComments(self.getReply)
+        }
+      })
+    },
     onClick: function (event) {
       if (!event.target.matches('.commentEditBtn') && !event.target.matches('.commentDeleteBtn') && !event.target.matches('.commentDropdownBtn') && !event.target.matches('.svg-icon') && !event.target.matches('.svg-path')) {
         for (var i = 0; i < document.getElementsByClassName('comment-dropdown-content').length; i++) {

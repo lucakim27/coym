@@ -5,10 +5,10 @@
                 <h3>About COYM</h3>
                 <p>What does COYM stand for? It stands for Comment On Your Major.</p>
                 <p>COYM is the neat, simple platform for college major reviews. Founded in 2022, we've collected {{
-                        comment
-                }} comments, {{ reply }} replies and {{ like
-}} likes to the reviews in about 300 college majors and {{ account }} number of people
-                        signed up on the website.</p>
+                     comment 
+                    }} comments, {{  reply  }} replies and {{  like 
+                    }} likes to the reviews in about 300 college majors and {{  account  }} number of people
+                    signed up on the website.</p>
                 <p>Each school year, millions of high school graduates need to pick their majors. For decades, they've
                     only had word-of-mouth and forums to rely on to help with their decisions- until today. Our goal is
                     to help high school graduates make better informed decisions during college admissions
@@ -107,10 +107,10 @@
                 <h3>About COYM</h3>
                 <p>What does COYM stand for? It stands for Comment On Your Major.</p>
                 <p>COYM is the neat, simple platform for college major reviews. Founded in 2022, we've collected {{
-                        comment
-                }} comments, {{ reply }} replies and {{ like
-}} likes to the reviews in about 300 college majors and {{ account }} number of people
-                        signed up on the website.</p>
+                     comment 
+                    }} comments, {{  reply  }} replies and {{  like 
+                    }} likes to the reviews in about 300 college majors and {{  account  }} number of people
+                    signed up on the website.</p>
                 <p>Each school year, millions of high school graduates need to pick their majors. For decades, they've
                     only had word-of-mouth and forums to rely on to help with their decisions- until today. Our goal is
                     to help high school graduates make better informed decisions during college admissions
@@ -225,7 +225,7 @@ export default {
     },
     methods: {
         directToGithub() {
-            window.location.href = 'https://github.com/lucakim27/Comment-On-Your-Major'
+            window.location.href = 'https://github.com/lucakim27/coym'
         },
         directToInstagram() {
             window.location.href = 'https://www.instagram.com/commentonyourmajor/'
@@ -236,21 +236,24 @@ export default {
             } else {
                 return false
             }
+        },
+        getTotalCount() {
+            let self = this
+            axios.all([
+                axios.get(process.env.VUE_APP_ROOT_API + "/getTotalCommentCount"),
+                axios.get(process.env.VUE_APP_ROOT_API + "/getTotalReplyCount"),
+                axios.get(process.env.VUE_APP_ROOT_API + "/getTotalLikeCount"),
+                axios.get(process.env.VUE_APP_ROOT_API + "/getTotalAccountCount"),
+            ]).then(axios.spread((comment, reply, like, account) => {
+                self.comment = comment.data.message[0]['COUNT(*)']
+                self.reply = reply.data.message[0]['COUNT(*)']
+                self.like = like.data.message[0]['COUNT(*)']
+                self.account = account.data.message[0]['COUNT(*)']
+            }))
         }
     },
     mounted() {
-        let self = this
-        axios.all([
-            axios.get(process.env.VUE_APP_ROOT_API + "/getTotalCommentCount"),
-            axios.get(process.env.VUE_APP_ROOT_API + "/getTotalReplyCount"),
-            axios.get(process.env.VUE_APP_ROOT_API + "/getTotalLikeCount"),
-            axios.get(process.env.VUE_APP_ROOT_API + "/getTotalAccountCount"),
-        ]).then(axios.spread((comment, reply, like, account) => {
-            self.comment = comment.data.message[0]['COUNT(*)']
-            self.reply = reply.data.message[0]['COUNT(*)']
-            self.like = like.data.message[0]['COUNT(*)']
-            self.account = account.data.message[0]['COUNT(*)']
-        }))
+        this.getTotalCount()
     }
 }
 </script>

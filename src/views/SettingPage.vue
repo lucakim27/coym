@@ -24,7 +24,7 @@
                 <div v-if="country !== null" class="settingCenterChild">
                     <select name="country" v-model="country">
                         <option :value="country.name" v-for="country in listOfCountries" :key="country.code">
-                            {{ country.name }}
+                            {{  country.name  }}
                         </option>
                     </select>
                 </div>
@@ -91,7 +91,7 @@
                 <div v-if="country !== null" class="settingCenterChild">
                     <select name="country" v-model="country">
                         <option :value="country.name" v-for="country in listOfCountries" :key="country.code">
-                            {{ country.name }}
+                            {{  country.name  }}
                         </option>
                     </select>
                 </div>
@@ -405,31 +405,7 @@ export default {
         }
     },
     created() {
-        let self = this
-        if (self.cookies.get('user') !== null) {
-            axios({
-                method: "GET",
-                url: process.env.VUE_APP_ROOT_API + "/cookieValidation",
-                params: {
-                    username: self.cookies.get("user").username,
-                    password: self.cookies.get("user").password
-                }
-            }).then(function (response) {
-                if (response.data.status) {
-                    self.username = response.data.username
-                    axios({
-                        method: "GET",
-                        url: process.env.VUE_APP_ROOT_API + "/getUserDetails",
-                        params: { username: response.data.username }
-                    }).then(function (response) {
-                        self.country = response.data.userDetails.country === null ? '' : response.data.userDetails.country
-                        self.major = response.data.userDetails.major === null ? '' : response.data.userDetails.major
-                        self.school = response.data.userDetails.school === null ? '' : response.data.userDetails.school
-                        self.gender = response.data.userDetails.gender === null ? '' : response.data.userDetails.gender
-                    })
-                }
-            })
-        }
+        this.cookieValidationWithGetUserDetails()
     },
     setup() {
         const { cookies } = useCookies()
@@ -462,6 +438,33 @@ export default {
                     } else {
                         alert(response.data.message)
                         window.location.reload()
+                    }
+                })
+            }
+        },
+        cookieValidationWithGetUserDetails() {
+            let self = this
+            if (self.cookies.get('user') !== null) {
+                axios({
+                    method: "GET",
+                    url: process.env.VUE_APP_ROOT_API + "/cookieValidation",
+                    params: {
+                        username: self.cookies.get("user").username,
+                        password: self.cookies.get("user").password
+                    }
+                }).then(function (response) {
+                    if (response.data.status) {
+                        self.username = response.data.username
+                        axios({
+                            method: "GET",
+                            url: process.env.VUE_APP_ROOT_API + "/getUserDetails",
+                            params: { username: response.data.username }
+                        }).then(function (response) {
+                            self.country = response.data.userDetails.country === null ? '' : response.data.userDetails.country
+                            self.major = response.data.userDetails.major === null ? '' : response.data.userDetails.major
+                            self.school = response.data.userDetails.school === null ? '' : response.data.userDetails.school
+                            self.gender = response.data.userDetails.gender === null ? '' : response.data.userDetails.gender
+                        })
                     }
                 })
             }
