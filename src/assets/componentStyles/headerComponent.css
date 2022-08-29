@@ -124,9 +124,30 @@ header h2:hover {
     overflow: hidden;
 }
 
+.signOutBtn {
+    text-align: center;
+    padding: 10px !important;
+    border: 2px solid red;
+    margin: 10%;
+    color: red !important;
+    border-radius: 10px;
+}
+
+.sidenav hr {
+    border: 1px solid black;
+}
+
+.loginBtn {
+    text-align: center;
+    padding: 10px !important;
+    border: 2px solid rgb(0, 149, 255);
+    margin: 10%;
+    color: rgb(0, 149, 255) !important;
+    border-radius: 10px;
+}
+
 .dropdown-content a {
-    margin: 0px;
-     
+    margin: 0px;    
     color: rgb(255, 255, 255);
     padding: 20px;
     text-decoration: none;
@@ -136,11 +157,10 @@ header h2:hover {
     height: 40px;
 }
 
-.sidenav,
-.sidenav2 {
+.sidenav {
     height: 0;
     width: 100%;
-    top: 0;
+    top: 10px;
     left: 0;
     margin-top: -10px;
     position: fixed;
@@ -152,8 +172,7 @@ header h2:hover {
      
   }
   
-  .sidenav a,
-  .sidenav2 a {
+  .sidenav a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;

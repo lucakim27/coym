@@ -1,14 +1,11 @@
 <template>
     <div id="mySidenav" class="sidenav"><br>
-        <a @click="renderPages('/')">Home</a>
-        <hr>
         <a @click="renderPages('/chart')">Chart</a>
         <hr>
         <a @click="renderPages('/people')">People</a>
         <hr>
         <div v-if="showLoginIcon">
             <a class="loginBtn" @click="this.showModal = true">Login</a>
-            <hr>
         </div>
         <div v-if="showProfileIcon">
             <a @click="renderProfile()">Profile</a>
@@ -17,40 +14,15 @@
             <hr>
             <a @click="renderPages('/request')">Request</a>
             <hr>
-            <a @click='logout()'>Sign Out</a>
-            <hr>    
+            <a @click='logout()' class="signOutBtn">Sign Out</a>    
         </div>
     </div>
-    <!-- <div id="mySidenav2" class="sidenav2"><br>
-        <a @click="renderProfile()">Profile</a>
-        <hr>
-        <a @click="renderPages('/setting')">Setting</a>
-        <hr>
-        <a @click="renderPages('/request')">Request</a>
-        <hr>
-        <a @click='logout()'>Sign Out</a>
-        <hr>
-    </div> -->
     <div>
         <Modal v-show="showModal" @closeModal="showModal = false" />
     </div>
     <div id="headerContainer">
         <header>
             <img @click="renderPages('/')" src="../assets/images/favicon.png" height="50" alt="">
-            <!-- <svg class='signInIcon' v-if="showLoginIcon" @click="this.showModal = true" height='40' width="40" fill="white"
-                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <g>
-                    <path fill="none" d="M0 0h24v24H0z" />
-                    <path
-                        d="M10 11V8l5 4-5 4v-3H1v-2h9zm-7.542 4h2.124A8.003 8.003 0 0 0 20 12 8 8 0 0 0 4.582 9H2.458C3.732 4.943 7.522 2 12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10c-4.478 0-8.268-2.943-9.542-7z" />
-                </g>
-            </svg>
-            <svg v-if="showProfileIcon" @click.prevent="sidebarOpen2()" class='profileSVG' xmlns="http://www.w3.org/2000/svg"
-                width="35" height="44" fill="white" viewBox="0 0 16 16">
-                <path class="profileSVGPath" d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                <path class="profileSVGPath" fill-rule="evenodd"
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-            </svg> -->
             <span v-if="sidebarOpenBtn" @click="sidebarOpen()" class="sidebarOpenBtn">&#9776;</span>
             <span v-if="sidebarCloseBtn" @click="sidebarClose()" class="sidebarCloseBtn">&times;</span>
         </header>
