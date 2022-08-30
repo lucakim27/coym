@@ -135,18 +135,14 @@
                         <div>
                             <a>Comment History</a>
                             <hr>
-                            <a class="profileLoader" v-if="commentDetails === null">
+                            <a class="profileLoader" v-if="!loaded">
                                 <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
                             </a>
-                            <a v-if="commentDetails !== null && commentDetails.length === 0">
-                                <p>There's no history</p>
+                            <a v-if="loaded && !commentChartData.labels.length">
+                                <p>There's no comment history.</p>
                             </a>
-                            <a v-for="comment in commentDetails" :key="comment.name">
-                                <p>
-                                    <router-link :to="'/comment/' + comment.id">{{  comment.name  }}</router-link>
-                                    :
-                                    {{  comment.count  }}
-                                </p>
+                            <a v-if="loaded && commentChartData.labels.length">
+                                <Doughnut :chart-data="commentChartData" :chart-options="chartOptions" />
                             </a>
                         </div>
                     </div>
@@ -154,18 +150,14 @@
                         <div>
                             <a>Reply History</a>
                             <hr>
-                            <a class="profileLoader" v-if="replyDetails === null">
+                            <a class="profileLoader" v-if="!loaded">
                                 <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
                             </a>
-                            <a v-if="replyDetails !== null && replyDetails.length === 0">
-                                <p>There's no history</p>
+                            <a v-if="loaded && !replyChartData.labels.length">
+                                <p>There's no reply history.</p>
                             </a>
-                            <a v-for="comment in replyDetails" :key="comment.name">
-                                <p>
-                                    <router-link :to="'/comment/' + comment.id">{{  comment.name  }}</router-link>
-                                    :
-                                    {{  comment.count  }}
-                                </p>
+                            <a v-if="loaded && replyChartData.labels.length">
+                                <Doughnut :chart-data="replyChartData" :chart-options="chartOptions" />
                             </a>
                         </div>
                     </div>
@@ -173,18 +165,14 @@
                         <div>
                             <a>Like History</a>
                             <hr>
-                            <a class="profileLoader" v-if="likeDetails === null">
+                            <a class="profileLoader" v-if="!loaded">
                                 <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
                             </a>
-                            <a v-if="likeDetails !== null && likeDetails.length === 0">
-                                <p>There's no history</p>
+                            <a v-if="loaded && !likeChartData.labels.length">
+                                <p>There's no like history.</p>
                             </a>
-                            <a v-for="comment in likeDetails" :key="comment.name">
-                                <p>
-                                    <router-link :to="'/comment/' + comment.id">{{  comment.name  }}</router-link>
-                                    :
-                                    {{  comment.count  }}
-                                </p>
+                            <a v-if="loaded && likeChartData.labels.length">
+                                <Doughnut :chart-data="likeChartData" :chart-options="chartOptions" />
                             </a>
                         </div>
                     </div>
@@ -325,17 +313,14 @@
                     <div>
                         <a>Comment History</a>
                         <hr>
-                        <a class="profileLoader" v-if="commentDetails === null">
+                        <a class="profileLoader" v-if="!loaded">
                             <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
                         </a>
-                        <a v-if="commentDetails !== null && commentDetails.length === 0">
-                            <p>There's no history</p>
-                        </a>
-                        <a v-for="comment in commentDetails" :key="comment.name">
-                            <p>
-                                <router-link :to="'/comment/' + comment.id">{{  comment.name  }}</router-link>:
-                                {{  comment.count  }}
-                            </p>
+                        <a v-if="loaded && !commentChartData.labels.length">
+                                <p>There's no comment history.</p>
+                            </a>
+                        <a v-if="loaded && commentChartData.labels.length">
+                            <Doughnut :chart-data="commentChartData" :chart-options="chartOptions" />
                         </a>
                     </div>
                 </div>
@@ -343,17 +328,15 @@
                     <div>
                         <a>Reply History</a>
                         <hr>
-                        <a class="profileLoader" v-if="replyDetails === null">
+                        <a class="profileLoader" v-if="!loaded">
                             <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
                         </a>
-                        <a v-if="replyDetails !== null && replyDetails.length === 0">
-                            <p>There's no history</p>
-                        </a>
-                        <a v-for="comment in replyDetails" :key="comment.name">
-                            <p>
-                                <router-link :to="'/comment/' + comment.id">{{  comment.name  }}</router-link>:
-                                {{  comment.count  }}
-                            </p>
+
+                        <a v-if="loaded && !replyChartData.labels.length">
+                                <p>There's no reply history.</p>
+                            </a>
+                        <a v-if="loaded && replyChartData.labels.length">
+                            <Doughnut :chart-data="replyChartData" :chart-options="chartOptions" />
                         </a>
                     </div>
                 </div>
@@ -361,17 +344,15 @@
                     <div>
                         <a>Like History</a>
                         <hr>
-                        <a class="profileLoader" v-if="likeDetails === null">
+                        <a class="profileLoader" v-if="!loaded">
                             <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
                         </a>
-                        <a v-if="likeDetails !== null && likeDetails.length === 0">
-                            <p>There's no history</p>
-                        </a>
-                        <a v-for="comment in likeDetails" :key="comment.name">
-                            <p>
-                                <router-link :to="'/comment/' + comment.id">{{  comment.name  }}</router-link>:
-                                {{  comment.count  }}
-                            </p>
+
+                        <a v-if="loaded && !likeChartData.labels.length">
+                                <p>There's no like history.</p>
+                            </a>
+                        <a v-if="loaded && likeChartData.labels.length">
+                            <Doughnut :chart-data="likeChartData" :chart-options="chartOptions" />
                         </a>
                     </div>
                 </div>
@@ -383,6 +364,16 @@
     </div>
 </template>
 <script>
+import { Doughnut } from 'vue-chartjs'
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+  CategoryScale
+} from 'chart.js'
+ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale)
 import axios from 'axios'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 import FooterComponent from '../components/FooterComponent.vue'
@@ -390,17 +381,53 @@ export default {
     name: 'ProfilePage',
     components: {
         PulseLoader,
-        FooterComponent
+        FooterComponent,
+        Doughnut
     },
     data() {
         return {
+            loaded: false,
             userDetails: null,
-            commentDetails: null,
-            replyDetails: null,
-            likeDetails: null
+            commentChartData: {
+                labels: [],
+                datasets: [
+                    {
+                        backgroundColor: [],
+                        data: []
+                    }
+                ]
+            },
+            replyChartData: {
+                labels: [],
+                datasets: [
+                    {
+                        backgroundColor: [],
+                        data: []
+                    }
+                ]
+            },
+            likeChartData: {
+                labels: [],
+                datasets: [
+                    {
+                        backgroundColor: [],
+                        data: []
+                    }
+                ]
+            },
+            chartOptions: {
+                responsive: true,
+                maintainAspectRatio: false,
+                width: '50%',
+                height: '50%'
+            }
         }
     },
     methods: {
+        random_rgba() {
+            var o = Math.round, r = Math.random, s = 255;
+            return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+        },
         isMobile() {
             if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
                 return true
@@ -418,9 +445,23 @@ export default {
             ]).then(axios.spread((account, comment, reply, like) => {
                 if (account.data.status && comment.data.status && reply.data.status && like.data.status) {
                     self.userDetails = account.data.data.username
-                    self.commentDetails = comment.data.data
-                    self.replyDetails = reply.data.data
-                    self.likeDetails = like.data.data
+                    comment.data.data.forEach(key => {
+                        self.commentChartData.labels.push(key.name)
+                        self.commentChartData.datasets[0].backgroundColor.push(self.random_rgba())
+                        self.commentChartData.datasets[0].data.push(key.count)
+                    })
+                    reply.data.data.forEach(key => {
+                        self.replyChartData.labels.push(key.name)
+                        self.replyChartData.datasets[0].backgroundColor.push(self.random_rgba())
+                        self.replyChartData.datasets[0].data.push(key.count)
+                    })
+                    like.data.data.forEach(key => {
+                        self.likeChartData.labels.push(key.name)
+                        self.likeChartData.datasets[0].backgroundColor.push(self.random_rgba())
+                        self.likeChartData.datasets[0].data.push(key.count)
+                    })
+                    self.loaded = true
+                    console.log(!self.commentChartData.labels.length)
                 }
             }))
         }

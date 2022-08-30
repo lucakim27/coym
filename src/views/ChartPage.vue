@@ -49,17 +49,17 @@ export default {
                 datasets: [
                     {
                         label: 'Comment',
-                        backgroundColor: '#ff6384',
+                        backgroundColor: this.random_rgba(),
                         data: []
                     },
                     {
                         label: 'Reply',
-                        backgroundColor: '#36a2eb',
+                        backgroundColor: this.random_rgba(),
                         data: []
                     },
                     {
                         label: 'Like',
-                        backgroundColor: '#ffce56',
+                        backgroundColor: this.random_rgba(),
                         data: []
                     }
                 ]
@@ -67,6 +67,10 @@ export default {
         }
     },
     methods: {
+        random_rgba() {
+            var o = Math.round, r = Math.random, s = 255;
+            return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+        },
         isMobile() {
             if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
                 return true

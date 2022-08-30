@@ -5,15 +5,13 @@
         </div>
         <img v-show="isLoaded" @load="loaded" :style='mobileImg' src='../assets/images/main.jpg' class="mainImage">
         <div class="homeInput" :style="mobileInput">
-            
             <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
             <div class="searchBarContainer">
-                <form class="homeForm" action="">
+                <form class="homeForm">
                     <input type="search" class="homeInputText" placeholder="Search for your major..." @input="searchChangeFunc($event)" required>
                    <i class="fa fa-search"></i>
                 </form>
             </div>
-
             <table id="options" class="mobileHomeOptions homeOptions" v-if="isMobile()">
                 <tr v-for="major in filteredMajorsList" :key="major.id">
                     <td scope="row">
