@@ -46,6 +46,11 @@ const routes = [
     name: 'AboutUsPage',
     component: () => import('@/views/AboutUsPage'),
   },
+  {
+    path: '/search',
+    name: 'SearchPage',
+    component: () => import('@/views/SearchPage'),
+  },
 ]
 
 export const router = createRouter({

@@ -425,8 +425,8 @@ export default {
     },
     methods: {
         random_rgba() {
-            var o = Math.round, r = Math.random, s = 255;
-            return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+            var o = Math.round, r = Math.random, s = 255
+            return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')'
         },
         isMobile() {
             if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
@@ -461,7 +461,6 @@ export default {
                         self.likeChartData.datasets[0].data.push(key.count)
                     })
                     self.loaded = true
-                    console.log(!self.commentChartData.labels.length)
                 }
             }))
         }

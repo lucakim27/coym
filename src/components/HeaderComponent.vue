@@ -4,6 +4,8 @@
         <hr>
         <a @click="renderPages('/people')">People</a>
         <hr>
+        <a @click="renderPages('/search')">Comment</a>
+        <hr>
         <div v-if="showLoginIcon">
             <a class="loginBtn" @click="this.showModal = true">Login</a>
         </div>
