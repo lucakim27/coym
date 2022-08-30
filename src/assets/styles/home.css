@@ -1,23 +1,3 @@
-.homeDescriptionContainer {
-    text-align: center;
-    margin-bottom: 35px;
-}
-
-.homeDescriptionContainer svg {
-    margin: 10px;
-    border-radius: 20px;
-    padding: 10px;
-    box-shadow: -3px 5px 3px rgb(0 0 0 / 30%);
-}
-
-.homeDescriptionContainer svg:hover {
-    margin: 10px;
-    border-radius: 20px;
-    padding: 10px;
-    background: rgb(146, 156, 161);
-    cursor: pointer;
-}
-
 .mainImage {
     width: 97%;
     height: 70%;
@@ -32,6 +12,61 @@
     overflow-y: scroll;
 }
 
-.homeDescriptionExplanation {
-     margin-top: 10px;
+.homeRecentCommentHeaderTitle {
+    font-weight: bold;
+}
+
+.homeRecentCommentHeader,
+.homeMajorNameAndCount {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.homeUsernameAndDate {
+    display: flex;
+}
+
+.homeDirect {
+    color: rgb(0, 136, 255);
+    text-decoration: none;
+}
+
+.homeLoader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
+.homeDate {
+    color: rgba(255, 255, 255, 0.589);
+    font-weight: lighter;
+}
+
+.homeUsernameAndDate a {
+    padding: 5px;
+    margin: 5px;
+}
+
+.homeUsername {
+    font-weight: bold;
+}
+
+.homeRecentCommentContainer {
+    padding: 10px;
+    text-align: left;
+}
+
+.homeRecentCommentContainer p {
+    margin: 10px;
+}
+
+.homeEachRecentComment {
+    color: white;
+    box-shadow: -3px 5px 3px rgb(0 0 0 / 50%);
+    background-color: rgb(146, 156, 161);
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10px;
 }
