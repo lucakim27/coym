@@ -16,7 +16,7 @@
             <hr>
             <a @click="renderPages('/request')">Request</a>
             <hr>
-            <a @click='logout()' class="signOutBtn">Sign Out</a>    
+            <a @click='logout()' class="signOutBtn">Sign Out</a>
         </div>
     </div>
     <div>
@@ -25,6 +25,16 @@
     <div id="headerContainer">
         <header>
             <img @click="renderPages('/')" src="../assets/images/favicon.png" height="50" alt="">
+            <input class="headerInput" id="headerInput" type="text" placeholder="Search by major..."
+                @input="searchChangeFunc($event)">
+            <table id="options" class="headerOptions">
+                <tr v-for="major in filteredMajorsList" :key="major.id">
+                    <td scope="row">
+                        <a @click="renderComment(major.id)">{{  major.name  }}</a>
+                        <br>
+                    </td>
+                </tr>
+            </table>
             <span v-if="sidebarOpenBtn" @click="sidebarOpen()" class="sidebarOpenBtn">&#9776;</span>
             <span v-if="sidebarCloseBtn" @click="sidebarClose()" class="sidebarCloseBtn">&times;</span>
         </header>
@@ -44,33 +54,14 @@ export default {
             username: null,
             showModal: false,
             sidebarOpenBtn: true,
-            sidebarCloseBtn: false
+            sidebarCloseBtn: false,
+            majorsList: [],
+            filteredMajorsList: null
         }
     },
     created() {
-        let self = this
-        if (self.cookies.get('user') !== null) {
-            axios({
-                method: "GET",
-                url: process.env.VUE_APP_ROOT_API + "/cookieValidation",
-                params: {
-                    username: self.cookies.get("user").username,
-                    password: self.cookies.get("user").password
-                }
-            }).then(function (response) {
-                if (response.data.status) {
-                    self.username = response.data.username
-                    self.showLoginIcon = false
-                    self.showProfileIcon = true
-                } else {
-                    self.showProfileIcon = false
-                    self.showLoginIcon = true      
-                }
-            })
-        } else {
-            self.showProfileIcon = false
-            self.showLoginIcon = true
-        }
+        this.cookieValidation()
+        this.getMajorList()
     },
     setup() {
         const { cookies } = useCookies()
@@ -83,16 +74,68 @@ export default {
         document.addEventListener('click', this.profileDropdownClose)
     },
     methods: {
-        onChange() {
-            if (document.URL.split('/').at(-2) === 'comment') {
-                window.location.href = '/comment/' + this.selectedOption
+        cookieValidation() {
+            let self = this
+            if (self.cookies.get('user') !== null) {
+                axios({
+                    method: "GET",
+                    url: process.env.VUE_APP_ROOT_API + "/cookieValidation",
+                    params: {
+                        username: self.cookies.get("user").username,
+                        password: self.cookies.get("user").password
+                    }
+                }).then(function (response) {
+                    if (response.data.status) {
+                        self.username = response.data.username
+                        self.showLoginIcon = false
+                        self.showProfileIcon = true
+                    } else {
+                        self.showProfileIcon = false
+                        self.showLoginIcon = true
+                    }
+                })
             } else {
-                document.getElementById("mySidenav").style.height = "0"
-                this.sidebarCloseBtn = false
-                this.sidebarOpenBtn = true
-                window.scrollTo(0, 0)
-                this.$router.push('/comment/' + this.selectedOption)
+                self.showProfileIcon = false
+                self.showLoginIcon = true
             }
+        },
+        renderComment(id) {
+            if (document.URL.split('/').at(-2) === 'comment') {
+                window.location.href = '/comment/' + id
+            } else {
+                document.getElementById('headerInput').value = ''
+                document.getElementById('options').style.display = 'none'
+                this.$router.push('/comment/' + id)
+                window.scrollTo(0, 0)
+            }
+
+        },
+        searchChangeFunc(event) {
+            this.filteredMajorsList = []
+            if (event.target.value.length > 0) {
+                for (let i = 0; i < this.majorsList.length; i++) {
+                    if (this.majorsList[i].name.toLowerCase().includes(event.target.value.toLowerCase())) {
+                        this.filteredMajorsList.push(this.majorsList[i])
+                    }
+                }
+                document.getElementById('options').style.display = 'block'
+            } else {
+                document.getElementById('options').style.display = 'none'
+            }
+        },
+        getMajorList() {
+            let self = this
+            axios({
+                method: "GET",
+                url: process.env.VUE_APP_ROOT_API + "/getMajorList"
+            }).then(function (response) {
+                if (response.data.status) {
+                    response.data.message.forEach(key => {
+                        self.majorsList.push({ name: key.name, id: key.id })
+                        self.filteredMajorsList = self.majorsList
+                    })
+                }
+            })
         },
         renderPages(page) {
             document.getElementById("mySidenav").style.height = "0"
@@ -135,13 +178,13 @@ export default {
             window.location.reload()
         },
         sidebarOpen() {
-            this.sidebarOpenBtn = false
-            this.sidebarCloseBtn = true
+            this.sidebarOpenBtn = !this.sidebarOpenBtn
+            this.sidebarCloseBtn = !this.sidebarCloseBtn
             document.getElementById("mySidenav").style.height = "100%"
         },
         sidebarClose() {
-            this.sidebarCloseBtn = false
-            this.sidebarOpenBtn = true
+            this.sidebarOpenBtn = !this.sidebarOpenBtn
+            this.sidebarCloseBtn = !this.sidebarCloseBtn
             document.getElementById("mySidenav").style.height = "0"
         }
     }

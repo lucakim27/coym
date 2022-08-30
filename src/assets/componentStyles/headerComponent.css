@@ -63,7 +63,7 @@ header span {
 .headerCommentsSelect {
     width: 50%;
     float: right;
-     
+
 }
 
 header span:hover {
@@ -74,13 +74,13 @@ header span:hover {
 
 .sidebarCloseBtn {
     font-size: 50px;
-    top: 0px !important;
+    top: -2px !important;
     right: 8px !important;
 }
 
 header h2 {
-    width:fit-content;
-     
+    width: fit-content;
+
     margin-top: 11px;
     font-size: 40px;
     overflow: auto;
@@ -147,7 +147,7 @@ header h2:hover {
 }
 
 .dropdown-content a {
-    margin: 0px;    
+    margin: 0px;
     color: rgb(255, 255, 255);
     padding: 20px;
     text-decoration: none;
@@ -169,10 +169,10 @@ header h2:hover {
     overflow: scroll;
     transition: 0.5s;
     padding-top: 60px;
-     
-  }
-  
-  .sidenav a {
+
+}
+
+.sidenav a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
@@ -180,27 +180,76 @@ header h2:hover {
     display: block;
     transition: 0.3s;
     cursor: pointer;
-  }
-  
-  .sidenav a:hover,
-  .sidenav2 a:hover {
+}
+
+.sidenav a:hover,
+.sidenav2 a:hover {
     color: #696969;
-  }
-  
-  .sidenav .closebtn {
+}
+
+.sidenav .closebtn {
     position: absolute;
     top: 0;
     right: 25px;
     font-size: 36px;
     margin-left: 50px;
-  }
-  
-  @media screen and (max-height: 450px) {
+}
+
+@media screen and (max-height: 450px) {
     .sidenav {
-      padding-top: 15px;
+        padding-top: 15px;
     }
-  
+
     .sidenav a {
-      font-size: 18px;
+        font-size: 18px;
     }
-  }
+}
+
+.headerInput {
+    background-color: rgba(146, 156, 161, 0.269);
+    border: 1px solid black;
+    position: absolute;
+    left: 70px;
+    top: 5px;
+    margin: 10px;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.headerOptions {
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.718);
+    position: absolute;
+    left: 70px;
+    top: 47px;
+    margin: 10px;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 8px;
+    height: 200px;
+    width: 280px;
+    overflow-y: scroll;
+    background: white;
+    color: black;
+    display: none;
+}
+
+.headerOptions tr td {
+    width: 10%;
+    margin: 20px;
+    padding: 10px;
+}
+
+.headerOptions tr td a {
+    min-width: 50%;
+}
+
+.headerOptions a {
+    color: black;
+    text-decoration: none;
+}
+
+.headerOptions a:hover {
+    color: rgb(0, 136, 255);
+    cursor: pointer;
+}
