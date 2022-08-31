@@ -35,8 +35,7 @@
                     </td>
                 </tr>
             </table>
-            <span v-if="sidebarOpenBtn" @click="sidebarOpen()" class="sidebarOpenBtn">&#9776;</span>
-            <span v-if="sidebarCloseBtn" @click="sidebarClose()" class="sidebarCloseBtn">&times;</span>
+            <span @click="sidebarOpen()" class="sidebarOpenBtn">&#9776;</span>
         </header>
     </div>
 </template>
@@ -53,8 +52,6 @@ export default {
             showProfileIcon: false,
             username: null,
             showModal: false,
-            sidebarOpenBtn: true,
-            sidebarCloseBtn: false,
             majorsList: [],
             filteredMajorsList: null
         }
@@ -139,8 +136,6 @@ export default {
         },
         renderPages(page) {
             document.getElementById("mySidenav").style.height = "0"
-            this.sidebarCloseBtn = false
-            this.sidebarOpenBtn = true
             window.scrollTo(0, 0)
             this.$router.push(page)
         },
@@ -158,8 +153,6 @@ export default {
                         window.location.href = '/profile/' + response.data.data.id.id
                     } else {
                         document.getElementById("mySidenav").style.height = "0"
-                        self.sidebarCloseBtn = false
-                        self.sidebarOpenBtn = true
                         window.scrollTo(0, 0)
                         self.$router.push('/profile/' + response.data.data.id.id)
                     }
@@ -169,8 +162,6 @@ export default {
         profileDropdownClose(event) {
             if (!event.target.matches('.loginBtn') && !event.target.matches('.headerCommentsSelect') && !event.target.matches('.headerComments') && !event.target.matches('.dropdownUsername') && !event.target.matches('.sidebarOpenBtn') && !event.target.matches('.sidebarCloseBtn') && !event.target.matches('.sidenav')) {
                 document.getElementById("mySidenav").style.height = "0"
-                this.sidebarCloseBtn = false
-                this.sidebarOpenBtn = true
             }
         },
         logout() {
@@ -178,14 +169,7 @@ export default {
             window.location.reload()
         },
         sidebarOpen() {
-            this.sidebarOpenBtn = !this.sidebarOpenBtn
-            this.sidebarCloseBtn = !this.sidebarCloseBtn
-            document.getElementById("mySidenav").style.height = "100%"
-        },
-        sidebarClose() {
-            this.sidebarOpenBtn = !this.sidebarOpenBtn
-            this.sidebarCloseBtn = !this.sidebarCloseBtn
-            document.getElementById("mySidenav").style.height = "0"
+            document.getElementById("mySidenav").style.height = document.getElementById("mySidenav").style.height === '100%' ?  '0' : '100%' 
         }
     }
 }
