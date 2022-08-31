@@ -23,7 +23,7 @@
         <Modal v-show="showModal" @closeModal="showModal = false" />
     </div>
     <div id="headerContainer">
-        <header>
+        <header class="header">
             <img @click="renderPages('/')" src="../assets/images/favicon.png" height="50" alt="">
             <input class="headerInput" id="headerInput" type="text" placeholder="Search by major..."
                 @input="searchChangeFunc($event)">
