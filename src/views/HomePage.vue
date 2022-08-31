@@ -11,7 +11,7 @@
             </div>
             <div class="homeEachRecentComment" v-for="comment in recentComments" :key="comment.id">
                 <div class="homeUsernameAndDate">
-                    <a class="homeUsername">{{  comment.username  }}</a>
+                    <router-link class="homeUsername" :to="'/profile/' + comment.id">{{ comment.username }}</router-link>
                     <a class="homeDate">{{  comment.createdAt.slice(0, 10)  }}</a>
                 </div>
                 <div>
@@ -29,7 +29,7 @@
             </div>
             <div class="homeEachRecentComment" v-for="major in popularMajors" :key="major.name">
                 <div class="homeMajorNameAndCount">
-                    <a class="homeUsername">{{  major.name  }}</a>
+                    <router-link class="homeUsername" :to="'/comment/' + major.id">{{ major.name }}</router-link>
                 </div>
             </div>
             <div class="homeLoader" v-if="popularMajors === null">
@@ -94,6 +94,7 @@ export default {
             }).then(function (response) {
                 if (response.data.status) {
                     self.popularMajors = response.data.message
+                    console.log(self.popularMajors)
                 }
             })
         }

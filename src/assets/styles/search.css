@@ -2,64 +2,6 @@
     text-align: center;
 }
 
-.searchInput input {
-    padding: 15px;
-    font-size: 16px;
-    width: 100%;
-    border-radius: 20px;
-    background-color: #ffffff;
-}
-
-.searchBarContainer {
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-}
-
-.searchForm {
-    transition: all 1s;
-    width: 50px;
-    box-sizing: border-box;
-    border-radius: 25px;
-    border: 4px solid rgb(146, 156, 161);
-}
-
-.searchInputText {
-    height: 42.5px;
-    line-height: 30px;
-    outline: 0;
-    border: 0;
-    display: none;
-    font-size: 1em;
-    border-radius: 20px;
-    padding: 0 20px;
-}
-
-.fa {
-    border-radius: 50%;
-    color: #000000;
-    text-align: center;
-    font-size: 1.2em;
-    transition: all 1s;
-    padding: 10px;
-}
-
-.searchForm:hover,
-.searchForm:valid{
-    width: 85%;
-    cursor: pointer;
-}
-
-.searchForm:hover input,
-.searchForm:valid input{
-    display: block;
-}
-
-.searchForm:hover .fa,
-.searchForm:valid .fa {
-    display: none;
-}
-
 .searchOptions a {
     color: black;
     text-decoration: none;
