@@ -19,22 +19,19 @@
                             <a class="profileLoader" v-if="userDetails === null">
                                 <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
                             </a>
-                            <a v-if="userDetails !== null" class="profileUserDetailsDesktopContainer">
-                                <div>
-                                    <svg style="margin-top: -5px; margin-right: -0px;"
-                                        xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
-                                        fill="white">
+                            <a v-if="userDetails !== null">
+                                <div v-if="userDetails.gender !== null && userDetails.gender !== ''">
+                                    <svg style="margin-top: -5px; margin-left: -4px;" xmlns="http://www.w3.org/2000/svg"
+                                        width="40" height="40" viewBox="0 0 24 24" fill="white">
                                         <path fill-rule="evenodd" clip-rule="evenodd"
                                             d="M12.1888 7L12.1909 5L19.1909 5.00746L19.1834 12.0075L17.1834 12.0053L17.1873 8.41678L14.143 11.4611C15.4612 13.4063 15.2587 16.0743 13.5355 17.7975C11.5829 19.7501 8.41709 19.7501 6.46447 17.7975C4.51184 15.8449 4.51184 12.6791 6.46447 10.7264C8.16216 9.02873 10.777 8.80709 12.7141 10.0615L15.7718 7.00382L12.1888 7ZM7.87868 12.1406C9.05025 10.9691 10.9497 10.9691 12.1213 12.1406C13.2929 13.3122 13.2929 15.2117 12.1213 16.3833C10.9497 17.5549 9.05025 17.5549 7.87868 16.3833C6.70711 15.2117 6.70711 13.3122 7.87868 12.1406Z"
                                             fill="white" />
                                     </svg>
-                                    <p v-if="userDetails.gender === null">N/A</p>
-                                    <p v-if="userDetails.gender === ''">N/A</p>
-                                    <p v-if="userDetails.gender !== null && userDetails.gender !== ''">{{
+                                    <p style="margin-left: -7px;">{{
                                          userDetails.gender 
                                         }}</p>
                                 </div>
-                                <div>
+                                <div v-if="userDetails.country !== null && userDetails.country !== ''">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
                                         viewBox="0 0 512 512">
                                         <path d="M267,474l-.8-.13A.85.85,0,0,0,267,474Z" />
@@ -51,17 +48,15 @@
                                         <path
                                             d="M256,72a184,184,0,1,1-130.1,53.9A182.77,182.77,0,0,1,256,72m0-40C132.3,32,32,132.3,32,256S132.3,480,256,480,480,379.7,480,256,379.7,32,256,32Z" />
                                     </svg>
-                                    <p v-if="userDetails.country === null">N/A</p>
-                                    <p v-if="userDetails.country === ''">N/A</p>
-                                    <p v-if="userDetails.country !== null && userDetails.country !== ''">{{
+                                    <p>{{
                                          userDetails.country 
                                         }}</p>
                                 </div>
-                                <div>
+                                <div v-if="userDetails.major !== null && userDetails.major !== ''">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="white"
                                         xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" width="30"
                                         height="30" viewBox="0 0 512.001 512.001"
-                                        style="margin-top:2px; enable-background:new 0 0 512.001 512.001;"
+                                        style="margin-top: -0px; enable-background:new 0 0 512.001 512.001;"
                                         xml:space="preserve">
                                         <g>
                                             <g>
@@ -110,23 +105,87 @@
                                         <g>
                                         </g>
                                     </svg>
-                                    <p v-if="userDetails.major === null"> N/A</p>
-                                    <p v-if="userDetails.major === ''">N/A</p>
-                                    <p v-if="userDetails.major !== null && userDetails.major !== ''">{{
-                                         userDetails.major 
-                                        }}</p>
+                                    <p>{{  userDetails.major  }}
+                                    </p>
                                 </div>
-                                <div>
+                                <div v-if="userDetails.school !== null && userDetails.school !== ''">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
                                         data-name="Layer 1" viewBox="0 0 24 24">
                                         <path
                                             d="M21,10a.99974.99974,0,0,0,1-1V6a.9989.9989,0,0,0-.68359-.94824l-9-3a1.002,1.002,0,0,0-.63282,0l-9,3A.9989.9989,0,0,0,2,6V9a.99974.99974,0,0,0,1,1H4v7.18427A2.99507,2.99507,0,0,0,2,20v2a.99974.99974,0,0,0,1,1H21a.99974.99974,0,0,0,1-1V20a2.99507,2.99507,0,0,0-2-2.81573V10ZM20,21H4V20a1.001,1.001,0,0,1,1-1H19a1.001,1.001,0,0,1,1,1ZM6,17V10H8v7Zm4,0V10h4v7Zm6,0V10h2v7ZM4,8V6.7207l8-2.667,8,2.667V8Z" />
                                     </svg>
-                                    <p v-if="userDetails.school === null"> N/A</p>
-                                    <p v-if="userDetails.school === ''">N/A</p>
-                                    <p v-if="userDetails.school !== null && userDetails.school !== ''">{{
-                                         userDetails.school 
+                                    <p>{{  userDetails.school 
                                         }}</p>
+                                </div>
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        version="1.1" id="Layer_1" x="0px" y="0px" width="30" height="30" fill="white"
+                                        viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;"
+                                        xml:space="preserve">
+                                        <g>
+                                            <g>
+                                                <rect y="478.609" width="512" height="33.391" />
+                                            </g>
+                                        </g>
+                                        <g>
+                                            <g>
+                                                <path
+                                                    d="M256,0c-22.928,10.021-38.957,40.479-38.957,61.217c0,21.515,17.441,38.957,38.957,38.957s38.957-17.441,38.957-38.957    C294.957,40.479,278.928,10.021,256,0z" />
+                                            </g>
+                                        </g>
+                                        <g>
+                                            <g>
+                                                <path
+                                                    d="M411.826,200.348H278.261v-66.783h-44.522v66.783H100.174c-30.609,0-55.652,25.043-55.652,55.652v5.565    c23.599,0,36.453,10.555,45.841,18.262c8.109,6.658,13.004,10.677,24.651,10.677c11.646,0,16.54-4.019,24.649-10.677    c9.386-7.707,22.241-18.262,45.84-18.262s36.453,10.555,45.84,18.262c8.11,6.658,13.005,10.677,24.651,10.677    c11.646,0,16.541-4.019,24.649-10.677c9.386-7.707,22.24-18.262,45.839-18.262c23.6,0,36.457,10.555,45.844,18.262    c8.111,6.658,13.006,10.677,24.655,10.677s16.544-4.019,24.655-10.677c9.387-7.707,22.243-18.262,45.844-18.262V256    C467.478,225.391,442.435,200.348,411.826,200.348z" />
+                                            </g>
+                                        </g>
+                                        <g>
+                                            <g>
+                                                <path
+                                                    d="M442.823,305.634c-9.387,7.708-22.243,18.262-45.843,18.262c-23.601,0-36.457-10.555-45.844-18.262    c-8.111-6.658-13.006-10.677-24.655-10.677c-11.646,0-16.54,4.019-24.649,10.677c-9.386,7.707-22.241,18.262-45.84,18.262    c-23.599,0-36.453-10.555-45.841-18.262c-8.11-6.658-13.004-10.677-24.651-10.677c-11.646,0-16.541,4.019-24.649,10.677    c-9.385,7.707-22.24,18.262-45.839,18.262c-23.599,0-36.453-10.555-45.841-18.262c-8.109-6.658-13.004-10.677-24.651-10.677    v150.261h422.957V294.957C455.829,294.957,450.934,298.976,442.823,305.634z" />
+                                            </g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                    </svg>
+                                    <p>{{  userDetails.createdAt.slice(0, 10) 
+                                        }}</p>
+                                </div>
+                                <div v-if="userDetails.url !== null && userDetails.url !== ''">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 16 16"
+                                        version="1.1" fill="none" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="1.5">
+                                        <path d="m2.75 10.25h9.5m-8.5-4.5h9.5m-2.5-4-1.5 12.5m-2.5-12.5-1.5 12.5" />
+                                    </svg>
+                                    <p><a :href="userDetails.url">{{  userDetails.sns  }}</a></p>
                                 </div>
                             </a>
                         </div>
@@ -200,21 +259,18 @@
                             <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
                         </a>
                         <a v-if="userDetails !== null">
-                            <div>
+                            <div v-if="userDetails.gender !== null && userDetails.gender !== ''">
                                 <svg style="margin-top: -5px; margin-left: -4px;" xmlns="http://www.w3.org/2000/svg"
                                     width="40" height="40" viewBox="0 0 24 24" fill="white">
                                     <path fill-rule="evenodd" clip-rule="evenodd"
                                         d="M12.1888 7L12.1909 5L19.1909 5.00746L19.1834 12.0075L17.1834 12.0053L17.1873 8.41678L14.143 11.4611C15.4612 13.4063 15.2587 16.0743 13.5355 17.7975C11.5829 19.7501 8.41709 19.7501 6.46447 17.7975C4.51184 15.8449 4.51184 12.6791 6.46447 10.7264C8.16216 9.02873 10.777 8.80709 12.7141 10.0615L15.7718 7.00382L12.1888 7ZM7.87868 12.1406C9.05025 10.9691 10.9497 10.9691 12.1213 12.1406C13.2929 13.3122 13.2929 15.2117 12.1213 16.3833C10.9497 17.5549 9.05025 17.5549 7.87868 16.3833C6.70711 15.2117 6.70711 13.3122 7.87868 12.1406Z"
                                         fill="white" />
                                 </svg>
-                                <p style="margin-left: -7px;" v-if="userDetails.gender === null">N/A</p>
-                                <p style="margin-left: -7px;" v-if="userDetails.gender === ''">N/A</p>
-                                <p style="margin-left: -7px;"
-                                    v-if="userDetails.gender !== null && userDetails.gender !== ''">{{
+                                <p style="margin-left: -7px;">{{
                                      userDetails.gender 
                                     }}</p>
                             </div>
-                            <div>
+                            <div v-if="userDetails.country !== null && userDetails.country !== ''">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
                                     viewBox="0 0 512 512">
                                     <path d="M267,474l-.8-.13A.85.85,0,0,0,267,474Z" />
@@ -231,13 +287,11 @@
                                     <path
                                         d="M256,72a184,184,0,1,1-130.1,53.9A182.77,182.77,0,0,1,256,72m0-40C132.3,32,32,132.3,32,256S132.3,480,256,480,480,379.7,480,256,379.7,32,256,32Z" />
                                 </svg>
-                                <p v-if="userDetails.country === null">N/A</p>
-                                <p v-if="userDetails.country === ''">N/A</p>
-                                <p v-if="userDetails.country !== null && userDetails.country !== ''">{{
+                                <p>{{
                                      userDetails.country 
                                     }}</p>
                             </div>
-                            <div>
+                            <div v-if="userDetails.major !== null && userDetails.major !== ''">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="white"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" width="30"
                                     height="30" viewBox="0 0 512.001 512.001"
@@ -290,21 +344,87 @@
                                     <g>
                                     </g>
                                 </svg>
-                                <p v-if="userDetails.major === null"> N/A</p>
-                                <p v-if="userDetails.major === ''">N/A</p>
-                                <p v-if="userDetails.major !== null && userDetails.major !== ''">{{  userDetails.major  }}
+                                <p>{{  userDetails.major  }}
                                 </p>
                             </div>
-                            <div>
+                            <div v-if="userDetails.school !== null && userDetails.school !== ''">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
                                     data-name="Layer 1" viewBox="0 0 24 24">
                                     <path
                                         d="M21,10a.99974.99974,0,0,0,1-1V6a.9989.9989,0,0,0-.68359-.94824l-9-3a1.002,1.002,0,0,0-.63282,0l-9,3A.9989.9989,0,0,0,2,6V9a.99974.99974,0,0,0,1,1H4v7.18427A2.99507,2.99507,0,0,0,2,20v2a.99974.99974,0,0,0,1,1H21a.99974.99974,0,0,0,1-1V20a2.99507,2.99507,0,0,0-2-2.81573V10ZM20,21H4V20a1.001,1.001,0,0,1,1-1H19a1.001,1.001,0,0,1,1,1ZM6,17V10H8v7Zm4,0V10h4v7Zm6,0V10h2v7ZM4,8V6.7207l8-2.667,8,2.667V8Z" />
                                 </svg>
-                                <p v-if="userDetails.school === null"> N/A</p>
-                                <p v-if="userDetails.school === ''">N/A</p>
-                                <p v-if="userDetails.school !== null && userDetails.school !== ''">{{  userDetails.school 
+                                <p>{{  userDetails.school 
                                     }}</p>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    version="1.1" id="Layer_1" x="0px" y="0px" width="30" height="30" fill="white"
+                                    viewBox="0 0 512 512" style="enable-background:new 0 0 512 512; margin-top: -5px;"
+                                    xml:space="preserve">
+                                    <g>
+                                        <g>
+                                            <rect y="478.609" width="512" height="33.391" />
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="M256,0c-22.928,10.021-38.957,40.479-38.957,61.217c0,21.515,17.441,38.957,38.957,38.957s38.957-17.441,38.957-38.957    C294.957,40.479,278.928,10.021,256,0z" />
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="M411.826,200.348H278.261v-66.783h-44.522v66.783H100.174c-30.609,0-55.652,25.043-55.652,55.652v5.565    c23.599,0,36.453,10.555,45.841,18.262c8.109,6.658,13.004,10.677,24.651,10.677c11.646,0,16.54-4.019,24.649-10.677    c9.386-7.707,22.241-18.262,45.84-18.262s36.453,10.555,45.84,18.262c8.11,6.658,13.005,10.677,24.651,10.677    c11.646,0,16.541-4.019,24.649-10.677c9.386-7.707,22.24-18.262,45.839-18.262c23.6,0,36.457,10.555,45.844,18.262    c8.111,6.658,13.006,10.677,24.655,10.677s16.544-4.019,24.655-10.677c9.387-7.707,22.243-18.262,45.844-18.262V256    C467.478,225.391,442.435,200.348,411.826,200.348z" />
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="M442.823,305.634c-9.387,7.708-22.243,18.262-45.843,18.262c-23.601,0-36.457-10.555-45.844-18.262    c-8.111-6.658-13.006-10.677-24.655-10.677c-11.646,0-16.54,4.019-24.649,10.677c-9.386,7.707-22.241,18.262-45.84,18.262    c-23.599,0-36.453-10.555-45.841-18.262c-8.11-6.658-13.004-10.677-24.651-10.677c-11.646,0-16.541,4.019-24.649,10.677    c-9.385,7.707-22.24,18.262-45.839,18.262c-23.599,0-36.453-10.555-45.841-18.262c-8.109-6.658-13.004-10.677-24.651-10.677    v150.261h422.957V294.957C455.829,294.957,450.934,298.976,442.823,305.634z" />
+                                        </g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                </svg>
+                                <p>{{  userDetails.createdAt.slice(0, 10) 
+                                    }}</p>
+                            </div>
+                            <div v-if="userDetails.url !== null && userDetails.url !== ''">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 16 16"
+                                    version="1.1" fill="none" stroke="currentColor" stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-width="1.5">
+                                    <path d="m2.75 10.25h9.5m-8.5-4.5h9.5m-2.5-4-1.5 12.5m-2.5-12.5-1.5 12.5" />
+                                </svg>
+                                <p><a :href="userDetails.url">{{  userDetails.sns  }}</a></p>
                             </div>
                         </a>
                     </div>
@@ -317,8 +437,8 @@
                             <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
                         </a>
                         <a v-if="loaded && !commentChartData.labels.length">
-                                <p>There's no comment history.</p>
-                            </a>
+                            <p>There's no comment history.</p>
+                        </a>
                         <a v-if="loaded && commentChartData.labels.length">
                             <Doughnut :chart-data="commentChartData" :chart-options="chartOptions" />
                         </a>
@@ -333,8 +453,8 @@
                         </a>
 
                         <a v-if="loaded && !replyChartData.labels.length">
-                                <p>There's no reply history.</p>
-                            </a>
+                            <p>There's no reply history.</p>
+                        </a>
                         <a v-if="loaded && replyChartData.labels.length">
                             <Doughnut :chart-data="replyChartData" :chart-options="chartOptions" />
                         </a>
@@ -349,8 +469,8 @@
                         </a>
 
                         <a v-if="loaded && !likeChartData.labels.length">
-                                <p>There's no like history.</p>
-                            </a>
+                            <p>There's no like history.</p>
+                        </a>
                         <a v-if="loaded && likeChartData.labels.length">
                             <Doughnut :chart-data="likeChartData" :chart-options="chartOptions" />
                         </a>
@@ -366,12 +486,12 @@
 <script>
 import { Doughnut } from 'vue-chartjs'
 import {
-  Chart as ChartJS,
-  Title,
-  Tooltip,
-  Legend,
-  ArcElement,
-  CategoryScale
+    Chart as ChartJS,
+    Title,
+    Tooltip,
+    Legend,
+    ArcElement,
+    CategoryScale
 } from 'chart.js'
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale)
 import axios from 'axios'
@@ -426,7 +546,7 @@ export default {
     methods: {
         random_rgba() {
             var o = Math.round, r = Math.random, s = 255
-            return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')'
+            return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')'
         },
         isMobile() {
             if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
@@ -445,6 +565,7 @@ export default {
             ]).then(axios.spread((account, comment, reply, like) => {
                 if (account.data.status && comment.data.status && reply.data.status && like.data.status) {
                     self.userDetails = account.data.data.username
+                    console.log(self.userDetails)
                     comment.data.data.forEach(key => {
                         self.commentChartData.labels.push(key.name)
                         self.commentChartData.datasets[0].backgroundColor.push(self.random_rgba())

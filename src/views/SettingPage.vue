@@ -48,13 +48,30 @@
                 </div>
             </div>
             <div class="settingEachContainer settingDesktopEachContainer">
-                <h3>Password (*)</h3>
+                <h3>SNS</h3>
+                <div class="settingLoader" v-if="url === null">
+                    <pulse-loader :loading="loading" :color="color"></pulse-loader>
+                </div>
+                <div class="settingCenterChild">
+                    <select v-model="snsType">
+                        <option value="Linkedin">Linkedin</option>
+                        <option value="Twitter">Twitter</option>
+                        <option value="Instagram">Instagram</option>
+                        <option value="Facebook">Facebook</option>
+                    </select>
+                </div>
+                <div v-if="url !== null" class="settingCenterChild">
+                    <input type="text" placeholder="URL for your sns..." v-model="url">
+                </div>
+            </div>
+            <div class="settingEachContainer settingDesktopEachContainer">
+                <h3>Password *</h3>
                 <div class="settingCenterChild">
                     <input type="password" placeholder="Your password..." v-model="password">
                 </div>
             </div>
             <div class="settingEachContainer settingDesktopEachContainer">
-                <h3>Password Confirm (*)</h3>
+                <h3>Password Confirm *</h3>
                 <div class="settingCenterChild">
                     <input type="password" placeholder="Your password confirm..." v-model="passwordConfirm">
                 </div>
@@ -115,13 +132,30 @@
                 </div>
             </div>
             <div class="settingEachContainer">
-                <h3>Password (*)</h3>
+                <h3>SNS</h3>
+                <div class="settingLoader" v-if="url === null">
+                    <pulse-loader :loading="loading" :color="color"></pulse-loader>
+                </div>
+                <div class="settingCenterChild">
+                    <select v-model="snsType">
+                        <option value="Linkedin">Linkedin</option>
+                        <option value="Twitter">Twitter</option>
+                        <option value="Instagram">Instagram</option>
+                        <option value="Facebook">Facebook</option>
+                    </select>
+                </div>
+                <div v-if="url !== null" class="settingCenterChild">
+                    <input type="text" placeholder="URL for your sns..." v-model="url">
+                </div>
+            </div>
+            <div class="settingEachContainer">
+                <h3>Password *</h3>
                 <div class="settingCenterChild">
                     <input type="password" placeholder="Your password..." v-model="password">
                 </div>
             </div>
             <div class="settingEachContainer">
-                <h3>Password Confirm (*)</h3>
+                <h3>Password Confirm *</h3>
                 <div class="settingCenterChild">
                     <input type="password" placeholder="Your password confirm..." v-model="passwordConfirm">
                 </div>
@@ -155,6 +189,8 @@ export default {
             major: null,
             school: null,
             gender: null,
+            snsType: null,
+            url: null,
             password: '',
             passwordConfirm: '',
             listOfCountries: [
@@ -431,7 +467,7 @@ export default {
                     method: "POST",
                     url: process.env.VUE_APP_ROOT_API + "/updateUserDetails",
                     headers: { 'Content-Type': 'application/json' },
-                    data: { username: this.username, country: this.country, major: this.major, school: this.school, gender: this.gender, password: this.password }
+                    data: { url: this.url, snsType: this.snsType, username: this.username, country: this.country, major: this.major, school: this.school, gender: this.gender, password: this.password }
                 }).then(function (response) {
                     if (!response.data.status) {
                         alert(response.data.message)
@@ -460,10 +496,12 @@ export default {
                             url: process.env.VUE_APP_ROOT_API + "/getUserDetails",
                             params: { username: response.data.username }
                         }).then(function (response) {
-                            self.country = response.data.userDetails.country === null ? '' : response.data.userDetails.country
-                            self.major = response.data.userDetails.major === null ? '' : response.data.userDetails.major
-                            self.school = response.data.userDetails.school === null ? '' : response.data.userDetails.school
-                            self.gender = response.data.userDetails.gender === null ? '' : response.data.userDetails.gender
+                            self.country = response.data.userDetails.country === null || response.data.userDetails.country === undefined ? '' : response.data.userDetails.country
+                            self.major = response.data.userDetails.major === null || response.data.userDetails.major === undefined ? '' : response.data.userDetails.major
+                            self.school = response.data.userDetails.school === null || response.data.userDetails.school === undefined ? '' : response.data.userDetails.school
+                            self.gender = response.data.userDetails.gender === null || response.data.userDetails.gender === undefined ? '' : response.data.userDetails.gender
+                            self.snsType = response.data.userDetails.snsType === undefined || response.data.userDetails.snsType === null ? 'Linkedin' : response.data.userDetails.snsType
+                            self.url = response.data.userDetails.url === null || response.data.userDetails.url === undefined ? '' : response.data.userDetails.url
                         })
                     }
                 })

@@ -4,7 +4,7 @@
             <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
         </div>
         <img v-show="isLoaded" @load="loaded" :style='mobileImg' src='../assets/images/main.jpg' class="mainImage">
-        <div class="homeRecentCommentContainer">
+        <div class="homeRecentCommentContainer" v-if="popularMajors !== null && recentComments !== null">
             <div class="homeRecentCommentHeader">
                 <a class="homeRecentCommentHeaderTitle">Recent comments</a>
                 <router-link class="homeDirect" :to="'/search'">See more</router-link>
@@ -18,23 +18,20 @@
                     <p>{{  comment.comment  }}</p>
                 </div>
             </div>
-            <div class="homeLoader" v-if="recentComments === null">
-                <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
-            </div>
         </div>
-        <div class="homeRecentCommentContainer">
+        <div class="homeRecentCommentContainer" v-if="popularMajors !== null && recentComments !== null">
             <div class="homeRecentCommentHeader">
                 <a class="homeRecentCommentHeaderTitle">Popular majors</a>
-                <router-link class="homeDirect" :to="'/chart'">See more</router-link>
+                <router-link class="homeDirect" :to="'/chart'">See more </router-link>
             </div>
             <div class="homeEachRecentComment" v-for="major in popularMajors" :key="major.name">
                 <div class="homeMajorNameAndCount">
                     <router-link class="homeUsername" :to="'/comment/' + major.id">{{ major.name }}</router-link>
                 </div>
             </div>
-            <div class="homeLoader" v-if="popularMajors === null">
-                <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
-            </div>
+        </div>
+        <div class="homeLoader" v-if="popularMajors === null || recentComments === null">
+            <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
         </div>
     </div>
     <div>
