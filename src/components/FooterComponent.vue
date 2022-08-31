@@ -6,13 +6,13 @@
                 <h3>Comment-On-Your-Major</h3>
                 <div class="footerLinksConatiner" v-if="!isMobile()">
                     <a @click="render('/aboutUs')">About Us</a>
-                    <a onclick="window.location.href = 'mailto:nikolaikim27@gmail.com'">Contact Us</a>
-                    <a @click="render('privacyPolicy')">Privacy Policy</a>
+                    <a @click="render('privacyPolicy')">Privacy Policy</a><br>
+                    <a @click="render('/termsAndConditions')">Terms & Conditions</a>
                 </div>
                 <div class="footerLinksConatiner footerLinksMoblieContainer" v-if="isMobile()">
                     <a @click="render('/aboutUs')">About Us</a><br>
-                    <a onclick="window.location.href = 'mailto:nikolaikim27@gmail.com'">Contact Us</a><br>
-                    <a @click="render('privacyPolicy')">Privacy Policy</a>
+                    <a @click="render('/privacyPolicy')">Privacy Policy</a><br>
+                    <a @click="render('/termsAndConditions')">Terms & Conditions</a>
                 </div><br>
                 <b>2022 COYM. All Rights Reserved.</b>
             </div>

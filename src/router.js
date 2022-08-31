@@ -51,6 +51,11 @@ const routes = [
     name: 'SearchPage',
     component: () => import('@/views/SearchPage'),
   },
+  {
+    path: '/termsAndConditions',
+    name: 'TermsAndConditionsPage',
+    component: () => import('@/views/TermsAndConditionsPage'),
+  }
 ]
 
 export const router = createRouter({
