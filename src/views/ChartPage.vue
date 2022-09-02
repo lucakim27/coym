@@ -3,7 +3,7 @@
         <div class='analysisBothContainer'>
             <div class='analysisMostViewedContainer'>
                 <div class="analysisMostViewedPages">
-                    <Bar v-if="loaded" :chart-data="chartData" :chart-options="chartOptions" />
+                    <Bar v-if="loaded" :chart-data="chartData" :chart-options="chartOptions" style="height: 100vh !important;" />
                 </div>
             </div>
         </div>
@@ -14,7 +14,7 @@
     <div v-if="isMobile() && loaded">
         <div class="analysisMostViewedContainer mobileAnalysisMostViewedContainer">
             <div class="analysisMostViewedPages mobileAnalysisContainer">
-                <Bar v-if="loaded" :chart-data="chartData" :chart-options="chartOptions" />
+                <Bar v-if="loaded" :chart-data="chartData" :chart-options="chartOptions" style="height: 100vh !important;" />
             </div>
         </div>
     </div>
@@ -40,8 +40,17 @@ export default {
         return {
             loaded: false,
             chartOptions: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
                 type: Object,
-                default: () => {},
+                default: () => { },
                 indexAxis: "y"
             },
             chartData: {
@@ -69,7 +78,7 @@ export default {
     methods: {
         random_rgba() {
             var o = Math.round, r = Math.random, s = 255;
-            return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+            return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
         },
         isMobile() {
             if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {

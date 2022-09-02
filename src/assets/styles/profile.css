@@ -113,6 +113,7 @@
 .profileEachRow p a {
     text-decoration: underline !important;
     padding: 5px;
+    margin-left: -4px;
 }
 
 .profileMobileMostViewedContainer {
