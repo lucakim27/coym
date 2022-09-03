@@ -1,5 +1,7 @@
 <template>
     <div id="mySidenav" class="sidenav"><br>
+        <a @click="renderPages('/test')">Test</a>
+        <hr>
         <a @click="renderPages('/chart')">Chart</a>
         <hr>
         <a @click="renderPages('/people')">People</a>

@@ -1,0 +1,56 @@
+.testEachContainer {
+    background-color: rgb(146, 156, 161);
+    box-shadow: -3px 5px 3px rgb(0, 0, 0);
+    min-width: 45%;
+    align-items: center;
+    padding: 30px;
+    margin: 30px;
+    border-radius: 20px;
+    color: white;
+}
+
+.testEachContainer select {
+    width: 100%;
+    margin: 10px;
+    border-radius: 20px;
+    padding: 20px;
+    color: white;
+    box-shadow: -3px 5px 3px rgb(0 0 0 / 50%);
+    border: 1px solid rgb(146, 156, 161);
+    background-color: rgba(255, 255, 255, 0.478);
+}
+
+.testEachContainer h3 {
+    margin-left: 20px;
+}
+
+.testEachContainer button {
+    display: inline-block;
+    border-radius: 20px;
+    color: rgb(0, 0, 0);
+    background: rgba(255, 255, 255, 0.478);
+    box-shadow: -3px 5px 3px rgb(0 0 0 / 50%);
+    border: 1px solid rgb(146, 156, 161);
+    width: 100%;
+    margin: 10px;
+    padding: 20px;
+    color: white;
+}
+
+.testCenterChild {
+    display: flex;
+    justify-content: center;
+}
+
+.testContainer {
+    padding: 10px;
+    margin-top: 85px;
+    margin-bottom: 20px;
+}
+
+.testMobileContainer {
+    overflow: hidden;
+    min-width: auto !important;
+    padding: 10px;
+    border-radius: 20px;
+}
