@@ -57,7 +57,6 @@
   display: flex;
   padding: 10px;
   color: rgb(255, 255, 255);
-  width: 100%;
 }
 
 .userRow div {
@@ -65,10 +64,9 @@
   background-color: grey;
   margin: 10px !important;
   border-radius: 20px;
-  width: 16%;
-  padding: 30px;
-  text-align: center;
-  margin: auto;
+  padding: 10px;
+  height: 50px;
+  margin: 10px;
 }
 
 .userRow div a {
@@ -94,6 +92,10 @@
     margin-bottom: 15px !important;
 }
 
+.userAlignChild svg {
+  margin-top: 5px;
+}
+
 .userAlignChild {
   box-shadow: -3px 5px 3px rgb(0, 0, 0);
   display: flex;
@@ -102,14 +104,15 @@
   background-color: rgb(145, 145, 145);
   margin: 10px;
   border-radius: 20px;
+  height: 50px;
 }
 
 .userAlignChild a {
   margin-top: 5px;
-  width: 80%;
   overflow-x: scroll;
   color: rgb(255, 255, 255);
   margin: 10px;
+  height: 40px;
 }
 
 .userMobileUsername {

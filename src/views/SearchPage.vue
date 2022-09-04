@@ -8,7 +8,6 @@
             <tr v-for="major in majorsList" :key="major.id">
                 <td scope="row">
                     <a @click="renderComment(major.id)">{{  major.name  }}</a>
-                    <hr>
                 </td>
             </tr>
         </table>

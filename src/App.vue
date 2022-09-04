@@ -35,4 +35,8 @@
 .masterContainer {
   font-family: 'Roboto', sans-serif;
 }
+
+::-webkit-scrollbar {
+   display: none;
+}
 </style>
