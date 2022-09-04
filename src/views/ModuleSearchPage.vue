@@ -21,7 +21,7 @@ import axios from 'axios'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 import FooterComponent from '../components/FooterComponent.vue'
 export default {
-    name: 'SearchPage',
+    name: 'ModuleSearchPage',
     components: {
         PulseLoader,
         FooterComponent
@@ -33,15 +33,16 @@ export default {
         }
     },
     methods: {
-        renderComment(id) {
-            this.$router.push('/comment/' + id)
-            window.scrollTo(0, 0)
+        renderComment() {
+            alert("We're under maintenance.")
+            // this.$router.push('/module/' + id)
+            // window.scrollTo(0, 0)
         },
         getMajorList() {
             let self = this
             axios({
                 method: "GET",
-                url: process.env.VUE_APP_ROOT_API + "/getMajorList"
+                url: process.env.VUE_APP_ROOT_API + "/getModuleList"
             }).then(function (response) {
                 if (response.data.status) {
                     response.data.message.forEach(key => {

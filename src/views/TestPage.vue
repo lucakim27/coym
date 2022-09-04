@@ -88,7 +88,7 @@ export default {
             }
         },
         analyze() {
-            alert("We're under maintanence.")
+            alert("We're under maintenance.")
         }
     },
     computed: {

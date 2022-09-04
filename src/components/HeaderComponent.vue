@@ -6,7 +6,9 @@
         <hr>
         <a @click="renderPages('/people')">People</a>
         <hr>
-        <a @click="renderPages('/search')">Comment</a>
+        <a @click="renderPages('/search')">Course</a>
+        <hr>
+        <a @click="renderPages('/moduleSearch')">Module</a>
         <hr>
         <div v-if="showLoginIcon">
             <a class="loginBtn" @click="this.showModal = true">Login</a>

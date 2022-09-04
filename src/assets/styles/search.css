@@ -31,9 +31,9 @@
 .searchOptions tr td {
     width: 10%;
     /* background: rgb(146, 156, 161);     */
-    padding: 20px;
+    /* padding: 20px; */
     margin: 10px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     /* border-radius: 20px; */
     /* box-shadow: -3px 5px 3px rgb(0 0 0); */
 }
