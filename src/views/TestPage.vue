@@ -26,7 +26,7 @@
         </div>
         <div class="testEachContainer" :style="mobileCheck">
             <div class="testCenterChild">
-                <button @click="analyze()">Analyze</button>
+                <button @click="analyze()">Test</button>
             </div>
         </div>
     </div>

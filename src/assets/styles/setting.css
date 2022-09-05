@@ -4,10 +4,10 @@
     margin: 10px;
     border-radius: 20px;
     padding: 20px;
-    color: white;
-    border: 1px solid rgb(146, 156, 161);
-    box-shadow: -3px 5px 3px rgb(0 0 0 / 50%);
-    background-color: rgba(255, 255, 255, 0.478);
+    /* color: white; */
+    background-color: white;
+    border: 1px solid #e4e3e5;
+    box-shadow: 0 0 8px 0 rgb(0 0 0 / 8%);
 }
 
 .settingEachContainer select {
@@ -15,10 +15,10 @@
     margin: 10px;
     border-radius: 20px;
     padding: 20px;
-    color: white;
-    box-shadow: -3px 5px 3px rgb(0 0 0 / 50%);
-    border: 1px solid rgb(146, 156, 161);
-    background-color: rgba(255, 255, 255, 0.478);
+    /* color: white; */
+    background-color: white;
+    border: 1px solid #e4e3e5;
+    box-shadow: 0 0 8px 0 rgb(0 0 0 / 8%);
 }
 
 .backgroundContainer {
@@ -33,13 +33,13 @@
     display: inline-block;
     border-radius: 20px;
     color: rgb(0, 0, 0);
-    background: rgba(255, 255, 255, 0.478);
-    box-shadow: -3px 5px 3px rgb(0 0 0 / 50%);
-    border: 1px solid rgb(146, 156, 161);
+    background-color: white;
+    border: 1px solid #e4e3e5;
+    box-shadow: 0 0 8px 0 rgb(0 0 0 / 8%);
     width: 100%;
     margin: 10px;
     padding: 20px;
-    color: white;
+    color: #0a66c2;
 }
 
 .settingEachContainer button:hover {
@@ -47,8 +47,9 @@
 }
 
 .settingEachContainer {
-    background-color: rgb(146, 156, 161);
-    box-shadow: -3px 5px 3px rgb(0, 0, 0);
+    background-color: white;
+    box-shadow: 0 0 8px 0 rgb(0 0 0 / 8%);
+    border: 1px solid #e4e3e5;
     min-width: 45%;
     align-items: center;
      /* border: 1px solid; */
@@ -65,8 +66,7 @@
 
 .settingEachContainer h3 {
     margin-left: 20px;
-    color: rgb(255, 255, 255);
-     
+    color: #0a66c2;
 }
 
 .settingMobileContainer {

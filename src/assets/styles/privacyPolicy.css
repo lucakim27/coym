@@ -10,7 +10,7 @@
 }
 
 .privacyPolicyChild a {
-    color: rgb(98, 203, 255);
+    color: #0a66c2;
     cursor: pointer;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .privacyPolicyMobileChild a {
-    color: rgb(98, 203, 255);
+    color: #0a66c2;
     cursor: pointer;
 }
 
@@ -49,13 +49,14 @@
 }
 
 .privacyPolicyMobileRow {
-    box-shadow: -3px 5px 3px rgb(0, 0, 0);
-    background-color: rgb(146, 156, 161);
+    box-shadow: 0 0 8px 0 rgb(0 0 0 / 8%);
+    border: 1px solid #e4e3e5;
+    /* background-color: rgb(146, 156, 161); */
     overflow: hidden;
     /* background: rgb(89, 95, 98); */
      /* border: 1px solid; */
     border-radius: 20px;
-    color: white;
+    /* color: white; */
     padding: 20px;
     margin: 15px;
 }

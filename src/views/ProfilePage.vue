@@ -14,17 +14,17 @@
                     <a v-if="userDetails !== null" class="userDetailContainer">
                         <div v-if="userDetails.gender !== null && userDetails.gender !== ''">
                             <svg style="margin-top: -5px; margin-left: -4px;" xmlns="http://www.w3.org/2000/svg"
-                                width="40" height="40" viewBox="0 0 24 24" fill="white">
+                                width="40" height="40" viewBox="0 0 24 24" fill="black">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
                                     d="M12.1888 7L12.1909 5L19.1909 5.00746L19.1834 12.0075L17.1834 12.0053L17.1873 8.41678L14.143 11.4611C15.4612 13.4063 15.2587 16.0743 13.5355 17.7975C11.5829 19.7501 8.41709 19.7501 6.46447 17.7975C4.51184 15.8449 4.51184 12.6791 6.46447 10.7264C8.16216 9.02873 10.777 8.80709 12.7141 10.0615L15.7718 7.00382L12.1888 7ZM7.87868 12.1406C9.05025 10.9691 10.9497 10.9691 12.1213 12.1406C13.2929 13.3122 13.2929 15.2117 12.1213 16.3833C10.9497 17.5549 9.05025 17.5549 7.87868 16.3833C6.70711 15.2117 6.70711 13.3122 7.87868 12.1406Z"
-                                    fill="white" />
+                                    fill="black" />
                             </svg>
                             <p style="margin-left: -7px;">{{
                                     userDetails.gender
                             }}</p>
                         </div>
                         <div v-if="userDetails.country !== null && userDetails.country !== ''">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black"
                                 viewBox="0 0 512 512">
                                 <path d="M267,474l-.8-.13A.85.85,0,0,0,267,474Z" />
                                 <path
@@ -45,7 +45,7 @@
                             }}</p>
                         </div>
                         <div v-if="userDetails.major !== null && userDetails.major !== ''">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="white"
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="black"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" width="30"
                                 height="30" viewBox="0 0 512.001 512.001"
                                 style="margin-top: -0px; enable-background:new 0 0 512.001 512.001;"
@@ -101,7 +101,7 @@
                             </p>
                         </div>
                         <div v-if="userDetails.school !== null && userDetails.school !== ''">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white"
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black"
                                 data-name="Layer 1" viewBox="0 0 24 24">
                                 <path
                                     d="M21,10a.99974.99974,0,0,0,1-1V6a.9989.9989,0,0,0-.68359-.94824l-9-3a1.002,1.002,0,0,0-.63282,0l-9,3A.9989.9989,0,0,0,2,6V9a.99974.99974,0,0,0,1,1H4v7.18427A2.99507,2.99507,0,0,0,2,20v2a.99974.99974,0,0,0,1,1H21a.99974.99974,0,0,0,1-1V20a2.99507,2.99507,0,0,0-2-2.81573V10ZM20,21H4V20a1.001,1.001,0,0,1,1-1H19a1.001,1.001,0,0,1,1,1ZM6,17V10H8v7Zm4,0V10h4v7Zm6,0V10h2v7ZM4,8V6.7207l8-2.667,8,2.667V8Z" />
@@ -111,7 +111,7 @@
                         </div>
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                version="1.1" id="Layer_1" x="0px" y="0px" width="30" height="30" fill="white"
+                                version="1.1" id="Layer_1" x="0px" y="0px" width="30" height="30" fill="black"
                                 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512; margin-top: -5px;"
                                 xml:space="preserve">
                                 <g>

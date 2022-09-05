@@ -1,26 +1,42 @@
 <template>
     <div id="mySidenav" class="sidenav"><br>
-        <a @click="renderPages('/test')">Test</a>
-        <hr>
-        <a @click="renderPages('/chart')">Chart</a>
-        <hr>
-        <a @click="renderPages('/people')">People</a>
-        <hr>
-        <a @click="renderPages('/search')">Course</a>
-        <hr>
-        <a @click="renderPages('/moduleSearch')">Module</a>
-        <hr>
+        <div class="headerEachLine" @click="renderPages('/test')">
+            <a>Test</a>
+            <a class="headerSign">></a>
+        </div><hr>
+        <div class="headerEachLine" @click="renderPages('/chart')">
+            <a>Chart</a>
+            <a class="headerSign">></a>
+        </div><hr>
+        <div class="headerEachLine" @click="renderPages('/people')">
+            <a>People</a>
+            <a class="headerSign">></a>
+        </div><hr>
+        <div class="headerEachLine" @click="renderPages('/search')">
+            <a>Course</a>
+            <a class="headerSign">></a>
+        </div><hr>
+        <div class="headerEachLine" @click="renderPages('/moduleSearch')">
+            <a>Module</a>
+            <a class="headerSign">></a>
+        </div><hr>
         <div v-if="showLoginIcon">
             <a class="loginBtn" @click="this.showModal = true">Login</a>
         </div>
         <div v-if="showProfileIcon">
-            <a @click="renderProfile()">Profile</a>
-            <hr>
-            <a @click="renderPages('/setting')">Setting</a>
-            <hr>
-            <a @click="renderPages('/request')">Request</a>
-            <hr>
-            <a @click='logout()' class="signOutBtn">Sign Out</a>
+            <div class="headerEachLine" @click="renderProfile()">
+                <a>Profile</a>
+                <a class="headerSign">></a>
+            </div><hr>
+            <div class="headerEachLine" @click="renderPages('/setting')">
+                <a>Setting</a>
+                <a class="headerSign">></a>
+            </div><hr>
+            <div class="headerEachLine" @click="renderPages('/request')">
+                <a>Request</a>
+                <a class="headerSign">></a>
+            </div><hr>
+            <a @click='logout()' class="signOutBtn">Sign Out</a>    
         </div>
     </div>
     <div>

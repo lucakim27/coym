@@ -99,6 +99,16 @@ header h2:hover {
     top: 10px;
 }
 
+.headerEachLine {
+    display: flex;
+    justify-content: space-between;
+}
+
+.headerSign {
+    margin-right: 20px;
+    color:rgba(0, 0, 0, 0.363) !important;
+}
+
 .dropdown-content {
     transition: 0.5s;
     height: 0;
@@ -122,10 +132,6 @@ header h2:hover {
     margin: 10%;
     color: red !important;
     border-radius: 10px;
-}
-
-.sidenav hr {
-    border: 1px solid black;
 }
 
 .loginBtn {
