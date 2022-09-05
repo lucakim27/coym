@@ -35,6 +35,7 @@
     </div>
 </template>
 <script>
+import axios from 'axios'
 import FooterComponent from '../components/FooterComponent.vue'
 export default {
     name: 'TestPage',
@@ -88,7 +89,19 @@ export default {
             }
         },
         analyze() {
-            alert("We're under maintenance.")
+            axios({
+                method: "GET",
+                url: process.env.VUE_APP_ROOT_API + "/getTest",
+                params: {
+                    mbti: this.mbti,
+                    hobby: this.hobby,
+                    subject: this.subject
+                }
+            }).then(function (response) {
+                if (response.data.status) {
+                    alert([...new Set([...response.data.data.mbti, ...response.data.data.hobby, ...response.data.data.subject])])
+                }
+            })
         }
     },
     computed: {

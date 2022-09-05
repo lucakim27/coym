@@ -91,7 +91,6 @@ export default {
             }).then(function (response) {
                 if (response.data.status) {
                     self.popularMajors = response.data.message
-                    console.log(self.popularMajors)
                 }
             })
         }
