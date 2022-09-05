@@ -9,7 +9,6 @@
   display: inline-block;
   box-sizing: border-box;
   border-radius: 20px;
-  /* border: 1px solid rgb(0, 0, 0); */
   border: 1px solid #e4e3e5;
   box-shadow: 0 0 8px 0 rgb(0 0 0 / 8%);
 }
@@ -25,7 +24,6 @@
   display: inline-block;
   box-sizing: border-box;
   border-radius: 20px;
-  /* border: 1px solid rgb(0, 0, 0); */
   border: 1px solid #e4e3e5;
   box-shadow: 0 0 8px 0 rgb(0 0 0 / 8%);
 }
@@ -40,7 +38,6 @@
   box-sizing: border-box;
   border: 1px solid #e4e3e5;
   box-shadow: 0 0 8px 0 rgb(0 0 0 / 8%);
-  /* border-color: black; */
   width: 100%;
   border-radius: 20px;
   resize: none;
@@ -63,7 +60,6 @@
   padding: 10px;
   margin: 10px;
   width: auto;
-  /* background-color: rgb(146, 156, 161); */
   border-radius: 20px;
   overflow-x: auto;
   overflow-y: hidden;
@@ -71,8 +67,6 @@
 
 .username,
 .replyUsername {
-  /* font-weight: bold; */
-  /* color: rgb(255, 255, 255); */
   margin: 5px;
   padding: 5px;
   text-decoration: none;
@@ -81,8 +75,6 @@
 
 .username:hover,
 .replyUsername:hover {
-  /* background-color: rgb(212, 212, 212) !important; */
-  /* color: black !important; */
   border-radius: 5px;
   cursor: pointer;
 }
@@ -94,10 +86,8 @@
 
 .comment {
   display: flex;
-  /* color: rgb(255, 255, 255); */
   margin: 10px;
   text-align: left;
-  /* font-size: 24px; */
 }
 
 .usernameDateContainer {
@@ -115,7 +105,6 @@
 .date {
   font-size: 16px;
   font-weight: lighter;
-  /* color: rgba(255, 255, 255, 0.589); */
   margin: 12px;
 }
 
@@ -141,10 +130,8 @@
 
 .replyParagraph {
   display: flex;
-  /* color: rgb(255, 255, 255); */
   margin: 0px;
   text-align: left;
-  /* font-size: 20px; */
   padding: 20px;
   margin-top: -20px;
 }
@@ -158,18 +145,12 @@
 .reply,
 .viewReply {
   box-shadow: 0 0 8px 0 rgb(0 0 0 / 8%);
-  /* font-size: 16px; */
   margin: 10px;
   border: 1px solid;
   color: #0a66c2;
-  /* background-color: rgba(255, 255, 255, 0.478); */
-  /* color: rgb(255, 255, 255); */
   border-radius: 20px;
   width: auto;
-  /* color: white; */
   cursor: pointer;
-  /* padding: 10px; */
-  /* border-color: rgb(146, 156, 161); */
   border: 1px solid #e4e3e5;
   background-color: white;
 }
@@ -181,13 +162,8 @@
 
 .replyContainers {
   box-shadow: 0 0 8px 0 rgb(0 0 0 / 8%);
-  /* color: white; */
-  /* background-color: rgb(89, 95, 98); */
-   /* border: 1px solid; */
-  /* text-align: left; */
   border-radius: 20px;
   margin: 5px;
-  /* padding: 10px; */
   border: 1px solid #e4e3e5;
   background: white;
 }
@@ -196,13 +172,11 @@
   box-shadow: 0 0 8px 0 rgb(0 0 0 / 8%);
   border: 1px solid #e4e3e5;
   font-size: 16px;
-  /* border-color: black; */
   width: 70%;
   margin: 8px;
   padding: 12px 20px;
   border-radius: 20px;
   text-align: left;
-   /* border: 1px solid; */
   height: 100px !important;
   resize: none;
 }
@@ -211,13 +185,11 @@
 .editBtn,
 .editCancelBtn,
 .editReplyBtn {
-  /* font-size: 16px; */
   width: 30%;
   margin: 8px;
   padding: 12px 20px;
   border-radius: 20px;
   background: white;
-  /* color: rgb(255, 255, 255); */
   box-shadow: 0 0 8px 0 rgb(0 0 0 / 8%);
   border: 1px solid #e4e3e5;
 }
@@ -226,7 +198,6 @@
   box-shadow: 0 0 8px 0 rgb(0 0 0 / 8%);
   border: 1px solid #e4e3e5;
   color: #0a66c2;
-  /* border-color: rgb(89, 95, 98) !important; */
 }
 
 button:hover,

@@ -43,12 +43,9 @@
 
 .userEachRow {
   box-shadow: 0 0 8px 0 rgb(0 0 0 / 8%);
-  /* font-size: 16px; */
   border: 1px solid #e4e3e5;
   padding: 10px;
-  /* display: flex; */
   margin: 10px;
-  /* background: rgb(146, 156, 161); */
   border-radius: 20px;
   overflow: scroll;
 }
@@ -98,11 +95,9 @@
 }
 
 .userAlignChild {
-  /* box-shadow: -3px 5px 3px rgb(0, 0, 0); */
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  /* background-color: rgb(145, 145, 145); */
   margin: 10px;
   border-radius: 20px;
   height: 50px;
@@ -110,16 +105,18 @@
 
 .userAlignChild a {
   margin-top: 5px;
-  /* overflow-x: scroll; */
-  width: 75%;
-  /* color: rgb(255, 255, 255); */
   margin: 10px;
   height: 40px;
+  text-align: right;
+}
+
+.userAlignChild a:hover {
+  cursor: pointer;
 }
 
 .userMobileUsername {
-  /* text-decoration: none !important; */
   color: #0a66c2;
+  text-decoration: none;
 }
 
 .userInputText {

@@ -60,11 +60,6 @@ const routes = [
     path: '/test',
     name: 'TestPage',
     component: () => import('@/views/TestPage'),
-  },
-  {
-    path: '/moduleSearch',
-    name: 'ModuleSearchPage',
-    component: () => import('@/views/ModuleSearchPage'),
   }
 ]
 

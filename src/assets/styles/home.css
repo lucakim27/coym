@@ -49,7 +49,7 @@
 
 .homeUsernameAndDate a {
     padding: 5px;
-    margin: 5px;
+    margin: 7px;
 }
 
 .homeUsername {
@@ -69,7 +69,6 @@
 .homeEachRecentComment {
     color: rgb(0, 0, 0);
     box-shadow: 0 0 8px 0 rgb(0 0 0 / 8%);
-    /* background-color: rgb(146, 156, 161); */
     border-radius: 20px;
     border: 1px solid #e4e3e5;
     padding: 10px;

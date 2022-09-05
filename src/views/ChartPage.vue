@@ -42,13 +42,6 @@ export default {
             chartOptions: {
                 responsive: true,
                 maintainAspectRatio: false,
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                },
                 type: Object,
                 default: () => { },
                 indexAxis: "y"
@@ -58,17 +51,17 @@ export default {
                 datasets: [
                     {
                         label: 'Comment',
-                        backgroundColor: this.random_rgba(),
+                        backgroundColor: 'pink',
                         data: []
                     },
                     {
                         label: 'Reply',
-                        backgroundColor: this.random_rgba(),
+                        backgroundColor: 'rgb(255 228 118)',
                         data: []
                     },
                     {
                         label: 'Like',
-                        backgroundColor: this.random_rgba(),
+                        backgroundColor: 'skyblue',
                         data: []
                     }
                 ]
@@ -76,10 +69,6 @@ export default {
         }
     },
     methods: {
-        random_rgba() {
-            var o = Math.round, r = Math.random, s = 255;
-            return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
-        },
         isMobile() {
             if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
                 return true

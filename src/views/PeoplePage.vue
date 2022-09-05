@@ -166,6 +166,13 @@
           </svg>
           <a>{{ user.joinedAt.slice(0, 10) }}</a>
         </p>
+        <p class="userAlignChild" v-if="user.url !== null && user.url !== '' && user.sns !== null && user.sns !== ''">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 16 16" version="1.1" fill="none"
+            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+            <path d="m2.75 10.25h9.5m-8.5-4.5h9.5m-2.5-4-1.5 12.5m-2.5-12.5-1.5 12.5" />
+          </svg>
+          <a :href="user.url" class="userMobileUsername">{{ user.sns }}</a>
+        </p>
       </div>
     </div>
   </div>
@@ -222,7 +229,9 @@ export default {
             school: key.school,
             major: key.major,
             country: key.country,
-            joinedAt: key.createdAt
+            joinedAt: key.createdAt,
+            url: key.url,
+            sns: key.sns
           })
         })
         self.filteredUsersList = self.users

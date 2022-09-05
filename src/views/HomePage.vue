@@ -21,7 +21,7 @@
         </div>
         <div class="homeRecentCommentContainer" v-if="popularMajors !== null && recentComments !== null">
             <div class="homeRecentCommentHeader">
-                <a class="homeRecentCommentHeaderTitle">Popular majors</a>
+                <a class="homeRecentCommentHeaderTitle">Popular courses</a>
                 <router-link class="homeDirect" :to="'/chart'">See more </router-link>
             </div>
             <div class="homeEachRecentComment" v-for="major in popularMajors" :key="major.name">

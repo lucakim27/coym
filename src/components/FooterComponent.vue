@@ -14,7 +14,7 @@
                     <a @click="render('/privacyPolicy')">Privacy Policy</a><br>
                     <a @click="render('/termsAndConditions')">Terms & Conditions</a>
                 </div><br>
-                <b>2022 COYM. All Rights Reserved.</b>
+                <b>{{ getCurrentYear }} COYM - All Rights Reserved.</b>
             </div>
         </footer>
     </div>
@@ -33,6 +33,11 @@ export default {
         render(page) {
             this.$router.push(page)
             window.scrollTo(0,0)
+        }
+    },
+    computed: {
+        getCurrentYear() {
+            return new Date().getFullYear()
         }
     }
 }
