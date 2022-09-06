@@ -1,5 +1,5 @@
 <template>
-    <div class="privacyPolicyContainer aboutUsContainer" v-if="!isMobile()">
+    <div class="privacyPolicyContainer aboutUsContainer" v-if="!isMobile() && loaded">
         <div class="privacyPolicyChild">
             <div class="privacyPolicyRow">
                 <h3>About COYM</h3>
@@ -101,7 +101,10 @@
             </div>
         </div>
     </div>
-    <div class="privacyPolicyMobileContainer aboutUsContainer" v-if="isMobile()">
+    <a class="privacyPolicyLoader" v-if="!loaded">
+        <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
+    </a>
+    <div class="privacyPolicyMobileContainer aboutUsContainer" v-if="isMobile() && loaded">
         <div class="privacyPolicyChild">
             <div class="privacyPolicyMobileRow">
                 <h3>About COYM</h3>
@@ -204,23 +207,26 @@
         </div>
     </div>
     <div>
-        <FooterComponent />
+        <FooterComponent v-if="loaded"/>
     </div>
 </template>
 <script>
 import axios from 'axios'
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 import FooterComponent from '../components/FooterComponent.vue'
 export default {
     name: 'privacyPolicyPage',
     components: {
-        FooterComponent
+        FooterComponent,
+        PulseLoader
     },
     data() {
         return {
             comment: null,
             reply: null,
             like: null,
-            account: null
+            account: null,
+            loaded: false
         }
     },
     methods: {
@@ -249,6 +255,7 @@ export default {
                 self.reply = reply.data.message[0]['COUNT(*)']
                 self.like = like.data.message[0]['COUNT(*)']
                 self.account = account.data.message[0]['COUNT(*)']
+                self.loaded = true
             }))
         }
     },

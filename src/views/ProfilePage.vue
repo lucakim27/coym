@@ -1,16 +1,15 @@
 <template>
     <div class="profileMostViewedContainer profileMobileMostViewedContainer">
         <div class="profileMostViewedPages profileMobileContainer">
-            <div style="display: flex;" class="profileUsernameContainer">
+            <a class="profileLoader" v-if="userDetails === null && !loaded">
+                <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
+            </a>
+            <div style="display: flex;" class="profileUsernameContainer" v-if="userDetails !== null && loaded">
                 <h3 v-if="userDetails !== null">{{ userDetails.username }}</h3>
             </div>
-            <div class='profileEachRow'>
+            <div class='profileEachRow' v-if="userDetails !== null && loaded">
                 <div class="profileUserDetailsContainer profileUserDetailsMobileContainer">
-                    <a>User Details</a>
-                    <hr>
-                    <a class="profileLoader" v-if="userDetails === null">
-                        <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
-                    </a>
+                    <a>User Details</a><hr>
                     <a v-if="userDetails !== null" class="userDetailContainer">
                         <div v-if="userDetails.gender !== null && userDetails.gender !== ''">
                             <svg style="margin-top: -5px; margin-left: -4px;" xmlns="http://www.w3.org/2000/svg"
@@ -182,13 +181,10 @@
                     </a>
                 </div>
             </div>
-            <div class='profileEachRow'>
+            <div class='profileEachRow' v-if="userDetails !== null && loaded">
                 <div>
                     <a>Comment History</a>
                     <hr>
-                    <a class="profileLoader" v-if="!loaded">
-                        <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
-                    </a>
                     <a v-if="loaded && !commentChartData.labels.length">
                         <p>There's no comment history.</p>
                     </a>
@@ -197,14 +193,10 @@
                     </a>
                 </div>
             </div>
-            <div class='profileEachRow'>
+            <div class='profileEachRow' v-if="userDetails !== null && loaded">
                 <div>
                     <a>Reply History</a>
                     <hr>
-                    <a class="profileLoader" v-if="!loaded">
-                        <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
-                    </a>
-
                     <a v-if="loaded && !replyChartData.labels.length">
                         <p>There's no reply history.</p>
                     </a>
@@ -213,14 +205,10 @@
                     </a>
                 </div>
             </div>
-            <div class='profileEachRow'>
+            <div class='profileEachRow' v-if="userDetails !== null && loaded">
                 <div>
                     <a>Like History</a>
                     <hr>
-                    <a class="profileLoader" v-if="!loaded">
-                        <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
-                    </a>
-
                     <a v-if="loaded && !likeChartData.labels.length">
                         <p>There's no like history.</p>
                     </a>
@@ -232,7 +220,7 @@
         </div>
     </div>
     <div>
-        <FooterComponent />
+        <FooterComponent v-if="userDetails !== null && loaded" />
     </div>
 </template>
 <script>

@@ -55,6 +55,13 @@
     display: flex;
 }
 
+.privacyPolicyLoader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
 .privacyPolicySameRow div {
     margin: 10px;
     padding: 10px;
