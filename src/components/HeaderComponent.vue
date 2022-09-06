@@ -1,39 +1,14 @@
 <template>
     <div id="mySidenav" class="sidenav"><br>
-        <div class="headerEachLine" @click="renderPages('/test')">
-            <a>Test</a>
-            <a class="headerSign">></a>
-        </div><hr>
-        <div class="headerEachLine" @click="renderPages('/people')">
-            <a>User</a>
-            <a class="headerSign">></a>
-        </div><hr>
-        <div class="headerEachLine" @click="renderPages('/chart')">
-            <a>Chart</a>
-            <a class="headerSign">></a>
-        </div><hr>
-        <div class="headerEachLine" @click="renderPages('/search')">
-            <a>Course / Module</a>
-            <a class="headerSign">></a>
-        </div><hr>
-        <div v-if="showLoginIcon">
-            <a class="loginBtn" @click="this.showModal = true">Login</a>
-        </div>
-        <div v-if="showProfileIcon">
-            <div class="headerEachLine" @click="renderPages('/setting')">
-                <a>Setting</a>
-                <a class="headerSign">></a>
-            </div><hr>
-            <div class="headerEachLine" @click="renderPages('/request')">
-                <a>Request</a>
-                <a class="headerSign">></a>
-            </div><hr>
-            <div class="headerEachLine" @click="renderProfile()">
-                <a>Your Profile</a>
-                <a class="headerSign">></a>
-            </div><hr>
-            <a @click='logout()' class="signOutBtn">Sign Out</a>    
-        </div>
+        <a @click="renderPages('/test')">Test</a><hr>
+        <a @click="renderPages('/people')">User</a><hr>
+        <a @click="renderPages('/chart')">Chart</a><hr>
+        <a @click="renderPages('/search')">Course / Module</a><hr>
+        <a @click="this.showModal = true" v-if="showLoginIcon">Sign In</a><hr v-if="showLoginIcon">
+        <a v-if="showProfileIcon" @click="renderPages('/setting')">Setting</a><hr v-if="showProfileIcon">
+        <a v-if="showProfileIcon" @click="renderPages('/request')">Request</a><hr v-if="showProfileIcon">
+        <a v-if="showProfileIcon" @click="renderProfile()">Your Profile</a><hr v-if="showProfileIcon">
+        <a v-if="showProfileIcon" @click='logout()'>Sign Out</a><hr v-if="showProfileIcon">
     </div>
     <div>
         <Modal v-show="showModal" @closeModal="showModal = false" />
