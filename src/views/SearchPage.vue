@@ -24,7 +24,7 @@
         <table v-if="loaded && option === 'module'" id="options" class="searchOptions">
             <tr v-for="module in modulesList" :key="module.id">
                 <td scope="row">
-                    <a @click="renderModule()">{{ module.name }}</a><br><br>
+                    <a @click="renderModule(module.id)">{{ module.name }}</a><br><br>
                 </td>
             </tr>
         </table>
@@ -52,8 +52,9 @@ export default {
         }
     },
     methods: {
-        renderModule() {
-            alert("We're under maintenance.")
+        renderModule(id) {
+            this.$router.push('/module/' + id)
+            window.scrollTo(0, 0)
         },
         renderComment(id) {
             this.$router.push('/comment/' + id)

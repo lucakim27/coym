@@ -16,12 +16,12 @@
     <div id="headerContainer">
         <header class="header">
             <img @click="renderPages('/')" src="../assets/images/favicon.png" height="50" alt="">
-            <input class="headerInput" id="headerInput" type="text" placeholder="Search by course..."
+            <input class="headerInput" id="headerInput" type="text" placeholder="Course / Module..."
                 @input="searchChangeFunc($event)">
             <table id="options" class="headerOptions">
-                <tr v-for="major in filteredMajorsList" :key="major.id">
+                <tr v-for="major in filteredMajorsList" :key="major.id + major.name + major.type">
                     <td scope="row">
-                        <a @click="renderComment(major.id)">{{  major.name  }}</a><br><br>
+                        <a @click="renderComment(major.id, major.type)">{{  major.name  }} ({{ major.type }})</a><br><br>
                     </td>
                 </tr>
             </table>
@@ -86,16 +86,26 @@ export default {
                 self.showLoginIcon = true
             }
         },
-        renderComment(id) {
-            if (document.URL.split('/').at(-2) === 'comment') {
-                window.location.href = '/comment/' + id
+        renderComment(id, type) {
+            if (type === 'course') {
+                if (document.URL.split('/').at(-2) === 'comment') {
+                    window.location.href = '/comment/' + id
+                } else {
+                    document.getElementById('headerInput').value = ''
+                    document.getElementById('options').style.display = 'none'
+                    this.$router.push('/comment/' + id)
+                    window.scrollTo(0, 0)
+                }
             } else {
-                document.getElementById('headerInput').value = ''
-                document.getElementById('options').style.display = 'none'
-                this.$router.push('/comment/' + id)
-                window.scrollTo(0, 0)
+                if (document.URL.split('/').at(-2) === 'module') {
+                    window.location.href = '/module/' + id
+                } else {
+                    document.getElementById('headerInput').value = ''
+                    document.getElementById('options').style.display = 'none'
+                    this.$router.push('/module/' + id)
+                    window.scrollTo(0, 0)
+                }
             }
-
         },
         searchChangeFunc(event) {
             this.filteredMajorsList = []
@@ -112,17 +122,18 @@ export default {
         },
         getMajorList() {
             let self = this
-            axios({
-                method: "GET",
-                url: process.env.VUE_APP_ROOT_API + "/getMajorList"
-            }).then(function (response) {
-                if (response.data.status) {
-                    response.data.message.forEach(key => {
-                        self.majorsList.push({ name: key.name, id: key.id })
-                        self.filteredMajorsList = self.majorsList
-                    })
-                }
-            })
+            axios.all([
+                axios.get(process.env.VUE_APP_ROOT_API + "/getMajorList"),
+                axios.get(process.env.VUE_APP_ROOT_API + "/getModuleList")
+            ]).then(axios.spread((course, module) => {
+                course.data.message.forEach(key => {
+                    self.majorsList.push({ name: key.name, id: key.id, type: 'course' })
+                })
+                module.data.message.forEach(key => {
+                    self.majorsList.push({ name: key.name, id: key.id, type: 'module' })
+                })
+                self.filteredMajorsList = self.majorsList
+            }))
         },
         renderPages(page) {
             document.getElementById("mySidenav").style.height = "0"
