@@ -214,3 +214,7 @@ header h2:hover {
     display: flex;
     justify-content: space-between;
 }
+
+.sidenavRow {
+    display: flex;
+}
