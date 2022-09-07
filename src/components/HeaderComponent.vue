@@ -5,8 +5,8 @@
         <a @click="renderPages('/chart')">Chart</a><hr>
         <a @click="renderPages('/search')">Course / Module</a><hr>
         <a @click="this.showModal = true" v-if="showLoginIcon">Sign In</a><hr v-if="showLoginIcon">
-        <a v-if="showProfileIcon" @click="renderPages('/setting')">Setting</a><hr v-if="showProfileIcon">
-        <a v-if="showProfileIcon" @click="renderPages('/request')">Request</a><hr v-if="showProfileIcon">
+        <a v-if="showProfileIcon" @click="renderPages('/setting')">Setting / Request</a><hr v-if="showProfileIcon">
+        <!-- <a v-if="showProfileIcon" @click="renderPages('/request')">Request</a><hr v-if="showProfileIcon"> -->
         <a v-if="showProfileIcon" @click="renderProfile()">Your Profile</a><hr v-if="showProfileIcon">
         <a v-if="showProfileIcon" @click='logout()'>Sign Out</a><hr v-if="showProfileIcon">
     </div>
@@ -21,7 +21,7 @@
             <table id="options" class="headerOptions">
                 <tr v-for="major in filteredMajorsList" :key="major.id + major.name + major.type">
                     <td scope="row">
-                        <a @click="renderComment(major.id, major.type)">{{  major.name  }} ({{ major.type }})</a><br><br>
+                        <a @click="renderComment(major.id, major.type)" :style="colorByType(major.type)">{{  major.name  }}</a><br><br>
                     </td>
                 </tr>
             </table>
@@ -61,6 +61,9 @@ export default {
         document.addEventListener('click', this.profileDropdownClose)
     },
     methods: {
+        colorByType(type) {
+            return type === 'course' ? '' : 'color: #0a66c2;'
+        },
         cookieValidation() {
             let self = this
             if (self.cookies.get('user') !== null) {

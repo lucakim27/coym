@@ -1,6 +1,17 @@
 <template>
+    <br><br><br><br>
     <div v-if="!isMobile()">
-        <div class='backgroundContainer settingMobileContainer'>
+        <div class="wrapper">
+            <input type="radio" name="select" id="option-1" value="course" v-model="option">
+            <input type="radio" name="select" id="option-2" value="module" v-model="option">
+            <label for="option-1" class="option option-1">
+                <span>Setting</span>
+            </label>
+            <label for="option-2" class="option option-2">
+                <span>Request</span>
+            </label>
+        </div>
+        <div class='backgroundContainer settingMobileContainer' v-if="option === 'course'">
             <div class="settingEachContainer settingDesktopEachContainer">
                 <h3>Gender</h3>
                 <div class="settingLoader" v-if="gender === null">
@@ -24,7 +35,7 @@
                 <div v-if="country !== null" class="settingCenterChild">
                     <select name="country" v-model="country">
                         <option :value="country.name" v-for="country in listOfCountries" :key="country.code">
-                            {{  country.name  }}
+                            {{ country.name }}
                         </option>
                     </select>
                 </div>
@@ -82,9 +93,42 @@
                 </div>
             </div>
         </div>
+        <div class='requestMainContainer' v-if="option === 'module'">
+            <div class="requestEachContainer requestDesktopEachContainer">
+                <h3>Type</h3>
+                <div class="requestCenterChild">
+                    <select class="requestSelect" @change="onChange">
+                        <option value="Add major">Add major</option>
+                        <option value="Report user">Report user</option>
+                        <option value="Change username">Change username</option>
+                    </select>
+                </div>
+            </div>
+            <div class="requestEachContainer requestDesktopEachContainer">
+                <h3>{{ inputLabel }}</h3>
+                <div class="requestCenterChild">
+                    <input type="text" placeholder="Type here..." v-model="content">
+                </div>
+            </div>
+            <div class="requestEachContainer requestDesktopEachContainer">
+                <div class="requestCenterChild">
+                    <button @click="request">Request</button>
+                </div>
+            </div>
+        </div>
     </div>
     <div v-if="isMobile()">
-        <div class='backgroundContainer settingMobileContainer'>
+        <div class="wrapper">
+            <input type="radio" name="select" id="option-1" value="course" v-model="option">
+            <input type="radio" name="select" id="option-2" value="module" v-model="option">
+            <label for="option-1" class="option option-1">
+                <span>Setting</span>
+            </label>
+            <label for="option-2" class="option option-2">
+                <span>Request</span>
+            </label>
+        </div>
+        <div class='backgroundContainer settingMobileContainer' v-if="option === 'course'">
             <div class="settingEachContainer">
                 <h3>Gender</h3>
                 <div class="settingLoader" v-if="gender === null">
@@ -108,7 +152,7 @@
                 <div v-if="country !== null" class="settingCenterChild">
                     <select name="country" v-model="country">
                         <option :value="country.name" v-for="country in listOfCountries" :key="country.code">
-                            {{  country.name  }}
+                            {{ country.name }}
                         </option>
                     </select>
                 </div>
@@ -165,6 +209,31 @@
                     <button @click="updateUserDetails">Update</button>
                 </div>
             </div>
+        </div>
+        <div class='requestMainContainer' v-if="option === 'module'">
+            <div class="requestEachContainer">
+                <h3>Type</h3>
+                <div class="requestCenterChild">
+                    <select class="requestSelect" @change="onChange">
+                        <option value="Add major">Add major</option>
+                        <option value="Report user">Report user</option>
+                        <option value="Change username">Change username</option>
+                    </select>
+                </div>
+            </div>
+            <div class="requestEachContainer">
+                <h3>{{ inputLabel }}</h3>
+                <div class="requestCenterChild">
+                    <input type="text" placeholder="Type here..." v-model="content">
+                </div>
+            </div>
+            <div class="requestEachContainer">
+                <div class="requestCenterChild">
+                    <button @click="request">Request</button>
+                </div>
+            </div>
+        </div>
+        <div>
         </div>
     </div>
     <div>
@@ -184,6 +253,9 @@ export default {
     },
     data() {
         return {
+            selectedValue: 'Add major',
+            content: '',
+            option: 'course',
             username: '',
             country: null,
             major: null,
@@ -447,7 +519,42 @@ export default {
         const { cookies } = useCookies()
         return { cookies }
     },
+    computed: {
+        inputLabel() {
+            if (this.selectedValue === 'Add major') {
+                return 'Major'
+            } else if (this.selectedValue === 'Report user') {
+                return 'Username & Reason being'
+            } else if (this.selectedValue === 'Change username') {
+                return 'New username (longer than 7 characters without spaces.)'
+            } else {
+                return 'Major'
+            }
+        }
+    },
     methods: {
+        request() {
+            if (this.username === '' || this.username === null) {
+                alert("Sign in please.")
+            } else if (this.content === '') {
+                alert("Please type in longer than a character.")
+            } else {
+                axios({
+                    method: "POST",
+                    url: process.env.VUE_APP_ROOT_API + "/postRequest",
+                    headers: { 'Content-Type': 'application/json' },
+                    data: { username: this.username, type: this.selectedValue, content: this.content }
+                }).then(function (response) {
+                    if (response.data.status) {
+                        alert(response.data.message)
+                        window.location.reload()
+                    }
+                })
+            }
+        },
+        onChange(event) {
+            this.selectedValue = event.target.value
+        },
         isMobile() {
             if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
                 return true
@@ -512,4 +619,5 @@ export default {
 </script>
 <style scoped>
 @import '../assets/styles/setting.css';
+@import '../assets/styles/request.css';
 </style>

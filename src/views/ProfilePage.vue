@@ -9,7 +9,6 @@
             </div>
             <div class='profileEachRow' v-if="userDetails !== null && loaded">
                 <div class="profileUserDetailsContainer profileUserDetailsMobileContainer">
-                    <a>User Details</a><hr>
                     <a v-if="userDetails !== null" class="userDetailContainer">
                         <div v-if="userDetails.gender !== null && userDetails.gender !== ''">
                             <svg style="margin-top: -5px; margin-left: -4px;" xmlns="http://www.w3.org/2000/svg"
@@ -19,7 +18,7 @@
                                     fill="black" />
                             </svg>
                             <p style="margin-left: -7px;">{{
-                                    userDetails.gender
+                            userDetails.gender
                             }}</p>
                         </div>
                         <div v-if="userDetails.country !== null && userDetails.country !== ''">
@@ -40,7 +39,7 @@
                                     d="M256,72a184,184,0,1,1-130.1,53.9A182.77,182.77,0,0,1,256,72m0-40C132.3,32,32,132.3,32,256S132.3,480,256,480,480,379.7,480,256,379.7,32,256,32Z" />
                             </svg>
                             <p>{{
-                                    userDetails.country
+                            userDetails.country
                             }}</p>
                         </div>
                         <div v-if="userDetails.major !== null && userDetails.major !== ''">
@@ -184,7 +183,7 @@
             <div class='profileEachRow' v-if="userDetails !== null && loaded">
                 <div>
                     <a>Comment History</a>
-                    <hr>
+                    <br>
                     <a v-if="loaded && !commentChartData.labels.length">
                         <p>There's no comment history.</p>
                     </a>
@@ -196,7 +195,7 @@
             <div class='profileEachRow' v-if="userDetails !== null && loaded">
                 <div>
                     <a>Reply History</a>
-                    <hr>
+                    <br>
                     <a v-if="loaded && !replyChartData.labels.length">
                         <p>There's no reply history.</p>
                     </a>
@@ -208,7 +207,7 @@
             <div class='profileEachRow' v-if="userDetails !== null && loaded">
                 <div>
                     <a>Like History</a>
-                    <hr>
+                    <br>
                     <a v-if="loaded && !likeChartData.labels.length">
                         <p>There's no like history.</p>
                     </a>
@@ -276,10 +275,13 @@ export default {
                 ]
             },
             chartOptions: {
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
                 responsive: true,
-                maintainAspectRatio: false,
-                width: '50%',
-                height: '50%'
+                maintainAspectRatio: false
             }
         }
     },
@@ -298,7 +300,6 @@ export default {
             ]).then(axios.spread((account, comment, reply, like) => {
                 if (account.data.status && comment.data.status && reply.data.status && like.data.status) {
                     self.userDetails = account.data.data.username
-                    console.log(self.userDetails)
                     comment.data.data.forEach(key => {
                         self.commentChartData.labels.push(key.name)
                         self.commentChartData.datasets[0].backgroundColor.push(self.random_rgba())

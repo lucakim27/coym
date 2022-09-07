@@ -22,11 +22,6 @@ const routes = [
     component: () => import('@/views/PeoplePage'),
   },
   {
-    path: '/request',
-    name: 'RequestPage',
-    component: () => import('@/views/RequestPage'),
-  },
-  {
     path: '/chart',
     name: 'ChartPage',
     component: () => import('@/views/ChartPage'),
