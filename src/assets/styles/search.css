@@ -81,7 +81,8 @@ box-shadow: 0 0 8px 0 rgb(0 0 0 / 8%);
   cursor: pointer;
   padding: 0 10px;
   border: 1px solid #e4e3e5;
-  transition: all 0.3s ease;
+  transition: all 0.7s ease;
+  z-index: 6 !important;
 }
 
 input[type="radio"]{

@@ -274,7 +274,8 @@
         </a><br v-if="showProfileIcon">
         <a v-if="showProfileIcon" @click="renderProfile()">
             <div class="sidenavRow">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" width="40" height="40" fill="rgb(146, 156, 161)" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" width="40" height="40" fill="rgb(146, 156, 161)"
+                 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
 <g>
 	<g>
 		<g>
@@ -417,8 +418,8 @@
             <table id="options" class="headerOptions">
                 <tr v-for="major in filteredMajorsList" :key="major.id + major.name + major.type">
                     <td scope="row">
-                        <a @click="renderComment(major.id, major.type)" :style="colorByType(major.type)">{{ major.name
-                        }}</a><br><br>
+                        <a @click="renderComment(major.id, major.type)">{{ major.name
+                        }} ({{ major.type }})</a><br><br>
                     </td>
                 </tr>
             </table>
@@ -458,9 +459,6 @@ export default {
         document.addEventListener('click', this.profileDropdownClose)
     },
     methods: {
-        colorByType(type) {
-            return type === 'course' ? '' : 'color: #0a66c2;'
-        },
         cookieValidation() {
             let self = this
             if (self.cookies.get('user') !== null) {

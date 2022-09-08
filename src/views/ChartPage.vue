@@ -51,17 +51,17 @@ export default {
                 datasets: [
                     {
                         label: 'Comment',
-                        backgroundColor: 'pink',
+                        backgroundColor: '#9BB7D4',
                         data: []
                     },
                     {
                         label: 'Reply',
-                        backgroundColor: 'rgb(255 228 118)',
+                        backgroundColor: '#939597',
                         data: []
                     },
                     {
                         label: 'Like',
-                        backgroundColor: 'skyblue',
+                        backgroundColor: '#363945',
                         data: []
                     }
                 ]
