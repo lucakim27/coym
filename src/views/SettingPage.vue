@@ -76,18 +76,6 @@
                 </div>
             </div>
             <div class="settingEachContainer settingDesktopEachContainer">
-                <h3>Password *</h3>
-                <div class="settingCenterChild">
-                    <input type="password" placeholder="Your password..." v-model="password">
-                </div>
-            </div>
-            <div class="settingEachContainer settingDesktopEachContainer">
-                <h3>Password Confirm *</h3>
-                <div class="settingCenterChild">
-                    <input type="password" placeholder="Your password confirm..." v-model="passwordConfirm">
-                </div>
-            </div>
-            <div class="settingEachContainer settingDesktopEachContainer">
                 <div class="settingCenterChild">
                     <button @click="updateUserDetails">Update</button>
                 </div>
@@ -193,18 +181,6 @@
                 </div>
             </div>
             <div class="settingEachContainer">
-                <h3>Password *</h3>
-                <div class="settingCenterChild">
-                    <input type="password" placeholder="Your password..." v-model="password">
-                </div>
-            </div>
-            <div class="settingEachContainer">
-                <h3>Password Confirm *</h3>
-                <div class="settingCenterChild">
-                    <input type="password" placeholder="Your password confirm..." v-model="passwordConfirm">
-                </div>
-            </div>
-            <div class="settingEachContainer">
                 <div class="settingCenterChild">
                     <button @click="updateUserDetails">Update</button>
                 </div>
@@ -263,9 +239,8 @@ export default {
             gender: null,
             snsType: null,
             url: null,
-            password: '',
-            passwordConfirm: '',
             listOfCountries: [
+                { name: 'N/A', code: 'N/A' },
                 { name: 'Afghanistan', code: 'AF' },
                 { name: 'Åland Islands', code: 'AX' },
                 { name: 'Albania', code: 'AL' },
@@ -563,18 +538,14 @@ export default {
             }
         },
         updateUserDetails() {
-            if (this.username === '' && this.username === null) {
+            if (this.cookies.get("user").username === '' || this.cookies.get("user").username === null || this.cookies.get("user").password === '' || this.cookies.get("user").password === null) {
                 alert("You're not logged in.")
-            } else if (this.password === '') {
-                alert("Password is compulsory.")
-            } else if (this.password !== this.passwordConfirm) {
-                alert('Password is not matching')
             } else {
                 axios({
                     method: "POST",
                     url: process.env.VUE_APP_ROOT_API + "/updateUserDetails",
                     headers: { 'Content-Type': 'application/json' },
-                    data: { url: this.url, snsType: this.snsType, username: this.username, country: this.country, major: this.major, school: this.school, gender: this.gender, password: this.password }
+                    data: { url: this.url, snsType: this.snsType, username: this.cookies.get("user").username, country: this.country, major: this.major, school: this.school, gender: this.gender, password: this.cookies.get("user").password }
                 }).then(function (response) {
                     if (!response.data.status) {
                         alert(response.data.message)
@@ -603,10 +574,10 @@ export default {
                             url: process.env.VUE_APP_ROOT_API + "/getUserDetails",
                             params: { username: response.data.username }
                         }).then(function (response) {
-                            self.country = response.data.userDetails.country === null || response.data.userDetails.country === undefined ? '' : response.data.userDetails.country
+                            self.country = response.data.userDetails.country === null || response.data.userDetails.country === undefined ? 'N/A' : response.data.userDetails.country
                             self.major = response.data.userDetails.major === null || response.data.userDetails.major === undefined ? '' : response.data.userDetails.major
                             self.school = response.data.userDetails.school === null || response.data.userDetails.school === undefined ? '' : response.data.userDetails.school
-                            self.gender = response.data.userDetails.gender === null || response.data.userDetails.gender === undefined ? '' : response.data.userDetails.gender
+                            self.gender = response.data.userDetails.gender === null || response.data.userDetails.gender === undefined ? 'N/A' : response.data.userDetails.gender
                             self.snsType = response.data.userDetails.snsType === undefined || response.data.userDetails.snsType === null ? 'Linkedin' : response.data.userDetails.snsType
                             self.url = response.data.userDetails.url === null || response.data.userDetails.url === undefined ? '' : response.data.userDetails.url
                         })
