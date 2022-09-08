@@ -10,7 +10,10 @@
                         <input class="loginInput" type="password" name="password" v-model="loginPassword"
                             placeholder="Password..." required /><br /><br />
                         <button class="loginButton signInBtn" type="submit" value="login">Sign In</button><br><br>
-                        <button class="loginButton" type="button" @click="directToSignUp()">Sign Up</button>
+                        <button class="loginButton" type="button" @click="directToSignUp()">Sign Up</button><br><br>
+                        <div class="centerGoogleLogin">
+                            <GoogleLogin :callback="callback"/>
+                        </div>
                     </form>
                 </div>
                 <div class="registerContainer" v-if="register">
@@ -38,6 +41,9 @@
                             placeholder="Password..." required /><br /><br />
                         <button class="loginButton signInBtn" type="submit" value="login">Sign In</button><br><br>
                         <button class="loginButton" type="button" @click="directToSignUp()">Sign Up</button><br><br>
+                        <div class="centerGoogleLogin">
+                            <GoogleLogin :callback="callback"/>
+                        </div>
                     </form>
                 </div>
                 <div class="registerContainer" v-if="register">
@@ -58,6 +64,60 @@
         </div>
     </Transition>
 </template>
+<script setup>
+// import axios from 'axios'
+// import { useCookies } from "vue3-cookies"
+import { decodeCredential } from 'vue3-google-login'
+
+const callback = (response) => {
+    const { cookies } = useCookies()
+    // decodeCredential will retrive the JWT payload from the credential
+    const userData = decodeCredential(response.credential)
+    console.log("Handle the userData", userData)
+
+    axios({
+        method: "POST",
+        url: process.env.VUE_APP_ROOT_API + "/signUp",
+        headers: { 'Content-Type': 'application/json' },
+        data: { username: userData.email, password: userData.given_name + userData.family_name, passwordConfirm: userData.given_name + userData.family_name }
+    }).then(function (response) {
+        if (!response.data.status) {
+            axios({
+                method: "GET",
+                url: process.env.VUE_APP_ROOT_API + "/signIn",
+                params: {
+                    username: userData.email,
+                    password: userData.given_name + userData.family_name
+                }
+            }).then(function (response) {
+                if (response.data.status) {
+                    self.$cookies.set("user", { username: userData.email, password: userData.given_name + userData.family_name })
+                    window.location.href = "/"
+                } else {
+                    alert(response.data.message)
+                }
+            })
+        } else {
+            axios({
+                method: "GET",
+                url: process.env.VUE_APP_ROOT_API + "/signIn",
+                params: {
+                    username: userData.email,
+                    password: userData.given_name + userData.family_name
+                }
+            }).then(function (response) {
+                if (response.data.status) {
+                    self.$cookies.set("user", { username: userData.email, password: userData.given_name + userData.family_name })
+                    window.location.href = "/"
+                } else {
+                    alert(response.data.message)
+                }
+            })
+        }
+    })
+
+}
+</script>
 <script>
 import axios from 'axios'
 import { useCookies } from "vue3-cookies"

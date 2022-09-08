@@ -158,3 +158,8 @@
   border-radius: 10px;
   color: white;
 }
+
+.centerGoogleLogin {
+  display: flex;
+  justify-content: center;
+}
