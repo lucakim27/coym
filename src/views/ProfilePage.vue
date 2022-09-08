@@ -10,7 +10,7 @@
             <div class='profileEachRow' v-if="userDetails !== null && loaded">
                 <div class="profileUserDetailsContainer profileUserDetailsMobileContainer">
                     <a v-if="userDetails !== null" class="userDetailContainer">
-                        <div v-if="userDetails.gender !== null && userDetails.gender !== ''">
+                        <div v-if="userDetails.gender !== null && userDetails.gender !== '' && userDetails.gender !== 'N/A'">
                             <svg style="margin-top: -5px; margin-left: -4px;" xmlns="http://www.w3.org/2000/svg"
                                 width="40" height="40" viewBox="0 0 24 24" fill="black">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -21,7 +21,7 @@
                             userDetails.gender
                             }}</p>
                         </div>
-                        <div v-if="userDetails.country !== null && userDetails.country !== ''">
+                        <div v-if="userDetails.country !== null && userDetails.country !== ''&& userDetails.country !== 'N/A'">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black"
                                 viewBox="0 0 512 512">
                                 <path d="M267,474l-.8-.13A.85.85,0,0,0,267,474Z" />
@@ -180,38 +180,29 @@
                     </a>
                 </div>
             </div>
-            <div class='profileEachRow' v-if="userDetails !== null && loaded">
+            <div class='profileEachRow' v-if="commentChartData.labels.length && loaded">
                 <div>
                     <a>Comment History</a>
                     <br>
-                    <a v-if="loaded && !commentChartData.labels.length">
-                        <p>There's no comment history.</p>
-                    </a>
-                    <a v-if="loaded && commentChartData.labels.length">
+                    <a>
                         <Doughnut :chart-data="commentChartData" :chart-options="chartOptions" />
                     </a>
                 </div>
             </div>
-            <div class='profileEachRow' v-if="userDetails !== null && loaded">
+            <div class='profileEachRow' v-if="replyChartData.labels.length && loaded">
                 <div>
                     <a>Reply History</a>
                     <br>
-                    <a v-if="loaded && !replyChartData.labels.length">
-                        <p>There's no reply history.</p>
-                    </a>
-                    <a v-if="loaded && replyChartData.labels.length">
+                    <a>
                         <Doughnut :chart-data="replyChartData" :chart-options="chartOptions" />
                     </a>
                 </div>
             </div>
-            <div class='profileEachRow' v-if="userDetails !== null && loaded">
+            <div class='profileEachRow' v-if="likeChartData.labels.length && loaded">
                 <div>
                     <a>Like History</a>
                     <br>
-                    <a v-if="loaded && !likeChartData.labels.length">
-                        <p>There's no like history.</p>
-                    </a>
-                    <a v-if="loaded && likeChartData.labels.length">
+                    <a>
                         <Doughnut :chart-data="likeChartData" :chart-options="chartOptions" />
                     </a>
                 </div>

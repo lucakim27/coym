@@ -4,10 +4,10 @@
             <div class="privacyPolicyRow">
                 <h3>About COYM</h3>
                 <p>What does COYM stand for? It stands for Comment On Your Major.</p>
-                <p>COYM is the neat, simple platform for college major reviews. Founded in 2022, we've collected {{
+                <p>COYM is the neat, simple platform for college major reviews. Founded in 2022, we've collected <a> {{
                      comment 
-                    }} comments, {{  reply  }} replies and {{  like 
-                    }} likes to the reviews in about 300 college majors and {{  account  }} number of people
+                    }} comments </a>, <a> {{  reply  }} replies </a> and <a> {{  like 
+                    }} likes </a> to the reviews in about 300 college majors and <a> {{  account  }} number of people </a>
                     signed up on the website.</p>
                 <p>Each school year, millions of high school graduates need to pick their majors. For decades, they've
                     only had word-of-mouth and forums to rely on to help with their decisions- until today. Our goal is
@@ -109,10 +109,10 @@
             <div class="privacyPolicyMobileRow">
                 <h3>About COYM</h3>
                 <p>What does COYM stand for? It stands for Comment On Your Major.</p>
-                <p>COYM is the neat, simple platform for college major reviews. Founded in 2022, we've collected {{
+                <p>COYM is the neat, simple platform for college major reviews. Founded in 2022, we've collected <a> {{
                      comment 
-                    }} comments, {{  reply  }} replies and {{  like 
-                    }} likes to the reviews in about 300 college majors and {{  account  }} number of people
+                    }} comments </a>, <a> {{  reply  }} replies </a> and <a> {{  like 
+                    }} likes </a> to the reviews in about 300 college majors and <a> {{  account  }} number of people </a>
                     signed up on the website.</p>
                 <p>Each school year, millions of high school graduates need to pick their majors. For decades, they've
                     only had word-of-mouth and forums to rely on to help with their decisions- until today. Our goal is

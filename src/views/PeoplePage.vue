@@ -27,7 +27,7 @@
           </svg>
           <a>{{ user.gender }}</a>
         </p>
-        <p class="userAlignChild" v-if="user.country !== null && user.country !== ''">
+        <p class="userAlignChild" v-if="user.country !== null && user.country !== '' && user.country !== 'N/A'">
           <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" viewBox="0 0 512 512">
             <path d="M267,474l-.8-.13A.85.85,0,0,0,267,474Z" />
             <path

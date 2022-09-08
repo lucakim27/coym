@@ -10,9 +10,11 @@
                         <input class="loginInput" type="password" name="password" v-model="loginPassword"
                             placeholder="Password..." required /><br /><br />
                         <button class="loginButton signInBtn" type="submit" value="login">Sign In</button><br><br>
-                        <button class="loginButton" type="button" @click="directToSignUp()">Sign Up</button><br><br>
                         <div class="centerGoogleLogin">
                             <GoogleLogin :callback="callback"/>
+                        </div><br><br>
+                        <div class="centerGoogleLogin">
+                            <a @click="directToSignUp()">Don't have an account yet?</a>
                         </div>
                     </form>
                 </div>
@@ -40,9 +42,11 @@
                         <input class="loginInput" type="password" name="password" v-model="loginPassword"
                             placeholder="Password..." required /><br /><br />
                         <button class="loginButton signInBtn" type="submit" value="login">Sign In</button><br><br>
-                        <button class="loginButton" type="button" @click="directToSignUp()">Sign Up</button><br><br>
                         <div class="centerGoogleLogin">
                             <GoogleLogin :callback="callback"/>
+                        </div><br><br>
+                        <div class="centerGoogleLogin">
+                            <a @click="directToSignUp()">Don't have an account yet?</a>
                         </div>
                     </form>
                 </div>
