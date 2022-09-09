@@ -29,7 +29,6 @@
 .profileUserDetailsContainer div {
     display: flex;
     justify-content: center;
-    padding: 0px !important;
 }
 
 .profileUserDetailsContainer div svg {
@@ -83,7 +82,7 @@
 }
 
 .profileEachRow div {
-    padding: 20px;
+    padding: 10px;
 }
 
 .profileEachRow a {
@@ -91,12 +90,16 @@
     overflow: scroll;
 }
 
-.userDetailContainer div {
-    width: 75%;
+.userDetailContainer {
+    display: flex;
+    overflow-x: scroll;
+    margin: 20px;
 }
 
 .profileEachRow p {
     text-align: center;
+    width: max-content;
+    overflow: hidden;
 }
 
 .profileDesktopHeader {

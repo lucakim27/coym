@@ -110,7 +110,7 @@
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 version="1.1" id="Layer_1" x="0px" y="0px" width="30" height="30" fill="black"
-                                viewBox="0 0 512 512" style="enable-background:new 0 0 512 512; margin-top: -5px;"
+                                viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;"
                                 xml:space="preserve">
                                 <g>
                                     <g>
@@ -182,16 +182,14 @@
             </div>
             <div class='profileEachRow' v-if="commentChartData.labels.length && loaded">
                 <div>
-                    <a>Comment History</a>
                     <br>
                     <a>
                         <Bar :chart-data="commentChartData" :chart-options="chartOptions" />
                     </a>
                 </div>
             </div>
-            <div class='profileEachRow' v-if="replyChartData.labels.length && loaded">
+            <!-- <div class='profileEachRow' v-if="replyChartData.labels.length && loaded">
                 <div>
-                    <a>Reply History</a>
                     <br>
                     <a>
                         <Bar :chart-data="replyChartData" :chart-options="chartOptions" />
@@ -200,13 +198,12 @@
             </div>
             <div class='profileEachRow' v-if="likeChartData.labels.length && loaded">
                 <div>
-                    <a>Like History</a>
                     <br>
                     <a>
                         <Bar :chart-data="likeChartData" :chart-options="chartOptions" />
                     </a>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <div>
@@ -238,25 +235,15 @@ export default {
                         label: 'Comment',
                         backgroundColor: '#9BB7D4',
                         data: []
-                    }
-                ]
-            },
-            replyChartData: {
-                labels: [],
-                datasets: [
+                    },
                     {
-                        label: 'Comment',
-                        backgroundColor: '#9BB7D4',
+                        label: 'Reply',
+                        backgroundColor: '#939597',
                         data: []
-                    }
-                ]
-            },
-            likeChartData: {
-                labels: [],
-                datasets: [
+                    },
                     {
-                        label: 'Comment',
-                        backgroundColor: '#9BB7D4',
+                        label: 'Like',
+                        backgroundColor: '#363945',
                         data: []
                     }
                 ]
@@ -266,20 +253,11 @@ export default {
                 maintainAspectRatio: false,
                 type: Object,
                 default: () => { },
-                indexAxis: "y",
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
+                indexAxis: "y"
             }
         }
     },
     methods: {
-        random_rgba() {
-            var o = Math.round, r = Math.random, s = 255
-            return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')'
-        },
         getAllUserDetails() {
             let self = this
             axios.all([
@@ -290,17 +268,46 @@ export default {
             ]).then(axios.spread((account, comment, reply, like) => {
                 if (account.data.status && comment.data.status && reply.data.status && like.data.status) {
                     self.userDetails = account.data.data.username
+
                     comment.data.data.forEach(key => {
                         self.commentChartData.labels.push(key.name)
                         self.commentChartData.datasets[0].data.push(key.count)
+                        self.commentChartData.datasets[1].data.push(0)
+                        self.commentChartData.datasets[2].data.push(0)
                     })
+
                     reply.data.data.forEach(key => {
-                        self.replyChartData.labels.push(key.name)
-                        self.replyChartData.datasets[0].data.push(key.count)
+                        let check = false
+                        for (let i = 0; i < self.commentChartData.labels.length; i++) {
+                            if (self.commentChartData.labels[i] === key.name) {
+                                self.commentChartData.datasets[1].data[i] = key.count
+                                check = true
+                                break
+                            }
+                        }
+                        if (!check) {
+                            self.commentChartData.labels.push(key.name)
+                            self.commentChartData.datasets[0].data.push(0)
+                            self.commentChartData.datasets[1].data.push(key.count)
+                            self.commentChartData.datasets[2].data.push(0)
+                        }
                     })
+
                     like.data.data.forEach(key => {
-                        self.likeChartData.labels.push(key.name)
-                        self.likeChartData.datasets[0].data.push(key.count)
+                        let check = false
+                        for (let i = 0; i < self.commentChartData.labels.length; i++) {
+                            if (self.commentChartData.labels[i] === key.name) {
+                                self.commentChartData.datasets[2].data[i] = key.count
+                                check = true
+                                break
+                            }
+                        }
+                        if (!check) {
+                            self.commentChartData.labels.push(key.name)
+                            self.commentChartData.datasets[0].data.push(0)
+                            self.commentChartData.datasets[1].data.push(0)
+                            self.commentChartData.datasets[2].data.push(key.count)
+                        }
                     })
                     self.loaded = true
                 }

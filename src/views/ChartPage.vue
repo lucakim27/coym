@@ -1,5 +1,5 @@
 <template>
-    <br><br><br><br>
+    <br><br><br>
     <div class='analysisContainer' v-if="!isMobile() && loaded">
         <div class='analysisBothContainer'>
             <div class='analysisMostViewedContainer'>
