@@ -185,7 +185,7 @@
                     <a>Comment History</a>
                     <br>
                     <a>
-                        <Doughnut :chart-data="commentChartData" :chart-options="chartOptions" />
+                        <Bar :chart-data="commentChartData" :chart-options="chartOptions" />
                     </a>
                 </div>
             </div>
@@ -194,7 +194,7 @@
                     <a>Reply History</a>
                     <br>
                     <a>
-                        <Doughnut :chart-data="replyChartData" :chart-options="chartOptions" />
+                        <Bar :chart-data="replyChartData" :chart-options="chartOptions" />
                     </a>
                 </div>
             </div>
@@ -203,7 +203,7 @@
                     <a>Like History</a>
                     <br>
                     <a>
-                        <Doughnut :chart-data="likeChartData" :chart-options="chartOptions" />
+                        <Bar :chart-data="likeChartData" :chart-options="chartOptions" />
                     </a>
                 </div>
             </div>
@@ -214,16 +214,9 @@
     </div>
 </template>
 <script>
-import { Doughnut } from 'vue-chartjs'
-import {
-    Chart as ChartJS,
-    Title,
-    Tooltip,
-    Legend,
-    ArcElement,
-    CategoryScale
-} from 'chart.js'
-ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale)
+import { Bar } from 'vue-chartjs'
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 import axios from 'axios'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 import FooterComponent from '../components/FooterComponent.vue'
@@ -232,7 +225,7 @@ export default {
     components: {
         PulseLoader,
         FooterComponent,
-        Doughnut
+        Bar
     },
     data() {
         return {
@@ -242,7 +235,8 @@ export default {
                 labels: [],
                 datasets: [
                     {
-                        backgroundColor: [],
+                        label: 'Comment',
+                        backgroundColor: '#9BB7D4',
                         data: []
                     }
                 ]
@@ -251,7 +245,8 @@ export default {
                 labels: [],
                 datasets: [
                     {
-                        backgroundColor: [],
+                        label: 'Comment',
+                        backgroundColor: '#9BB7D4',
                         data: []
                     }
                 ]
@@ -260,19 +255,23 @@ export default {
                 labels: [],
                 datasets: [
                     {
-                        backgroundColor: [],
+                        label: 'Comment',
+                        backgroundColor: '#9BB7D4',
                         data: []
                     }
                 ]
             },
             chartOptions: {
+                responsive: true,
+                maintainAspectRatio: false,
+                type: Object,
+                default: () => { },
+                indexAxis: "y",
                 plugins: {
                     legend: {
                         display: false
                     }
                 },
-                responsive: true,
-                maintainAspectRatio: false
             }
         }
     },
@@ -293,17 +292,14 @@ export default {
                     self.userDetails = account.data.data.username
                     comment.data.data.forEach(key => {
                         self.commentChartData.labels.push(key.name)
-                        self.commentChartData.datasets[0].backgroundColor.push(self.random_rgba())
                         self.commentChartData.datasets[0].data.push(key.count)
                     })
                     reply.data.data.forEach(key => {
                         self.replyChartData.labels.push(key.name)
-                        self.replyChartData.datasets[0].backgroundColor.push(self.random_rgba())
                         self.replyChartData.datasets[0].data.push(key.count)
                     })
                     like.data.data.forEach(key => {
                         self.likeChartData.labels.push(key.name)
-                        self.likeChartData.datasets[0].backgroundColor.push(self.random_rgba())
                         self.likeChartData.datasets[0].data.push(key.count)
                     })
                     self.loaded = true
