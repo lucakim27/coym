@@ -28,7 +28,7 @@
 
 .profileUserDetailsContainer div {
     display: flex;
-    justify-content: center;
+    justify-content: center !important;
 }
 
 .profileUserDetailsContainer div svg {
@@ -100,6 +100,11 @@
     text-align: center;
     width: max-content;
     overflow: hidden;
+}
+
+.profileCenterTitle {
+    display: flex;
+    justify-content: center;
 }
 
 .profileDesktopHeader {

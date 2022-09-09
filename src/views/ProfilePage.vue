@@ -9,6 +9,9 @@
             </div>
             <div class='profileEachRow' v-if="userDetails !== null && loaded">
                 <div class="profileUserDetailsContainer profileUserDetailsMobileContainer">
+                    <div class="profileCenterTitle">
+                        <b>User Details</b>
+                    </div><hr>
                     <a v-if="userDetails !== null" class="userDetailContainer">
                         <div v-if="userDetails.gender !== null && userDetails.gender !== '' && userDetails.gender !== 'N/A'">
                             <svg style="margin-top: -5px; margin-left: -4px;" xmlns="http://www.w3.org/2000/svg"
@@ -180,30 +183,28 @@
                     </a>
                 </div>
             </div>
-            <div class='profileEachRow' v-if="commentChartData.labels.length && loaded">
+            <div class='profileEachRow' v-if="courseChartData.labels.length && loaded">
                 <div>
-                    <br>
+                    <div class="profileCenterTitle">
+                        <b>Course History</b>
+                    </div>
+                    <hr>
                     <a>
-                        <Bar :chart-data="commentChartData" :chart-options="chartOptions" />
+                        <Bar :chart-data="courseChartData" :chart-options="chartOptions" />
                     </a>
                 </div>
             </div>
-            <!-- <div class='profileEachRow' v-if="replyChartData.labels.length && loaded">
+            <div class='profileEachRow' v-if="moduleChartData.labels.length && loaded">
                 <div>
-                    <br>
+                    <div class="profileCenterTitle">
+                        <b>Module History</b>
+                    </div>
+                    <hr>
                     <a>
-                        <Bar :chart-data="replyChartData" :chart-options="chartOptions" />
+                        <Bar :chart-data="moduleChartData" :chart-options="chartOptions" />
                     </a>
                 </div>
             </div>
-            <div class='profileEachRow' v-if="likeChartData.labels.length && loaded">
-                <div>
-                    <br>
-                    <a>
-                        <Bar :chart-data="likeChartData" :chart-options="chartOptions" />
-                    </a>
-                </div>
-            </div> -->
         </div>
     </div>
     <div>
@@ -228,22 +229,22 @@ export default {
         return {
             loaded: false,
             userDetails: null,
-            commentChartData: {
+            courseChartData: {
                 labels: [],
                 datasets: [
                     {
                         label: 'Comment',
                         backgroundColor: '#9BB7D4',
                         data: []
-                    },
+                    }
+                ]
+            },
+            moduleChartData: {
+                labels: [],
+                datasets: [
                     {
-                        label: 'Reply',
-                        backgroundColor: '#939597',
-                        data: []
-                    },
-                    {
-                        label: 'Like',
-                        backgroundColor: '#363945',
+                        label: 'Comment',
+                        backgroundColor: '#9BB7D4',
                         data: []
                     }
                 ]
@@ -263,52 +264,21 @@ export default {
             axios.all([
                 axios.get(`${process.env.VUE_APP_ROOT_API}/getUserDetailsByID/${this.$route.params.id}`),
                 axios.get(`${process.env.VUE_APP_ROOT_API}/getUserCommentDetails/${this.$route.params.id}`),
-                axios.get(`${process.env.VUE_APP_ROOT_API}/getUserReplyDetails/${this.$route.params.id}`),
-                axios.get(`${process.env.VUE_APP_ROOT_API}/getUserLikeDetails/${this.$route.params.id}`),
-            ]).then(axios.spread((account, comment, reply, like) => {
-                if (account.data.status && comment.data.status && reply.data.status && like.data.status) {
+                axios.get(`${process.env.VUE_APP_ROOT_API}/getUserModuleCommentDetails/${this.$route.params.id}`)
+            ]).then(axios.spread((account, course, module) => {
+                if (account.data.status && course.data.status && module.data.status) {
                     self.userDetails = account.data.data.username
 
-                    comment.data.data.forEach(key => {
-                        self.commentChartData.labels.push(key.name)
-                        self.commentChartData.datasets[0].data.push(key.count)
-                        self.commentChartData.datasets[1].data.push(0)
-                        self.commentChartData.datasets[2].data.push(0)
+                    course.data.data.forEach(key => {
+                        self.courseChartData.labels.push(key.name)
+                        self.courseChartData.datasets[0].data.push(key.count)
                     })
 
-                    reply.data.data.forEach(key => {
-                        let check = false
-                        for (let i = 0; i < self.commentChartData.labels.length; i++) {
-                            if (self.commentChartData.labels[i] === key.name) {
-                                self.commentChartData.datasets[1].data[i] = key.count
-                                check = true
-                                break
-                            }
-                        }
-                        if (!check) {
-                            self.commentChartData.labels.push(key.name)
-                            self.commentChartData.datasets[0].data.push(0)
-                            self.commentChartData.datasets[1].data.push(key.count)
-                            self.commentChartData.datasets[2].data.push(0)
-                        }
+                    module.data.data.forEach(key => {
+                        self.moduleChartData.labels.push(key.name)
+                        self.moduleChartData.datasets[0].data.push(key.count)
                     })
 
-                    like.data.data.forEach(key => {
-                        let check = false
-                        for (let i = 0; i < self.commentChartData.labels.length; i++) {
-                            if (self.commentChartData.labels[i] === key.name) {
-                                self.commentChartData.datasets[2].data[i] = key.count
-                                check = true
-                                break
-                            }
-                        }
-                        if (!check) {
-                            self.commentChartData.labels.push(key.name)
-                            self.commentChartData.datasets[0].data.push(0)
-                            self.commentChartData.datasets[1].data.push(0)
-                            self.commentChartData.datasets[2].data.push(key.count)
-                        }
-                    })
                     self.loaded = true
                 }
             }))
