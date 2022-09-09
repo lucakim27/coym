@@ -17,14 +17,14 @@
         <table v-if="loaded && option === 'course'" id="options" class="searchOptions">
             <tr v-for="major in majorsList" :key="major.id">
                 <td scope="row">
-                    <a @click="renderComment(major.id)">{{ major.name }}</a><br><br>
+                    <a @click="renderComment(major.id)">{{ major.name }}</a><hr>
                 </td>
             </tr>
         </table>
         <table v-if="loaded && option === 'module'" id="options" class="searchOptions">
             <tr v-for="module in modulesList" :key="module.id">
                 <td scope="row">
-                    <a @click="renderModule(module.id)">{{ module.name }}</a><br><br>
+                    <a @click="renderModule(module.id)">{{ module.name }}</a><hr>
                 </td>
             </tr>
         </table>

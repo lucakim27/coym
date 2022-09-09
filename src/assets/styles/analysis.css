@@ -10,7 +10,6 @@
 }
 
 .analysisBothContainer {
-    margin-top: 80px;
     display: flex;
     padding: 10px;
     justify-content: center;
@@ -51,7 +50,6 @@
 .mobileAnalysisMostViewedContainer {
     min-width: auto !important;
     margin-bottom: 15px !important;
-    margin-top: 85px !important;
 }
 
 .mobileAnalysisContainer {
@@ -83,4 +81,50 @@
 .analysisMajorTitle:hover {
     background-color: rgb(130, 130, 130) !important;
     border-radius: 5px;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center !important;
+    height: 50px;
+    align-items: center;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.wrapper .option {
+    box-shadow: 0 0 8px 0 rgb(0 0 0 / 8%);
+    background: #fff;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 0 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 0 10px;
+    border: 1px solid #e4e3e5;
+    transition: all 0.7s ease;
+    z-index: 6 !important;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+#option-1:checked:checked~.option-1,
+#option-2:checked:checked~.option-2 {
+    border-color: #0a66c2;
+    background: #0a66c2;
+}
+
+.wrapper .option span {
+    font-size: 20px;
+    color: #808080;
+}
+
+#option-1:checked:checked~.option-1 span,
+#option-2:checked:checked~.option-2 span {
+    color: #fff;
 }

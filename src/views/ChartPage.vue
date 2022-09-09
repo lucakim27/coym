@@ -1,9 +1,25 @@
 <template>
+    <br><br><br><br>
     <div class='analysisContainer' v-if="!isMobile() && loaded">
         <div class='analysisBothContainer'>
             <div class='analysisMostViewedContainer'>
-                <div class="analysisMostViewedPages">
-                    <Bar v-if="loaded" :chart-data="chartData" :chart-options="chartOptions" style="height: 100vh !important;" />
+                <div class="wrapper">
+                    <input type="radio" name="select" id="option-1" value="course" v-model="option">
+                    <input type="radio" name="select" id="option-2" value="module" v-model="option">
+                    <label for="option-1" class="option option-1">
+                        <span>Course</span>
+                    </label>
+                    <label for="option-2" class="option option-2">
+                        <span>Module</span>
+                    </label>
+                </div>
+                <div class="analysisMostViewedPages" v-if="option === 'course'">
+                    <Bar v-if="loaded" :chart-data="courseChartData" :chart-options="chartOptions"
+                        style="height: 100vh !important;" />
+                </div>
+                <div class="analysisMostViewedPages" v-if="option === 'module'">
+                    <Bar v-if="loaded" :chart-data="moduleChartData" :chart-options="chartOptions"
+                        style="height: 100vh !important;" />
                 </div>
             </div>
         </div>
@@ -13,8 +29,23 @@
     </div>
     <div v-if="isMobile() && loaded">
         <div class="analysisMostViewedContainer mobileAnalysisMostViewedContainer">
-            <div class="analysisMostViewedPages mobileAnalysisContainer">
-                <Bar v-if="loaded" :chart-data="chartData" :chart-options="chartOptions" style="height: 100vh !important;" />
+            <div class="wrapper">
+                <input type="radio" name="select" id="option-1" value="course" v-model="option">
+                <input type="radio" name="select" id="option-2" value="module" v-model="option">
+                <label for="option-1" class="option option-1">
+                    <span>Course</span>
+                </label>
+                <label for="option-2" class="option option-2">
+                    <span>Module</span>
+                </label>
+            </div>
+            <div class="analysisMostViewedPages mobileAnalysisContainer" v-if="option === 'course'">
+                <Bar v-if="loaded" :chart-data="courseChartData" :chart-options="chartOptions"
+                    style="height: 100vh !important;" />
+            </div>
+            <div class="analysisMostViewedPages mobileAnalysisContainer" v-if="option === 'module'">
+                <Bar v-if="loaded" :chart-data="moduleChartData" :chart-options="chartOptions"
+                    style="height: 100vh !important;" />
             </div>
         </div>
     </div>
@@ -38,30 +69,36 @@ export default {
     },
     data() {
         return {
+            option: 'course',
             loaded: false,
             chartOptions: {
                 responsive: true,
                 maintainAspectRatio: false,
                 type: Object,
                 default: () => { },
-                indexAxis: "y"
+                indexAxis: "y",
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
             },
-            chartData: {
+            courseChartData: {
                 labels: [],
                 datasets: [
                     {
                         label: 'Comment',
                         backgroundColor: '#9BB7D4',
                         data: []
-                    },
+                    }
+                ]
+            },
+            moduleChartData: {
+                labels: [],
+                datasets: [
                     {
-                        label: 'Reply',
-                        backgroundColor: '#939597',
-                        data: []
-                    },
-                    {
-                        label: 'Like',
-                        backgroundColor: '#363945',
+                        label: 'Comment',
+                        backgroundColor: '#9BB7D4',
                         data: []
                     }
                 ]
@@ -80,40 +117,15 @@ export default {
             let self = this
             axios.all([
                 axios.get(process.env.VUE_APP_ROOT_API + "/getCommentCount"),
-                axios.get(process.env.VUE_APP_ROOT_API + "/getReplyCount"),
-                axios.get(process.env.VUE_APP_ROOT_API + "/getLikeCount"),
-            ]).then(axios.spread((comment, reply, like) => {
-                let count = []
-                count.push(...comment.data.message)
-                for (var i = 0; i < reply.data.message.length; i++) {
-                    let exist = false
-                    for (var j = 0; j < count.length; j++) {
-                        if (reply.data.message[i].name === count[j].name) {
-                            exist = true
-                            count[j].reply = reply.data.message[i].count
-                        }
-                    }
-                    if (!exist) {
-                        count.push(reply.data.message[i])
-                    }
+                axios.get(process.env.VUE_APP_ROOT_API + "/getModuleCommentCount")
+            ]).then(axios.spread((course, module) => {
+                for (let i = 0; i < course.data.message.length; i++) {
+                    self.courseChartData.labels.push(course.data.message[i].name)
+                    self.courseChartData.datasets[0].data.push(course.data.message[i].count)
                 }
-                for (var e = 0; e < like.data.message.length; e++) {
-                    let exist = false
-                    for (var f = 0; f < count.length; f++) {
-                        if (like.data.message[e].name === count[f].name) {
-                            exist = true
-                            count[f].like = like.data.message[e].count
-                        }
-                    }
-                    if (!exist) {
-                        count.push(like.data.message[e])
-                    }
-                }
-                for (var d = 0; d < count.length; d++) {
-                    self.chartData.labels.push(count[d].name)
-                    self.chartData.datasets[0].data.push(count[d].count)
-                    self.chartData.datasets[1].data.push(count[d].reply)
-                    self.chartData.datasets[2].data.push(count[d].like)
+                for (let j = 0; j < module.data.message.length; j++) {
+                    self.moduleChartData.labels.push(module.data.message[j].name)
+                    self.moduleChartData.datasets[0].data.push(module.data.message[j].count)
                 }
                 self.loaded = true
             }))

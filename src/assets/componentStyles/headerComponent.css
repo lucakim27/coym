@@ -98,7 +98,7 @@ header h2:hover {
     position: fixed;
     background-color: rgb(0, 0, 0);
     overflow: scroll;
-    transition: 1.5s;
+    transition: 1.0s;
     padding-top: 60px;
 }
 
@@ -108,7 +108,7 @@ header h2:hover {
     font-size: 25px;
     color: rgb(146, 156, 161);
     display: block;
-    transition: 1.5s;
+    transition: 1.0s;
     cursor: pointer;
 }
 
