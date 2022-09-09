@@ -7,7 +7,7 @@
                 <p>COYM is the neat, simple platform for college major reviews. Founded in 2022, we've collected <a> {{
                      comment 
                     }} comments </a>, <a> {{  reply  }} replies </a> and <a> {{  like 
-                    }} likes </a> to the reviews in about 300 college majors and <a> {{  account  }} number of people </a>
+                    }} likes </a> to the reviews in about 300 college majors and <a> {{  account  }} users </a>
                     signed up on the website.</p>
                 <p>Each school year, millions of high school graduates need to pick their majors. For decades, they've
                     only had word-of-mouth and forums to rely on to help with their decisions- until today. Our goal is
@@ -112,7 +112,7 @@
                 <p>COYM is the neat, simple platform for college major reviews. Founded in 2022, we've collected <a> {{
                      comment 
                     }} comments </a>, <a> {{  reply  }} replies </a> and <a> {{  like 
-                    }} likes </a> to the reviews in about 300 college majors and <a> {{  account  }} number of people </a>
+                    }} likes </a> to the reviews in about 300 college majors and <a> {{  account  }} users </a>
                     signed up on the website.</p>
                 <p>Each school year, millions of high school graduates need to pick their majors. For decades, they've
                     only had word-of-mouth and forums to rely on to help with their decisions- until today. Our goal is
@@ -249,11 +249,14 @@ export default {
                 axios.get(process.env.VUE_APP_ROOT_API + "/getTotalCommentCount"),
                 axios.get(process.env.VUE_APP_ROOT_API + "/getTotalReplyCount"),
                 axios.get(process.env.VUE_APP_ROOT_API + "/getTotalLikeCount"),
+                axios.get(process.env.VUE_APP_ROOT_API + "/getTotalModuleCommentCount"),
+                axios.get(process.env.VUE_APP_ROOT_API + "/getTotalModuleReplyCount"),
+                axios.get(process.env.VUE_APP_ROOT_API + "/getTotalModuleLikeCount"),
                 axios.get(process.env.VUE_APP_ROOT_API + "/getTotalAccountCount"),
-            ]).then(axios.spread((comment, reply, like, account) => {
-                self.comment = comment.data.message[0]['COUNT(*)']
-                self.reply = reply.data.message[0]['COUNT(*)']
-                self.like = like.data.message[0]['COUNT(*)']
+            ]).then(axios.spread((comment, reply, like, moduleComment, moduleReply, moduleLike, account) => {
+                self.comment = comment.data.message[0]['COUNT(*)'] + moduleComment.data.message[0]['COUNT(*)']
+                self.reply = reply.data.message[0]['COUNT(*)'] + moduleReply.data.message[0]['COUNT(*)']
+                self.like = like.data.message[0]['COUNT(*)'] + moduleLike.data.message[0]['COUNT(*)']
                 self.account = account.data.message[0]['COUNT(*)']
                 self.loaded = true
             }))
