@@ -11,9 +11,11 @@
                 <div class="profileUserDetailsContainer profileUserDetailsMobileContainer">
                     <div class="profileCenterTitle">
                         <b>User Details</b>
-                    </div><hr>
+                    </div>
+                    <hr>
                     <a v-if="userDetails !== null" class="userDetailContainer">
-                        <div v-if="userDetails.gender !== null && userDetails.gender !== '' && userDetails.gender !== 'N/A'">
+                        <div
+                            v-if="userDetails.gender !== null && userDetails.gender !== '' && userDetails.gender !== 'N/A'">
                             <svg style="margin-top: -5px; margin-left: -4px;" xmlns="http://www.w3.org/2000/svg"
                                 width="40" height="40" viewBox="0 0 24 24" fill="black">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -24,7 +26,8 @@
                             userDetails.gender
                             }}</p>
                         </div>
-                        <div v-if="userDetails.country !== null && userDetails.country !== ''&& userDetails.country !== 'N/A'">
+                        <div
+                            v-if="userDetails.country !== null && userDetails.country !== ''&& userDetails.country !== 'N/A'">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black"
                                 viewBox="0 0 512 512">
                                 <path d="M267,474l-.8-.13A.85.85,0,0,0,267,474Z" />
@@ -113,8 +116,7 @@
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 version="1.1" id="Layer_1" x="0px" y="0px" width="30" height="30" fill="black"
-                                viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;"
-                                xml:space="preserve">
+                                viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
                                 <g>
                                     <g>
                                         <rect y="478.609" width="512" height="33.391" />
@@ -190,7 +192,7 @@
                     </div>
                     <hr>
                     <a>
-                        <Bar :chart-data="courseChartData" :chart-options="chartOptions" />
+                        <Bar :chart-data="courseChartData" :chart-options="chartOptions" :style="{ height: courseHeight + 'vh' }" />
                     </a>
                 </div>
             </div>
@@ -201,7 +203,7 @@
                     </div>
                     <hr>
                     <a>
-                        <Bar :chart-data="moduleChartData" :chart-options="chartOptions" />
+                        <Bar :chart-data="moduleChartData" :chart-options="chartOptions" :style="{ height: moduleHeight + 'vh' }" />
                     </a>
                 </div>
             </div>
@@ -227,6 +229,8 @@ export default {
     },
     data() {
         return {
+            moduleHeight: 0,
+            courseHeight: 0,
             loaded: false,
             userDetails: null,
             courseChartData: {
@@ -253,12 +257,52 @@ export default {
                 responsive: true,
                 maintainAspectRatio: false,
                 type: Object,
-                default: () => { },
-                indexAxis: "y"
+                default: () => {},
+                indexAxis: "y",
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
             }
         }
     },
     methods: {
+        formatLabel(str, maxwidth) {
+            let sections = []
+            let words = str.split(" ")
+            let temp = ""
+            words.forEach(function (item, index) {
+                if (temp.length > 0) {
+                    let concat = temp + ' ' + item
+                    if (concat.length > maxwidth) {
+                        sections.push(temp)
+                        temp = ""
+                    }
+                    else {
+                        if (index == (words.length - 1)) {
+                            sections.push(concat)
+                            return
+                        }
+                        else {
+                            temp = concat
+                            return
+                        }
+                    }
+                }
+                if (index == (words.length - 1)) {
+                    sections.push(item)
+                    return
+                }
+                if (item.length < maxwidth) {
+                    temp = item
+                }
+                else {
+                    sections.push(item)
+                }
+            })
+            return sections
+        },
         getAllUserDetails() {
             let self = this
             axios.all([
@@ -270,13 +314,15 @@ export default {
                     self.userDetails = account.data.data.username
 
                     course.data.data.forEach(key => {
-                        self.courseChartData.labels.push(key.name)
+                        self.courseChartData.labels.push(self.formatLabel(key.name.replaceAll('-', ' ')))
                         self.courseChartData.datasets[0].data.push(key.count)
+                        self.courseHeight += 15
                     })
 
                     module.data.data.forEach(key => {
-                        self.moduleChartData.labels.push(key.name)
+                        self.moduleChartData.labels.push(self.formatLabel(key.name.replaceAll('-', ' ')))
                         self.moduleChartData.datasets[0].data.push(key.count)
+                        self.moduleHeight += 15
                     })
 
                     self.loaded = true

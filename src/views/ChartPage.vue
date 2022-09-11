@@ -15,11 +15,11 @@
                 </div>
                 <div class="analysisMostViewedPages" v-if="option === 'course'">
                     <Bar v-if="loaded" :chart-data="courseChartData" :chart-options="chartOptions"
-                        style="height: 100vh !important;" />
+                        :style="{ height: courseHeight + 'vh'}" />
                 </div>
                 <div class="analysisMostViewedPages" v-if="option === 'module'">
                     <Bar v-if="loaded" :chart-data="moduleChartData" :chart-options="chartOptions"
-                        style="height: 100vh !important;" />
+                        :style="{ height: moduleHeight + 'vh'}" />
                 </div>
             </div>
         </div>
@@ -41,11 +41,11 @@
             </div>
             <div class="analysisMostViewedPages mobileAnalysisContainer" v-if="option === 'course'">
                 <Bar v-if="loaded" :chart-data="courseChartData" :chart-options="chartOptions"
-                    style="height: 100vh !important;" />
+                    :style="{ height: courseHeight + 'vh'}" />
             </div>
             <div class="analysisMostViewedPages mobileAnalysisContainer" v-if="option === 'module'">
                 <Bar v-if="loaded" :chart-data="moduleChartData" :chart-options="chartOptions"
-                    style="height: 100vh !important;" />
+                    :style="{ height: moduleHeight + 'vh'}" />
             </div>
         </div>
     </div>
@@ -69,6 +69,8 @@ export default {
     },
     data() {
         return {
+            courseHeight: 0,
+            moduleHeight: 0,
             option: 'course',
             loaded: false,
             chartOptions: {
@@ -81,7 +83,7 @@ export default {
                     legend: {
                         display: false
                     }
-                },
+                }
             },
             courseChartData: {
                 labels: [],
@@ -106,6 +108,42 @@ export default {
         }
     },
     methods: {
+        formatLabel(str, maxwidth) {
+            let sections = []
+            let words = str.split(" ")
+            let temp = ""
+            words.forEach(function (item, index) {
+                if (temp.length > 0) {
+                    let concat = temp + ' ' + item
+
+                    if (concat.length > maxwidth) {
+                        sections.push(temp)
+                        temp = ""
+                    }
+                    else {
+                        if (index == (words.length - 1)) {
+                            sections.push(concat)
+                            return
+                        }
+                        else {
+                            temp = concat
+                            return
+                        }
+                    }
+                }
+                if (index == (words.length - 1)) {
+                    sections.push(item)
+                    return
+                }
+                if (item.length < maxwidth) {
+                    temp = item
+                }
+                else {
+                    sections.push(item)
+                }
+            })
+            return sections
+        },
         isMobile() {
             if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
                 return true
@@ -120,12 +158,14 @@ export default {
                 axios.get(process.env.VUE_APP_ROOT_API + "/getModuleCommentCount")
             ]).then(axios.spread((course, module) => {
                 for (let i = 0; i < course.data.message.length; i++) {
-                    self.courseChartData.labels.push(course.data.message[i].name)
+                    self.courseChartData.labels.push(self.formatLabel(course.data.message[i].name.replaceAll('-', ' ')))
                     self.courseChartData.datasets[0].data.push(course.data.message[i].count)
+                    self.courseHeight += 15
                 }
                 for (let j = 0; j < module.data.message.length; j++) {
-                    self.moduleChartData.labels.push(module.data.message[j].name)
+                    self.moduleChartData.labels.push(self.formatLabel(module.data.message[j].name.replaceAll('-', ' ')))
                     self.moduleChartData.datasets[0].data.push(module.data.message[j].count)
+                    self.moduleHeight += 15
                 }
                 self.loaded = true
             }))
