@@ -12,11 +12,6 @@ const routes = [
     component: () => import('@/views/CommentPage'),
   },
   {
-    path: '/module/:id',
-    name: 'ModulePage',
-    component: () => import('@/views/ModulePage'),
-  },
-  {
     path: '/people',
     name: 'PeoplePage',
     component: () => import('@/views/PeoplePage'),

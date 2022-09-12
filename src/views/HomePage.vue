@@ -4,7 +4,7 @@
             <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
         </div>
         <img v-show="isLoaded" @load="loaded" :style='mobileImg' src='../assets/images/main.jpg' class="mainImage">
-        <div class="homeRecentCommentContainer" v-if="popularMajors !== null && recentComments !== nul || popularModules !== null">
+        <div class="homeRecentCommentContainer" v-if="popularMajors !== null && recentComments !== null">
             <div class="homeRecentCommentHeader">
                 <a class="homeRecentCommentHeaderTitle">Recent comments</a>
                 <router-link class="homeDirect" :to="'/search'">See more</router-link>
@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-        <div class="homeRecentCommentContainer" v-if="popularMajors !== null && recentComments !== null || popularModules !== null">
+        <div class="homeRecentCommentContainer" v-if="popularMajors !== null && recentComments !== null">
             <div class="homeRecentCommentHeader">
                 <a class="homeRecentCommentHeaderTitle">Popular courses</a>
                 <router-link class="homeDirect" :to="'/chart'">See more </router-link>
@@ -30,18 +30,7 @@
                 </div>
             </div>
         </div>
-        <div class="homeRecentCommentContainer" v-if="popularMajors !== null && recentComments !== null || popularModules !== null">
-            <div class="homeRecentCommentHeader">
-                <a class="homeRecentCommentHeaderTitle">Popular modules</a>
-                <router-link class="homeDirect" :to="'/chart'">See more </router-link>
-            </div>
-            <div class="homeEachRecentComment" v-for="module in popularModules" :key="module.name">
-                <div class="homeMajorNameAndCount">
-                    <router-link class="homeUsername" :to="'/module/' + module.id">{{ module.name }}</router-link>
-                </div>
-            </div>
-        </div>
-        <div class="homeLoader" v-if="popularMajors === null || recentComments === null || popularModules === null">
+        <div class="homeLoader" v-if="popularMajors === null || recentComments === null">
             <pulse-loader :loading="loading" :color="color" :size="size"></pulse-loader>
         </div>
     </div>
@@ -64,8 +53,7 @@ export default {
             isLoaded: false,
             isLoading: false,
             recentComments: null,
-            popularMajors: null,
-            popularModules: null
+            popularMajors: null
         }
     },
     methods: {
@@ -105,17 +93,6 @@ export default {
                     self.popularMajors = response.data.message
                 }
             })
-        },
-        getPopularModules() {
-            let self = this
-            axios({
-                method: "GET",
-                url: process.env.VUE_APP_ROOT_API + "/getPopularModules"
-            }).then(function (response) {
-                if (response.data.status) {
-                    self.popularModules = response.data.message
-                }
-            })
         }
     },
     computed: {
@@ -129,7 +106,6 @@ export default {
     beforeMount() {
         this.getRecentComments()
         this.getPopularMajors()
-        this.getPopularModules()
     }
 }
 </script>

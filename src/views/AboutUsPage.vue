@@ -249,14 +249,11 @@ export default {
                 axios.get(process.env.VUE_APP_ROOT_API + "/getTotalCommentCount"),
                 axios.get(process.env.VUE_APP_ROOT_API + "/getTotalReplyCount"),
                 axios.get(process.env.VUE_APP_ROOT_API + "/getTotalLikeCount"),
-                axios.get(process.env.VUE_APP_ROOT_API + "/getTotalModuleCommentCount"),
-                axios.get(process.env.VUE_APP_ROOT_API + "/getTotalModuleReplyCount"),
-                axios.get(process.env.VUE_APP_ROOT_API + "/getTotalModuleLikeCount"),
                 axios.get(process.env.VUE_APP_ROOT_API + "/getTotalAccountCount"),
-            ]).then(axios.spread((comment, reply, like, moduleComment, moduleReply, moduleLike, account) => {
-                self.comment = comment.data.message[0]['COUNT(*)'] + moduleComment.data.message[0]['COUNT(*)']
-                self.reply = reply.data.message[0]['COUNT(*)'] + moduleReply.data.message[0]['COUNT(*)']
-                self.like = like.data.message[0]['COUNT(*)'] + moduleLike.data.message[0]['COUNT(*)']
+            ]).then(axios.spread((comment, reply, like, account) => {
+                self.comment = comment.data.message[0]['COUNT(*)']
+                self.reply = reply.data.message[0]['COUNT(*)']
+                self.like = like.data.message[0]['COUNT(*)']
                 self.account = account.data.message[0]['COUNT(*)']
                 self.loaded = true
             }))

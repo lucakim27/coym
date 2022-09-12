@@ -196,17 +196,6 @@
                     </a>
                 </div>
             </div>
-            <div class='profileEachRow' v-if="moduleChartData.labels.length && loaded">
-                <div>
-                    <div class="profileCenterTitle">
-                        <b>Module History</b>
-                    </div>
-                    <hr>
-                    <a>
-                        <Bar :chart-data="moduleChartData" :chart-options="chartOptions" :style="{ height: moduleHeight + 'vh' }" />
-                    </a>
-                </div>
-            </div>
         </div>
     </div>
     <div>
@@ -229,21 +218,10 @@ export default {
     },
     data() {
         return {
-            moduleHeight: 0,
             courseHeight: 0,
             loaded: false,
             userDetails: null,
             courseChartData: {
-                labels: [],
-                datasets: [
-                    {
-                        label: 'Comment',
-                        backgroundColor: '#9BB7D4',
-                        data: []
-                    }
-                ]
-            },
-            moduleChartData: {
                 labels: [],
                 datasets: [
                     {
@@ -307,24 +285,15 @@ export default {
             let self = this
             axios.all([
                 axios.get(`${process.env.VUE_APP_ROOT_API}/getUserDetailsByID/${this.$route.params.id}`),
-                axios.get(`${process.env.VUE_APP_ROOT_API}/getUserCommentDetails/${this.$route.params.id}`),
-                axios.get(`${process.env.VUE_APP_ROOT_API}/getUserModuleCommentDetails/${this.$route.params.id}`)
-            ]).then(axios.spread((account, course, module) => {
-                if (account.data.status && course.data.status && module.data.status) {
+                axios.get(`${process.env.VUE_APP_ROOT_API}/getUserCommentDetails/${this.$route.params.id}`)
+            ]).then(axios.spread((account, course) => {
+                if (account.data.status && course.data.status) {
                     self.userDetails = account.data.data.username
-
                     course.data.data.forEach(key => {
                         self.courseChartData.labels.push(self.formatLabel(key.name.replaceAll('-', ' ')))
                         self.courseChartData.datasets[0].data.push(key.count)
                         self.courseHeight += 15
                     })
-
-                    module.data.data.forEach(key => {
-                        self.moduleChartData.labels.push(self.formatLabel(key.name.replaceAll('-', ' ')))
-                        self.moduleChartData.datasets[0].data.push(key.count)
-                        self.moduleHeight += 15
-                    })
-
                     self.loaded = true
                 }
             }))

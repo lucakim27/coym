@@ -4,7 +4,7 @@
       <textarea height="60" type="text" id="userInput" v-model="commentInput" v-if="majorName === null"
         :placeholder="'Loading...'" @focus="showBtns = true"></textarea>
       <textarea height="60" type="text" id="userInput" v-model="commentInput" v-if="majorName !== null"
-        :placeholder="'Comment on ' + majorName + ' course...'" @focus="showBtns = true"></textarea><br>
+        :placeholder="'Comment on ' + majorName + '...'" @focus="showBtns = true"></textarea><br>
       <div class="commentButtonContainer">
         <button @click="comment()" id="commentBtn" v-show="showBtns">Comment</button>
         <button @click="showBtns = !showBtns" class="closeBtn" v-show="showBtns">Close</button>

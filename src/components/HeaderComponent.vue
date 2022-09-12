@@ -413,13 +413,13 @@
     <div id="headerContainer">
         <header class="header">
             <img @click="renderPages('/')" src="../assets/images/favicon.png" height="50" alt="">
-            <input class="headerInput" id="headerInput" type="text" placeholder="Course / Module..."
+            <input class="headerInput" id="headerInput" type="text" placeholder="Search for major..."
                 @input="searchChangeFunc($event)">
             <table id="options" class="headerOptions">
                 <tr v-for="major in filteredMajorsList" :key="major.id + major.name + major.type">
                     <td scope="row">
                         <a @click="renderComment(major.id, major.type)">{{ major.name
-                        }} ({{ major.type }})</a><br><br>
+                        }}</a><br><br>
                     </td>
                 </tr>
             </table>
@@ -494,15 +494,6 @@ export default {
                     this.$router.push('/comment/' + id)
                     window.scrollTo(0, 0)
                 }
-            } else {
-                if (document.URL.split('/').at(-2) === 'module') {
-                    window.location.href = '/module/' + id
-                } else {
-                    document.getElementById('headerInput').value = ''
-                    document.getElementById('options').style.display = 'none'
-                    this.$router.push('/module/' + id)
-                    window.scrollTo(0, 0)
-                }
             }
         },
         searchChangeFunc(event) {
@@ -521,14 +512,10 @@ export default {
         getMajorList() {
             let self = this
             axios.all([
-                axios.get(process.env.VUE_APP_ROOT_API + "/getMajorList"),
-                axios.get(process.env.VUE_APP_ROOT_API + "/getModuleList")
-            ]).then(axios.spread((course, module) => {
+                axios.get(process.env.VUE_APP_ROOT_API + "/getMajorList")
+            ]).then(axios.spread((course) => {
                 course.data.message.forEach(key => {
                     self.majorsList.push({ name: key.name, id: key.id, type: 'course' })
-                })
-                module.data.message.forEach(key => {
-                    self.majorsList.push({ name: key.name, id: key.id, type: 'module' })
                 })
                 self.filteredMajorsList = self.majorsList
             }))
