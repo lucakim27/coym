@@ -8,21 +8,21 @@
 }
 
 .privacyPolicyChild a {
-    color: #0a66c2;
+    color: rgb(146, 156, 161);
     cursor: pointer;
 }
 
 .privacyPolicyChild a:hover {
-    color: rgb(0, 136, 255);
+    color: rgb(146, 156, 161);
 }
 
 .privacyPolicyMobileChild a {
-    color: #0a66c2;
+    color: rgb(146, 156, 161);
     cursor: pointer;
 }
 
 .privacyPolicyMobileChild a:hover {
-    color: rgb(0, 136, 255);
+    color: rgb(146, 156, 161);
 }
 
 .privacyPolicyMobileContainer {
@@ -66,15 +66,7 @@
     padding: 10px;
 }
 
-.githubSVG,
-.instagramSVG {
-    background-color: rgb(255, 255, 255);
-    border-radius: 20px;
-    padding: 10px;
-    cursor: pointer;
-}
-
 .aboutUsContainer a {
-    color: rgb(98, 203, 255) !important;
+    color: rgb(146, 156, 161) !important;
     cursor: default;
 }
