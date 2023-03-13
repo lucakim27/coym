@@ -36,7 +36,7 @@
                     <router-link class="homeUsername" :to="'/profile/' + comment.id">{{ comment.username }}</router-link>
                     <!-- <a class="homeDate">{{  comment.createdAt.slice(0, 10)  }}</a> -->
                 </div>
-                <div>
+                <div @click="renderPages('/comment/' + comment.majorID)">
                     <p>{{  comment.comment  }}</p>
                 </div>
             </div>
