@@ -26,7 +26,7 @@
         </div>
         <div class="testEachContainer" :style="mobileCheck">
             <div class="testCenterChild">
-                <button @click="analyze()">Test</button>
+                <button @click="analyze()">Analyze</button>
             </div>
         </div>
     </div>
@@ -115,6 +115,6 @@ export default {
     }
 }
 </script>
-    <style scoped>
-    @import '../assets/styles/test.css';
-    </style>
+<style scoped>
+@import '../assets/styles/test.css';
+</style>

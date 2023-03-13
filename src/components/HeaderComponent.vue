@@ -50,7 +50,7 @@
                     <g>
                     </g>
                 </svg>
-                <a>Test</a>
+                <a>Analysis</a>
             </div>
         </a><br>
         <a @click="renderPages('/people')">
