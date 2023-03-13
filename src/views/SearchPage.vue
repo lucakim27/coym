@@ -4,10 +4,11 @@
         <div class="searchLoader" v-if="!loaded">
             <pulse-loader :loading="loading" :color="color"></pulse-loader>
         </div>
+        <h2> {{ majorsList.length }} courses on COYM </h2>
         <table v-if="loaded" id="options" class="searchOptions">
             <tr v-for="major in majorsList" :key="major.id">
                 <td scope="row">
-                    <a @click="renderComment(major.id)">{{ major.name }}</a><hr>
+                    <a @click="renderComment(major.id)">{{ major.name }}</a><br><br>
                 </td>
             </tr>
         </table>
