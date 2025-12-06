@@ -11,3 +11,7 @@
 - **Dynamic Data**: Interacts with the backend to fetch and display information in real-time.  
 - **User-friendly Interface**: Clean and intuitive layout for easy use.  
 - **Performance-focused**: Optimized for fast loading and smooth interactions.  
+
+## API
+
+This frontend works with the [COYM API](https://github.com/lucakim27/coym-api) backend. See the backend repository for setup and API documentation.
