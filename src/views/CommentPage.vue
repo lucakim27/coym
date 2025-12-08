@@ -166,7 +166,7 @@ export default {
     getMajorName(self) {
       axios({
         method: "GET",
-        url: `/getMajorName/${this.$route.params.id}`
+        url: process.env.VUE_APP_ROOT_API + `/getMajorName/${this.$route.params.id}`
       }).then(function (response) {
         if (response.data.status) {
           self.majorName = response.data.message[0].name
@@ -177,7 +177,7 @@ export default {
       if (self.cookies.get('user') !== null) {
         axios({
           method: "GET",
-          url: "/cookieValidation",
+          url: process.env.VUE_APP_ROOT_API + "/cookieValidation",
           params: {
             username: self.cookies.get("user").username,
             password: self.cookies.get("user").password
@@ -192,7 +192,7 @@ export default {
     initComment(self) {
       axios({
         method: "GET",
-        url: `/getComment/${this.$route.params.id}`
+        url: process.env.VUE_APP_ROOT_API + `/getComment/${this.$route.params.id}`
       }).then(function (response) {
         if (response.data.status) {
           self.getComment = response.data.message
@@ -202,7 +202,7 @@ export default {
     initLike(self) {
       axios({
         method: "GET",
-        url: `/getLike/${this.$route.params.id}`
+        url: process.env.VUE_APP_ROOT_API + `/getLike/${this.$route.params.id}`
       }).then(function (response) {
         if (response.data.status) {
           self.getLike = response.data.message
@@ -226,7 +226,7 @@ export default {
     initReply(self) {
       axios({
         method: "GET",
-        url: `/getReply/${this.$route.params.id}`
+        url: process.env.VUE_APP_ROOT_API + `/getReply/${this.$route.params.id}`
       }).then(function (response) {
         if (response.data.status) {
           self.getReply = response.data.message
@@ -252,7 +252,7 @@ export default {
       } else {
         axios({
           method: "POST",
-          url: `/editComment/${commentID}`,
+          url: process.env.VUE_APP_ROOT_API + `/editComment/${commentID}`,
           headers: { 'Content-Type': 'application/json' },
           data: { comment: document.getElementById(`editTextArea/${commentID}`).value, page: this.$route.params.id }
         }).then(function (response) {
@@ -271,7 +271,7 @@ export default {
       } else {
         axios({
           method: "POST",
-          url: `/editReply/${replyID}`,
+          url: process.env.VUE_APP_ROOT_API + `/editReply/${replyID}`,
           headers: { 'Content-Type': 'application/json' },
           data: { reply: document.getElementById(`replyEditTextArea/${commentID}/${replyID}`).value }
         }).then(function (response) {
@@ -314,7 +314,7 @@ export default {
       if (confirm("Are you sure you want to delete the comment?")) {
         axios({
           method: "POST",
-          url: `/deleteComment/${commentID}`,
+          url: process.env.VUE_APP_ROOT_API + `/deleteComment/${commentID}`,
           headers: { 'Content-Type': 'application/json' }
         }).then(function (response) {
           if (response.data.status) {
@@ -330,7 +330,7 @@ export default {
       if (confirm("Are you sure you want to delete the reply?")) {
         axios({
           method: "POST",
-          url: `/deleteReply/${replyID}`,
+          url: process.env.VUE_APP_ROOT_API + `/deleteReply/${replyID}`,
           headers: { 'Content-Type': 'application/json' }
         }).then(function (response) {
           if (response.data.status) {
@@ -367,7 +367,7 @@ export default {
       else {
         axios({
           method: "POST",
-          url: `/postReply/${commentID}`,
+          url: process.env.VUE_APP_ROOT_API + `/postReply/${commentID}`,
           headers: { 'Content-Type': 'application/json' },
           data: { username: this.username, reply: document.getElementById(`ReplyInput/${commentID}`).value, page: this.$route.params.id }
         }).then(function (response) {
@@ -391,7 +391,7 @@ export default {
       } else {
         axios({
           method: "POST",
-          url: `/postComment/${this.$route.params.id}`,
+          url: process.env.VUE_APP_ROOT_API + `/postComment/${this.$route.params.id}`,
           headers: { 'Content-Type': 'application/json' },
           data: { comment: this.commentInput, username: this.username }
         }).then(function (response) {
@@ -408,7 +408,7 @@ export default {
       } else {
         axios({
           method: "POST",
-          url: `/postLike/${commentID}`,
+          url: process.env.VUE_APP_ROOT_API + `/postLike/${commentID}`,
           headers: { 'Content-Type': 'application/json' },
           data: { page: this.$route.params.id, username: this.username }
         }).then(function (response) {

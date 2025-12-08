@@ -516,7 +516,7 @@ export default {
             } else {
                 axios({
                     method: "POST",
-                    url: "/postRequest",
+                    url: process.env.VUE_APP_ROOT_API + "/postRequest",
                     headers: { 'Content-Type': 'application/json' },
                     data: { username: this.username, type: this.selectedValue, content: this.content }
                 }).then(function (response) {
@@ -543,7 +543,7 @@ export default {
             } else {
                 axios({
                     method: "POST",
-                    url: "/updateUserDetails",
+                    url: process.env.VUE_APP_ROOT_API + "/updateUserDetails",
                     headers: { 'Content-Type': 'application/json' },
                     data: { url: this.url, snsType: this.snsType, username: this.cookies.get("user").username, country: this.country, major: this.major, school: this.school, gender: this.gender, password: this.cookies.get("user").password }
                 }).then(function (response) {
@@ -561,7 +561,7 @@ export default {
             if (self.cookies.get('user') !== null) {
                 axios({
                     method: "GET",
-                    url: "/cookieValidation",
+                    url: process.env.VUE_APP_ROOT_API + "/cookieValidation",
                     params: {
                         username: self.cookies.get("user").username,
                         password: self.cookies.get("user").password
@@ -571,7 +571,7 @@ export default {
                         self.username = response.data.username
                         axios({
                             method: "GET",
-                            url: "/getUserDetails",
+                            url: process.env.VUE_APP_ROOT_API + "/getUserDetails",
                             params: { username: response.data.username }
                         }).then(function (response) {
                             self.country = response.data.userDetails.country === null || response.data.userDetails.country === undefined ? 'N/A' : response.data.userDetails.country

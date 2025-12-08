@@ -98,7 +98,7 @@ export default {
             let self = this
             axios({
                 method: "GET",
-                url: "/getRecentComments"
+                url: process.env.VUE_APP_ROOT_API + "/getRecentComments"
             }).then(function (response) {
                 if (response.data.status) {
                     self.recentComments = response.data.message
@@ -109,7 +109,7 @@ export default {
             let self = this
             axios({
                 method: "GET",
-                url: "/getPopularMajors"
+                url: process.env.VUE_APP_ROOT_API + "/getPopularMajors"
             }).then(function (response) {
                 if (response.data.status) {
                     self.popularMajors = response.data.message

@@ -41,7 +41,7 @@ export default {
         getList() {
             let self = this
             axios.all([
-                axios.get("/getMajorList")
+                axios.get(process.env.VUE_APP_ROOT_API + "/getMajorList")
             ]).then(axios.spread((major) => {
                 self.majorsList = major.data.message
                 self.loaded = true

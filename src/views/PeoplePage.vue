@@ -218,7 +218,7 @@ export default {
     let self = this
     axios({
       method: "GET",
-      url: "/getAllUsers"
+      url: process.env.VUE_APP_ROOT_API + "/getAllUsers"
     }).then(function (response) {
       if (response.data.status) {
         response.data.data.slice().reverse().forEach(key => {

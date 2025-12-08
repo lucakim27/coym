@@ -114,7 +114,7 @@ export default {
         getCommentReplyLikeCount() {
             let self = this
             axios.all([
-                axios.get("/getCommentCount")
+                axios.get(process.env.VUE_APP_ROOT_API + "/getCommentCount")
             ]).then(axios.spread((course) => {
                 for (let i = 0; i < course.data.message.length; i++) {
                     self.courseChartData.labels.push(self.formatLabel(course.data.message[i].name.replaceAll('-', ' ')))

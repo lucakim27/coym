@@ -78,7 +78,7 @@ export default {
         getTotalCount() {
             let self = this
             axios.all([
-                axios.get("/getTotalCommentCount"),
+                axios.get(process.env.VUE_APP_ROOT_API + "/getTotalCommentCount"),
                 axios.get("/getTotalReplyCount"),
                 axios.get("/getTotalLikeCount"),
                 axios.get("/getTotalAccountCount"),
