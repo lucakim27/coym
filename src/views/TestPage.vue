@@ -91,7 +91,7 @@ export default {
         analyze() {
             axios({
                 method: "GET",
-                url: process.env.VUE_APP_ROOT_API + "/getTest",
+                url: "/api/getTest",
                 params: {
                     mbti: this.mbti,
                     hobby: this.hobby,

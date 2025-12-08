@@ -81,14 +81,14 @@ const callback = (response) => {
 
     axios({
         method: "POST",
-        url: process.env.VUE_APP_ROOT_API + "/signUp",
+        url: "/api/signUp",
         headers: { 'Content-Type': 'application/json' },
         data: { username: userData.email, password: userData.given_name + userData.family_name, passwordConfirm: userData.given_name + userData.family_name }
     }).then(function (response) {
         if (!response.data.status) {
             axios({
                 method: "GET",
-                url: process.env.VUE_APP_ROOT_API + "/signIn",
+                url: "/api/signIn",
                 params: {
                     username: userData.email,
                     password: userData.given_name + userData.family_name
@@ -104,7 +104,7 @@ const callback = (response) => {
         } else {
             axios({
                 method: "GET",
-                url: process.env.VUE_APP_ROOT_API + "/signIn",
+                url: "/api/signIn",
                 params: {
                     username: userData.email,
                     password: userData.given_name + userData.family_name
@@ -162,7 +162,7 @@ export default {
             const self = this
             axios({
                 method: "GET",
-                url: process.env.VUE_APP_ROOT_API + "/signIn",
+                url: "/api/signIn",
                 params: {
                     username: this.loginUsername,
                     password: this.loginPassword
@@ -180,7 +180,7 @@ export default {
             const self = this
             axios({
                 method: "POST",
-                url: process.env.VUE_APP_ROOT_API + "/signUp",
+                url: "/api/signUp",
                 headers: { 'Content-Type': 'application/json' },
                 data: { username: this.registerUsername, password: this.registerPassword, passwordConfirm: this.registerPasswordConfirm }
             }).then(function (response) {

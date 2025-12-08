@@ -284,8 +284,8 @@ export default {
         getAllUserDetails() {
             let self = this
             axios.all([
-                axios.get(`${process.env.VUE_APP_ROOT_API}/getUserDetailsByID/${this.$route.params.id}`),
-                axios.get(`${process.env.VUE_APP_ROOT_API}/getUserCommentDetails/${this.$route.params.id}`)
+                axios.get(`/api/getUserDetailsByID/${this.$route.params.id}`),
+                axios.get(`/api/getUserCommentDetails/${this.$route.params.id}`)
             ]).then(axios.spread((account, course) => {
                 if (account.data.status && course.data.status) {
                     self.userDetails = account.data.data.username

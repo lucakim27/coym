@@ -464,7 +464,7 @@ export default {
             if (self.cookies.get('user') !== null) {
                 axios({
                     method: "GET",
-                    url: process.env.VUE_APP_ROOT_API + "/cookieValidation",
+                    url: "/api/cookieValidation",
                     params: {
                         username: self.cookies.get("user").username,
                         password: self.cookies.get("user").password
@@ -512,7 +512,7 @@ export default {
         getMajorList() {
             let self = this
             axios.all([
-                axios.get(process.env.VUE_APP_ROOT_API + "/getMajorList")
+                axios.get("/api/getMajorList")
             ]).then(axios.spread((course) => {
                 course.data.message.forEach(key => {
                     self.majorsList.push({ name: key.name, id: key.id, type: 'course' })
@@ -529,7 +529,7 @@ export default {
             let self = this
             axios({
                 method: "GET",
-                url: process.env.VUE_APP_ROOT_API + "/getUserID",
+                url: "/api/getUserID",
                 params: {
                     username: this.username
                 }
