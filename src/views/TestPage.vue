@@ -91,7 +91,7 @@ export default {
         analyze() {
             axios({
                 method: "GET",
-                url: "/api/getTest",
+                url: "/getTest",
                 params: {
                     mbti: this.mbti,
                     hobby: this.hobby,

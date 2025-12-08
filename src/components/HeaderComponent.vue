@@ -464,7 +464,7 @@ export default {
             if (self.cookies.get('user') !== null) {
                 axios({
                     method: "GET",
-                    url: "/api/cookieValidation",
+                    url: "/cookieValidation",
                     params: {
                         username: self.cookies.get("user").username,
                         password: self.cookies.get("user").password
@@ -512,7 +512,7 @@ export default {
         getMajorList() {
             let self = this
             axios.all([
-                axios.get("/api/getMajorList")
+                axios.get("/getMajorList")
             ]).then(axios.spread((course) => {
                 course.data.message.forEach(key => {
                     self.majorsList.push({ name: key.name, id: key.id, type: 'course' })
@@ -529,7 +529,7 @@ export default {
             let self = this
             axios({
                 method: "GET",
-                url: "/api/getUserID",
+                url: "/getUserID",
                 params: {
                     username: this.username
                 }

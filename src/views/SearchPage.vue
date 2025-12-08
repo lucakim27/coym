@@ -41,7 +41,7 @@ export default {
         getList() {
             let self = this
             axios.all([
-                axios.get("/api/getMajorList")
+                axios.get("/getMajorList")
             ]).then(axios.spread((major) => {
                 self.majorsList = major.data.message
                 self.loaded = true

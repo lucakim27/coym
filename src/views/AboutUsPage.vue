@@ -78,10 +78,10 @@ export default {
         getTotalCount() {
             let self = this
             axios.all([
-                axios.get("/api/getTotalCommentCount"),
-                axios.get("/api/getTotalReplyCount"),
-                axios.get("/api/getTotalLikeCount"),
-                axios.get("/api/getTotalAccountCount"),
+                axios.get("/getTotalCommentCount"),
+                axios.get("/getTotalReplyCount"),
+                axios.get("/getTotalLikeCount"),
+                axios.get("/getTotalAccountCount"),
             ]).then(axios.spread((comment, reply, like, account) => {
                 self.comment = comment.data.message[0]['COUNT(*)']
                 self.reply = reply.data.message[0]['COUNT(*)']
